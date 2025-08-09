@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: scripts/science_db.lua:8
 msgid "Natural"
@@ -44,11 +44,11 @@ msgstr ""
 "Asteroiden sind kleinere Himmelskörper, üblicherweise nur wenige Kilometer "
 "groß - größere Varianten werden manchmal als Planetoiden bezeichnet."
 
-#: scripts/science_db.lua:16
+#: scripts/science_db.lua:17
 msgid "Black hole"
 msgstr "Schwarzes Loch"
 
-#: scripts/science_db.lua:17
+#: scripts/science_db.lua:18
 msgid ""
 "A black hole is a point of supercondensed mass with a gravitational pull so "
 "powerful that not even light can escape it. It has no locally detectable "
@@ -75,11 +75,11 @@ msgstr ""
 "den Ereignishorizont gezogen und durch die Gezeitenkräfte "
 "auseinandergerissen."
 
-#: scripts/science_db.lua:21
+#: scripts/science_db.lua:24
 msgid "Nebula"
 msgstr "Nebel"
 
-#: scripts/science_db.lua:22
+#: scripts/science_db.lua:25
 msgid ""
 "Nebulae are the birthing places of new stars. These gas fields, usually "
 "created by the death of an old star, slowly form new stars due to the "
@@ -96,11 +96,11 @@ msgstr ""
 "Wissenschaftsoffiziere sind daher dazu angehalten, sich auf Sonden und "
 "visuelle Beobachtungen zu verlassen."
 
-#: scripts/science_db.lua:26
+#: scripts/science_db.lua:29
 msgid "Planet"
 msgstr "Planet"
 
-#: scripts/science_db.lua:27
+#: scripts/science_db.lua:30
 msgid ""
 "A planetary-mass object is large, dense, near-spherical astronomical body "
 "comprised of various forms of matter. Most planets are either terrestrial, "
@@ -117,11 +117,11 @@ msgstr ""
 "Planeten haben oft eine Gasatmosphäre, und manche werden von einem oder "
 "mehreren großen Planetoiden umkreist, die üblicherweise Monde genannt werden."
 
-#: scripts/science_db.lua:31
+#: scripts/science_db.lua:35
 msgid "Wormhole"
 msgstr "Wurmloch"
 
-#: scripts/science_db.lua:32
+#: scripts/science_db.lua:36
 msgid ""
 "A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that "
 "connects two points of spacetime. Jump drives operate in a similar fashion, "
@@ -150,11 +150,11 @@ msgstr ""
 "Signalverzerrungen auf den Sensoren, wodurch ein guter Wissenschaftsoffizier "
 "in der Lage ist, sie auch durch Störquellen wie Nebel hindurch aufzuspüren."
 
-#: scripts/science_db.lua:37
+#: scripts/science_db.lua:42
 msgid "Technologies"
 msgstr "Technologien"
 
-#: scripts/science_db.lua:38
+#: scripts/science_db.lua:43
 msgid ""
 "This database covers ship systems and technologically created phenomena that "
 "spacefaring crews might encounter in densely populated regions of space.\n"
@@ -171,19 +171,19 @@ msgstr ""
 "zum Betrieb Ihres Schiffes finden Sie in den technischen Handbüchern und "
 "Übungsmaterialien Ihres Schiffes."
 
-#: scripts/science_db.lua:42
+#: scripts/science_db.lua:47
 msgid "Beam/shield frequencies"
 msgstr "Laser-/Schildfrequenzen"
 
-#: scripts/science_db.lua:43
+#: scripts/science_db.lua:48
 msgid "Unit"
 msgstr "Einheit"
 
-#: scripts/science_db.lua:43
+#: scripts/science_db.lua:48
 msgid "Terahertz"
 msgstr "Terahertz"
 
-#: scripts/science_db.lua:44
+#: scripts/science_db.lua:49
 msgid ""
 "Ships with shield and beam systems can often configure their terahertz-"
 "frequency radiation. By manipulating these frequencies, savvy ship crews can "
@@ -210,20 +210,20 @@ msgstr ""
 "eine detaillierte Analyse der Laser- und Schildfrequenzen an und schlägt "
 "jeweils optimale Werte vor."
 
-#: scripts/science_db.lua:50
+#: scripts/science_db.lua:56
 msgid "Hacking measure"
 msgstr "Hacking"
 
-#: scripts/science_db.lua:51 scripts/science_db.lua:72
-#: scripts/science_db.lua:85 scripts/science_db.lua:93
+#: scripts/science_db.lua:57 scripts/science_db.lua:80
+#: scripts/science_db.lua:93 scripts/science_db.lua:101
 msgid "Interaction"
 msgstr "Interaktion"
 
-#: scripts/science_db.lua:51
+#: scripts/science_db.lua:57
 msgid "Long-range transmission"
 msgstr "Langstreckenübertragung"
 
-#: scripts/science_db.lua:52
+#: scripts/science_db.lua:58
 msgid ""
 "Thanks to our covert operations teams, we've acquired enough information "
 "about our enemies' computer systems to repurpose our long-range "
@@ -246,43 +246,44 @@ msgstr ""
 "beeinträchtigen, doch erfordern diese Angriffe immer noch menschliches "
 "Eingreifen, um vollständig zu funktionieren."
 
-#: scripts/science_db.lua:58
+#: scripts/science_db.lua:65
 msgid "Radar signature"
 msgstr "Radarsignatur"
 
-#: scripts/science_db.lua:59
+#: scripts/science_db.lua:66
 msgid "Signature"
 msgstr "Signatur"
 
-#: scripts/science_db.lua:59
+#: scripts/science_db.lua:66
 msgid "Related color bands"
 msgstr "Entsprechende Farblinien"
 
-#: scripts/science_db.lua:60
-msgid "Biological"
-msgstr "Biologisch"
-
-#: scripts/science_db.lua:60
-msgid "Red, green"
-msgstr "Rot, Grün"
-
-#: scripts/science_db.lua:61
+#: scripts/science_db.lua:67
 msgid "Electrical"
 msgstr "Elektromagnetisch"
 
-#: scripts/science_db.lua:61
-msgid "Red, blue"
-msgstr "Rot, blau"
+#: scripts/science_db.lua:67
+#| msgid "Related color bands"
+msgid "Red (outer band)"
+msgstr "Rot (äußeres Band)"
 
-#: scripts/science_db.lua:62
+#: scripts/science_db.lua:68
+msgid "Biological"
+msgstr "Biologisch"
+
+#: scripts/science_db.lua:68
+msgid "Green (middle band)"
+msgstr "Grün (mittleres Band)"
+
+#: scripts/science_db.lua:69
 msgid "Gravitational"
 msgstr "Gravitativ"
 
-#: scripts/science_db.lua:62
-msgid "Green, blue"
-msgstr "Grün, Blau"
+#: scripts/science_db.lua:69
+msgid "Blue (inner band)"
+msgstr "Blue (inneres Band)"
 
-#: scripts/science_db.lua:63
+#: scripts/science_db.lua:70
 msgid ""
 "The outer ring of long-range Science radar screens contain three colored "
 "bands that represent raw sensor inputs monitored on that heading. Ships and "
@@ -291,52 +292,52 @@ msgid ""
 "more information to a well-trained eye.\n"
 "\n"
 "For tactical purposes, heat generated by ship systems is registered in raw "
-"thermal sensor data in a similar manner as biological (red, green) sources. "
-"If a ship's systems are under- or over-powered, its electrical (red, blue) "
-"readings change accordingly.\n"
+"thermal sensor data in a similar manner as biological (green) sources. If a "
+"ship's systems are under- or over-powered, its electrical (red) readings "
+"change accordingly.\n"
 "\n"
 "A ship warping or preparing to jump exponentially increases its "
-"gravitational (green, blue) output. After completing a jump a ship performs "
-"a massive power transfer that raw sensor data reads as an electrical spike."
+"gravitational (blue) output. After completing a jump a ship performs a "
+"massive power transfer that raw sensor data reads as an electrical spike."
 msgstr ""
 "Der äußere Ring der Wissenschaft-Radarschirme enthält drei farbige Bänder, "
 "die die Rohdaten der Langstreckensensoren darstellen. Schiffe und "
 "Weltraumphänomene emittieren Strahlung oder weisen Eigenschaften auf, die "
-"Ihr Sensorensystem in Symbole auf Ihrem Radar übersetzt, aber diese rohen "
-"Ringe können einem gut geschulten Auge Informationen zu Objekten liefern, "
-"die sich außerhalb des Radarschirms befinden.\n"
+"Ihr Sensorsystem in Symbole auf Ihrem Radar übersetzt, aber diese Ringe "
+"können einem gut geschulten Auge Informationen zu Objekten liefern, die sich "
+"außerhalb des Radarschirms befinden.\n"
 "\n"
 "Die von Schiffssystemen erzeugte Wärme in den Rohdaten der Wärmesensoren auf "
-"ähnliche Weise registriert wie biologische Quellen (rot&grün). Wenn die "
-"Systeme eines Schiffes unterversorgt oder bei voller Leistung sind, ändern "
-"sich die elektrischen Messwerte(rot&blau) entsprechend.\n"
+"ähnliche Weise registriert wie biologische Quellen (grün). Wenn die Systeme "
+"eines Schiffes unterversorgt oder bei voller Leistung sind, ändern sich die "
+"elektrischen Messwerte(rot) entsprechend.\n"
 "\n"
 "Ein Schiff im Warpflug, oder in Vorbereitung auf einen Sprung, erhöht seine "
-"Gravitationsverzerrung (grün, blau) exponentiell. Nach einem Sprung führt "
-"das Schiff einen massiven Energietransfer durch, der von den Rohdaten der "
+"Gravitationsverzerrung (blau) exponentiell. Nach einem Sprung führt das "
+"Schiff einen massiven Energietransfer durch, der von den Rohdaten der "
 "Sensoren als elektromagnetische Spitze angezeigt wird."
 
-#: scripts/science_db.lua:69
+#: scripts/science_db.lua:77
 msgid "Scan probe"
 msgstr "Sonde"
 
-#: scripts/science_db.lua:70
+#: scripts/science_db.lua:78
 msgid "Radar range"
 msgstr "Radar-Reichweite"
 
-#: scripts/science_db.lua:71
+#: scripts/science_db.lua:79
 msgid "Typical lifetime"
 msgstr "Typische Lebensdauer"
 
-#: scripts/science_db.lua:71
+#: scripts/science_db.lua:79
 msgid "10 minutes"
 msgstr "10 Minuten"
 
-#: scripts/science_db.lua:72
+#: scripts/science_db.lua:80
 msgid "Systems link"
 msgstr "Verbindung mit Wissenschaft"
 
-#: scripts/science_db.lua:75
+#: scripts/science_db.lua:83
 msgid ""
 "Whether your mission involves scientific investigation, deep-space "
 "exploration, or military operations, remember to take advantage of any scan "
@@ -375,23 +376,23 @@ msgstr ""
 "aufgebraucht ist. Ihr Schiff hat nur eine begrenzte Anzahl von Sonden an "
 "Bord, die nur von einigen Raumstationen wieder aufgestockt werden können."
 
-#: scripts/science_db.lua:83
+#: scripts/science_db.lua:91
 msgid "Supply drop"
 msgstr "Voratscontainer"
 
-#: scripts/science_db.lua:84
+#: scripts/science_db.lua:92
 msgid "Contents"
 msgstr "Inhalt"
 
-#: scripts/science_db.lua:84
+#: scripts/science_db.lua:92
 msgid "Weapons, energy"
 msgstr "Waffen, Energie"
 
-#: scripts/science_db.lua:85
+#: scripts/science_db.lua:93
 msgid "Close-range retrieval"
 msgstr "Bergung aus nächster Nähe"
 
-#: scripts/science_db.lua:88
+#: scripts/science_db.lua:96
 msgid ""
 "To expedite resupply actions, our engineers have standardized containers for "
 "weapons and energy that can be automatically and quickly integrated into "
@@ -412,15 +413,15 @@ msgstr ""
 "in Schiffe der gleichen Fraktion integriert werden können, so dass ein "
 "Diebstahl nicht möglich ist."
 
-#: scripts/science_db.lua:92
+#: scripts/science_db.lua:100
 msgid "Warp jammer"
 msgstr "Störsender"
 
-#: scripts/science_db.lua:93
+#: scripts/science_db.lua:101
 msgid "Short-range encounter"
 msgstr "Störfeld"
 
-#: scripts/science_db.lua:96
+#: scripts/science_db.lua:104
 msgid ""
 "Warp and jump technologies rely on technological manipulation of "
 "gravitational forces to achieve long-range travel. However, these "
@@ -451,53 +452,220 @@ msgstr ""
 "Captains, die Wert auf die Möglichkeit des Rückzugs legen, sollten entweder "
 "einen großen Bogen um Störsender machen oder sie möglichst schnell zerstören."
 
-#: scripts/science_db.lua:103
+#: scripts/science_db.lua:111
 msgid "Weapons"
 msgstr "Waffen"
 
-#: scripts/science_db.lua:104
+#: scripts/science_db.lua:112
 msgid ""
-"This database covers only the basic versions of missile weapons used "
-"throughout the galaxy.\n"
-"\n"
-"It has been reported that some battleships started using larger variations "
-"of those missiles. Small fighters and even frigates should not have too much "
-"trouble dodging them, but space captains of bigger ships should be wary of "
-"their doubled damage potential.\n"
-"\n"
-"Smaller variations of these missiles have become common in the galaxy, too. "
-"Fighter pilots praise their speed and maneuverability, because it gives them "
-"an edge against small and fast-moving targets. They only deal half the "
-"damage of their basic counterparts, but what good is a missile if it does "
-"not hit its target."
+"This database covers only the basic versions of weapons used throughout the "
+"galaxy."
 msgstr ""
 "Diese Datenbank deckt lediglich die Standard-Raketenvarianten ab, die in der "
-"Galaxie verwendet werden.\n"
-"Es wurde berichtet, dass manche Schiffe angefangen haben, größere Varianten "
-"dieser Raketen zu nutzen. Kleine Jäger und selbst Fregatten sollten keine "
-"Probleme haben, ihnen auszuweichen, aber Captains auf größeren Schiffen "
-"sollten sich vor ihrer potentiell doppelt so hohen Schadenswirkung in Acht "
-"nehmen.\n"
-"Auch kleinere Varianten dieser Raketen werden langsam alltäglich. "
-"Jägerpiloten schätzen ihre Geschwindigkeit und Wendigkeit, da dies ihnen  "
-"eine Vorteil gegenüber kleinen und schnellen Zielen gibt.\n"
-"Verglichen mit der Standard-Variante verursachen Sie nur halben Schaden, "
-"aber was nützt eine große Rakete wenn sie ihr Ziel verfehlt?"
+"Galaxie verwendet werden."
 
-#: scripts/science_db.lua:110
-msgid "Homing missile"
-msgstr "Zielsuchrakete"
+#: scripts/science_db.lua:114
+#| msgid "Weapons"
+msgid "Beam weapons"
+msgstr "Laserwaffen"
 
-#: scripts/science_db.lua:111 scripts/science_db.lua:116
-#: scripts/science_db.lua:135 scripts/science_db.lua:142
+#: scripts/science_db.lua:115 scripts/science_db.lua:126
 msgid "Range"
 msgstr "Radar-Reichweite"
 
-#: scripts/science_db.lua:112 scripts/science_db.lua:143
+#: scripts/science_db.lua:115 scripts/science_db.lua:116
+#: scripts/science_db.lua:126 scripts/science_db.lua:127
+msgid "Varies"
+msgstr "Variiert"
+
+#: scripts/science_db.lua:116 scripts/science_db.lua:127
 msgid "Damage"
 msgstr "Schaden"
 
-#: scripts/science_db.lua:113
+#: scripts/science_db.lua:117
+msgid ""
+"Beam weapons emit an instantaneous, focused burst of energy or matter at a "
+"single target within a target arc. Many ships equip beam weapons for their "
+"precision and versatility.\n"
+"\n"
+"Shields are generally effective against energy-based beam weapons. To combat "
+"this, a beam's output can be modulated to various frequencies. This allows "
+"beam weapons to be tuned to a target's shield frequency to maximize their "
+"effectiveness.\n"
+"\n"
+"Each firing of a beam weapon begins a brief cycle period, during which the "
+"beam cannot fire again. Damage to the system increases this delay while also "
+"reducing its output. Beam firings also generate heat above and beyond the "
+"system's normal operating temperature. In heavy combat situations, a ship's "
+"engineers must dissipate this heat to prevent inflicting damage on the "
+"system.\n"
+"\n"
+"On some ships, heavy beam weapons are mounted on turrets that can rotate to "
+"cover a wide firing arc, at an expense of targeting speed."
+msgstr ""
+"Laserwaffen geben einen sofortigen, Energiestoß auf ein einzelnes Ziel "
+"innerhalb eines Zielbogens ab. Viele Schiffe rüsten Strahlenwaffen wegen "
+"ihrer Präzision und Vielseitigkeit aus.\n"
+"\n"
+"Schilde sind allgemein sehr wirksam gegen Laserwaffen. Um dem "
+"entgegenzuwirken, kann der Laserstrahl auf verschiedene Frequenzen moduliert "
+"werden. Dadurch können Laser auf die Schildfrequenz eines Ziels abgestimmt "
+"werden, um ihre Wirksamkeit zu maximieren.\n"
+"\n"
+"Nach jedem Abschuss eines Lasers beginnt eine kurze Zykluszeit, in der der "
+"Strahl nicht erneut abgefeuert werden kann. Eine Beschädigung des Systems "
+"erhöht diese Verzögerung und verringert gleichzeitig seine Leistung. Das "
+"Abfeuern von Lasern erzeugt außerdem Wärme, die über die normale "
+"Betriebstemperatur des Systems hinausgeht. In schweren Feuergefechten müssen "
+"die Schiffsingenieure diese Wärme ableiten, um Schäden am System zu "
+"vermeiden.\n"
+"\n"
+"Auf einigen Schiffen sind schwere Laserkanonen auf drehbaren Geschütztürmen "
+"montiert, um einen weiten Schussbereich abzudecken, was zu Lasten der "
+"Zielgeschwindigkeit geht."
+
+#: scripts/science_db.lua:125
+msgid "Missile weapons"
+msgstr "Raketen  (allgemein)"
+
+#: scripts/science_db.lua:128
+#| msgid ""
+#| "This database covers only the basic versions of missile weapons used "
+#| "throughout the galaxy.\n"
+#| "\n"
+#| "It has been reported that some battleships started using larger "
+#| "variations of those missiles. Small fighters and even frigates should not "
+#| "have too much trouble dodging them, but space captains of bigger ships "
+#| "should be wary of their doubled damage potential.\n"
+#| "\n"
+#| "Smaller variations of these missiles have become common in the galaxy, "
+#| "too. Fighter pilots praise their speed and maneuverability, because it "
+#| "gives them an edge against small and fast-moving targets. They only deal "
+#| "half the damage of their basic counterparts, but what good is a missile "
+#| "if it does not hit its target."
+msgid ""
+"Missiles are weapons launched from tubes. Most are self-propelled ranged "
+"weapons with various capabilities, such as differing ranges, self-guided "
+"pursuit of a designated target, explosive warheads that damage everything "
+"within a radius, and varying types and amounts of damage.\n"
+"\n"
+"Some battleships use larger variations of these missile designs. Small "
+"fighters and even frigates are capable of dodging these variants at range, "
+"but captains of bigger spaceships should be wary of their doubled damage "
+"potential.\n"
+"\n"
+"Smaller missile variations are also common. Fighter pilots praise their "
+"speed and maneuverability, which gives them an edge against small and fast-"
+"moving targets. They deal only half the damage of their basic counterparts, "
+"but what good is a missile if it does not hit its target?"
+msgstr ""
+"Raketen sind Projektilwaffen, die aus Schächten abgefeuert werden. Bei den "
+"meisten handelt es sich um Fernwaffen mit eigenem Antrieb und "
+"unterschiedlichen Eigenschaften wie Reichweite, Zielsuch-Eigenschaften, "
+"explosiven Sprengköpfen, und diversen Schadensarten.\n"
+"\n"
+"\n"
+"Manche Schiffe nutzen größere Varianten dieser Raketen. Kleine Jäger und "
+"selbst Fregatten sollten keine Probleme haben, ihnen auszuweichen, aber "
+"Captains größerer Schiffe sollten sich vor ihrer potentiell doppelt so hohen "
+"Schadenswirkung in Acht nehmen.\n"
+"Auch kleinere Varianten dieser Raketen sind nicht ungewöhnlich. "
+"Jägerpilot:innen schätzen ihre Geschwindigkeit und Wendigkeit, da dies "
+"ihnen  eine Vorteil gegenüber kleinen und schnellen Zielen gibt.\n"
+"Verglichen mit der Standard-Variante verursachen Sie nur halben Schaden, "
+"aber was nützt eine große Rakete wenn sie ihr Ziel verfehlt?"
+
+#: scripts/science_db.lua:136 scripts/science_db.lua:146
+#| msgid "Damage at edge"
+msgid "Damage type"
+msgstr "Schadensart"
+
+#: scripts/science_db.lua:137 scripts/science_db.lua:147
+#: scripts/science_db.lua:175
+msgid "Damage at center"
+msgstr "Schaden im Zentrum"
+
+#: scripts/science_db.lua:138 scripts/science_db.lua:148
+#: scripts/science_db.lua:176
+msgid "Damage at edge"
+msgstr "Schaden am Rand"
+
+#: scripts/science_db.lua:139 scripts/science_db.lua:149
+#: scripts/science_db.lua:177
+msgid "Blast radius (u)"
+msgstr "Explosionsradius (u)"
+
+#: scripts/science_db.lua:140 scripts/science_db.lua:187
+msgid "Speed (u/sec.)"
+msgstr "Geschwindigkeit (u/s)"
+
+#: scripts/science_db.lua:141 scripts/science_db.lua:151
+#: scripts/science_db.lua:189
+msgid "Turn rate (deg./sec.)"
+msgstr "Drehgeschw.(Grad/s)"
+
+#: scripts/science_db.lua:142 scripts/science_db.lua:178
+msgid "Lifetime (sec.)"
+msgstr "Lebensdauer(s)"
+
+#: scripts/science_db.lua:143
+msgid "Homing range (u)"
+msgstr "Zielsuchreichweite (u)"
+
+#: scripts/science_db.lua:150 scripts/science_db.lua:188
+msgid "Launch speed (u/sec.)"
+msgstr "Abschussgeschw.(u/s)"
+
+#: scripts/science_db.lua:152
+msgid "Arming delay (sec.)"
+msgstr "Scharfschaltung (s)"
+
+#: scripts/science_db.lua:153
+msgid "Trigger distance (u)"
+msgstr "Auslöse-Distanz (u)"
+
+#: scripts/science_db.lua:157 scripts/science_db.lua:158
+#: scripts/science_db.lua:160 scripts/science_db.lua:161
+msgid "Kinetic"
+msgstr "Kinetisch"
+
+#: scripts/science_db.lua:159 scripts/science_db.lua:223
+msgid "EMP"
+msgstr "EMP"
+
+#: scripts/science_db.lua:166
+msgctxt "size_abbreviation"
+msgid "S"
+msgstr "S"
+
+#: scripts/science_db.lua:167
+msgctxt "size_abbreviation"
+msgid "M"
+msgstr "M"
+
+#: scripts/science_db.lua:168 scripts/science_db.lua:182
+#: scripts/science_db.lua:193
+msgctxt "size_abbreviation"
+msgid "L"
+msgstr "L"
+
+#: scripts/science_db.lua:204
+msgid "Homing missile"
+msgstr "Zielsuchrakete"
+
+#: scripts/science_db.lua:205 scripts/science_db.lua:210
+#: scripts/science_db.lua:217 scripts/science_db.lua:224
+#: scripts/science_db.lua:229
+msgid "Sizes"
+msgstr "Größen"
+
+#: scripts/science_db.lua:205 scripts/science_db.lua:210
+#: scripts/science_db.lua:217 scripts/science_db.lua:224
+#: scripts/science_db.lua:229
+msgid "Small (S) / Medium (M) / Large (L)"
+msgstr "Klein (S) / Mittel (M) / Groß (L)"
+
+#: scripts/science_db.lua:207
 msgid ""
 "This target-seeking missile is the workhorse of many space combat arsenals. "
 "It's compact enough to be fitted on frigates, and packs enough punch to be "
@@ -508,26 +676,11 @@ msgstr ""
 "genug um auch auf größeren Schiffen genutzt zu werden, wobei sie dort "
 "üblicherweise mit mehr als einem Waffenschacht benutzt werden."
 
-#: scripts/science_db.lua:115
+#: scripts/science_db.lua:209
 msgid "Nuke"
 msgstr "Nuke"
 
-#: scripts/science_db.lua:117 scripts/science_db.lua:127
-#: scripts/science_db.lua:136
-msgid "Blast radius"
-msgstr "Explosionsradius"
-
-#: scripts/science_db.lua:118 scripts/science_db.lua:128
-#: scripts/science_db.lua:137
-msgid "Damage at center"
-msgstr "Schaden im Zentrum"
-
-#: scripts/science_db.lua:119 scripts/science_db.lua:129
-#: scripts/science_db.lua:138
-msgid "Damage at edge"
-msgstr "Schaden am Rand"
-
-#: scripts/science_db.lua:120
+#: scripts/science_db.lua:212
 msgid ""
 "A nuclear missile is similar to a homing missile in that it can seek a "
 "target, but it moves and turns more slowly and explodes a greatly increased "
@@ -552,19 +705,11 @@ msgstr ""
 "welcher Schaden entstanden ist, und ob Schilde oder Panzerung wirklich "
 "genügend Schutz bieten."
 
-#: scripts/science_db.lua:124
+#: scripts/science_db.lua:216
 msgid "Mine"
 msgstr "Mine"
 
-#: scripts/science_db.lua:125
-msgid "Drop distance"
-msgstr "Abwurf-Weite"
-
-#: scripts/science_db.lua:126
-msgid "Trigger distance"
-msgstr "Auslöse-Distanz"
-
-#: scripts/science_db.lua:130
+#: scripts/science_db.lua:219
 msgid ""
 "Mines are often placed in defensive perimeters around stations. There are "
 "also old minefields scattered around the galaxy from older wars.\n"
@@ -580,11 +725,7 @@ msgstr ""
 "verzögerte Explosion und der grosse Explosionsradius machen dies zu einem "
 "sehr riskanten Unterfangen."
 
-#: scripts/science_db.lua:134
-msgid "EMP"
-msgstr "EMP"
-
-#: scripts/science_db.lua:139
+#: scripts/science_db.lua:226
 msgid ""
 "The electromagnetic pulse missile (EMP) reproduces the disruptive effects of "
 "a nuclear explosion, but without the destructive properties. This causes it "
@@ -603,19 +744,11 @@ msgstr ""
 "Schilde des Zieles auszuschalten bevor sie sich nähern und es mit gezielten "
 "Schüssen der Laser kampfunfähig machen."
 
-#: scripts/science_db.lua:141
+#: scripts/science_db.lua:228
 msgid "HVLI"
 msgstr "HGBI"
 
-#: scripts/science_db.lua:143
-msgid "10 each, 50 total"
-msgstr "10 pro Geschoss, 50 insgesamt"
-
-#: scripts/science_db.lua:144
-msgid "Burst"
-msgstr "Einzelgeschosse"
-
-#: scripts/science_db.lua:145
+#: scripts/science_db.lua:231
 msgid ""
 "A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high "
 "velocity. This weapon is usually found in simpler ships since it does not "
@@ -634,3 +767,164 @@ msgstr ""
 "\n"
 "Jeder Schuss mit einer HGBI-Waffe ist ein Feuerstoß aus 5 Projektilen, was "
 "die Trefferchance erhöht, aber dennoch ein genaues Zielen erfordert."
+
+#: scripts/science_db.lua:244
+msgctxt "database direction"
+msgid "Front"
+msgstr "Front"
+
+#: scripts/science_db.lua:245
+msgctxt "database direction"
+msgid "Right"
+msgstr "Rechts"
+
+#: scripts/science_db.lua:246
+msgctxt "database direction"
+msgid "Left"
+msgstr "Links"
+
+#: scripts/science_db.lua:247
+msgctxt "database direction"
+msgid "Rear"
+msgstr "Heck"
+
+#: scripts/science_db.lua:254
+msgctxt "database"
+msgid "Factions"
+msgstr "Fraktionen"
+
+#: scripts/science_db.lua:259 scripts/science_db.lua:262
+msgctxt "stance"
+msgid "Neutral"
+msgstr "Neutral"
+
+#: scripts/science_db.lua:263
+msgctxt "stance"
+msgid "Enemy"
+msgstr "Feindlich"
+
+#: scripts/science_db.lua:264
+msgctxt "stance"
+msgid "Friendly"
+msgstr "Freundlich"
+
+#: scripts/science_db.lua:274
+msgctxt "database"
+msgid "Ships"
+msgstr "Schiffe"
+
+#: scripts/science_db.lua:275
+msgid ""
+"Spaceships are vessels capable of withstanding the dangers of travel through "
+"deep space. They can fill many functions and vary broadly in size, from "
+"small tugs to massive dreadnoughts."
+msgstr ""
+"Raumschiffe sind gebaut, um den Gefahren des Reisens durch das Weltall zu "
+"widerstehen. Sie erfüllen verschiedenste Funktionen und können stark in "
+"ihrer Größe variieren, von kleinen Jägern bis hin zu massiven "
+"Schlachtschiffen."
+
+#: scripts/science_db.lua:277
+msgctxt "database"
+msgid "Stations"
+msgstr "Raumstationen"
+
+#: scripts/science_db.lua:278
+msgid ""
+"Space stations are permanent, immobile structures ranging in scale from "
+"small outposts to city-sized communities. Many provide restocking and repair "
+"services to neutral and friendly ships."
+msgstr ""
+
+#: scripts/science_db.lua:287 scripts/science_db.lua:311
+msgid "No class"
+msgstr "Keine Klasse"
+
+#: scripts/science_db.lua:312
+msgid "No sub-class"
+msgstr "Keine Unterklasse"
+
+#: scripts/science_db.lua:328
+msgctxt "database"
+msgid "Class"
+msgstr "Klasse"
+
+#: scripts/science_db.lua:329
+msgctxt "database"
+msgid "Sub-class"
+msgstr "Unterklasse"
+
+#: scripts/science_db.lua:332 scripts/science_db.lua:334
+msgctxt "database"
+msgid "Size"
+msgstr "Größe"
+
+#: scripts/science_db.lua:346
+msgctxt "database"
+msgid "Shield"
+msgstr "Schilde"
+
+#: scripts/science_db.lua:350
+msgid "Hull"
+msgstr "Hülle"
+
+#: scripts/science_db.lua:354
+msgctxt "database"
+msgid "Move speed"
+msgstr "Geschwindigkeit"
+
+#: scripts/science_db.lua:355
+msgctxt "database"
+msgid "Reverse move speed"
+msgstr "Geschw. rückwärts"
+
+#: scripts/science_db.lua:358
+msgctxt "database"
+msgid "Turn speed"
+msgstr "Wendigkeit"
+
+#: scripts/science_db.lua:361
+msgctxt "database"
+msgid "Warp speed"
+msgstr "Warpgeschwindigkeit"
+
+#: scripts/science_db.lua:364
+msgctxt "database"
+msgid "Jump range"
+msgstr "Sprungreichweite"
+
+#: scripts/science_db.lua:371
+#, lua-format
+msgctxt "database"
+msgid "%s beam weapon"
+msgstr "Laser %s"
+
+#: scripts/science_db.lua:372
+#, lua-format
+msgctxt "database"
+msgid "%.1f Dmg / %.1f sec"
+msgstr "%.1f Schaden / %.1f Sek."
+
+#: scripts/science_db.lua:380
+#, lua-format
+msgctxt "database"
+msgid "%s tube"
+msgstr "Schacht %s"
+
+#: scripts/science_db.lua:382
+#, lua-format
+msgctxt "database"
+msgid "%s small tube"
+msgstr "Kleiner Schacht %s"
+
+#: scripts/science_db.lua:385
+#, lua-format
+msgctxt "database"
+msgid "%s large tube"
+msgstr "Großer Schacht %s"
+
+#: scripts/science_db.lua:389
+#, lua-format
+msgctxt "database"
+msgid "%.1f sec"
+msgstr "%.1f Sek."
