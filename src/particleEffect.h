@@ -51,10 +51,8 @@ class ParticleEngine : public Updatable
 
     enum class Attributes : uint8_t
     {
-        Center = 0,
-        TexCoords,
-        Color,
-        Size,
+        CenterAndSize = 0,
+        ColorAndTexCoords,
 
         Count
     };
@@ -77,8 +75,14 @@ private:
 
     std::vector<Particle> particles;
     std::vector<Particle>::iterator first_expired;
-    
-    std::vector<ParticleData> particles_renderdata;
+
+    struct ParticleRenderData
+    {
+        glm::vec4 position_and_size{};      // 4 * 4
+        glm::u8vec4 color_and_texcoords{};  // 1 * 4 = 20
+    };
+
+    std::vector<ParticleRenderData> particle_renderdata;
     sp::Shader* shader = nullptr;
 };
 
