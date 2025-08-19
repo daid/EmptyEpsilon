@@ -10,6 +10,10 @@
 AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim)
 : GuiToggleButton(owner, id, tr("missile","Lock"), [this](bool value)
     {
+        if (value)
+            text = tr("missile","Lock");
+        else
+            text = tr("missile","Manual");
         setAimLock(value);
     })
 {
