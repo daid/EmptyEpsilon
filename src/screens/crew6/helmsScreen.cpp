@@ -93,8 +93,6 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
             }
         },
         [this](glm::vec2 position) {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
             heading_hint->hide();
         }
     );
