@@ -1,0 +1,742 @@
+#: scripts/tutorial/00_all.lua:28
+msgid ""
+"This is the main screen, which displays your ship and the surrounding "
+"space.\n"
+"While you cannot move the ship from this screen, you can use it to visually "
+"identify objects."
+msgstr ""
+"这是主屏幕，显示你的飞船及周围的太空环境。\n"
+"虽然你无法从这个屏幕移动飞船，但你可以用它来直观地识别物体。"
+
+#: scripts/tutorial/00_all.lua:33
+msgid ""
+"Welcome to the long-range radar. This radar can detect objects up to 30u "
+"from your ship, depicted at the radar's center. This radar allows you to "
+"quickly identify distant objects."
+msgstr ""
+"欢迎来到远程雷达。此雷达可以探测到距离你的飞船（显示在雷达中心）30个单位以内的物体。此雷达可让你快速识别远距离目标。"
+
+#: scripts/tutorial/00_all.lua:35
+msgid ""
+"To the right of your ship is a brown dot. This is an asteroid.\n"
+"Asteroid impacts will damage your ship, so avoid hitting them."
+msgstr ""
+"你飞船右侧有一个棕色光点。那是一颗小行星。\n"
+"撞击小行星会损坏你的飞船，所以请避免撞到它们。"
+
+#: scripts/tutorial/00_all.lua:39
+msgid ""
+"The white dot is a mine. When you move near a mine, it explodes with a "
+"powerful 1u-radius blast. Striking a mine while your shields are down will "
+"surely destroy your ship."
+msgstr ""
+"白色光点是一枚水雷。当你靠近水雷时，它会以1个单位的半径爆炸，产生强大冲击。如果你的护盾关闭时撞到水雷，你的飞船肯定会被摧毁。"
+
+#: scripts/tutorial/00_all.lua:44
+msgid ""
+"This large dot is a station. Stations can be several different sizes and "
+"belong to different factions. The dot's color indicates whether the station "
+"is friendly (green), neutral (light blue), or hostile (red)."
+msgstr ""
+"这个大光点是一个空间站。空间站的尺寸和所属派系各不相同。光点的颜色表示空间站是友方（绿色）、中立（浅蓝色）还是敌对（红色）。"
+
+#: scripts/tutorial/00_all.lua:49
+msgid ""
+"The rainbow-colored cloud is a nebula. Nebulae block long-range sensors, "
+"preventing ships from detecting what's inside of them at distances of more "
+"than 5u. Sensors also cannot detect objects behind nebulae."
+msgstr ""
+"彩虹色的云团是星云。星云会阻碍远程传感器，使飞船无法探测到其中5个单位以外的物体。传感器也无法探测到星云后面的物体。"
+
+#: scripts/tutorial/00_all.lua:55
+msgid ""
+"Finally, these are ships. They look like you on radar, and their attitude "
+"toward you is reflected by the same colors as stations. In addition to "
+"green, blue, and red, ships of unknown attitude appear as gray objects."
+msgstr ""
+"最后，这些是飞船。它们在雷达上看起来和你一样，它们对你的态度也用和空间站相同的颜色表示。除了绿色、蓝色和红色，未知态度的飞船显示为灰色物体。"
+
+#: scripts/tutorial/00_all.lua:60
+msgid "Next, we will look at the short-range radar."
+msgstr "接下来，我们看看短程雷达。"
+
+#: scripts/tutorial/00_all.lua:62
+msgid ""
+"The short-range radar can detect objects up to 5u from your ship. It also "
+"depicts the range of your own beam weapons.\n"
+"Your ship has 2 beam weapons aimed forward. Each type of ship has different "
+"beam weapon layouts, with different ranges and locations."
+msgstr ""
+"短程雷达可以探测到距离你的飞船5个单位以内的物体。它还会显示你自身光束武器的射程。\n"
+"你的飞船有2门光束武器，均指向前方。每种类型的飞船都有不同的光束武器布局，射程和位置也各不相同。"
+
+#: scripts/tutorial/00_all.lua:75
+msgid ""
+"This is the helms screen.\n"
+"As the helms officer, you command your ship's movement in space."
+msgstr ""
+"这是驾驶屏幕。\n"
+"作为驾驶员，你负责指挥飞船在太空中的移动。"
+
+#: scripts/tutorial/00_all.lua:78
+msgid ""
+"Your primary controls are your impulse engines and maneuvering thrusters.\n"
+"Your impulse controls are on the left side of the screen.\n"
+"\n"
+"Raise your impulse level to 100% to fly forward right now."
+msgstr ""
+"你的主要控制是脉冲引擎和机动推进器。\n"
+"脉冲控制在屏幕左侧。\n"
+"\n"
+"现在将你的脉冲级别提升到100%以向前飞行。"
+
+#: scripts/tutorial/00_all.lua:83
+msgid ""
+"Good. You now know how to move forward.\n"
+"\n"
+"I've disabled your impulse engine for now. Next, let's rotate your ship.\n"
+"Rotating the ship is easy. Simply press a heading on the radar screen to "
+"rotate your ship in that direction.\n"
+"Try rotating to heading 200 right now."
+msgstr ""
+"很好。你现在知道如何向前移动了。\n"
+"\n"
+"我现在已禁用你的脉冲引擎。接下来，让我们旋转你的飞船。\n"
+"旋转飞船很简单。只需在雷达屏幕上按一个航向，即可将你的飞船朝该方向旋转。\n"
+"现在尝试旋转到航向200。"
+
+#: scripts/tutorial/00_all.lua:90
+msgid ""
+"Excellent!\n"
+"\n"
+"Next up: docking. Docking with a station recharges your energy, repairs your "
+"hull, and allows the relay officer to request weapon refills. It can also be "
+"important for other mission-related events.\n"
+"To dock, maneuver within 1u of a station and press the \"Request Dock\" "
+"button, from which point docking is fully automated.\n"
+"Maneuver to the nearby station and request permission to dock."
+msgstr ""
+"干得漂亮！\n"
+"\n"
+"接下来：停靠。与空间站停靠可以为你补充能量、修复船体，并允许通讯官请求补充武器。它对其他任务相关事件也可能很重要。\n"
+"要停靠，请在距离空间站1个单位以内进行机动，然后按下“请求停靠”按钮，从此时起，停靠将完全自动化。\n"
+"机动到附近的空间站并请求停靠许可。"
+
+#: scripts/tutorial/00_all.lua:95
+msgid ""
+"Now that you are docked, your movement is locked. As helms officer, there is "
+"nothing else you can do but undock, so do that now."
+msgstr ""
+"你现在已经停靠，你的移动被锁定。作为驾驶员，除了解除停靠，你无能为力，所以现在就解除停靠吧。"
+
+#: scripts/tutorial/00_all.lua:99
+msgid ""
+"Ok, there are just a few more things that you need to know.\n"
+"Remember those beam weapons? As helms officer, it is your task to keep those "
+"beams on your target.\n"
+"I've set up an stationary enemy ship as a target. Destroy it with your beam "
+"weapons. Note that at every shot, the corresponding firing arc will change "
+"color."
+msgstr ""
+"好的，还有几件事你需要知道。\n"
+"还记得那些光束武器吗？作为驾驶员，你的任务是让光束始终瞄准你的目标。\n"
+"我已设置了一艘静止的敌方飞船作为目标。用你的光束武器摧毁它。请注意，每次射击时，相应的射击弧度都会改变颜色。"
+
+#: scripts/tutorial/00_all.lua:102
+msgid ""
+"Aggression is not always the solution, but boy, it is fun!\n"
+"\n"
+"On to the next task: moving long distances.\n"
+"There are two methods of moving long distances quickly. Depending on your "
+"ship, you either have a warp drive or a jump drive.\n"
+"The warp drive moves your ship at high speed, while the jump drive instantly "
+"teleports your ship a great distance."
+msgstr ""
+"进攻并非总是解决之道，但天呐，它真有趣！\n"
+"\n"
+"接下来是下一个任务：长距离移动。\n"
+"有两种快速长距离移动的方法。根据你的飞船类型，你可能拥有跃迁引擎或超空间引擎。\n"
+"跃迁引擎使你的飞船高速移动，而超空间引擎则能瞬间将你的飞船远距离传送。"
+
+#: scripts/tutorial/00_all.lua:108
+msgid ""
+"First, let us try the warp drive.\n"
+"\n"
+"It functions like the impulse drive but only propels your ship forward, and "
+"consumes energy at a much faster rate.\n"
+"Use the warp drive to move more than 30u away from this starting point."
+msgstr ""
+"首先，让我们尝试跃迁引擎。\n"
+"\n"
+"它的功能类似于脉冲驱动，但只向前推进你的飞船，并且能量消耗速度快得多。\n"
+"使用跃迁引擎，从这个起始点移动超过30个单位的距离。"
+
+#: scripts/tutorial/00_all.lua:113
+msgid ""
+"Next, let us demonstrate the jump drive.\n"
+"\n"
+"To use the jump drive, point your ship in the direction where you want to "
+"jump, configure a distance to jump, and then initiate it. The jump occurs 10 "
+"seconds after you initiate. Use the jump drive to jump more than 30u from "
+"this starting point, in any direction."
+msgstr ""
+"接下来，让我们演示超空间引擎。\n"
+"\n"
+"要使用超空间引擎，将你的飞船指向你想要跃迁的方向，配置跃迁距离，然后启动。跃迁会在你启动后10秒发生。使用超空间引擎，从这个起始点向任意方向跃迁超过30个单位。"
+
+#: scripts/tutorial/00_all.lua:116
+msgid ""
+"Notice how your jump drive needs to recharge after use.\n"
+"\n"
+"This covers the basics of the helms officer."
+msgstr ""
+"请注意，你的超空间引擎在使用后需要充能。\n"
+"\n"
+"这涵盖了驾驶员的基本职责。"
+
+#: scripts/tutorial/00_all.lua:131
+msgid ""
+"This is the weapons screen.\n"
+"As the weapons officer, you are responsible for targeting beam weapons, "
+"loading and firing missile weapons, and controlling your shields."
+msgstr ""
+"这是武器屏幕。\n"
+"作为武器官，你负责瞄准光束武器、装填和发射导弹武器，以及控制你的护盾。"
+
+#: scripts/tutorial/00_all.lua:134
+msgid ""
+"Your most fundamental task is to target your ship's weapons.\n"
+"Your beam weapons only fire at your selected target, and homing missiles "
+"travel toward your selected target.\n"
+"\n"
+"Target the ship in front of you by pressing it."
+msgstr ""
+"你最基本的任务是瞄准飞船的武器。\n"
+"你的光束武器只会向你选择的目标开火，追踪导弹也会飞向你选择的目标。\n"
+"\n"
+"点击你前方的飞船来锁定目标。"
+
+#: scripts/tutorial/00_all.lua:138
+msgid ""
+"Good! Notice that your beam weapons did not fire on this ship until you "
+"targeted it.\n"
+"\n"
+"Next up: shield controls."
+msgstr ""
+"很好！请注意，直到你锁定目标，你的光束武器才对这艘飞船开火。\n"
+"\n"
+"接下来是：护盾控制。"
+
+#: scripts/tutorial/00_all.lua:143
+msgid ""
+"As you might notice, you are being shot at. Do not worry, you cannot die "
+"right now.\n"
+"\n"
+"You are taking damage, however, so enable your shields to protect yourself."
+msgstr ""
+"你可能会注意到，你正在被射击。别担心，你现在不会死亡。\n"
+"\n"
+"然而，你正在受到伤害，所以请启用你的护盾来保护自己。"
+
+#: scripts/tutorial/00_all.lua:158
+msgid ""
+"Shields protect your ship from direct damage, but they cost extra energy to "
+"maintain, can take only a limited amount of damage, and are slow to "
+"recharge. Eventually, this enemy's attacks will get through your shields.\n"
+"\n"
+"Disable your shields to continue."
+msgstr ""
+"护盾可以保护你的飞船免受直接伤害，但它们需要额外能量来维持，只能承受有限的伤害，并且充能缓慢。最终，敌人的攻击会穿透你的护盾。\n"
+"\n"
+"禁用你的护盾以继续。"
+
+#: scripts/tutorial/00_all.lua:162
+msgid ""
+"While only a single button, your shields are vital for survival. They "
+"protect against all kinds of damage, including beam weapons, missiles, "
+"asteroids, and mines, so make them one of your primary priorities.\n"
+"\n"
+"Next up, the real fun starts: missile weapons."
+msgstr ""
+"虽然只是一个按钮，但你的护盾对于生存至关重要。它们可以抵御各种伤害，包括光束武器、导弹、小行星和水雷，因此请将它们作为你的首要任务之一。\n"
+"\n"
+"接下来，真正的乐趣开始了：导弹武器。"
+
+#: scripts/tutorial/00_all.lua:173
+msgid ""
+"You have 1 homing missile in your missile storage now, and 1 weapon tube.\n"
+"You can load this missile into your weapon tube. Depending on your ship "
+"type, you might have more types of missiles and more weapon tubes.\n"
+"\n"
+"Load this homing missile into the weapon tube by selecting the homing "
+"missile, and then pressing the load button for this tube. Note that it takes "
+"some time to load missiles into tubes."
+msgstr ""
+"你现在导弹存储中有一个追踪导弹，以及一个武器发射管。\n"
+"你可以将这枚导弹装填到你的武器发射管中。根据你的飞船类型，你可能拥有更多类型的导弹和更多的武器发射管。\n"
+"\n"
+"选择追踪导弹，然后按下该发射管的装填按钮，将这枚追踪导弹装填到武器发射管中。请注意，将导弹装填到发射管中需要一些时间。"
+
+#: scripts/tutorial/00_all.lua:178
+msgid "Great! Now fire this missile by clicking on the tube."
+msgstr "太棒了！现在点击发射管来发射这枚导弹。"
+
+#: scripts/tutorial/00_all.lua:179
+msgid "Missile away!"
+msgstr "导弹已发射！"
+
+#: scripts/tutorial/00_all.lua:182
+msgid ""
+"BOOM! That was just firing straight ahead, but you can also aim missiles.\n"
+"First, unlock your aim by pressing the [Lock] button above the radar view.\n"
+"Next, aim your missiles with the aiming dial surrounding the radar.\n"
+"Point the aiming dial at the next ship, load a missile, and fire."
+msgstr ""
+"轰隆！那只是直线发射，但你也可以瞄准导弹。\n"
+"首先，通过按下雷达视图上方的[锁定]按钮来解锁你的瞄准。\n"
+"接下来，使用雷达周围的瞄准盘来瞄准你的导弹。\n"
+"将瞄准盘指向下一艘飞船，装填一枚导弹，然后开火。"
+
+#: scripts/tutorial/00_all.lua:193
+msgid ""
+"Perfect aim!\n"
+"\n"
+"The next ship is behind you. Target the ship by pressing it to guide your "
+"homing missiles toward your selected target.\n"
+"While not necessary against a stationary target, this homing ability can "
+"make all the difference against a moving target."
+msgstr ""
+"完美瞄准！\n"
+"\n"
+"下一艘飞船在你身后。点击它来锁定目标，引导你的追踪导弹飞向你选定的目标。\n"
+"虽然对静止目标并非必要，但这种追踪能力对移动目标而言至关重要。"
+
+#: scripts/tutorial/00_all.lua:204
+msgid ""
+"In addition to homing missiles, your ship might have nukes, EMPs, and mines. "
+"Nukes and EMPs have the same features as homing missiles, but have a 1u-"
+"radius blast and do much more damage. EMPs damage only shields, and thus are "
+"great for weakening heavily shielded enemies."
+msgstr ""
+"除了追踪导弹，你的飞船可能还配备了核弹、电磁脉冲弹和水雷。核弹和电磁脉冲弹与追踪导弹具有相同的功能，但它们的爆炸半径为1个单位，并造成更多伤害。电磁脉冲弹只对护盾造成伤害，因此非常适合削弱护盾强大的敌人。"
+
+#: scripts/tutorial/00_all.lua:212
+msgid ""
+"Welcome to engineering.\n"
+"Engineering is split into two parts. The top part shows your ship's "
+"interior, including damage control teams stationed throughout.\n"
+"The bottom part controls power and coolant levels of your ship's systems."
+msgstr ""
+"欢迎来到工程部。\n"
+"工程部分为两部分。上半部分显示你的飞船内部，包括部署在各处的损管团队。\n"
+"下半部分控制飞船各系统的能量和冷却液级别。"
+
+#: scripts/tutorial/00_all.lua:217
+msgid ""
+"First, we will explain your control over your ship's systems.\n"
+"Each row on the bottom area of the screen represents one of your ship's "
+"system, and each system has a damage level, heat level, power level, and "
+"coolant level.\n"
+"\n"
+"I've overheated your warp system. An overheating system can damage your "
+"ship. You can prevent this by putting coolant in your warp system. Select "
+"the warp system and increase the coolant slider."
+msgstr ""
+"首先，我们将解释你对飞船系统的控制。\n"
+"屏幕底部区域的每一行代表你飞船的一个系统，每个系统都有损坏程度、热量、能量和冷却液级别。\n"
+"\n"
+"我已使你的跃迁系统过热。系统过热会损坏你的飞船。你可以通过向跃迁系统添加冷却液来防止这种情况。选择跃迁系统并增加冷却液滑块。"
+
+#: scripts/tutorial/00_all.lua:222
+msgid ""
+"I've also overheated the impulse system. As before, increase the system's "
+"coolant level to mitigate the effect. Note that the warp system's coolant "
+"level is automatically reduced to allow for coolant in the impulse system.\n"
+"\n"
+"This is because you have a limited amount of coolant available to distribute "
+"this across your ship's systems."
+msgstr ""
+"我还使脉冲系统过热了。和之前一样，增加系统的冷却液级别以减轻影响。请注意，跃迁系统的冷却液级别会自动降低，以便为脉冲系统提供冷却液。\n"
+"\n"
+"这是因为你可分配给飞船各系统的冷却液总量是有限的。"
+
+#: scripts/tutorial/00_all.lua:225
+msgid ""
+"Good! Next up: power levels.\n"
+"You can manage each system's power level independently. Adding power to a "
+"system makes it perform more effectively, but also generates more heat, and "
+"thus requires coolant to prevent it from overheating and damaging the "
+"system.\n"
+"\n"
+"Maximize the power to the front shield system."
+msgstr ""
+"很好！接下来是：能量级别。\n"
+"你可以独立管理每个系统的能量级别。向系统增加能量会使其运行更有效，但也会产生更多热量，因此需要冷却液来防止其过热和损坏系统。\n"
+"\n"
+"将前护盾系统的能量最大化。"
+
+#: scripts/tutorial/00_all.lua:229
+msgid ""
+"The added power increases the amount of heat in the system.\n"
+"\n"
+"Overpower the system until it overheats."
+msgstr ""
+"增加的能量会增加系统中的热量。\n"
+"\n"
+"超负荷运行系统直到它过热。"
+
+#: scripts/tutorial/00_all.lua:234
+msgid ""
+"Note that as the system overheats, it takes damage. Because the system is "
+"damaged, it functions less effectively.\n"
+"\n"
+"Systems can also take damage when your ship is hit while the shields are "
+"down."
+msgstr ""
+"请注意，当系统过热时，它会受到损坏。由于系统已损坏，其运行效率会降低。\n"
+"\n"
+"当你的飞船在护盾关闭时被击中时，系统也可能受损。"
+
+#: scripts/tutorial/00_all.lua:238
+msgid "In this top area, you see your damage control teams in your ship."
+msgstr "在这个上方区域，你看到你飞船中的损管团队。"
+
+#: scripts/tutorial/00_all.lua:239
+msgid ""
+"The front shield system is damaged, as indicated by the color of this room's "
+"outline.\n"
+"\n"
+"Select a damage control team from elsewhere on the ship by pressing it, then "
+"press on that room to initiate repairs.\n"
+"(Repairs will take a while.)"
+msgstr ""
+"前护盾系统已损坏，如该房间轮廓的颜色所示。\n"
+"\n"
+"通过点击选择飞船其他地方的损管团队，然后点击那个房间以开始维修。\n"
+"（维修需要一段时间。）"
+
+#: scripts/tutorial/00_all.lua:244
+msgid ""
+"Good. Now you know your most important tasks. Next, we'll go over each "
+"system's function in detail.\n"
+"Remember, each system performs better with more power, but performs less "
+"well when damaged. Your job is to keep vital systems running as well as you "
+"can."
+msgstr ""
+"很好。现在你了解了最重要的任务。接下来，我们将详细介绍每个系统的功能。\n"
+"请记住，每个系统在能量充足时表现更好，但在受损时表现较差。你的职责是尽可能地保持关键系统正常运行。"
+
+#: scripts/tutorial/00_all.lua:246
+msgid ""
+"Reactor:\n"
+"\n"
+"The reactor generates energy. Adding power to the reactor increases your "
+"energy generation rate."
+msgstr ""
+"反应堆：\n"
+"\n"
+"反应堆产生能量。向反应堆增加能量会提高你的能量生成速率。"
+
+#: scripts/tutorial/00_all.lua:249
+msgid ""
+"Beam Weapons:\n"
+"\n"
+"Adding power to the beam weapons system increases their rate of fire, which "
+"causes them to do more damage.\n"
+"Note that every beam you fire adds additional heat to the system."
+msgstr ""
+"光束武器：\n"
+"\n"
+"向光束武器系统增加能量会提高其射速，从而造成更多伤害。\n"
+"请注意，你发射的每一束光束都会给系统增加额外的热量。"
+
+#: scripts/tutorial/00_all.lua:253
+msgid ""
+"Missile System:\n"
+"\n"
+"Increased missile system power lowers the reload time of weapon tubes."
+msgstr ""
+"导弹系统：\n"
+"\n"
+"增加导弹系统能量可缩短武器发射管的装填时间。"
+
+#: scripts/tutorial/00_all.lua:256
+msgid ""
+"Maneuvering:\n"
+"\n"
+"Increasing power to the maneuvering system allows the ship to turn faster. "
+"It also increases the recharge rate for the combat maneuvering system."
+msgstr ""
+"机动系统：\n"
+"\n"
+"增加机动系统能量可使飞船转向更快。它还会提高战斗机动系统的充能速率。"
+
+#: scripts/tutorial/00_all.lua:259
+msgid ""
+"Impulse Engines:\n"
+"\n"
+"Adding power to the impulse engines increases your impulse flight speed."
+msgstr ""
+"脉冲引擎：\n"
+"\n"
+"向脉冲引擎增加能量可提高你的脉冲飞行速度。"
+
+#: scripts/tutorial/00_all.lua:262
+msgid ""
+"Warp Drive:\n"
+"\n"
+"Adding power to the warp drive increases your warp drive flight speed."
+msgstr ""
+"跃迁引擎：\n"
+"\n"
+"向跃迁引擎增加能量可提高你的跃迁飞行速度。"
+
+#: scripts/tutorial/00_all.lua:265
+msgid ""
+"Jump Drive:\n"
+"\n"
+"A higher-powered jump drive recharges faster and has a shorter delay before "
+"jumping."
+msgstr ""
+"超空间引擎：\n"
+"\n"
+"能量更高的超空间引擎充能更快，且跃迁前延迟更短。"
+
+#: scripts/tutorial/00_all.lua:268
+msgid ""
+"Shields:\n"
+"\n"
+"Additional power in the shield system increases their rate of recharge, and "
+"decreases the amount of degradation your shields sustain when damaged."
+msgstr ""
+"护盾：\n"
+"\n"
+"护盾系统中额外的能量会提高其充能速率，并减少护盾受损时的衰减量。"
+
+#: scripts/tutorial/00_all.lua:271
+msgid ""
+"This concludes the overview of the engineering station. Be sure to keep your "
+"ship running in top condition!"
+msgstr ""
+"工程工作站的概览到此结束。务必让你的飞船保持最佳运行状态！"
+
+#: scripts/tutorial/00_all.lua:279
+msgid ""
+"Welcome, science officer.\n"
+"\n"
+"You are the eyes of the ship. Your job is to supply the captain with "
+"information. From your station, you can detect and scan objects at a range "
+"of up to 30u."
+msgstr ""
+"欢迎，科学官。\n"
+"\n"
+"你是飞船的眼睛。你的职责是向舰长提供信息。从你的工作站，你可以探测和扫描距离30个单位以内的物体。"
+
+#: scripts/tutorial/00_all.lua:284 scripts/tutorial/00_all.lua:370
+msgid ""
+"On this radar, you can select objects to get information about them.\n"
+"I've added a friendly ship and a station for you to examine. Select them and "
+"notice how much information you can observe.\n"
+"Heading and distance are of particular importance, as without these, the "
+"helms officer will be jumping in the dark."
+msgstr ""
+"在这个雷达上，你可以选择物体来获取它们的信息。\n"
+"我已添加了一艘友方飞船和一个空间站供你查看。选择它们，注意你能观察到多少信息。\n"
+"航向和距离尤为重要，因为没有这些，驾驶员将寸步难行。"
+
+#: scripts/tutorial/00_all.lua:289 scripts/tutorial/00_all.lua:375
+msgid ""
+"I've replaced the friendly station with an unknown ship. Once you select it, "
+"notice that you know nothing about this ship.\n"
+"To learn about it, you must scan it. Scanning requires you to match your "
+"scanner's frequency bands to your target's.\n"
+"Scan this ship now."
+msgstr ""
+"我已将友方空间站替换为一艘未知飞船。当你选择它后，会发现你对这艘飞船一无所知。\n"
+"要了解它，你必须扫描它。扫描要求你将扫描仪的频段与目标的频段匹配。\n"
+"现在扫描这艘飞船。"
+
+#: scripts/tutorial/00_all.lua:292 scripts/tutorial/00_all.lua:378
+msgid ""
+"Good. Notice that you now know this ship is unfriendly. It might have been a "
+"friendly or neutral ship as well, but until you scanned it, you do not know."
+msgstr ""
+"很好。请注意，你现在知道这艘飞船不友好。它也可能是友方或中立飞船，但直到你扫描它之前，你都无法得知。"
+
+#: scripts/tutorial/00_all.lua:293 scripts/tutorial/00_all.lua:379
+msgid ""
+"Note that you have less information about this ship than the friendly ship. "
+"You must perform a deep scan of this ship to acquire more information.\n"
+"A deep scan takes more effort and requires you to align 2 different "
+"frequency bands simultaneously.\n"
+"Deep scan the enemy now."
+msgstr ""
+"请注意，你关于这艘飞船的信息比友方飞船少。你必须对这艘飞船进行深度扫描才能获取更多信息。\n"
+"深度扫描需要更多精力，并且需要你同时对齐2个不同的频段。\n"
+"现在对敌人进行深度扫描。"
+
+#: scripts/tutorial/00_all.lua:296 scripts/tutorial/00_all.lua:382
+msgid ""
+"Excellent. Notice that this took more time and concentration than the simple "
+"scan, so be careful to perform deep scans only when necessary or you could "
+"run out of time."
+msgstr ""
+"太棒了。请注意，这比简单扫描花费了更多时间和精力，所以请谨慎，只在必要时才进行深度扫描，否则你可能会时间不足。"
+
+#: scripts/tutorial/00_all.lua:300 scripts/tutorial/00_all.lua:386
+msgid ""
+"Next to the long-range radar, the science station can also access the "
+"science database.\n"
+"\n"
+"In this database, you can look up details on things like ship types, "
+"weapons, and other objects."
+msgstr ""
+"在远程雷达旁边，科学工作站还可以访问科学数据库。\n"
+"\n"
+"在这个数据库中，你可以查找飞船类型、武器和其他物体等详细信息。"
+
+#: scripts/tutorial/00_all.lua:303 scripts/tutorial/00_all.lua:389
+msgid ""
+"Remember, your job is to supply information. Knowing the location and status "
+"of other ships is vital to your captain.\n"
+"\n"
+"Without your information, the crew is mostly blind."
+msgstr ""
+"请记住，你的职责是提供信息。了解其他飞船的位置和状态对你的舰长至关重要。\n"
+"\n"
+"没有你的信息，船员们几乎是盲目的。"
+
+#: scripts/tutorial/00_all.lua:313
+msgid ""
+"Welcome to relay!\n"
+"\n"
+"It is your job to communicate with stations and ships. You also have access "
+"to short-range radar data from friendly ships and stations, and can place "
+"navigational waypoints and launch scanning probes."
+msgstr ""
+"欢迎来到通讯部！\n"
+"\n"
+"你的职责是与空间站和飞船进行通讯。你还可以访问来自友方飞船和空间站的短程雷达数据，并可以设置导航航路点和发射扫描探测器。"
+
+#: scripts/tutorial/00_all.lua:316
+msgid ""
+"Your first responsibility is to coordinate the ship's communications.\n"
+"\n"
+"You can target any station or ship and attempt to communicate with it. Other "
+"ships can also attempt to contact you."
+msgstr ""
+"你的首要职责是协调飞船的通讯。\n"
+"\n"
+"你可以锁定任何空间站或飞船并尝试与之通讯。其他飞船也可以尝试联系你。"
+
+#: scripts/tutorial/00_all.lua:322 scripts/tutorial/00_all.lua:398
+msgid "You successfully opened communications. Congratulations."
+msgstr "你成功建立了通讯。恭喜你。"
+
+#: scripts/tutorial/00_all.lua:323 scripts/tutorial/00_all.lua:399
+msgid "Tell me more!"
+msgstr "告诉我更多！"
+
+#: scripts/tutorial/00_all.lua:324 scripts/tutorial/00_all.lua:400
+msgid "Sorry, there's nothing more to tell you."
+msgstr "抱歉，没有更多可告诉你的了。"
+
+#: scripts/tutorial/00_all.lua:326 scripts/tutorial/00_all.lua:402
+msgid "Continue with the tutorial."
+msgstr "继续教程。"
+
+#: scripts/tutorial/00_all.lua:327 scripts/tutorial/00_all.lua:403
+msgid ""
+"The tutorial will continue when you close communications with this station."
+msgstr ""
+"当你关闭与该空间站的通讯后，教程将继续。"
+
+#: scripts/tutorial/00_all.lua:331 scripts/tutorial/00_all.lua:407
+msgid "Open communications with the station near you to continue the tutorial."
+msgstr "与你附近的空间站建立通讯以继续教程。"
+
+#: scripts/tutorial/00_all.lua:333 scripts/tutorial/00_all.lua:409
+msgid "Now finish your talk with the station."
+msgstr "现在结束你与空间站的对话。"
+
+#: scripts/tutorial/00_all.lua:336 scripts/tutorial/00_all.lua:412
+msgid ""
+"Depending on the scenario, you might have different options when "
+"communicating with stations.\n"
+"They might inform you about new objectives and your mission progress, ask "
+"for backup, or resupply your weapons. This is all part of your "
+"responsibilities as relay officer."
+msgstr ""
+"根据剧本不同，你与空间站通讯时可能会有不同的选项。\n"
+"他们可能会通知你新的目标和任务进度，请求支援，或为你补充武器。这些都是你作为通讯官的职责一部分。"
+
+#: scripts/tutorial/00_all.lua:342
+msgid ""
+"Your station also includes this radar map.\n"
+"\n"
+"On this map, you can detect objects within short-range radar range of all "
+"allied ships and stations. Everything else is invisible to you. This gives "
+"you a different view from the science officer, because you can scan the "
+"contents of nebulae."
+msgstr ""
+"你的工作站还包括这个雷达地图。\n"
+"\n"
+"在此地图上，你可以探测所有友方飞船和空间站短程雷达范围内的物体。其他一切对你来说都是不可见的。这与科学官的视角不同，因为你可以扫描星云内部的内容。"
+
+#: scripts/tutorial/00_all.lua:345
+msgid ""
+"Finally, you control your ship's probes. Probes can expand your radar view. "
+"Launch a probe to the top right, toward the ship designated DMY-01."
+msgstr ""
+"最后，你控制着飞船的探测器。探测器可以扩展你的雷达视野。向右上角，朝向指定为DMY-01的飞船发射一枚探测器。"
+
+#: scripts/tutorial/00_all.lua:356
+msgid ""
+"Probes can expand your sensory capabilities beyond your normal range and "
+"explore nebulae. However, you have a limited supply of them and can't "
+"replenish them until you to dock with a station."
+msgstr ""
+"探测器可以将你的感知能力扩展到常规范围之外，并探索星云。然而，你拥有的探测器数量有限，并且在与空间站停靠之前无法补充。"
+
+#: scripts/tutorial/00_all.lua:365
+msgid ""
+"Welcome, operations officer.\n"
+"\n"
+"You are the eyes of the ship. Your job is to supply the captain with "
+"information. From your station, you can detect and scan objects at a range "
+"of up to 30u."
+msgstr ""
+"欢迎，行动官。\n"
+"\n"
+"你是飞船的眼睛。你的职责是向舰长提供信息。从你的工作站，你可以探测和扫描距离30个单位以内的物体。"
+
+#: scripts/tutorial/00_all.lua:392
+msgid ""
+"Your second responsibility is to coordinate the ship's communications.\n"
+"\n"
+"You can target any station or ship and attempt to communicate with it. Other "
+"ships can also attempt to contact you."
+msgstr ""
+"你的第二项职责是协调飞船的通讯。\n"
+"\n"
+"你可以锁定任何空间站或飞船并尝试与之通讯。其他飞船也可以尝试联系你。"
+
+#: scripts/tutorial/00_all.lua:418
+msgid ""
+"This concludes the tutorial. While we have covered the basics, there are "
+"more advanced features in the game that you might discover."
+msgstr ""
+"教程到此结束。虽然我们已经涵盖了基础知识，但游戏中还有更多高级功能等待你去发现。"
+
+#: scripts/tutorialUtils.lua:6
+msgid ""
+"Welcome to the EmptyEpsilon tutorial.\n"
+"Note that this tutorial is designed to give you a quick overview of the "
+"basic options for the game, but does not cover every single aspect.\n"
+"\n"
+"Press next to continue..."
+msgstr ""
+"欢迎来到EmptyEpsilon教程。\n"
+"请注意，本教程旨在为你快速概览游戏的基本选项，但并未涵盖所有方面。\n"
+"\n"
+"按下一步继续..."
