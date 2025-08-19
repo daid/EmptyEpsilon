@@ -144,6 +144,7 @@ function init()
     table.insert(b20_nebula_list, Nebula():setPosition(325643, -88627))
     table.insert(b20_nebula_list, Nebula():setPosition(328671, -79788))
     table.insert(b20_nebula_list, Nebula():setPosition(315655, -85367))
+    nebula_reference = b20_nebula_list[1]
 
     nebula = table.remove(b20_nebula_list, math.random(#b20_nebula_list))
     x, y = nebula:getPosition()
@@ -250,6 +251,9 @@ Doppler instability: %i]]),
         SpaceStation():setTemplate("Large Station"):setFaction("Kraylor"):setPosition(29333, -240151),
         SpaceStation():setTemplate("Small Station"):setFaction("Kraylor"):setPosition(36681, -200260)
     }
+    local lsx, lsy = kraylor_forward_line[3]:getPosition()
+    local ssx, ssy = kraylor_forward_line[1]:getPosition()
+    target_sector = getSectorName((lsx + ssx) / 2, (lsy + ssy) / 2)
     kraylor_transport = nil
 
     for idx, station in ipairs(kraylor_forward_line) do
@@ -338,9 +342,7 @@ function phase1WaitForPowerup(delta)
     -- All system powered, give the next objective.
     shipyard_gamma:sendCommsMessage(
         player, 
-        _("station-incCall", [[Good, Atlantis-1, we read all systems are go. You can safely undock now.
-
-Head to sector K6, where F-1 has dropped missile supplies. Pick them up to stock up on weapons.]])
+        string.format(_("station-incCall", "Good, Atlantis-1, we read all systems are go. You can safely undock now.\n\nHead to sector %s, where F-1 has dropped missile supplies. Pick them up to stock up on weapons."),transport_f1:getSectorName())
     )
     supply_drop = SupplyDrop():setFaction("Human Navy"):setPosition(29021, 114945):setEnergy(500):setWeaponStorage("Homing", 12):setWeaponStorage("Nuke", 4):setWeaponStorage("Mine", 8):setWeaponStorage("EMP", 6):setWeaponStorage("HVLI", 20)
     transport_f1:orderDock(supply_station_6)
@@ -412,17 +414,11 @@ end
 
 --[[*********************************************************************--]]
 function phase2WaitForJump(delta)
-    if handleJumpCarrier(jc88, 24000, 125000, 310000, -71000, _("JumpCarrier-incCall", [[Hold on tight, heading for sector B20.]])) then
+    if handleJumpCarrier(jc88, 24000, 125000, 310000, -71000, string.format(_("JumpCarrier-incCall", "Hold on tight, heading for sector %s."),nebula_reference:getSectorName())) then
         -- Good, continue.
         jc88:sendCommsMessage(
             player,
-            _("JumpCarrier-incCall", [[Atlantis-1,
-
-Here we are, sector B20. Looks like there are some lingering Kraylor here.
-
-We are outside of the no-fire zone and at war with the Kraylor, so you are clear to engage.
-
-Report back when you have found the source of the odd sensor readings. This should be a good opportunity to make use of your ship's probes, or your Science Officer might be able to track it down based on its radar signature.]])
+            string.format(_("JumpCarrier-incCall", "Atlantis-1,\n\nHere we are, sector %s. Looks like there are some lingering Kraylor here.\n\nWe are outside of the no-fire zone and at war with the Kraylor, so you are clear to engage.\n\nReport back when you have found the source of the odd sensor readings. This should be a good opportunity to make use of your ship's probes, or your Science Officer might be able to track it down based on its radar signature."),nebula_reference:getSectorName())
         )
         mission_state = phase2SeekArtifact
     end
@@ -503,20 +499,13 @@ function phase3FindHoleInTheKraylorDefenseLine(delta)
         if py > -248000 or px > 75000 then
             shipyard_gamma:sendCommsMessage(
                 player,
-                _("station-incCall", [[Atlantis-1, come in.
-
-Finally! We thought we lost you. You are not out of the woods yet, though.
-
-Try to get to sector zu5. We are sending JC88 to get you out of there.]])
+                string.format(_("station-incCall", "Atlantis-1, come in.\n\nFinally! We thought we lost you. You are not out of the woods yet, though.\n\nTry to get to sector %s. We are sending JC88 to get you out of there."),target_sector)
             )
         else
             shipyard_gamma:sendCommsMessage(
                 player,
-                _("station-incCall", [[Atlantis-1, come in.
-
-Finally! We thought we lost you. You are not out of the woods yet, though.
-
-Search for a hole in the Kraylor defenses, then try to get to sector zu5. We are sending JC88 to get you out of there.]]))
+                string.format(_("station-incCall", "Atlantis-1, come in.\n\nFinally! We thought we lost you. You are not out of the woods yet, though.\n\nSearch for a hole in the Kraylor defenses, then try to get to sector %s. We are sending JC88 to get you out of there."),target_sector)
+            )
         end
 
         jc88:orderFlyTowardsBlind(10000, -210000)
@@ -688,11 +677,7 @@ function phase5Cracking3(delta)
         if cracking_delay < 0.0 then
             shipyard_gamma:sendCommsMessage(
                 player,
-                _("station-incCall", [[It looks like the Kraylor were watching these experiments and waiting for their moment to steal the end result.
-
-According to these documents, the Kraylor continued the experiments at sector D20, explaining the phenomenon you experienced there.
-
-It looks like they successfully created a working prototype jump drive, but the documents must have been scrambled here, because they go from mentioning distances of 2000U to talking about infeasibly large troop counts and missile storage.]])
+                string.format(_("station-incCall", "It looks like the Kraylor were watching these experiments and waiting for their moment to steal the end result.\n\nAccording to these documents, the Kraylor continued the experiments at sector %s, explaining the phenomenon you experienced there.\n\nIt looks like they successfully created a working prototype jump drive, but the documents must have been scrambled here, because they go from mentioning distances of 2000U to talking about infeasibly large troop counts and missile storage."),nebula_reference:getSectorName())
             )
             cracking_delay = 30
             mission_state = phase5Cracking4
@@ -778,11 +763,7 @@ function shipyardGammaComms()
         addCommsReply(
             _("station-comms", "Yes."),
             function()
-                setCommsMessage(_("station-comms", [[Good. Your first mission is to identify odd readings coming from the nebula cloud near sector B20.
-
-Your ship is not equipped to travel this distance by itself, so we have tasked jump carrier JC-88 to take you there.
-
-Dock with JC-88 and it will handle the rest.]]))
+                setCommsMessage(string.format(_("station-comms", "Good. Your first mission is to identify odd readings coming from the nebula cloud near sector %s.\n\nYour ship is not equipped to travel this distance by itself, so we have tasked jump carrier JC-88 to take you there.\n\nDock with JC-88 and it will handle the rest."),nebula_reference:getSectorName()))
                 mission_state = phase2WaitForJump
             end
         )
