@@ -82,12 +82,12 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
 
 void GuiJumpControls::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (my_spaceship)
     {
         auto engine = my_spaceship.getComponent<JumpDrive>();
         setVisible(engine != nullptr);
 
-        if (my_spaceship && engine)
+        if (engine && isVisible())
         {
             float value = slider->getValue();
             float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
