@@ -15,6 +15,7 @@ private:
     GuiSlider* slider;
     GuiButton* button;
     GuiProgressbar* charge_bar;
+    bool set_active = false;
 public:
     GuiJumpControls(GuiContainer* owner, string id);
 

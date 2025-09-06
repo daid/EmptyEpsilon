@@ -54,6 +54,13 @@ public:
     sp::io::Keybinding helms_zero_impulse;
     sp::io::Keybinding helms_max_impulse;
     sp::io::Keybinding helms_min_impulse;
+    sp::io::Keybinding helms_increase_jump_100;
+    sp::io::Keybinding helms_increase_jump_1k;
+    sp::io::Keybinding helms_decrease_jump_100;
+    sp::io::Keybinding helms_decrease_jump_1k;
+    sp::io::Keybinding helms_set_jump;
+    sp::io::Keybinding helms_max_jump;
+    sp::io::Keybinding helms_min_jump;
     sp::io::Keybinding helms_turn_left;
     sp::io::Keybinding helms_turn_right;
     sp::io::Keybinding helms_warp0;

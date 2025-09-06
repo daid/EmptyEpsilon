@@ -84,9 +84,48 @@ void GuiJumpControls::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto adjust = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
-        slider->setValue(slider->getValue() + 1000.0f * adjust);
-        if (keys.helms_execute_jump.getDown())
-            my_player_info->commandJump(slider->getValue());
+        auto engine = my_spaceship.getComponent<JumpDrive>();
+        setVisible(engine != nullptr);
+
+        if (my_spaceship && engine)
+        {
+            float value = slider->getValue();
+            float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
+            // Get joystick axis map value (-1.0 to 1.0)
+            float axis_value = keys.helms_set_jump.getValue();
+            // The jump slider's min/max range values seem to be inverted.
+            // getRangeMin returns the jump range's max value, and vice versa.
+            const float slider_range = slider->getRangeMin() - slider->getRangeMax();
+            // Translate the slider's value on its min/max range to a value
+            // between -1.0 to 1.0.
+            float slider_axis_pos = ((slider->getValue() - slider->getRangeMax()) / slider_range) * 2.0f - 1.0f;
+
+            if (key_change != 0.0f)
+                value = std::clamp(value + 1000.0f * key_change, slider->getRangeMin(), slider->getRangeMax());
+            if (keys.helms_increase_jump_100.getDown())
+                value = std::min(value + 100.0f, slider->getRangeMax());
+            if (keys.helms_decrease_jump_100.getDown())
+                value = std::max(value - 100.0f, slider->getRangeMin());
+            if (keys.helms_increase_jump_1k.getDown())
+                value = std::min(value + 1000.0f, slider->getRangeMax());
+            if (keys.helms_decrease_jump_1k.getDown())
+                value = std::max(value - 1000.0f, slider->getRangeMin());
+            if (keys.helms_min_jump.getDown())
+                value = slider->getRangeMin();
+            if (keys.helms_max_jump.getDown())
+                value = slider->getRangeMax();
+
+            if (axis_value != slider_axis_pos && (axis_value != 0.0f || set_active))
+            {
+                // Translate the axis position between -1.0 to 1.0 to a value in the slider's min/max range
+                value = (((axis_value + 1.0f) / 2.0f) * slider_range) + slider->getRangeMax();
+                set_active = axis_value != 0.0f; // Make sure the next update is sent, even if it is back to zero.
+            }
+
+            slider->setValue(value);
+
+            if (keys.helms_execute_jump.getDown())
+                my_player_info->commandJump(slider->getValue());
+        }
     }
 }
