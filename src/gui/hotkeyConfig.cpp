@@ -108,6 +108,13 @@ Keys::Keys() :
     helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
     helms_max_impulse("HELMS_IMPULSE_MAX"),
     helms_min_impulse("HELMS_IMPULSE_MIN"),
+    helms_increase_jump_100("HELMS_JUMP_INCREASE_100"),
+    helms_increase_jump_1k("HELMS_JUMP_INCREASE_1K"),
+    helms_decrease_jump_100("HELMS_JUMP_DECREASE_100"),
+    helms_decrease_jump_1k("HELMS_JUMP_DECREASE_1K"),
+    helms_set_jump("HELMS_SET_JUMP"),
+    helms_max_jump("HELMS_JUMP_MAX"),
+    helms_min_jump("HELMS_JUMP_MIN"),
     helms_turn_left("HELMS_TURN_LEFT", "Left"),
     helms_turn_right("HELMS_TURN_RIGHT", "Right"),
     helms_warp0("HELMS_WARP0", "6"),
@@ -359,6 +366,13 @@ void Keys::init()
     helms_undock.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Undock"));
     helms_increase_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance"));
     helms_decrease_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance"));
+    helms_increase_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 0.1U"));
+    helms_increase_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 1U"));
+    helms_decrease_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 0.1U"));
+    helms_decrease_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 1U"));
+    helms_set_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set jump distance (joystick)"));
+    helms_max_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Maximize jump distance"));
+    helms_min_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Minimize jump distance"));
     helms_execute_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Initiate jump"));
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
