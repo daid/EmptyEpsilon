@@ -1,5 +1,6 @@
 ---
 name: CI/CD
+
 on:
   push:
     branches:
@@ -43,29 +44,60 @@ jobs:
           cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton -DWARNING_IS_ERROR=1
           ninja package
   macos:
+    if: true
     name: MacOS
     runs-on: macos-latest
     steps:
       - name: Dependencies
-        run: brew install cmake sdl2 ninja
+        run: |
+          brew uninstall --ignore-dependencies cmake || true
+          brew install cmake ninja sdl2 freetype
       - name: SeriousProton Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: daid/SeriousProton
           path: SeriousProton
           ref: master
       - name: EmptyEpsilon Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: EmptyEpsilon
       - name: Build
         run: |
           mkdir -p _build_macos
           cd _build_macos
-          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=. -DWARNING_IS_ERROR=1
+          cmake ../EmptyEpsilon -G Ninja -DSERIOUS_PROTON_DIR=../SeriousProton -DCMAKE_INSTALL_PREFIX=. -DCMAKE_OSX_DEPLOYMENT_TARGET=10.15 -DCMAKE_PREFIX_PATH=$(brew --prefix sdl2) -DWARNING_IS_ERROR=1
           ninja
           ninja install
+          APP_PATH="./EmptyEpsilon.app"
+          mkdir -p "$APP_PATH/Contents/Frameworks"
+          cp $(brew --prefix sdl2)/lib/libSDL2-2.0.0.dylib "$APP_PATH/Contents/Frameworks/"
+          cp $(brew --prefix freetype)/lib/libfreetype.6.dylib "$APP_PATH/Contents/Frameworks/"
+          cp $(brew --prefix libpng)/lib/libpng16.16.dylib "$APP_PATH/Contents/Frameworks/" || true
+          install_name_tool -add_rpath @executable_path/../Frameworks "$APP_PATH/Contents/MacOS/EmptyEpsilon"
+          install_name_tool -change $(brew --prefix sdl2)/lib/libSDL2-2.0.0.dylib @rpath/libSDL2-2.0.0.dylib "$APP_PATH/Contents/MacOS/EmptyEpsilon"
+          install_name_tool -change $(brew --prefix freetype)/lib/libfreetype.6.dylib @rpath/libfreetype.6.dylib "$APP_PATH/Contents/MacOS/EmptyEpsilon"
+          install_name_tool -change $(brew --prefix libpng)/lib/libpng16.16.dylib @rpath/libpng16.16.dylib "$APP_PATH/Contents/Frameworks/libfreetype.6.dylib" || true
+          codesign --remove-signature "$APP_PATH/Contents/Frameworks/libSDL2-2.0.0.dylib"
+          codesign --remove-signature "$APP_PATH/Contents/Frameworks/libfreetype.6.dylib"
+          codesign --remove-signature "$APP_PATH/Contents/Frameworks/libpng16.16.dylib" || true
+          codesign --remove-signature "$APP_PATH/Contents/MacOS/EmptyEpsilon"
+          codesign --force --deep --timestamp --sign - "$APP_PATH"
+          VERSION=$(date +%Y.%m.%d)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          mkdir dmg_contents
+          cp -R "$APP_PATH" dmg_contents/
+          ln -s /Applications dmg_contents/Applications
+          hdiutil create -volname EmptyEpsilon -srcfolder dmg_contents -ov -format UDZO "MacOS_EmptyEpsilon_EE-${VERSION}-arm64.dmg"
+          rm -rf dmg_contents
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: EmptyEpsilon-EE-${{ env.VERSION }}-macOS-arm64
+          path: _build_macos/MacOS_EmptyEpsilon_EE-*-arm64.dmg
+          retention-days: 30
   windows:
+    if: false
     name: Windows
     runs-on: windows-latest
     strategy:
