@@ -201,8 +201,9 @@ int main(int argc, char** argv)
 
     if (!tutorial.empty())
     {
+        bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
         LOG(DEBUG) << "Starting tutorial: " << tutorial;
-        new TutorialGame(false, tutorial);
+        new TutorialGame(repeat_tutorial, tutorial);
     }
     else if (server_scenario.empty())
         returnToMainMenu(defaultRenderLayer);

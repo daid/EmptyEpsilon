@@ -39,8 +39,9 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
+    this->filename = filename;
 
-    gameGlobalInfo->startScenario(filename);
+    gameGlobalInfo->startScenario(this->filename);
 
     gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
     gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
@@ -108,7 +109,7 @@ void TutorialGame::createScreens()
 void TutorialGame::update(float delta)
 {
     if (keys.escape.getDown())
-        finish();
+        quit(); // NOT finish() -- finish can choose to loop
     if (my_spaceship)
     {
         auto pc = my_spaceship.getComponent<PlayerControl>();
@@ -221,7 +222,7 @@ void TutorialGame::finish()
         sp::ecs::Entity::destroyAllEntities();
         instance->hideAllScreens();
 
-        gameGlobalInfo->startScenario("tutorial.lua");
+        gameGlobalInfo->startScenario(instance->filename);
 
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
@@ -236,11 +237,16 @@ void TutorialGame::finish()
 
         auto res = gameGlobalInfo->main_scenario_script->call<void>("tutorial_init");
         LuaConsole::checkResult(res);
-    }else{
-        disconnectFromServer();
-        returnToMainMenu(instance->getRenderLayer());
-        instance->destroy();
+    } else {
+        quit();
     }
+}
+
+void TutorialGame::quit()
+{
+    disconnectFromServer();
+    returnToMainMenu(instance->getRenderLayer());
+    instance->destroy();
 }
 
 void TutorialGame::hideAllScreens()
