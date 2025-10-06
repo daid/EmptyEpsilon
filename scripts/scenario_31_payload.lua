@@ -95,12 +95,8 @@ function init()
     Mine():setPosition(x, y)
   end
 
-  -- Unspawn some asteroids and mines
-  local clearRadius = 5000
-  ClearHazardsNear(FactionStation.startX, FactionStation.startY, clearRadius)
-  ClearHazardsNear(KraylorStation.startX, KraylorStation.startY, clearRadius)
-  ClearHazardsNear(PayloadShip.startX, PayloadShip.startY, clearRadius)
-  ThinPath(FactionStation, KraylorStation)
+  -- Unspawn some asteroids and mines (moved this to update() as hackaround for a limitation in ECS branch)
+  FirstTickClearHazards = true
 
   -- Spawn some nebulas
   local nebulaNum = 15 --15
@@ -246,13 +242,13 @@ function ClearHazardsNear(centerX, centerY, radius, maxRoids, maxMines)
 
   -- Destroy any hazards beyond the limits
   for _, potentialHazard in ipairs(objects) do
-    if potentialHazard.typeName == "Asteroid" then
+    if potentialHazard.components.explode_on_touch ~= nil then
       roidCount = roidCount + 1
       if roidCount > maxRoids then
         potentialHazard:destroy()
       end
     end
-    if potentialHazard.typeName == "Mine" then
+    if potentialHazard.components.delayed_explode_on_touch ~= nil then
       mineCount = mineCount + 1
       if mineCount > maxMines then
         potentialHazard:destroy()
@@ -304,7 +300,7 @@ function SpawnWeaponPickups()
       artifact:onCollision(function(self, collider)
         -- "Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table..."
         local __ = math.abs(0)
-        if collider.typeName == "PlayerSpaceship" then
+        if collider.components.player_control then
           collider:setWeaponStorage(weaponType, collider:getWeaponStorage(weaponType) + 1)
           self:destroy()
           collider:addToShipLog(_("artifacts", "Picked up a ") .. weaponType, "green")
@@ -337,7 +333,7 @@ function CheckPayloadControl(target, faction1, faction2)
   local allShips = getObjectsInRadius(payloadX, payloadY, PayloadDistanceThreshold)
 
   for _, ship in ipairs(allShips) do
-    if ship.typeName ~= "CpuShip" and ship.typeName ~= "PlayerSpaceship" then
+    if ship.components.ai_controller == nil and ship.components.player_control == nil then
       goto continue
     end
     if ship:isValid() and ship:getFaction() == faction1 then
@@ -658,7 +654,7 @@ function SpawnWave(faction)
       if i == queenIndex and WaveSize > 1 then
         enemyTemplate = "Phobos M3"
       end
-      local enemy = CpuShip():setTemplate(enemyTemplate):setFaction("Kraylor"):setPosition(enemyX, enemyY)
+      local enemy = CpuShip():setTemplate(enemyTemplate):setFaction("Kraylor"):setPosition(enemyX, enemyY):orderIdle()
       enemy:setWarpDrive(true)
       enemy:setWeaponStorage("Homing", 4)
       enemy:setWeaponStorage("Nuke", 0)
@@ -671,7 +667,7 @@ function SpawnWave(faction)
 
     if (faction == "Human Navy" or faction == "Both") and spawnHumanCount > 0 then
       spawnHumanCount = spawnHumanCount - 1
-      local human = CpuShip():setTemplate("Adder MK".. irandom(3,8)):setFaction("Human Navy"):setPosition(humanX, humanY)
+      local human = CpuShip():setTemplate("Adder MK".. irandom(3,8)):setFaction("Human Navy"):setPosition(humanX, humanY):orderIdle()
       human:setWarpDrive(true)
       human:setScannedByFaction("Human Navy", true)
       human:onTakingDamage(OnDamaged)
@@ -692,23 +688,28 @@ end
 --
 
 function CheckWinCondition()
-  if PayloadShip:isDocked(FactionStation) then
-    victory("Kraylor")
-  elseif PayloadShip:isDocked(KraylorStation) then
-    victory("Human Navy")
-  end
   if not (Player:isValid()
     and PayloadShip:isValid()
     and FactionStation:isValid()
     and KraylorStation:isValid())
   then
     victory("Kraylor")
+    return true
+  end
+  if PayloadShip:isDocked(FactionStation) then
+    victory("Kraylor")
+    return true
+  elseif PayloadShip:isDocked(KraylorStation) then
+    victory("Human Navy")
+    return true
   end
   if TimeLimit > 0 and getScenarioTime() >= TimeLimit then
     globalMessage(_("payload-comms","You are out of time!"))
     Player:addToShipLog(_("payload-comms", "You are out of time!"), "red")
     victory("Kraylor")
+    return true
   end
+  return false
 end
 
 -- Update the Payload's target based on proximities and scan status
@@ -958,7 +959,19 @@ end
 -- Main update function
 ---@diagnostic disable-next-line: lowercase-global
 function update(delta)
-  CheckWinCondition()
+
+  if(FirstTickClearHazards and #(getObjectsInRadius(FactionStation.startX, FactionStation.startY, 1)) > 0) then
+    FirstTickClearHazards = false
+    local clearRadius = 5000
+    ClearHazardsNear(FactionStation.startX, FactionStation.startY, clearRadius)
+    ClearHazardsNear(KraylorStation.startX, KraylorStation.startY, clearRadius)
+    ClearHazardsNear(PayloadShip.startX, PayloadShip.startY, clearRadius)
+    ThinPath(FactionStation, KraylorStation)
+  end
+
+  if CheckWinCondition() then
+    return
+  end
   DeterminePayloadTarget()
   HandleNPCs(delta)
   HandleNPCWaves(delta)
