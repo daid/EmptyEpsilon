@@ -199,7 +199,7 @@ int main(int argc, char** argv)
 #endif //STEAMSDK
 
     // Tutorial scenario to load relative to the scripts path, such as
-    // "tutorials/00_all.lua" to run all tutorials.
+    // "tutorial/00_all.lua" to run all tutorials.
     string tutorial = PreferencesManager::get("tutorial");
 
     if (!tutorial.empty())
