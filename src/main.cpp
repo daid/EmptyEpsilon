@@ -198,22 +198,23 @@ int main(int argc, char** argv)
     new SteamRichPresence();
 #endif //STEAMSDK
 
-    string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
-    string server_scenario = PreferencesManager::get("server_scenario");
+    // Tutorial scenario to load relative to the scripts path, such as
+    // "tutorials/00_all.lua" to run all tutorials.
+    string tutorial = PreferencesManager::get("tutorial");
 
     if (!tutorial.empty())
     {
-        bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
-        LOG(DEBUG) << "Starting tutorial: " << tutorial;
-        new TutorialGame(repeat_tutorial, tutorial);
+        LOG(Info, "Launching local tutorial " + tutorial);
+        new TutorialGame(PreferencesManager::get("autoconnect").empty(), tutorial);
     }
-    else if (server_scenario.empty())
+    else if (PreferencesManager::get("server_scenario").empty())
         returnToMainMenu(defaultRenderLayer);
     else
     {
         // server_scenario creates a server running the specified scenario
         // using its defined default settings, and launches directly into
         // the ship selection screen instead of the main menu.
+        string server_scenario = PreferencesManager::get("server_scenario");
 
         // Create the server to listen on the assigned port.
         // Use the default port if server_port isn't set or has an invalid

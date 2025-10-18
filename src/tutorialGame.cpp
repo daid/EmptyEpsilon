@@ -223,6 +223,7 @@ void TutorialGame::finish()
         instance->hideAllScreens();
 
         gameGlobalInfo->startScenario(instance->filename);
+        engine->setGameSpeed(1.0f);
 
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
