@@ -39,6 +39,7 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
+    this->filename = filename;
 
     gameGlobalInfo->startScenario(filename);
 
@@ -221,7 +222,8 @@ void TutorialGame::finish()
         sp::ecs::Entity::destroyAllEntities();
         instance->hideAllScreens();
 
-        gameGlobalInfo->startScenario("tutorial.lua");
+        gameGlobalInfo->startScenario(instance->filename);
+        engine->setGameSpeed(1.0);
 
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_setPlayerShip", &TutorialGame::setPlayerShip);
         gameGlobalInfo->main_scenario_script->setGlobal("tutorial_switchViewToMainScreen", &TutorialGame::switchViewToMainScreen);
