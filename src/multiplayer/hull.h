@@ -4,4 +4,4 @@
 #include "components/hull.h"
 
 BASIC_REPLICATION_CLASS(HealthReplication, Health);
-// BASIC_REPLICATION_CLASS(HullReplication, Hull);
+BASIC_REPLICATION_CLASS(HullReplication, Hull);

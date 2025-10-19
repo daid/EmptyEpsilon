@@ -94,31 +94,55 @@ void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const Damag
 void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info)
 {
     auto hull = entity.getComponent<Hull>();
-    if (!hull)
-        return;
-    if (!(hull->damaged_by_flags & (1 << int(info.type))))
+    auto health = entity.getComponent<Health>();
+    if (!hull && !health) return;
+
+    if ((hull && !(hull->damaged_by_flags & (1 << int(info.type)))) || (health && !(health->damaged_by_flags & (1 << int(info.type)))))
         return;
 
-    // If taking non-EMP damage, light up the hull damage overlay.
-    hull->damage_indicator = 1.5f;
-
-    if (gameGlobalInfo->use_system_damage && hull)
+    if (hull)
     {
-        if (auto sys = ShipSystem::get(entity, info.system_target))
-        {
-            //Target specific system
-            float system_damage = (amount / hull->max) * 2.0f;
-            if (info.type == DamageType::Energy)
-                system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
-            sys->health -= system_damage;
-            if (sys->health < -1.0f)
-                sys->health = -1.0f;
+        // If taking non-EMP damage, light up the hull damage overlay.
+        hull->damage_indicator = 1.5f;
 
-            for(int n=0; n<2; n++)
+        if (gameGlobalInfo->use_system_damage)
+        {
+            if (auto sys = ShipSystem::get(entity, info.system_target))
             {
-                auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
+                //Target specific system
+                float system_damage = (amount / hull->max) * 2.0f;
+                if (info.type == DamageType::Energy)
+                    system_damage *= 3.0f;   //Beam weapons do more system damage, as they penetrate the hull easier.
+                sys->health -= system_damage;
+                if (sys->health < -1.0f)
+                    sys->health = -1.0f;
+
+                for(int n=0; n<2; n++)
+                {
+                    auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
+                    //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
+                    float system_damage = (amount / hull->max) * 1.0f;
+                    sys = ShipSystem::get(entity, random_system);
+                    if (sys) {
+                        sys->health -= system_damage;
+                        if (sys->health < -1.0f)
+                            sys->health = -1.0f;
+                    }
+                }
+
+                if (info.type == DamageType::Energy)
+                    amount *= 0.02f;
+                else
+                    amount *= 0.5f;
+            }
+            else
+            {
                 //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                float system_damage = (amount / hull->max) * 1.0f;
+                float system_damage = (amount / hull->max) * 3.0f;
+                if (info.type == DamageType::Energy)
+                    system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
+
+                auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
                 sys = ShipSystem::get(entity, random_system);
                 if (sys) {
                     sys->health -= system_damage;
@@ -127,45 +151,43 @@ void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const Da
                 }
             }
 
-            if (info.type == DamageType::Energy)
-                amount *= 0.02f;
-            else
-                amount *= 0.5f;
-        }else{
-            //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-            float system_damage = (amount / hull->max) * 3.0f;
-            if (info.type == DamageType::Energy)
-                system_damage *= 2.5f;   //Beam weapons do more system damage, as they penetrate the hull easier.
+            hull->current -= amount;
+            if (hull->current <= 0.0f && !hull->allow_destruction)
+                hull->current = 1;
 
-            auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
-            sys = ShipSystem::get(entity, random_system);
-            if (sys) {
-                sys->health -= system_damage;
-                if (sys->health < -1.0f)
-                    sys->health = -1.0f;
+            if (hull->current <= 0.0f)
+            {
+                destroyedByDamage(entity, info);
+                return;
+            }
+
+            if (hull->on_taking_damage)
+            {
+                if (info.instigator)
+                    LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity, info.instigator));
+                else
+                    LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity));
             }
         }
     }
-
-    hull->current -= amount;
-    if (hull->current <= 0.0f && !hull->allow_destruction)
+    else if (health)
     {
-        hull->current = 1;
-    }
+        health->current -= amount;
+        if (health->current <= 0.0f && !health->allow_destruction)
+            health->current = 1;
 
-    if (hull->current <= 0.0f)
-    {
-        destroyedByDamage(entity, info);
-        return;
-    }
-
-    if (hull->on_taking_damage)
-    {
-        if (info.instigator)
+        if (health->current <= 0.0f)
         {
-            LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity, info.instigator));
-        } else {
-            LuaConsole::checkResult(hull->on_taking_damage.call<void>(entity));
+            destroyedByDamage(entity, info);
+            return;
+        }
+
+        if (health->on_taking_damage)
+        {
+            if (info.instigator)
+                LuaConsole::checkResult(health->on_taking_damage.call<void>(entity, info.instigator));
+            else
+                LuaConsole::checkResult(health->on_taking_damage.call<void>(entity));
         }
     }
 }
@@ -181,13 +203,14 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
         }
     }
 
+    auto hull = entity.getComponent<Hull>();
+    auto health = entity.getComponent<Health>();
+
     if (info.instigator)
     {
         float points = 0;
 
-        auto hull = entity.getComponent<Hull>();
-        if (hull)
-            points += hull->max * 0.1f;
+        if (hull) points += hull->max * 0.1f;
 
         auto shields = entity.getComponent<Shields>();
         if (shields && !shields->entries.empty()) {
@@ -202,15 +225,19 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
             Faction::getInfo(info.instigator).reputation_points = std::max(Faction::getInfo(info.instigator).reputation_points - points, 0.0f);
     }
 
-    auto hull = entity.getComponent<Hull>();
     if (hull->on_destruction)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(hull->on_destruction.call<void>(entity, info.instigator));
-        } else {
+        else
             LuaConsole::checkResult(hull->on_destruction.call<void>(entity));
-        }
+    }
+    else if (health->on_destruction)
+    {
+        if (info.instigator)
+            LuaConsole::checkResult(health->on_destruction.call<void>(entity, info.instigator));
+        else
+            LuaConsole::checkResult(health->on_destruction.call<void>(entity));
     }
 
     //Finally, destroy the entity.
