@@ -342,6 +342,12 @@ function formatTime(seconds)
     end
     return str
 end
+
+-- Clamps a value by returning a limit if the given value exceeds it.
+function clamp(value, min, max)
+    return value < min and min or (value > max and max or value)
+end
+
 --	Temporary function to be used as a helper function until the transition to ECS is complete
 --	First parameter is a space object of some kind
 --	Second parameter is the pre-ECS value of .typeName (eg "CpuShip")

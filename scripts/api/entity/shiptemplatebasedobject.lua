@@ -1,3 +1,4 @@
+require("utils.lua")
 local Entity = getLuaEntityFunctionTable()
 
 ----- Old ShipTemplateBasedObject API -----
@@ -104,33 +105,28 @@ function Entity:getHullMax()
     return 0
 end
 --- Sets this STBO's hull points.
+--- Hull points are intended for STBOs, which should have hulls.
+--- Non-STBOs that must track damage should have Health points instead; see setHealth() and setHealthMax().
+--- If an object has both Hull and Health components, damage to the STBO depletes Health points only after Hull points are reduced to 0.
 --- If set to a value larger than the maximum, this sets the value to the limit.
 --- If set to a value less than 0, this sets the value to 0.
 --- Note that setting this value to 0 doesn't immediately destroy the STBO.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.components.hull then self.components.hull.current = amount end
+    if self.components.hull then
+        self.components.hull.current = clamp(amount, 0, self.components.hull.max)
+    end
     return self
 end
 --- Sets this STBO's maximum limit of hull points.
 --- Note that SpaceStations can't repair their own hull, so this only changes the percentage of remaining hull.
 --- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    if self.components.hull then self.components.hull.max = amount end
+    if self.components.hull then
+        self.components.hull.max = amount
+        self.components.hull.current = clamp(self.components.hull.current, 0, self.components.hull.max)
+    end
     return self
-end
---- Defines whether this STBO can be destroyed by damage.
---- Defaults to true.
---- Example: stbo:setCanBeDestroyed(false) -- prevents the STBO from being destroyed by damage
-function Entity:setCanBeDestroyed(allow_destroy)
-    if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
-    return self    
-end
---- Returns whether the STBO can be destroyed by damage.
---- Example: stbo:getCanBeDestroyed()
-function Entity:getCanBeDestroyed()
-    if self.components.hull then return self.components.hull.allow_destruction end
-    return false
 end
 --- Returns the shield points for this STBO's shield segment with the given index.
 --- Shield segments are 0-indexed.
@@ -243,13 +239,13 @@ function Entity:setSharesEnergyWithDocked(allow_energy_share)
     if self.components.docking_bay then self.components.docking_bay.share_energy = allow_energy_share end
     return self
 end
---- Returns whether this STBO repairs docked SpaceShips.
+--- Returns whether this STBO repairs the hull of docked SpaceShips.
 --- Example: stbo:getRepairDocked()
 function Entity:getRepairDocked()
     if self.components.docking_bay then return self.components.docking_bay.repair end
     return false
 end
---- Defines whether this STBO repairs docked SpaceShips.
+--- Defines whether this STBO repairs the hull of docked SpaceShips.
 --- Example: stbo:setRepairDocked(true)
 function Entity:setRepairDocked(allow_repair)
     if self.components.docking_bay then self.components.docking_bay.repair = allow_repair end
@@ -324,14 +320,14 @@ function Entity:setRearShieldMax(amount)
     if self.components.shields then self.components.shields[2].max = amount end
     return self
 end
---- Defines a function to call when this STBO takes damage.
+--- Defines a function to call when this STBO takes hull damage.
 --- Passes the object taking damage and the instigator SpaceObject (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was damaged by " .. instigator:getCallSign()) end)
 function Entity:onTakingDamage(callback)
     if self.components.hull then self.components.hull.on_taking_damage = callback end
     return self
 end
---- Defines a function to call when this STBO is destroyed by taking damage.
+--- Defines a function to call when this STBO is destroyed by taking hull damage.
 --- Passes the object taking damage and the instigator SpaceObject that delivered the destroying damage (or nil) to the function.
 --- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
 function Entity:onDestruction(callback)

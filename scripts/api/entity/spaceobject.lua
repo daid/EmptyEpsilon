@@ -1,3 +1,4 @@
+require("utils.lua")
 local Entity = getLuaEntityFunctionTable()
 
 ----- Old SpaceObject API -----
@@ -458,12 +459,74 @@ function Entity:isScannedByFaction(faction_name)
     end
     return false
 end
---- Defines a function to call when this SpaceObject is destroyed by any means.
---- Example:
---- -- Prints to the console window or logging file when this SpaceObject is destroyed
---- obj:onDestroyed(function() print("Object destroyed!") end)
-function Entity:onDestroyed(callback)
-    --TODO: Cases where we do not have hull
-    if self.components.hull then self.components.hull.on_destruction = callback end
+--- Returns this SpaceObject's health points.
+--- Example: obj:getHealth()
+function Entity:getHealth()
+    if self.components.health then return self.components.health.current end
+    return 0
+end
+--- Returns this SpaceObject's maximum limit of health points.
+--- Example: stbo:getHealthMax()
+function Entity:getHealthMax()
+    if self.components.health then return self.components.health.max end
+    return 0
+end
+--- Sets this SpaceObject's health points.
+--- Health points are intended for SpaceObjects that lack hulls, such as asteroids.
+--- If an object has both Hull and Health components, damage to the object depletes Health points only after Hull points are reduced to 0.
+--- No entity restores Health points by default. Scenarios must apply their own Health point restoration logic if required.
+--- If set to a value larger than the maximum, this sets the value to the limit.
+--- If set to a value less than 0, this sets the value to 0.
+--- Note that setting this value to 0 doesn't immediately destroy the SpaceObject.
+--- Example: obj:setHealth(100) -- sets the health point limit to either 100, or the limit if less than 100
+function Entity:setHealth(amount)
+    if self.components.health then
+        self.components.health.current = clamp(amount, 0, self.components.health.max)
+    end
     return self
+end
+--- Sets this SpaceObject's maximum limit of health points.
+--- Example: obj:setHealthMax(100) -- sets the health point limit to 100
+function Entity:setHealthMax(amount)
+    if self.components.health then
+        self.components.health.max = amount
+        self.components.health.current = clamp(self.components.health.current, 0, self.components.health.max)
+    end
+    return self
+end
+--- Defines whether this SpaceObject can be destroyed by damage.
+--- Defaults to true.
+--- Example: obj:setCanBeDestroyed(false) -- prevents the SpaceObject from being destroyed by damage
+function Entity:setCanBeDestroyed(allow_destroy)
+    if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
+    if self.components.health then self.components.health.allow_destruction = allow_destroy end
+    return self
+end
+--- Returns whether the SpaceObject can be destroyed by damage.
+--- Example: obj:getCanBeDestroyed()
+function Entity:getCanBeDestroyed()
+    if self.components.hull then return self.components.hull.allow_destruction end
+    if self.components.health then return self.components.health.allow_destruction end
+    return false
+end
+--- Defines a function to call when this SpaceObject takes health damage.
+--- Passes the object taking damage and the instigator SpaceObject (or nil) to the function.
+--- Example: obj:onTakingDamage(function(this_obj, instigator) print(this_obj:getCallSign() .. " was damaged by " .. instigator:getCallSign()) end)
+function Entity:onTakingHealthDamage(callback)
+    if self.components.health then self.components.health.on_taking_damage = callback end
+    return self
+end
+--- Defines a function to call when a SpaceObject with health is destroyed by any means.
+--- Example:
+--- -- Prints to the console window or logging file when this SpaceObject is destroyed by taking health damage
+--- obj:onHealthDestruction(function() print("Object destroyed!") end)
+function Entity:onHealthDestruction(callback)
+    -- TODO: Implement callback upon destruction when the SpaceObject lacks both Health and Hull components
+    if self.components.health then self.components.health.on_destruction = callback end
+    return self
+end
+--- DEPRECATED: Former alternative method to invoke onDestruction callback if destroyed by taking Hull damage.
+--- Use onDestruction instead for callbacks upon destruction from Hull damage, or onHealthDestruction upon destruction from Health damage.
+function Entity:onDestroyed(callback)
+    self:onDestruction(callback)
 end
