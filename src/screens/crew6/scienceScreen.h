@@ -50,6 +50,7 @@ public:
     GuiButton* info_type_button;
     GuiKeyValueDisplay* info_shields;
     GuiKeyValueDisplay* info_hull;
+    GuiKeyValueDisplay* info_health;
     GuiScrollText* info_description;
     GuiFrequencyCurve* info_shield_frequency;
     GuiFrequencyCurve* info_beam_frequency;

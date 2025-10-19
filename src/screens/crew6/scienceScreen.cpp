@@ -136,6 +136,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
     info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
+    info_health = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HEALTH", 0.4, tr("science", "Health"), "");
+    info_health->setSize(GuiElement::GuiSizeMax, 30)->hide();
 
     // Full scan data
 
@@ -299,6 +301,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type->setValue("-");
     info_shields->setValue("-");
     info_hull->setValue("-");
+    info_health->setValue("-");
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
@@ -404,6 +407,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             }
             if (auto hull = target.getComponent<Hull>())
                 info_hull->setValue(int(ceil(hull->current)));
+            if (auto health = target.getComponent<Health>())
+                info_health->setValue(int(ceil(health->current)))->show();
+            else
+                info_health->hide();
         }
 
         // On a full scan, show tactical and systems data (if any), and its
