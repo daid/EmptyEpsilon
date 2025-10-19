@@ -261,6 +261,8 @@ void SpectatorScreen::update(float delta)
         }
         if (auto hull = target.getComponent<Hull>())
             info[trMark("gm_info", "Hull")] = string(int(100.0f * hull->current / hull->max)) + "%";
+        if (auto health = target.getComponent<Health>())
+            info[trMark("gm_info", "Health")] = string(int(100.0f * health->current / health->max)) + "%";
 
         for (auto i = info.begin(); i != info.end(); i++)
             selection_info[i->first] = i->second;

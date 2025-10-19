@@ -151,14 +151,29 @@ void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const Da
                 }
             }
 
+            float current_hull = hull->current;
             hull->current -= amount;
-            if (hull->current <= 0.0f && !hull->allow_destruction)
-                hull->current = 1;
+            amount -= current_hull;
 
             if (hull->current <= 0.0f)
             {
-                destroyedByDamage(entity, info);
-                return;
+                if (!hull->allow_destruction)
+                {
+                    amount = 0.0f;
+                    hull->current = 1.0f;
+                }
+                else
+                {
+                    if (!health)
+                    {
+                        destroyedByDamage(entity, info);
+                        return;
+                    }
+                    else
+                    {
+                        hull->current = 0.0f;
+                    }
+                }
             }
 
             if (hull->on_taking_damage)
@@ -170,16 +185,21 @@ void DamageSystem::takeHullDamage(sp::ecs::Entity entity, float amount, const Da
             }
         }
     }
-    else if (health)
+
+    // Deal damage to Health only if the entity either lacks a Hull component
+    // or has depleted its Hull.
+    if (health && amount > 0.0f)
     {
         health->current -= amount;
-        if (health->current <= 0.0f && !health->allow_destruction)
-            health->current = 1;
-
         if (health->current <= 0.0f)
         {
-            destroyedByDamage(entity, info);
-            return;
+            if (!health->allow_destruction)
+                health->current = 1;
+            else
+            {
+                destroyedByDamage(entity, info);
+                return;
+            }
         }
 
         if (health->on_taking_damage)

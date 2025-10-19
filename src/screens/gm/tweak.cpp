@@ -312,7 +312,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
 
+    ADD_PAGE(tr("tweak-tab", "Health"), Health);
+    ADD_LABEL(tr("tweak-text", "Health takes damage only if Hull is absent or depleted"));
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Health, current);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Health, max);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Health, allow_destruction);
+
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
+    ADD_LABEL(tr("tweak-text", "Hull takes damage if Shields are absent, inactive, or depleted"));
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Hull, current);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Hull, max);
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Hull, allow_destruction);

@@ -41,6 +41,8 @@ static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
         result[trMark("gm_info", "Type")] = tn->localized;
     if (auto hull = entity.getComponent<Hull>())
         result[trMark("gm_info", "Hull")] = string(hull->current) + "/" + string(hull->max);
+    if (auto health = entity.getComponent<Health>())
+        result[trMark("gm_info", "Health")] = string(health->current) + "/" + string(health->max);
     //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
         // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.
@@ -580,7 +582,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             {
                 if (auto ai = entity.getComponent<AIController>())
                 {
-                    if (target && target != entity && target.hasComponent<Hull>())
+                    if (target && target != entity && (target.hasComponent<Hull>() || target.hasComponent<Health>()))
                     {
                         if (Faction::getRelation(entity, target) == FactionRelation::Enemy)
                         {
