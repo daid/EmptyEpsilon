@@ -3,6 +3,10 @@
 #include "script/callback.h"
 #include "systems/damage.h"
 
+// Component to indicate that this entity can take damage.
+// An entity is typically destroyed once it reaches 0 health, but you can
+// disable this to prevent an entity's destruction in LARP scenarios or
+// tutorials.
 class Health
 {
 public:
@@ -17,8 +21,8 @@ public:
 };
 
 // Component to indicate that this entity has a hull and can take hull damage.
-// Usually entities are destroyed once they reach 0 hull, but you can disable
-// this to prevent player ship destruction in LARP scenarios or tutorials.
+// A hull functions as Health but represents a physical structure on an entity.
+// Having a Hull makes an entity targetable, scannable, and selectable.
 class Hull : public Health
 {
 };
