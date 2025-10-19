@@ -3,10 +3,7 @@
 #include "script/callback.h"
 #include "systems/damage.h"
 
-
-// Component to indicate that this entity has a hull and can get hull damage.
-//  Usually entities are destroyed once they reach zero hull. But you can disable this to prevent player ship destruction in LARP scenarios or tutorials.
-class Hull
+class Health
 {
 public:
     float current = 100.0f;
@@ -17,6 +14,13 @@ public:
 
     sp::script::Callback on_destruction;
     sp::script::Callback on_taking_damage;
+};
+
+// Component to indicate that this entity has a hull and can take hull damage.
+// Usually entities are destroyed once they reach 0 hull, but you can disable
+// this to prevent player ship destruction in LARP scenarios or tutorials.
+class Hull : public Health
+{
 };
 
 // Not having actual hull, but an explosion in the area will destroy this entity.

@@ -60,7 +60,7 @@ void GravitySystem::update(float delta)
                     DamageSystem::applyDamage(target, 100000.0, info); //try to destroy the object by inflicting a huge amount of damage
                     if (target)
                     {
-                        if (!target.hasComponent<Hull>() || target.getComponent<Hull>()->allow_destruction)
+                        if (!target.hasComponent<Health>() || target.getComponent<Health>()->allow_destruction)
                             target.destroy();
                         return;
                     }
