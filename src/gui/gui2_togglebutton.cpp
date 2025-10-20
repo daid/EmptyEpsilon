@@ -24,6 +24,11 @@ void GuiToggleButton::onDraw(sp::RenderTarget& renderer)
         float icon_x;
         switch(icon_alignment)
         {
+        case sp::Alignment::Center:
+            icon_x = rect.position.x + rect.size.x * 0.5f;
+            text_rect = rect;
+            text_align = sp::Alignment::Center;
+            break;
         case sp::Alignment::CenterLeft:
         case sp::Alignment::TopLeft:
         case sp::Alignment::BottomLeft:
