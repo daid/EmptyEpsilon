@@ -36,8 +36,9 @@ protected:
     glm::vec2 max_size;
     float min_text_size;
     float max_text_size;
+    bool wrap_text;
 public:
-    GuiAutoSizeLabel(GuiContainer* owner, string id, string text, glm::vec2 min_size, glm::vec2 max_size, float min_text_size, float max_text_size);
+    GuiAutoSizeLabel(GuiContainer* owner, string id, string text, glm::vec2 min_size, glm::vec2 max_size, float min_text_size, float max_text_size, bool wrap_text = true);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual void onUpdate() override;
