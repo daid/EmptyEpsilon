@@ -179,7 +179,7 @@ class ConfigCmd(cmd.Cmd):
         return result
 
     def do_setname(self, args):
-        'Set a name of a machine'
+        'Set a client\'s name.\nExample: To set the name of the client with the MAC address 00b0d0a6b323 to Red_shirt, run:\nsetname 00b0d0a6b323 Red_shirt'
         args = args.split(" ", 1)
         client = self._getClient(args[0])
         if not client:
@@ -190,7 +190,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_setposition(self, args):
-        'Set the autoconnect position of a client'
+        'Set the autoconnect position of a client.'
         args = args.split(" ", 1)
         client = self._getClient(args[0])
         if not client:
@@ -201,7 +201,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_exec(self, args):
-        'Execute any command trough SSH on one or more clients.'
+        'Execute any command through SSH on one or more clients.'
         args = args.split(" ", 1)
         for client in self._getClients(args[0]):
             client.runOnClient(args[1])

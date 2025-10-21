@@ -40,13 +40,13 @@ You also need to have a standalone wired network, or a second wired network inte
 
 The `netboot` directory of this repo also includes a Python script named `config_manager.py`. After running `build_netboot_system.sh`, this script is also located in the server's home directory. Use this tool to edit and administrate `options.ini` Preferences Files for each client.
 
-To launch it, run `python config_manager.py` from the server's home directory.
+To launch it, run `python config_manager.py` from the server's home directory. This launches a `(Cmd)` prompt where you can enter commands.
 
 ## Rename clients (setname)
 
 By default, each client uses its hardware MAC address as its name and displays its name in the upper-left corner of the EmptyEpsilon main menu. You can configure names for each client using the `config_manager.py` tool's `setname` command. 
 
-For example, to rename the system with a specific MAC address to `Red_shirt`, run:
+For example, to rename the system with a specific MAC address to `Red_shirt` from the `(Cmd)` prompt, run:
 
 `setname 00b0d0a6b323 Red_shirt`
 
@@ -55,6 +55,8 @@ When that client is rebooted, it will display `Red_shirt` in the upper-left corn
 ### Other functions
 
 The `config_manager.py` tool can also reboot systems, restart EE on systems, and configure autoconnect settings.
+
+To list the tool's functions, run `help` from the `(Cmd)` prompt. Run `help <function>` from the prompt for a description of the function.
 
 ### Manual configuration
 
