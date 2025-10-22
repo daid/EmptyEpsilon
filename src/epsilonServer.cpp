@@ -1,4 +1,5 @@
 #include "epsilonServer.h"
+#include "components/maneuveringthrusters.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
 #include "soundManager.h"
@@ -40,8 +41,24 @@ void EpsilonServer::onDisconnectClient(int32_t client_id)
 {
     LOG(INFO) << "Client left: " << client_id;
     foreach(PlayerInfo, i, player_info_list)
+    {
         if (i->client_id == client_id)
+        {
+            for (auto position : i->crew_positions)
+            {
+                // Stop manual rotation if the player was controlling a ship.
+                // Might be prudent to also stop impulse, warp, etc.
+                if (position.has(CrewPosition::helmsOfficer)
+                    || position.has(CrewPosition::tacticalOfficer)
+                    || position.has(CrewPosition::singlePilot))
+                {
+                    if (auto thrusters = i->ship.getComponent<ManeuveringThrusters>())
+                        thrusters->stop();
+                }
+            }
             i->destroy();
+        }
+    }
     player_info_list.update();
 }
 
