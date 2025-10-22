@@ -675,6 +675,7 @@ GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
         if (d->player == entity)
             return d;
     auto dialog = new GameMasterChatDialog(chat_layer, main_radar, entity);
+    dialog->setPosition(0, 0)->setSize(300, 300);
     chat_dialog_per_ship.push_back(dialog);
     return dialog;
 }
