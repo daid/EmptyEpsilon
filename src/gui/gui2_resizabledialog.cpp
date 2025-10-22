@@ -14,8 +14,8 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
     auto title_bar_layout = new GuiElement(layout, "RESIZABLE_TITLE_BAR_LAYOUT");
     title_bar_layout->setMargins(25.0f, 0.0f, 10.0f, 0.0f)->setSize(GuiElement::GuiSizeMax, title_bar_height);
     title_bar_layout->setAttribute("layout", "horizontal");
-    title_bar = new GuiAutoSizeLabel(title_bar_layout, "RESIZABLE_TITLE_BAR", title, glm::vec2(100.0f, title_bar_height), glm::vec2(500.0f, title_bar_height), 20.0f, 20.0f, false);
-    title_bar->addBackground()->setAlignment(sp::Alignment::CenterLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    title_bar = new GuiAutoSizeLabel(title_bar_layout, "RESIZABLE_TITLE_BAR", title, glm::vec2(100.0f, title_bar_height), glm::vec2(500.0f, title_bar_height), 20.0f, 20.0f);
+    title_bar->setClipped()->addBackground()->setAlignment(sp::Alignment::CenterLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     minimize_button = new GuiToggleButton(title_bar_layout, "RESIZABLE_MINIMIZE", "", [this](bool value)
     {
