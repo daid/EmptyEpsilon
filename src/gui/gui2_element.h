@@ -81,6 +81,9 @@ public:
     GuiContainer* getTopLevelContainer();
     const string& getID() { return id; }
 
+    // Change this element's owner/container safely (removes from old owner and adds to new owner)
+    GuiElement* setParent(GuiContainer* new_owner);
+
     //Have this GuiElement destroyed, but at a safe point&time in the code. (handled by the container)
     void destroy();
 
