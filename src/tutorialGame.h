@@ -25,6 +25,7 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiButton* next_button;
 
     bool repeated_tutorial;
+    string filename;
 public:
     sp::script::Callback _onNext;
 
