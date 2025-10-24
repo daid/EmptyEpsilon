@@ -2,7 +2,7 @@
 #include "theme.h"
 
 GuiLabel::GuiLabel(GuiContainer* owner, string id, string text, float text_size)
-: GuiElement(owner, id), text(text), text_size(text_size), text_color(glm::u8vec4{255,255,255,255}), text_alignment(sp::Alignment::Center), background(false), font_flag(sp::Font::FlagLineWrap)
+: GuiElement(owner, id), text(text), text_size(text_size), text_color(glm::u8vec4{255,255,255,255}), text_alignment(sp::Alignment::Center), background(false), font_flag(0)
 {
     front_style = theme->getStyle("label.front");
     back_style = theme->getStyle("label.back");
@@ -47,9 +47,9 @@ GuiLabel* GuiLabel::setVertical()
     return this;
 }
 
-GuiLabel* GuiLabel::setUnwrapped()
+GuiLabel* GuiLabel::setWrapped()
 {
-    font_flag &= ~sp::Font::FlagLineWrap;
+    font_flag |= sp::Font::FlagLineWrap;
     return this;
 }
 
