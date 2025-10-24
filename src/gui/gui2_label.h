@@ -24,7 +24,7 @@ public:
     GuiLabel* setAlignment(sp::Alignment alignment);
     GuiLabel* addBackground();
     GuiLabel* setVertical();
-    GuiLabel* setUnwrapped();
+    GuiLabel* setWrapped();
     GuiLabel* setClipped();
 };
 
