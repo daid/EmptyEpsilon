@@ -48,9 +48,7 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
     }
 
     if (PreferencesManager::get("instance_name") != "")
-    {
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(0, 18);
-    }
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25.0f))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 18.0f);
 }
 
 AutoConnectScreen::~AutoConnectScreen()
