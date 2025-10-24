@@ -29,9 +29,9 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
     }
 
     status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
-    status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
+    status_label->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    (new GuiLabel(this, "POSITION", positions[0].describe(), 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
+    (new GuiLabel(this, "POSITION", positions[0].describe(), 50.0f))->setPosition(0.0f, 400.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     for(string filter : ship_filter.split(";"))
     {
