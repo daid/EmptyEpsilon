@@ -139,6 +139,9 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
     // Lights setup.
     ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
 
+    // Set illumination modulation
+    glUniform4fv(shader.get().uniform(ShaderRegistry::Uniforms::IlluminationModulation), 1, glm::value_ptr(mrc.illumination_modulation));
+
     // Textures
     activateAndBindMeshTextures(mrc);
 
