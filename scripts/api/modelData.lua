@@ -86,6 +86,18 @@ function ModelData:setNormalMap(texture)
     self.mesh_render.normal_texture=texture
     return self
 end
+--- Modulates this ModelData's illumination map as RGBA values.
+--- Values range from 0.0 (unlit) to 1.0 (max brightness).
+--- Illumination maps default to bright white {1.0, 1.0, 1.0, 1.0}.
+--- Examples:
+--- model:modulateIllumination(1.0, 0.0, 0.0, 1.0) -- red lights
+--- model:modulateIllumination(1.0, 1.0, 1.0, 0.0) -- unlit
+function ModelData:modulateIllumination(r, g, b, a)
+    if self.mesh_render.illumination_texture then
+        self.mesh_render.illumination_modulation = {r, g, b, a}
+    end
+    return self
+end
 --- Sets this ModelData's mesh offset, relative to its position in its mesh data.
 --- If a 3D mesh's central origin point is not at 0,0,0, use this to compensate.
 --- If you view the model in Blender, these values are equivalent to -X,+Y,+Z.
