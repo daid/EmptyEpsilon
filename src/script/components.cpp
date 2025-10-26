@@ -325,7 +325,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<Sfx>::name("sfx");
     BIND_MEMBER(Sfx, sound);
     BIND_MEMBER(Sfx, power);
-    BIND_MEMBER(Sfx, played);
+    // BIND_MEMBER(Sfx, played);
 
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
