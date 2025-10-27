@@ -20,7 +20,7 @@ void CoolantSystem::update(float delta)
                 for(int n = 0; n < ShipSystem::COUNT; n++) {
                     auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
                     if (!sys) continue;
-                    sys->coolant_request = coolant.max * sys->heat_level / total_heat;
+                    sys->coolant_request = std::min(coolant.max * sys->heat_level / total_heat, coolant.max_coolant_per_system);
                 }
             }
         }
