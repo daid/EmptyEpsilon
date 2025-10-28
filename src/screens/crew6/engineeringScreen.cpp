@@ -230,7 +230,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
                 info.heat_icon->hide();
 
             info.power_bar->setValue(system->power_level);
-            info.coolant_bar->setValue(system->coolant_level)->setEnable(!coolant->auto_levels);
+            info.coolant_bar->setValue(system->coolant_level);
+            if (coolant) info.coolant_bar->setEnable(!coolant->auto_levels);
             if (system->coolant_request > 0.0f) {
                 float f = system->coolant_request / 10.f;
                 info.coolant_max_indicator->setPosition(-20 + info.coolant_bar->getSize().x * f, 5);
