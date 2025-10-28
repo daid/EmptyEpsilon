@@ -67,8 +67,7 @@ void CoolantSystem::update(float delta)
 
                             if (sys->coolant_request < coolant.max_coolant_per_system && sys->heat_level > 0.0f)
                             {
-                                float additional = excess_coolant * sys->heat_level / available_heat;
-                                sys->coolant_request += additional;
+                                sys->coolant_request += excess_coolant * sys->heat_level / available_heat;
                                 excess_redistributed = true;
                             }
                         }
