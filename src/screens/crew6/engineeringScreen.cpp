@@ -39,7 +39,6 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
 
-
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");
 
@@ -194,6 +193,8 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
     if (my_spaceship)
     {
         float total_coolant_used = 0.0f;
+        auto coolant = my_spaceship.getComponent<Coolant>();
+
         for(int n=0; n<ShipSystem::COUNT; n++)
         {
             SystemRow info = system_rows[n];
@@ -230,6 +231,7 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
 
             info.power_bar->setValue(system->power_level);
             info.coolant_bar->setValue(system->coolant_level);
+            if (coolant) info.coolant_bar->setEnable(!coolant->auto_levels);
             if (system->coolant_request > 0.0f) {
                 float f = system->coolant_request / 10.f;
                 info.coolant_max_indicator->setPosition(-20 + info.coolant_bar->getSize().x * f, 5);
@@ -240,7 +242,6 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             total_coolant_used += system->coolant_level;
         }
 
-        auto coolant = my_spaceship.getComponent<Coolant>();
         coolant_remaining_bar->setVisible(coolant);
         if (coolant) {
             coolant_remaining_bar->setRange(0, coolant->max);
