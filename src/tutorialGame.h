@@ -18,6 +18,7 @@ class TutorialGame : public Updatable, public GuiCanvas
     GuiElement* viewport;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
+    // TODO: GuiRadarView* strategic_map;
     GuiElement* station_screen[8];
 
     GuiPanel* frame;

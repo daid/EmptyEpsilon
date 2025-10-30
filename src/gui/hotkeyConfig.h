@@ -41,6 +41,7 @@ public:
     sp::io::Keybinding mainscreen_target;
     sp::io::Keybinding mainscreen_tactical_radar;
     sp::io::Keybinding mainscreen_long_range_radar;
+    sp::io::Keybinding mainscreen_strategic_map;
     sp::io::Keybinding mainscreen_first_person;
 
     //helms
