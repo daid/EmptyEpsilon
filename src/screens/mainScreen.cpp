@@ -30,21 +30,26 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     viewport = new GuiViewportMainScreen(this, "VIEWPORT");
     viewport->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
+    // Radars
     main_screen_radar = new GuiRadarView(viewport, "VIEWPORT_RADAR", nullptr);
     main_screen_radar->setStyle(GuiRadarView::CircularMasked)->setSize(200, 200)->setPosition(-20, 20, sp::Alignment::TopRight);
 
     tactical_radar = new GuiRadarView(this, "TACTICAL", nullptr);
     tactical_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     tactical_radar->setRangeIndicatorStepSize(1000.0f)->shortRange()->enableCallsigns()->hide();
-    long_range_radar = new GuiRadarView(this, "TACTICAL", nullptr);
+    long_range_radar = new GuiRadarView(this, "LONG_RANGE", nullptr);
     long_range_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     long_range_radar->setRangeIndicatorStepSize(5000.0f)->longRange()->enableCallsigns()->hide();
     long_range_radar->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    strategic_map = new GuiRadarView(this, "STRATEGIC", 50000.0f, nullptr);
+    strategic_map->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    strategic_map->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->hide();
+    strategic_map->setAutoCentering(false)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+
+    // Overlays
     onscreen_comms = new GuiCommsOverlay(this);
     onscreen_comms->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setVisible(false);
-
     new GuiShipDestroyedPopup(this);
-
     new GuiJumpIndicator(this);
     new GuiSelfDestructIndicator(this);
     new GuiGlobalMessage(this);
@@ -70,6 +75,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
 
     keyboard_help->setText(keyboard_help_text);
 
+    // Music playback
     if (PreferencesManager::get("music_enabled") != "0")
     {
         threat_estimate = new ThreatLevelEstimate();
@@ -125,7 +131,8 @@ void ScreenMainScreen::update(float delta)
 
     if (my_spaceship)
     {
-        if (auto pc = my_spaceship.getComponent<PlayerControl>()) {
+        if (auto pc = my_spaceship.getComponent<PlayerControl>())
+        {
             switch(pc->main_screen_setting)
             {
             case MainScreenSetting::Front:
@@ -136,16 +143,25 @@ void ScreenMainScreen::update(float delta)
                 viewport->show();
                 tactical_radar->hide();
                 long_range_radar->hide();
+                strategic_map->hide();
                 break;
             case MainScreenSetting::Tactical:
                 viewport->hide();
                 tactical_radar->show();
                 long_range_radar->hide();
+                strategic_map->hide();
                 break;
             case MainScreenSetting::LongRange:
                 viewport->hide();
                 tactical_radar->hide();
                 long_range_radar->show();
+                strategic_map->hide();
+                break;
+            case MainScreenSetting::Strategic:
+                viewport->hide();
+                tactical_radar->hide();
+                long_range_radar->hide();
+                strategic_map->show();
                 break;
             }
 
@@ -188,6 +204,8 @@ void ScreenMainScreen::update(float delta)
             my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
         if (keys.mainscreen_long_range_radar.getDown())
             my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
+        if (keys.mainscreen_strategic_map.getDown())
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Strategic);
         if (keys.mainscreen_first_person.getDown())
             viewport->first_person = !viewport->first_person;
     }
@@ -225,6 +243,9 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
             break;
         case MainScreenSetting::LongRange:
             button = check_radar(*long_range_radar);
+            break;
+        case MainScreenSetting::Strategic:
+            button = check_radar(*strategic_map);
             break;
         default:
             // Tapping the radar brings it up (middle mouse)
@@ -273,6 +294,8 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
                 my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             else if (gameGlobalInfo->allow_main_screen_long_range_radar)
                 my_player_info->commandMainScreenSetting(MainScreenSetting::LongRange);
+            else if (gameGlobalInfo->allow_main_screen_strategic_map)
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Strategic);
             break;
         case MainScreenSetting::Tactical:
             if (gameGlobalInfo->allow_main_screen_long_range_radar)
@@ -280,6 +303,10 @@ bool ScreenMainScreen::onPointerDown(sp::io::Pointer::Button button, glm::vec2 p
             break;
         case MainScreenSetting::LongRange:
             if (gameGlobalInfo->allow_main_screen_tactical_radar)
+                my_player_info->commandMainScreenSetting(MainScreenSetting::Strategic);
+            break;
+        case MainScreenSetting::Strategic:
+            if (gameGlobalInfo->allow_main_screen_strategic_map)
                 my_player_info->commandMainScreenSetting(MainScreenSetting::Tactical);
             break;
         }

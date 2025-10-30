@@ -49,6 +49,11 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
             long_range_button->setValue(active_mode == MainScreenSetting::LongRange);
             long_range_button->setVisible(gameGlobalInfo->allow_main_screen_long_range_radar);
         }
+        if (strategic_map_button)
+        {
+            strategic_map_button->setValue(active_mode == MainScreenSetting::Strategic);
+            strategic_map_button->setVisible(gameGlobalInfo->allow_main_screen_strategic_map);
+        }
 
         // Overlay controls
         if (show_comms_button)
@@ -148,6 +153,17 @@ GuiMainScreenControls::GuiMainScreenControls(GuiContainer* owner)
         closePopup();
     }));
     long_range_button = buttons.back();
+
+    // Strategic map button.
+    buttons.push_back(new GuiToggleButton(button_strip, "MAIN_SCREEN_STRATEGIC_MAP_BUTTON", tr("mainscreen", "Strategic map"),
+    [this](bool value)
+    {
+        if (my_spaceship)
+            my_player_info->commandMainScreenSetting(MainScreenSetting::Strategic);
+
+        closePopup();
+    }));
+    strategic_map_button = buttons.back();
 
     // If the player has control over comms, they can toggle the comms overlay
     // on the main screen.
