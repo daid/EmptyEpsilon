@@ -27,16 +27,8 @@
 REGISTER_SHIP_AI(ShipAI, "default");
 
 ShipAI::ShipAI(sp::ecs::Entity owner)
-: owner(owner)
+: owner(owner), missile_fire_delay(0.0f), has_missiles(false), has_beams(false), beam_weapon_range(0.0f), weapon_direction(EWeaponDirection::Front), update_target_delay(0.0f)
 {
-    missile_fire_delay = 0.0;
-
-    has_missiles = false;
-    has_beams = false;
-    beam_weapon_range = 0.0;
-    weapon_direction = EWeaponDirection::Front;
-
-    update_target_delay = 0.0;
 }
 
 bool ShipAI::canSwitchAI()
@@ -383,8 +375,10 @@ void ShipAI::updateTarget()
 void ShipAI::runOrders()
 {
     auto ai = owner.getComponent<AIController>();
+    if (!ai) return;
     auto docking_port = owner.getComponent<DockingPort>();
     auto radius = 0.0f;
+
     if (auto physics = owner.getComponent<sp::Physics>())
         radius = physics->getSize().x;
 
@@ -395,46 +389,57 @@ void ShipAI::runOrders()
         pathPlanner.clear();
         break;
     case AIOrder::Roaming:         //Fly around and engage at will, without a clear target
-        //Could mean 3 things
+        // Could mean:
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (auto ot = owner.getComponent<sp::Transform>()) {
+        if (auto ot = owner.getComponent<sp::Transform>())
+        {
             if (has_missiles || has_beams)
             {
-                auto new_target = findBestTarget(ot->getPosition(), relay_range);
-                if (new_target)
-                {
+                if (auto new_target = findBestTarget(ot->getPosition(), relay_range))
                     owner.getOrAddComponent<Target>().entity = new_target;
-                }else{
+                else
+                {
+                    // If our current target coords are 0,0, reinitalize them to
+                    // our current position
+                    if (ai->order_target_location == glm::vec2(0.0f, 0.0f))
+                        ai->order_target_location = ot->getPosition();
+
+                    // If we're within 1U of an existing destination, find new
+                    // coordinates within our long-range radar range.
                     auto diff = ai->order_target_location - ot->getPosition();
-                    if (glm::length2(diff) < 1000.0f*1000.0f) {
+                    if (glm::length2(diff) < 1000.0f * 1000.0f)
+                    {
                         ai->orders = AIOrder::Roaming;
                         ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                     }
                     flyTowards(ai->order_target_location);
                 }
-            }else{
+            }
+            else
+            {
                 auto tubes = owner.getComponent<MissileTubes>();
                 if (tubes && tubes->mounts.size() > 0)
                 {
-                    // Find a station which can re-stock our weapons.
-                    auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range);
-                    if (new_target)
+                    // Find an entity that can re-stock our weapons.
+                    if (auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range))
                     {
                         ai->orders = AIOrder::Retreat;
                         ai->order_target = new_target;
-                    }else{
+                    }
+                    else
+                    {
                         auto diff = ai->order_target_location - ot->getPosition();
-                        if (glm::length2(diff) < 1000.0f*1000.0f) {
+                        if (glm::length2(diff) < 1000.0f * 1000.0f)
+                        {
                             ai->orders = AIOrder::Roaming;
                             ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                         }
                         flyTowards(ai->order_target_location);
                     }
-                }else{
-                    pathPlanner.clear();
                 }
+                else pathPlanner.clear();
             }
         }
         break;
