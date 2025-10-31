@@ -235,9 +235,6 @@ string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
 
 void GameGlobalInfo::reset()
 {
-    if (state_logger)
-        state_logger->destroy();
-
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
@@ -348,12 +345,6 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
             main_script_error_count = max_repeated_script_errors;
             LuaConsole::addLog("init() function failed, not going to call update()");
         }
-    }
-
-    if (PreferencesManager::get("game_logs", "1").toInt())
-    {
-        state_logger = new GameStateLogger();
-        state_logger->start();
     }
 }
 

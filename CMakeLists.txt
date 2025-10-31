@@ -233,7 +233,6 @@ set(MAIN_SOURCES
     src/script.cpp
     src/crewPosition.cpp
     src/playerInfo.cpp
-    src/gameStateLogger.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
@@ -527,7 +526,6 @@ set(MAIN_SOURCES
     src/epsilonServer.h
     src/featureDefs.h
     src/gameGlobalInfo.h
-    src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
     src/hardware/devices/dmx512SerialDevice.h
