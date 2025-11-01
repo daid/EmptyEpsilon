@@ -15,32 +15,24 @@ void WarpSystem::update(float delta)
 {
     for(auto [entity, warp, impulse, position, physics] : sp::ecs::Query<WarpDrive, sp::ecs::optional<ImpulseEngine>, sp::Transform, sp::Physics>())
     {
-        if (warp.request > warp.max_level)
-            warp.request = warp.max_level;
-        if (warp.request > 0 || warp.current > 0)
+        // Cap warp request to max factor.
+        warp.request = std::min(warp.request, warp.max_level);
+        // If warp is unpowered, damaged to inoperation, or jammed,
+        // reset the request to 0.
+        if (warp.getSystemEffectiveness() <= 0.0f) warp.request = 0;
+        if ((warp.request > 0 || warp.current > 0.0f) && isWarpJammed(entity)) warp.request = 0;
+
+        if (warp.request > 0 || warp.current > 0.0f)
         {
-            if (isWarpJammed(entity))
-                warp.request = 0;
-        }
-        if (warp.request > 0 || warp.current > 0)
-        {
-            if (!impulse || impulse->actual == 0.0f) {
-                if (warp.current < warp.request)
-                {
-                    warp.current += delta / warp.charge_time;
-                    if (warp.current > warp.request)
-                        warp.current = warp.request;
-                } else if (warp.current > warp.request)
-                {
-                    warp.current -= delta / warp.decharge_time;
-                    if (warp.current < warp.request)
-                        warp.current = warp.request;
-                }
-            } else if (warp.current > 0.0f) {
-                warp.current -= delta / warp.decharge_time;
-                if (warp.current < 0.0f)
-                    warp.current = 0.0f;
+            if (!impulse || impulse->actual == 0.0f)
+            {
+                if (warp.current < warp.request && warp.charge_time > 0.0f)
+                    warp.current = std::min(static_cast<float>(warp.request), warp.current + delta / warp.charge_time);
+                else if (warp.current > warp.request && warp.decharge_time > 0.0f)
+                    warp.current = std::max(static_cast<float>(warp.request), warp.current - delta / warp.decharge_time);
             }
+            else if (warp.current > 0.0f && warp.decharge_time > 0.0f)
+                warp.current = std::max(0.0f, warp.current - delta / warp.decharge_time);
 
             auto reactor = entity.getComponent<Reactor>();
             if (reactor) {
@@ -63,7 +55,7 @@ void WarpSystem::update(float delta)
         auto forward = vec2FromAngle(position.getRotation());
         auto current_velocity = physics.getVelocity();
         if (!impulse)
-            current_velocity = glm::vec2{0, 0};
+            current_velocity = glm::vec2{0.0f, 0.0f};
         physics.setVelocity(current_velocity + forward * (warp.current * warp.speed_per_level * warp.getSystemEffectiveness()));
     }
 }
@@ -73,7 +65,7 @@ void WarpSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, gl
     auto color = glm::u8vec4(200, 150, 100, 64);
     if (my_spaceship && Faction::getRelation(my_spaceship, e) == FactionRelation::Enemy)
         color = glm::u8vec4(255, 0, 0, 64);
-    renderer.drawCircleOutline(screen_position, component.range*scale, 2.0, color);
+    renderer.drawCircleOutline(screen_position, component.range*scale, 2.0f, color);
 }
 
 bool WarpSystem::isWarpJammed(sp::ecs::Entity entity)
@@ -89,13 +81,13 @@ bool WarpSystem::isWarpJammed(sp::ecs::Entity entity)
     return false;
 }
 
-glm::vec2 WarpSystem::getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end)
+glm::vec2 WarpSystem::getFirstNonJammedPosition(glm::vec2 start, glm::vec2 end)
 {
     auto startEndDiff = end - start;
     float startEndLength = glm::length(startEndDiff);
     sp::ecs::Entity first_jammer;
     float first_jammer_f = startEndLength;
-    glm::vec2 first_jammer_q{0, 0};
+    glm::vec2 first_jammer_q{0.0f, 0.0f};
     for(auto [entity, jammer, jt] : sp::ecs::Query<WarpJammer, sp::Transform>())
     {
         float f_inf = glm::dot(startEndDiff, jt.getPosition() - start) / startEndLength;
