@@ -26,13 +26,28 @@ void WarpSystem::update(float delta)
         {
             if (!impulse || impulse->actual == 0.0f)
             {
-                if (warp.current < warp.request && warp.charge_time > 0.0f)
-                    warp.current = std::min(static_cast<float>(warp.request), warp.current + delta / warp.charge_time);
-                else if (warp.current > warp.request && warp.decharge_time > 0.0f)
-                    warp.current = std::max(static_cast<float>(warp.request), warp.current - delta / warp.decharge_time);
+                if (warp.current < warp.request)
+                {
+                    if (warp.charge_time > 0.0f)
+                        warp.current = std::min(static_cast<float>(warp.request), warp.current + delta / warp.charge_time);
+                    else
+                        warp.current = static_cast<float>(warp.request);
+                }
+                else if (warp.current > warp.request)
+                {
+                    if (warp.decharge_time > 0.0f)
+                        warp.current = std::max(static_cast<float>(warp.request), warp.current - delta / warp.decharge_time);
+                    else
+                        warp.current = static_cast<float>(warp.request);
+                }
             }
-            else if (warp.current > 0.0f && warp.decharge_time > 0.0f)
-                warp.current = std::max(0.0f, warp.current - delta / warp.decharge_time);
+            else if (warp.current > 0.0f)
+            {
+                if (warp.decharge_time > 0.0f)
+                    warp.current = std::max(0.0f, warp.current - delta / warp.decharge_time);
+                else
+                    warp.current = 0.0f;
+            }
 
             auto reactor = entity.getComponent<Reactor>();
             if (reactor) {
