@@ -17,7 +17,6 @@
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
-#include "menus/optionsMenu.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -344,9 +343,9 @@ void returnToShipSelection(RenderLayer* render_layer)
     }
 }
 
-void returnToOptionMenu()
+void returnToOptionMenu(OptionsMenu::ReturnTo return_to)
 {
-    new OptionsMenu();
+    new OptionsMenu(return_to);
 }
 
 std::unordered_map<string, string> loadScenarioSettingsFromPrefs()

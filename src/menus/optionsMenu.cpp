@@ -98,9 +98,9 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
 
     // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this]()
+    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this, return_to]()
     {
-        new HotkeyMenu();
+        new HotkeyMenu(return_to);
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -196,9 +196,9 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        if (return_to == ReturnTo::OR_Main)
+        if (return_to == ReturnTo::Main)
             returnToMainMenu(getRenderLayer());
-        else if (return_to == ReturnTo::OR_ShipSelection)
+        else if (return_to == ReturnTo::ShipSelection)
             returnToShipSelection(getRenderLayer());
         else
         {

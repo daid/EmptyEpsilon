@@ -1,6 +1,6 @@
-#ifndef HOTKEYMENU_H
-#define HOTKEYMENU_H
+#pragma once
 
+#include "optionsMenu.h"
 #include "gui/gui2_arrowbutton.h"
 #include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
@@ -52,13 +52,12 @@ private:
     int category_index = 1;
     std::vector<string> category_list;
     std::vector<sp::io::Keybinding*> hotkey_list;
+    OptionsMenu::ReturnTo return_to;
 
     void setCategory(int cat);
     void pageHotkeys(int direction);
 public:
-    HotkeyMenu();
+    HotkeyMenu(OptionsMenu::ReturnTo return_to=OptionsMenu::ReturnTo::Main);
 
     virtual void update(float delta) override;
 };
-
-#endif //HOTKEYMENU_H
