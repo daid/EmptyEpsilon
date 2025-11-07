@@ -26,6 +26,7 @@ public:
     TextureRef illumination_texture;
     glm::vec3 mesh_offset{};
     float scale = 1.0;
+    glm::vec4 illumination_modulation{1.0, 1.0, 1.0, 1.0};
 
     Mesh* getMesh();
     sp::Texture* getTexture();

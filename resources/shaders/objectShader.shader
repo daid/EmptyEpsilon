@@ -37,6 +37,7 @@ uniform sampler2D specularMap;
 #endif
 #ifdef ILLUMINATION
 uniform sampler2D illuminationMap;
+uniform vec4 illuminationModulation;
 #endif
 
 // Per-fragment inputs
@@ -51,7 +52,7 @@ void main()
 	
 	vec4 base = texture2D(baseMap, fragtexcoords.st);
 #ifdef ILLUMINATION
-	vec4 illumination = texture2D(illuminationMap, fragtexcoords.st);
+	vec4 illumination = texture2D(illuminationMap, fragtexcoords.st) * illuminationModulation;
 #else
     vec4 illumination = vec4(0.0, 0.0, 0.0, 0.0);
 #endif
