@@ -95,6 +95,7 @@ Keys::Keys() :
     mainscreen_target("MAINSCREEN_TARGET", "T"),
     mainscreen_tactical_radar("MAINSCREEN_TACTICAL", "Tab"),
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
+    mainscreen_strategic_map("MAINSCREEN_STRATEGIC", "W"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     //helms

@@ -12,7 +12,8 @@ enum class MainScreenSetting
     Right,
     Target,
     Tactical,
-    LongRange
+    LongRange,
+    Strategic
 };
 
 enum class MainScreenOverlay
