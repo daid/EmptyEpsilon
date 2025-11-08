@@ -145,6 +145,6 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 
 void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, glm::u8vec4 color)
 {
-    renderer.drawSprite(icon_name, icon_position, icon_size);
+    renderer.drawSprite(icon_name, icon_position, icon_size, color);
     icon_position += icon_offset;
 }
