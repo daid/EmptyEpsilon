@@ -235,7 +235,7 @@ ShipSelectionScreen::ShipSelectionScreen()
     cinematic_button->setSize(GuiElement::GuiSizeMax, 50);
 
     (new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
-        new OptionsMenu(OptionsMenu::ReturnTo::OR_ShipSelection);
+        new OptionsMenu(OptionsMenu::ReturnTo::ShipSelection);
         this->destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 

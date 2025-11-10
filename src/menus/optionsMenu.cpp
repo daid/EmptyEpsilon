@@ -19,7 +19,17 @@
 #include "gui/gui2_keyvaluedisplay.h"
 
 
+void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
+{
+    if (return_to == OptionsMenu::ReturnTo::Main)
+        returnToMainMenu(render_layer);
+    else if (return_to == OptionsMenu::ReturnTo::ShipSelection)
+        returnToShipSelection(render_layer);
+    else LOG(Error, "exitOptionsMenu called without a return_to target");
+}
+
 OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
+: return_to(return_to)
 {
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -98,9 +108,9 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
 
     // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this]()
+    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this, return_to]()
     {
-        new HotkeyMenu();
+        new HotkeyMenu(return_to);
         destroy();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
@@ -196,15 +206,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        if (return_to == ReturnTo::OR_Main)
-            returnToMainMenu(getRenderLayer());
-        else if (return_to == ReturnTo::OR_ShipSelection)
-            returnToShipSelection(getRenderLayer());
-        else
-        {
-            LOG(WARNING) << "Unknown options back button return_to state";
-            returnToMainMenu(getRenderLayer());
-        }
+        exitOptionsMenu(return_to, getRenderLayer());
 
     }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
     // Save options button.
@@ -223,9 +225,9 @@ void OptionsMenu::update(float delta)
 {
     if (keys.escape.getDown())
     {
+        exitOptionsMenu(return_to, getRenderLayer());
         destroy();
         soundManager->stopMusic();
-        returnToMainMenu(getRenderLayer());
     }
 }
 
