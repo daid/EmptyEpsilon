@@ -1,5 +1,4 @@
-#ifndef VIEWPORT_3D_H
-#define VIEWPORT_3D_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "glObjects.h"
@@ -70,10 +69,9 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
 
     GuiViewport3D* showCallsigns() { show_callsigns = true; return this; }
+    GuiViewport3D* toggleCallsigns() { show_callsigns = !show_callsigns; return this; }
     GuiViewport3D* showHeadings() { show_headings = true; return this; }
     GuiViewport3D* showSpacedust() { show_spacedust = true; return this; }
 private:
     glm::vec3 worldToScreen(sp::RenderTarget& window, glm::vec3 world);
 };
-
-#endif//VIEWPORT_3D_H

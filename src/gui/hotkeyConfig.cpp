@@ -8,6 +8,7 @@ extern sp::io::Keybinding fullscreen_key;
 // Cinematic Keys
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
+    toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
@@ -28,6 +29,7 @@ void Keys::CinematicKeys::init()
 {
     const auto localized_category = tr("hotkey_menu", "Cinematic View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
+    toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
     cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
@@ -46,6 +48,7 @@ void Keys::CinematicKeys::init()
 
 Keys::TopDownKeys::TopDownKeys() :
     toggle_ui("TOPDOWN_TOGGLE_UI", "H"),
+    toggle_callsigns("TOPDOWN_TOGGLE_CALLSIGNS", "G"),
     lock_camera("TOPDOWN_LOCK_CAMERA", "L"),
     previous_player_ship("TOPDOWN_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("TOPDOWN_NEXT_PLAYER_SHIP", "K"),
@@ -59,6 +62,7 @@ void Keys::TopDownKeys::init()
 {
     const auto localized_category = tr("hotkey_menu", "Top-down View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Topdown", "Toggle UI"));
+    toggle_callsigns.setLabel(localized_category, tr("hotkey_Topdown", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Topdown", "Camera lock"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle previous player ship"));
     next_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle next player ship"));

@@ -105,6 +105,11 @@ void CinematicViewScreen::update(float delta)
         }
     }
 
+    if (keys.cinematic.toggle_callsigns.getDown())
+    {
+        viewport->toggleCallsigns();
+    }
+
     if (keys.cinematic.lock_camera.getDown())
     {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
