@@ -10,37 +10,44 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
+
 #: scripts/shiptemplates/ktlitan.lua:2
 msgctxt "ship"
 msgid "Ktlitan Fighter"
-msgstr ""
+msgstr "Ktlitanischer Jäger"
+
 #: scripts/shiptemplates/ktlitan.lua:9
 msgctxt "ship"
 msgid "Ktlitan Breaker"
-msgstr ""
+msgstr "Ktlitanischer Durchbrecher"
+
 #: scripts/shiptemplates/ktlitan.lua:19
 msgctxt "ship"
 msgid "Ktlitan Worker"
-msgstr ""
+msgstr "Ktlitanische Arbeiterin"
+
 #: scripts/shiptemplates/ktlitan.lua:26
 msgctxt "ship"
 msgid "Ktlitan Drone"
-msgstr ""
+msgstr "Ktlitanische Drohne"
+
 #: scripts/shiptemplates/ktlitan.lua:32
 msgctxt "ship"
 msgid "Ktlitan Feeder"
-msgstr ""
+msgstr "Ktlitanischer Fütterer"
+
 #: scripts/shiptemplates/ktlitan.lua:42
 msgctxt "ship"
 msgid "Ktlitan Scout"
-msgstr ""
+msgstr "Ktlitanisches Scout"
+
 #: scripts/shiptemplates/ktlitan.lua:48
 msgctxt "ship"
 msgid "Ktlitan Destroyer"
-msgstr ""
+msgstr "Ktlitanische Zerstörerin"
+
 #: scripts/shiptemplates/ktlitan.lua:59
 msgctxt "ship"
 msgid "Ktlitan Queen"
-msgstr ""
-#, fuzzy
+msgstr "Ktlitanische Königin"

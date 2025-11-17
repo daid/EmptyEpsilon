@@ -96,7 +96,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Target scan data sidebar.
     info_sidebar = new GuiElement(radar_view, "SIDEBAR");
     info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-
+    info_sidebar->setMargins(0, 0, 0, 75);
+    
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
@@ -121,7 +122,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         auto ship = targets.get();
         if (auto tn = ship.getComponent<TypeName>())
         {
-            if (database_view->findAndDisplayEntry(tn->type_name))
+            if (database_view->findAndDisplayEntry(tn->type_name) || database_view->findAndDisplayEntry(tn->localized))
             {
                 view_mode_selection->setSelectionIndex(1);
                 radar_view->hide();
@@ -159,9 +160,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
-    info_shield_frequency->setSize(GuiElement::GuiSizeMax, 150);
+    info_shield_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     info_beam_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_BEAM_FREQUENCY", true, false);
-    info_beam_frequency->setSize(GuiElement::GuiSizeMax, 150);
+    info_beam_frequency->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Show shield and beam frequencies only if enabled by the server.
     if (!gameGlobalInfo->use_beam_shield_frequencies)
@@ -180,7 +181,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Prep and hide the description text area.
     info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
-    info_description->setTextSize(28)->setMargins(20, 20, 0, 0)->setSize(GuiElement::GuiSizeMax, 400)->hide();
+    info_description->setTextSize(28)->setMargins(20, 0, 0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
@@ -283,9 +284,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
-        info_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
-        sidebar_selector->setPosition(-280, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
+        custom_function_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
         custom_function_sidebar->show();
         info_sidebar->show();
     }

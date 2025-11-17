@@ -11,7 +11,7 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    renderer.drawSprite("mouse.png", position, 32.0);
+    renderer.drawSprite(sprite, position, 32.0);
 }
 
 bool MouseRenderer::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)

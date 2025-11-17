@@ -12,26 +12,31 @@ While ship captains are encouraged to avoid unnecessary interactions with these 
 
 local item = space_objects:addEntry(_('Asteroid'))
 item:setLongDescription(_([[An asteroid is a minor planet, usually smaller than a few kilometers. Larger variants are sometimes referred to as planetoids.]]))
+item:setModelDataName("astroid_1")
 
 local item = space_objects:addEntry(_('Black hole'))
 item:setLongDescription(_([[A black hole is a point of supercondensed mass with a gravitational pull so powerful that not even light can escape it. It has no locally detectable features, and can only be seen indirectly by blocking the view and distorting its surroundings, creating a strange circular mirror image of the galaxy. The black disc in the middle marks the event horizon, the boundary where even light can't escape it anymore. 
 	
 On the sensors, a black hole appears as a disc indicating the zone where the gravitational pull is getting dangerous, and soon will be stronger then the ship's impulse engines. An object that crosses a black hole is drawn toward its center and quickly ripped apart by the gravitational forces.]]))
+--item:setModelDataName("black_hole")
+item:setImage('images/black_hole_wireframe.jpg')
 
 local item = space_objects:addEntry(_('Nebula'))
 item:setLongDescription(_([[Nebulae are the birthing places of new stars. These gas fields, usually created by the death of an old star, slowly form new stars due to the gravitational pull of its gas molecules.
 
 Because of the ever-changing nature of gas nebulae, most radar and scanning technologies are unable to penetrate them. Science officers are therefore advised to rely on probes and visual observations.]]))
-
+item:setImage('Nebula1.png')
 local item = space_objects:addEntry(_('Planet'))
 item:setLongDescription(_([[A planetary-mass object is large, dense, near-spherical astronomical body comprised of various forms of matter. Most planets are either terrestrial, like Earth, or giants, like the gas giant Jupiter or ice giant Neptune.
 
 Planets often have gaseous atmospheres, and some are orbited by one or more large planetoids typically called moons.]]))
+item:setModelDataName("planet_showcase")
 
 local item = space_objects:addEntry(_('Wormhole'))
 item:setLongDescription(_([[A wormhole, also known as an Einstein-Rosen bridge, is a phenomena that connects two points of spacetime. Jump drives operate in a similar fashion, but instead of being created at will, a wormhole occupies a specific location in space. Objects that enter a wormhole instantaneously emerge from the other end, which might be anywhere from a few feet to thousands of light years away. 
 
 Wormholes are rare, and most can move objects in only one direction. Traversable wormholes, which are stable and allow for movement in both directions, are even rarer. All wormholes generate tremendous sensor activity, which an astute science officer can detect even through disruptions such as nebulae.]]))
+item:setImage('images/wormhole.jpg')
 
 -- "Technologies" describes non-ship, non-weapon ship features
 local technologies = ScienceDatabase():setName(_('Technologies'))
@@ -46,6 +51,7 @@ item:setLongDescription(_([[Ships with shield and beam systems can often configu
 A beam frequency that's resonant with a target's shield frequency can do considerably more damage, and beam frequencies can be quickly modulated. Shield frequencies require time to recalibrate.
 
 If your Science officer fully scans a target, your ship's computer presents them with a detailed analysis of beam and shield frequencies and suggests optimal values for each.]]))
+item:setImage('images/frequency_graph.png')
 
 local item = technologies:addEntry(_('Hacking measure'))
 item:addKeyValue(_('Interaction'), _('Long-range transmission'))
@@ -54,17 +60,19 @@ item:setLongDescription(_([[Thanks to our covert operations teams, we've acquire
 While we've managed to create algorithmic attack vectors that you can deploy at range to target and degrade specific ship systems, these exploits still require active human intervention to fully function.
 
 To facilitate successful operations in the field, our software engineers have abstracted the required inputs into common puzzles that even a Relay crew member can successfully complete.]]))
+item:setImage('images/hack_minigames.jpg')
 
 local item = technologies:addEntry(_('Radar signature'))
 item:addKeyValue(_('Signature'), _('Related color bands'))
-item:addKeyValue(_('Biological'), _('Green'))
-item:addKeyValue(_('Electrical'), _('Red'))
-item:addKeyValue(_('Gravitational'), _('Blue'))
+item:addKeyValue(_('Electrical'), _('Red (outer band)'))
+item:addKeyValue(_('Biological'), _('Green (middle band)'))
+item:addKeyValue(_('Gravitational'), _('Blue (inner band)'))
 item:setLongDescription(_([[The outer ring of long-range Science radar screens contain three colored bands that represent raw sensor inputs monitored on that heading. Ships and space phenomena emit energies or exhibit characteristics that your sensor suite translates into icons on your radar, but these raw rings can provide more information to a well-trained eye.
 
 For tactical purposes, heat generated by ship systems is registered in raw thermal sensor data in a similar manner as biological (green) sources. If a ship's systems are under- or over-powered, its electrical (red) readings change accordingly.
 
 A ship warping or preparing to jump exponentially increases its gravitational (blue) output. After completing a jump a ship performs a massive power transfer that raw sensor data reads as an electrical spike.]]))
+item:setImage('images/radar_rings.png')
 
 local item = technologies:addEntry(_('Scan probe'))
 item:addKeyValue(_('Radar range'), '5u')
@@ -101,15 +109,11 @@ Ship captains who value the option of retreat are advised to either give warp ja
 
 -- "Weapons" describes ship weapon types
 local weapons = ScienceDatabase():setName(_('Weapons'))
-weapons:setLongDescription(_([[This database covers only the basic versions of missile weapons used throughout the galaxy.
-
-It has been reported that some battleships started using larger variations of those missiles. Small fighters and even frigates should not have too much trouble dodging them, but space captains of bigger ships should be wary of their doubled damage potential.
-
-Smaller variations of these missiles have become common in the galaxy, too. Fighter pilots praise their speed and maneuverability, because it gives them an edge against small and fast-moving targets. They only deal half the damage of their basic counterparts, but what good is a missile if it does not hit its target.]]))
+weapons:setLongDescription(_([[This database covers only the basic versions of weapons used throughout the galaxy.]]))
 
 local item = weapons:addEntry(_('Beam weapons'))
-item:addKeyValue(_('Range'), 'Varies')
-item:addKeyValue(_('Damage'), 'Varies')
+item:addKeyValue(_('Range'), _('Varies'))
+item:addKeyValue(_('Damage'), _('Varies'))
 item:setLongDescription(_([[Beam weapons emit an instantaneous, focused burst of energy or matter at a single target within a target arc. Many ships equip beam weapons for their precision and versatility.
 
 Shields are generally effective against energy-based beam weapons. To combat this, a beam's output can be modulated to various frequencies. This allows beam weapons to be tuned to a target's shield frequency to maximize their effectiveness.
@@ -118,41 +122,112 @@ Each firing of a beam weapon begins a brief cycle period, during which the beam 
 
 On some ships, heavy beam weapons are mounted on turrets that can rotate to cover a wide firing arc, at an expense of targeting speed.]]))
 
+local item = weapons:addEntry(_('Missile weapons'))
+item:addKeyValue(_('Range'), _('Varies'))
+item:addKeyValue(_('Damage'), _('Varies'))
+item:setLongDescription(_([[Missiles are weapons launched from tubes. Most are self-propelled ranged weapons with various capabilities, such as differing ranges, self-guided pursuit of a designated target, explosive warheads that damage everything within a radius, and varying types and amounts of damage.
+
+Some battleships use larger variations of these missile designs. Small fighters and even frigates are capable of dodging these variants at range, but captains of bigger spaceships should be wary of their doubled damage potential.
+
+Smaller missile variations are also common. Fighter pilots praise their speed and maneuverability, which gives them an edge against small and fast-moving targets. They deal only half the damage of their basic counterparts, but what good is a missile if it does not hit its target?]]))
+
+-- Better: Get these directly from MissileWeaponData, MissileSystem, and ExplodeOnTouch instead of copying and pasting them
+local missile_stat_keys = {
+  _('Damage type'),
+  _('Damage at center'),
+  _('Damage at edge'),
+  _('Blast radius (u)'),
+  _('Speed (u/sec.)'),
+  _('Turn rate (deg./sec.)'),
+  _('Lifetime (sec.)'),
+  _('Homing range (u)')
+}
+local mine_stat_keys = {
+  _('Damage type'),
+  _('Damage at center'),
+  _('Damage at edge'),
+  _('Blast radius (u)'),
+  _('Launch speed (u/sec.)'),
+  _('Turn rate (deg./sec.)'),
+  _('Arming delay (sec.)'),
+  _('Trigger distance (u)')
+}
+
+-- For medium size: damage type, damage at center, damage at edge, blast radius, speed, turn rate, lifetime, homing range
+local homing_stats = { _('Kinetic'),  35,  5,   30 / 1000, 200 / 1000, 10, 27.0, 1200 / 1000 }
+local nuke_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
+local emp_stats    = { _('EMP'),     160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
+local hvli_stats   = { _('Kinetic'),  10, 10,   20 / 1000, 500 / 1000,  0, 13.5,    0 }
+local mine_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 100 / 1000,  0, 10.0, 1000 / 1000 }
+-- Mine speed is upon ejection, lifetime is duration from launch to activation, homing range is detection radius
+
+local function populateMissileStats(__item, __keys, __stats)
+	local missile_modifier_sizes = {
+		_('size_abbreviation', 'S'),
+		_('size_abbreviation', 'M'),
+		_('size_abbreviation', 'L')
+	}
+	local missile_modifier_values = { 0.5, 1.0, 2.0 }
+
+	for idx, key in ipairs(__keys) do
+		local size_value = ''
+
+		if key == _('Damage at center')
+		or key == _('Damage at edge')
+		or key == _('Blast radius (u)')
+		or key == _('Lifetime (sec.)')
+		then
+			for size_idx, size in ipairs(missile_modifier_sizes) do
+				size_value = size_value .. __stats[idx] * missile_modifier_values[size_idx] .. ' (' .. size .. ') '
+				if size ~= _('size_abbreviation', 'L') then
+					size_value = size_value .. '/ '
+				end
+			end
+			__item:addKeyValue(key, size_value)
+		elseif key == _('Speed (u/sec.)')
+		or key == _('Launch speed (u/sec.)')
+		or key == _('Turn rate (deg./sec.)')
+		then
+			for size_idx, size in ipairs(missile_modifier_sizes) do
+				size_value = size_value .. __stats[idx] / missile_modifier_values[size_idx] .. ' (' .. size .. ') '
+				if size ~= _('size_abbreviation', 'L') then
+					size_value = size_value .. '/ '
+				end
+			end
+			__item:addKeyValue(key, size_value)
+		else
+			__item:addKeyValue(key, __stats[idx])
+		end
+	end
+end
+
 local item = weapons:addEntry(_('Homing missile'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Damage'), '35')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, homing_stats)
 item:setLongDescription(_([[This target-seeking missile is the workhorse of many space combat arsenals. It's compact enough to be fitted on frigates, and packs enough punch to be used on larger ships, though usually in more than a single missile tube.]]))
 
 local item = weapons:addEntry(_('Nuke'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, nuke_stats)
 item:setLongDescription(_([[A nuclear missile is similar to a homing missile in that it can seek a target, but it moves and turns more slowly and explodes a greatly increased payload. Its nuclear explosion spans 1U of space and can take out multiple ships in a single shot.
 
 Some captains oppose the use of nuclear weapons because their large explosions can lead to 'fragging', or unintentional friendly fire. Shields should protect crews from harmful radiation, but because these weapons are often used in the thick of battle, there's no way of knowing if hull plating or shields can provide enough protection.]]))
 
 local item = weapons:addEntry(_('Mine'))
-item:addKeyValue(_('Drop distance'), '1u')
-item:addKeyValue(_('Trigger distance'), '0.6u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, mine_stat_keys, mine_stats)
 item:setLongDescription(_([[Mines are often placed in defensive perimeters around stations. There are also old minefields scattered around the galaxy from older wars.
 
 Some fearless captains use mines as offensive weapons, but their delayed detonation and blast radius make this use risky at best.]]))
 
 local item = weapons:addEntry(_('EMP'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Blast radius'), '1u')
-item:addKeyValue(_('Damage at center'), '160')
-item:addKeyValue(_('Damage at edge'), '30')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, emp_stats)
 item:setLongDescription(_([[The electromagnetic pulse missile (EMP) reproduces the disruptive effects of a nuclear explosion, but without the destructive properties. This causes it to only affect shields within its blast radius, leaving their hulls intact. The EMP missile is also smaller and easier to store than heavy nukes. Many captains (and pirates) prefer EMPs over nukes for these reasons, and use them to knock out targets' shields before closing to disable them with focused beam fire.]]))
 
 local item = weapons:addEntry(_('HVLI'))
-item:addKeyValue(_('Range'), '5.4u')
-item:addKeyValue(_('Damage'), _('10 each, 50 total'))
-item:addKeyValue(_('Burst'), '5')
+item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
+populateMissileStats(item, missile_stat_keys, hvli_stats)
 item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
 Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
@@ -178,22 +253,39 @@ function __fillDefaultDatabaseData()
 	-- Populate the Factions top-level entry.
 	local faction_database = ScienceDatabase():setName(_("database", "Factions"))
 	for name, info in pairs(__faction_info) do
-        local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+		local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+
+		--[[ DB entries use locale-independent internal names.
+		     Sort the list of internal names by localized name to match the DatabaseView list.
+		     Lua in EE sorts by character index (for instance uppercase A > lowercase z), so lowercase the locale name for sorting purposes.
+		     Accents also break sorting, which for example affects the French translation of "Exuari" as "Éxuaris", which are listed last after MSU (USN).
+		     Since this isn't handled in DatabaseView on the C++ side either, this sorting is also "broken" here in the same manner for consistency.
+		     If sorting accented characters in DatabaseView is fixed, it should also be fixed here by replacing accented characters in locale names. ]]--
+		local faction_names2 = {}
 		for name2, info2 in pairs(__faction_info) do
-            if info ~= info2 then
-				local stance = _("stance", "Neutral");
-				for idx, relation in ipairs(info) do
+			table.insert(faction_names2, {string.lower(info2.components.faction_info.locale_name), name2})
+		end
+		-- Sort internal names by localized names
+		table.sort(faction_names2, function(f1, f2) return f1[1] < f2[1] end)
+
+		-- Build the sorted k/v list
+		for i, name2 in ipairs(faction_names2) do
+			local info2 = __faction_info[name2[2]] -- internal name from localized-sorted pair
+			local stance = "-"
+			if info ~= info2 then
+				stance = _("stance", "Neutral")
+				for idx, relation in ipairs(info.components.faction_info) do
 					if relation.other_faction == info2 then
 						if relation.relation == "neutral" then stance = _("stance", "Neutral") end
 						if relation.relation == "enemy" then stance = _("stance", "Enemy") end
 						if relation.relation == "friendly" then stance = _("stance", "Friendly") end
 					end
 				end
-				entry:addKeyValue(info2.components.faction_info.locale_name, stance);
 			end
-        end
-        entry:setLongDescription(info.components.faction_info.description);
-    end
+			entry:addKeyValue(info2.components.faction_info.locale_name, stance);
+		end
+		entry:setLongDescription(info.components.faction_info.description);
+	end
 
     -- Populate the Ships top-level entry.
     local ship_database = ScienceDatabase():setName(_("database", "Ships"))

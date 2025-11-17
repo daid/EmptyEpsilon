@@ -36,6 +36,10 @@ private:
         Resize,
         Drag
     };
+
+    glm::vec2 window_size;
+    glm::vec2 drag_start_mouse;
+    glm::vec2 drag_start_dialog;
     glm::vec2 click_offset;
     ClickState click_state;
 

@@ -1,6 +1,7 @@
 #include "gameMasterScreen.h"
 #include "i18n.h"
 #include "main.h"
+#include "gui/mouseRenderer.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
@@ -245,7 +246,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_help_text = "";
 
-    for (const auto& category : {"Console", "Basic", "GM"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
         {
@@ -254,11 +255,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     }
 
     keyboard_help->setText(keyboard_help_text);
+    gameGlobalInfo->on_gm_click = nullptr;
 }
 
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer")) mouse_renderer->setSpriteImage("mouse.png");
 }
 
 void GameMasterScreen::update(float delta)
@@ -308,6 +311,12 @@ void GameMasterScreen::update(float delta)
         pause_button->setValue(true);
     } else {
         pause_button->setValue(false);
+    }
+
+    if (keys.gm_show_callsigns.getDown())
+    {
+        // Toggle callsigns.
+        main_radar->showCallsigns(!main_radar->getCallsigns());
     }
 
     bool has_object = false;
@@ -438,16 +447,32 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
+        if (mouse_renderer)
+        {
+            if (gameGlobalInfo->on_gm_click_cursor == "")
+                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
+            else
+                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+        }
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
+        if (mouse_renderer)
+        {
+            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
+            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
+            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
+            else mouse_renderer->setSpriteImage("mouse.png");
+        }
     }
 }
 
@@ -525,6 +550,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
+
             for(auto entity : sp::CollisionSystem::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
@@ -586,6 +612,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         gravity->wormhole_target = position;
                 }
             }
+            gameGlobalInfo->on_gm_click = nullptr;
         }
         break;
     case CD_BoxSelect:
@@ -594,6 +621,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
+
             for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
             {
                 auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
@@ -647,6 +675,7 @@ GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
         if (d->player == entity)
             return d;
     auto dialog = new GameMasterChatDialog(chat_layer, main_radar, entity);
+    dialog->setPosition(0, 0)->setSize(300, 300);
     chat_dialog_per_ship.push_back(dialog);
     return dialog;
 }

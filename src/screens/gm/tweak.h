@@ -19,7 +19,7 @@ public:
     std::function<void(sp::ecs::Entity)> remove_component;
 
     GuiButton* add_remove_button;
-    GuiElement* contents;
+    GuiElement* tweaks;
 
     sp::ecs::Entity entity;
 };
@@ -33,6 +33,7 @@ public:
 
 private:
     sp::ecs::Entity entity;
+    GuiElement* content;
     std::vector<GuiTweakPage*> pages;
 };
 

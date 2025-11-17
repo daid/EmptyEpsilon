@@ -12,7 +12,8 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 
-HotkeyMenu::HotkeyMenu()
+HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
+: return_to(return_to)
 {
     new GuiOverlay(this, "", colorConfig.background);
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
@@ -68,12 +69,12 @@ HotkeyMenu::HotkeyMenu()
     // Bottom: Menu navigation
     // Back button to return to the Options menu
     (new GuiScrollText(info_container, "INFO_LABEL", tr("Left Click: Assign input. Middle Click: Add input. Right Click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes.")))->setPosition(10, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT*3);
-    (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this]()
+    (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this, return_to]()
     {
         // Close this menu, stop the music, and return to the main menu.
         destroy();
         soundManager->stopMusic();
-        returnToOptionMenu();
+        returnToOptionMenu(return_to);
     }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
 }
 
@@ -82,7 +83,7 @@ void HotkeyMenu::update(float delta)
     if (keys.escape.getDown())
     {
         destroy();
-        returnToOptionMenu();
+        returnToOptionMenu(return_to);
     }
 }
 

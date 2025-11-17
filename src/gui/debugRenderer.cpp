@@ -73,6 +73,12 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         }
 
         key_order.clear();
+
+        // Update max_size after adding new points
+        max_size = 0;
+        for (auto it : timing_graph_points)
+            max_size = std::max(it.second.size(), max_size);
+
         std::map<string, float> total;
         for(auto& [key, data] : timing_graph_points) {
             float sum = 0;
@@ -98,7 +104,7 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             if (total[key] * scale * 1000.0f < max_size)
                 skip = true;
 
-            for (unsigned int n=0; n<max_size; n++)
+            for (unsigned int n=0; n<max_size && n < timing_graph_points[key].size(); n++)
                 points[n].y -= scale * 1000.0f * timing_graph_points[key][n];
 
             if (!skip) {

@@ -168,8 +168,9 @@ namespace sp::script {
                     lua_geti(L, -1, 1); auto callback = Convert<sp::script::Callback>::fromLua(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 3); auto description = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 4); auto icon = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", description ? description : ""});
+                    result.push_back({callback, label ? label : "", description ? description : "", icon ? icon : ""});
                 }
                 lua_pop(L, 1);
             }
@@ -198,8 +199,9 @@ namespace sp::script {
                     lua_geti(L, -1, 2); auto label = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 3); auto category = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_geti(L, -1, 4); auto description = lua_tostring(L, -1); lua_pop(L, 1);
+                    lua_geti(L, -1, 5); auto icon = lua_tostring(L, -1); lua_pop(L, 1);
                     lua_pop(L, 1);
-                    result.push_back({callback, label ? label : "", category ? category : "", description ? description : ""});
+                    result.push_back({callback, label ? label : "", category ? category : "", description ? description : "", icon ? icon : ""});
                 }
                 lua_pop(L, 1);
             }
@@ -233,12 +235,10 @@ string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
 
 void GameGlobalInfo::reset()
 {
-    if (state_logger)
-        state_logger->destroy();
-
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
+    on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     sp::ecs::Entity::destroyAllEntities();
     main_scenario_script = nullptr;
@@ -345,12 +345,6 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
             main_script_error_count = max_repeated_script_errors;
             LuaConsole::addLog("init() function failed, not going to call update()");
         }
-    }
-
-    if (PreferencesManager::get("game_logs", "1").toInt())
-    {
-        state_logger = new GameStateLogger();
-        state_logger->start();
     }
 }
 

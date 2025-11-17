@@ -942,8 +942,8 @@ function setBorderZones()
 		if random(1,upBound) <= cutOff then
 			positiveBendCount = positiveBendCount + newBend
 		else
-			newBend = -1*newBend
 			negativeBendCount = negativeBendCount + newBend
+			newBend = -1*newBend
 		end
 	end
 	newBend = bendAngle + newBend

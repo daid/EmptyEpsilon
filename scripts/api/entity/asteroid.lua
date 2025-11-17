@@ -57,23 +57,3 @@ function VisualAsteroid()
     }
     return e
 end
-
-local Entity = getLuaEntityFunctionTable()
---- Sets this Asteroid's radius.
---- Defaults to a random value between 110 and 130.
---- Example: asteroid:setSize(150)
-function Entity:setSize(radius)
-    local comp = self.components
-    if comp.physics then comp.physics.size=radius end
-    if comp.mesh_render then comp.mesh_render.scale=radius end
-    if comp.avoid_object then comp.avoid_object.range=radius*2 end
-    return self
-end
---- Returns this Asteroid's radius.
---- Example: asteroid:getSize()
-function Entity:getSize()
-    local comp = self.components
-    if comp.physics then return comp.physics.size end
-    if comp.mesh_render then return comp.mesh_render.scale end
-    return 100.0
-end

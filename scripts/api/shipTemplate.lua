@@ -4,13 +4,13 @@ __player_ship_templates = {}
 __allow_new_player_ships = true
 
 -- Called by the engine to populate the list of player ships that can be spawned.
--- Returns a list of {key, label, description}.
+-- Returns a list of {key, label, description, radar trace}.
 function getSpawnablePlayerShips()
     local result = {}
     if __allow_new_player_ships then
         for i, v in ipairs(__player_ship_templates) do
             if not v.__hidden then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description, v.radar_trace.icon}
             end
         end
     end
@@ -133,8 +133,8 @@ end
 --- If declared, this function hides this ShipTemplate from creation features and the science database.
 --- Hidden templates provide backward compatibility to older scenario scripts.
 --- Example: template:hidden() -- hides this template
-function ShipTemplate:hidden(hidden)
-    self.__hidden = hidden
+function ShipTemplate:hidden()
+    self.__hidden = true
     return self
 end
 --- Sets the default combat AI state for CpuShips created from this ShipTemplate.
@@ -154,6 +154,10 @@ end
 --- ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from scripts/model_data.lua when EmptyEpsilon is launched.
 --- Example: template:setModel("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
 function ShipTemplate:setModel(model_data_name)
+    if not __model_data[model_data_name] then
+        error("Failed to find model: " .. tostring(model_data_name), 2)
+    end
+
     self.__model_data_name = model_data_name
     for k, v in pairs(__model_data[model_data_name]) do
         if string.sub(1, 2) ~= "__" then

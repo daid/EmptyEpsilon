@@ -8,18 +8,29 @@
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_scrolltext.h"
+#include "gui/gui2_button.h"
 
 #include "screenComponents/rotatingModelView.h"
 
 DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 : GuiElement(owner, "DATABASE_VIEW")
 {
-    item_list = new GuiListbox(this, "DATABASE_ITEM_LIST", [this](int index, string value) {
+    setAttribute("layout", "horizontal");
+
+    // Setup the navigation bar
+    GuiElement* navigation_element = new GuiElement(this, "NAVIGATION_BAR");
+    navigation_element->setAttribute("layout", "vertical");
+    navigation_element->setMargins(20, 20, 20, 120)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    back_button = new GuiButton(navigation_element,"BACK_BUTTON", "Back", [this](){
+        selected_entry = sp::ecs::Entity::fromString(back_entry);
+        display();
+    });
+    back_button->setSize(GuiElement::GuiSizeMax, 50)->hide()->setMargins(0, 0, 0, 20);
+    item_list = new GuiListbox(navigation_element, "DATABASE_ITEM_LIST", [this](int index, string value) {
         selected_entry = sp::ecs::Entity::fromString(value);
         display();
     });
-    setAttribute("layout", "horizontal");
-    item_list->setMargins(20, 20, 20, 120)->setSize(navigation_width, GuiElement::GuiSizeMax);
+    item_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     display();
 }
 
@@ -70,12 +81,19 @@ void DatabaseViewComponent::fillListBox()
     {
         if (children.size() != 0)
         {
-            item_list->addEntry(tr("button", "Back"), selected_database->parent.toString());
+            back_button->show();
+            back_entry = selected_database->parent.toString();
         }
         else if(parent_entry)
         {
-            item_list->addEntry(tr("button", "Back"), parent_entry->parent.toString());
+            back_button->show();
+            back_entry = parent_entry->parent.toString();
         }
+    }
+    else
+    {
+        back_button->hide();
+        back_entry = "";
     }
 
     // the indices we actually want to display

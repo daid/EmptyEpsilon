@@ -69,7 +69,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
 
     keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
 
-    for (const auto& category : {"Console", "Basic", "General"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "General")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
             keyboard_general += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
@@ -408,7 +408,11 @@ void CrewStationScreen::showTab(GuiElement* element)
             string keyboard_category = "";
             keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
-        } 
+
+            // Explicitly reset focus after switching tabs, such as when changed
+            // via hotkey.
+            focus(main_panel);
+        }
         else 
         {
             info.element->hide();

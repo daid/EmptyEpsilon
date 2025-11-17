@@ -18,7 +18,7 @@ function Entity:setTemplate(template_name)
     local template = __ship_templates[template_name]
     local comp = self.components
     if template == nil then
-        return error("Failed to find template: " .. template_name)
+        error("Failed to find template: " .. tostring(template_name), 2)
     end
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
@@ -81,7 +81,7 @@ end
 --- This overrides the vessel class name provided by the ShipTemplate.
 --- Example: stbo:setTypeName("Prototype")
 function Entity:setTypeName(type_name)
-    self.components.typename = {type_name=type_name}
+    self.components.typename = {type_name=type_name, localized=type_name}
     return self
 end
 --- Returns this STBO's vessel classification name.
@@ -192,7 +192,11 @@ end
 function Entity:setShieldsMax(...)
     if self.components.shields then
         for i, max in ipairs({...}) do
-            self.components.shields[i].max = max
+            if self.components.shields[i] then
+                self.components.shields[i].max = max
+            else
+                self.components.shields[i] = {max=max, level=max}
+            end
         end
         while select('#', ...) < #self.components.shields do
             self.components.shields[#self.components.shields] = nil

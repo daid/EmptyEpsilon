@@ -1,24 +1,25 @@
 function getSpawnableGMObjects()
     local result = {}
-    result[#result+1] = {function() return Artifact() end, _("create", "Artifact"), _("create", "Various")}
-    result[#result+1] = {function() return WarpJammer() end, _("create", "Warp Jammer"), _("create", "Various")}
-    result[#result+1] = {function() return Mine() end, _("create", "Mine"), _("create", "Various")}
-    result[#result+1] = {function() return SupplyDrop():setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1) end, _("create", "Supply Drop"), _("create", "Various")}
-    result[#result+1] = {function() return Asteroid() end, _("create", "Asteroid"), _("create", "Various")}
-    result[#result+1] = {function() return VisualAsteroid() end, _("create", "Visual Asteroid"), _("create", "Various")}
-    result[#result+1] = {function() return Planet() end, _("create", "Planet"), _("create", "Various")}
-    result[#result+1] = {function() return BlackHole() end, _("create", "BlackHole"), _("create", "Various")}
-    result[#result+1] = {function() return Nebula() end, _("create", "Nebula"), _("create", "Various")}
-    result[#result+1] = {function() return WormHole() end, _("create", "Worm Hole"), _("create", "Various")}
+    result[#result+1] = {function() return Artifact() end, _("create", "Artifact"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return WarpJammer() end, _("create", "Warp jammer"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return Mine() end, _("create", "Mine"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return SupplyDrop():setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1) end, _("create", "Supply drop"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return ScanProbe() end, _("create", "Scan probe"), _("create", "Various"), "", "radar/probe.png"}
+    result[#result+1] = {function() return Asteroid() end, _("create", "Asteroid"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return VisualAsteroid() end, _("create", "Visual asteroid"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return Planet() end, _("create", "Planet"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return BlackHole() end, _("create", "Black hole"), _("create", "Various"), "", "radar/blackHole.png"}
+    result[#result+1] = {function() return Nebula() end, _("create", "Nebula"), _("create", "Various"), "", "Nebula1.png"}
+    result[#result+1] = {function() return WormHole() end, _("create", "Worm hole"), _("create", "Various"), "", "radar/wormHole.png"}
 
     for k, v in pairs(__ship_templates) do
         if not v.__hidden then
             if v.__type == "playership" then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, _("create", "player ship"), v.__description}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, _("create", "Player ship"), v.__description, v.radar_trace.icon}
             elseif v.__type == "station" then
-                result[#result+1] = {__spawnStationFunc(v.typename.type_name), v.typename.localized, _("create", "station"), v.__description}
+                result[#result+1] = {__spawnStationFunc(v.typename.type_name), v.typename.localized, _("create", "Station"), v.__description, v.radar_trace.icon}
             else
-                result[#result+1] = {__spawnCpuShipFunc(v.typename.type_name), v.typename.localized, _("create", "cpu ship"), v.__description}
+                result[#result+1] = {__spawnCpuShipFunc(v.typename.type_name), v.typename.localized, _("create", "CPU ship"), v.__description, v.radar_trace.icon}
             end
         end
     end

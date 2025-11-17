@@ -87,20 +87,12 @@ function init()
     -- Brief the players
     shipyard_human:sendCommsMessage(
         gallipoli,
-        _("goal-incCall", [[Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector F5!
-
-Provide cover while our troop transports board the station to reclaim it.
-
-Good luck, and stay safe.]])
+        string.format(_("goal-incCall", "Captain, it seems that the Kraylor are moving to take the Shangri-La station in sector %s!\n\nProvide cover while our troop transports board the station to reclaim it.\n\nGood luck, and stay safe."),shangri_la:getSectorName())
     )
 
     shipyard_kraylor:sendCommsMessage(
         crusader,
-        _("goal-incCall", [[Greetings, Crusader.
-
-Your mission is to secure the Shangri-La station in sector F5. The feeble humans think it's theirs for the taking.
-
-Support our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!]])
+        string.format(_("goal-incCall", "Greetings, Crusader.\n\nYour mission is to secure the Shangri-La station in sector %s. The feeble humans think it's theirs for the taking.\n\nSupport our glorious soldiers by preventing the heretics from harming our transports, and cleanse all enemy opposition!"),shangri_la:getSectorName())
     )
 
     -- Spawn the first wave

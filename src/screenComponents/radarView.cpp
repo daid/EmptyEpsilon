@@ -4,8 +4,9 @@
 #include "featureDefs.h"
 #include "ecs/query.h"
 #include "systems/collision.h"
-#include "components/collision.h"
 #include "components/beamweapon.h"
+#include "components/collision.h"
+#include "components/docking.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
@@ -49,8 +50,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     missile_tube_controls(nullptr),
     view_position(0.0f,0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -78,8 +80,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     missile_tube_controls(nullptr),
     view_position(0.0f, 0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     distance(distance),
     long_range(false),
     show_ghost_dots(false),
@@ -101,16 +104,29 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
-    //Hacky, when not relay and we have a ship, center on it.
-    auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
-        if (auto_center_on_my_ship) {
-            view_position = transform->getPosition();
-        }
-        if (auto_rotate_on_my_ship) {
-            view_rotation = transform->getRotation() + 90;
-        }
+    // Auto-center on the target, defaulting to my_spaceship on creation.
+    auto transform = auto_center_target.getComponent<sp::Transform>();
+
+    // If target has no transform, it might be docked inside another ship.
+    // Otherwise, if the target doesn't physically exist, fall back to
+    // my_spaceship if possible.
+    if (!transform)
+    {
+        if (auto dp = auto_center_target.getComponent<DockingPort>())
+            transform = dp->target.getComponent<sp::Transform>();
+        else if (!transform && my_spaceship)
+            auto_center_target = my_spaceship;
+        else
+            auto_center_target = sp::ecs::Entity();
     }
+
+    if (transform && auto_center_on_ship)
+    {
+        view_position = transform->getPosition();
+        if (auto_rotate_on_ship)
+            view_rotation = transform->getRotation() + 90;
+    }
+
     if (auto_distance)
     {
         distance = long_range ? 30000.0f : 5000.0f;
@@ -669,6 +685,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         flags |= RadarRenderSystem::FlagShortRange;
     if (show_game_master_data)
         flags |= RadarRenderSystem::FlagGM;
+    if (show_callsigns)
+        flags |= RadarRenderSystem::FlagCallsigns;
+
     glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
