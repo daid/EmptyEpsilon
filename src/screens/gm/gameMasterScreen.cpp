@@ -80,13 +80,20 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->layout.fill_width = false;
     box_selection_overlay->hide();
 
-    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {
-        if (!value)
-            engine->setGameSpeed(1.0f);
-        else
-            engine->setGameSpeed(0.0f);
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
+        if (!value) engine->setGameSpeed(std::powf(2, game_time_scale->getSelectionIndex()));
+        else engine->setGameSpeed(0.0f);
     });
-    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(250, 50);
+    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
+
+    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [this](int index, string value) {
+        engine->setGameSpeed(std::powf(2, index));
+    });
+    game_time_scale
+        ->setOptions({"1x", "2x", "4x", "8x", "16x"})
+        ->setSelectionIndex(0)
+        ->setPosition(170, 20, sp::Alignment::TopLeft)
+        ->setSize(100, 50);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
@@ -304,9 +311,20 @@ void GameMasterScreen::update(float delta)
     }
 
     if (keys.pause.getDown())
+    {
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+    }
 
-    pause_button->setValue(engine->getGameSpeed() == 0.0f);
+    if (engine->getGameSpeed() == 0.0f)
+    {
+        pause_button->setValue(true);
+        game_time_scale->disable();
+    }
+    else
+    {
+        pause_button->setValue(false);
+        game_time_scale->enable();
+    }
 
     if (keys.gm_show_callsigns.getDown())
     {
