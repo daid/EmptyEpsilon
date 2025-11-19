@@ -49,7 +49,8 @@ end
 --- If this ship has weapon tubes but lacks beam weapons and is out of weapons stock, it attempts to Retreat to a weapons restock target within long-range radar range.
 --- Example: ship:orderRoaming()
 function Entity:orderRoaming()
-    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location={0, 0}} end
+    if self.components.transform == nil then return self end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "roaming", order_target_location=self.components.transform.position} end
     return self
 end
 function Entity:orderRoamingAt(x, y)
