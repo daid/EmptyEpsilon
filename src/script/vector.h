@@ -83,10 +83,12 @@ template<> struct Convert<glm::u8vec4> {
 
             if (str.startswith("#") && str.length() == 7)
             {
-                result.r = static_cast<uint8_t>(str.substr(1, 2).toInt(16));
-                result.g = static_cast<uint8_t>(str.substr(3, 2).toInt(16));
-                result.b = static_cast<uint8_t>(str.substr(5, 2).toInt(16));
-            } else {
+                result.r = static_cast<uint8_t>(str.substr(1, 3).toInt(16));
+                result.g = static_cast<uint8_t>(str.substr(3, 5).toInt(16));
+                result.b = static_cast<uint8_t>(str.substr(5, 7).toInt(16));
+            }
+            else
+            {
                 std::vector<string> parts = str.split(",");
                 if (parts.size() == 3)
                 {
