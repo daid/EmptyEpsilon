@@ -65,7 +65,7 @@ protected:
     virtual void updateTarget();
     virtual void runOrders();
     virtual void runAttack(sp::ecs::Entity target);
-    virtual void flyTowards(glm::vec2 target, float keep_distance = 100.0);
+    virtual void flyTowards(glm::vec2 target, float keep_distance = 0.0);
     virtual void flyFormation(sp::ecs::Entity target, glm::vec2 offset);
 
     sp::ecs::Entity findBestTarget(glm::vec2 position, float radius);
