@@ -241,8 +241,15 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
         textureManager.getTexture("texture/fire_ring.png")->bind();
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
+
+        // Disable backface culling to render fire ring on both sides
+        glDisable(GL_CULL_FACE);
+
         std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
+
+        // Re-enable backface culling
+        glEnable(GL_CULL_FACE);
     }
 }
 
