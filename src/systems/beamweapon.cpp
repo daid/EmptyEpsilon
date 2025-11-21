@@ -242,14 +242,9 @@ void BeamWeaponSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Bea
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)quad.data());
         glVertexAttribPointer(texcoords.get(), 2, GL_FLOAT, GL_FALSE, sizeof(VertexAndTexCoords), (GLvoid*)((char*)quad.data() + sizeof(glm::vec3)));
 
-        // Disable backface culling to render fire ring on both sides
-        glDisable(GL_CULL_FACE);
-
-        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, std::begin(indices));
-
-        // Re-enable backface culling
-        glEnable(GL_CULL_FACE);
+        // Draw two quads with opposite winding order for double-sided rendering
+        std::initializer_list<uint16_t> indices = { 0, 1, 2, 2, 3, 0, 0, 3, 2, 2, 1, 0 };
+        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_SHORT, std::begin(indices));
     }
 }
 
