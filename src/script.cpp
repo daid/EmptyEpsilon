@@ -1300,6 +1300,16 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("addGMFunction", &luaAddGMFunction);
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
+    /// void Script()
+    /// Creates an additional script.
+    /// Use this to set up Lua scripts to execute alongside the current script.
+    /// Use Script()'s setVariable function to pass values to the additional script.
+    /// Use Script()'s run function to pass the script's filename and begin running it.
+    /// Additional scripts run until they are destroyed, and can flag themselves for self-destruction by invoking destroyScript() in their update() loop.
+    /// Example:
+    /// local script = Script()
+    /// script:setVariable("callsign", player:getCallSign()) -- passes the value into the variable "callsign" in the additional script
+    /// script:run("some_script.lua") -- runs scripts/some_script.lua
     env.setGlobal("Script", &luaCreateAdditionalScript);
 
     /// void setCommsMessage(string message)

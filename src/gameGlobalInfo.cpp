@@ -114,11 +114,30 @@ void GameGlobalInfo::update(float delta)
             main_script_error_count = 0;
         }
     }
-    for(auto& as : additional_scripts) {
+
+    // Run each additional script alongside the main script.
+    for (auto& as : additional_scripts)
+    {
+        // Track this additional script's environment, so we can add it to
+        // the list of those to marked for destruction if it calls
+        // destroyScript() in its update() loop.
+        sp::script::Environment::setCurrentEnvironment(as.get());
         auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
             LuaConsole::checkResult(res);
     }
+    sp::script::Environment::setCurrentEnvironment(nullptr);
+
+    // Remove additional scripts that were marked for destruction.
+    additional_scripts.erase(
+        std::remove_if(additional_scripts.begin(), additional_scripts.end(),
+            [](const std::unique_ptr<sp::script::Environment>& script)
+            {
+                return script->isMarkedForDestruction();
+            }
+        ),
+        additional_scripts.end()
+    );
 }
 
 string GameGlobalInfo::getNextShipCallsign()
