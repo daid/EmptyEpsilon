@@ -280,12 +280,34 @@ static int luaCreateAdditionalScript(lua_State* L)
             return 0;
         });
         lua_setfield(L, -2, "run");
-        lua_pushcfunction(L, [](lua_State* LL) {
+        lua_pushcfunction(L, [](lua_State* LL)
+        {
             auto ptr = reinterpret_cast<sp::script::Environment**>(luaL_checkudata(LL, 1, "ScriptObject"));
             if (!ptr) return 0;
             string name = luaL_checkstring(LL, 2);
-            string value = luaL_checkstring(LL, 3);
-            (*ptr)->setGlobal(name, value);
+            auto ltype = lua_type(LL, 3);
+            // Strings
+            if (ltype == LUA_TSTRING)
+            {
+                string value = lua_tostring(LL, 3);
+                (*ptr)->setGlobal(name, value);
+            }
+            // Entities, as light userdata
+            else if (ltype == LUA_TLIGHTUSERDATA)
+            {
+                sp::ecs::Entity entity = sp::script::Convert<sp::ecs::Entity>::fromLua(LL, 3);
+                if (entity) (*ptr)->setGlobal(name, entity);
+                else return luaL_error(LL, "Userdata was passed to setVariable, but it wasn't an entity");
+            }
+            // Numbers
+            else if (ltype == LUA_TNUMBER)
+            {
+                float value = lua_tonumber(LL, 3);
+                (*ptr)->setGlobal(name, value);
+            }
+            else
+                return luaL_error(LL, "setVariable expects a string, float, or entity as the second argument");
+
             lua_settop(LL, 1);
             return 1;
         });
