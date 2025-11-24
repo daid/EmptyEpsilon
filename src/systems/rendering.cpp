@@ -59,12 +59,23 @@ glm::mat4 calculateModelMatrix(glm::vec2 position, float rotation, glm::vec3 mes
 ShaderRegistry::ScopedShader lookUpShader(MeshRenderComponent& mrc)
 {
     auto shader_id = ShaderRegistry::Shaders::Object;
-    if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
-        shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
-    else if (mrc.getTexture() && mrc.getSpecularTexture())
-        shader_id = ShaderRegistry::Shaders::ObjectSpecular;
-    else if (mrc.getTexture() && mrc.getIlluminationTexture())
-        shader_id = ShaderRegistry::Shaders::ObjectIllumination;
+    if (mrc.getNormalTexture()) {
+        if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectSpecularIlluminationNormal;
+        else if (mrc.getTexture() && mrc.getSpecularTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectSpecularNormal;
+        else if (mrc.getTexture() && mrc.getIlluminationTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectIlluminationNormal;
+        else
+            shader_id = ShaderRegistry::Shaders::ObjectNormal;
+    } else {
+        if (mrc.getTexture() && mrc.getSpecularTexture() && mrc.getIlluminationTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
+        else if (mrc.getTexture() && mrc.getSpecularTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectSpecular;
+        else if (mrc.getTexture() && mrc.getIlluminationTexture())
+            shader_id = ShaderRegistry::Shaders::ObjectIllumination;
+    }
 
     return ShaderRegistry::ScopedShader(shader_id);
 }
@@ -85,6 +96,12 @@ void activateAndBindMeshTextures(MeshRenderComponent& mrc)
         glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
         mrc.getIlluminationTexture()->bind();
     }
+
+    if (mrc.getNormalTexture())
+    {
+        glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::NormalMap));
+        mrc.getNormalTexture()->bind();
+    }
 }
 
 void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
@@ -92,8 +109,9 @@ void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
     gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
     gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+    gl::ScopedVertexAttribArray tangent(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-    mrc.getMesh()->render(positions.get(), texcoords.get(), normals.get());
+    mrc.getMesh()->render(positions.get(), texcoords.get(), normals.get(), tangent.get());
 
     // wut iz?
     if (mrc.getSpecularTexture() || mrc.getIlluminationTexture())
@@ -227,12 +245,13 @@ void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
         gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
         gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+        gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
         Mesh* m = Mesh::getMesh("mesh/sphere.obj");
-        m->render(positions.get(), texcoords.get(), normals.get());
+        m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         if (ee.electrical) {
             glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(glm::scale(explosion_matrix, glm::vec3(.5f))));
-            m->render(positions.get(), texcoords.get(), normals.get());
+            m->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
     }
     std::vector<glm::vec3> vertices(4 * ee.max_quad_count);

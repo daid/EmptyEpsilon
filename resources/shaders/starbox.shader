@@ -1,40 +1,40 @@
 [vertex]
 
 // Program inputs
-uniform mat4 projection;
-uniform mat4 view;
-uniform float scale;
+uniform mat4 u_projection;
+uniform mat4 u_view;
+uniform float u_scale;
 
 // Per-vertex inputs
-attribute vec3 position;
+attribute vec3 a_position;
 
 // Per-vertex outputs
-varying vec3 texcoords;
+varying vec3 v_texcoords;
 
 void main()
 {
     // For texcoords, undo flipping the Z axis and rotation around X axis
     // from code.
-    texcoords = vec3(position.x, position.z, -position.y);
+    v_texcoords = vec3(a_position.x, a_position.z, -a_position.y);
 
     // We get rid of the translation component, so the box gets always centered around the camera.
-    gl_Position = projection * mat4(mat3(view)) * vec4(scale * position, 1.);
+    gl_Position = u_projection * mat4(mat3(u_view)) * vec4(u_scale * a_position, 1.);
 }
 
 [fragment]
 
 // Program inputs
-uniform samplerCube global_starbox;
-uniform samplerCube local_starbox;
-uniform float starbox_lerp;
+uniform samplerCube u_global_starbox;
+uniform samplerCube u_local_starbox;
+uniform float u_starbox_lerp;
 
 // Per-fragment inputs.
-varying vec3 texcoords;
+varying vec3 v_texcoords;
 
 void main()
 {
-    vec4 global_color = textureCube(global_starbox, texcoords);
-    vec4 local_color = textureCube(local_starbox, texcoords);
+    vec4 global_color = textureCube(u_global_starbox, v_texcoords);
+    vec4 local_color = textureCube(u_local_starbox, v_texcoords);
 
-    gl_FragColor = mix(global_color, local_color, starbox_lerp);
+    gl_FragColor = mix(global_color, local_color, u_starbox_lerp);
 }

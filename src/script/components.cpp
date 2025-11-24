@@ -263,6 +263,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MeshRenderComponent, texture.name, "texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, specular_texture.name, "specular_texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
+    BIND_MEMBER_NAMED(MeshRenderComponent, normal_texture.name, "normal_texture");
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
     sp::script::ComponentHandler<BillboardRenderer>::name("billboard_render");

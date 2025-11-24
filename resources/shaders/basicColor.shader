@@ -1,24 +1,24 @@
 [vertex]
 
 // Program inputs
-uniform mat4 projection;
-uniform mat4 view;
-uniform mat4 model;
+uniform mat4 u_projection;
+uniform mat4 u_view;
+uniform mat4 u_model;
 
 // Per-vertex inputs
-attribute vec3 position;
+attribute vec3 a_position;
 
 void main()
 {
-    gl_Position = projection * view * model * vec4(position, 1.0);
+    gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 }
 
 [fragment]
 
 // Program inputs
-uniform vec4 color;
+uniform vec4 u_color;
 
 void main()
 {
-    gl_FragColor = color;
+    gl_FragColor = u_color;
 }
