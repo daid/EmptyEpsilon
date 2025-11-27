@@ -8,6 +8,15 @@
 #include "random.h"
 #include "mesh.h"
 
+
+struct ModelDataVertex
+{
+    float position[3];
+    float normal[3];
+    float uv[2];
+};
+
+
 namespace
 {
     inline int32_t readInt(const P<ResourceStream>& stream)
@@ -68,7 +77,7 @@ Mesh::Mesh(std::vector<MeshVertex>&& unindexed_vertices)
     }
 }
 
-void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t normal_attrib)
+void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t normal_attrib, int32_t tangent_attrib)
 {
     if (vertices.empty() || vbo_ibo[0] == NO_BUFFER || (!indices.empty() && vbo_ibo[1] == NO_BUFFER))
         return;
@@ -84,6 +93,8 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
     if (texcoords_attrib != -1)
         glVertexAttribPointer(texcoords_attrib, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, uv));
 
+    if (tangent_attrib != -1)
+        glVertexAttribPointer(tangent_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, tangent));
 
     if (!indices.empty())
     {
@@ -296,14 +307,55 @@ Mesh* Mesh::getMesh(const string& filename)
 
     }else if (filename.endswith(".model"))
     {
-        mesh_vertices.resize(readInt(stream));
-        stream->read(mesh_vertices.data(), sizeof(MeshVertex) * mesh_vertices.size());
+        std::vector<ModelDataVertex> model_data_vertices;
+        model_data_vertices.resize(readInt(stream));
+        stream->read(model_data_vertices.data(), sizeof(ModelDataVertex) * model_data_vertices.size());
+        mesh_vertices.resize(model_data_vertices.size());
+        for(auto idx=0U; idx<model_data_vertices.size(); idx++) {
+            mesh_vertices[idx].position[0] = model_data_vertices[idx].position[0];
+            mesh_vertices[idx].position[1] = model_data_vertices[idx].position[1];
+            mesh_vertices[idx].position[2] = model_data_vertices[idx].position[2];
+            mesh_vertices[idx].normal[0] = model_data_vertices[idx].normal[0];
+            mesh_vertices[idx].normal[1] = model_data_vertices[idx].normal[1];
+            mesh_vertices[idx].normal[2] = model_data_vertices[idx].normal[2];
+            mesh_vertices[idx].uv[0] = model_data_vertices[idx].uv[0];
+            mesh_vertices[idx].uv[1] = model_data_vertices[idx].uv[1];
+        }
     }else{
         LOG(ERROR) << "Unknown mesh format: " << filename;
     }
 
     if (!mesh_vertices.empty())
     {
+        // Calculate tangent
+        for(auto idx=0U; idx<mesh_vertices.size(); idx+=3) {
+            auto p0 = glm::vec3(mesh_vertices[idx+0].position[0], mesh_vertices[idx+0].position[1], mesh_vertices[idx+0].position[2]);
+            auto p1 = glm::vec3(mesh_vertices[idx+1].position[0], mesh_vertices[idx+1].position[1], mesh_vertices[idx+1].position[2]);
+            auto p2 = glm::vec3(mesh_vertices[idx+2].position[0], mesh_vertices[idx+2].position[1], mesh_vertices[idx+2].position[2]);
+            auto uv0 = glm::vec2(mesh_vertices[idx+0].uv[0], mesh_vertices[idx+0].uv[1]);
+            auto uv1 = glm::vec2(mesh_vertices[idx+1].uv[0], mesh_vertices[idx+1].uv[1]);
+            auto uv2 = glm::vec2(mesh_vertices[idx+2].uv[0], mesh_vertices[idx+2].uv[1]);
+
+            glm::vec3 edge1 = p1 - p0;
+            glm::vec3 edge2 = p2 - p0;
+            glm::vec2 deltaUV1 = uv1 - uv0;
+            glm::vec2 deltaUV2 = uv2 - uv0;
+
+            float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+
+            auto tangent = glm::vec3(
+                    f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x),
+                    f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y),
+                    f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z));
+
+            for(int n=0; n<3; n++) {
+                mesh_vertices[idx+n].tangent[0] = tangent.x;
+                mesh_vertices[idx+n].tangent[1] = tangent.y;
+                mesh_vertices[idx+n].tangent[2] = tangent.z;
+            }
+        }
+
+
         ret = new Mesh(std::move(mesh_vertices));
         meshMap[filename] = ret;
     }
