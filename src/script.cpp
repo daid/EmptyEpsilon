@@ -233,11 +233,6 @@ static string luaGetScenarioVariation()
     return "None";
 }
 
-static void luaOnNewPlayerShip(sp::script::Callback callback)
-{
-    gameGlobalInfo->on_new_player_ship = callback;
-}
-
 static void luaGlobalMessage(string message, std::optional<float> timeout)
 {
     gameGlobalInfo->global_message = message;
@@ -1135,7 +1130,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// [DEPRECATED]
     /// As getScenarioSetting("variation").
     env.setGlobal("getScenarioVariation", &luaGetScenarioVariation);
-    env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
     /// void globalMessage(string message, std::optional<float> timeout)
     /// Displays a message on the main screens of all active player ships.
     /// The message appears for 5 seconds, but new messages immediately replace any displayed message.

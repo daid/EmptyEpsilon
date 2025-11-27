@@ -20,6 +20,7 @@ function Entity:setTemplate(template_name)
     if template == nil then
         error("Failed to find template: " .. tostring(template_name), 2)
     end
+    local isNewPlayerShip = comp.player_control and not comp.physics
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
@@ -68,6 +69,12 @@ function Entity:setTemplate(template_name)
             comp.shields.rear_auto_repair_per_second = 0.005
         end
         if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
+    end
+    if isNewPlayerShip then
+        local res = {pcall(__on_new_player_ship, self)}
+        if not res[1] then
+            print("onNewPlayerShip callback function error:", table.unpack(res, 2))
+        end
     end
     return self
 end
