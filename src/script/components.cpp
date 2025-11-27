@@ -324,9 +324,19 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplosionEffect, electrical);
 
     sp::script::ComponentHandler<Sfx>::name("sfx");
+    sp::script::ComponentHandler<Sfx>::members["sound"] = {
+        [](lua_State* L, const void* ptr) {
+            auto p = reinterpret_cast<const Sfx*>(ptr);
+            return sp::script::Convert<string>::toLua(L, p->sound);
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<Sfx*>(ptr);
+            p->sound = sp::script::Convert<string>::fromLua(L, -1);
+            p->played = false;
+        }
+    };
     BIND_MEMBER(Sfx, sound);
-    BIND_MEMBER(Sfx, power);
-    // BIND_MEMBER(Sfx, played);
+    BIND_MEMBER(Sfx, volume);
+    BIND_MEMBER(Sfx, pitch);
 
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
