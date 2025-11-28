@@ -114,6 +114,8 @@ void GameGlobalInfo::update(float delta)
             main_script_error_count = 0;
         }
     }
+    script_threads.insert(script_threads.end(), new_script_threads.begin(), new_script_threads.end());
+    new_script_threads.clear();
     for(auto it = script_threads.begin(); it != script_threads.end(); )
     {
         auto res = (*it)->resume(delta);

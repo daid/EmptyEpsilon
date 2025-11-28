@@ -1108,7 +1108,7 @@ static void luaStartThread(sp::script::Callback callback)
     auto res = callback.callCoroutine();
     LuaConsole::checkResult(res);
     if (res.isOk() && res.value())
-        gameGlobalInfo->script_threads.push_back(res.value());
+        gameGlobalInfo->new_script_threads.push_back(res.value());
 }
 
 static int luaYield(lua_State* lua)

@@ -123,6 +123,7 @@ public:
     std::unique_ptr<sp::script::Environment> script_environment_base;
     std::unique_ptr<sp::script::Environment> main_scenario_script;
     std::vector<sp::script::CoroutinePtr> script_threads;
+    std::vector<sp::script::CoroutinePtr> new_script_threads;
 private:
     sp::ecs::Entity victory_faction;
     int callsign_counter;
