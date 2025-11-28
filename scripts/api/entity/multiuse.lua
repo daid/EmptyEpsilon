@@ -107,7 +107,7 @@ end
 --- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
 --- Example: beamfx:setTarget(target,0,0,0)
 function Entity:setTarget(a, b, c, d)
-    if self.components.move_to then
+    if self.components.allow_radar_link then -- Scan probe, order it to move the the target.
         self.components.move_to = {target={a, b}}
     end
     if self.components.beam_effect then
