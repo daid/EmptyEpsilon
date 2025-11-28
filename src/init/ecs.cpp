@@ -32,6 +32,7 @@
 #include "multiplayer/missiletubes.h"
 #include "multiplayer/internalrooms.h"
 #include "multiplayer/orbit.h"
+#include "multiplayer/sfx.h"
 #include "multiplayer/spin.h"
 #include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
@@ -51,6 +52,7 @@
 #include "systems/missilesystem.h"
 #include "systems/maneuvering.h"
 #include "systems/energysystem.h"
+#include "systems/sfx.h"
 #include "systems/selfdestruct.h"
 #include "systems/basicmovement.h"
 #include "systems/gravity.h"
@@ -116,7 +118,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SelfDestructReplication>();
-    //Sfx
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SfxReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShipLogReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
@@ -142,6 +144,7 @@ void initSystemsAndComponents()
     engine->registerSystem<CoolantSystem>();
     engine->registerSystem<ShipSystemsSystem>();
     engine->registerSystem<SelfDestructSystem>();
+    engine->registerSystem<SfxSystem>();
     engine->registerSystem<BasicMovementSystem>();
     engine->registerSystem<GravitySystem>();
     engine->registerSystem<InternalCrewSystem>();

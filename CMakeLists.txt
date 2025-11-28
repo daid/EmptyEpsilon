@@ -396,6 +396,8 @@ set(MAIN_SOURCES
     src/systems/warpsystem.cpp
     src/systems/jumpsystem.h
     src/systems/jumpsystem.cpp
+    src/systems/sfx.h
+    src/systems/sfx.cpp
     src/systems/shieldsystem.h
     src/systems/shieldsystem.cpp
     src/systems/damage.h
@@ -486,6 +488,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/sfx.h
+    src/multiplayer/sfx.cpp
     src/multiplayer/spin.h
     src/multiplayer/spin.cpp
     src/multiplayer/moveto.h
