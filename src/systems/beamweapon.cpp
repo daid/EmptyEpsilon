@@ -30,23 +30,23 @@ void BeamWeaponSystem::update(float delta)
     if (!game_server) return;
     if (delta <= 0.0f) return;
 
-    for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, Target, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
+    for(auto [entity, beamsys, target, transform, reactor, docking_port] : sp::ecs::Query<BeamWeaponSys, sp::ecs::optional<Target>, sp::Transform, sp::ecs::optional<Reactor>, sp::ecs::optional<DockingPort>>()) {
         auto warp = entity.getComponent<WarpDrive>();
 
         for(auto& mount : beamsys.mounts) {
             if (mount.cooldown > 0.0f)
                 mount.cooldown -= delta * beamsys.getSystemEffectiveness();
-            if (!target.entity) continue;
+            if (!target || !target->entity) continue;
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && Faction::getRelation(entity, target.entity) == FactionRelation::Enemy && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            if (mount.range > 0.0f && Faction::getRelation(entity, target->entity) == FactionRelation::Enemy && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
-                if (auto target_transform = target.entity.getComponent<sp::Transform>()) {
+                if (auto target_transform = target->entity.getComponent<sp::Transform>()) {
                     // Get the angle to the target.
                     auto diff = target_transform->getPosition() - (transform.getPosition() + rotateVec2(glm::vec2(mount.position.x, mount.position.y), transform.getRotation()));
                     float distance = glm::length(diff);
-                    if (auto physics = target.entity.getComponent<sp::Physics>())
+                    if (auto physics = target->entity.getComponent<sp::Physics>())
                         distance -= physics->getSize().x;
 
                     // We also only care if the target is within no more than its
@@ -103,7 +103,7 @@ void BeamWeaponSystem::update(float delta)
 
                             auto hit_location = target_transform->getPosition();
                             auto r = 100.0f;
-                            if (auto physics = target.entity.getComponent<sp::Physics>()) {
+                            if (auto physics = target->entity.getComponent<sp::Physics>()) {
                                 hit_location -= glm::normalize(target_transform->getPosition() - transform.getPosition()) * physics->getSize().x;
                                 r = physics->getSize().x;
                             }
@@ -112,7 +112,7 @@ void BeamWeaponSystem::update(float delta)
                             e.addComponent<sp::Transform>(transform);
                             auto& be = e.addComponent<BeamEffect>();
                             be.source = entity;
-                            be.target = target.entity;
+                            be.target = target->entity;
                             be.source_offset = mount.position;
                             be.target_location = hit_location;
                             be.beam_texture = mount.texture;
@@ -125,7 +125,7 @@ void BeamWeaponSystem::update(float delta)
                                 auto local_hit_location = hit_location - target_transform->getPosition();
                                 be.target_offset = glm::vec3(local_hit_location.x + random(-r/2.0f, r/2.0f), local_hit_location.y + random(-r/2.0f, r/2.0f), random(-r/4.0f, r/4.0f));
 
-                                auto shield = target.entity.getComponent<Shields>();
+                                auto shield = target->entity.getComponent<Shields>();
                                 if (shield && shield->active)
                                     be.target_offset = glm::normalize(be.target_offset) * r;
                                 else
@@ -136,7 +136,7 @@ void BeamWeaponSystem::update(float delta)
                             DamageInfo info(entity, mount.damage_type, hit_location);
                             info.frequency = beamsys.frequency;
                             info.system_target = beamsys.system_target;
-                            DamageSystem::applyDamage(target.entity, mount.damage, info);
+                            DamageSystem::applyDamage(target->entity, mount.damage, info);
                         }
                     }
                 }
@@ -370,7 +370,6 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         // If the beam is cooling down, flash and fade the arc color.
         glm::u8vec4 color = Tween<glm::u8vec4>::linear(std::max(0.0f, mount.cooldown), 0, mount.cycle_time, mount.arc_color, mount.arc_color_fire);
 
-        
         // Initialize variables from the beam's data.
         float beam_direction = mount.direction;
         float beam_arc = mount.arc;
