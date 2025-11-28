@@ -1105,10 +1105,10 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms","To which waypoint should we dispatch the reinforcements?"))
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms","Waypoint %s"),n),function()
+                    addCommsReply(string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n)),function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to assist at waypoint %s"),ship:getCallSign(),n))
+                            setCommsMessage(string.format(_("stationAssist-comms","We have dispatched %s to assist at waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)))
                         else
                             setCommsMessage(_("needRep-comms","Not enough reputation!"))
                         end

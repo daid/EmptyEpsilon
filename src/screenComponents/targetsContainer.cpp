@@ -80,16 +80,15 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
 
     if (allow_waypoint_selection)
     {
-        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
-            for(size_t n=0; n<lrr->waypoints.size(); n++)
+        if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
+            for(size_t n=0; n<waypoints->waypoints.size(); n++)
             {
-                if (glm::length2(lrr->waypoints[n] - position) < max_range*max_range)
+                if (glm::length2(waypoints->waypoints[n].position - position) < max_range*max_range)
                 {
-                    if (!target || glm::length2(position - lrr->waypoints[n]) < glm::length2(position - target_position))
+                    if (!target || glm::length2(position - waypoints->waypoints[n].position) < glm::length2(position - target_position))
                     {
                         clear();
-                        waypoint_selection_index = n;
-                        waypoint_selection_position = lrr->waypoints[n];
+                        waypoint_selection_index = waypoints->waypoints[n].id;
                         return;
                     }
                 }
@@ -101,20 +100,17 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
 
 int TargetsContainer::getWaypointIndex()
 {
-    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    if (!lrr || waypoint_selection_index < 0 || waypoint_selection_index >= int(lrr->waypoints.size()))
-        waypoint_selection_index = -1;
-    else if (lrr->waypoints[waypoint_selection_index] != waypoint_selection_position)
+    auto waypoints = my_spaceship.getComponent<Waypoints>();
+    if (!waypoints || waypoint_selection_index < 0 || !waypoints->get(waypoint_selection_index))
         waypoint_selection_index = -1;
     return waypoint_selection_index;
 }
 
 void TargetsContainer::setWaypointIndex(int index)
 {
-    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    waypoint_selection_index = index;
-    if (lrr && index >= 0 && index < (int)lrr->waypoints.size())
-        waypoint_selection_position = lrr->waypoints[index];
+    auto waypoints = my_spaceship.getComponent<Waypoints>();
+    if (waypoints && waypoints->get(index))
+        waypoint_selection_index = index;
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)

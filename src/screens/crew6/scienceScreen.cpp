@@ -189,10 +189,10 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Probe view button
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
-        auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-        if (value && lrr && lrr->radar_view_linked_entity)
+        auto rl = my_spaceship.getComponent<RadarLink>();
+        if (value && rl && rl->linked_entity)
         {
-            auto transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
+            auto transform = rl->linked_entity.getComponent<sp::Transform>();
             if (transform) {
                 science_radar->hide();
                 probe_radar->show();
@@ -239,6 +239,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     science_radar->setVisible(lrr != nullptr);
     if (!lrr)
         return;
+    auto rl = my_spaceship.getComponent<RadarLink>();
 
     float view_distance = science_radar->getDistance();
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
@@ -258,9 +259,9 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         zoom_label->setText(tr("scienceButton", "Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
     }
 
-    if (probe_view_button->getValue() && lrr->radar_view_linked_entity)
+    if (probe_view_button->getValue() && rl && rl->linked_entity)
     {
-        auto probe_transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
+        auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
@@ -308,10 +309,10 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
-    if (lrr->radar_view_linked_entity)
+    if (rl && rl->linked_entity)
     {
         probe_view_button->enable();
-        auto probe_transform = lrr->radar_view_linked_entity.getComponent<sp::Transform>();
+        auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
         if (probe_transform)
             probe_radar->setViewPosition(probe_transform->getPosition());
     }
@@ -487,24 +488,26 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     else if (targets.getWaypointIndex() >= 0)
     {
         sidebar_pager->hide();
-        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+        if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                auto position_diff = lrr->waypoints[targets.getWaypointIndex()] - transform->getPosition();
-                float distance = glm::length(position_diff);
-                float heading = vec2ToAngle(position_diff) - 270;
+                if (auto waypoint_position = waypoints->get(targets.getWaypointIndex())) {
+                    auto position_diff = waypoint_position.value() - transform->getPosition();
+                    float distance = glm::length(position_diff);
+                    float heading = vec2ToAngle(position_diff) - 270;
 
-                while(heading < 0) heading += 360;
+                    while(heading < 0) heading += 360;
 
-                float rel_velocity = 0.0;
-                if (auto physics = my_spaceship.getComponent<sp::Physics>())
-                    rel_velocity = -dot(physics->getVelocity(), position_diff / distance);
+                    float rel_velocity = 0.0;
+                    if (auto physics = my_spaceship.getComponent<sp::Physics>())
+                        rel_velocity = -dot(physics->getVelocity(), position_diff / distance);
 
-                if (std::abs(rel_velocity) < 0.01f)
-                    rel_velocity = 0.0;
+                    if (std::abs(rel_velocity) < 0.01f)
+                        rel_velocity = 0.0;
 
-                info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-                info_heading->setValue(string(int(heading)));
-                info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                    info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
+                    info_heading->setValue(string(int(heading)));
+                    info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                }
             }
         }
     }

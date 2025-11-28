@@ -112,6 +112,8 @@ function ShipTemplate:setType(template_type)
         self.scan_probe_launcher = {}
         self.hacking_device = {}
         self.long_range_radar = {}
+        self.radar_link = {}
+        self.waypoints = {}
         self.comms_transmitter = {}
         self.comms_receiver = nil
         self.ai_controller = nil

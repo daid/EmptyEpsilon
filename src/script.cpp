@@ -1044,27 +1044,23 @@ void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
 
 static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && lrr->waypoints.size() < 9) {
-        lrr->waypoints.push_back({x, y});
-        lrr->waypoints_dirty = true;
+    if (auto wp = ship.getComponent<Waypoints>()) {
+        wp->addNew({x, y});
     }
 }
 
 static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-        lrr->waypoints.erase(lrr->waypoints.begin() + index);
-        lrr->waypoints_dirty = true;
+    auto wp = ship.getComponent<Waypoints>();
+    if (wp && index >= 0 && index < int(wp->waypoints.size())) {
+        wp->waypoints.erase(wp->waypoints.begin() + index);
+        wp->dirty = true;
     }
 }
 static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-        lrr->waypoints[index] = {x, y};
-        lrr->waypoints_dirty = true;
+    if (auto wp = ship.getComponent<Waypoints>()) {
+        wp->move(index, {x, y});
     }
 }
 static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship) {

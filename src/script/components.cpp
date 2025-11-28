@@ -347,13 +347,18 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
-    BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
-    BIND_ARRAY_DIRTY_FLAG(LongRangeRadar, waypoints, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, x, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, y, waypoints_dirty);
-    BIND_MEMBER(LongRangeRadar, on_probe_link);
-    BIND_MEMBER(LongRangeRadar, on_probe_unlink);
+
+    sp::script::ComponentHandler<Waypoints>::name("waypoints");
+    BIND_ARRAY_DIRTY_FLAG(Waypoints, waypoints, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "id", id, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "x", position.x, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "y", position.y, dirty);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
+
+    sp::script::ComponentHandler<RadarLink>::name("radar_link");
+    BIND_MEMBER(RadarLink, linked_entity);
+    BIND_MEMBER(RadarLink, on_link);
+    BIND_MEMBER(RadarLink, on_unlink);
     sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
     BIND_MEMBER(AllowRadarLink, owner);
 

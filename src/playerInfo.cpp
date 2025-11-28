@@ -842,33 +842,28 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             glm::vec2 position{};
             packet >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && lrr->waypoints.size() < 9) {
-                lrr->waypoints.push_back(position);
-                lrr->waypoints_dirty = true;
+            auto wp = ship.getComponent<Waypoints>();
+            if (wp) {
+                wp->addNew(position);
             }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
-            int32_t index;
-            packet >> index;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints.erase(lrr->waypoints.begin() + index);
-                lrr->waypoints_dirty = true;
+            int32_t id;
+            packet >> id;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->remove(id);
             }
         }
         break;
     case CMD_MOVE_WAYPOINT:
         {
-            int32_t index;
+            int32_t id;
             glm::vec2 position{};
-            packet >> index >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints[index] = position;
-                lrr->waypoints_dirty = true;
+            packet >> id >> position;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->move(id, position);
             }
         }
         break;
@@ -968,13 +963,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> target;
 
             // TODO: Check if this probe is ours
-            if (auto lrr = ship.getComponent<LongRangeRadar>()) {
-                auto old = lrr->radar_view_linked_entity;
-                if (lrr->on_probe_link && target)
-                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(ship, target));
-                lrr->radar_view_linked_entity = target;
-                if (lrr->on_probe_unlink && old)
-                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(ship, old));
+            if (auto rl = ship.getComponent<RadarLink>()) {
+                auto old = rl->linked_entity;
+                if (rl->on_link && target)
+                    LuaConsole::checkResult(rl->on_link.call<void>(ship, target));
+                rl->linked_entity = target;
+                if (rl->on_unlink && old)
+                    LuaConsole::checkResult(rl->on_unlink.call<void>(ship, old));
             }
         }
         break;

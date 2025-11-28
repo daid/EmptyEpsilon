@@ -100,10 +100,12 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<OrbitReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlayerControlReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WaypointsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanProbeLauncherReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShareShortRangeRadarReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<AllowRadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarBlockReplication>();
