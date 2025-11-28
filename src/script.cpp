@@ -1103,6 +1103,19 @@ static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     //TODO
 }
 
+static void luaStartThread(sp::script::Callback callback)
+{
+    auto res = callback.callCoroutine();
+    LuaConsole::checkResult(res);
+    if (res.isOk() && res.value())
+        gameGlobalInfo->script_threads.push_back(res.value());
+}
+
+static int luaYield(lua_State* lua)
+{
+    return lua_yield(lua, 0);
+}
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -1119,6 +1132,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("createEntity", &luaCreateEntity);
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
+    env.setGlobal("startThread", &luaStartThread);
+    env.setGlobal("yield", &luaYield);
     
     env.setGlobal("createClass", &luaCreateClass);
 

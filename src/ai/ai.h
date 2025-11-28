@@ -22,7 +22,7 @@ protected:
     float missile_fire_delay = 0;
     bool has_missiles = false;
     bool has_beams = false;
-    float beam_weapon_range = 1000;
+    float beam_weapon_range = 0.0f;
     float short_range = 5000;
     float long_range = 30000;
     float relay_range = 60000;
@@ -35,10 +35,10 @@ protected:
         Side,
         Rear
     };
-    EWeaponDirection weapon_direction;
-    EMissileWeapons best_missile_type;
+    EWeaponDirection weapon_direction = EWeaponDirection::Front;
+    EMissileWeapons best_missile_type = EMissileWeapons::MW_Homing;
 
-    float update_target_delay;
+    float update_target_delay = 0.0f;
 
     PathPlanner pathPlanner;
 public:

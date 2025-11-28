@@ -114,6 +114,16 @@ void GameGlobalInfo::update(float delta)
             main_script_error_count = 0;
         }
     }
+    for(auto it = script_threads.begin(); it != script_threads.end(); )
+    {
+        auto res = (*it)->resume(delta);
+        LuaConsole::checkResult(res);
+        if (res.isErr() || !res.value()) {
+            it = script_threads.erase(it);
+        } else {
+            ++it;
+        }
+    }
     for(auto& as : additional_scripts) {
         auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
