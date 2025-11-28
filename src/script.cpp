@@ -966,13 +966,14 @@ void luaCommandSetSystemPowerRequest(sp::ecs::Entity ship, ShipSystem::Type syst
 }
 void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type system, float coolant_level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetSystemCoolantRequest(system, coolant_level); return; }
-    auto coolant = ship.getComponent<Coolant>();
-    if (coolant) {
+    if (auto coolant = ship.getComponent<Coolant>())
+    {
         coolant_level = std::clamp(coolant_level, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
         auto sys = ShipSystem::get(ship, system);
-        if (sys && coolant_level >= 0.0f && coolant_level <= 3.0f) {
+        if (sys && coolant_level >= 0.0f && coolant_level <= coolant->max_coolant_per_system)
             sys->coolant_request = coolant_level;
-        }
+        else
+            LOG(Warning, "Invalid system or coolant level passed via Lua commandSetSystemCoolantRequest()");
     }
 }
 void luaCommandDock(sp::ecs::Entity ship, sp::ecs::Entity station) {
