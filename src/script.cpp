@@ -1183,6 +1183,12 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
     /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
     env.setGlobal("sectorToXY", &luaSectorToXY);
+    /// bool isInsideZone(x, y, zone_entity)
+    /// Checks whether the given x/y coordinates are within the specified zone.
+    /// Example:
+    /// square_zone = Zone():setPoints(-2000, 2000, 2000, 2000, 2000, -2000, -2000, -2000) -- draw a 4U square zone around coordinates 1000, 1000
+    /// local inside_zone = isInsideZone(1000, 1000, square_zone) -- true, because coordinates 1000, 1000 are inside of the zone
+    /// local outside_zone = isInsideZone(10000, 10000, square_zone) -- false, because coordinates 10000, 10000 are outside of the zone
     env.setGlobal("isInsideZone", &luaIsInsideZone);
     /// void setBanner(string banner)
     /// Displays a scrolling banner containing the given text on the cinematic and top-down views.
