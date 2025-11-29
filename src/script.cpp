@@ -629,12 +629,17 @@ static void luaShutdownGame()
 
 static void luaPauseGame()
 {
-    engine->setGameSpeed(0.0);
+    engine->setGameSpeed(0.0f);
 }
 
 static void luaUnpauseGame()
 {
-    engine->setGameSpeed(1.0);
+    engine->setGameSpeed(1.0f);
+}
+
+static bool luaGameIsPaused()
+{
+    return engine->getGameSpeed() == 0.0f;
 }
 
 static void luaPlaySoundFile(string filename)
@@ -1236,6 +1241,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Use to unpause a headless server, which doesn't have access to the GM screen.
     /// Example: unpauseGame()
     env.setGlobal("unpauseGame", &luaUnpauseGame);
+    /// bool gameIsPaused()
+    /// Returns true if the game is paused.
+    /// Example: local is_paused = gameIsPaused()
+    env.setGlobal("gameIsPaused", &luaGameIsPaused);
     /// void playSoundFile(string filename)
     /// Plays the given audio file on the server.
     /// Paths are relative to the resources/ directory.
