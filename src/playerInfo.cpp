@@ -729,9 +729,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            auto sys = ShipSystem::get(ship, system);
-            if (sys && request >= 0.0f && request <= 3.0f)
-                sys->power_request = request;
+
+            if (auto sys = ShipSystem::get(ship, system))
+                sys->power_request = std::clamp(request, 0.0f, 3.0f);
         }
         break;
     case CMD_SET_SYSTEM_COOLANT_REQUEST:
@@ -740,12 +740,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request;
             packet >> system >> request;
 
-            auto coolant = ship.getComponent<Coolant>();
-            if (coolant) {
-                request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
-                auto sys = ShipSystem::get(ship, system);
-                if (sys)
-                    sys->coolant_request = request;
+            if (auto coolant = ship.getComponent<Coolant>())
+            {
+                if (auto sys = ShipSystem::get(ship, system))
+                    sys->coolant_request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
             }
         }
         break;
