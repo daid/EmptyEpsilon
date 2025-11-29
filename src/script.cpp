@@ -1186,7 +1186,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// bool isInsideZone(x, y, zone_entity)
     /// Checks whether the given x/y coordinates are within the specified zone.
     /// Example:
-    /// square_zone = Zone():setPoints(-2000, 2000, 2000, 2000, 2000, -2000, -2000, -2000) -- draw a 4U square zone around coordinates 1000, 1000
+    /// square_zone = Zone():setPoints(-2000, 2000, 2000, 2000, 2000, -2000, -2000, -2000) -- draw a 4U square zone around coordinates 0, 0
     /// local inside_zone = isInsideZone(1000, 1000, square_zone) -- true, because coordinates 1000, 1000 are inside of the zone
     /// local outside_zone = isInsideZone(10000, 10000, square_zone) -- false, because coordinates 10000, 10000 are outside of the zone
     env.setGlobal("isInsideZone", &luaIsInsideZone);
