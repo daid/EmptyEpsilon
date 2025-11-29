@@ -331,7 +331,8 @@ static int luaSectorToXY(lua_State* L)
     if(sector.length() < 2){
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
-        return 2;
+        lua_pushboolean(L, false);
+        return 3;
     }
 
     // Y axis is complicated
@@ -344,7 +345,8 @@ static int luaSectorToXY(lua_State* L)
         } catch(const std::exception& e) {
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         if(a1 > char('a')){
             // Case with two lowercase letters (zz10) counting down towards the North
@@ -361,7 +363,8 @@ static int luaSectorToXY(lua_State* L)
         }catch(const std::exception& e){
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         y = (alphaPart - char('F')) * sector_size;
     }
@@ -369,7 +372,8 @@ static int luaSectorToXY(lua_State* L)
     x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
     lua_pushnumber(L, x);
     lua_pushnumber(L, y);
-    return 2;
+    lua_pushboolean(L, true);
+    return 3;
 }
 
 static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
