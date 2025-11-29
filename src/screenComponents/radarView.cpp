@@ -802,6 +802,19 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 50), n-view_rotation,
             string(n), 15.0f, main_font, {255, 255, 255, 255});
     }
+    
+    if (show_target_heading)
+    {
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 0),
+            radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 30),
+            {255, 255, 255, 255});
+            
+        renderer.drawSprite("redicule.png", radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 50), 48);
+        renderer.drawRotatedText(
+            radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 85), target_heading-view_rotation,
+            string(fmodf(target_heading + 360.f, 360.f), 1), 20.0f, main_font, {255, 255, 255, 255});
+    }
 }
 
 glm::vec2 GuiRadarView::worldToScreen(glm::vec2 world_position)

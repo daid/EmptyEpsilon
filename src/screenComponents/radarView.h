@@ -58,6 +58,8 @@ private:
     bool show_callsigns;
     bool show_heading_indicators;
     bool show_game_master_data;
+    float target_heading;
+    bool show_target_heading = false;
     float range_indicator_step_size;
     uint8_t background_alpha;
     ERadarStyle style;
@@ -105,6 +107,8 @@ public:
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
     float getViewRotation() { return view_rotation; }
+    GuiRadarView* showTargetHeading(bool value) { show_target_heading = value; return this; }
+    GuiRadarView* setTargetHeading(float value) { show_target_heading = true; target_heading = value; return this; }
 
     glm::vec2 worldToScreen(glm::vec2 world_position);
     glm::vec2 screenToWorld(glm::vec2 screen_position);

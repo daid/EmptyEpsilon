@@ -3,6 +3,7 @@
 
 #include "gui/gui2_overlay.h"
 #include "gui/joystickConfig.h"
+#include "screenComponents/radarView.h"
 
 class GuiKeyValueDisplay;
 class GuiLabel;
@@ -16,9 +17,9 @@ private:
 
     GuiElement* warp_controls;
     GuiElement* jump_controls;
-    GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
+    GuiRadarView* radar;
 public:
     HelmsScreen(GuiContainer* owner);
 
