@@ -17,6 +17,7 @@ private:
 
     GuiElement* warp_controls;
     GuiElement* jump_controls;
+    GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
     GuiRadarView* radar;
