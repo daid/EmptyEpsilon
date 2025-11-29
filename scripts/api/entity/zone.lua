@@ -56,9 +56,15 @@ end
 ---   zone:setLocalSkybox("purple") -- sets the local skybox but doesn't modify the fade distance
 function Entity:setLocalSkybox(skybox, transition)
     if self.components.zone then
+        -- Values without corresponding image sets result in pink skyboxes!
+        if skybox ~= "" then
+            self.components.zone.skybox = skybox
+        end
+
         transition = transition or self.components.zone.skybox_fade_distance
-        self.components.zone.skybox = skybox
-        self.components.zone.skybox_fade_distance = transition
+        if transition >= 0 then
+            self.components.zone.skybox_fade_distance = transition
+        end
     end
     return self
 end
