@@ -331,7 +331,8 @@ static int luaSectorToXY(lua_State* L)
     if(sector.length() < 2){
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
-        return 2;
+        lua_pushboolean(L, false);
+        return 3;
     }
 
     // Y axis is complicated
@@ -344,7 +345,8 @@ static int luaSectorToXY(lua_State* L)
         } catch(const std::exception& e) {
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         if(a1 > char('a')){
             // Case with two lowercase letters (zz10) counting down towards the North
@@ -361,7 +363,8 @@ static int luaSectorToXY(lua_State* L)
         }catch(const std::exception& e){
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         y = (alphaPart - char('F')) * sector_size;
     }
@@ -369,7 +372,8 @@ static int luaSectorToXY(lua_State* L)
     x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
     lua_pushnumber(L, x);
     lua_pushnumber(L, y);
-    return 2;
+    lua_pushboolean(L, true);
+    return 3;
 }
 
 static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
@@ -1166,10 +1170,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("getSectorName", &luaGetSectorName);
     /// glm::vec2 sectorToXY(string sector_name)
     /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
+    /// If the sector name is invalid, this returns coordinates 0, 0. This function also returns a third optional Boolean value that indicates whether the sector name was valid.
     /// Examples:
-    /// x,y = sectorToXY("A0") -- x = -100000, y = -100000
-    /// x,y = sectorToXY("zz-23") -- x = -560000, y = -120000
-    /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
+    /// x, y = sectorToXY("F5") -- x = 0, y = 0
+    /// x, y = sectorToXY("A0") -- x = -100000, y = -100000
+    /// x, y = sectorToXY("zz-23") -- x = -560000, y = -120000
+    /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
+    /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
     env.setGlobal("sectorToXY", &luaSectorToXY);
     env.setGlobal("isInsideZone", &luaIsInsideZone);
     /// void setBanner(string banner)
