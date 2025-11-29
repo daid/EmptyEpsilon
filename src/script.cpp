@@ -1170,10 +1170,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("getSectorName", &luaGetSectorName);
     /// glm::vec2 sectorToXY(string sector_name)
     /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
+    /// If the sector name is invalid, this returns coordinates 0, 0. This function also returns a third optional Boolean value that indicates whether the sector name was valid.
     /// Examples:
-    /// x,y = sectorToXY("A0") -- x = -100000, y = -100000
-    /// x,y = sectorToXY("zz-23") -- x = -560000, y = -120000
-    /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
+    /// x, y = sectorToXY("F5") -- x = 0, y = 0
+    /// x, y = sectorToXY("A0") -- x = -100000, y = -100000
+    /// x, y = sectorToXY("zz-23") -- x = -560000, y = -120000
+    /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
+    /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
     env.setGlobal("sectorToXY", &luaSectorToXY);
     env.setGlobal("isInsideZone", &luaIsInsideZone);
     /// void setBanner(string banner)
