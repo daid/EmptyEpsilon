@@ -21,7 +21,7 @@ local Entity = getLuaEntityFunctionTable()
 --- Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
 --- Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
 function Entity:setPoints(...)
-    if self.components.zone then 
+    if self.components.zone then
         local coords = {...}
         local points = {}
         for n=1,#coords,2 do
@@ -49,6 +49,18 @@ end
 function Entity:getLabel()
     if self.components.zone then return self.components.zone.label end
     return ""
+end
+--- Sets this Zone's local skybox. Optionally also sets this zone's skybox fade transition distance, which defaults to 0.
+--- Examples:
+---   zone:setLocalSkybox("purple", 250) -- sets this zone's local skybox to "purple" with a 0.25U transition distance
+---   zone:setLocalSkybox("purple") -- sets the local skybox but doesn't modify the fade distance
+function Entity:setLocalSkybox(skybox, transition)
+    if self.components.zone then
+        transition = transition or self.components.zone.skybox_fade_distance
+        self.components.zone.skybox = skybox
+        self.components.zone.skybox_fade_distance = transition
+    end
+    return self
 end
 --- Returns whether the given SpaceObject is inside this Zone.
 --- Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
