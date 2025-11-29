@@ -1189,8 +1189,8 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: setBanner("You will soon die!")
     env.setGlobal("setBanner", &luaSetBanner);
     /// void setDefaultSkybox(string skybox)
-    /// Sets the default skybox to show, "default" is the default skybox. See resources/skybox for other options.
-    /// Example: setDefaultSkybox("You will soon die!")
+    /// Sets the default skybox image set to use in 3D viewports. Each image set is a directory in resources/skybox containing top.png, right.png, left.png, front.png, bottom.png, and back.png images. Defaults to "default".
+    /// Example: setDefaultSkybox("simulation")
     env.setGlobal("setDefaultSkybox", &luaSetDefaultSkybox);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
