@@ -162,7 +162,7 @@ void SinglePilotScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 1.0f;
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
