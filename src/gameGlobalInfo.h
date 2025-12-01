@@ -65,9 +65,6 @@ public:
     //When active, all comms request goto the GM as chat, and normal scripted converstations are disabled. This does not disallow player<->player ship comms.
     bool intercept_all_comms_to_gm;
 
-    //Callback called when a new player ship is created on the ship selection screen.
-    sp::script::Callback on_new_player_ship;
-
     std::function<void(glm::vec2)> on_gm_click;
     const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
     string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;

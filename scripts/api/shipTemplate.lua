@@ -2,6 +2,7 @@
 __ship_templates = {}
 __player_ship_templates = {}
 __allow_new_player_ships = true
+__on_new_player_ship = function() end
 
 -- Called by the engine to populate the list of player ships that can be spawned.
 -- Returns a list of {key, label, description, radar trace}.
@@ -25,6 +26,16 @@ function allowNewPlayerShips(enabled)
         __allow_new_player_ships = enabled
     end
     return __allow_new_player_ships
+end
+
+function onNewPlayerShip(callback)
+	if type(callback) == "function" then
+		__on_new_player_ship = callback
+	elseif callback == nil then
+		__on_new_player_ship = function() end
+	else
+		error("bad callback value: expected function or nil, got " .. type(callback), 2)
+	end
 end
 
 --- A ShipTemplate defines the base functionality, stats, models, and other details for the ShipTemplateBasedObjects created from it.
