@@ -13,7 +13,7 @@
 GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    slider = new GuiSlider(this, id + "_SLIDER", 5000.0, 50000.0, 10000.0, nullptr);
+    slider = new GuiSlider(this, id + "_SLIDER", 50000.0, 5000.0, 10000.0, nullptr);
     slider->setPosition(0, -50, sp::Alignment::BottomLeft)->setSize(50, GuiElement::GuiSizeMax);
 
     charge_bar = new GuiProgressbar(this, id + "_CHARGE", 0.0, 50000.0, 0.0);
@@ -93,7 +93,8 @@ void GuiJumpControls::onUpdate()
             float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
             // Get joystick axis map value (-1.0 to 1.0)
             float axis_value = keys.helms_set_jump.getValue();
-            // The jump slider's min/max range values seem to be inverted.
+            // The jump slider's min/max range values are inverted because the
+            // gui2_slider is coded for max to be on the bottom.
             // getRangeMin returns the jump range's max value, and vice versa.
             const float slider_range = slider->getRangeMin() - slider->getRangeMax();
             // Translate the slider's value on its min/max range to a value
@@ -103,17 +104,17 @@ void GuiJumpControls::onUpdate()
             if (key_change != 0.0f)
                 value = std::clamp(value + 1000.0f * key_change, slider->getRangeMin(), slider->getRangeMax());
             if (keys.helms_increase_jump_100.getDown())
-                value = std::min(value + 100.0f, slider->getRangeMax());
+                value = std::min(value + 100.0f, slider->getRangeMin());
             if (keys.helms_decrease_jump_100.getDown())
-                value = std::max(value - 100.0f, slider->getRangeMin());
+                value = std::max(value - 100.0f, slider->getRangeMax());
             if (keys.helms_increase_jump_1k.getDown())
-                value = std::min(value + 1000.0f, slider->getRangeMax());
+                value = std::min(value + 1000.0f, slider->getRangeMin());
             if (keys.helms_decrease_jump_1k.getDown())
-                value = std::max(value - 1000.0f, slider->getRangeMin());
+                value = std::max(value - 1000.0f, slider->getRangeMax());
             if (keys.helms_min_jump.getDown())
-                value = slider->getRangeMin();
-            if (keys.helms_max_jump.getDown())
                 value = slider->getRangeMax();
+            if (keys.helms_max_jump.getDown())
+                value = slider->getRangeMin();
 
             if (axis_value != slider_axis_pos && (axis_value != 0.0f || set_active))
             {
