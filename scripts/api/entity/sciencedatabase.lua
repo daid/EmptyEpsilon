@@ -70,14 +70,12 @@ end
 function Entity:getParentId()
     if self.components.science_database then
         -- Entries without valid parents are top-level entries.
-        if not self.components.science_database.parent:isValid() then
-            return 0
+        if self.components.science_database.parent and self.components.science_database.parent:isValid() then
+            return self.components.science_database.parent
         end
-
-        return self.components.science_database.parent
     end
 
-    return nil
+    return 0
 end
 --- Creates a ScienceDatabase entry with the given name as a child of this ScienceDatabase entry.
 --- Returns the newly created entry. Chaining addEntry() creates a child of the new child entry.
