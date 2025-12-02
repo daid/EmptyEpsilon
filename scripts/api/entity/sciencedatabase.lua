@@ -69,9 +69,8 @@ end
 --- Example: entry:getParentId() -- returns the parent entry's ID
 function Entity:getParentId()
     if self.components.science_database then
-        -- Is there a better way to identify when an entity doesn't exist?
-        -- Or should a ScienceDatabase's `parent` entity be itself if no parent exists, closer to legacy behavior? 
-        if tostring(self.components.science_database.parent) == "entity: 0xffffffffffffffff" then
+        -- Entries without valid parents are top-level entries.
+        if not self.components.science_database.parent:isValid() then
             return 0
         end
 
