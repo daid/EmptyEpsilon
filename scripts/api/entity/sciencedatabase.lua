@@ -118,7 +118,7 @@ end
 --- Returns true if this ScienceDatabase entry has child entries.
 --- Example: entry:hasEntries()
 function Entity:hasEntries()
-    return #getEntries() > 0
+    return #self:getEntries() > 0
 end
 --- Adds a key/value pair to this ScienceDatabase entry's key/value data.
 --- The Database view's center column displays all key/value data when its entry is selected.
