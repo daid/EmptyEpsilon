@@ -154,15 +154,22 @@ end
 --- Example: entry:removeKey("Legs") -- removes all key/value data with the key "Legs"
 function Entity:removeKey(key)
     if not self.components.science_database then return self end
-    local n=1
+
+    local n = 1
     while n <= #self.components.science_database do
-        while self.components.science_database[n].key == key do
-            for m=n,#self.components.science_database-1 do
-                self.components.science_database[n] = {key=self.components.science_database[n+1].key, value=self.components.science_database[n+1].value}
+        -- If this entry's key matches the key to be removed, move the remaining entries down one place and remove the last one.
+        if self.components.science_database[n].key == key then
+            for m = n, #self.components.science_database - 1 do
+                self.components.science_database[m] = {
+                    key = self.components.science_database[m + 1].key,
+                    value = self.components.science_database[m + 1].value
+                }
             end
+
             self.components.science_database[#self.components.science_database] = nil
+        else
+            n = n + 1
         end
-        n = n + 1
     end
     return self
 end
