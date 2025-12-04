@@ -183,7 +183,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                     LOG(Info, "Player selected game master mode, which has a control code.");
                     focus(password_dialog->entry);
                     password_dialog->open(tr("Enter the GM control code:"), "",
-                        [this](string code)
+                        [](string code)
                         {
                             return code == gameGlobalInfo->gm_control_code;
                         },
@@ -222,7 +222,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 LOG(Info, "Player selected spectate mode, which has a control code.");
                 focus(password_dialog->entry);
                 password_dialog->open(tr("Enter the GM control code:"), "",
-                    [this](string code)
+                    [](string code)
                     {
                         return code == gameGlobalInfo->gm_control_code;
                     },
@@ -260,7 +260,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 LOG(Info, "Player selected cinematic view mode, which has a control code.");
                 focus(password_dialog->entry);
                 password_dialog->open(tr("Enter the GM control code:"), "",
-                    [this](string code)
+                    [](string code)
                     {
                         return code == gameGlobalInfo->gm_control_code;
                     },
@@ -298,7 +298,7 @@ ShipSelectionScreen::ShipSelectionScreen()
                 LOG(Info, "Player selected top-down 3D view mode, which has a control code.");
                 focus(password_dialog->entry);
                 password_dialog->open(tr("Enter the GM control code:"), "",
-                    [this](string code)
+                    [](string code)
                     {
                         return code == gameGlobalInfo->gm_control_code;
                     },
@@ -677,7 +677,7 @@ void ShipSelectionScreen::joinPlayerShip(string entity_string)
             right_container->hide();
             // Show the control code entry dialog.
             focus(password_dialog->entry);
-            password_dialog->open(tr("Enter this ship's control code:"), my_player_info->last_ship_password, [this, ship, pc](string code) {
+            password_dialog->open(tr("Enter this ship's control code:"), my_player_info->last_ship_password, [ship, pc](string code) {
                 return ship && pc->control_code == code;
             }, [this, ship, pc](){
                 my_player_info->commandSetShip(ship);
