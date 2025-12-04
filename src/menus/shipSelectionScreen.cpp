@@ -172,80 +172,168 @@ ShipSelectionScreen::ShipSelectionScreen()
     right_panel->setAttribute("margin", "0, 0, 0, 20");
 
     (new GuiLabel(right_panel, "DIRECT_OPTIONS_LABEL", tr("Additional views and options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->setAttribute("margin", "0, 0, 0, 10");
-    // Game master button
+
+    // Game Master button
     if (game_server) {
-        auto game_master_button = new GuiButton(right_panel, "GAME_MASTER_BUTTON", tr("Game master"), [this]() {
-            if (gameGlobalInfo->gm_control_code.length() > 0)
+        auto game_master_button = new GuiButton(right_panel, "GAME_MASTER_BUTTON", tr("Game master"),
+            [this]()
             {
-                LOG(INFO) << "Player selected gm mode, which has a control code.";
-                focus(password_dialog->entry);
-                password_dialog->open(tr("Enter the GM control code:"), "", [this](string code) {
-                    return code == gameGlobalInfo->gm_control_code;
-                }, [this](){
+                if (gameGlobalInfo->gm_control_code.length() > 0)
+                {
+                    LOG(Info, "Player selected game master mode, which has a control code.");
+                    focus(password_dialog->entry);
+                    password_dialog->open(tr("Enter the GM control code:"), "",
+                        [this](string code)
+                        {
+                            return code == gameGlobalInfo->gm_control_code;
+                        },
+                        [this]()
+                        {
+                            my_player_info->commandSetShip({});
+                            destroy();
+                            new GameMasterScreen(getRenderLayer());
+                        },
+                        [this]()
+                        {
+                            left_container->show();
+                            right_container->show();
+                        }
+                    );
+                    left_container->hide();
+                    right_container->hide();
+                }
+                else
+                {
                     my_player_info->commandSetShip({});
                     destroy();
                     new GameMasterScreen(getRenderLayer());
-                }, [this](){
-                    left_container->show();
-                    right_container->show();
-                });
-                left_container->hide();
-                right_container->hide();
-            } else {
-                my_player_info->commandSetShip({});
-                destroy();
-                new GameMasterScreen(getRenderLayer());
+                }
             }
-        });
-        game_master_button->setSize(GuiElement::GuiSizeMax, 50);
+        );
+        game_master_button->setSize(GuiElement::GuiSizeMax, 50.0f);
     }
 
     // Spectator view button
-    auto spectator_button = new GuiButton(right_panel, "SPECTATOR_BUTTON", tr("Spectate (view all)"), [this]() {
-        if (gameGlobalInfo->gm_control_code.length() > 0)
+    auto spectator_button = new GuiButton(right_panel, "SPECTATOR_BUTTON", tr("Spectator map (view all)"),
+        [this]()
         {
-            LOG(INFO) << "Player selected Spectate mode, which has a control code.";
-            focus(password_dialog->entry);
-            password_dialog->open(tr("Enter the GM control code:"), "", [this](string code) {
-                return code == gameGlobalInfo->gm_control_code;
-            }, [this](){
+            if (gameGlobalInfo->gm_control_code.length() > 0)
+            {
+                LOG(Info, "Player selected spectate mode, which has a control code.");
+                focus(password_dialog->entry);
+                password_dialog->open(tr("Enter the GM control code:"), "",
+                    [this](string code)
+                    {
+                        return code == gameGlobalInfo->gm_control_code;
+                    },
+                    [this]()
+                    {
+                        my_player_info->commandSetShip({});
+                        destroy();
+                        new SpectatorScreen(getRenderLayer());
+                    },
+                    [this]()
+                    {
+                        left_container->show();
+                        right_container->show();
+                    }
+                );
+                left_container->hide();
+                right_container->hide();
+            }
+            else
+            {
                 my_player_info->commandSetShip({});
                 destroy();
                 new SpectatorScreen(getRenderLayer());
-            }, [this](){
-                left_container->show();
-                right_container->show();
-            });
-            left_container->hide();
-            right_container->hide();
-        } else {
-            my_player_info->commandSetShip({});
-            destroy();
-            new SpectatorScreen(getRenderLayer());
+            }
         }
-    });
-    spectator_button->setSize(GuiElement::GuiSizeMax, 50);
+    );
+    spectator_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    // Spectator view button
-    auto cinematic_button = new GuiButton(right_panel, "", tr("Cinematic view"), [this]() {
-        my_player_info->commandSetShip({});
-        destroy();
-        new CinematicViewScreen(getRenderLayer());
-    });
-    cinematic_button->setSize(GuiElement::GuiSizeMax, 50);
+    // Cinematic view button
+    auto cinematic_button = new GuiButton(right_panel, "", tr("Cinematic view"),
+        [this]()
+        {
+            if (gameGlobalInfo->gm_control_code.length() > 0)
+            {
+                LOG(Info, "Player selected cinematic view mode, which has a control code.");
+                focus(password_dialog->entry);
+                password_dialog->open(tr("Enter the GM control code:"), "",
+                    [this](string code)
+                    {
+                        return code == gameGlobalInfo->gm_control_code;
+                    },
+                    [this]()
+                    {
+                        my_player_info->commandSetShip({});
+                        destroy();
+                        new CinematicViewScreen(getRenderLayer());
+                    },
+                    [this]()
+                    {
+                        left_container->show();
+                        right_container->show();
+                    }
+                );
+                left_container->hide();
+                right_container->hide();
+            }
+            else
+            {
+                my_player_info->commandSetShip({});
+                destroy();
+                new CinematicViewScreen(getRenderLayer());
+            }
+        }
+    );
+    cinematic_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Top-down 3D view button
-    auto topdown_button = new GuiToggleButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"), [this](bool value) {
-        my_player_info->commandSetShip({});
-        destroy();
-        new TopDownScreen(getRenderLayer());
-    });
-    topdown_button->setSize(GuiElement::GuiSizeMax, 50);
+    auto topdown_button = new GuiToggleButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"),
+        [this](bool value)
+        {
+            if (gameGlobalInfo->gm_control_code.length() > 0)
+            {
+                LOG(Info, "Player selected top-down 3D view mode, which has a control code.");
+                focus(password_dialog->entry);
+                password_dialog->open(tr("Enter the GM control code:"), "",
+                    [this](string code)
+                    {
+                        return code == gameGlobalInfo->gm_control_code;
+                    },
+                    [this]()
+                    {
+                        my_player_info->commandSetShip({});
+                        destroy();
+                        new TopDownScreen(getRenderLayer());
+                    },
+                    [this]()
+                    {
+                        left_container->show();
+                        right_container->show();
+                    }
+                );
+                left_container->hide();
+                right_container->hide();
+            }
+            else
+            {
+                my_player_info->commandSetShip({});
+                destroy();
+                new TopDownScreen(getRenderLayer());
+            }
+        }
+    );
+    topdown_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    (new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"), [this]() {
-        new OptionsMenu(OptionsMenu::ReturnTo::ShipSelection);
-        this->destroy();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiButton(right_panel, "OPEN_OPTIONS", tr("mainMenu", "Options"),
+        [this]()
+        {
+            new OptionsMenu(OptionsMenu::ReturnTo::ShipSelection);
+            this->destroy();
+        }
+    ))->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     if (game_server)
     {
@@ -299,7 +387,7 @@ ShipSelectionScreen::ShipSelectionScreen()
             extra_settings_panel->show();
             container->hide();
         });
-        extra_settings_button->setSize(GuiElement::GuiSizeMax, 50);
+        extra_settings_button->setSize(GuiElement::GuiSizeMax, 50.0f);
     }
 
     right_panel->setSize(GuiElement::GuiSizeMax, 30 + right_panel->children.size() * 50);
