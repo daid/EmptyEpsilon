@@ -1139,6 +1139,13 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("_", &luaTranslate);
     
     env.setGlobal("createEntity", &luaCreateEntity);
+    /// table getEntitiesWithComponent(string component_name)
+    /// Returns a table of entities that have the given component type.
+    /// Component names are typically lowercased versions of their C++ equivalents with words separated by underscores instead of by case.
+    /// These names do not necessarily match their ShipSystem equivalents. For example, "beam_weapons" is the Lua component name to be used here, but "beamweapons" is the separate Lua ShipSystem name.
+    /// Examples:
+    ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
+    ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
     env.setGlobal("startThread", &luaStartThread);
