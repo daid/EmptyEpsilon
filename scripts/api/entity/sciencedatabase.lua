@@ -35,6 +35,24 @@ function ScienceDatabase()
     return e
 end
 
+--- table getScienceDatabases()
+--- Returns a 1-indexed table of all parentless ScienceDatabase entries.
+--- Examples:
+---   sdb = getScienceDatabases() -- returns a table of top-level entries
+---   sdb[1]:getName() -- returns "Natural" in the default science database
+function getScienceDatabases()
+    local sdb = {}
+    local entities = getEntitiesWithComponent("science_database") or {}
+
+    for idx, e in ipairs(entities) do
+        if e:getParentId() == 0 then
+            table.insert(sdb, e)
+        end
+    end
+
+    return #sdb > 0 and sdb or nil
+end
+
 --- Returns this ScienceDatabase entry's displayed name.
 --- Example: entry:getName()
 function Entity:getName()
@@ -50,7 +68,14 @@ end
 --- Returns 0 if the entry has no parent.
 --- Example: entry:getParentId() -- returns the parent entry's ID
 function Entity:getParentId()
-    if self.components.science_database then return self.components.science_database.parent end
+    if self.components.science_database then
+        -- Entries without valid parents are top-level entries.
+        if self.components.science_database.parent and self.components.science_database.parent:isValid() then
+            return self.components.science_database.parent
+        end
+    end
+
+    return 0
 end
 --- Creates a ScienceDatabase entry with the given name as a child of this ScienceDatabase entry.
 --- Returns the newly created entry. Chaining addEntry() creates a child of the new child entry.
@@ -91,7 +116,7 @@ end
 --- Returns true if this ScienceDatabase entry has child entries.
 --- Example: entry:hasEntries()
 function Entity:hasEntries()
-    return #getEntries() > 0
+    return #self:getEntries() > 0
 end
 --- Adds a key/value pair to this ScienceDatabase entry's key/value data.
 --- The Database view's center column displays all key/value data when its entry is selected.
