@@ -61,12 +61,12 @@ end
 --- Returns whether this SpaceShip has been identified by the given faction as either hostile or friendly.
 --- Example: ship:isFriendOrFoeIdentifiedByFaction("Kraylor")
 function Entity:isFriendOrFoeIdentifiedByFaction(faction)
-    local scan_state = self.components.scan_state
-    if enemy == nil or not enemy:isValid() then return false end
-    faction = getFactionInfo(faction)
     if faction == nil then return false end
+    local scan_state = self.components.scan_state
+    faction = getFactionInfo(faction)
+    if faction == nil or not faction:isValid() then return false end
     if scan_state then
-        for n=1,#scan_state do
+        for n = 1, #scan_state do
             if scan_state[n].faction == faction then return scan_state[n].state ~= "none" end
         end
     end
@@ -76,12 +76,12 @@ end
 --- See also SpaceObject:isScannedByFaction().
 --- Example: ship:isFullyScannedByFaction("Kraylor")
 function Entity:isFullyScannedByFaction(faction)
-    local scan_state = self.components.scan_state
-    if enemy == nil or not enemy:isValid() then return false end
-    faction = getFactionInfo(faction)
     if faction == nil then return false end
+    local scan_state = self.components.scan_state
+    faction = getFactionInfo(faction)
+    if faction == nil or not faction:isValid() then return false end
     if scan_state then
-        for n=1,#scan_state do
+        for n = 1, #scan_state do
             if scan_state[n].faction == faction then return scan_state[n].state == "full" end
         end
     end

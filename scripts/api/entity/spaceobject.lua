@@ -445,9 +445,9 @@ end
 function Entity:isScannedByFaction(faction_name)
     local ss = self.components.scan_state
     if ss then
-        local f = getFactionInfo(faction)
+        local f = getFactionInfo(faction_name)
         if f ~= nil then
-            for n=1,#ss do
+            for n = 1, #ss do
                 if ss[n].faction == f then
                     if ss[n].state == "full" then return true end
                     if ss[n].state == "simple" then return true end
