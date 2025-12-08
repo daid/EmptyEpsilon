@@ -36,7 +36,8 @@ function ScienceDatabase()
 end
 
 --- table getScienceDatabases()
---- Returns a 1-indexed table of all parentless ScienceDatabase entries.
+--- Returns a 1-indexed table of all parentless (top-level) ScienceDatabase entries.
+--- Returns nil if there are no parentless ScienceDatabases.
 --- Examples:
 ---   sdb = getScienceDatabases() -- returns a table of top-level entries
 ---   sdb[1]:getName() -- returns "Natural" in the default science database
@@ -45,7 +46,9 @@ function getScienceDatabases()
     local entities = getEntitiesWithComponent("science_database") or {}
 
     for idx, e in ipairs(entities) do
-        if e:getParentId() == 0 then
+        -- Only return valid, parentless entries
+        local parent = e:getParentId()
+        if e:isValid() and parent == nil then
             table.insert(sdb, e)
         end
     end
@@ -59,14 +62,14 @@ function Entity:getName()
     if self.components.science_database then return self.components.science_database.name end
     return ""
 end
---- Returns this ScienceDatabase entry's unique multiplayer_id.
---- Examples: entry:getId() -- returns the entry's ID
+--- Returns this ScienceDatabase entry's unique entity.
+--- Examples: entry:getId() -- returns the entry's entity
 function Entity:getId()
     return self
 end
---- Return this ScienceDatabase entry's parent entry's unique multiplayer_id.
---- Returns 0 if the entry has no parent.
---- Example: entry:getParentId() -- returns the parent entry's ID
+--- Return this ScienceDatabase entry's parent entry's entity.
+--- Returns nil if the entry has no parent.
+--- Example: entry:getParentId() -- returns the parent entry's entity
 function Entity:getParentId()
     if self.components.science_database then
         -- Entries without valid parents are top-level entries.
@@ -75,7 +78,7 @@ function Entity:getParentId()
         end
     end
 
-    return 0
+    return nil
 end
 --- Creates a ScienceDatabase entry with the given name as a child of this ScienceDatabase entry.
 --- Returns the newly created entry. Chaining addEntry() creates a child of the new child entry.
