@@ -47,8 +47,7 @@ function getScienceDatabases()
 
     for idx, e in ipairs(entities) do
         -- Only return valid, parentless entries
-        local parent = e:getParentId()
-        if e:isValid() and parent == nil then
+        if e:isValid() and e:getParentId() == nil then
             table.insert(sdb, e)
         end
     end
