@@ -23,13 +23,14 @@ class MineSweeper : public MiniGame {
     void onFieldClick(int x, int y);
     void onFieldRightClick(int x, int y);
     void updateAttemptsLabel();
-    int error_count;
-    int correct_count;
+    int error_count = 0;
+    int correct_count = 0;
     int field_size;
     int bomb_count;
     GuiLabel* attempts_label;
     GuiToggleButton* flag_mode_toggle;
-    bool flag_mode;
+    bool flag_mode = false;
+
     class FieldItem : public GuiToggleButton
     {
     public:
@@ -38,7 +39,7 @@ class MineSweeper : public MiniGame {
         virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
         virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
-        bool bomb;
+        bool bomb = false;
 
     private:
         func_t left_click_func;

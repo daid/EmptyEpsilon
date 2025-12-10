@@ -11,7 +11,7 @@
 static constexpr int MAX_ATTEMPTS = 2;
 
 MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
-: MiniGame(owner, parent, difficulty), flag_mode(false)
+: MiniGame(owner, parent, difficulty)
 {
     field_size = difficulty * 2 + 6;
     bomb_count = difficulty * 2 + 6;
