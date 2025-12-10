@@ -5,7 +5,6 @@
 
 
 DebugRenderSystem::DebugRenderSystem()
-: show_colliders(false)
 {
 #ifdef DEBUG
     show_colliders = true;
@@ -15,7 +14,7 @@ DebugRenderSystem::DebugRenderSystem()
 void DebugRenderSystem::update(float delta)
 {
 #ifdef DEBUG
-if (keys.debug_show_colliders.getDown()) show_colliders = !show_colliders;
+    if (keys.debug_show_colliders.getDown()) show_colliders = !show_colliders;
 #endif
 }
 
