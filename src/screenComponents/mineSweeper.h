@@ -20,16 +20,20 @@ class MineSweeper : public MiniGame {
   protected:
     virtual void gameComplete() override;
   private:
+    static constexpr int MAX_ATTEMPTS = 2;
+
     void onFieldClick(int x, int y);
     void onFieldRightClick(int x, int y);
     void updateAttemptsLabel();
+
     int error_count = 0;
     int correct_count = 0;
     int field_size;
     int bomb_count;
+    bool flag_mode = false;
+
     GuiLabel* attempts_label;
     GuiToggleButton* flag_mode_toggle;
-    bool flag_mode = false;
 
     class FieldItem : public GuiToggleButton
     {

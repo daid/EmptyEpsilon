@@ -8,8 +8,6 @@
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_panel.h"
 
-static constexpr int MAX_ATTEMPTS = 2;
-
 MineSweeper::MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty)
 : MiniGame(owner, parent, difficulty)
 {
