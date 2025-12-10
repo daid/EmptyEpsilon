@@ -1,17 +1,18 @@
-/** An implementation of mineSweeper for use as a hacking minigame.
- *  Original implementation by https://github.com/daid
- */
-
-#ifndef MINESWEEPER_H
-#define MINESWEEPER_H
+#pragma once
 
 #include "miniGame.h"
 #include "gui/gui2_togglebutton.h"
 
+class GuiLabel;
+class GuiToggleButton;
 
+/** An implementation of mineSweeper for use as a hacking minigame.
+ *  Original implementation by https://github.com/daid
+ */
 class MineSweeper : public MiniGame {
   public:
     MineSweeper(GuiPanel* owner, GuiHackingDialog* parent, int difficulty);
+    virtual ~MineSweeper();
     virtual void reset() override;
     virtual void disable() override;
     virtual float getProgress() override;
@@ -19,19 +20,35 @@ class MineSweeper : public MiniGame {
   protected:
     virtual void gameComplete() override;
   private:
+    static constexpr int MAX_ATTEMPTS = 2;
+
     void onFieldClick(int x, int y);
-    int error_count;
-    int correct_count;
+    void onFieldRightClick(int x, int y);
+    void updateAttemptsLabel();
+
+    int error_count = 0;
+    int correct_count = 0;
     int field_size;
     int bomb_count;
+    bool flag_mode = false;
+
+    GuiLabel* attempts_label;
+    GuiToggleButton* flag_mode_toggle;
+
     class FieldItem : public GuiToggleButton
     {
     public:
-        FieldItem(GuiContainer* owner, string id, string text, func_t func);
+        FieldItem(GuiContainer* owner, string id, string text, func_t left_func, func_t right_func);
 
-        bool bomb;
+        virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
+        virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+
+        bool bomb = false;
+
+    private:
+        func_t left_click_func;
+        func_t right_click_func;
+        sp::io::Pointer::Button last_button;
     };
     FieldItem* getFieldItem(int x, int y);
 };
-
-#endif//MINESWEEPER_H
