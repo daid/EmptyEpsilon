@@ -236,7 +236,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 {
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return;
-    auto fireLocation = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
+    auto fire_location = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
     auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
     auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
 
@@ -334,8 +334,9 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 
         if (auto f = source.getComponent<Faction>())
             missile.addComponent<Faction>().entity = f->entity;
+
         auto& t = missile.addComponent<sp::Transform>();
-        t.setPosition(fireLocation);
+        t.setPosition(fire_location);
         t.setRotation(source_transform->getRotation() + tube.direction);
         auto& cpe = missile.addComponent<ConstantParticleEmitter>();
         if (tube.type_loaded == MW_Mine) {
@@ -365,6 +366,11 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
         trace.flags = RadarTrace::Rotate;
         trace.color = mwd.color;
+
+        auto& sfx = missile.addComponent<Sfx>();
+        sfx.sound = mwd.fire_sound;
+        sfx.volume = 55.0f + 15.0f * category_modifier;
+        sfx.pitch += random(-0.1f, 0.1f);
     }
 }
 
