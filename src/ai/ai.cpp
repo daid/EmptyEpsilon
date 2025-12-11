@@ -867,7 +867,8 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     const float target_distance = glm::length(ot->getPosition() - target_position);
     const float search_distance = std::min(short_range, target_distance + 500.0f);
     const float target_angle = vec2ToAngle(target_position - ot->getPosition());
-    const float search_angle = 5.0;
+    const float fire_angle = ot->getRotation() + tube.direction;
+    const float search_angle = 5.0f;
 
     // Verify if missle can be fired safely
     for(auto entity : sp::CollisionSystem::queryArea(ot->getPosition() - glm::vec2(search_distance, search_distance), ot->getPosition() + glm::vec2(search_distance, search_distance)))
@@ -878,10 +879,9 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
                 // Ship in research triangle
                 const auto owner_to_obj = t->getPosition() - ot->getPosition();
                 const float heading_to_obj = vec2ToAngle(owner_to_obj);
-                const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
-                if (angle_from_heading_to_target < search_angle) {
+                const float angle_from_heading_to_fire_angle = std::abs(angleDifference(heading_to_obj, fire_angle));
+                if (angle_from_heading_to_fire_angle < search_angle)
                     return std::numeric_limits<float>::infinity();
-                }
             }
         }
     }
@@ -892,7 +892,6 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
 
         auto target_position = tt->getPosition();
         float target_angle = vec2ToAngle(target_position - ot->getPosition());
-        float fire_angle = ot->getRotation() + tube.direction;
 
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = angleDifference(target_angle, fire_angle);
@@ -906,7 +905,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         auto target_radius = 100.0f;
         if (auto physics = target.getComponent<sp::Physics>())
             target_radius = physics->getSize().x;
-        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target_radius * 2.0f)
+        if (std::abs(angle_diff) < 80.0f && target_distance * tanf(glm::radians(fabs(angle_diff))) < target_radius * 2.0f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();
