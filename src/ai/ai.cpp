@@ -137,8 +137,9 @@ void ShipAI::updateWeaponState(float delta)
             else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
                 MissileSystem::startLoad(owner, tube, MW_HVLI);
 
-            //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
-            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded)
+            // When the tube is loading, loaded, or firing, add the relative
+            // strength of this tube to the direction of this tube.
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded || tube.state == MissileTubes::MountPoint::State::Firing)
             {
                 int index = getDirectionIndex(tube.direction, 90);
                 if (index >= 0)
@@ -159,20 +160,20 @@ void ShipAI::updateWeaponState(float delta)
     }
 
     int best_tube_index = -1;
-    float best_tube_strenght = 0.0;
+    float best_tube_strength = 0.0f;
     int best_beam_index = -1;
-    float best_beam_strenght = 0.0;
+    float best_beam_strength = 0.0f;
     for(int n=0; n<4; n++)
     {
-        if (best_tube_strenght < tube_strength_per_direction[n])
+        if (best_tube_strength < tube_strength_per_direction[n])
         {
             best_tube_index = n;
-            best_tube_strenght = tube_strength_per_direction[n];
+            best_tube_strength = tube_strength_per_direction[n];
         }
-        if (best_beam_strenght < beam_strength_per_direction[n])
+        if (best_beam_strength < beam_strength_per_direction[n])
         {
             best_beam_index = n;
-            best_beam_strenght = beam_strength_per_direction[n];
+            best_beam_strength = beam_strength_per_direction[n];
         }
     }
 
@@ -190,34 +191,47 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
+
+    // Prioritize available missiles to ensure stronger missiles are fired
+    // first, and manually aimed HVLIs are used only when other options are
+    // depleted.
     if (has_missiles && tubes)
     {
-        float best_missile_strength = 0.0;
-        for(auto& tube : tubes->mounts)
+        bool has_homing = false;
+        bool has_hvli = false;
+        bool has_nuke = false;
+        bool has_emp = false;
+
+        for (auto& tube : tubes->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded) {
-                int index = getDirectionIndex(tube.direction, 90);
-                if (index == best_tube_index) {
-                    EMissileWeapons type = tube.type_loaded;
-                    float strenght = getMissileWeaponStrength(type);
-                    if (strenght > best_missile_strength)
-                    {
-                        best_missile_strength = strenght;
-                        best_missile_type = type;
-                    }
-                }
+            if (tube.state == MissileTubes::MountPoint::State::Loading
+                || tube.state == MissileTubes::MountPoint::State::Loaded
+                || tube.state == MissileTubes::MountPoint::State::Firing)
+            {
+                if (tube.type_loaded == MW_Homing) has_homing = true;
+                if (tube.type_loaded == MW_HVLI) has_hvli = true;
+                if (tube.type_loaded == MW_Nuke) has_nuke = true;
+                if (tube.type_loaded == MW_EMP) has_emp = true;
             }
         }
+
+        if (has_nuke) best_missile_type = MW_Nuke;
+        else if (has_emp) best_missile_type = MW_EMP;
+        else if (has_homing) best_missile_type = MW_Homing;
+        else if (has_hvli) best_missile_type = MW_HVLI;
     }
 
     int direction_index = best_tube_index;
     float* strength_per_direction = tube_strength_per_direction;
-    if (best_beam_strenght > best_tube_strenght)
+
+    // Prefer beams only if no missiles remain.
+    if (!has_missiles && has_beams)
     {
         direction_index = best_beam_index;
         strength_per_direction = beam_strength_per_direction;
     }
-    switch(direction_index)
+
+    switch (direction_index)
     {
     case -1:
     case 0:
@@ -604,7 +618,58 @@ void ShipAI::runAttack(sp::ecs::Entity target)
         auto thrusters = owner.getComponent<ManeuveringThrusters>();
         if (thrusters) thrusters->target = vec2ToAngle(position_diff);
     }else{
-        if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
+        // Unguided HVLIs require the firing ship to maintain aim by rotating.
+        if (best_missile_type == MW_HVLI &&
+            (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right))
+        {
+            // Calculate the angle to the target
+            auto target_position = tt->getPosition();
+            auto diff = target_position - ot->getPosition();
+            float angle_to_target = vec2ToAngle(diff);
+
+            // Determine which side to face toward target.
+            float desired_rotation = angle_to_target;
+
+            if (weapon_direction == EWeaponDirection::Left)
+                desired_rotation = angle_to_target + 90.0f;
+            else if (weapon_direction == EWeaponDirection::Right)
+                desired_rotation = angle_to_target - 90.0f;
+            else
+            {
+                // Choose the side that requires less rotation.
+                float left_rotation = angle_to_target + 90.0f;
+                float right_rotation = angle_to_target - 90.0f;
+                if (fabs(angleDifference(ot->getRotation(), left_rotation)) < fabs(angleDifference(ot->getRotation(), right_rotation)))
+                    desired_rotation = left_rotation;
+                else
+                    desired_rotation = right_rotation;
+            }
+
+            // Override movement orders to maintain HVLI firing position.
+            auto thrusters = owner.getComponent<ManeuveringThrusters>();
+            if (thrusters) thrusters->target = desired_rotation;
+
+            auto impulse = owner.getComponent<ImpulseEngine>();
+            if (impulse && impulse->max_speed_forward > 0.0f)
+            {
+                if (distance > attack_distance + impulse->max_speed_forward * 5.0f)
+                    impulse->request = 1.0f;
+                else if (distance > attack_distance)
+                    impulse->request = (distance - attack_distance) / (impulse->max_speed_forward * 5.0f);
+                else if (distance < attack_distance - impulse->max_speed_forward * 5.0f)
+                    impulse->request = -1.0f;
+                else
+                    impulse->request = -(attack_distance - distance) / (impulse->max_speed_forward * 5.0f);
+
+                // Reduce thrust if not facing the correct direction.
+                const float rotation_diff = fabs(angleDifference(desired_rotation, ot->getRotation()));
+                if (rotation_diff > 90.0f)
+                    impulse->request = -impulse->request;
+                else if (rotation_diff > 45.0f)
+                    impulse->request *= (1.0f - (rotation_diff - 45.0f) / 45.0f);
+            }
+        }
+        else if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
             //We have side beams, find out where we want to attack from.
             auto target_position = tt->getPosition();
