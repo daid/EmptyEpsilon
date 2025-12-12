@@ -3,6 +3,7 @@
 #include "components/database.h"
 #include "components/rendering.h"
 #include "ecs/query.h"
+#include "playerInfo.h"
 
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_image.h"
@@ -17,19 +18,33 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
 {
     setAttribute("layout", "horizontal");
 
-    // Setup the navigation bar
-    GuiElement* navigation_element = new GuiElement(this, "NAVIGATION_BAR");
-    navigation_element->setAttribute("layout", "vertical");
-    navigation_element->setMargins(20, 20, 20, 120)->setSize(navigation_width, GuiElement::GuiSizeMax);
-    back_button = new GuiButton(navigation_element,"BACK_BUTTON", "Back", [this](){
-        selected_entry = sp::ecs::Entity::fromString(back_entry);
-        display();
-    });
-    back_button->setSize(GuiElement::GuiSizeMax, 50)->hide()->setMargins(0, 0, 0, 20);
-    item_list = new GuiListbox(navigation_element, "DATABASE_ITEM_LIST", [this](int index, string value) {
-        selected_entry = sp::ecs::Entity::fromString(value);
-        display();
-    });
+    // Setup the navigation bar.
+    navigation_element = new GuiElement(this, "DB_NAV_BAR");
+    navigation_element
+        ->setSize(navigation_width, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    navigation_element
+        ->setAttribute("margin", "0, 20, 0, 0");
+
+    back_button = new GuiButton(navigation_element, "DB_BACK_BUTTON", tr("databaseView", "Back"),
+        [this]()
+        {
+            selected_entry = sp::ecs::Entity::fromString(back_entry);
+            display();
+        }
+    );
+    back_button
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->hide()
+        ->setAttribute("margin", "0, 0, 0, 20");
+
+    item_list = new GuiListbox(navigation_element, "DB_ITEM_LIST",
+        [this](int index, string value)
+        {
+            selected_entry = sp::ecs::Entity::fromString(value);
+            display();
+        }
+    );
     item_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     display();
 }
@@ -46,6 +61,18 @@ bool DatabaseViewComponent::findAndDisplayEntry(string name)
         }
     }
     return false;
+}
+
+DatabaseViewComponent* DatabaseViewComponent::setDetailsPadding(int padding)
+{
+    details_padding = std::max(0, padding);
+    return this;
+}
+
+DatabaseViewComponent* DatabaseViewComponent::setItemsPadding(int padding)
+{
+    items_padding = std::max(0, padding);
+    return this;
 }
 
 void DatabaseViewComponent::fillListBox()
@@ -115,58 +142,77 @@ void DatabaseViewComponent::fillListBox()
 
 void DatabaseViewComponent::display()
 {
-    if (keyvalue_container)
-        keyvalue_container->destroy();
-    if (details_container)
-        details_container->destroy();
+    if (keyvalue_container) keyvalue_container->destroy();
+    if (details_container) details_container->destroy();
 
-    keyvalue_container = new GuiElement(this, "KEY_VALUE_CONTAINER");
-    keyvalue_container->setMargins(20)->setSize(400, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
+    keyvalue_container = new GuiElement(this, "DB_KV_CONTAINER");
+    keyvalue_container
+        ->setSize(400.0f, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
-    details_container = new GuiElement(this, "DETAILS_CONTAINER");
-    details_container->setMargins(20)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
-    details_container->layout.padding.top = 50;
+    details_container = new GuiElement(this, "DB_DETAILS_CONTAINER");
+    details_container
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    details_container
+        ->setAttribute("margin", "20, 0, 0, 0");
+    // Set conditional padding on details and item lists.
+    details_container
+        ->setAttribute("padding", "0, 0, " + static_cast<string>(details_padding) + ", 0");
+
+    navigation_element
+        ->setAttribute("padding", "0, 0, 0, " + static_cast<string>(items_padding));
 
     fillListBox();
 
     auto database = selected_entry.getComponent<Database>();
-    if (!database)
-        return;
-    auto mrc = selected_entry.getComponent<MeshRenderComponent>();
+    if (!database) return;
 
+    auto mrc = selected_entry.getComponent<MeshRenderComponent>();
     bool has_key_values = database->key_values.size() > 0;
     bool has_image_or_model = mrc || database->image != "";
     bool has_text = database->description.length() > 0;
 
     if (has_image_or_model)
     {
-        GuiElement* visual = (new GuiElement(details_container, "DATABASE_VISUAL_ELEMENT"))->setMargins(0, 0, 0, 40)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        GuiElement* visual = (new GuiElement(details_container, "DB_VISUAL_ELEMENT"))
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
         if (mrc)
         {
-            (new GuiRotatingModelView(visual, "DATABASE_MODEL_VIEW", selected_entry))
+            (new GuiRotatingModelView(visual, "DB_MODEL_VIEW", selected_entry))
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-            if(database->image != "")
+
+            if (database->image != "")
             {
-                (new GuiImage(visual, "DATABASE_IMAGE", database->image))->setMargins(0)->setSize(32, 32);
+                (new GuiImage(visual, "DB_IMAGE", database->image))
+                    ->setSize(32.0f, 32.0f);
             }
         }
         else if(database->image != "")
         {
-            auto image = new GuiImage(visual, "DATABASE_IMAGE", database->image);
-            image->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+            (new GuiImage(visual, "DB_IMAGE", database->image))
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         }
     }
+
     if (has_text)
     {
-        (new GuiScrollFormattedText(details_container, "DATABASE_LONG_DESCRIPTION", database->description))->setTextSize(24)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        (new GuiScrollFormattedText(details_container, "DB_LONG_DESCRIPTION", database->description))
+            ->setTextSize(24.0f)
+            ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 
     if (has_key_values)
     {
-        for(auto& kv : database->key_values)
-            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37, kv.key, kv.value))->setSize(GuiElement::GuiSizeMax, 40);
-    } else {
+        for (auto& kv : database->key_values)
+        {
+            (new GuiKeyValueDisplay(keyvalue_container, "", 0.37f, kv.key, kv.value))
+                ->setSize(GuiElement::GuiSizeMax, 40.0f);
+        }
+    }
+    else
+    {
         keyvalue_container->destroy();
         keyvalue_container = nullptr;
     }
