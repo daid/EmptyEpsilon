@@ -59,8 +59,6 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
     float vertical_fov_rad = glm::radians(camera_fov / 2.0f);
     float horizontal_fov_rad = glm::atan(glm::tan(vertical_fov_rad) * aspect_ratio);
 
-    // Calculate distance needed to fit each dimension to fill viewport, then
-    // apply fill percentage and zoom.
     float view_distance = glm::max(mesh_diameter / glm::tan(vertical_fov_rad), mesh_diameter / glm::tan(horizontal_fov_rad)) / (desired_fill_percentage * zoom_level);
 
     // OpenGL standard: X across (left-to-right), Y up, Z "towards".
