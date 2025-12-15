@@ -22,7 +22,9 @@ Keys::CinematicKeys::CinematicKeys() :
     rotate_left("CINEMATIC_TILT_LEFT", "Left"),
     rotate_right("CINEMATIC_TILT_RIGHT", "Right"),
     tilt_down("CINEMATIC_TILT_DOWN", "Down"),
-    tilt_up("CINEMATIC_TILT_UP", "Up")
+    tilt_up("CINEMATIC_TILT_UP", "Up"),
+    move_faster("CINEMATIC_MOVE_FASTER", "Left Shift"),
+    toggle_mouselook("CINEMATIC_TOGGLE_MOUSELOOK", "M")
 {}
 
 void Keys::CinematicKeys::init()
@@ -44,6 +46,8 @@ void Keys::CinematicKeys::init()
     rotate_right.setLabel(localized_category, tr("hotkey_Cinematic", "Rotate right"));
     tilt_down.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt down"));
     tilt_up.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt up"));
+    move_faster.setLabel(localized_category, tr("hotkey_Cinematic", "Move faster"));
+    toggle_mouselook.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle mouselook"));
 }
 
 Keys::TopDownKeys::TopDownKeys() :
