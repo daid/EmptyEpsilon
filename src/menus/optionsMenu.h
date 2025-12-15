@@ -26,6 +26,10 @@ private:
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;
+
+    GuiToggleButton* helms_radar_lock_toggle;
+    GuiToggleButton* weapons_radar_lock_toggle;
+    GuiToggleButton* science_radar_lock_toggle;
     GuiSlider* sound_volume_slider;
     GuiSlider* music_volume_slider;
     GuiSlider* impulse_volume_slider;
@@ -39,6 +43,7 @@ private:
     GuiLabel* impulse_volume_overlay_label;
     OptionsMenu::ReturnTo return_to;
 
+    void setupInterfaceOptions(OptionsMenu::ReturnTo return_to);
     void setupGraphicsOptions();
     void setupAudioOptions();
 public:
