@@ -7,6 +7,8 @@
 #include "gui/gui2_label.h"
 #include "screenComponents/viewport3d.h"
 
+class GuiButton;
+class GuiElement;
 class GuiHelpOverlay;
 class GuiSelector;
 class GuiToggleButton;
@@ -17,10 +19,15 @@ class CinematicViewScreen : public GuiCanvas, public Updatable
 private:
     GuiViewport3D* viewport;
     sp::ecs::Entity target;
+
+    GuiElement* camera_controls;
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiToggleButton* camera_lock_tot_toggle;
     GuiToggleButton* camera_lock_cycle_toggle;
+    GuiButton* callsigns_toggle;
+    GuiToggleButton* mouselook_toggle;
+    GuiButton* ui_toggle;
     GuiHelpOverlay* keyboard_help;
 
     float min_camera_distance = 300.0f;
@@ -39,6 +46,7 @@ private:
     const float camera_rotation_max = 4.0f;
     P<MouseRenderer> mouse_renderer;
     bool mouselook = false;
+    bool invert_mouselook_y = false;
 
     glm::vec2 diff_2D{0.0f, 0.0f};
     glm::vec3 diff_3D{0.0f, 0.0f, 0.0f};
@@ -67,8 +75,10 @@ public:
     virtual ~CinematicViewScreen();
 
     void setTargetTransform(sp::Transform* transform);
+    void setMouselook(bool value);
     void updateCamera(sp::Transform* main_transform, sp::Transform* tot_transform);
 
     virtual void update(float delta) override;
     virtual bool onPointerMove(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual void onPointerUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 };

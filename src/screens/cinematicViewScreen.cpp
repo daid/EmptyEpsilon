@@ -15,6 +15,8 @@
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
 #include "screenComponents/helpOverlay.h"
+#include "gui/gui2_button.h"
+#include "gui/gui2_element.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
@@ -25,6 +27,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 {
     // Capture mouse_renderer so we can hide it in mouselook.
     mouse_renderer = engine->getObject("mouseRenderer");
+    invert_mouselook_y = (PreferencesManager::get("camera_mouse_inverted", "0") == "1");
 
     // Create a full-screen viewport.
     viewport = new GuiViewport3D(this, "VIEWPORT");
@@ -52,22 +55,50 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     if (pref_sens > 0.0f) camera_sensitivity = pref_sens;
     else LOG(Warning, "camera_mouse_sensitivity value invalid:", PreferencesManager::get("camera_mouse_sensitivity"));
 
+    // Control GUI.
+    camera_controls = new GuiElement(this, "CAMERA_CONTROLS");
+    camera_controls->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     // Let the screen operator select a player ship to lock the camera onto.
-    camera_lock_selector = new GuiSelector(this, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
+    camera_lock_selector = new GuiSelector(camera_controls, "CAMERA_LOCK_SELECTOR", [this](int index, string value) {
         if (auto ship = sp::ecs::Entity::fromString(value)) target = ship;
     });
-    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
+    camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50);
 
     // Toggle whether to lock the camera onto a ship.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
-    camera_lock_toggle->setValue(true)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
+    camera_lock_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
+    camera_lock_toggle->setValue(true)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
-    camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
+    camera_lock_tot_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Track ship's target"), [this](bool value) {});
+    camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(300, 50);
 
-    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
-    camera_lock_cycle_toggle->setValue(false)->setPosition(670, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
+    camera_lock_cycle_toggle = new GuiToggleButton(camera_controls, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
+    camera_lock_cycle_toggle->setValue(false)->setPosition(620, -20, sp::Alignment::BottomLeft)->setSize(300, 50);
     cycle_time = 0.0f;
+
+    // Toggle callsigns.
+    callsigns_toggle = new GuiButton(camera_controls, "CAMERA_CALLSIGNS_TOGGLE", tr("button", "Toggle callsigns"),
+        [this]() {
+            viewport->toggleCallsigns();
+        });
+    callsigns_toggle->setPosition(20, -140, sp::Alignment::BottomLeft)->setSize(300, 50);
+
+    // Toggle mouselook.
+    mouselook_toggle = new GuiToggleButton(camera_controls, "CAMERA_MOUSELOOK_TOGGLE", tr("button", "Mouselook"),
+        [this](bool value)
+        {
+            setMouselook(value);
+            camera_controls->setVisible(!camera_controls->isVisible());
+        }
+    );
+    mouselook_toggle->setValue(false)->setPosition(-20, -80, sp::Alignment::BottomRight)->setSize(200, 50)->disable();
+    ui_toggle = new GuiButton(camera_controls, "UI_TOGGLE", tr("button", "Toggle controls"),
+        [this]()
+        {
+            camera_controls->setVisible(!camera_controls->isVisible());
+        }
+    );
+    ui_toggle->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(200, 50);
 
     new GuiIndicatorOverlays(this);
 
@@ -104,20 +135,7 @@ void CinematicViewScreen::update(float delta)
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
 
     if (keys.cinematic.toggle_ui.getDown())
-    {
-        if (camera_lock_toggle->isVisible() || camera_lock_selector->isVisible() || camera_lock_tot_toggle->isVisible())
-        {
-            camera_lock_toggle->hide();
-            camera_lock_selector->hide();
-            camera_lock_tot_toggle->hide();
-            camera_lock_cycle_toggle->hide();
-        }
-        else {
-            camera_lock_toggle->show();
-            camera_lock_selector->show();
-            camera_lock_tot_toggle->show();
-        }
-    }
+        camera_controls->setVisible(!camera_controls->isVisible());
 
     if (keys.cinematic.toggle_callsigns.getDown())
         viewport->toggleCallsigns();
@@ -238,15 +256,7 @@ void CinematicViewScreen::update(float delta)
     }
 
     if (keys.cinematic.toggle_mouselook.getDown())
-    {
-        // Allow toggling of mouse capture and mouselook, but only if camera
-        // lock is disabled or no camera lock target exists.
-        if(!camera_lock_toggle->getValue() || !target)
-        {
-            mouselook = !mouselook;
-            SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() ? SDL_FALSE : SDL_TRUE);
-        }
-    }
+        setMouselook(!mouselook);
 
     // Hide the mouse renderer while in mouselook.
     if (mouse_renderer) mouse_renderer->visible = !mouselook;
@@ -286,26 +296,27 @@ void CinematicViewScreen::update(float delta)
     // Plot headings from the camera to the locked player ship.
     // Set camera_yaw and camera_pitch to those values.
 
-    // If lock is enabled and a ship is selected (but not in mouselook mode)...
-    if (camera_lock_toggle->getValue() && target && !mouselook)
+    // If lock is enabled and a ship is selected...
+    if (camera_lock_toggle->getValue() && target)
     {
+        setMouselook(false);
+        mouselook_toggle->setValue(false)->disable();
+
         // Set target position to target transform if available.
         // If the target lacks a transform, clear the target.
         auto target_transform = target.getComponent<sp::Transform>();
         if (!target_transform)
         {
-            camera_lock_tot_toggle->hide();
-            camera_lock_cycle_toggle->hide();
+            camera_lock_tot_toggle->setValue(false)->disable();
+            camera_lock_cycle_toggle->setValue(false)->disable();
+            if (camera_controls->isVisible()) mouselook_toggle->enable();
             target = sp::ecs::Entity();
             return;
         }
 
-        // Show the target-of-target lock button.
-        if (camera_lock_toggle->isVisible())
-        {
-            camera_lock_tot_toggle->show();
-            camera_lock_cycle_toggle->show();
-        }
+        // Enable the target-of-target lock button.
+        camera_lock_tot_toggle->enable();
+        camera_lock_cycle_toggle->enable();
 
         setTargetTransform(target_transform);
 
@@ -321,38 +332,48 @@ void CinematicViewScreen::update(float delta)
     }
     else
     {
-        // Hide the target-of-target camera lock button.
-        camera_lock_tot_toggle->hide();
-        camera_lock_cycle_toggle->hide();
+        // Disable the target-of-target camera lock button and enable the
+        // mouselook button.
+        camera_lock_tot_toggle->setValue(false)->disable();
+        camera_lock_cycle_toggle->setValue(false)->disable();
+        if (camera_controls->isVisible()) mouselook_toggle->enable();
     }
 }
 
 bool CinematicViewScreen::onPointerMove(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    // Handle mouselook if enabled.
-    if (mouselook)
+    // Handle mouselook if enabled and the camera lock is off.
+    if (mouselook && !camera_lock_toggle->getValue())
     {
-        if (!camera_lock_toggle->getValue())
-        {
-            // Mouselook enables SDL relative mouse mode, which reports movement
-            // deltas instead of positions. This makes the position variable oddly
-            // named for the moment.
+        // Mouselook enables SDL relative mouse mode, which reports movement
+        // deltas instead of positions. This makes the position variable oddly
+        // named for the moment.
 
-            // Yaw (mouse x, horizontal rotation normalized)
-            camera_yaw += position.x * camera_sensitivity;
-            camera_yaw = std::fmod(camera_yaw, 360.0f);
-            if (camera_yaw < 0.0f) camera_yaw += 360.0f;
+        // Yaw (mouse x, horizontal rotation normalized)
+        camera_yaw += position.x * camera_sensitivity;
+        camera_yaw = std::fmod(camera_yaw, 360.0f);
+        if (camera_yaw < 0.0f) camera_yaw += 360.0f;
 
-            // Pitch (mouse y, vertical rotation)
-            // Clamp pitch to 90 degrees up/down prevent flipping upside down.
-            if (PreferencesManager::get("camera_mouse_inverted", "0") == "1")
-                camera_pitch += position.y * camera_sensitivity;
-            else camera_pitch -= position.y * camera_sensitivity;
-            camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
-        }
+        // Pitch (mouse y, vertical rotation)
+        // Clamp pitch to 90 degrees up/down prevent flipping upside down.
+        if (invert_mouselook_y)
+            camera_pitch += position.y * camera_sensitivity;
+        else
+            camera_pitch -= position.y * camera_sensitivity;
+        camera_pitch = std::clamp(camera_pitch, -89.9f, 89.9f);
     }
 
     return false;
+}
+
+void CinematicViewScreen::onPointerUp(glm::vec2 position, sp::io::Pointer::ID id)
+{
+    // Disable mouselook and toggle UI on click.
+    if (mouselook)
+        setMouselook(false);
+    else if (!camera_controls->isVisible())
+        camera_controls->setVisible(!camera_controls->isVisible());
+    GuiCanvas::onPointerUp(position, id);
 }
 
 void CinematicViewScreen::setTargetTransform(sp::Transform* transform)
@@ -458,4 +479,22 @@ void CinematicViewScreen::updateCamera(sp::Transform* main_transform, sp::Transf
     // Point the camera.
     camera_yaw = angle_yaw;
     camera_pitch = angle_pitch;
+}
+
+void CinematicViewScreen::setMouselook(bool value)
+{
+    // Allow toggling of mouse capture and mouselook, but only if camera
+    // lock is disabled or no camera lock target exists.
+    if (value && !camera_lock_toggle->getValue() || !target)
+    {
+        mouselook = true;
+        mouselook_toggle->setValue(true);
+        SDL_SetRelativeMouseMode(SDL_GetRelativeMouseMode() ? SDL_FALSE : SDL_TRUE);
+    }
+    else
+    {
+        mouselook = false;
+        mouselook_toggle->setValue(false);
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+    }
 }
