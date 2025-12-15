@@ -76,65 +76,102 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     audio_page = new GuiElement(container, "OPTIONS_AUDIO");
     audio_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     interface_page = new GuiElement(container, "OPTIONS_INTERFACE");
-    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "vertical");
+    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "horizontal");
 
+    setupInterfaceOptions(return_to);
     setupGraphicsOptions();
     setupAudioOptions();
 
-    // Interface options
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Radar Rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    // Helms rotation lock.
-    (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    // Bottom GUI.
+    // Back button.
+    (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
     {
-        PreferencesManager::set("helms_radar_lock", value ? "1" : "");
-        PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
+        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
+        sp::RenderTarget::setDefaultFont(main_font);
+        // Close this menu, stop the music, and return to the main menu.
+        destroy();
+        soundManager->stopMusic();
+        exitOptionsMenu(return_to, getRenderLayer());
+
+    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
+    // Save options button.
+    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
+    {
+        if (getenv("EE_CONF_DIR"))
+            PreferencesManager::save(string(getenv("EE_CONF_DIR")) + "/options.ini");
+        else if (getenv("HOME"))
+            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        else
+            PreferencesManager::save("options.ini");
+    }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
+}
+
+void OptionsMenu::update(float delta)
+{
+    if (keys.escape.getDown())
+    {
+        exitOptionsMenu(return_to, getRenderLayer());
+        destroy();
+        soundManager->stopMusic();
+    }
+}
+
+void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
+{
+    // Interface options
+    GuiElement* interface_left_column = new GuiElement(interface_page, "");
+    interface_left_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    interface_left_column
+        ->setAttribute("margin", "0, 20, 0, 0");
+    GuiElement* interface_right_column = new GuiElement(interface_page, "");
+    interface_right_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    // Interface page, left column
+    // Radar rotation options.
+    (new GuiLabel(interface_left_column, "CONTROL_OPTIONS_LABEL", tr("Radar rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
+    // Helms rotation lock.
+    (new GuiToggleButton(interface_left_column, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    {
+        PreferencesManager::set(       "helms_radar_lock", value ? "1" : "");
+        PreferencesManager::set(    "tactical_radar_lock", value ? "1" : "");
         PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Weapons rotation lock.
-    (new GuiToggleButton(interface_page, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
+    (new GuiToggleButton(interface_left_column, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
     {
         PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
     // Science rotation lock.
-    (new GuiToggleButton(interface_page, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
+    (new GuiToggleButton(interface_left_column, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
     {
         PreferencesManager::set("science_radar_lock", value ? "1" : "");
         PreferencesManager::set("operations_radar_lock", value ? "1" : "");
     }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
 
-    // Control configuration
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-
-    // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this, return_to]()
+    // Select language
     {
-        new HotkeyMenu(return_to);
-        destroy();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    //Select the language
-    {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))
+            ->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
         
         std::vector<string> languages = findResources("locale/main.*.po");
         
+        // Strip extension
         for(string &language : languages) 
-        {
-            //strip extension
             language = language.substr(language.find(".") + 1, language.rfind("."));
-        }
         std::sort(languages.begin(), languages.end());
 
         int default_index = 0;
         auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
         if(default_elem != languages.end())
-        {
             default_index =  static_cast<int>(default_elem - languages.begin());
-        }
 
-        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+        (new GuiSelector(interface_left_column, "LANGUAGE_SELECTOR", [](int index, string value)
         {
             i18n::reset();
             i18n::load("locale/main." + value + ".po");
@@ -143,7 +180,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
     }
     
-    //Gui theme selection
+    // GUI theme selection
     {
         std::vector<string> themes = findResources("gui/*.theme.txt");
         
@@ -185,8 +222,8 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         }
 
         if (themes.size() > 1) {
-            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-            (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR", [](int index, string theme_name)
             {
                 GuiTheme::setCurrentTheme(theme_name);
                 main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
@@ -196,39 +233,53 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
             }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
         }
     }
-    
-    // Bottom GUI.
-    // Back button.
-    (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
-    {
-        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
-        sp::RenderTarget::setDefaultFont(main_font);
-        // Close this menu, stop the music, and return to the main menu.
-        destroy();
-        soundManager->stopMusic();
-        exitOptionsMenu(return_to, getRenderLayer());
 
-    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
-    // Save options button.
-    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
-    {
-        if (getenv("EE_CONF_DIR"))
-            PreferencesManager::save(string(getenv("EE_CONF_DIR")) + "/options.ini");
-        else if (getenv("HOME"))
-            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        else
-            PreferencesManager::save("options.ini");
-    }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
-}
+    // Interface page, right column
+    // Control configuration
+    (new GuiLabel(interface_right_column, "CONTROL_OPTIONS_LABEL", tr("Control options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-void OptionsMenu::update(float delta)
-{
-    if (keys.escape.getDown())
+    // Keyboard config (hotkeys/keybindings)
+    (new GuiButton(interface_right_column, "CONFIGURE_KEYBOARD", tr("Configure keyboard/joystick"), [this, return_to]()
     {
-        exitOptionsMenu(return_to, getRenderLayer());
+        new HotkeyMenu(return_to);
         destroy();
-        soundManager->stopMusic();
+    }))->setSize(GuiElement::GuiSizeMax, 50);
+
+    (new GuiLabel(interface_right_column, "CINEMATIC_VIEW_OPTIONS_LABEL", tr("Cinematic view options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("margin", "0, 0, 20, 0");
+
+    // Mouselook camera axis inversion
+    (new GuiToggleButton(interface_right_column, "TOGGLE_MOUSELOOK_INVERSION", tr("Invert camera y-axis"), [this](bool value)
+    {
+        PreferencesManager::set("camera_mouse_inverted", value ? "1" : "0");
+    }))->setValue(PreferencesManager::get("camera_mouse_inverted", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    auto initial_mouselook_sensitivity = PreferencesManager::get("camera_mouse_sensitivity", "0.15").toFloat();
+    if (initial_mouselook_sensitivity <= 0.0f)
+    {
+        LOG(Warning, "camera_mouse_sensitivity value invalid: ", PreferencesManager::get("camera_mouse_sensitivity", "0.15"));
+        initial_mouselook_sensitivity = 0.15f;
     }
+    mouselook_sensitivity_slider = new GuiBasicSlider(interface_right_column, "MOUSELOOK_SENSITIVITY_SLIDER", 0.01f, 1.0f, initial_mouselook_sensitivity,
+        [this](float sensitivity)
+        {
+            PreferencesManager::set("camera_mouse_sensitivity", sensitivity);
+            mouselook_sensitivity_overlay_label->setText(
+                tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f)))} })
+            );
+            LOG(Info, "sensitivity: ", sensitivity, " static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))): ", static_cast<string>(static_cast<int>(nearbyint(sensitivity * 100.0f))) );
+        }
+    );
+    mouselook_sensitivity_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Override overlay label.
+    mouselook_sensitivity_overlay_label = new GuiLabel(mouselook_sensitivity_slider, "MOUSELOOK_SENSITIVITY_SLIDER_LABEL",
+        tr("Mouselook sensitivity: {s}").format({ {"s", static_cast<string>(static_cast<int>(nearbyint(initial_mouselook_sensitivity * 100.0f)))} }), 30.0f);
+    mouselook_sensitivity_overlay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void OptionsMenu::setupGraphicsOptions()
@@ -263,6 +314,11 @@ void OptionsMenu::setupGraphicsOptions()
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    if (initial_fov <= 30.0f || initial_fov >= 140.0f)
+    {
+        LOG(Warning, "main_screen_camera_fov value invalid: ", PreferencesManager::get("main_screen_camera_fov"));
+        initial_fov = std::clamp(initial_fov, 30.0f, 140.0f);
+    }
     graphics_fov_slider = new GuiBasicSlider(graphics_page, "GRAPHICS_FOV_SLIDER", 30.f, 140.0f, initial_fov, [this](float fov) {
         fov = std::round(fov);
         graphics_fov_slider->setValue(fov);

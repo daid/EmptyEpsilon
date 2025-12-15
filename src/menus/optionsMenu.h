@@ -26,6 +26,8 @@ private:
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;
+    GuiBasicSlider* mouselook_sensitivity_slider;
+    GuiLabel* mouselook_sensitivity_overlay_label;
     GuiSlider* sound_volume_slider;
     GuiSlider* music_volume_slider;
     GuiSlider* impulse_volume_slider;
@@ -39,6 +41,7 @@ private:
     GuiLabel* impulse_volume_overlay_label;
     OptionsMenu::ReturnTo return_to;
 
+    void setupInterfaceOptions(OptionsMenu::ReturnTo return_to);
     void setupGraphicsOptions();
     void setupAudioOptions();
 public:
