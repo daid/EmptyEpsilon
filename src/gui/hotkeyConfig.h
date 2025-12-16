@@ -1,5 +1,4 @@
-#ifndef HOTKEY_CONFIG_H
-#define HOTKEY_CONFIG_H
+#pragma once
 
 #include <tuple>
 #include <array>
@@ -200,7 +199,8 @@ public:
     //Debug
     sp::io::Keybinding debug_show_fps;
     sp::io::Keybinding debug_show_timing;
+#ifdef DEBUG
+    sp::io::Keybinding debug_show_colliders;
+#endif
 };
 extern Keys keys;
-
-#endif//HOTKEY_CONFIG_H

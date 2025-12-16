@@ -309,6 +309,9 @@ Keys::Keys() :
 
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
 
+#ifdef DEBUG
+    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
+#endif
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
     debug_show_timing("DEBUG_SHOW_TIMING", "F11")
 {
