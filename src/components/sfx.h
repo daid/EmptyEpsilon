@@ -6,7 +6,8 @@ class Sfx
 {
 public:
     string sound;
-    float power;
+    float volume = 100.0f;
+    float pitch = 1.0f;
     bool played = false;
 };
 

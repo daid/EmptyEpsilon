@@ -8,6 +8,7 @@ extern sp::io::Keybinding fullscreen_key;
 // Cinematic Keys
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
+    toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
     lock_camera("CINEMATIC_LOCK_CAMERA", "L"),
     cycle_camera("CINEMATIC_CYCLE_CAMERA", "C"),
     previous_player_ship("CINEMATIC_PREVIOUS_PLAYER_SHIP", "J"),
@@ -28,6 +29,7 @@ void Keys::CinematicKeys::init()
 {
     const auto localized_category = tr("hotkey_menu", "Cinematic View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
+    toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
     cycle_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera cycle"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Cinematic", "Cycle previous player ship"));
@@ -46,6 +48,7 @@ void Keys::CinematicKeys::init()
 
 Keys::TopDownKeys::TopDownKeys() :
     toggle_ui("TOPDOWN_TOGGLE_UI", "H"),
+    toggle_callsigns("TOPDOWN_TOGGLE_CALLSIGNS", "G"),
     lock_camera("TOPDOWN_LOCK_CAMERA", "L"),
     previous_player_ship("TOPDOWN_PREVIOUS_PLAYER_SHIP", "J"),
     next_player_ship("TOPDOWN_NEXT_PLAYER_SHIP", "K"),
@@ -59,6 +62,7 @@ void Keys::TopDownKeys::init()
 {
     const auto localized_category = tr("hotkey_menu", "Top-down View");
     toggle_ui.setLabel(localized_category, tr("hotkey_Topdown", "Toggle UI"));
+    toggle_callsigns.setLabel(localized_category, tr("hotkey_Topdown", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Topdown", "Camera lock"));
     previous_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle previous player ship"));
     next_player_ship.setLabel(localized_category, tr("hotkey_Topdown", "Cycle next player ship"));
@@ -128,9 +132,9 @@ Keys::Keys() :
     helms_dock_request("HELMS_DOCK_REQUEST"),
     helms_dock_abort("HELMS_DOCK_ABORT"),
     helms_undock("HELMS_UNDOCK"),
-    helms_increase_jump_distance("HELMS_JUMP_INCREASE", "RBracket"),
-    helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "LBracket"),
-    helms_execute_jump("HELMS_JUMP_EXECUTE", "BackSlash"),
+    helms_increase_jump_distance("HELMS_JUMP_INCREASE", "]"),
+    helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "["),
+    helms_execute_jump("HELMS_JUMP_EXECUTE", "\\"),
     helms_combat_left("HELMS_COMBAT_LEFT"),
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
@@ -200,11 +204,11 @@ Keys::Keys() :
     weapons_toggle_shields("WEAPONS_SHIELDS_TOGGLE", "S"),
     weapons_enable_shields("WEAPONS_SHIELDS_ENABLE"),
     weapons_disable_shields("WEAPONS_SHIELDS_DISABLE"),
-    weapons_shield_calibration_increase("WEAPONS_SHIELD_CALIBRATION_INCREASE", "Period"),
-    weapons_shield_calibration_decrease("WEAPONS_SHIELD_CALIBRATION_DECREASE", "Comma"),
-    weapons_shield_calibration_start("WEAPONS_SHIELD_CALIBRATION_START", "Slash"),
-    weapons_beam_subsystem_target_next("WEAPONS_SUBSYSTEM_TARGET_NEXT", "Quote"),
-    weapons_beam_subsystem_target_previous("WEAPONS_SUBSYSTEM_TARGET_PREVIOUS", "SemiColon"),
+    weapons_shield_calibration_increase("WEAPONS_SHIELD_CALIBRATION_INCREASE", "."),
+    weapons_shield_calibration_decrease("WEAPONS_SHIELD_CALIBRATION_DECREASE", ","),
+    weapons_shield_calibration_start("WEAPONS_SHIELD_CALIBRATION_START", "/"),
+    weapons_beam_subsystem_target_next("WEAPONS_SUBSYSTEM_TARGET_NEXT", '"'),
+    weapons_beam_subsystem_target_previous("WEAPONS_SUBSYSTEM_TARGET_PREVIOUS", ";"),
     weapons_beam_frequence_increase("WEAPONS_FREQUENCY_INCREASE", "M"),
     weapons_beam_frequence_decrease("WEAPONS_FREQUENCY_DECREASE", "N"),
     weapons_toggle_aim_lock("WEAPONS_AIM_LOCK_TOGGLE"),

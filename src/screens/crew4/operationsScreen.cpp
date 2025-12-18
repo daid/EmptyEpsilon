@@ -33,13 +33,15 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             // is our ship...
             if (mode == TargetSelection && science->targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+                if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
                     // ... and we select something near a waypoint, switch to move
                     // waypoint mode.
-                    if (glm::length(lrr->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0f)
-                    {
-                        mode = MoveWaypoint;
-                        drag_waypoint_index = science->targets.getWaypointIndex();
+                    if (auto waypoint_position = waypoints->get(science->targets.getWaypointIndex())) {
+                        if (glm::length(waypoint_position.value() - position) < 1000.0f)
+                        {
+                            mode = MoveWaypoint;
+                            drag_waypoint_index = science->targets.getWaypointIndex();
+                        }
                     }
                 }
             }
@@ -106,8 +108,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
 
 void OperationScreen::onDraw(sp::RenderTarget& target)
 {
-    if (!my_spaceship)
-        return;
+    GuiOverlay::onDraw(target);
+
+    if (!my_spaceship) return;
     if (science->radar_view->isVisible())
     {
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0))->show();

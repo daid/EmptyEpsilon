@@ -77,6 +77,15 @@ function ModelData:setIllumination(texture)
     self.mesh_render.illumination_texture=texture
     return self
 end
+--- Sets this ModelData's normal map.
+--- Optional; if omitted, no normal map is applied.
+--- Valid values include PNG- or JPG-format images relative to the resources/ directory.
+--- You can also reference textures from resource packs.
+function ModelData:setNormalMap(texture)
+    if self.mesh_render == nil then self.mesh_render = {} end
+    self.mesh_render.normal_texture=texture
+    return self
+end
 --- Sets this ModelData's mesh offset, relative to its position in its mesh data.
 --- If a 3D mesh's central origin point is not at 0,0,0, use this to compensate.
 --- If you view the model in Blender, these values are equivalent to -X,+Y,+Z.

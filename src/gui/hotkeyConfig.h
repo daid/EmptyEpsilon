@@ -156,6 +156,7 @@ public:
         CinematicKeys();
         void init();
         sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding toggle_callsigns;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding cycle_camera;
         sp::io::Keybinding previous_player_ship;
@@ -177,6 +178,7 @@ public:
         TopDownKeys();
         void init();
         sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding toggle_callsigns;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;

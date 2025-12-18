@@ -112,6 +112,8 @@ function ShipTemplate:setType(template_type)
         self.scan_probe_launcher = {}
         self.hacking_device = {}
         self.long_range_radar = {}
+        self.radar_link = {}
+        self.waypoints = {}
         self.comms_transmitter = {}
         self.comms_receiver = nil
         self.ai_controller = nil
@@ -122,6 +124,7 @@ function ShipTemplate:setType(template_type)
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
         self.docking_bay.repair = true
+        self.docking_bay.restock_probes = true
         self.docking_bay.share_energy = true
         if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"

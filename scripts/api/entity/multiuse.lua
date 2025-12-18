@@ -2,7 +2,6 @@ local Entity = getLuaEntityFunctionTable()
 
 -- Functions that have multiple implementations as a result of the old object code are here and interact with multiple components.
 
-
 --- Sets this faction's internal string name, used to reference this faction regardless of EmptyEpsilon's language setting.
 --- If no locale name is defined, this sets the locale name to the same value.
 --- Example: faction:setName("USN")
@@ -31,6 +30,32 @@ function Entity:setDescription(description)
         self.components.science_description = {not_scanned=description, friend_or_foe_identified=description, simple_scan=description, full_scan=description}
     end
     return self
+end
+
+--- Sets this entity's radius.
+--- Default sizes vary by entity type. Asteroids default to random values between 110 and 130. Explosions default to 1.0.
+--- If the entity as an AvoidObject component, this also sets that radius to 2x the given value.
+--- Examples: obj:setSize(150) -- sets the entity's size to 150
+---           explosion:setSize(1000) -- sets the explosion radius to 1U
+function Entity:setSize(radius)
+    local comp = self.components
+    if comp.physics then comp.physics.size=radius end
+    if comp.mesh_render then comp.mesh_render.scale=radius end
+    if comp.avoid_object then comp.avoid_object.range=radius*2 end
+    if comp.explosion_effect then comp.explosion_effect.size=radius end
+    if comp.explode_on_touch then comp.explode_on_touch.blast_range=radius end
+    return self
+end
+
+--- Returns this entity's radius.
+--- If the entity has a Physics component, this returns that value.
+--- If not, this returns the radius of its 3D mesh, or 100 by default.
+--- Example: obj:getSize()
+function Entity:getSize()
+    local comp = self.components
+    if comp.physics then return comp.physics.size end
+    if comp.mesh_render then return comp.mesh_render.scale end
+    return 100.0
 end
 
 --- Sets this SpaceShip's energy level.
@@ -82,7 +107,7 @@ end
 --- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
 --- Example: beamfx:setTarget(target,0,0,0)
 function Entity:setTarget(a, b, c, d)
-    if self.components.move_to then
+    if self.components.allow_radar_link then -- Scan probe, order it to move the the target.
         self.components.move_to = {target={a, b}}
     end
     if self.components.beam_effect then

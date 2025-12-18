@@ -95,19 +95,19 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
         if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("magtitude", jump->just_jumped * 10.0f);
-            glitchPostProcessor->setUniform("delta", random(0, 360));
+            glitchPostProcessor->setUniform("u_magtitude", jump->just_jumped * 10.0f);
+            glitchPostProcessor->setUniform("u_delta", random(0, 360));
         }else{
             glitchPostProcessor->enabled = false;
         }
         if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", warp->current * 0.01f);
+            warpPostProcessor->setUniform("u_amount", warp->current * 0.01f);
         }else if (jump && jump->delay > 0.0f && jump->delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("amount", (2.0f - jump->delay) * 0.1f);
+            warpPostProcessor->setUniform("u_amount", (2.0f - jump->delay) * 0.1f);
         }else{
             warpPostProcessor->enabled = false;
         }

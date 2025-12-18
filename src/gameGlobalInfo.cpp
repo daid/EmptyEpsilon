@@ -114,6 +114,18 @@ void GameGlobalInfo::update(float delta)
             main_script_error_count = 0;
         }
     }
+    script_threads.insert(script_threads.end(), new_script_threads.begin(), new_script_threads.end());
+    new_script_threads.clear();
+    for(auto it = script_threads.begin(); it != script_threads.end(); )
+    {
+        auto res = (*it)->resume(delta);
+        LuaConsole::checkResult(res);
+        if (res.isErr() || !res.value()) {
+            it = script_threads.erase(it);
+        } else {
+            ++it;
+        }
+    }
     for(auto& as : additional_scripts) {
         auto res = as->call<void>("update", delta);
         if (res.isErr() && res.error() != "Not a function")
@@ -235,9 +247,6 @@ string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
 
 void GameGlobalInfo::reset()
 {
-    if (state_logger)
-        state_logger->destroy();
-
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
@@ -348,12 +357,6 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
             main_script_error_count = max_repeated_script_errors;
             LuaConsole::addLog("init() function failed, not going to call update()");
         }
-    }
-
-    if (PreferencesManager::get("game_logs", "1").toInt())
-    {
-        state_logger = new GameStateLogger();
-        state_logger->start();
     }
 }
 

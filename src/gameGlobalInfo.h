@@ -3,7 +3,6 @@
 
 #include "script.h"
 #include "script/gm.h"
-#include "gameStateLogger.h"
 #include "components/faction.h"
 #include "Updatable.h"
 #include "multiplayer.h"
@@ -12,7 +11,6 @@
 #include <unordered_map>
 
 
-class GameStateLogger;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 
@@ -124,8 +122,9 @@ public:
     std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
     std::unique_ptr<sp::script::Environment> script_environment_base;
     std::unique_ptr<sp::script::Environment> main_scenario_script;
+    std::vector<sp::script::CoroutinePtr> script_threads;
+    std::vector<sp::script::CoroutinePtr> new_script_threads;
 private:
-    P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;
     int callsign_counter;
 

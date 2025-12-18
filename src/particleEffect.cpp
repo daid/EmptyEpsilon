@@ -149,13 +149,13 @@ void ParticleEngine::initialize()
 
     shader->bind();
 
-    uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("projection");
-    uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("view");
+    uniforms[as_index(Uniforms::Projection)] = shader->getUniformLocation("u_projection");
+    uniforms[as_index(Uniforms::View)] = shader->getUniformLocation("u_view");
 
-    attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("center");
-    attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("texcoords");
-    attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("color");
-    attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("size");
+    attributes[as_index(Attributes::Center)] = shader->getAttributeLocation("a_center");
+    attributes[as_index(Attributes::TexCoords)] = shader->getAttributeLocation("a_texcoords");
+    attributes[as_index(Attributes::Color)] = shader->getAttributeLocation("a_color");
+    attributes[as_index(Attributes::Size)] = shader->getAttributeLocation("a_size");
 
     std::vector<uint16_t> elements(instances_per_draw * elements_per_instance);
 

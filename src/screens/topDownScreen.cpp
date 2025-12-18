@@ -101,6 +101,11 @@ void TopDownScreen::update(float delta)
         }
     }
 
+    if (keys.topdown.toggle_callsigns.getDown())
+    {
+        viewport->toggleCallsigns();
+    }
+
     if (keys.topdown.lock_camera.getDown())
     {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());

@@ -45,13 +45,13 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
-            if (mode == TargetSelection && targets.getWaypointIndex() > -1)
-            {
-                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
-                    if (glm::length(lrr->waypoints[targets.getWaypointIndex()] - position) < 1000.0f)
-                    {
-                        mode = MoveWaypoint;
-                        drag_waypoint_index = targets.getWaypointIndex();
+            if (mode == TargetSelection && targets.getWaypointIndex() > -1) {
+                if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
+                    if (auto waypoint_position = waypoints->get(targets.getWaypointIndex())) {
+                        if (glm::length(waypoint_position.value() - position) < 1000.0f) {
+                            mode = MoveWaypoint;
+                            drag_waypoint_index = targets.getWaypointIndex();
+                        }
                     }
                 }
             }
@@ -268,9 +268,9 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         if (auto arl = target.getComponent<AllowRadarLink>())
         {
             if (arl->owner == my_spaceship) {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                if (lrr)
-                    link_to_science_button->setValue(lrr->radar_view_linked_entity == target);
+                auto rl = my_spaceship.getComponent<RadarLink>();
+                if (rl)
+                    link_to_science_button->setValue(rl->linked_entity == target);
                 link_to_science_button->enable();
             } else {
                 link_to_science_button->setValue(false);

@@ -1,12 +1,22 @@
 <!doctype html>
 <html lang="us">
 <head>
-<meta charset="utf-8">
-<title>EmptyEpsilon - Scripting documentation</title>
+<!-- Font faces -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+<link
+href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+rel="stylesheet"
+/>
 <link href="https://daid.github.io/EmptyEpsilon/bebasneue.css" rel="stylesheet" />
+<!-- Syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/lua.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+<meta charset="utf-8">
+<title>EmptyEpsilon - Scripting documentation</title>
 <style>
   body {
     color: #ffffff;
@@ -15,11 +25,11 @@
     line-height: 1.7;
     margin: 50px 0;
   }
-  
+
   h1, h2 {
     margin-top: 0;
   }
-  
+
   a {
     color: #ffffff;
   }
@@ -55,7 +65,6 @@
   ul > li {
     list-style-type: none;
     font-weight: bold;
-    line-height: 2.5rem;
     background: rgba(36, 40, 44, 0.8);
     padding-left: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -93,18 +102,39 @@
   li > dd {
     background: rgba(16, 19, 23, 0.8);
     margin-left: -1rem;
+    white-space: preserve;
+  }
+
+  .hljs, pre {
+    margin: 0;
+    background-color: #000;
+    white-space: preserve;
   }
 </style>
 </head>
 <body>
+
+<!-- Intro -->
 <div class="section">
   <h1>EmptyEpsilon Scripting Reference</h1>
   <p>This is the EmptyEpsilon script reference for this version of EmptyEpsilon.</p>
-  <p>By no means this is a guide to help you scripting, you should check <a href="https://daid.github.io/EmptyEpsilon/#tabs=4">EmptyEpsilon website</a> for the guide on scripting. As well as check the already existing scenario and ship data files on how to get started.</p>
+  <p>This is not a scripting tutorial. See the <a href="https://daid.github.io/EmptyEpsilon/#tabs=4">EmptyEpsilon website</a> for help with scripting, and review the scenario, ship data, and entity scripts in EmptyEpsilon's scripts directory as examples.</p>
 </div>
 
-<div class="section">
-  <p>Some of the types in the parameters:</p>
+<!-- ToC -->
+<div id="contents" class="section">
+  <h2>Contents</h2>
+  <ul>
+      <li><a href="#types">Types</a></li>
+      <li><a href="#creation">Entity creation functions</a></li>
+      <li><a href="#entity">Entity usage functions</a></li>
+      <li><a href="#global">Global functions</a></li>
+  </ul>
+</div>
+
+<!-- Types and enums -->
+<div id="types" class="section">
+  <h2><a href="#types">Parameter types</a></h2>
   <ul>
     {{foreach type=enum}}
       <li><a name="enum_{{name}}">{{name}}</a>: {{docs}}</li>
@@ -112,22 +142,48 @@
   </ul>
 </div>
 
-<div class="section">
-  <h2>Objects</h2>
+<!-- Entity creation functions -->
+<div id="creation" class="section">
+  <h2><a href="#creation">Entity creation functions</a></h2>
   <ul>
     {{foreach type=creation}}
-      <li><a href="#create_{{name}}">{{name}}</a></li>
+      <li>
+        {{name}}</a>({{params}})
+        <dd>{{docs}}</dd>
+        <pre><code class="language-lua">{{example}}</code></pre>
+      </li>
     {{end}}
   </ul>
 </div>
 
-{{foreach type=creation}}
-  <div class="section">
-    <a name="class_{{name}}"></a><h2>{{name}}</h2>
-    <div>{{doc}}</div>
-  </div>
-{{end}}
-  
+<!-- Entity usage functions -->
+<div id="entity" class="section">
+  <h2>Entity usage functions</h2>
+  <ul>
+    {{foreach type=method}}
+      <li>
+        <a name="method_{{name}}">{{name}}</a>({{params}})
+        <dd>{{docs}}</dd>
+        <pre><code class="language-lua">{{example}}</code></pre>
+      </li>
+    {{end}}
+  </ul>
+</div>
+
+<!-- Global functions -->
+<div id="global" class="section">
+  <h2><a href="#global">Global functions</a></h2>
+  <ul>
+    {{foreach type=global}}
+      <li>
+        {{name}}({{params}})
+        <dd>{{docs}}</dd>
+        <pre><code class="language-lua">{{example}}</code></pre>
+      </li>
+    {{end}}
+  </ul>
+</div>
+
 </div>
 </body>
 </html>

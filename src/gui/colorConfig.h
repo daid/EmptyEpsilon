@@ -1,5 +1,4 @@
-#ifndef COLOR_CONFIG_H
-#define COLOR_CONFIG_H
+#pragma once
 
 #include <glm/gtc/type_precision.hpp>
 
@@ -33,6 +32,7 @@ public:
     WidgetColorSet textbox;
 
     glm::u8vec4 overlay_damaged;
+    glm::u8vec4 overlay_docked;
     glm::u8vec4 overlay_jammed;
     glm::u8vec4 overlay_hacked;
     glm::u8vec4 overlay_no_power;
@@ -46,5 +46,3 @@ public:
     void load();
 };
 extern ColorConfig colorConfig;
-
-#endif//COLOR_CONFIG_H

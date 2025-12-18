@@ -108,7 +108,7 @@ function init()
     Nebula():setPosition(88962, 3520)
     Nebula():setPosition(83108, -7966)
     Nebula():setPosition(94001, -4928)
-    Nebula():setPosition(105264, -8633)
+    reference_nebula = Nebula():setPosition(105264, -8633)
     Nebula():setPosition(85034, -16340)
     Nebula():setPosition(93704, -17970)
     Nebula():setPosition(106895, -18563)
@@ -373,10 +373,7 @@ We should hurry back to Central Command with this so they can begin work.]])
         if Player:isDocked(Central_Command) then
             Central_Command:sendCommsMessage(
                 Player,
-                _("centralcommand-incCall", [[It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from the E.O.S. scope. It's possible this was sabotage.
-
-Whatever the case, we need you to rendezvous with science station Galileo in sector C5. We've contracted this Arlenian station to interpret and analyze data retrieved from our various scope stations.]]
-                )
+                string.format(_("centralcommand-incCall", "It appears the damage was mechanical, but Kraylor ships in the area have been spotted in surveillance data you recovered from the E.O.S. scope. It's possible this was sabotage.\n\nWhatever the case, we need you to rendezvous with science station Galileo in sector %s. We've contracted this Arlenian station to interpret and analyze data retrieved from our various scope stations."),Science_Galileo:getSectorName())
             )
 
             Central_Command.mission_state = 3
@@ -438,11 +435,7 @@ Thank you for defending our station. Please dock with us, and we'll analyze the 
         if Player:isDocked(Science_Galileo) then
             Central_Command:sendCommsMessage(
                 Player,
-                _("centralcommand-incCall", [[Apollo, come in!
-
-Leave the E.O.S. data with Galileo for now, we've confirmed reports that Kraylor are brazen enough to attack our E.O.S. scope directly! All available ships should converge on E.O.S. territory in sector H8!
-
-That means you, Apollo!]])
+                string.format(_("centralcommand-incCall", "Apollo, come in!\n\nLeave the E.O.S. data with Galileo for now, we've confirmed reports that Kraylor are brazen enough to attack our E.O.S. scope directly! All available ships should converge on E.O.S. territory in sector %s!\n\nThat means you, Apollo!"),EOS_Station:getSectorName())
             )
 
             kraylor_e1:orderRoaming()
@@ -774,9 +767,7 @@ function commsCentralCommandStation()
         -- Edge of space additions
         if comms_target:getCallSign() == _("callsign", "Central Command") and not comms_source:isDocked(comms_target) then
             if comms_target.mission_state == 1 then
-                setCommsMessage(_("centralcommand-comms", [[The E.O.S. scope is in sector H8, right on the edge of Kraylor territory.
-
-Be careful out there.]]))
+                setCommsMessage(string.format(_("centralcommand-comms", "The E.O.S. scope is in sector %s, right on the edge of Kraylor territory.\n\nBe careful out there."),EOS_Station:getSectorName()))
                 return true
             end
 
@@ -786,17 +777,17 @@ Be careful out there.]]))
             end
 
             if comms_target.mission_state == 3 then
-                setCommsMessage(_("centralcommandOrders-comms", "The Arlenian science station Galileo is in sector C5. Lay in a course bearing 356 from Central Command and deliver the E.O.S. scope data there."))
+                setCommsMessage(string.format(_("centralcommandOrders-comms", "The Arlenian science station Galileo is in sector %s. Lay in a course bearing 356 from Central Command and deliver the E.O.S. scope data there."),Science_Galileo:getSectorName()))
                 return true
             end
 
             if comms_target.mission_state == 4 then
-                setCommsMessage(_("centralcommandOrders-comms", "Save Galileo station! They're under attack in sector C5, and we need them to analyze that data!"))
+                setCommsMessage(string.format(_("centralcommandOrders-comms", "Save Galileo station! They're under attack in sector %s, and we need them to analyze that data!"),Science_Galileo:getSectorName()))
                 return true
             end
 
             if comms_target.mission_state == 5 then
-                setCommsMessage(_("centralcommandOrders-comms", "Dock with Galileo station in sector C5 and deliver the E.O.S. scope data."))
+                setCommsMessage(string.format(_("centralcommandOrders-comms", "Dock with Galileo station in sector %s and deliver the E.O.S. scope data."),Science_Galileo:getSectorName()))
                 return true
             end
 
@@ -823,7 +814,7 @@ If you need more assistance, request it from Midspace Support.]]))
             end
 
             if comms_target.mission_state == 10 then
-                setCommsMessage(_("centralcommandOrders-comms", "The Kraylor super-nebula hides a wormhole that we believe will be used in an attack on human space. There is an entrance into the nebula in sector F10, but be careful of traps!"))
+                setCommsMessage(string.format(_("centralcommandOrders-comms", "The Kraylor super-nebula hides a wormhole that we believe will be used in an attack on human space. There is an entrance into the nebula in sector %s, but be careful of traps!"),reference_nebula:getSectorName()))
                 return true
             end
         end
@@ -845,7 +836,7 @@ If you need supplies, please dock with us first.]]))
                     else
                         setCommsMessage(_("stationAssist-comms", "Where do we need to drop off your supplies?"))
                         for n = 1, comms_source:getWaypointCount() do
-                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                                     if comms_source:takeReputationPoints(100) then
                                         local position_x, position_y = comms_target:getPosition()
                                         local target_x, target_y = comms_source:getWaypoint(n)
@@ -853,7 +844,7 @@ If you need supplies, please dock with us first.]]))
                                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                                         script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n))
+                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)))
                                     else
                                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
                                     end
@@ -873,10 +864,10 @@ If you need supplies, please dock with us first.]]))
                     else
                         setCommsMessage(_("stationAssist-comms", "Where does the backup need to go?"))
                         for n = 1, comms_source:getWaypointCount() do
-                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                            addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                                     if comms_source:takeReputationPoints(150) then
                                         ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d."), ship:getCallSign(), n))
+                                        setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d."), ship:getCallSign(), comms_source:getWaypointID(n)))
                                     else
                                         setCommsMessage(_("needRep-comms", "Not enough rep!"))
                                     end

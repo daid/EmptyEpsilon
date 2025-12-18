@@ -92,8 +92,9 @@ void ShieldSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Shields
             gl::ScopedVertexAttribArray positions(basicShader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(basicShader.get().attribute(ShaderRegistry::Attributes::Texcoords));
             gl::ScopedVertexAttribArray normals(basicShader.get().attribute(ShaderRegistry::Attributes::Normal));
+            gl::ScopedVertexAttribArray tangents(basicShader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-            mesh->render(positions.get(), texcoords.get(), normals.get());
+            mesh->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
         angle += arc;
     }

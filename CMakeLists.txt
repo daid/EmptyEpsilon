@@ -233,7 +233,6 @@ set(MAIN_SOURCES
     src/script.cpp
     src/crewPosition.cpp
     src/playerInfo.cpp
-    src/gameStateLogger.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
@@ -397,6 +396,8 @@ set(MAIN_SOURCES
     src/systems/warpsystem.cpp
     src/systems/jumpsystem.h
     src/systems/jumpsystem.cpp
+    src/systems/sfx.h
+    src/systems/sfx.cpp
     src/systems/shieldsystem.h
     src/systems/shieldsystem.cpp
     src/systems/damage.h
@@ -487,6 +488,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/sfx.h
+    src/multiplayer/sfx.cpp
     src/multiplayer/spin.h
     src/multiplayer/spin.cpp
     src/multiplayer/moveto.h
@@ -527,7 +530,6 @@ set(MAIN_SOURCES
     src/epsilonServer.h
     src/featureDefs.h
     src/gameGlobalInfo.h
-    src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
     src/hardware/devices/dmx512SerialDevice.h

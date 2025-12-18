@@ -29,14 +29,6 @@ REGISTER_SHIP_AI(ShipAI, "default");
 ShipAI::ShipAI(sp::ecs::Entity owner)
 : owner(owner)
 {
-    missile_fire_delay = 0.0;
-
-    has_missiles = false;
-    has_beams = false;
-    beam_weapon_range = 0.0;
-    weapon_direction = EWeaponDirection::Front;
-
-    update_target_delay = 0.0;
 }
 
 bool ShipAI::canSwitchAI()
@@ -145,8 +137,9 @@ void ShipAI::updateWeaponState(float delta)
             else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
                 MissileSystem::startLoad(owner, tube, MW_HVLI);
 
-            //When the tube is loading or loaded, add the relative strenght of this tube to the direction of this tube.
-            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded)
+            // When the tube is loading, loaded, or firing, add the relative
+            // strength of this tube to the direction of this tube.
+            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded || tube.state == MissileTubes::MountPoint::State::Firing)
             {
                 int index = getDirectionIndex(tube.direction, 90);
                 if (index >= 0)
@@ -167,20 +160,20 @@ void ShipAI::updateWeaponState(float delta)
     }
 
     int best_tube_index = -1;
-    float best_tube_strenght = 0.0;
+    float best_tube_strength = 0.0f;
     int best_beam_index = -1;
-    float best_beam_strenght = 0.0;
+    float best_beam_strength = 0.0f;
     for(int n=0; n<4; n++)
     {
-        if (best_tube_strenght < tube_strength_per_direction[n])
+        if (best_tube_strength < tube_strength_per_direction[n])
         {
             best_tube_index = n;
-            best_tube_strenght = tube_strength_per_direction[n];
+            best_tube_strength = tube_strength_per_direction[n];
         }
-        if (best_beam_strenght < beam_strength_per_direction[n])
+        if (best_beam_strength < beam_strength_per_direction[n])
         {
             best_beam_index = n;
-            best_beam_strenght = beam_strength_per_direction[n];
+            best_beam_strength = beam_strength_per_direction[n];
         }
     }
 
@@ -198,34 +191,47 @@ void ShipAI::updateWeaponState(float delta)
             }
         }
     }
+
+    // Prioritize available missiles to ensure stronger missiles are fired
+    // first, and manually aimed HVLIs are used only when other options are
+    // depleted.
     if (has_missiles && tubes)
     {
-        float best_missile_strength = 0.0;
-        for(auto& tube : tubes->mounts)
+        bool has_homing = false;
+        bool has_hvli = false;
+        bool has_nuke = false;
+        bool has_emp = false;
+
+        for (auto& tube : tubes->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Loading || tube.state == MissileTubes::MountPoint::State::Loaded) {
-                int index = getDirectionIndex(tube.direction, 90);
-                if (index == best_tube_index) {
-                    EMissileWeapons type = tube.type_loaded;
-                    float strenght = getMissileWeaponStrength(type);
-                    if (strenght > best_missile_strength)
-                    {
-                        best_missile_strength = strenght;
-                        best_missile_type = type;
-                    }
-                }
+            if (tube.state == MissileTubes::MountPoint::State::Loading
+                || tube.state == MissileTubes::MountPoint::State::Loaded
+                || tube.state == MissileTubes::MountPoint::State::Firing)
+            {
+                if (tube.type_loaded == MW_Homing) has_homing = true;
+                if (tube.type_loaded == MW_HVLI) has_hvli = true;
+                if (tube.type_loaded == MW_Nuke) has_nuke = true;
+                if (tube.type_loaded == MW_EMP) has_emp = true;
             }
         }
+
+        if (has_nuke) best_missile_type = MW_Nuke;
+        else if (has_emp) best_missile_type = MW_EMP;
+        else if (has_homing) best_missile_type = MW_Homing;
+        else if (has_hvli) best_missile_type = MW_HVLI;
     }
 
     int direction_index = best_tube_index;
     float* strength_per_direction = tube_strength_per_direction;
-    if (best_beam_strenght > best_tube_strenght)
+
+    // Prefer beams only if no missiles remain.
+    if (!has_missiles && has_beams)
     {
         direction_index = best_beam_index;
         strength_per_direction = beam_strength_per_direction;
     }
-    switch(direction_index)
+
+    switch (direction_index)
     {
     case -1:
     case 0:
@@ -383,8 +389,10 @@ void ShipAI::updateTarget()
 void ShipAI::runOrders()
 {
     auto ai = owner.getComponent<AIController>();
+    if (!ai) return;
     auto docking_port = owner.getComponent<DockingPort>();
     auto radius = 0.0f;
+
     if (auto physics = owner.getComponent<sp::Physics>())
         radius = physics->getSize().x;
 
@@ -395,46 +403,57 @@ void ShipAI::runOrders()
         pathPlanner.clear();
         break;
     case AIOrder::Roaming:         //Fly around and engage at will, without a clear target
-        //Could mean 3 things
+        // Could mean:
         // 1) we are looking for a target
         // 2) we ran out of missiles
         // 3) we have no weapons
-        if (auto ot = owner.getComponent<sp::Transform>()) {
+        if (auto ot = owner.getComponent<sp::Transform>())
+        {
             if (has_missiles || has_beams)
             {
-                auto new_target = findBestTarget(ot->getPosition(), relay_range);
-                if (new_target)
-                {
+                if (auto new_target = findBestTarget(ot->getPosition(), relay_range))
                     owner.getOrAddComponent<Target>().entity = new_target;
-                }else{
+                else
+                {
+                    // If our current target coords are 0,0, reinitalize them to
+                    // our current position
+                    if (ai->order_target_location == glm::vec2(0.0f, 0.0f))
+                        ai->order_target_location = ot->getPosition();
+
+                    // If we're within 1U of an existing destination, find new
+                    // coordinates within our long-range radar range.
                     auto diff = ai->order_target_location - ot->getPosition();
-                    if (glm::length2(diff) < 1000.0f*1000.0f) {
+                    if (glm::length2(diff) < 1000.0f * 1000.0f)
+                    {
                         ai->orders = AIOrder::Roaming;
-                        ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
+                        ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                     }
                     flyTowards(ai->order_target_location);
                 }
-            }else{
+            }
+            else
+            {
                 auto tubes = owner.getComponent<MissileTubes>();
                 if (tubes && tubes->mounts.size() > 0)
                 {
-                    // Find a station which can re-stock our weapons.
-                    auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range);
-                    if (new_target)
+                    // Find an entity that can re-stock our weapons.
+                    if (auto new_target = findBestMissileRestockTarget(ot->getPosition(), long_range))
                     {
                         ai->orders = AIOrder::Retreat;
                         ai->order_target = new_target;
-                    }else{
+                    }
+                    else
+                    {
                         auto diff = ai->order_target_location - ot->getPosition();
-                        if (glm::length2(diff) < 1000.0f*1000.0f) {
+                        if (glm::length2(diff) < 1000.0f * 1000.0f)
+                        {
                             ai->orders = AIOrder::Roaming;
-                            ai->order_target_location = glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
+                            ai->order_target_location = ot->getPosition() + glm::vec2(random(-long_range, long_range), random(-long_range, long_range));
                         }
                         flyTowards(ai->order_target_location);
                     }
-                }else{
-                    pathPlanner.clear();
                 }
+                else pathPlanner.clear();
             }
         }
         break;
@@ -599,7 +618,58 @@ void ShipAI::runAttack(sp::ecs::Entity target)
         auto thrusters = owner.getComponent<ManeuveringThrusters>();
         if (thrusters) thrusters->target = vec2ToAngle(position_diff);
     }else{
-        if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
+        // Unguided HVLIs require the firing ship to maintain aim by rotating.
+        if (best_missile_type == MW_HVLI &&
+            (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right))
+        {
+            // Calculate the angle to the target
+            auto target_position = tt->getPosition();
+            auto diff = target_position - ot->getPosition();
+            float angle_to_target = vec2ToAngle(diff);
+
+            // Determine which side to face toward target.
+            float desired_rotation = angle_to_target;
+
+            if (weapon_direction == EWeaponDirection::Left)
+                desired_rotation = angle_to_target + 90.0f;
+            else if (weapon_direction == EWeaponDirection::Right)
+                desired_rotation = angle_to_target - 90.0f;
+            else
+            {
+                // Choose the side that requires less rotation.
+                float left_rotation = angle_to_target + 90.0f;
+                float right_rotation = angle_to_target - 90.0f;
+                if (fabs(angleDifference(ot->getRotation(), left_rotation)) < fabs(angleDifference(ot->getRotation(), right_rotation)))
+                    desired_rotation = left_rotation;
+                else
+                    desired_rotation = right_rotation;
+            }
+
+            // Override movement orders to maintain HVLI firing position.
+            auto thrusters = owner.getComponent<ManeuveringThrusters>();
+            if (thrusters) thrusters->target = desired_rotation;
+
+            auto impulse = owner.getComponent<ImpulseEngine>();
+            if (impulse && impulse->max_speed_forward > 0.0f)
+            {
+                if (distance > attack_distance + impulse->max_speed_forward * 5.0f)
+                    impulse->request = 1.0f;
+                else if (distance > attack_distance)
+                    impulse->request = (distance - attack_distance) / (impulse->max_speed_forward * 5.0f);
+                else if (distance < attack_distance - impulse->max_speed_forward * 5.0f)
+                    impulse->request = -1.0f;
+                else
+                    impulse->request = -(attack_distance - distance) / (impulse->max_speed_forward * 5.0f);
+
+                // Reduce thrust if not facing the correct direction.
+                const float rotation_diff = fabs(angleDifference(desired_rotation, ot->getRotation()));
+                if (rotation_diff > 90.0f)
+                    impulse->request = -impulse->request;
+                else if (rotation_diff > 45.0f)
+                    impulse->request *= (1.0f - (rotation_diff - 45.0f) / 45.0f);
+            }
+        }
+        else if (weapon_direction == EWeaponDirection::Side || weapon_direction == EWeaponDirection::Left || weapon_direction == EWeaponDirection::Right)
         {
             //We have side beams, find out where we want to attack from.
             auto target_position = tt->getPosition();
@@ -862,7 +932,8 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     const float target_distance = glm::length(ot->getPosition() - target_position);
     const float search_distance = std::min(short_range, target_distance + 500.0f);
     const float target_angle = vec2ToAngle(target_position - ot->getPosition());
-    const float search_angle = 5.0;
+    const float fire_angle = ot->getRotation() + tube.direction;
+    const float search_angle = 5.0f;
 
     // Verify if missle can be fired safely
     for(auto entity : sp::CollisionSystem::queryArea(ot->getPosition() - glm::vec2(search_distance, search_distance), ot->getPosition() + glm::vec2(search_distance, search_distance)))
@@ -873,10 +944,9 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
                 // Ship in research triangle
                 const auto owner_to_obj = t->getPosition() - ot->getPosition();
                 const float heading_to_obj = vec2ToAngle(owner_to_obj);
-                const float angle_from_heading_to_target = std::abs(angleDifference(heading_to_obj, target_angle));
-                if (angle_from_heading_to_target < search_angle) {
+                const float angle_from_heading_to_fire_angle = std::abs(angleDifference(heading_to_obj, fire_angle));
+                if (angle_from_heading_to_fire_angle < search_angle)
                     return std::numeric_limits<float>::infinity();
-                }
             }
         }
     }
@@ -887,7 +957,6 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
 
         auto target_position = tt->getPosition();
         float target_angle = vec2ToAngle(target_position - ot->getPosition());
-        float fire_angle = ot->getRotation() + tube.direction;
 
         //HVLI missiles do not home or turn. So use a different targeting mechanism.
         float angle_diff = angleDifference(target_angle, fire_angle);
@@ -901,7 +970,7 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
         auto target_radius = 100.0f;
         if (auto physics = target.getComponent<sp::Physics>())
             target_radius = physics->getSize().x;
-        if (std::abs(angle_diff) < 80.0f && target_distance * glm::degrees(tanf(fabs(angle_diff))) < target_radius * 2.0f)
+        if (std::abs(angle_diff) < 80.0f && target_distance * tanf(glm::radians(fabs(angle_diff))) < target_radius * 2.0f)
             return fire_angle;
 
         return std::numeric_limits<float>::infinity();
