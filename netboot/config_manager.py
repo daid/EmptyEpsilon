@@ -18,7 +18,7 @@ class Client:
             self.__CONFIG_PATH = "test/"
         self.__mac = mac
         self.__ip = ip
-        self.__name = "None"
+        self.__name = "(same as MAC)"
         self.__auto_connect = False
         self.__ship = ""
         self.__station = ""
@@ -68,7 +68,7 @@ class Client:
             if position.lower() == pos.lower():
                 idx = self.POSITIONS.index(pos)
         if idx is None:
-            print("Unknown position: [%s], possible position: %s" % (position, ', '.join(self.POSITIONS)))
+            print("Unknown position: [%s], possible positions: %s" % (position, ', '.join(self.POSITIONS)))
             return
         self.replaceInIni("autoconnect", idx)
     
@@ -96,8 +96,8 @@ class Client:
 
     def __repr__(self):
         if self.__auto_connect:
-            return "%s %s [%s] (%s)" % (self.__mac, self.__name, self.__station, self.__ship)
-        return "%s %s" % (self.__mac, self.__name)
+            return "{: >12} {: >20} {: >20} {: >20}".format(self.__mac, self.__name, self.__station, self.__ship)
+        return "{: >12} {: >20}".format(self.__mac, self.__name)
 
 class ClientDatabase:
     __LEASES_FILE = "/var/lib/misc/dnsmasq.leases"
@@ -158,12 +158,16 @@ class ConfigCmd(cmd.Cmd):
         return []
     
     def do_list(self, args):
-        'List all the clients known to the server.'
+        'List all clients known to the server by their MAC address and name (if configured), and if connected to the server by their crew position and ship.'
+        print()
+        print("{: >12} {: >20} {: >20} {: >20}".format("MAC address", "Name", "Position", "Ship"))
+        print("{: >12} {: >20} {: >20} {: >20}".format("============", "====================", "====================", "===================="))
         for client in self.__client_database.getClients():
             print(client)
+        print()
     
     def do_edit(self, args):
-        'Directly edit a configuration file for a certain client, will create a new file if none exists.'
+        'Open the specified client\'s EmptyEpsilon Preferences File in the nano editor, or create a new file if none exists.\nExample: edit 00abcdef1234'
         client = self._getClient(args)
         if not client:
             return
@@ -179,7 +183,7 @@ class ConfigCmd(cmd.Cmd):
         return result
 
     def do_setname(self, args):
-        'Set a name of a machine'
+        'Set the specified client\'s name.\nExample: setname 00abcdef1234 Red_shirt'
         args = args.split(" ", 1)
         client = self._getClient(args[0])
         if not client:
@@ -190,7 +194,8 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_setposition(self, args):
-        'Set the autoconnect position of a client'
+        'Set the specified client\'s autoconnect position.\nExample: setposition 00abcdef1234 helms'
+        print("%s" % (', '.join(self.POSITIONS)))
         args = args.split(" ", 1)
         client = self._getClient(args[0])
         if not client:
@@ -201,7 +206,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_exec(self, args):
-        'Execute any command trough SSH on one or more clients.'
+        'Execute any command on the specified clients over SSH.\nExamples: exec 00abcdef1234 ip addr\n         exec all ip addr\n          exec 00ab* ip addr'
         args = args.split(" ", 1)
         for client in self._getClients(args[0]):
             client.runOnClient(args[1])
@@ -210,7 +215,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_set(self, args):
-        'Set any option to one or more clients.'
+        'Set or replace the value of any EmptyEpsilon Preferences File option on the specified clients.\nExamples: set 00abcdef1234 music_enabled 0\n        set all music_enabled 0\n          set 00ab* music_enabled 0'
         args = args.split(" ", 2)
         for client in self._getClients(args[0]):
             client.replaceInIni(args[1], args[2])
@@ -219,6 +224,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_reboot(self, args):
+        'Reboot the specified clients.\nExamples: reboot 00abcdef1234\n          reboot all\n          reboot 00ab*'
         for client in self._getClients(args):
             client.runOnClient("reboot")
 
@@ -226,6 +232,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
 
     def do_restart(self, args):
+        'Restart EmptyEpsilon on the specified client.\nExamples: restart 00abcdef1234\n          restart all\n          restart 00ab*'
         for client in self._getClients(args):
             client.runOnClient("systemctl restart emptyepsilon.service")
 
@@ -233,7 +240,7 @@ class ConfigCmd(cmd.Cmd):
         return self.complete_edit(text, line, begidx, endidx)
     
     def do_exit(self, args):
-        'Exit the configuration editor.'
+        'Exit this configuration tool.'
         return True
 
 if len(sys.argv) > 1:
