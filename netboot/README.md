@@ -26,7 +26,7 @@ You also need to have a standalone wired network, or a second wired network inte
 1. Copy the `build_netboot_system.sh` script to the freshly installed Debian system.
 1. Run `build_netboot_system.sh` as the root user. This installs several packages, downloads an additional Linux installation for the network boot environment, and compiles EmptyEpsilon in this environment from source.
 
-   This script sets up your system to run a DHCP server over its network interface. After running this script, the DHCP server is not yet activated; however, on the following reboot it will distribute IP addresses to network clients. **If this system is an an existing network that already has an active DHCP server, this will disrupt your local network. You have been warned!**
+   This script sets up your system to run a DHCP server over its network interface. After running this script, the DHCP server is not yet activated; however, on the following reboot it will distribute IP addresses to network clients. **If this system is on an existing network that already has an active DHCP server, this will disrupt your local network. You have been warned!**
 
 1. Disconnect the network cable from the server.
 1. Reboot.
