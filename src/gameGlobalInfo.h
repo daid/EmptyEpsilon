@@ -53,6 +53,7 @@ public:
     bool use_system_damage;
     bool allow_main_screen_tactical_radar;
     bool allow_main_screen_long_range_radar;
+    bool allow_main_screen_strategic_map;
     string default_skybox = "default";
     string gm_control_code;
     float elapsed_time;
