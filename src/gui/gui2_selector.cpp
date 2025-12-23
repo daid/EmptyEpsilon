@@ -5,7 +5,7 @@
 #include "soundManager.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30)
+: GuiEntryList(owner, id, func)
 {
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
         if (getSelectionIndex() <= 0)

@@ -9,7 +9,7 @@ class GuiArrowButton;
 class GuiSelector : public GuiEntryList
 {
 protected:
-    float text_size;
+    float text_size = 30.0f;
     float popup_width = 0.0f;
     float popup_button_height = 50.0f;
     sp::Alignment text_alignment;
