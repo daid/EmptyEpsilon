@@ -71,7 +71,10 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setSize(280.0f, 300.0f
             - (gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f)
             - (gameGlobalInfo->use_system_damage ? 0.0f : 50.0f)
-            - (gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f))
+            - (!gameGlobalInfo->use_beam_shield_frequencies && !gameGlobalInfo->use_system_damage ? 100.0f : 0.0f)
+            - (my_spaceship.hasComponent<Shields>() ? 0.0f : 100.0f)
+            - (my_spaceship.hasComponent<Shields>() && gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f)
+        )
         ->setAttribute("layout", "vertical");
 
     // Beam weapon targeting controls
@@ -81,7 +84,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
         ->setSize(200.0f, 50.0f)
         ->setAttribute("margin", "80, 0, 0, 0");
 
-    GuiElement* beam_frequency_row = new GuiElement(beam_shield_box, "BEAM_FREQUENCY_ROW");
+    beam_frequency_row = new GuiElement(beam_shield_box, "BEAM_FREQUENCY_ROW");
     beam_frequency_row
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
@@ -92,7 +95,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     (new GuiBeamFrequencySelector(beam_frequency_row, ""))
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    GuiElement* beam_system_row = new GuiElement(beam_shield_box, "BEAM_SYSTEM_ROW");
+    beam_system_row = new GuiElement(beam_shield_box, "BEAM_SYSTEM_ROW");
     beam_system_row
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->setAttribute("layout", "horizontal");
@@ -114,7 +117,8 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     }
 
     // The shield frequency selector includes a shield activation toggle.
-    (new GuiLabel(beam_shield_box, "SHIELD_CONTROL_LABEL", tr("Shield controls"), 30.0f))
+    shield_label = new GuiLabel(beam_shield_box, "SHIELD_CONTROL_LABEL", tr("Shield controls"), 30.0f);
+    shield_label
         ->addBackground()
         ->setSize(280.0f, 50.0f);
 
@@ -178,14 +182,20 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 
             if (beam_shield_box->isVisible())
             {
-                const float window_width_excess = renderer.getVirtualSize().x - 1260.0f;
+                beam_label->setVisible(gameGlobalInfo->use_system_damage || gameGlobalInfo->use_beam_shield_frequencies);
+                beam_frequency_row->setVisible(gameGlobalInfo->use_beam_shield_frequencies);
+                beam_system_row->setVisible(gameGlobalInfo->use_system_damage);
+                const bool has_shields = my_spaceship.hasComponent<Shields>();
+
+                shield_label->setVisible(has_shields);
+                float window_width_excess = has_shields ? renderer.getVirtualSize().x - 1260.0f : 80.0f;
 
                 // Widen group label on wider viewports.
                 if (window_width_excess > 0.0f)
                 {
                     beam_label
                         ->setSize(200.0f + std::min(80.0f, window_width_excess), 50.0f)
-                        ->setAttribute("margin", static_cast<string>(static_cast<int>(80.0f - std::clamp(window_width_excess - 80.0f, 0.0f, 80.0f))) + ", 0, 0, 0");
+                        ->setAttribute("margin", static_cast<string>(static_cast<int>(std::clamp(80.0f - window_width_excess, 0.0f, 80.0f))) + ", 0, 0, 0");
                 }
 
                 // Expand abbreviated labels on wider viewports.
