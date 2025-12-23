@@ -1,5 +1,4 @@
-#ifndef GUI2_SELECTOR_H
-#define GUI2_SELECTOR_H
+#pragma once
 
 #include "gui2_entrylist.h"
 #include "gui2_togglebutton.h"
@@ -10,7 +9,9 @@ class GuiArrowButton;
 class GuiSelector : public GuiEntryList
 {
 protected:
-    float text_size;
+    float text_size = 30.0f;
+    float popup_width = 0.0f;
+    float popup_button_height = 50.0f;
     sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
@@ -25,6 +26,7 @@ public:
     virtual void onFocusLost() override;
 
     GuiSelector* setTextSize(float size);
+    // Define a width that overrides the GuiSelector's width for the popup.
+    // If less than the GuiSelector's width, this value is ignored.
+    GuiSelector* setPopupWidth(float width);
 };
-
-#endif//GUI2_SELECTOR_H
