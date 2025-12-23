@@ -26,8 +26,11 @@ private:
     GuiToggleButton* lock_aim;
     GuiElement* beam_shield_box;
     GuiLabel* beam_label;
+    GuiElement* beam_frequency_row;
     GuiLabel* beam_frequency_label;
+    GuiElement* beam_system_row;
     GuiLabel* beam_system_label;
+    GuiLabel* shield_label;
 public:
     WeaponsScreen(GuiContainer* owner);
 
