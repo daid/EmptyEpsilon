@@ -65,20 +65,68 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(130, 50);
 
+    beam_shield_box = new GuiElement(this, "BEAM_SHIELD_BOX");
+    beam_shield_box
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(280.0f, 300.0f
+            - (gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f)
+            - (gameGlobalInfo->use_system_damage ? 0.0f : 50.0f)
+            - (gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f))
+        ->setAttribute("layout", "vertical");
+
+    // Beam weapon targeting controls
+    beam_label = new GuiLabel(beam_shield_box, "BEAM_TARGETING_LABEL", tr("Beam targeting"), 30.0f);
+    beam_label
+        ->addBackground()
+        ->setSize(200.0f, 50.0f)
+        ->setAttribute("margin", "80, 0, 0, 0");
+
+    GuiElement* beam_frequency_row = new GuiElement(beam_shield_box, "BEAM_FREQUENCY_ROW");
+    beam_frequency_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+    beam_frequency_label = new GuiLabel(beam_frequency_row, "", tr("beam_weapon_frequency", "Freq "), 30.0f);
+    beam_frequency_label
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiBeamFrequencySelector(beam_frequency_row, ""))
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+    GuiElement* beam_system_row = new GuiElement(beam_shield_box, "BEAM_SYSTEM_ROW");
+    beam_system_row
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setAttribute("layout", "horizontal");
+    beam_system_label = new GuiLabel(beam_system_row, "", tr("beam_weapon_targeted_system", "Sys "), 30.0f);
+    beam_system_label
+        ->setAlignment(sp::Alignment::CenterRight)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+    (new GuiBeamTargetSelector(beam_system_row, ""))
+        ->setPopupWidth(300.0f)
+        ->setSize(200.0f, 50.0f);
+
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(-20, -120, sp::Alignment::BottomRight)->setSize(280, 150);
-        (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beam info"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
-        (new GuiBeamTargetSelector(beam_info_box, "BEAM_TARGET_SELECTOR"))->setPosition(0, -50, sp::Alignment::BottomRight)->setSize(GuiElement::GuiSizeMax, 50);
+        (new GuiPowerDamageIndicator(this, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))
+            ->setPosition(-20.0f, -150.0f, sp::Alignment::BottomRight)
+            ->setSize(280.0f, 100.0f
+                - (gameGlobalInfo->use_beam_shield_frequencies ? 0.0f : 50.0f)
+                - (gameGlobalInfo->use_system_damage ? 0.0f : 50.0f));
+    }
 
-        if (!gameGlobalInfo->use_beam_shield_frequencies)
-        {   //If we do have system damage, but no shield frequencies, we can partially overlap this with the shield button.
-            //So move the beam configuration a bit down.
-            beam_info_box->setPosition(-20, -50, sp::Alignment::BottomRight);
-        }
+    // The shield frequency selector includes a shield activation toggle.
+    (new GuiLabel(beam_shield_box, "SHIELD_CONTROL_LABEL", tr("Shield controls"), 30.0f))
+        ->addBackground()
+        ->setSize(280.0f, 50.0f);
+
+    if (gameGlobalInfo->use_beam_shield_frequencies)
+    {
+        (new GuiShieldFrequencySelect(beam_shield_box, "SHIELD_FREQ"))
+            ->setSize(GuiElement::GuiSizeMax, 100.0f);
+    }
+    else
+    {
+        (new GuiShieldsEnableButton(beam_shield_box, "SHIELDS_ENABLE"))
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
     }
 
     auto stats = new GuiElement(this, "WEAPONS_STATS");
@@ -91,14 +139,6 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     rear_shield_display = new GuiKeyValueDisplay(stats, "REAR_SHIELD_DISPLAY", 0.45, tr("shields", "Rear"), "");
     rear_shield_display->setIcon("gui/icons/shields-aft")->setTextSize(20)->setSize(240, 40);
 
-    if (gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        //The shield frequency selection includes a shield enable button.
-        (new GuiShieldFrequencySelect(this, "SHIELD_FREQ"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 100);
-    }else{
-        (new GuiShieldsEnableButton(this, "SHIELDS_ENABLE"))->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(280, 50);
-    }
-
     (new GuiCustomShipFunctions(this, CrewPosition::weaponsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
 }
 
@@ -110,6 +150,7 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         energy_display->setVisible(reactor);
         if (reactor)
             energy_display->setValue(string(int(reactor->energy)));
+
         auto shields = my_spaceship.getComponent<Shields>();
         if (shields && shields->entries.size() > 0) {
             front_shield_display->setValue(string(shields->entries[0].percentage()) + "%");
@@ -123,15 +164,45 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         } else {
             rear_shield_display->hide();
         }
+
         if (auto tg = my_spaceship.getComponent<Target>())
             targets.set(tg->entity);
         else
             targets.set(sp::ecs::Entity{});
 
         missile_aim->setVisible(tube_controls->getManualAim());
-        if (beam_info_box)
-            beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
+
+        if (beam_shield_box)
+        {
+            beam_shield_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() || my_spaceship.hasComponent<Shields>());
+
+            if (beam_shield_box->isVisible())
+            {
+                const float window_width_excess = renderer.getVirtualSize().x - 1260.0f;
+
+                // Widen group label on wider viewports.
+                if (window_width_excess > 0.0f)
+                {
+                    beam_label
+                        ->setSize(200.0f + std::min(80.0f, window_width_excess), 50.0f)
+                        ->setAttribute("margin", static_cast<string>(static_cast<int>(80.0f - std::clamp(window_width_excess - 80.0f, 0.0f, 80.0f))) + ", 0, 0, 0");
+                }
+
+                // Expand abbreviated labels on wider viewports.
+                if (window_width_excess > 60.0f)
+                {
+                    beam_frequency_label->setText(tr("beam_weapon_frequency", "Frequency"));
+                    beam_system_label->setText(tr("beam_weapon_targeted_system", "System"));
+                }
+                else
+                {
+                    beam_frequency_label->setText(tr("beam_weapon_frequency", "Freq "));
+                    beam_system_label->setText(tr("beam_weapon_targeted_system", "Sys "));
+                }
+            }
+        }
     }
+
     GuiOverlay::onDraw(renderer);
 }
 
