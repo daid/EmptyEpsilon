@@ -76,53 +76,72 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     audio_page = new GuiElement(container, "OPTIONS_AUDIO");
     audio_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     interface_page = new GuiElement(container, "OPTIONS_INTERFACE");
-    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "vertical");
+    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "horizontal");
 
+    setupInterfaceOptions(return_to);
     setupGraphicsOptions();
     setupAudioOptions();
 
-    // Interface options
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Radar Rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    // Helms rotation lock.
-    (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
+    // Bottom GUI.
+    // Back button.
+    (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
     {
-        PreferencesManager::set("helms_radar_lock", value ? "1" : "");
-        PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
-        PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Weapons rotation lock.
-    (new GuiToggleButton(interface_page, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Science rotation lock.
-    (new GuiToggleButton(interface_page, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("science_radar_lock", value ? "1" : "");
-        PreferencesManager::set("operations_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Control configuration
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-
-    // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this, return_to]()
-    {
-        new HotkeyMenu(return_to);
+        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
+        sp::RenderTarget::setDefaultFont(main_font);
+        // Close this menu, stop the music, and return to the main menu.
         destroy();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
+        soundManager->stopMusic();
+        exitOptionsMenu(return_to, getRenderLayer());
 
-    //Select the language
+    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
+    // Save options button.
+    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
     {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-        
+        if (getenv("EE_CONF_DIR"))
+            PreferencesManager::save(string(getenv("EE_CONF_DIR")) + "/options.ini");
+        else if (getenv("HOME"))
+            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
+        else
+            PreferencesManager::save("options.ini");
+    }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
+}
+
+void OptionsMenu::update(float delta)
+{
+    if (keys.escape.getDown())
+    {
+        exitOptionsMenu(return_to, getRenderLayer());
+        destroy();
+        soundManager->stopMusic();
+    }
+}
+
+void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
+{
+    // Interface options
+    GuiElement* interface_left_column = new GuiElement(interface_page, "");
+    interface_left_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    interface_left_column
+        ->setAttribute("margin", "0, 20, 0, 0");
+    GuiElement* interface_right_column = new GuiElement(interface_page, "");
+    interface_right_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    // Interface page, left column
+
+    // Select language
+    {
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Interface language"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
         std::vector<string> languages = findResources("locale/main.*.po");
-        
-        for(string &language : languages) 
+        // Strip extension
+        for (string &language : languages)
         {
-            //strip extension
             language = language.substr(language.find(".") + 1, language.rfind("."));
         }
         std::sort(languages.begin(), languages.end());
@@ -130,20 +149,24 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         int default_index = 0;
         auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
         if(default_elem != languages.end())
-        {
-            default_index =  static_cast<int>(default_elem - languages.begin());
-        }
+            default_index = static_cast<int>(default_elem - languages.begin());
 
-        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
+        (new GuiSelector(interface_left_column, "LANGUAGE_SELECTOR", [](int index, string value)
         {
             i18n::reset();
             i18n::load("locale/main." + value + ".po");
             PreferencesManager::set("language", value);
             keys.init(); // Reinit keyboard shortcut labels
-        }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+        }))
+            ->setOptions(languages)
+            ->setSelectionIndex(default_index)
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        (new GuiLabel(interface_left_column, "LANGUAGE_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
     }
     
-    //Gui theme selection
+    // GUI theme selection
     {
         std::vector<string> themes = findResources("gui/*.theme.txt");
         
@@ -185,8 +208,8 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
         }
 
         if (themes.size() > 1) {
-            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-            (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR", [](int index, string theme_name)
             {
                 GuiTheme::setCurrentTheme(theme_name);
                 main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
@@ -196,38 +219,113 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
             }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
         }
     }
-    
-    // Bottom GUI.
-    // Back button.
-    (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
-    {
-        //Apply potentially modified font now, in order not to have some half rendered panel with one font and another
-        sp::RenderTarget::setDefaultFont(main_font);
-        // Close this menu, stop the music, and return to the main menu.
-        destroy();
-        soundManager->stopMusic();
-        exitOptionsMenu(return_to, getRenderLayer());
 
-    }))->setPosition(50, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
-    // Save options button.
-    (new GuiButton(this, "SAVE_OPTIONS", tr("options", "Save"), []()
-    {
-        if (getenv("EE_CONF_DIR"))
-            PreferencesManager::save(string(getenv("EE_CONF_DIR")) + "/options.ini");
-        else if (getenv("HOME"))
-            PreferencesManager::save(string(getenv("HOME")) + "/.emptyepsilon/options.ini");
-        else
-            PreferencesManager::save("options.ini");
-    }))->setPosition(200, -50, sp::Alignment::BottomLeft)->setSize(150, 50);
-}
+    // Interface page, right column
 
-void OptionsMenu::update(float delta)
-{
-    if (keys.escape.getDown())
+    // Control configuration
+    (new GuiLabel(interface_right_column, "CONTROL_OPTIONS_LABEL", tr("Control options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Keyboard config (hotkeys/keybindings)
+    (new GuiButton(interface_right_column, "CONFIGURE_KEYBOARD", tr("Configure keyboard/joystick"), [this, return_to]()
     {
-        exitOptionsMenu(return_to, getRenderLayer());
+        new HotkeyMenu(return_to);
         destroy();
-        soundManager->stopMusic();
+    }))
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Radar rotation lock options.
+    {
+        GuiElement* radar_rotation_lock = new GuiElement(interface_right_column, "RADAR_ROTATION_LOCK");
+        radar_rotation_lock
+            ->setSize(GuiElement::GuiSizeMax, 310.0f)
+            ->setAttribute("layout", "vertical");
+        radar_rotation_lock
+            ->setAttribute("margin", "0, 20");
+
+        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+        (new GuiLabel(radar_rotation_lock, "RADAR_LOCK_DETAILS", tr("On: Top of radar points forward, radar rotates\nOff: Top of radar points to heading 0, ship rotates"), 20.0f))
+            ->setSize(GuiElement::GuiSizeMax, 60.0f)
+            ->setAttribute("margin", "0, 0, 0, 20");
+
+        // Helms/Tactical/Single Pilot rotation lock.
+        const float row_height = 50.0f;
+        GuiElement* lock_row = new GuiElement(radar_rotation_lock, "HELMS_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        helms_radar_lock_toggle = new GuiToggleButton(lock_row, "HELMS_RADAR_LOCK", tr("radar_locks", "Lock to 0"),
+        [this](bool value)
+        {
+            PreferencesManager::set(       "helms_radar_lock", value ? "1" : "");
+            PreferencesManager::set(    "tactical_radar_lock", value ? "1" : "");
+            PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
+
+            helms_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        helms_radar_lock_toggle
+            ->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")
+            ->setText(helms_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
+
+        // Weapons rotation lock.
+        lock_row = new GuiElement(radar_rotation_lock, "WEAPONS_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        (new GuiLabel(lock_row, "WEAPONS_LOCK_DETAILS", tr("radar_locks", "Weapons"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        weapons_radar_lock_toggle = new GuiToggleButton(lock_row, "WEAPONS_RADAR_LOCK", tr("radar_locks", "Lock"),
+        [this](bool value)
+        {
+            PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
+
+            weapons_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        weapons_radar_lock_toggle
+            ->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")
+            ->setText(weapons_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
+
+        // Science/Ops rotation lock.
+        lock_row = new GuiElement(radar_rotation_lock, "SCIENCE_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        (new GuiLabel(lock_row, "SCIENCE_LOCK_DETAILS", tr("radar_locks", "Science,\nOperations"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        science_radar_lock_toggle = new GuiToggleButton(lock_row, "SCIENCE_RADAR_LOCK", tr("radar_locks", "Lock"),
+        [this](bool value)
+        {
+            PreferencesManager::set("science_radar_lock", value ? "1" : "");
+            PreferencesManager::set("operations_radar_lock", value ? "1" : "");
+
+            science_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        science_radar_lock_toggle
+            ->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")
+            ->setText(science_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
     }
 }
 
