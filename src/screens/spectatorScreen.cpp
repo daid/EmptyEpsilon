@@ -200,7 +200,7 @@ void SpectatorScreen::update(float delta)
     }
 
     if (keys.pause.getDown())
-        if (game_server) engine->setGameSpeed(0.0);
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.spectator_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
