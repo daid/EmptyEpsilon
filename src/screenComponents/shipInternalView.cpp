@@ -1,8 +1,8 @@
-#include "playerInfo.h"
 #include "shipInternalView.h"
+#include "playerInfo.h"
 #include "components/internalrooms.h"
 #include "ecs/query.h"
-
+#include "gui/theme.h"
 
 GuiShipInternalView::GuiShipInternalView(GuiContainer* owner, string id, float room_size)
 : GuiElement(owner, id), room_size(room_size), room_container(nullptr)
@@ -154,17 +154,16 @@ GuiShipRoom::GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::i
 : GuiElement(owner, id), system(ShipSystem::Type::None), room_size(room_size), func(func)
 {
     setSize(glm::vec2(dimensions) * room_size);
+    room_theme = theme->getStyle("ship_room");
 }
 
 void GuiShipRoom::onDraw(sp::RenderTarget& renderer)
 {
     float f = 1.0;
     ShipSystem* sys = nullptr;
-    if (ship)
-        sys = ShipSystem::get(ship, system);
-    if (sys)
-        f = std::max(0.0f, sys->health);
-    renderer.drawStretchedHV(rect, rect.size.x * 0.25f, "room_background", glm::u8vec4(255, 255 * f, 255 * f, 255));
+    if (ship) sys = ShipSystem::get(ship, system);
+    if (sys) f = std::max(0.0f, sys->health);
+    renderer.drawStretchedHV(rect, rect.size.x * 0.25f, room_theme->get(getState()).texture, glm::u8vec4(255, 255 * f, 255 * f, 255));
 
     if (system != ShipSystem::Type::None && ship && sys)
     {
@@ -226,14 +225,16 @@ void GuiShipRoom::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiShipDoor::GuiShipDoor(GuiContainer* owner, string id, func_t func)
 : GuiElement(owner, id), horizontal(false), func(func)
 {
+    door_theme = theme->getStyle("ship_door");
 }
 
 void GuiShipDoor::onDraw(sp::RenderTarget& renderer)
 {
+    const auto& door = door_theme->get(getState());
     if (horizontal)
-        renderer.drawSprite("room_door.png", getCenterPoint(), rect.size.y);
+        renderer.drawSprite(door.texture, getCenterPoint(), rect.size.y);
     else
-        renderer.drawRotatedSprite("room_door.png", getCenterPoint(), rect.size.y, 90);
+        renderer.drawRotatedSprite(door.texture, getCenterPoint(), rect.size.y, 90.0f);
 }
 
 bool GuiShipDoor::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
@@ -252,6 +253,8 @@ void GuiShipDoor::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiShipCrew::GuiShipCrew(GuiContainer* owner, string id, sp::ecs::Entity crew, sp::ecs::Entity& selected_crew_member, func_t func)
 : GuiElement(owner, id), crew(crew), selected_crew_member(selected_crew_member), func(func)
 {
+    crew_theme = theme->getStyle("ship_crew");
+    selection_theme = theme->getStyle("ship_crew.selected");
 }
 
 void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
@@ -259,12 +262,13 @@ void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
     auto ic = crew.getComponent<InternalCrew>();
     if (!ic) return;
 
+    const auto& crew_style = crew_theme->get(getState());
     setPosition(ic->position * getSize().x, sp::Alignment::TopLeft);
 
-    float rotation = 0;
-    string tex = "topdownCrew0.png";
+    float rotation = 0.0f;
+    string tex = crew_style.texture + "0.png";
     if (ic->action == InternalCrew::Action::Move)
-        tex = "topdownCrew" + string(int(ic->action_delay * 12) % 6) + ".png";
+        tex = crew_style.texture + string(int(ic->action_delay * 12) % 6) + ".png";
     switch(ic->direction)
     {
     case InternalCrew::Direction::Left: rotation = 180; break;
@@ -275,7 +279,10 @@ void GuiShipCrew::onDraw(sp::RenderTarget& renderer)
     }
     renderer.drawRotatedSprite(tex, getCenterPoint(), getSize().x, rotation);
     if (selected_crew_member == crew)
-        renderer.drawSprite("redicule.png", getCenterPoint(), getSize().x);
+    {
+        const auto& selection_style = selection_theme->get(getState());
+        renderer.drawSprite(selection_style.texture, getCenterPoint(), getSize().x);
+    }
 }
 
 bool GuiShipCrew::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

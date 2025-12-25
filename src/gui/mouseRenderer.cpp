@@ -1,10 +1,12 @@
 #include "mouseRenderer.h"
 #include "main.h"
+#include "theme.h"
 
 MouseRenderer::MouseRenderer(RenderLayer* render_layer)
 : Renderable(render_layer)
 {
     visible = true;
+    setSpriteThemed("mouse.default");
 }
 
 void MouseRenderer::render(sp::RenderTarget& renderer)
@@ -35,4 +37,9 @@ void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
         this->position = position;
         visible = true;
     }
+}
+
+void MouseRenderer::setSpriteThemed(string theme_element)
+{
+    sprite = GuiTheme::getCurrentTheme()->getStyle(theme_element)->get(GuiElement::State::Normal).texture;
 }

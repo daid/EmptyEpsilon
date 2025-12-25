@@ -1,14 +1,16 @@
-#include <i18n.h>
 #include "aimLock.h"
+#include <i18n.h>
 
 #include "playerInfo.h"
 #include "missileTubeControls.h"
 #include "components/collision.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_rotationdial.h"
+#include "screenComponents/radarView.h"
 
 AimLockButton::AimLockButton(GuiContainer* owner, string id, GuiMissileTubeControls* tube_controls, GuiRotationDial* missile_aim)
-: GuiToggleButton(owner, id, tr("missile","Lock"), [this](bool value)
+: GuiToggleButton(owner, id, tr("missile", "Lock"), [this](bool value)
     {
         setAimLock(value);
     })
@@ -59,6 +61,8 @@ void AimLockButton::setAimLock(bool value)
 AimLock::AimLock(GuiContainer* owner, string id, GuiRadarView* radar, float min_value, float max_value, float start_value, func_t func)
 : GuiRotationDial(owner, id, min_value, max_value, start_value, func), radar(radar)
 {
+    back_style = theme->getStyle("rotationdial.back");
+    front_style = theme->getStyle("rotationdial.front");
 }
 
 void AimLock::onDraw(sp::RenderTarget& renderer)
@@ -67,8 +71,11 @@ void AimLock::onDraw(sp::RenderTarget& renderer)
     float view_rotation = radar->getViewRotation();
     float radius = std::min(rect.size.x, rect.size.y);
 
-    renderer.drawSprite("gui/widget/dial_background.png", center, radius);
-    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation);
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
+
+    renderer.drawSprite(back.texture, center, radius, back.color);
+    renderer.drawRotatedSprite(front.texture, center, radius, (value - min_value) / (max_value - min_value) * 360.0f - view_rotation, front.color);
 }
 
 bool AimLock::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

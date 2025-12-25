@@ -261,7 +261,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 //due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer")) mouse_renderer->setSpriteImage("mouse.png");
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer")) mouse_renderer->setSpriteThemed("mouse.default");
 }
 
 void GameMasterScreen::update(float delta)
@@ -456,10 +456,15 @@ void GameMasterScreen::update(float delta)
         cancel_action_button->show();
         if (mouse_renderer)
         {
-            if (gameGlobalInfo->on_gm_click_cursor == "")
-                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
+            string cursor = gameGlobalInfo->on_gm_click_cursor;
+            if (cursor == "")
+                cursor = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR;
+
+            // Check if this is a theme key (starts with "mouse.")
+            if (cursor.startswith("mouse."))
+                mouse_renderer->setSpriteThemed(cursor);
             else
-                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+                mouse_renderer->setSpriteImage(cursor);
         }
     }
     else
@@ -468,10 +473,10 @@ void GameMasterScreen::update(float delta)
         cancel_action_button->hide();
         if (mouse_renderer)
         {
-            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
-            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
-            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
-            else mouse_renderer->setSpriteImage("mouse.png");
+            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteThemed("mouse.ship");
+            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteThemed("mouse.faction");
+            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteThemed("mouse.add");
+            else mouse_renderer->setSpriteThemed("mouse.default");
         }
     }
 }

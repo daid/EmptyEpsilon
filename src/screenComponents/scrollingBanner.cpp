@@ -1,11 +1,12 @@
 #include "scrollingBanner.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "gui/theme.h"
 
 GuiScrollingBanner::GuiScrollingBanner(GuiContainer* owner)
 : GuiElement(owner, "")
 {
-    draw_offset = 0;
+    banner_style = theme->getStyle("scrollingbanner");
 }
 
 void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
@@ -17,11 +18,15 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
         draw_offset = 0;
         return;
     }
-    renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
+    auto banner = banner_style->get(getState());
+    renderer.drawStretchedHV(rect, banner.size, banner.texture);
 
     {
-        float font_size = rect.size.y;
-        auto prepared = bold_font->prepare(gameGlobalInfo->banner_string, 32, font_size, {255, 255, 255, 255}, rect.size, sp::Alignment::CenterLeft);
+        auto font = banner.font;
+        // Fall back to bold_font if theme font is invalid.
+        if (!font) font = bold_font;
+
+        auto prepared = font->prepare(gameGlobalInfo->banner_string, 32, rect.size.y, banner.color, rect.size, sp::Alignment::CenterLeft);
         if (draw_offset > std::max(prepared.getUsedAreaSize().x, rect.size.x) + black_area)
             draw_offset -= std::max(prepared.getUsedAreaSize().x, rect.size.x) + black_area;
         for(auto& g : prepared.data)

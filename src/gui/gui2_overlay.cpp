@@ -1,5 +1,6 @@
 #include "engine.h"
 #include "gui2_overlay.h"
+#include "theme.h"
 
 GuiOverlay::GuiOverlay(GuiContainer* owner, string id, glm::u8vec4 color)
 : GuiElement(owner, id), color(color)
@@ -39,6 +40,13 @@ GuiOverlay* GuiOverlay::setAlpha(int alpha)
 GuiOverlay* GuiOverlay::setTextureTiled(string texture)
 {
     this->texture = texture;
+    this->texture_mode = TM_Tiled;
+    return this;
+}
+
+GuiOverlay* GuiOverlay::setTextureTiledThemed(string theme_element, GuiElement::State state)
+{
+    this->texture = GuiTheme::getCurrentTheme()->getStyle(theme_element)->get(state).texture;
     this->texture_mode = TM_Tiled;
     return this;
 }

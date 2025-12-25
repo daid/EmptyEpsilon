@@ -31,7 +31,7 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png"); // TODO: Define crosses image as background image across EmptyEpsilon using GuiTheme
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Initialize autolayout columns.
     auto main_panel = new GuiPanel(this, "");

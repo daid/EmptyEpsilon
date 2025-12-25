@@ -33,11 +33,12 @@
 EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_position)
 : GuiOverlay(owner, "ENGINEERING_SCREEN", GuiTheme::getColor("background"))
 {
+    slider_tick_style = theme->getStyle("slider.tick");
     overlay_damaged_style = theme->getStyle("overlay.damaged");
     overlay_overheating_style = theme->getStyle("overlay.overheating");
     // Render the background decorations.
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiled("gui/background/crosses.png");
+    background_crosses->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
@@ -101,7 +102,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         info.coolant_bar->setColor(glm::u8vec4(32, 128, 128, 128))->setSize(column_width, GuiElement::GuiSizeMax);
         if (!gameGlobalInfo->use_system_damage)
             info.damage_bar->hide();
-        info.coolant_max_indicator = new GuiImage(info.coolant_bar, "", "gui/widget/SliderTick.png");
+        info.coolant_max_indicator = new GuiImage(info.coolant_bar, "", slider_tick_style->get(getState()).texture);
         info.coolant_max_indicator->setSize(40, 40);
         info.coolant_max_indicator->setAngle(90);
         info.coolant_max_indicator->setColor({255,255,255,0});
@@ -235,13 +236,17 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             info.power_bar->setValue(system->power_level);
             info.coolant_bar->setValue(system->coolant_level);
             if (coolant) info.coolant_bar->setEnable(!coolant->auto_levels);
-            if (system->coolant_request > 0.0f) {
-                float f = system->coolant_request / 10.f;
-                info.coolant_max_indicator->setPosition(-20 + info.coolant_bar->getSize().x * f, 5);
-                info.coolant_max_indicator->setColor({255,255,255,255});
-            } else {
-                info.coolant_max_indicator->setColor({255,255,255,0});
+
+            auto slider_tick_color = slider_tick_style->get(getState()).color;
+            if (system->coolant_request > 0.0f)
+            {
+                float f = system->coolant_request * 0.1f;
+                info.coolant_max_indicator->setPosition(-20.0f + info.coolant_bar->getSize().x * f, 5.0f);
+                info.coolant_max_indicator->setColor({slider_tick_color.r, slider_tick_color.g, slider_tick_color.b, 255});
             }
+            else
+                info.coolant_max_indicator->setColor({slider_tick_color.r, slider_tick_color.g, slider_tick_color.b, 0});
+
             total_coolant_used += system->coolant_level;
         }
 

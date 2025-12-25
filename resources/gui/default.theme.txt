@@ -1,21 +1,108 @@
 [base] {
+    # Full-game interface properties:
+
     # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     
     # Stronger font used at a few locations without UI widgets.
+    # UI widgets with their own font theme properties might set this on their own.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
     }
 
-    # Background color for all screens.
+    # Background color and images
     [background] {
         color: #1F252D
+        [background.crosses] {
+            image: gui/background/crosses.png
+        }
+        [background.gradient] {
+            image: gui/background/gradient.png
+        }
+        [background.gradient_single] {
+            image: gui/background/gradientSingle.png
+        }
+        [background.gradient_offset] {
+            image: gui/background/gradientOffset.png
+        }
     }
 
-    # GuiButton
+    # Mouse cursors
+    [mouse] {
+        image: mouse.png
+        [mouse.default] {
+            image: mouse.png
+        }
+        [mouse.add] {
+            image: mouse_add.png
+        }
+        [mouse.create] {
+            image: mouse_create.png
+        }
+        [mouse.faction] {
+            image: mouse_faction.png
+        }
+        [mouse.ship] {
+            image: mouse_ship.png
+        }
+    }
+
+    # Alert overlay
+    [alert_overlay] {
+        image: gui/alertOverlay.png
+    }
+
+    # Lua console
+    [luaconsole] {
+        size: 12.0
+        font: gui/fonts/RobotoMono-SemiBold.ttf
+        [luaconsole.log.back] {
+        }
+        [luaconsole.entry.back] {
+            image: gui/widget/TextEntryBackground.png
+            image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+    }
+
+    # Used in multiple GuiElement classes:
+
+    # Waypoints
+    [ship_waypoint] {
+        image: waypoint.png
+        [ship_waypoint.background] {
+            color: #8080FFD0
+        }
+        [ship_waypoint.text] {
+            color: #000000D0
+        }
+    }
+
+    # Outermost border of circular radars
+    [radar_outline] {
+        color: #FFFFFF
+    }
+
+    # Signal bands, used in radar views and sensor locking
+    # By default, biological = green, electrical = red, gravitational = blue.
+    # Scenarios or help text might refer to bands by color.
+    [signal_bands] {
+        [signal_bands.biological] {
+            color: #41FF51
+        }
+        [signal_bands.electrical] {
+            color: #FF2D54
+        }
+        [signal_bands.gravitational] {
+            color: #4678FF
+        }
+    }
+
+    # GuiElement classes:
+
+    # GuiButton, GuiToggleButton, GuiArrowButton
     [button] {
         color: #FFFFFF
-        size: 30
+        size: 30.0
         [button.back] {
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
@@ -72,20 +159,8 @@
     
     # GuiTextEntry
     [textentry] {
-        size: 30
+        size: 30.0
         [textentry.back] {
-            image: gui/widget/TextEntryBackground.png
-            image.focus: gui/widget/TextEntryBackground.focused.png
-        }
-    }
-
-    # Lua console
-    [luaconsole] {
-        size: 12
-        font: gui/fonts/RobotoMono-SemiBold.ttf
-        [luaconsole.log.back] {
-        }
-        [luaconsole.entry.back] {
             image: gui/widget/TextEntryBackground.png
             image.focus: gui/widget/TextEntryBackground.focused.png
         }
@@ -94,11 +169,12 @@
     # GuiSlider
     [slider] {
         [slider.back] {
-            size: 25
+            size: 25.0
             image: gui/widget/SliderBackground.png
         }
         [slider.tick] {
             image: gui/widget/SliderTick.png
+            color: #FFFFFF
         }
         [slider.front] {
             image: gui/widget/SliderKnob.png
@@ -119,7 +195,7 @@
         }
     }
     
-    # GuiPanel, used as a base for several other classes.
+    # GuiPanel
     [panel] {
         size: 25.0
         image: gui/widget/PanelBackground.png
@@ -131,7 +207,7 @@
             image: gui/widget/ProgressbarBackground.png
         }
         [progressbar.front] {
-            size: 25
+            size: 25.0
             image: gui/widget/ProgressbarFill.png
         }
     }
@@ -188,7 +264,13 @@
     }
 
     # GuiPowerDamageIndicator overlays
+    # Icons are all automatically suffixed with .png and should have transparent backgrounds.
     [overlay] {
+        image: gui/widget/damagePowerOverlay.png
+        font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+        size: 30.0
+
+        # Icons are all automatically suffixed with .png and should have transparent backgrounds.
         [overlay.damaged] {
             color: #FF0000
             image: gui/icons/status_damaged
@@ -203,6 +285,7 @@
         }
         [overlay.hacked] {
             color: #4040FF
+            image: gui/icons/station-relay
         }
         [overlay.no_power] {
             color: #FF0000
@@ -241,28 +324,36 @@
         }
     }
 
-    # Waypoints
-    [ship_waypoint] {
-        image: waypoint.png
-        [ship_waypoint.background] {
-            color: #8080FFD0
-        }
-        [ship_waypoint.text] {
-            color: #000000D0
+    # GuiShipRoom (internal ship room)
+    [ship_room] {
+        # Sliced square image
+        image: room_background.png
+    }
+
+    # GuiShipDoor (internal ship door)
+    [ship_door] {
+        image: room_door.png
+    }
+
+    # GuiShipCrew (internal ship repair crew)
+    [ship_crew] {
+        # Sprite frame filename prefix, to be followed by 0.png, 1.png ... 5.png for each frame.
+        # For example, the default value is topdownCrew, and the files are topdownCrew0.png, topdownCrew1.png ... topdownCrew5.png.
+        image: topdownCrew
+        [ship_crew.selected] {
+            # Must have a transparent background.
+            image: redicule.png
         }
     }
 
-    # Outermost border of circular radars
-    [radar_outline] {
-        color: #FFFFFF
-    }
-
-    # GuiArrow
+    # GuiArrow, as used on Engineering heat delta indicators.
+    # Arrow buttons are GuiArrowButtons styled in button.arrow.
     [arrow] {
         image: gui/widget/IndicatorArrow.png
     }
 
     # GuiSelector
+    # Arrow buttons are GuiArrowButtons styled in button.arrow.
     [selector] {
         [selector.back] {
             image: gui/widget/SelectorBackground.png
@@ -288,8 +379,23 @@
 
     # GuiResizableDialog
     [resizabledialog] {
+        # Corner handle for resizing the dialog.
         [resizabledialog.corner] {
             image: gui/widget/ResizeDialogCorner.png
         }
+    }
+
+    # GuiScrollingBanner
+    [scrollingbanner] {
+        image: gui/widget/LabelBackground.png
+        size: 25.0
+        font: gui/fonts/BebasNeue Bold.otf
+        color: #FFFFFF
+    }
+
+    # GuiSignalQualityIndicator
+    [signalquality] {
+        image: gui/widget/PanelBackground.png
+        size: 25.0
     }
 }

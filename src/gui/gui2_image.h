@@ -16,6 +16,7 @@ public:
 
     GuiImage* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiImage* setAngle(float angle) { this->angle = angle; return this; }
+    GuiImage* setTextureThemed(string theme_element, GuiElement::State state = GuiElement::State::Normal);
 };
 
 #endif//GUI2_IMAGE_H

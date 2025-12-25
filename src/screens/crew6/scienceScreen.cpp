@@ -41,11 +41,11 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
-    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientOffset.png");
-    background_gradient->setPosition(glm::vec2(105, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient->setTextureThemed("background.gradient_offset")->setPosition(glm::vec2(105, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiled("gui/background/crosses.png");
+    background_crosses->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
