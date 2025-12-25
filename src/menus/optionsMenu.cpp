@@ -247,8 +247,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
-            ->setSize(GuiElement::GuiSizeMax, 60.0f)
-            ->setAttribute("margin", "0, 0, 0, 20");
 
         // Helms/Tactical/Single Pilot rotation lock.
         const float row_height = 50.0f;
@@ -257,7 +255,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             ->setSize(GuiElement::GuiSizeMax, row_height)
             ->setAttribute("layout", "horizontal");
         lock_row
-            ->setAttribute("margin", "0, 0, 0, 10");
+            ->setAttribute("margin", "0, 0, 20, 10");
 
         (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
             ->setAlignment(sp::Alignment::CenterRight)
