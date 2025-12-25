@@ -1,12 +1,16 @@
 #include "textureManager.h"
 #include "vectorUtils.h"
 #include "logging.h"
-#include "gui2_rotationdial.h"
+#include "theme.h"
 #include "preferenceManager.h"
 
+#include "gui2_rotationdial.h"
+
 GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
-: GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
+: GuiElement(owner, id)
 {
+    back_style = theme->getStyle("rotationdial.back");
+    front_style = theme->getStyle("rotationdial.front");
 }
 
 void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
@@ -14,8 +18,11 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     auto center = getCenterPoint();
     float radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
-    renderer.drawSprite("gui/widget/dial_background.png", center, radius * 2.0f);
-    renderer.drawRotatedSprite("gui/widget/dial_button.png", center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f);
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
+
+    renderer.drawSprite(back.texture, center, radius * 2.0f, back.color);
+    renderer.drawRotatedSprite(front.texture, center, radius * 2.0f, (value - min_value) / (max_value - min_value) * 360.0f, front.color);
 }
 
 bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
