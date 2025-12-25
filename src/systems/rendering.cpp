@@ -120,6 +120,13 @@ void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
 
 void MeshRenderSystem::update(float delta)
 {
+    // Update banking angle for all physics entities.
+    for (auto [entity, mrc, transform, physics] : sp::ecs::Query<MeshRenderComponent, sp::Transform, sp::Physics>())
+    {
+        float target_bank_angle = 0.0f;
+        target_bank_angle = std::clamp(physics.getAngularVelocity(), -4.0f, 4.0f);
+        mrc.bank_angle = mrc.bank_angle * 0.97f + target_bank_angle * 0.03f;
+    }
 }
 
 void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, MeshRenderComponent& mrc)
@@ -129,6 +136,16 @@ void MeshRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, Mes
             transform.getRotation(),
             mrc.mesh_offset,
             mrc.scale);
+
+    // Bank slightly around forward axis while rotating.
+    if (mrc.bank_angle != 0.0f)
+    {
+        model_matrix = glm::rotate(
+            model_matrix,
+            glm::radians(mrc.bank_angle),
+            glm::vec3{1.0f, 0.0f, 0.0f}
+        );
+    }
 
     auto shader = lookUpShader(mrc);
     glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
