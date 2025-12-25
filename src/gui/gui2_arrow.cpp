@@ -2,7 +2,7 @@
 #include "theme.h"
 
 GuiArrow::GuiArrow(GuiContainer* owner, string id, float angle)
-: GuiElement(owner, id)
+: GuiElement(owner, id), angle(angle)
 {
     arrow_style = theme->getStyle("arrow");
 }
