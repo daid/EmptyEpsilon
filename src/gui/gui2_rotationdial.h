@@ -1,5 +1,4 @@
-#ifndef GUI2_ROTATIONDIAL_H
-#define GUI2_ROTATIONDIAL_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -27,5 +26,3 @@ public:
     GuiRotationDial* setValue(float value);
     float getValue() const;
 };
-
-#endif//GUI2_ROTATIONDIAL_H

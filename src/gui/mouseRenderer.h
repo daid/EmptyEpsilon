@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MOUSE_RENDERER_H
+#define MOUSE_RENDERER_H
 
 #include "Renderable.h"
 
@@ -59,3 +60,5 @@ private:
     // Overlay sprites drawn over the primary, offset from the cursor position.
     std::vector<CursorLayer> overlays;
 };
+
+#endif//MOUSE_RENDERER_H

@@ -136,7 +136,7 @@ public:
 ShipSelectionScreen::ShipSelectionScreen()
 {
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Easiest place to ensure that positional sound is disabled on console
     // views. As soon as a 3D view is rendered, positional sound is re-enabled.
@@ -950,7 +950,7 @@ SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
 : GuiCanvas(window_render_layers[monitor_index]), monitor_index(monitor_index)
 {
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 }
 
 void SecondMonitorScreen::update(float delta)

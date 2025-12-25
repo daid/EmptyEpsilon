@@ -21,7 +21,7 @@ ServerSetupScreen::ServerSetupScreen()
 {
     // Background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "CONTAINER");
@@ -144,7 +144,7 @@ ServerSetupScreen::ServerSetupScreen()
 ServerSetupMasterServerRegistrationScreen::ServerSetupMasterServerRegistrationScreen()
 {
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     info_label = new GuiLabel(this, "INFO", "", 30);
     info_label->setPosition({0, 0}, sp::Alignment::Center);
@@ -194,7 +194,7 @@ ServerScenarioSelectionScreen::ServerScenarioSelectionScreen()
 {
     // Background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "");
@@ -326,7 +326,7 @@ ServerScenarioOptionsScreen::ServerScenarioOptionsScreen(string filename)
 
     // Background elements.
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Layout elements.
     GuiElement* container = new GuiElement(this, "");
