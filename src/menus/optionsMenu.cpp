@@ -247,7 +247,6 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
             ->addBackground()
             ->setSize(GuiElement::GuiSizeMax, 50.0f);
-        (new GuiLabel(radar_rotation_lock, "RADAR_LOCK_DETAILS", tr("On: Top of radar points forward, radar rotates\nOff: Top of radar points to heading 0, ship rotates"), 20.0f))
             ->setSize(GuiElement::GuiSizeMax, 60.0f)
             ->setAttribute("margin", "0, 0, 0, 20");
 
