@@ -124,7 +124,7 @@
         [keyvalue.key] {
         }
         [keyvalue.value] {
-            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            font: gui/fonts/BebasNeue Bold.otf
         }
     }
 
