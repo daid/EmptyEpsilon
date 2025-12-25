@@ -133,23 +133,23 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     }
 
     if (health <= 0.0f)
-        drawIcon(renderer, "gui/icons/status_damaged", overlay_damaged_style->get(getState()).color);
+        drawIcon(renderer, overlay_damaged_style->get(getState()).texture, overlay_damaged_style->get(getState()).color);
 
     if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
-        drawIcon(renderer, "gui/icons/docking", overlay_docked_style->get(getState()).color);
+        drawIcon(renderer, overlay_docked_style->get(getState()).texture, overlay_docked_style->get(getState()).color);
     else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
-        drawIcon(renderer, "gui/icons/status_jammed", overlay_jammed_style->get(getState()).color);
+        drawIcon(renderer, overlay_jammed_style->get(getState()).texture, overlay_jammed_style->get(getState()).color);
 
     if (power == 0.0f)
-        drawIcon(renderer, "gui/icons/status_no_power", overlay_no_power_style->get(getState()).color);
+        drawIcon(renderer, overlay_no_power_style->get(getState()).texture, overlay_no_power_style->get(getState()).color);
     else if (power < 0.3f)
-        drawIcon(renderer, "gui/icons/status_low_power", overlay_low_power_style->get(getState()).color);
+        drawIcon(renderer, overlay_low_power_style->get(getState()).texture, overlay_low_power_style->get(getState()).color);
 
     if (reactor && reactor->energy < 10.0f)
-        drawIcon(renderer, "gui/icons/status_low_energy", overlay_low_energy_style->get(getState()).color);
+        drawIcon(renderer, overlay_low_energy_style->get(getState()).texture, overlay_low_energy_style->get(getState()).color);
 
     if (heat > 0.90f)
-        drawIcon(renderer, "gui/icons/status_overheat", overlay_overheating_style->get(getState()).color);
+        drawIcon(renderer, overlay_overheating_style->get(getState()).texture, overlay_overheating_style->get(getState()).color);
 }
 
 void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, glm::u8vec4 color)

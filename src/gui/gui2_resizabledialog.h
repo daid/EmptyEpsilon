@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI2_RESIZABLEDIALOG_H
+#define GUI2_RESIZABLEDIALOG_H
 
 #include "gui2_panel.h"
 
@@ -49,3 +50,5 @@ protected:
     GuiElement* contents;
     const GuiThemeStyle* resize_corner_style;
 };
+
+#endif//GUI2_RESIZABLEDIALOG_H

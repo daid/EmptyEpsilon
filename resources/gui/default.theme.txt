@@ -191,27 +191,34 @@
     [overlay] {
         [overlay.damaged] {
             color: #FF0000
+            image: gui/icons/status_damaged
         }
         [overlay.docked] {
             color: #40C040
+            image: gui/icons/docking
         }
         [overlay.jammed] {
             color: #FF0000
+            image: gui/icons/status_jammed
         }
         [overlay.hacked] {
             color: #4040FF
         }
         [overlay.no_power] {
             color: #FF0000
+            image: gui/icons/status_no_power
         }
         [overlay.low_energy] {
             color: #FF8000
+            image: gui/icons/status_low_energy
         }
         [overlay.low_power] {
             color: #FF8000
+            image: gui/icons/status_low_power
         }
         [overlay.overheating] {
             color: #FF8000
+            image: gui/icons/status_overheat
         }
     }
 
@@ -236,6 +243,7 @@
 
     # Waypoints
     [ship_waypoint] {
+        image: waypoint.png
         [ship_waypoint.background] {
             color: #8080FFD0
         }
