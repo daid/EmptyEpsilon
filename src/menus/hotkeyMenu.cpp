@@ -6,6 +6,7 @@
 #include "main.h"
 
 #include "gui/hotkeyBinder.h"
+#include "gui/theme.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_textentry.h"
@@ -15,7 +16,7 @@
 HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // TODO: Figure out how to make this an AutoLayout.

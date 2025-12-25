@@ -4,7 +4,6 @@
 #include <graphics/freetypefont.h>
 #include <logging.h>
 
-
 static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
 string GuiTheme::current_theme = "default";
@@ -163,4 +162,11 @@ GuiTheme::GuiTheme(const string& name)
 
 GuiTheme::~GuiTheme()
 {
+}
+
+glm::u8vec4 GuiTheme::getColor(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).color;
 }

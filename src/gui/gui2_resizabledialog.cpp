@@ -8,6 +8,7 @@ GuiResizableDialog::GuiResizableDialog(GuiContainer* owner, string id, string ti
 : GuiPanel(owner, id)
 {
     resize_corner_style = theme->getStyle("resizabledialog.corner");
+
     auto title_bar_layout = new GuiElement(this, "");
     title_bar_layout->setMargins(25, 0)->setSize(GuiElement::GuiSizeMax, title_bar_height)->setAttribute("layout", "horizontalright");
 

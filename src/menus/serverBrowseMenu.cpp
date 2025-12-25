@@ -6,6 +6,7 @@
 #include "preferenceManager.h"
 #include "config.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_selector.h"
@@ -45,7 +46,7 @@ ServerBrowserMenu::ServerBrowserMenu(std::optional<GameClient::DisconnectReason>
     scanner->scanLocalNetwork();
     scanner->scanMasterServer(PreferencesManager::get("registry_list_url", "http://daid.eu/ee/list.php"));
 
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     (new GuiButton(this, "BACK", tr("button", "Back"), [this]() {

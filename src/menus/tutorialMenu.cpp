@@ -5,6 +5,8 @@
 #include "preferenceManager.h"
 #include "tutorialGame.h"
 #include "scenarioInfo.h"
+
+#include "gui/theme.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_selector.h"
@@ -17,7 +19,7 @@
 
 TutorialMenu::TutorialMenu()
 {
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Draw a one-column autolayout container with margins.

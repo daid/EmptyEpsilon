@@ -1,5 +1,4 @@
-#ifndef GUI2_ELEMENT_H
-#define GUI2_ELEMENT_H
+#pragma once
 
 #include <functional>
 #include "stringImproved.h"
@@ -93,5 +92,3 @@ protected:
     glm::u8vec4 selectColor(const ColorSet& color_set) const;
     State getState() const;
 };
-
-#endif//GUI2_ELEMENT_H

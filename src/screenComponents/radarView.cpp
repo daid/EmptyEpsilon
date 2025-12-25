@@ -4,6 +4,12 @@
 #include "featureDefs.h"
 #include "ecs/query.h"
 #include "systems/collision.h"
+
+#include "main.h"
+#include "gameGlobalInfo.h"
+#include "tween.h"
+#include "playerInfo.h"
+
 #include "components/beamweapon.h"
 #include "components/collision.h"
 #include "components/docking.h"
@@ -18,13 +24,12 @@
 #include "systems/missilesystem.h"
 #include "systems/radarblock.h"
 #include "systems/radar.h"
-#include "main.h"
-#include "gameGlobalInfo.h"
-#include "tween.h"
-#include "playerInfo.h"
+
 #include "radarView.h"
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
+
+#include "gui/theme.h"
 
 namespace
 {
@@ -71,6 +76,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
+    ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
@@ -100,6 +108,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_drag_func(nullptr),
     mouse_up_func(nullptr)
 {
+    radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
+    ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
@@ -158,7 +169,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
         // Draw the radar's outline. First, and before any stencil kicks in.
         // this way, the outline is not even a part of the rendering area.
         float r = std::min(rect.size.x, rect.size.y) * 0.5f;
-        renderer.drawCircleOutline(getCenterPoint(), r, 2.0f, colorConfig.radar_outline);
+        renderer.drawCircleOutline(getCenterPoint(), r, 2.0f, radar_outline_style->get(getState()).color);
     }
 
     // Stencil setup.
@@ -451,15 +462,16 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
     {
         auto screen_position = worldToScreen(waypoints->waypoints[n].position);
 
-        renderer.drawSprite("waypoint.png", screen_position - glm::vec2(0, 10), 20, colorConfig.ship_waypoint_background);
-        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
+        // TODO: Define sprite image in GuiThemeStyle
+        renderer.drawSprite("waypoint.png", screen_position - glm::vec2(0, 10), 20, ship_waypoint_background_style->get(getState()).color);
+        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, ship_waypoint_text_style->get(getState()).color);
 
         if (style != Rectangular && glm::length(screen_position - radar_screen_center) > std::min(rect.size.x, rect.size.y) * 0.5f)
         {
             screen_position = radar_screen_center + ((screen_position - radar_screen_center) / glm::length(screen_position - radar_screen_center) * std::min(rect.size.x, rect.size.y) * 0.4f);
 
-            renderer.drawRotatedSprite("waypoint.png", screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, colorConfig.ship_waypoint_background);
-            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
+            renderer.drawRotatedSprite("waypoint.png", screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, ship_waypoint_background_style->get(getState()).color);
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, ship_waypoint_text_style->get(getState()).color);
         }
     }
 }

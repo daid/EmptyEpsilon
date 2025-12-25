@@ -1,10 +1,8 @@
-#ifndef GUI_THEME_H
-#define GUI_THEME_H
+#pragma once
 
 #include <stringImproved.h>
 #include "gui2_element.h"
 #include <unordered_map>
-
 
 class GuiThemeStyle
 {
@@ -52,6 +50,9 @@ public:
     static bool loadTheme(const string& name, const string& resource_name);
 
     static glm::u8vec4 toColor(const string& s);
+
+    // Returns the element's theme color, with optionally defined state.
+    static glm::u8vec4 getColor(const string& element, GuiElement::State state = GuiElement::State::Normal);
 private:
     GuiTheme(const string& name);
     virtual ~GuiTheme();
@@ -62,5 +63,3 @@ private:
     static std::unordered_map<string, GuiTheme*> themes;
     static string current_theme;
 };
-
-#endif//GUI_THEME_H

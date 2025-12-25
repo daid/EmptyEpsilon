@@ -8,23 +8,25 @@
 #include "ecs/query.h"
 #include "i18n.h"
 
-#include "components/name.h"
-
 #include "serverCreationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
 #include "playerInfo.h"
+#include "preferenceManager.h"
 #include "gameGlobalInfo.h"
 #include "scenarioInfo.h"
+
+#include "components/database.h"
+#include "components/name.h"
 #include "screens/windowScreen.h"
 #include "screens/topDownScreen.h"
 #include "screens/cinematicViewScreen.h"
 #include "screens/spectatorScreen.h"
 #include "screens/gm/gameMasterScreen.h"
-#include "components/database.h"
 #include "menus/luaConsole.h"
 #include "menus/optionsMenu.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
@@ -33,8 +35,6 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_textentry.h"
 #include "gui/gui2_togglebutton.h"
-
-#include "preferenceManager.h"
 
 class PasswordDialog : public GuiOverlay
 {
@@ -135,7 +135,7 @@ public:
 
 ShipSelectionScreen::ShipSelectionScreen()
 {
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     // Easiest place to ensure that positional sound is disabled on console
@@ -949,7 +949,7 @@ void CrewPositionSelection::spawnUI(RenderLayer* render_layer)
 SecondMonitorScreen::SecondMonitorScreen(int monitor_index)
 : GuiCanvas(window_render_layers[monitor_index]), monitor_index(monitor_index)
 {
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 }
 

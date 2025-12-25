@@ -19,6 +19,7 @@
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/alertLevelButton.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
@@ -36,7 +37,7 @@ static bool canHack(sp::ecs::Entity entity)
 }
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
-: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background), mode(TargetSelection)
+: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);

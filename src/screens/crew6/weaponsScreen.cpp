@@ -21,14 +21,14 @@
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_rotationdial.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "WEAPONS_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "WEAPONS_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradient.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);

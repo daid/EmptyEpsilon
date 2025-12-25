@@ -1,5 +1,4 @@
-#ifndef ENGINEERING_SCREEN_H
-#define ENGINEERING_SCREEN_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
 #include "playerInfo.h"
@@ -13,10 +12,14 @@ class GuiArrow;
 class GuiToggleButton;
 class GuiProgressbar;
 class GuiProgressSlider;
+class GuiThemeStyle;
 
 class EngineeringScreen : public GuiOverlay
 {
 private:
+    const GuiThemeStyle* background_style;
+    const GuiThemeStyle* overlay_damaged_style;
+    const GuiThemeStyle* overlay_overheating_style;
     GuiOverlay* background_crosses;
 
     GuiSelfDestructButton* self_destruct_button;
@@ -45,7 +48,7 @@ private:
     GuiElement* system_effects_container;
     std::vector<GuiKeyValueDisplay*> system_effects;
     unsigned int system_effects_index;
-    ShipSystem::Type selected_system;
+    ShipSystem::Type selected_system = ShipSystem::Type::None;
 
     bool set_power_active[ShipSystem::COUNT] = {false};
     bool set_coolant_active[ShipSystem::COUNT] = {false};
@@ -60,5 +63,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//ENGINEERING_SCREEN_H

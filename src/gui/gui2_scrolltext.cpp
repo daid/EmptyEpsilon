@@ -1,11 +1,12 @@
 #include "gui2_scrolltext.h"
 #include "theme.h"
 
+#include "gui2_scrollbar.h"
 
 GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), mouse_scroll_steps(25)
+: GuiElement(owner, id), text(text)
 {
-    auto_scroll_down = false;
+    text_theme = theme->getStyle("textbox.front");
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
@@ -29,8 +30,9 @@ GuiScrollText* GuiScrollText::setScrollbarWidth(float width)
 
 void GuiScrollText::onDraw(sp::RenderTarget& renderer)
 {
+    const auto& text_style = text_theme->get(getState());
     auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
-    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, selectColor(colorConfig.textbox.forground), text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
+    auto prepared = sp::RenderTarget::getDefaultFont()->prepare(this->text, 32, text_size, text_style.color, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     auto text_draw_size = prepared.getUsedAreaSize();
 
     int scroll_max = text_draw_size.y;
@@ -71,7 +73,8 @@ GuiScrollFormattedText::GuiScrollFormattedText(GuiContainer* owner, string id, s
 
 void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
 {
-    auto main_color = selectColor(colorConfig.textbox.forground);
+    const auto& text_style = text_theme->get(getState());
+    auto main_color = text_style.color;
     auto current_color = main_color;
     auto text_rect = sp::Rect(rect.position.x, rect.position.y, rect.size.x - scrollbar->getSize().x, rect.size.y);
     auto prepared = sp::RenderTarget::getDefaultFont()->start(32, text_rect.size, sp::Alignment::TopLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
