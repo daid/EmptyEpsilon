@@ -1,8 +1,8 @@
+#include "tacticalScreen.h"
 #include "playerInfo.h"
 #include "i18n.h"
 #include "featureDefs.h"
 #include "gameGlobalInfo.h"
-#include "tacticalScreen.h"
 #include "preferenceManager.h"
 
 #include "components/reactor.h"
@@ -30,13 +30,14 @@
 #include "screenComponents/beamTargetSelector.h"
 #include "screenComponents/powerDamageIndicator.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
-: GuiOverlay(owner, "TACTICAL_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "TACTICAL_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientSingle.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);

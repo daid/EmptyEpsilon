@@ -1,6 +1,6 @@
+#include "helmsScreen.h"
 #include <i18n.h>
 #include "playerInfo.h"
-#include "helmsScreen.h"
 #include "preferenceManager.h"
 #include "featureDefs.h"
 
@@ -21,13 +21,14 @@
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/infoDisplay.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_image.h"
 
 HelmsScreen::HelmsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "HELMS_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "HELMS_SCREEN", GuiTheme::getColor("background"))
 {
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradient.png"))->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);

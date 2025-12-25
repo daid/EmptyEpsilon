@@ -14,11 +14,11 @@
 #include "screenComponents/rotatingModelView.h"
 #include "config.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_textentry.h"
-
 
 MainMenu::MainMenu()
 {
@@ -27,7 +27,7 @@ MainMenu::MainMenu()
     constexpr float logo_size_x = 1024;
     constexpr float title_y = 160;
 
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     (new GuiImage(this, "LOGO", "logo_full.png"))->setPosition(0, title_y, sp::Alignment::TopCenter)->setSize(logo_size_x, logo_size_y);

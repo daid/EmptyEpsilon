@@ -26,6 +26,7 @@
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_button.h"
+#include "gui/theme.h"
 
 P<TutorialGame> TutorialGame::instance;
 
@@ -34,7 +35,7 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     instance = this;
     new LocalOnlyGame();
 
-    new GuiOverlay(this, "", colorConfig.background);
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
 
     this->viewport = nullptr;

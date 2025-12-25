@@ -5,6 +5,7 @@
 
 class GuiMissileTubeControls;
 class TargetsContainer;
+class GuiThemeStyle;
 
 class GuiRadarView : public GuiElement
 {
@@ -66,6 +67,10 @@ private:
     pfunc_t mouse_up_func;
     // Overlay callback
     std::function<void(sp::RenderTarget&)> overlay_func;
+
+    const GuiThemeStyle* radar_outline_style;
+    const GuiThemeStyle* ship_waypoint_background_style;
+    const GuiThemeStyle* ship_waypoint_text_style;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);

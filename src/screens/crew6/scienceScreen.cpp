@@ -1,6 +1,6 @@
+#include "scienceScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "scienceScreen.h"
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
 #include "i18n.h"
@@ -25,6 +25,7 @@
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -34,7 +35,7 @@
 #include "gui/gui2_image.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "SCIENCE_SCREEN", GuiTheme::getColor("background"))
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     targets.setAllowWaypointSelection();

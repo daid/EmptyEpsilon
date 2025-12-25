@@ -18,7 +18,6 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-
 void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 {
     if (return_to == OptionsMenu::ReturnTo::Main)
@@ -31,8 +30,8 @@ void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png"); // TODO: Define crosses image as background image across EmptyEpsilon using GuiTheme
 
     // Initialize autolayout columns.
     auto main_panel = new GuiPanel(this, "");

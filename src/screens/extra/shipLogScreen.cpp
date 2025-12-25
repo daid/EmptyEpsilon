@@ -3,11 +3,11 @@
 #include "components/shiplog.h"
 
 #include "gui/gui2_advancedscrolltext.h"
+#include "gui/theme.h"
 #include "screenComponents/customShipFunctions.h"
 
-
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SHIP_LOG_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "SHIP_LOG_SCREEN", GuiTheme::getColor("background"))
 {
     GuiElement* shiplog_layout = new GuiElement(this, "SHIPLOG_LAYOUT");
     shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontalright");

@@ -1,6 +1,6 @@
+#include "engineeringScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "engineeringScreen.h"
 #include "i18n.h"
 #include "engine.h"
 
@@ -20,6 +20,7 @@
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/infoDisplay.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_slider.h"
@@ -30,8 +31,10 @@
 #include "gui/gui2_panel.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", colorConfig.background), selected_system(ShipSystem::Type::None)
+: GuiOverlay(owner, "ENGINEERING_SCREEN", GuiTheme::getColor("background"))
 {
+    overlay_damaged_style = theme->getStyle("overlay.damaged");
+    overlay_overheating_style = theme->getStyle("overlay.overheating");
     // Render the background decorations.
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
     background_crosses->setTextureTiled("gui/background/crosses.png");
@@ -77,7 +80,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         info.damage_bar = new GuiProgressbar(info.row, id + "_DAMAGE", 0.0f, 1.0f, 0.0f);
         info.damage_bar->setSize(150, GuiElement::GuiSizeMax);
         info.damage_icon = new GuiImage(info.damage_bar, "", "gui/icons/system_health");
-        info.damage_icon->setColor(colorConfig.overlay_damaged)->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+        info.damage_icon->setColor(overlay_damaged_style->get(getState()).color)->setPosition(0, 0, sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.damage_label = new GuiLabel(info.damage_bar, id + "_DAMAGE_LABEL", "...", 20);
         info.damage_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_bar = new GuiProgressbar(info.row, id + "_HEAT", 0.0f, 1.0f, 0.0f);
@@ -85,7 +88,7 @@ EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_posi
         info.heat_arrow = new GuiArrow(info.heat_bar, id + "_HEAT_ARROW", 0);
         info.heat_arrow->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
         info.heat_icon = new GuiImage(info.heat_bar, "", "gui/icons/status_overheat");
-        info.heat_icon->setColor(colorConfig.overlay_overheating)->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+        info.heat_icon->setColor(overlay_overheating_style->get(getState()).color)->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
         info.power_bar = new GuiProgressSlider(info.row, id + "_POWER", 0.0f, 3.0f, 0.0f, [this,n](float value){
             if (my_spaceship)
                 my_player_info->commandSetSystemPowerRequest(ShipSystem::Type(n), value);
