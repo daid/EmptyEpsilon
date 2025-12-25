@@ -68,6 +68,7 @@ private:
     pfunc_t mouse_up_func;
 
     const GuiThemeStyle* radar_outline_style;
+    const GuiThemeStyle* ship_waypoint_style;
     const GuiThemeStyle* ship_waypoint_background_style;
     const GuiThemeStyle* ship_waypoint_text_style;
 public:

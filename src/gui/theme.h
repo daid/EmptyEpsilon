@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GUI_THEME_H
+#define GUI_THEME_H
 
 #include <stringImproved.h>
 #include "gui2_element.h"
@@ -63,3 +64,5 @@ private:
     static std::unordered_map<string, GuiTheme*> themes;
     static string current_theme;
 };
+
+#endif//GUI_THEME_H

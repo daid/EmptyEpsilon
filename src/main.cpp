@@ -116,8 +116,6 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
     keys.init();
-    colorConfig.load();
-
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();

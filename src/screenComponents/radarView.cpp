@@ -77,6 +77,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_up_func(nullptr)
 {
     radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_style = theme->getStyle("ship_waypoint");
     ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
     ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
@@ -109,6 +110,7 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_up_func(nullptr)
 {
     radar_outline_style = theme->getStyle("radar_outline");
+    ship_waypoint_style = theme->getStyle("ship_waypoint");
     ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
     ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
 }
@@ -462,15 +464,16 @@ void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
     {
         auto screen_position = worldToScreen(waypoints->waypoints[n].position);
 
-        // TODO: Define sprite image in GuiThemeStyle
-        renderer.drawSprite("waypoint.png", screen_position - glm::vec2(0, 10), 20, ship_waypoint_background_style->get(getState()).color);
+        const auto& waypoint_sprite = ship_waypoint_style->get(getState());
+        const auto& waypoint_color = ship_waypoint_background_style->get(getState()).color;
+        renderer.drawSprite(waypoint_sprite.texture, screen_position - glm::vec2(0, 10), 20, waypoint_color);
         renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, ship_waypoint_text_style->get(getState()).color);
 
         if (style != Rectangular && glm::length(screen_position - radar_screen_center) > std::min(rect.size.x, rect.size.y) * 0.5f)
         {
             screen_position = radar_screen_center + ((screen_position - radar_screen_center) / glm::length(screen_position - radar_screen_center) * std::min(rect.size.x, rect.size.y) * 0.4f);
 
-            renderer.drawRotatedSprite("waypoint.png", screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, ship_waypoint_background_style->get(getState()).color);
+            renderer.drawRotatedSprite(waypoint_sprite.texture, screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, waypoint_color);
             renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, ship_waypoint_text_style->get(getState()).color);
         }
     }

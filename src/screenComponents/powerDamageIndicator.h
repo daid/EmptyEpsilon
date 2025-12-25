@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POWER_DAMAGE_INDICATOR_H
+#define POWER_DAMAGE_INDICATOR_H
 
 #include "gui/gui2_element.h"
 
@@ -31,3 +32,5 @@ private:
 
     void drawIcon(sp::RenderTarget& window, string icon_name, glm::u8vec4 color);
 };
+
+#endif//POWER_DAMAGE_INDICATOR_H

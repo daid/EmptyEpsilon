@@ -2,7 +2,6 @@
 #include <stringImproved.h>
 #include <io/keybinding.h>
 #include <preferenceManager.h>
-#include "gui/colorConfig.h"
 #include "gui/hotkeyConfig.h"
 #include <cstring>
 
