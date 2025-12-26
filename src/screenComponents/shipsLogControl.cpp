@@ -2,6 +2,7 @@
 #include "components/shiplog.h"
 #include "shipsLogControl.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_advancedscrolltext.h"
 
@@ -21,7 +22,7 @@ ShipsLog::ShipsLog(GuiContainer* owner)
 
 void ShipsLog::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretchedHV(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y + 100), 25.0f, "gui/widget/PanelBackground.png");
+    renderer.drawStretchedHV(sp::Rect(rect.position.x, rect.position.y, rect.size.x, rect.size.y + 100), 25.0f, theme->getStyle("panel")->get(getState()).texture);
 
     auto logs = my_spaceship.getComponent<ShipLog>();
     if (!logs)

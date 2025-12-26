@@ -398,4 +398,11 @@
         image: gui/widget/PanelBackground.png
         size: 25.0
     }
+
+    # GuiFrequencyCurve
+    [frequencycurve] {
+        [frequencycurve.indicator] {
+            image: gui/widget/IndicatorArrow.png
+        }
+    }
 }
