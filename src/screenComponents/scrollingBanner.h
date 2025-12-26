@@ -1,9 +1,7 @@
-#ifndef SCROLLING_BANNER_H
-#define SCROLLING_BANNER_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "timer.h"
-
 
 class GuiScrollingBanner : public GuiElement
 {
@@ -13,10 +11,8 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
 private:
     static constexpr float scroll_speed_per_second = 150.0f;
-    static constexpr float black_area = 200.0f;
 
     sp::SystemStopwatch update_clock;
-    float draw_offset;
+    bool has_scrolling_started = false;
+    float draw_offset = 0.0f;
 };
-
-#endif//SCROLLING_BANNER_H
