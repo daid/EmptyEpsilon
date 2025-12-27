@@ -1,13 +1,15 @@
-#ifndef GUI2_ARROW_H
-#define GUI2_ARROW_H
+#pragma once
 
 #include "gui2_element.h"
+
+class GuiThemeStyle;
 
 class GuiArrow : public GuiElement
 {
 private:
     glm::u8vec4 color{255,255,255,255};
     float angle;
+    const GuiThemeStyle* arrow_style;
 public:
     GuiArrow(GuiContainer* owner, string id, float angle);
 
@@ -16,5 +18,3 @@ public:
     GuiArrow* setColor(glm::u8vec4 color) { this->color = color; return this; }
     GuiArrow* setAngle(float angle) { this->angle = angle; return this; }
 };
-
-#endif//GUI2_ARROW_H
