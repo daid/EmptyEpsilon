@@ -1,0 +1,36 @@
+# Bebas Neue font theme.
+# This theme overrides only the font properties of the default theme.
+# The `inherit: default` property is implied.
+
+[base] {
+    font: gui/fonts/BebasNeue Book.otf
+
+    # Stronger font used at a few locations without UI widgets.
+    [bold] {
+        font: gui/fonts/BebasNeue Bold.otf
+    }
+
+    [keyvalue] {
+        [keyvalue.value] {
+            font: gui/fonts/BebasNeue Bold.otf
+        }
+    }
+
+    [label] {
+        [label.front] {
+            font: gui/fonts/BebasNeue Regular.otf
+        }
+    }
+
+    [button] {
+        [button.toggle.on.front] {
+            font: gui/fonts/BebasNeue Bold.otf
+        }
+    }
+
+    [listbox] {
+        [listbox.selected.front] {
+            font: gui/fonts/BebasNeue Bold.otf
+        }
+    }
+}
