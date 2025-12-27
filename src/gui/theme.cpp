@@ -4,7 +4,6 @@
 #include <graphics/freetypefont.h>
 #include <logging.h>
 
-
 static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
 string GuiTheme::current_theme = "default";
@@ -22,7 +21,7 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
     return {255, 255, 255, 255};
 }
 
-static sp::Font* getFont(const string& s)
+static sp::Font* cacheFont(const string& s)
 {
     auto it = fonts.find(s);
     if (it != fonts.end())
@@ -98,7 +97,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             global_style.color = toColor(input["color"]);
         else
             global_style.color = {255, 255, 255, 255};
-        global_style.font = getFont(input["font"]);
+        global_style.font = cacheFont(input["font"]);
         global_style.size = input["size"].toFloat();
         global_style.sound = input["sound"];
         for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)
@@ -128,7 +127,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             if (input.find("color." + postfix) != input.end())
                 style.states[n].color = toColor(input["color." + postfix]);
             if (input.find("font." + postfix) != input.end())
-                style.states[n].font = getFont(input["font." + postfix]);
+                style.states[n].font = cacheFont(input["font." + postfix]);
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
             if (input.find("sound." + postfix) != input.end())
@@ -152,7 +151,7 @@ GuiTheme::GuiTheme(const string& name)
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
     if(fonts.size() > 0)
     {
-        fallback_state.font = getFont(fonts[0]);
+        fallback_state.font = cacheFont(fonts[0]);
     }
     fallback_state.texture = "";
     GuiThemeStyle fallback;
@@ -163,4 +162,39 @@ GuiTheme::GuiTheme(const string& name)
 
 GuiTheme::~GuiTheme()
 {
+}
+
+glm::u8vec4 GuiTheme::getColor(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).color;
+}
+
+string GuiTheme::getSound(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).sound;
+}
+
+string GuiTheme::getImage(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).texture;
+}
+
+float GuiTheme::getSize(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).size;
+}
+
+sp::Font* GuiTheme::getFont(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).font;
 }

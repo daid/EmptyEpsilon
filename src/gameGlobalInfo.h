@@ -69,7 +69,7 @@ public:
     sp::script::Callback on_new_player_ship;
 
     std::function<void(glm::vec2)> on_gm_click;
-    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
+    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse.create";
     string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     GameGlobalInfo();

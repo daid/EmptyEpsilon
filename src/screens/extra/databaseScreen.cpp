@@ -2,9 +2,10 @@
 
 #include "screenComponents/databaseView.h"
 #include "screenComponents/customShipFunctions.h"
+#include "gui/theme.h"
 
 DatabaseScreen::DatabaseScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DATABASE_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "DATABASE_SCREEN", GuiTheme::getColor("background"))
 {
     (new DatabaseViewComponent(this))->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
