@@ -1,8 +1,6 @@
-#ifndef MISSILE_WEAPON_DATA_H
-#define MISSILE_WEAPON_DATA_H
+#pragma once
 
 #include "multiplayer.h"
-
 
 enum EMissileWeapons
 {
@@ -29,6 +27,7 @@ string getLocaleMissileWeaponName(EMissileWeapons missile);
 class MissileWeaponData
 {
 public:
+    MissileWeaponData() = default;
     MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound);
 
     float speed; //meter/sec
@@ -44,5 +43,7 @@ public:
 
     static float convertSizeToCategoryModifier(EMissileSizes size);
     static EMissileSizes convertCategoryModifierToSize(float size);
+
+private:
+    static MissileWeaponData* getMissileDataArray();
 };
-#endif//MISSILE_WEAPON_DATA_H
