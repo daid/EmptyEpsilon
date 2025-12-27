@@ -244,7 +244,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             style.states[n].color = {255, 255, 255, 255};
             style.states[n].size = 30.0f;
             style.states[n].font = nullptr;
-            // TODO: style.states[n].font_offset = 0.0f;
+            style.states[n].font_offset = 0.0f;
             style.states[n].texture = "";
             style.states[n].sound = "";
         }
@@ -254,7 +254,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         global_style.color = {255, 255, 255, 255};
         global_style.size = 30.0f;
         global_style.font = nullptr;
-        // TODO: global_style.font_offset = 0.0f;
+        global_style.font_offset = 0.0f;
         global_style.texture = "";
         global_style.sound = "";
 
@@ -276,10 +276,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 global_style.font = theme->styles["fallback"].states[0].font;
             }
         }
-        /* TODO: 
         if (input.find("font_offset") != input.end())
             global_style.font_offset = input["font_offset"].toFloat();
-        */
         if (input.find("size") != input.end())
             global_style.size = input["size"].toFloat();
         if (input.find("sound") != input.end())
@@ -314,10 +312,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 style.states[n].color = global_style.color;
             if (input.find("font") != input.end() && global_style.font)
                 style.states[n].font = global_style.font;
-            /* TODO:
             if (input.find("font_offset") != input.end())
                 style.states[n].font_offset = global_style.font_offset;
-            */
             if (input.find("size") != input.end())
                 style.states[n].size = global_style.size;
             if (input.find("sound") != input.end())
@@ -357,12 +353,10 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.color = {255, 255, 255, 255};
     fallback_state.size = 12;
     fallback_state.font = nullptr;
-    // TODO: fallback_state.offset = 0.0f;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
     if(fonts.size() > 0)
-    {
         fallback_state.font = getFont(fonts[0]);
-    }
+    fallback_state.font_offset = 0.0f;
     fallback_state.texture = "";
     GuiThemeStyle fallback;
     for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)
