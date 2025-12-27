@@ -158,7 +158,7 @@ int main(int argc, char** argv)
 
     const auto& active_theme = GuiTheme::getCurrentTheme();
     main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
-    bold_font = active_theme->getStyle("bold")->states[0].font;
+    bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
@@ -171,7 +171,7 @@ int main(int argc, char** argv)
     // Apply baseline offset adjustments to fonts
     // Positive values move text down, negative values move text up
     main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).offset);
-    bold_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).offset);
+    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).offset);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
