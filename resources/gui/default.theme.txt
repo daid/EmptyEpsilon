@@ -107,6 +107,35 @@
         }
     }
 
+    [missile_data]
+    {
+        [missile_data.homing] {
+            color: #FFC800
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.nuke] {
+            color: #FF6420
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.mine] {
+            color: #FFFFFF
+            image: radar/mine.png
+            sound: sfx/missile_launch.wav
+        }
+        [missile_data.emp] {
+            color: #6420FF
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.hvli] {
+            color: #C8C8C8
+            image: radar/missile.png
+            sound: sfx/hvli_fire.wav
+        }
+    }
+
     # Signal bands, used in radar views and sensor locking
     # By default, biological = green, electrical = red, gravitational = blue.
     # Scenarios or help text might refer to bands by color.

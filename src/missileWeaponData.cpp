@@ -2,8 +2,8 @@
 #include "i18n.h"
 #include "gui/theme.h"
 
-MissileWeaponData::MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound)
-: speed(speed), turnrate(turnrate), lifetime(lifetime), color(color), homing_range(homing_range), fire_sound(fire_sound)
+MissileWeaponData::MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound, string radar_trace)
+: speed(speed), turnrate(turnrate), lifetime(lifetime), color(color), homing_range(homing_range), fire_sound(fire_sound), radar_trace(radar_trace)
 {
 }
 
@@ -16,14 +16,16 @@ MissileWeaponData* MissileWeaponData::getMissileDataArray()
             200.0f, 10.f, 27.0f,                       // speed, turnrate, lifetime
             GuiTheme::getColor("missile_data.homing"), // color
             1200.0,                                    // homing_range
-            GuiTheme::getSound("missile_data.homing")  // fire_sound
+            GuiTheme::getSound("missile_data.homing"), // fire_sound
+            GuiTheme::getImage("missile_data.homing")  // radar_trace
         ),
         // MW_Nuke
         MissileWeaponData(
             200.0f, 10.f, 27.0f,                     // speed, turnrate, lifetime
             GuiTheme::getColor("missile_data.nuke"), // color
             500.0,                                   // homing_range
-            GuiTheme::getSound("missile_data.nuke")  // fire_sound
+            GuiTheme::getSound("missile_data.nuke"), // fire_sound
+            GuiTheme::getImage("missile_data.nuke")  // radar_trace
         ),
         // MW_Mine
         MissileWeaponData(
@@ -31,21 +33,24 @@ MissileWeaponData* MissileWeaponData::getMissileDataArray()
             100.0f,  0.f, 10.0f,                     // speed, turnrate, lifetime
             GuiTheme::getColor("missile_data.mine"), // color
             0.0,                                     // homing_range
-            GuiTheme::getSound("missile_data.mine")  // fire_sound
+            GuiTheme::getSound("missile_data.mine"), // fire_sound
+            GuiTheme::getImage("missile_data.mine")  // radar_trace
         ),
         // MW_EMP
         MissileWeaponData(
             200.0f, 10.f, 27.0f,                    // speed, turnrate, lifetime
             GuiTheme::getColor("missile_data.emp"), // color
             500.0,                                  // homing_range
-            GuiTheme::getSound("missile_data.emp")  // fire_sound
+            GuiTheme::getSound("missile_data.emp"), // fire_sound
+            GuiTheme::getImage("missile_data.emp")  // radar_trace
         ),
         // MW_HVLI
         MissileWeaponData(
             500.0f,  0.f, 13.5f,                     // speed, turnrate, lifetime
             GuiTheme::getColor("missile_data.hvli"), // color
             0.0,                                     // homing_range
-            GuiTheme::getSound("missile_data.hvli")  // fire_sound
+            GuiTheme::getSound("missile_data.hvli"), // fire_sound
+            GuiTheme::getImage("missile_data.hvli")  // radar_trace
         ),
     };
     return missile_data;

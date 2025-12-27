@@ -28,7 +28,7 @@ class MissileWeaponData
 {
 public:
     MissileWeaponData() = default;
-    MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound);
+    MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound, string radar_trace);
 
     float speed; //meter/sec
     float turnrate; //deg/sec
@@ -38,6 +38,7 @@ public:
     float homing_range;
 
     string fire_sound;
+    string radar_trace;
 
     static const MissileWeaponData& getDataFor(EMissileWeapons type);
 
