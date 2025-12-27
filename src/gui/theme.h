@@ -1,5 +1,4 @@
-#ifndef GUI_THEME_H
-#define GUI_THEME_H
+#pragma once
 
 #include <stringImproved.h>
 #include "gui2_element.h"
@@ -52,8 +51,16 @@ public:
 
     static glm::u8vec4 toColor(const string& s);
 
+    // Returns the path to the element's theme texture (image), with optionally defined state.
+    static string getImage(const string& element, GuiElement::State state = GuiElement::State::Normal);
     // Returns the element's theme color, with optionally defined state.
     static glm::u8vec4 getColor(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the element's theme font, with optionally defined state.
+    static sp::Font* getFont(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the element's theme size, with optionally defined state.
+    static float getSize(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the path to the element's theme sound, with optionally defined state.
+    static string getSound(const string& element, GuiElement::State state = GuiElement::State::Normal);
 private:
     GuiTheme(const string& name);
     virtual ~GuiTheme();
@@ -64,5 +71,3 @@ private:
     static std::unordered_map<string, GuiTheme*> themes;
     static string current_theme;
 };
-
-#endif//GUI_THEME_H
