@@ -68,7 +68,10 @@ private:
     // Overlay callback
     std::function<void(sp::RenderTarget&)> overlay_func;
 
+    const GuiThemeStyle* radar_style;
     const GuiThemeStyle* radar_outline_style;
+    const GuiThemeStyle* radar_range_indicators_style;
+    const GuiThemeStyle* radar_sector_grid_style;
     const GuiThemeStyle* ship_waypoint_style;
     const GuiThemeStyle* ship_waypoint_background_style;
     const GuiThemeStyle* ship_waypoint_text_style;
