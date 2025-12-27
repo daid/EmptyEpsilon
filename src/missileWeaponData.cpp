@@ -1,23 +1,64 @@
 #include "missileWeaponData.h"
 #include "i18n.h"
+#include "gui/theme.h"
 
-MissileWeaponData missile_data[MW_Count] =
+MissileWeaponData::MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound, string radar_trace)
+: speed(speed), turnrate(turnrate), lifetime(lifetime), color(color), homing_range(homing_range), fire_sound(fire_sound), radar_trace(radar_trace)
 {
-    //                speed, turnrate, lifetime, color, homing_range
-    MissileWeaponData(200.0f, 10.f, 27.0f, glm::u8vec4(255, 200, 0, 255), 1200.0, "sfx/rlaunch.wav"),/*MW_Homing*/
-    MissileWeaponData(200.0f, 10.f, 27.0f, glm::u8vec4(255, 100, 32, 255), 500.0, "sfx/rlaunch.wav"),/*MW_Nuke*/
-    MissileWeaponData(100.0f,  0.f, 10.0f, glm::u8vec4(255, 255, 255, 255), 0.0, "sfx/missile_launch.wav"),/*MW_Mine, lifetime is used at time which the mine is ejecting from the ship*/
-    MissileWeaponData(200.0f, 10.f, 27.0f, glm::u8vec4(100, 32, 255, 255), 500.0, "sfx/rlaunch.wav"),/*MW_EMP*/
-    MissileWeaponData(500.0f,  0.f, 13.5f, glm::u8vec4(200, 200, 200, 255), 0.0, "sfx/hvli_fire.wav"),/*MW_HVLI*/
-};
+}
 
-MissileWeaponData::MissileWeaponData(float speed, float turnrate, float lifetime, glm::u8vec4 color, float homing_range, string fire_sound)
-: speed(speed), turnrate(turnrate), lifetime(lifetime), color(color), homing_range(homing_range), fire_sound(fire_sound)
+MissileWeaponData* MissileWeaponData::getMissileDataArray()
 {
+    static MissileWeaponData missile_data[MW_Count] =
+    {
+        // MW_Homing
+        MissileWeaponData(
+            200.0f, 10.f, 27.0f,                       // speed, turnrate, lifetime
+            GuiTheme::getColor("missile_data.homing"), // color
+            1200.0,                                    // homing_range
+            GuiTheme::getSound("missile_data.homing"), // fire_sound
+            GuiTheme::getImage("missile_data.homing")  // radar_trace
+        ),
+        // MW_Nuke
+        MissileWeaponData(
+            200.0f, 10.f, 27.0f,                     // speed, turnrate, lifetime
+            GuiTheme::getColor("missile_data.nuke"), // color
+            500.0,                                   // homing_range
+            GuiTheme::getSound("missile_data.nuke"), // fire_sound
+            GuiTheme::getImage("missile_data.nuke")  // radar_trace
+        ),
+        // MW_Mine
+        MissileWeaponData(
+            // Lifetime is used at time which the mine is ejecting from the ship
+            100.0f,  0.f, 10.0f,                     // speed, turnrate, lifetime
+            GuiTheme::getColor("missile_data.mine"), // color
+            0.0,                                     // homing_range
+            GuiTheme::getSound("missile_data.mine"), // fire_sound
+            GuiTheme::getImage("missile_data.mine")  // radar_trace
+        ),
+        // MW_EMP
+        MissileWeaponData(
+            200.0f, 10.f, 27.0f,                    // speed, turnrate, lifetime
+            GuiTheme::getColor("missile_data.emp"), // color
+            500.0,                                  // homing_range
+            GuiTheme::getSound("missile_data.emp"), // fire_sound
+            GuiTheme::getImage("missile_data.emp")  // radar_trace
+        ),
+        // MW_HVLI
+        MissileWeaponData(
+            500.0f,  0.f, 13.5f,                     // speed, turnrate, lifetime
+            GuiTheme::getColor("missile_data.hvli"), // color
+            0.0,                                     // homing_range
+            GuiTheme::getSound("missile_data.hvli"), // fire_sound
+            GuiTheme::getImage("missile_data.hvli")  // radar_trace
+        ),
+    };
+    return missile_data;
 }
 
 const MissileWeaponData& MissileWeaponData::getDataFor(EMissileWeapons type)
 {
+    auto* missile_data = getMissileDataArray();
     if (type == MW_None)
         return missile_data[0];
     return missile_data[type];
@@ -105,5 +146,3 @@ EMissileSizes MissileWeaponData::convertCategoryModifierToSize(float size)
         return MS_Large;
     return MS_Medium;
 }
-
-#include "missileWeaponData.hpp"
