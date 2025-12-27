@@ -99,6 +99,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         else
             global_style.color = {255, 255, 255, 255};
         global_style.font = getFont(input["font"]);
+        global_style.offset = input["offset"].toFloat();
         global_style.size = input["size"].toFloat();
         global_style.sound = input["sound"];
         for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)
@@ -129,6 +130,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 style.states[n].color = toColor(input["color." + postfix]);
             if (input.find("font." + postfix) != input.end())
                 style.states[n].font = getFont(input["font." + postfix]);
+            if (input.find("offset." + postfix) != input.end())
+                style.states[n].offset = input["font." + postfix].toFloat();
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
             if (input.find("sound." + postfix) != input.end())
@@ -151,9 +154,8 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.font = nullptr;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
     if(fonts.size() > 0)
-    {
         fallback_state.font = getFont(fonts[0]);
-    }
+    fallback_state.offset = 0.0f;
     fallback_state.texture = "";
     GuiThemeStyle fallback;
     for(unsigned int n=0; n<int(GuiElement::State::COUNT); n++)

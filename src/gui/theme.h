@@ -16,6 +16,7 @@ public:
         glm::u8vec4 color;
         float size; //general size parameter, depends on the widget type what it means.
         sp::Font* font;
+        float offset = 0.0f;
         string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
@@ -23,17 +24,18 @@ public:
 };
 
 /** The Theme class is used by the GuiElement classes to style themselves.
-    
+
     Themes are loaded from a text resource, and referenced from GuiElement classes.
     A single theme contains information on how to style different widget elements.
-    
+
     Each element describes the following properties:
     - texture
     - color
     - font
+    - offset
     - size
     - sound
-   
+
     With the possibility to distingish with the following states:
     - normal: Default state
     - disabled: When enabled is false
