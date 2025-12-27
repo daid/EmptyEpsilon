@@ -3,7 +3,7 @@
 
     # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
-    
+
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
     [bold] {
@@ -77,9 +77,34 @@
         }
     }
 
-    # Outermost border of circular radars
-    [radar_outline] {
-        color: #FFFFFF
+    [radar] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+
+        # Outermost border of circular radars
+        [radar.outline] {
+            color: #FFFFFF
+        }
+        [radar.range_indicators] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 20.0
+            # Circle alpha; text alpha is half of this.
+            color: #FFFFFF20
+        }
+        [radar.target_projections] {
+            # Distance tick line alpha; path alpha is half of this.
+            color: #FFFFFFFF
+        }
+        [radar.missile_tubes] {
+            color: #80808080
+        }
+        [radar.sector_grid] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 30.0
+            # Main grid line alpha; subsector line alpha is half of this.
+            color: #404080FF
+        }
     }
 
     # Signal bands, used in radar views and sensor locking
@@ -107,7 +132,7 @@
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            
+
             [button.selfdestruct.back] {
                 color: #FF0000
                 color.disabled: #A08080
@@ -149,14 +174,14 @@
             color.disabled: #FFFFFF4D
         }
     }
-    
+
     # GuiLabel
     [label] {
         [label.back] {
             image: gui/widget/LabelBackground.png
         }
     }
-    
+
     # GuiTextEntry
     [textentry] {
         size: 30.0
@@ -182,7 +207,7 @@
             color.hover: #CCCCCC
         }
     }
-    
+
     # GuiScrollbar
     [scrollbar] {
         [scrollbar.back] {
@@ -194,13 +219,13 @@
             color.hover: #CCCCCC
         }
     }
-    
+
     # GuiPanel
     [panel] {
         size: 25.0
         image: gui/widget/PanelBackground.png
     }
-    
+
     # GuiProgressbar
     [progressbar] {
         [progressbar.back] {
@@ -211,7 +236,7 @@
             image: gui/widget/ProgressbarFill.png
         }
     }
-    
+
     # GuiKeyValueDisplay
     [keyvalue] {
         [keyvalue.back] {
@@ -231,7 +256,7 @@
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            
+
             [listbox.selected.back] {
                 image: gui/widget/ButtonBackground.active.png
                 image.hover: gui/widget/ButtonBackground.active.png
@@ -246,7 +271,7 @@
             }
         }
     }
-    
+
     # GuiTextbox
     [textbox] {
         [textbox.back] {
@@ -389,7 +414,7 @@
     [scrollingbanner] {
         image: gui/widget/LabelBackground.png
         size: 25.0
-        font: gui/fonts/BebasNeue Bold.otf
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
         color: #FFFFFF
     }
 
