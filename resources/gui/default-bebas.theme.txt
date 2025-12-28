@@ -3,7 +3,7 @@
 # The `inherit: default` property is implied.
 
 [base] {
-    font: gui/fonts/BebasNeue Book.otf
+    font: gui/fonts/BebasNeue Regular.otf
 
     # Stronger font used at a few locations without UI widgets.
     [bold] {
@@ -18,7 +18,7 @@
 
     [label] {
         [label.front] {
-            font: gui/fonts/BebasNeue Regular.otf
+            font: gui/fonts/BebasNeue Bold.otf
         }
     }
 
