@@ -787,8 +787,9 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
         my_player_info->commandSetMainScreen(window_index, value);
         unselectSingleOptions();
     });
-    main_screen_button->setValue(my_player_info->main_screen & (1 << window_index));
-    main_screen_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+    main_screen_button
+        ->setValue(my_player_info->main_screen & (1 << window_index))
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Window button
     auto window_button_row = new GuiElement(space_screens_panel, "");
@@ -857,7 +858,7 @@ CrewPositionSelection::CrewPositionSelection(GuiContainer* owner, string id, int
 void CrewPositionSelection::onUpdate()
 {
     auto pc = my_spaceship.getComponent<PlayerControl>();
-    bool any_selected = main_screen_button->getValue() || window_button->getValue();
+    bool crew_position_selected = false;
     // If a position already has a player on the currently selected player ship,
     // indicate that on the button.
     string crew_text = "";
@@ -887,19 +888,18 @@ void CrewPositionSelection::onUpdate()
                 crew_text += button_text + ": " + string(", ").join(players);
             }
             else
-            {
                 crew_position_button[n]->setText(button_text);
-            }
 
             crew_position_button[n]->setEnable(!pc || pc->allowed_positions.has(cp));
-            any_selected = any_selected || crew_position_button[n]->getValue();
+            crew_position_selected = crew_position_selected || crew_position_button[n]->getValue();
         }
     }
 
     if (crew_text.empty()) crew_text = tr("No crew members assigned");
+    main_screen_button->setText(crew_position_selected ? tr("Main screen (split)") : tr("Main screen"));
 
     station_players->setText(crew_text);
-    ready_button->setEnable(any_selected);
+    ready_button->setEnable(main_screen_button->getValue() || window_button->getValue() || crew_position_selected);
 }
 
 void CrewPositionSelection::disableAllExcept(GuiToggleButton* button)
