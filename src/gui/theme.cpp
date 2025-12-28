@@ -331,6 +331,8 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 if (!style.states[n].font)
                     LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
+            if (input.find("font_offset." + postfix) != input.end())
+                style.states[n].font_offset = input["font_offset." + postfix].toFloat();
             if (input.find("size." + postfix) != input.end())
                 style.states[n].size = input["size." + postfix].toFloat();
             if (input.find("sound." + postfix) != input.end())
