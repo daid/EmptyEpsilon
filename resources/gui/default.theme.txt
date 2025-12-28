@@ -1,6 +1,8 @@
 [base] {
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
-    
+    # Positive offset moves the font down, negative moves it up.
+    font_offset: 0.0
+
     [button] {
         color: #FFFFFF
         size: 30
@@ -75,7 +77,7 @@
             image.focus: gui/widget/TextEntryBackground.focused.png
         }
     }
-    
+
     [luaconsole] {
         size: 12
         font: gui/fonts/RobotoMono-SemiBold.ttf
@@ -196,5 +198,6 @@
     # Stronger font used at a few locations without UI widgets.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        offset: 0.0
     }
 }
