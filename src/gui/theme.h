@@ -14,6 +14,7 @@ public:
         glm::u8vec4 color;
         float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
+        // TODO: float offset;
         string sound; //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
@@ -55,9 +56,6 @@ public:
 private:
     GuiTheme(const string& name);
     virtual ~GuiTheme();
-
-    static bool loadParentThemes(GuiTheme* theme, const std::vector<string>& parent_names, std::unordered_set<string>& loading_chain);
-    static GuiThemeStyle getMergedParentStyle(GuiTheme* theme, const string& element_name);
 
     string name;
     std::unordered_map<string, GuiThemeStyle> styles;

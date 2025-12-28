@@ -40,16 +40,44 @@ static sp::Font* getFont(const string& s)
     return result;
 }
 
+// Flatten and cache the theme tree into a temporary nested map.
+static std::map<string, std::map<string, string>>* getFlattenedTheme(const string& name, std::unordered_map<string, std::map<string, std::map<string, string>>>& session_cache)
+{
+    auto it = session_cache.find(name);
+    if (it != session_cache.end())
+        return &it->second;
+
+    string resource_name = "gui/" + name + ".theme.txt";
+    auto tree = sp::io::KeyValueTreeLoader::load(resource_name);
+    if (!tree)
+    {
+        LOG(Debug, "Failed to load theme file for flattening: ", resource_name);
+        return nullptr;
+    }
+
+    session_cache[name] = tree->getFlattenNodesByIds();
+    LOG(Debug, "Flattened theme ", name, " with ", session_cache[name].size(), " elements");
+    return &session_cache[name];
+}
+
+// Merge flattened themes into a nested map.
+// Later/child values override those defined earlier.
+static void mergeFlattenedData(std::map<string, std::map<string, string>>& dest, const std::map<string, std::map<string, string>>& source)
+{
+    for (const auto& [element_name, properties] : source)
+        for (const auto& [key, value] : properties) dest[element_name][key] = value;
+}
+
 const GuiThemeStyle* GuiTheme::getStyle(const string& element)
 {
     auto it = styles.find(element);
     if (it != styles.end())
     {
-        // Log the font that will be applied for the Normal state
+        // Capture the font that will be applied for the Normal state.
         const auto& normal_state = it->second.states[int(GuiElement::State::Normal)];
         if (normal_state.font)
         {
-            // Try to find the font name from the fonts cache
+            // Find the font name from the fonts cache.
             string font_name = "unknown";
             for (auto font_it = fonts.begin(); font_it != fonts.end(); ++font_it)
             {
@@ -62,6 +90,7 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
         }
         return &it->second;
     }
+
     int n = element.rfind(".");
     if (n == -1)
     {
@@ -69,21 +98,20 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
         return getStyle("fallback");
     }
     string parent_element = element.substr(0, n);
-    // LOG(Debug, "Element ", element, " not found in theme ", name, ", trying parent element: ", parent_element);
     return getStyle(parent_element);
 }
 
 GuiTheme* GuiTheme::getTheme(const string& name)
 {
     auto it = themes.find(name);
-    if (it != themes.end())
-        return it->second;
+    if (it != themes.end()) return it->second;
+
     if (name == "default")
     {
         LOG(Error, "Default theme not found. Most likely crashing now.");
         return nullptr;
     }
-    LOG(Warning, "Theme ", name, " not found. Falling back to [default] theme.");
+    LOG(Warning, "Theme ", name, " not found. Falling back to Default theme.");
     return getTheme("default");
 }
 
@@ -101,109 +129,9 @@ GuiTheme* GuiTheme::getCurrentTheme()
     return GuiTheme::getTheme(GuiTheme::current_theme);
 }
 
-// Helper function to recursively load parent themes
-// Returns false if circular dependency detected
-bool GuiTheme::loadParentThemes(GuiTheme* theme,
-                                const std::vector<string>& parent_names,
-                                std::unordered_set<string>& loading_chain)
-{
-    for (const string& parent_name : parent_names)
-    {
-        // Check if parent already loaded
-        if (GuiTheme::themes.find(parent_name) == GuiTheme::themes.end())
-        {
-            // Circular dependency check
-            if (loading_chain.find(parent_name) != loading_chain.end())
-            {
-                LOG(Error, "Circular theme inheritance detected: ", parent_name);
-                LOG(Debug, "Loading chain: ", [&]() {
-                    string chain;
-                    for (const auto& t : loading_chain) chain += t + " -> ";
-                    return chain + parent_name;
-                }());
-                return false;
-            }
-
-            // Load parent theme
-            string parent_resource = "gui/" + parent_name + ".theme.txt";
-            LOG(Debug, "Loading parent theme: ", parent_name, " from ", parent_resource);
-            loading_chain.insert(parent_name);
-            if (!GuiTheme::loadTheme(parent_name, parent_resource))
-            {
-                LOG(Error, "Failed to load parent theme: ", parent_name);
-                LOG(Debug, "Could not load resource: ", parent_resource);
-                return false;
-            }
-            loading_chain.erase(parent_name);
-            LOG(Debug, "Successfully loaded parent theme: ", parent_name);
-        }
-        else
-        {
-            LOG(Debug, "Parent theme ", parent_name, " already loaded, reusing");
-        }
-
-        theme->parent_themes.push_back(parent_name);
-    }
-    return true;
-}
-
-// Merge style from all parent themes.
-GuiThemeStyle GuiTheme::getMergedParentStyle(GuiTheme* theme, const string& element_name)
-{
-    GuiThemeStyle merged;
-
-    // Initialize with fallback defaults.
-    for (int n = 0; n < int(GuiElement::State::COUNT); n++)
-    {
-        merged.states[n].color = {255, 255, 255, 255};
-        merged.states[n].size = 30.0f;
-        merged.states[n].font = nullptr;
-        merged.states[n].texture = "";
-        merged.states[n].sound = "";
-    }
-
-    // Merge from each parent in precedence order.
-    for (const string& parent_name : theme->parent_themes)
-    {
-        GuiTheme* parent = GuiTheme::getTheme(parent_name);
-        if (!parent)
-        {
-            LOG(Debug, "Parent theme ", parent_name, " not found when merging style for ", element_name);
-            continue;
-        }
-
-        const GuiThemeStyle* parent_style = parent->getStyle(element_name);
-        if (!parent_style)
-        {
-            LOG(Debug, "Style ", element_name, " not found in parent theme ", parent_name);
-            continue;
-        }
-
-        // Merge each state's properties.
-        for (int n = 0; n < int(GuiElement::State::COUNT); n++)
-        {
-            const GuiThemeStyle::StateStyle& ps = parent_style->states[n];
-            GuiThemeStyle::StateStyle& ms = merged.states[n];
-
-            // Override only if parent has non-default value.
-            if (ps.texture != "")
-                ms.texture = ps.texture;
-            if (ps.font != nullptr)
-                ms.font = ps.font;
-            if (ps.sound != "")
-                ms.sound = ps.sound;
-            // Always override these (can't detect "default")
-            ms.color = ps.color;
-            ms.size = ps.size;
-        }
-    }
-
-    return merged;
-}
-
 bool GuiTheme::loadTheme(const string& name, const string& resource_name)
 {
-    LOG(Debug, "Loading theme: ", name, " from ", resource_name);
+    LOG(Debug, "Loading theme ", name, " from ", resource_name);
     GuiTheme* theme = new GuiTheme(name);
 
     auto tree = sp::io::KeyValueTreeLoader::load(resource_name);
@@ -214,10 +142,13 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         return false;
     }
 
+    // Get current theme's flattened data.
+    auto current_data = tree->getFlattenNodesByIds();
+
     // Parse `inherit` directive from `base` node.
     std::vector<string> parent_names;
-    auto base_node = tree->getFlattenNodesByIds().find("base");
-    if (base_node != tree->getFlattenNodesByIds().end())
+    auto base_node = current_data.find("base");
+    if (base_node != current_data.end())
     {
         std::map<string, string>& base_input = base_node->second;
         if (base_input.find("inherit") != base_input.end())
@@ -247,33 +178,85 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             LOG(Debug, "Theme ", name, " already explicitly inherits from 'default', skipping implicit addition");
     }
 
-    // Recursively load parent themes.
+    // Check for circular dependencies.
     std::unordered_set<string> loading_chain = {name};
-    if (!loadParentThemes(theme, parent_names, loading_chain))
+    for (const string& parent_name : parent_names)
     {
-        delete theme;
-        return false;
+        if (loading_chain.find(parent_name) != loading_chain.end())
+        {
+            LOG(Error, "Circular theme inheritance detected: ", parent_name);
+            delete theme;
+            return false;
+        }
     }
 
-    // Track this theme's explicitly defined elements.
-    std::unordered_set<string> explicitly_defined_elements;
+    // Cache flattened theme data.
+    std::unordered_map<string, std::map<string, std::map<string, string>>> session_cache;
 
-    // Track the default font from the base element.
-    sp::Font* base_font = nullptr;
+    // Merged flattened data from all parent themes, from lowest to highest
+    // precedence.
+    std::map<string, std::map<string, string>> merged_data;
 
-    for (auto& it : tree->getFlattenNodesByIds())
+    for (const string& parent_name : parent_names)
     {
-        string element_name = it.first;
-        std::map<string, string>& input = it.second;
+        if (auto* parent_data = getFlattenedTheme(parent_name, session_cache))
+        {
+            mergeFlattenedData(merged_data, *parent_data);
+            theme->parent_themes.push_back(parent_name);
+        }
+        else
+            LOG(Warning, "Parent theme ", parent_name, " not found for theme ", name);
+    }
 
-        explicitly_defined_elements.insert(element_name);
+    // Active theme's definitions override parents' on merge.
+    std::unordered_set<string> current_theme_elements;
+    for (const auto& [element_name, properties] : current_data)
+        current_theme_elements.insert(element_name);
 
-        // Start with merged parent styles.
-        GuiThemeStyle style = getMergedParentStyle(theme, element_name);
+    mergeFlattenedData(merged_data, current_data);
 
-        // Create global_style from parent's normal state, then override with
-        // this theme's values.
-        GuiThemeStyle::StateStyle global_style = style.states[int(GuiElement::State::Normal)];
+    // Active theme inherits base properties for all undefined elements.
+    // This ensures that a child theme can override global font defaults.
+    if (merged_data.find("base") != merged_data.end())
+    {
+        const auto& base_properties = merged_data["base"];
+        for (auto& [element_name, properties] : merged_data)
+        {
+            // Skip everything but undefined elements in the active theme.
+            if (element_name == "base") continue;
+            if (current_theme_elements.find(element_name) != current_theme_elements.end()) continue;
+
+            // For other undefined elements, apply this theme's base properties,
+            // overriding any base properties defined in the parent.
+            for (const auto& [key, value] : base_properties)
+                properties[key] = value;
+        }
+    }
+
+    // Process the merged data into GuiThemeStyle objects
+    for (auto& [element_name, input] : merged_data)
+    {
+        GuiThemeStyle style;
+
+        // Initialize all states with defaults
+        for (int n = 0; n < int(GuiElement::State::COUNT); n++)
+        {
+            style.states[n].color = {255, 255, 255, 255};
+            style.states[n].size = 30.0f;
+            style.states[n].font = nullptr;
+            // TODO: style.states[n].font_offset = 0.0f;
+            style.states[n].texture = "";
+            style.states[n].sound = "";
+        }
+
+        // Create global_style with defaults for properties that apply to all states
+        GuiThemeStyle::StateStyle global_style;
+        global_style.color = {255, 255, 255, 255};
+        global_style.size = 30.0f;
+        global_style.font = nullptr;
+        // TODO: global_style.font_offset = 0.0f;
+        global_style.texture = "";
+        global_style.sound = "";
 
         // Override global properties if specified in this theme.
         if (input.find("image") != input.end())
@@ -292,11 +275,11 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 LOG(Debug, "Font ", font_path, " failed to load for element ", element_name, " in theme ", name, ". Using fallback font.");
                 global_style.font = theme->styles["fallback"].states[0].font;
             }
-
-            // If this is the base element, store its font as the theme default.
-            if (element_name == "base" && global_style.font)
-                base_font = global_style.font;
         }
+        /* TODO: 
+        if (input.find("font_offset") != input.end())
+            global_style.font_offset = input["font_offset"].toFloat();
+        */
         if (input.find("size") != input.end())
             global_style.size = input["size"].toFloat();
         if (input.find("sound") != input.end())
@@ -331,6 +314,10 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
                 style.states[n].color = global_style.color;
             if (input.find("font") != input.end() && global_style.font)
                 style.states[n].font = global_style.font;
+            /* TODO:
+            if (input.find("font_offset") != input.end())
+                style.states[n].font_offset = global_style.font_offset;
+            */
             if (input.find("size") != input.end())
                 style.states[n].size = global_style.size;
             if (input.find("sound") != input.end())
@@ -357,43 +344,6 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         theme->styles[element_name] = style;
     }
 
-    // Copy all parent theme styles that aren't already defined in this theme.
-    // Process parents in reverse order, such that higher-precedence parent
-    // styles have priority.
-    for (auto it = theme->parent_themes.rbegin(); it != theme->parent_themes.rend(); ++it)
-    {
-        const string& parent_name = *it;
-        GuiTheme* parent = GuiTheme::getTheme(parent_name);
-        if (!parent)
-        {
-            LOG(Debug, "Parent theme ", parent_name, " not found, can't copy styles.");
-            continue;
-        }
-
-        for (const auto& parent_style : parent->styles)
-        {
-            if (theme->styles.find(parent_style.first) == theme->styles.end())
-            {
-                GuiThemeStyle copied_style = parent_style.second;
-
-                // If this theme has a base font and this element wasn't
-                // explicitly defined in the theme, apply the base font to all
-                // states of this copied style.
-                if (base_font && explicitly_defined_elements.find(parent_style.first) == explicitly_defined_elements.end())
-                {
-                    for (size_t n = 0; n < static_cast<size_t>(GuiElement::State::COUNT); n++)
-                    {
-                        // Override only if no state-specific font is defined.
-                        if (copied_style.states[n].font)
-                            copied_style.states[n].font = base_font;
-                    }
-                }
-
-                theme->styles[parent_style.first] = copied_style;
-            }
-        }
-    }
-
     LOG(Debug, "Successfully loaded theme: ", name, " with ", theme->styles.size(), " total styles");
     return true;
 }
@@ -407,6 +357,7 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.color = {255, 255, 255, 255};
     fallback_state.size = 12;
     fallback_state.font = nullptr;
+    // TODO: fallback_state.offset = 0.0f;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
     if(fonts.size() > 0)
     {
