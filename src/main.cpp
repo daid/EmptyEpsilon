@@ -170,8 +170,8 @@ int main(int argc, char** argv)
 
     // Apply baseline offset adjustments to fonts
     // Positive values move text down, negative values move text up
-    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).offset);
-    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).offset);
+    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
+    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.

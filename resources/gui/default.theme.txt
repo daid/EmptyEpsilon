@@ -1,7 +1,7 @@
 [base] {
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     # Positive offset moves the font down, negative moves it up.
-    offset: 0.0
+    font_offset: 20.0
 
     [button] {
         color: #ffffff

@@ -16,7 +16,7 @@ public:
         glm::u8vec4 color;
         float size; //general size parameter, depends on the widget type what it means.
         sp::Font* font;
-        float offset = 0.0f;
+        float font_offset = 0.0f;
         string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
