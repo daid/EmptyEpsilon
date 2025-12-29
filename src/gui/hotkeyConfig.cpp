@@ -4,6 +4,7 @@
 
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
+extern sp::io::Keybinding screenshot_key;
 
 // Cinematic Keys
 Keys::CinematicKeys::CinematicKeys() :
@@ -324,6 +325,7 @@ void Keys::init()
     voice_all.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to server"));
     voice_ship.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to ship"));
     fullscreen_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Fullscreen toggle"));
+    screenshot_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Take screenshot"));
 
     //General
     next_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to next crew station"));
