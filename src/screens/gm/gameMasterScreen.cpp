@@ -11,6 +11,7 @@
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/gravity.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/comms.h"
 #include "components/player.h"
@@ -39,8 +40,8 @@ static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
         result[trMark("gm_info", "CallSign")] = cs->callsign;
     if (auto tn = entity.getComponent<TypeName>())
         result[trMark("gm_info", "Type")] = tn->localized;
-    if (auto hull = entity.getComponent<Hull>())
-        result[trMark("gm_info", "Hull")] = string(hull->current) + "/" + string(hull->max);
+    if (auto health = entity.getComponent<Health>())
+        result[trMark("gm_info", "Health")] = string(health->current) + "/" + string(health->max);
     //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
         // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.

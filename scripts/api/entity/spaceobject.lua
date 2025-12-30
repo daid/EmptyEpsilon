@@ -458,12 +458,52 @@ function Entity:isScannedByFaction(faction_name)
     end
     return false
 end
+--- Returns this entity's health points.
+--- Example: entity:getHealth()
+function Entity:getHealth()
+    if self.components.health then return self.components.health.current end
+    return 0
+end
+--- Returns this entity's maximum limit of health points.
+--- Example: entity:getHealthMax()
+function Entity:getHealthMax()
+    if self.components.health then return self.components.health.max end
+    return 0
+end
+--- Sets this entity's health points.
+--- If set to a value larger than the maximum, this sets the value to the limit.
+--- If set to a value less than 0, this sets the value to 0.
+--- Note that setting this value to 0 doesn't immediately destroy the entity.
+--- Example: entity:setHealth(100) -- sets the health point limit to either 100, or the limit if less than 100
+function Entity:setHealth(amount)
+    if self.components.health then self.components.health.current = amount end
+    return self
+end
+--- Sets this entity's maximum limit of health points.
+--- Example: entity:setHealthMax(100) -- sets the health point limit to 100
+function Entity:setHealthMax(amount)
+    if self.components.health then self.components.health.max = amount end
+    return self
+end
+--- Defines whether this entity can be destroyed by damage.
+--- Defaults to true.
+--- Example: entity:setCanBeDestroyed(false) -- prevents the entity from being destroyed by damage
+function Entity:setCanBeDestroyed(allow_destroy)
+    if self.components.health then self.components.health.allow_destruction = allow_destroy end
+    return self
+end
+--- Returns whether the entity can be destroyed by damage.
+--- Example: entity:getCanBeDestroyed()
+function Entity:getCanBeDestroyed()
+    if self.components.health then return self.components.health.allow_destruction end
+    return false
+end
 --- Defines a function to call when this SpaceObject is destroyed by any means.
 --- Example:
 --- -- Prints to the console window or logging file when this SpaceObject is destroyed
 --- obj:onDestroyed(function() print("Object destroyed!") end)
 function Entity:onDestroyed(callback)
-    --TODO: Cases where we do not have hull
-    if self.components.hull then self.components.hull.on_destruction = callback end
+    --TODO: Cases where we do not have health
+    if self.components.health then self.components.health.on_destruction = callback end
     return self
 end

@@ -21,8 +21,27 @@ function Entity:setTemplate(template_name)
         error("Failed to find template: " .. tostring(template_name), 2)
     end
     -- print("Setting template:" .. template_name)
+
+    -- Convert old hull component setters to health + hull for backward compatibility
+    if template.hull and type(template.hull) == "table" then
+        -- Create health component from hull data
+        local hull_data = template.hull
+        comp.health = {
+            current = hull_data.current or 100.0,
+            max = hull_data.max or 100.0,
+            allow_destruction = hull_data.allow_destruction,
+            damaged_by_energy = hull_data.damaged_by_energy,
+            damaged_by_kinetic = hull_data.damaged_by_kinetic,
+            damaged_by_emp = hull_data.damaged_by_emp,
+            on_destruction = hull_data.on_destruction,
+            on_taking_damage = hull_data.on_taking_damage
+        }
+        -- Create hull as empty marker component
+        comp.hull = {}
+    end
+
     for key, value in next, template, nil do
-        if string.sub(key, 1, 2) ~= "__" then
+        if string.sub(key, 1, 2) ~= "__" and key ~= "hull" then
             comp[key] = value
         end
     end
@@ -91,46 +110,34 @@ end
 function Entity:getTypeName()
     return self.components.typename.type_name
 end
---- Returns this STBO's hull points.
---- Example: stbo:getHull()
+--- DEPRECATED: Returns this entity's health points.
+--- Example: entity:getHull()
 function Entity:getHull()
-    if self.components.hull then return self.components.hull.current end
-    return 0
+    return self:getHealth()
 end
---- Returns this STBO's maximum limit of hull points.
---- Example: stbo:getHullMax()
+--- DEPRECATED: Returns this entity's maximum limit of health points.
+--- Example: entity:getHullMax()
 function Entity:getHullMax()
-    if self.components.hull then return self.components.hull.max end
-    return 0
+    return self:getHealthMax()
 end
---- Sets this STBO's hull points.
+--- Adds the Hull marker component to the entity.
+--- DEPRECATED: If passed an amount, also sets this entity's current health value.
 --- If set to a value larger than the maximum, this sets the value to the limit.
 --- If set to a value less than 0, this sets the value to 0.
---- Note that setting this value to 0 doesn't immediately destroy the STBO.
---- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
+--- Note that setting this value to 0 doesn't immediately destroy the entity.
+--- Example: entity:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.components.hull then self.components.hull.current = amount end
+    self.components.hull = {}
+    self:setHealth(amount)
     return self
 end
---- Sets this STBO's maximum limit of hull points.
---- Note that SpaceStations can't repair their own hull, so this only changes the percentage of remaining hull.
---- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
+--- Adds the Hull marker component to the entity.
+--- DEPRECATED: If passed an amount, also sets this entity's maximum limit of health points.
+--- Example: entity:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    if self.components.hull then self.components.hull.max = amount end
+    self.components.hull = {}
+    self:setHealthMax(amount)
     return self
-end
---- Defines whether this STBO can be destroyed by damage.
---- Defaults to true.
---- Example: stbo:setCanBeDestroyed(false) -- prevents the STBO from being destroyed by damage
-function Entity:setCanBeDestroyed(allow_destroy)
-    if self.components.hull then self.components.hull.allow_destruction = allow_destroy end
-    return self    
-end
---- Returns whether the STBO can be destroyed by damage.
---- Example: stbo:getCanBeDestroyed()
-function Entity:getCanBeDestroyed()
-    if self.components.hull then return self.components.hull.allow_destruction end
-    return false
 end
 --- Returns the shield points for this STBO's shield segment with the given index.
 --- Shield segments are 0-indexed.
@@ -283,12 +290,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getFrontShield()
-    return self.getShieldLevel(0)
+    return self:getShieldLevel(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getFrontShieldMax()
-    return self.getShieldMax(0)
+    return self:getShieldMax(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
@@ -305,12 +312,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getRearShield()
-    return self.getShieldLevel(1)
+    return self:getShieldLevel(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getRearShieldMax()
-    return self.getShieldMax(1)
+    return self:getShieldMax(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.

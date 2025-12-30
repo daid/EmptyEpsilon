@@ -16,6 +16,7 @@
 #include "components/name.h"
 #include "components/moveto.h"
 #include "components/lifetime.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/docking.h"
@@ -362,15 +363,17 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
     BIND_MEMBER(AllowRadarLink, owner);
 
+    sp::script::ComponentHandler<Health>::name("health");
+    BIND_MEMBER(Health, current);
+    BIND_MEMBER(Health, max);
+    BIND_MEMBER(Health, allow_destruction);
+    BIND_MEMBER(Health, on_destruction);
+    BIND_MEMBER(Health, on_taking_damage);
+    BIND_MEMBER_FLAG(Health, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
+    BIND_MEMBER_FLAG(Health, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
+    BIND_MEMBER_FLAG(Health, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
+
     sp::script::ComponentHandler<Hull>::name("hull");
-    BIND_MEMBER(Hull, current);
-    BIND_MEMBER(Hull, max);
-    BIND_MEMBER(Hull, allow_destruction);
-    BIND_MEMBER(Hull, on_destruction);
-    BIND_MEMBER(Hull, on_taking_damage);
-    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_energy", (1 << int(DamageType::Energy)));
-    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_kinetic", (1 << int(DamageType::Kinetic)));
-    BIND_MEMBER_FLAG(Hull, damaged_by_flags, "damaged_by_emp", (1 << int(DamageType::EMP)));
 
     sp::script::ComponentHandler<Shields>::name("shields");
     BIND_MEMBER_NAMED(Shields, front_system.health, "front_health");
