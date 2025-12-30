@@ -48,7 +48,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     // Fit selector text between the arrow buttons.
     sp::Rect text_rect(rect.position.x + rect.size.y * 0.5f, rect.position.y, rect.size.x - rect.size.y, rect.size.y);
     if (selection_index >= 0 && selection_index < static_cast<int>(entries.size()))
-        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, color, sp::Font::FlagClip);
+        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
 
     if (!focus) popup->hide();
 
