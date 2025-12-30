@@ -142,6 +142,31 @@ void PlayerInfo::reset()
     crew_positions.clear();
 }
 
+// Return the total number of positions populated by this player.
+int PlayerInfo::countTotalPlayerPositions()
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for (auto monitor : crew_positions)
+        for (auto position : monitor) count++;
+
+    LOG(Info, "count: ", count);
+    return count;
+}
+
+// Return the total number of positions populated by this player.
+int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for (auto position : crew_positions[monitor]) count++;
+
+    LOG(Info, "count: ", count);
+    return count;
+}
+
 bool PlayerInfo::hasPosition(CrewPosition cp)
 {
     for(auto cps : crew_positions) {
