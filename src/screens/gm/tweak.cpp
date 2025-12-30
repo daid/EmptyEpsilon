@@ -11,6 +11,7 @@
 #include "components/docking.h"
 #include "components/gravity.h"
 #include "components/hacking.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/impulse.h"
 #include "components/jumpdrive.h"
@@ -312,10 +313,14 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max per system:"), Coolant, max_coolant_per_system);
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
 
+    ADD_PAGE(tr("tweak-tab", "Health"), Health);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Health, current);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Health, max);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Health, allow_destruction);
+
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Hull, current);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Hull, max);
-    ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Hull, allow_destruction);
+    ADD_LABEL(tr("tweak-text", "Hull is a marker component identifying ship-like entities."));
+    ADD_LABEL(tr("tweak-text", "For health values, use the Health component."));
 
     ADD_PAGE(tr("tweak-tab", "Impulse engine"), ImpulseEngine);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed forward:"), ImpulseEngine, max_speed_forward);

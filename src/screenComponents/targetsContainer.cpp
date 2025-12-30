@@ -1,12 +1,14 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
-#include "systems/collision.h"
-#include "components/hull.h"
-#include "components/collision.h"
-#include "components/scanning.h"
-#include "components/radar.h"
 #include "ecs/query.h"
 
+#include "systems/collision.h"
+#include "components/collision.h"
+#include "components/comms.h"
+#include "components/health.h"
+#include "components/hull.h"
+#include "components/scanning.h"
+#include "components/radar.h"
 
 TargetsContainer::TargetsContainer()
 {
@@ -199,21 +201,21 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
 {
     if (entity == my_spaceship) return false;
 
-    switch(selection_type)
+    switch (selection_type)
     {
-    case Selectable:
+    case Selectable: // Used by Relay
         if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
-        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        if (entity.hasComponent<ShareShortRangeRadar>()) return true;
+        if (entity.hasComponent<ScanState>()) return true;
         break;
-    case Targetable:
-        if (entity.hasComponent<Hull>()) return true;
+    case Targetable: // Used by Weapons
+        if (entity.hasComponent<Health>()) return true;
         break;
-    case Scannable:
+    case Scannable: // Used by Science
         if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
-        if (entity.getComponent<ScienceDescription>()) return true;
-        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+        if (entity.hasComponent<ScanState>()) return true;
+        if (entity.hasComponent<ScienceDescription>()) return true;
+        if (entity.hasComponent<ShareShortRangeRadar>()) return true;
         break;
     }
     return false;

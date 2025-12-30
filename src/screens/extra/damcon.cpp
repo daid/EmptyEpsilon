@@ -4,6 +4,7 @@
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/customShipFunctions.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "i18n.h"
 
@@ -36,10 +37,12 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        auto hull = my_spaceship.getComponent<Hull>();
-        if (hull) {
-            hull_display->setValue(string(int(100 * hull->current / hull->max)) + "%");
-            if (hull->current < hull->max / 4.0f)
+        auto health = my_spaceship.getComponent<Health>();
+        auto hull = my_spaceship.hasComponent<Hull>();
+        if (health && hull)
+        {
+            hull_display->setValue(string(int(100 * health->current / health->max)) + "%");
+            if (health->current < health->max / 4.0f)
                 hull_display->setBackColor(glm::u8vec4(255, 0, 0, 255));
             else
                 hull_display->setBackColor(glm::u8vec4{255,255,255,255});

@@ -1,6 +1,7 @@
 #include "systems/gravity.h"
 #include "components/gravity.h"
 #include "components/collision.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "systems/collision.h"
 #include "systems/damage.h"
@@ -60,7 +61,8 @@ void GravitySystem::update(float delta)
                     DamageSystem::applyDamage(target, 100000.0, info); //try to destroy the object by inflicting a huge amount of damage
                     if (target)
                     {
-                        if (!target.hasComponent<Hull>() || target.getComponent<Hull>()->allow_destruction)
+                        auto health = target.getComponent<Health>();
+                        if (!health || health->allow_destruction)
                             target.destroy();
                         return;
                     }
