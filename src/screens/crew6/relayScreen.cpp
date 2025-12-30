@@ -29,11 +29,24 @@
 //TODO: This function does not belong here.
 static bool canHack(sp::ecs::Entity entity)
 {
+    if (!my_spaceship) return false;
+    if (my_spaceship == entity || !my_spaceship.hasComponent<HackingDevice>()) return false;
     auto scanstate = entity.getComponent<ScanState>();
-    //TODO: Check if there are actually hackable systems.
     if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
         return true;
-    return Faction::getRelation(entity, my_spaceship) != FactionRelation::Friendly;
+
+    // Check for hackable ShipSystems.
+    bool has_hackable_systems = false;
+    for (int n = 0; n < static_cast<int>(ShipSystem::Type::COUNT); n++)
+    {
+        auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
+        if (sys && sys->can_be_hacked) has_hackable_systems = true;
+    };
+
+    if (Faction::getRelation(entity, my_spaceship) == FactionRelation::Friendly)
+        return false;
+    else
+        return has_hackable_systems;
 }
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)

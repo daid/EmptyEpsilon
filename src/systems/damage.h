@@ -40,6 +40,6 @@ public:
     static void applyDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info);
 
 private:
-    static void takeHullDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info);
+    static void takeHealthDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info);
     static void destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& info);
 };

@@ -5,6 +5,7 @@
 #include "components/reactor.h"
 #include "components/collision.h"
 #include "components/shields.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/coolant.h"
 #include "playerInfo.h"
@@ -97,10 +98,12 @@ HullInfoDisplay::HullInfoDisplay(GuiContainer* owner, const string& id, float di
 
 void HullInfoDisplay::onUpdate()
 {
-    if (auto hull = my_spaceship.getComponent<Hull>())
+    // Show Health as Hull, and only if the entity also has Hull.
+    auto health = my_spaceship.getComponent<Health>();
+    if (health && my_spaceship.hasComponent<Hull>())
     {
-        setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
-        if (hull->current < hull->max / 4.0f)
+        setValue(toNearbyIntString(100.0f * health->current / health->max) + "%");
+        if (health->current < health->max / 4.0f)
             setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
             setBackColor(glm::u8vec4{255,255,255,255});
