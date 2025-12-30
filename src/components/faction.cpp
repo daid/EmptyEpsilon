@@ -61,6 +61,10 @@ void Faction::didAnOffensiveAction(sp::ecs::Entity entity)
 
 FactionRelation FactionInfo::getRelation(sp::ecs::Entity faction_entity)
 {
+    // If the entity has no faction, return None
+    if (!faction_entity)
+        return FactionRelation::None;
+
     for(auto it : relations)
         if (it.other_faction == faction_entity)
             return it.relation;

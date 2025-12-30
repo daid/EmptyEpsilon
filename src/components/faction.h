@@ -8,6 +8,7 @@ class FactionInfo;
 
 enum class FactionRelation
 {
+    None,      // Entity has no Faction component
     Friendly,
     Neutral,
     Enemy

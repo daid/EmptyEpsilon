@@ -4,7 +4,7 @@
 #include "components/missiletubes.h"
 #include "components/missile.h"
 #include "components/lifetime.h"
-#include "components/hull.h"
+#include "components/health.h"
 #include "components/radar.h"
 #include "components/docking.h"
 #include "components/warpdrive.h"
@@ -137,15 +137,15 @@ void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
     if (!game_server) return;
     auto deot = a.getComponent<DelayedExplodeOnTouch>();
     if (deot && deot->trigger_holdoff_delay <= 0.0f) {
-        auto hull = b.getComponent<Hull>();
-        if (!hull) return;
+        auto health = b.getComponent<Health>();
+        if (!health) return;
         deot->triggered = true;
     }
     auto eot = a.getComponent<ExplodeOnTouch>();
     if (!eot) return;
     if (eot->owner == b) return;
-    auto hull = b.getComponent<Hull>();
-    if (!hull) return;
+    auto health = b.getComponent<Health>();
+    if (!health) return;
 
     explode(a, b, *eot);
 }

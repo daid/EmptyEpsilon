@@ -1,12 +1,14 @@
 #include "targetsContainer.h"
 #include "playerInfo.h"
-#include "systems/collision.h"
-#include "components/hull.h"
-#include "components/collision.h"
-#include "components/scanning.h"
-#include "components/radar.h"
 #include "ecs/query.h"
 
+#include "systems/collision.h"
+#include "components/collision.h"
+#include "components/comms.h"
+#include "components/health.h"
+#include "components/hull.h"
+#include "components/scanning.h"
+#include "components/radar.h"
 
 TargetsContainer::TargetsContainer()
 {
@@ -199,22 +201,47 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
 {
     if (entity == my_spaceship) return false;
 
-    switch(selection_type)
+    const bool has_health = entity.hasComponent<Health>();
+    const bool has_hull = entity.hasComponent<Hull>();
+
+    switch (selection_type)
     {
-    case Selectable:
-        if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
+    case Selectable: // Used by Relay
+        // Always select entities with both Health and Hull.
+        if (has_health && has_hull) return true;
+        // Always select entities if they share radar.
         if (entity.getComponent<ShareShortRangeRadar>()) return true;
+
+        // Select entities if they're CommsReceivers.
+        if (has_health && !has_hull)
+            if (entity.hasComponent<CommsReceiver>()) return true;
         break;
-    case Targetable:
-        if (entity.hasComponent<Hull>()) return true;
+
+    case Hackable: // Used by Relay
+        // Can hack entities with a hackable ShipSystem.
+        for (int n = 0; n < static_cast<int>(ShipSystem::Type::COUNT); n++)
+        {
+            auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
+            if (sys && sys->can_be_hacked) return true;
+        };
         break;
-    case Scannable:
-        if (entity.hasComponent<Hull>()) return true;
-        if (entity.getComponent<ScanState>()) return true;
-        if (entity.getComponent<ScienceDescription>()) return true;
-        if (entity.getComponent<ShareShortRangeRadar>()) return true;
+
+    case Targetable: // Used by Weapons
+        // Weapons target anything with Health.
+        if (has_health) return true;
+        break;
+
+    case Scannable: // Used by Science
+        // Can scan entities that have both Health and Hull.
+        if (has_health && has_hull) return true;
+
+        // Can scan entities without Health if they have scan state or
+        // description, or share radar.
+        if (entity.hasComponent<ScanState>()) return true;
+        if (entity.hasComponent<ScienceDescription>()) return true;
+        if (entity.hasComponent<ShareShortRangeRadar>()) return true;
         break;
     }
+
     return false;
 }

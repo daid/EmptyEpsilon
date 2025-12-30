@@ -33,6 +33,7 @@ function Asteroid()
         spin={rate=random(0.1, 0.8)},
         avoid_object={range=size*2},
         explode_on_touch={damage_at_center=35, damage_at_edge=35,blast_range=size},
+        health={current=size, max=size},
     }
     return e
 end

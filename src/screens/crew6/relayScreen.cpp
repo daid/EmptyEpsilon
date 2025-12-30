@@ -67,7 +67,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             switch(mode)
             {
             case TargetSelection:
-                targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
+                // If a target isn't selectable (lacks hull) but can still be
+                // hacked, still select it.
+                if (targets.getTargets().empty()) targets.setToClosestTo(position, 1000, TargetsContainer::Hackable);
                 break;
             case WaypointPlacement:
                 if (my_spaceship)

@@ -4,6 +4,7 @@
 #include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
 #include "components/reactor.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
@@ -61,14 +62,16 @@ void DockingSystem::update(float delta)
                 }
 
                 auto bay = docking_port.target.getComponent<DockingBay>();
-                if (bay && (bay->flags & DockingBay::Repair))  //Check if what we are docked to allows hull repairs, and if so, do it.
+                // Check if what we are docked to allows hull repairs, and if
+                // so, do it.
+                if (bay && (bay->flags & DockingBay::Repair))
                 {
-                    auto hull = entity.getComponent<Hull>();
-                    if (hull && hull->current < hull->max)
+                    auto health = entity.getComponent<Health>();
+                    if (health && health->current < health->max)
                     {
-                        hull->current += delta;
-                        if (hull->current > hull->max)
-                            hull->current = hull->max;
+                        health->current += delta;
+                        if (health->current > health->max)
+                            health->current = health->max;
                     }
                 }
 

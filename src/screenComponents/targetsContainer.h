@@ -1,5 +1,4 @@
-#ifndef TARGETS_CONTAINER_H
-#define TARGETS_CONTAINER_H
+#pragma once
 
 #include "ecs/entity.h"
 #include "components/faction.h"
@@ -10,6 +9,7 @@ public:
     enum ESelectionType
     {
         Targetable,
+        Hackable,
         Selectable,
         Scannable,
     };
@@ -40,5 +40,3 @@ private:
     void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities);
     bool isValidTarget(sp::ecs::Entity entity, ESelectionType selection_type);
 };
-
-#endif//TARGETS_CONTAINER_H

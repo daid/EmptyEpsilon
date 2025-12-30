@@ -11,6 +11,7 @@
 #include "components/player.h"
 #include "components/missiletubes.h"
 #include "components/customshipfunction.h"
+#include "systems/damage.h"
 #include "missileWeaponData.h"
 
 
@@ -60,6 +61,7 @@ template<> struct Convert<sp::Physics::Type> {
 template<> struct Convert<FactionRelation> {
     static int toLua(lua_State* L, FactionRelation value) {
         switch(value) {
+        case FactionRelation::None: lua_pushstring(L, "none"); break;
         case FactionRelation::Friendly: lua_pushstring(L, "friendly"); break;
         case FactionRelation::Neutral: lua_pushstring(L, "neutral"); break;
         case FactionRelation::Enemy: lua_pushstring(L, "enemy"); break;
@@ -68,7 +70,9 @@ template<> struct Convert<FactionRelation> {
     }
     static FactionRelation fromLua(lua_State* L, int idx) {
         string str = string(luaL_checkstring(L, idx)).lower();
-        if (str == "friendly")
+        if (str == "none")
+            return FactionRelation::None;
+        else if (str == "friendly")
             return FactionRelation::Friendly;
         else if (str == "neutral")
             return FactionRelation::Neutral;

@@ -31,6 +31,7 @@
 
 #include "components/collision.h"
 #include "components/impulse.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/customshipfunction.h"
 #include "components/shiplog.h"
@@ -928,8 +929,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 trace.max_size = 10.0;
                 trace.color = {96, 192, 128, 255};
                 trace.flags = RadarTrace::LongRange;
-                auto& hull = p.addComponent<Hull>();
-                hull.current = hull.max = 1;
+                auto& health = p.addComponent<Health>();
+                health.current = health.max = 1;
+                p.addComponent<Hull>();
                 p.addComponent<ShareShortRangeRadar>();
                 auto model = "SensorBuoy/SensorBuoyMKI.model";
                 auto idx = irandom(1, 3);

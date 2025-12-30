@@ -1,6 +1,7 @@
 #include "gameGlobalInfo.h"
 #include "threatLevelEstimate.h"
 #include "ecs/query.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/shields.h"
@@ -52,9 +53,10 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
 
     float threat = 0.0;
 
-    auto hull = ship.getComponent<Hull>();
-    if (hull)
-        threat += hull->max - hull->current;
+    auto health = ship.getComponent<Health>();
+    const bool hull = ship.getComponent<Health>();
+    if (hull && health)
+        threat += health->max - health->current;
     auto shields = ship.getComponent<Shields>();
     if (shields) {
         if (shields->active)
@@ -81,10 +83,10 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
             }
 
             bool is_being_attacked = false;
-            hull = entity.getComponent<Hull>();
+            health = entity.getComponent<Health>();
             float score = 200.0f;
-            if (hull)
-                score += hull->max;
+            if (hull && health)
+                score += health->max;
             auto shields = entity.getComponent<Shields>();
             if (shields) {
                 for(auto& shield : shields->entries) {
