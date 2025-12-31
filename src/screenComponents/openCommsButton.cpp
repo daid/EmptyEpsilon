@@ -20,6 +20,8 @@ void GuiOpenCommsButton::onDraw(sp::RenderTarget& renderer)
     if (transmitter && transmitter->state == CommsTransmitter::State::Inactive)
     {
         auto target = targets->get();
+        // Button enabling logic should align with Relay targeting logic for
+        // TargetsContainer::ESelectionType::Selectable.
         if (target.hasComponent<CommsReceiver>() || target.hasComponent<CommsTransmitter>())
             enable();
     }

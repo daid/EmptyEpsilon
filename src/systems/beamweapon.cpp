@@ -40,7 +40,12 @@ void BeamWeaponSystem::update(float delta)
 
             // Check on beam weapons only if we are on the server, have a target, and
             // not paused, and if the beams are cooled down or have a turret arc.
-            if (mount.range > 0.0f && Faction::getRelation(entity, target->entity) != FactionRelation::Friendly && delta > 0.0f && (!warp || warp->current == 0.0f) && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
+            const auto relationship = Faction::getRelation(entity, target->entity);
+            if (mount.range > 0.0f
+                && (relationship == FactionRelation::Enemy || relationship == FactionRelation::None)
+                && delta > 0.0f
+                && (!warp || warp->current == 0.0f)
+                && (!docking_port || docking_port->state == DockingPort::State::NotDocking))
             {
                 if (auto target_transform = target->entity.getComponent<sp::Transform>()) {
                     // Get the angle to the target.

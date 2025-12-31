@@ -212,9 +212,10 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
         // Always select entities if they share radar.
         if (entity.getComponent<ShareShortRangeRadar>()) return true;
 
-        // Select entities if they're CommsReceivers.
-        if (has_health && !has_hull)
-            if (entity.hasComponent<CommsReceiver>()) return true;
+        // Select entities if they can accept hails.
+        // Targeting logic should align with "Open comms" button enabling logic
+        // on Relay.
+        if (entity.hasComponent<CommsReceiver>() || entity.hasComponent<CommsTransmitter>()) return true;
         break;
 
     case Hackable: // Used by Relay
@@ -235,8 +236,8 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
         // Can scan entities that have both Health and Hull.
         if (has_health && has_hull) return true;
 
-        // Can scan entities without Health if they have scan state or
-        // description, or share radar.
+        // Can scan entities without Health and/or Hull if they have scan state
+        // or description, or share radar.
         if (entity.hasComponent<ScanState>()) return true;
         if (entity.hasComponent<ScienceDescription>()) return true;
         if (entity.hasComponent<ShareShortRangeRadar>()) return true;
