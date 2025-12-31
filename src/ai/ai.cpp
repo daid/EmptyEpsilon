@@ -6,6 +6,7 @@
 #include "components/impulse.h"
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
@@ -527,8 +528,8 @@ void ShipAI::runOrders()
                 }
                 if (bay->flags & DockingBay::Repair)
                 {
-                    auto hull = owner.getComponent<Hull>();
-                    if (hull && hull->current < hull->max)
+                    auto health = owner.getComponent<Health>();
+                    if (health && health->current < health->max)
                         allow_undock = false;
                 }
             }
@@ -837,6 +838,7 @@ sp::ecs::Entity ShipAI::findBestTarget(glm::vec2 position, float radius)
     auto owner_position = ot->getPosition();
     for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(radius, radius), position + glm::vec2(radius, radius)))
     {
+        // Seek only entities with Hull components.
         if (!entity.hasComponent<Hull>() || Faction::getRelation(owner, entity) != FactionRelation::Enemy || entity == target)
             continue;
         if (RadarBlockSystem::isRadarBlockedFrom(owner_position, entity, short_range))
