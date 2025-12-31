@@ -145,6 +145,7 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             switch(fvf_state)
             {
             case FactionRelation::Enemy:
+            case FactionRelation::None:
                 victory_label->setText(tr("Defeat!"));
                 break;
             case FactionRelation::Friendly:
