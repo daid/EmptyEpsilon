@@ -3,6 +3,7 @@
 #include "targetsContainer.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_progressbar.h"
+#include "components/radar.h"
 #include "components/scanning.h"
 #include "components/target.h"
 #include "i18n.h"
@@ -11,10 +12,22 @@
 GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id), targets(targets)
 {
-    button = new GuiButton(this, id + "_BUTTON", tr("scienceButton", "Scan"), [this]() {
-        if (my_spaceship && this->targets && this->targets->get())
-            my_player_info->commandScan(this->targets->get());
-    });
+    button = new GuiButton(this, id + "_BUTTON", tr("scienceButton", "Scan"),
+        [this]()
+        {
+            if (my_spaceship && this->targets && this->targets->get())
+            {
+                // Always check for active radar link dynamically
+                auto rl = my_spaceship.getComponent<RadarLink>();
+                if (rl && rl->linked_entity)
+                    my_player_info->commandScan(this->targets->get(), rl->linked_entity);
+                else
+                    my_player_info->commandScan(this->targets->get());
+            }
+
+
+        }
+    );
     button->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     progress = new GuiProgressbar(this, id + "_PROGRESS", 0, 6.0f, 0.0);
     progress->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
