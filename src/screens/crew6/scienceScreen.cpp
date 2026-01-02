@@ -535,9 +535,9 @@ void ScienceScreen::onUpdate()
             auto scanstate = obj.getComponent<ScanState>();
             if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
-                // Check if scanning via radar link (e.g., from a probe)
+                // Check for active radar link and validate the linked entity
                 auto rl = my_spaceship.getComponent<RadarLink>();
-                if (rl && rl->linked_entity)
+                if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
                     my_player_info->commandScan(obj, rl->linked_entity);
                 else
                     my_player_info->commandScan(obj);
