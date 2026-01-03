@@ -60,6 +60,7 @@ void Waypoints::move(int id, glm::vec2 position)
 void Waypoints::remove(int id)
 {
     waypoints.erase(std::remove_if(waypoints.begin(), waypoints.end(), [id](auto& p) { return p.id == id; }), waypoints.end());
+    dirty = true;
 }
 
 std::optional<glm::vec2> Waypoints::get(int id)
