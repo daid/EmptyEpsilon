@@ -81,13 +81,13 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
-        if (!value) engine->setGameSpeed(std::powf(2.0f, game_time_scale->getSelectionIndex()));
+        if (!value) engine->setGameSpeed(pow(2.0f, game_time_scale->getSelectionIndex()));
         else engine->setGameSpeed(0.0f);
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
 
     game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [this](int index, string value) {
-        engine->setGameSpeed(std::powf(2, index));
+        engine->setGameSpeed(pow(2, index));
     });
     game_time_scale
         ->setOptions({"1x", "2x", "4x", "8x"})
@@ -317,7 +317,7 @@ void GameMasterScreen::update(float delta)
             engine->setGameSpeed(
                 game_speed > 0.0f
                     ? 0.0f
-                    : std::powf(2.0f, game_time_scale->getSelectionIndex())
+                    : std::pow(2.0f, game_time_scale->getSelectionIndex())
             );
     }
 
