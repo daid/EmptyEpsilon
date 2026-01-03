@@ -1,5 +1,4 @@
-#ifndef SCIENCE_SCREEN_H
-#define SCIENCE_SCREEN_H
+#pragma once
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
@@ -68,5 +67,3 @@ private:
     float previous_long_range_radar=0;
     float previous_short_range_radar=0;
 };
-
-#endif//SCIENCE_SCREEN_H
