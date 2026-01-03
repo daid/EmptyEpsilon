@@ -30,7 +30,7 @@ void GuiOpenCommsButton::onDraw(sp::RenderTarget& renderer)
                 enable();
                 setText(allow_comms ? tr("Open comms") : tr("Link to comms"));
             }
-            else setText(tr("No comms reception"));
+            else setText(tr("No comms target"));
         }
         else setText(tr("Transmitting..."));
     }

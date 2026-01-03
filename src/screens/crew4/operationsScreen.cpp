@@ -72,21 +72,29 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
 
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, sp::Alignment::BottomRight)->setSize(200, 50);
+    // Limited relay functions: comms and waypoints.
+    GuiElement* relay_functions = new GuiElement(science->radar_view, "RELAY_FUNCTIONS");
+    relay_functions
+        ->setPosition(-270.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(200.0f, 150.0f)
+        ->setAttribute("layout", "verticalbottom");
+
+    // Manage comms.
+    (new GuiOpenCommsButton(relay_functions, "OPEN_COMMS_BUTTON", tr("Open comms"), &science->targets))
+        ->setSize(200.0f, 50.0f);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
-        mode = WaypointPlacement;
-    });
-    place_waypoint_button->setPosition(-270, -70, sp::Alignment::BottomRight)->setSize(200, 50);
+    place_waypoint_button = new GuiButton(relay_functions, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() { mode = WaypointPlacement; });
+    place_waypoint_button->setSize(200.0f, 50.0f);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
-        if (my_spaceship && science->targets.getWaypointIndex() >= 0)
+    delete_waypoint_button = new GuiButton(relay_functions, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
+        [this]()
         {
-            my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
+            if (my_spaceship && science->targets.getWaypointIndex() >= 0)
+                my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
-    });
-    delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);
+    );
+    delete_waypoint_button->setSize(200.0f, 50.0f);
 
     auto stats = new GuiElement(this, "OPERATIONS_STATS");
     stats->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(240, 80)->setAttribute("layout", "vertical");
