@@ -81,7 +81,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->hide();
 
     pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
-        if (!value) engine->setGameSpeed(std::powf(2, game_time_scale->getSelectionIndex()));
+        if (!value) engine->setGameSpeed(std::powf(2.0f, game_time_scale->getSelectionIndex()));
         else engine->setGameSpeed(0.0f);
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
@@ -312,7 +312,12 @@ void GameMasterScreen::update(float delta)
 
     if (keys.pause.getDown())
     {
-        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+        if (game_server && !gameGlobalInfo->getVictoryFaction())
+            engine->setGameSpeed(
+                engine->getGameSpeed() > 0.0f
+                    ? 0.0f
+                    : std::powf(2.0f, game_time_scale->getSelectionIndex())
+            );
     }
 
     if (engine->getGameSpeed() == 0.0f)
