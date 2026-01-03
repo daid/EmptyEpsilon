@@ -1,5 +1,4 @@
-#ifndef RELAY_SCREEN_H
-#define RELAY_SCREEN_H
+#pragma once
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
@@ -21,9 +20,8 @@ private:
         WaypointPlacement,
         LaunchProbe,
         MoveWaypoint
-    };
+    } mode = TargetSelection;
 
-    EMode mode;
     TargetsContainer targets;
     int drag_waypoint_index;
     GuiRadarView* radar;
@@ -51,5 +49,3 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//RELAY_SCREEN_H
