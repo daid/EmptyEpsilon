@@ -90,7 +90,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         engine->setGameSpeed(std::powf(2, index));
     });
     game_time_scale
-        ->setOptions({"1x", "2x", "4x", "8x", "16x"})
+        ->setOptions({"1x", "2x", "4x", "8x"})
         ->setSelectionIndex(0)
         ->setPosition(170, 20, sp::Alignment::TopLeft)
         ->setSize(100, 50);
@@ -310,25 +310,46 @@ void GameMasterScreen::update(float delta)
         returnToShipSelection(getRenderLayer());
     }
 
+    const float game_speed = engine->getGameSpeed();
     if (keys.pause.getDown())
     {
         if (game_server && !gameGlobalInfo->getVictoryFaction())
             engine->setGameSpeed(
-                engine->getGameSpeed() > 0.0f
+                game_speed > 0.0f
                     ? 0.0f
                     : std::powf(2.0f, game_time_scale->getSelectionIndex())
             );
     }
 
-    if (engine->getGameSpeed() == 0.0f)
+    if (game_speed == 0.0f)
     {
         pause_button->setValue(true);
-        game_time_scale->disable();
+        game_time_scale
+            ->setSelectionIndex(0)
+            ->disable();
     }
     else
     {
         pause_button->setValue(false);
         game_time_scale->enable();
+
+        switch (static_cast<int>(game_speed))
+        {
+            case 1:
+                game_time_scale->setSelectionIndex(0);
+                break;
+            case 2:
+                game_time_scale->setSelectionIndex(1);
+                break;
+            case 4:
+                game_time_scale->setSelectionIndex(2);
+                break;
+            case 8:
+                game_time_scale->setSelectionIndex(3);
+                break;
+            default:
+                LOG(Warning, "Lua setGameSpeed: Invalid value ", static_cast<int>(game_speed), "; must be 0, 1, 2, 4, or 8");
+        }
     }
 
     if (keys.gm_show_callsigns.getDown())
