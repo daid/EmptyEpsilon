@@ -13,9 +13,12 @@ GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string
 
 void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
+    int point_count = rect.size.x / 4 - 1;
+    // Bail if there's not enough space to draw the signal.
+    if (point_count < 2) return;
+
     renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
 
-    int point_count = rect.size.x / 4 - 1;
     std::vector<glm::vec2> r;
     std::vector<glm::vec2> g;
     std::vector<glm::vec2> b;
