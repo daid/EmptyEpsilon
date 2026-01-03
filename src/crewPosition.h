@@ -23,8 +23,10 @@ enum class CrewPosition
     damageControl,
     powerManagement,
     databaseView,
-    altRelay,
-    commsOnly,
+    altScience, // Science without scanning
+    scanOnly, // Science scanner only
+    altRelay, // Relay without comms
+    commsOnly, // Relay comms only
     shipLog,
 
     MAX

@@ -270,6 +270,7 @@ set(MAIN_SOURCES
     src/screens/extra/powerManagement.cpp
     src/screens/extra/databaseScreen.cpp
     src/screens/extra/commsScreen.cpp
+    src/screens/extra/scannerScreen.cpp
     src/screens/extra/shipLogScreen.cpp
     src/screens/gm/gameMasterScreen.cpp
     src/screens/gm/objectCreationView.cpp
@@ -625,6 +626,7 @@ set(MAIN_SOURCES
     src/screens/crew6/weaponsScreen.h
     src/screens/crewStationScreen.h
     src/screens/extra/commsScreen.h
+    src/screens/extra/scannerScreen.h
     src/screens/extra/damcon.h
     src/screens/extra/databaseScreen.h
     src/screens/extra/powerManagement.h

@@ -1,5 +1,4 @@
-#ifndef SCANNING_DIALOG_H
-#define SCANNING_DIALOG_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "signalQualityIndicator.h"
@@ -38,5 +37,3 @@ public:
     void setupParameters();
     void updateSignal();
 };
-
-#endif//SCANNING_DIALOG_H
