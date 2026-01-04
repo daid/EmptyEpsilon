@@ -12,10 +12,6 @@
 GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    locked = false;
-    lock_start_time = 0;
-    scan_depth = 0;
-
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
@@ -246,4 +242,9 @@ std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()
         }
     }
     return {complexity, depth};
+}
+
+bool GuiScanningDialog::isBoxVisible()
+{
+    return isVisible() && box->isVisible();
 }
