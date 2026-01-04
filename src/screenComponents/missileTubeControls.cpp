@@ -91,6 +91,7 @@ void GuiMissileTubeControls::onUpdate()
         switch(tube.state)
         {
         case MissileTubes::MountPoint::State::Empty:
+        case MissileTubes::MountPoint::State::Fired:
             rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText(tr("missile","Load"));
             if (health <= 0)

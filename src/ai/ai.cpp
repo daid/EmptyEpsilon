@@ -128,13 +128,17 @@ void ShipAI::updateWeaponState(float delta)
     if (tubes) {
         for(auto& tube : tubes->mounts)
         {
-            if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
+            if ((tube.state == MissileTubes::MountPoint::State::Empty || tube.state == MissileTubes::MountPoint::State::Fired)
+                && tubes->storage[MW_EMP] > 0 && tube.canLoad(MW_EMP))
                 MissileSystem::startLoad(owner, tube, MW_EMP);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
+            else if ((tube.state == MissileTubes::MountPoint::State::Empty || tube.state == MissileTubes::MountPoint::State::Fired)
+                && tubes->storage[MW_Nuke] > 0 && tube.canLoad(MW_Nuke))
                 MissileSystem::startLoad(owner, tube, MW_Nuke);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
+            else if ((tube.state == MissileTubes::MountPoint::State::Empty || tube.state == MissileTubes::MountPoint::State::Fired)
+                && tubes->storage[MW_Homing] > 0 && tube.canLoad(MW_Homing))
                 MissileSystem::startLoad(owner, tube, MW_Homing);
-            else if (tube.state == MissileTubes::MountPoint::State::Empty && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
+            else if ((tube.state == MissileTubes::MountPoint::State::Empty || tube.state == MissileTubes::MountPoint::State::Fired)
+                && tubes->storage[MW_HVLI] > 0 && tube.canLoad(MW_HVLI))
                 MissileSystem::startLoad(owner, tube, MW_HVLI);
 
             // When the tube is loading, loaded, or firing, add the relative

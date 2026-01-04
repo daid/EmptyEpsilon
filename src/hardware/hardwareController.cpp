@@ -410,6 +410,7 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE("TubeLoading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loading ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeUnloading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Unloading ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeFiring" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Firing ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeFired" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Fired ? 1.0f : 0.0f);
     }
     for(int n=0; n<ShipSystem::COUNT; n++)
     {
@@ -421,7 +422,10 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE2(getSystemName(ShipSystem::Type(n)).replace(" ", "") + "Hacked", c->hacked_level);
     }
 
-    LOG(WARNING) << "Unknown variable: " << variable_name;
-    value = 0.0;
+    if (variable_name.empty())
+        LOG(Warning, "No hardware controller variable name");
+    else
+        LOG(Warning, "Unknown hardware controller variable: ", variable_name);
+    value = 0.0f;
     return false;
 }

@@ -16,7 +16,8 @@ public:
             Loading,
             Loaded,
             Unloading,
-            Firing
+            Firing,
+            Fired
         };
 
         //Configuration
@@ -30,6 +31,7 @@ public:
         EMissileWeapons type_loaded = MW_None;
         State state = State::Empty;
         float delay = 0.0f;
+        float fired_delay = 0.0f;
         int fire_count = 0;
 
         bool canLoad(EMissileWeapons type) {
