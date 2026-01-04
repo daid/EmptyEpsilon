@@ -189,25 +189,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
     database_view = new DatabaseViewComponent(this);
     database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
-        auto rl = my_spaceship.getComponent<RadarLink>();
-        if (value && rl && rl->linked_entity)
-        {
-            auto transform = rl->linked_entity.getComponent<sp::Transform>();
-            if (transform) {
-                science_radar->hide();
-                probe_radar->show();
-                probe_radar->setViewPosition(transform->getPosition())->show();
-            }
-        }else{
-            probe_view_button->setValue(false);
-            science_radar->show();
-            probe_radar->hide();
-        }
-    });
-    probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
-
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
     {
@@ -219,15 +200,53 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this, allow_scanning](int index, string value) {
-        radar_view->setVisible(index == 0);
-        background_gradient->setVisible(index == 0);
-        database_view->setVisible(index == 1 && allow_scanning);
-    });
-    view_mode_selection->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
+    // View controls.
+    GuiElement* view_controls = new GuiElement(radar_view, "VIEW_CONTROLS");
+    view_controls
+        ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, 150.0f)
+        ->setAttribute("layout", "verticalbottom");
 
-    // Scanning dialog, create only if scanning is allowed.
+    // Probe view button.
+    probe_view_button = new GuiToggleButton(view_controls, "PROBE_VIEW", tr("scienceButton", "Probe View"),
+        [this](bool value)
+        {
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (value && rl && rl->linked_entity)
+            {
+                if (auto transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    science_radar->hide();
+                    probe_radar->show();
+                    probe_radar->setViewPosition(transform->getPosition())->show();
+                }
+            }
+            else
+            {
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
+        }
+    );
+    probe_view_button->setSize(200.0f, 50.0f)->disable();
+
+    // Radar/database view toggle, create only on Science/Ops (allow_scanning).
+    view_mode_selection = new GuiListbox(view_controls, "VIEW_SELECTION",
+        [this](int index, string value)
+        {
+            radar_view->setVisible(index == 0);
+            background_gradient->setVisible(index == 0);
+            database_view->setVisible(index == 1);
+        }
+    );
+    view_mode_selection
+        ->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})
+        ->setSelectionIndex(0)
+        ->setSize(200.0f, 100.0f)
+        ->setVisible(allow_scanning);
+
+    // Scanning dialog, create only on Science/Ops.
     if (allow_scanning) new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 

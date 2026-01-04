@@ -36,4 +36,5 @@ public:
 
     void setupParameters();
     void updateSignal();
+    bool isBoxVisible();
 };
