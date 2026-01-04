@@ -369,7 +369,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                 if (std::abs(rel_velocity) < 0.01f)
                     rel_velocity = 0.0f;
-                info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                info_relspeed->setValue(tr("science", "{relative_speed}/min").format({{"relative_speed", string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K}}));
             }
         }
         if (auto cs = target.getComponent<CallSign>())
@@ -527,7 +527,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                     info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
                     info_heading->setValue(string(int(heading)));
-                    info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                    info_relspeed->setValue(tr("science", "{relative_speed}/min").format({{"relative_speed", string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K}}));
                 }
             }
         }
