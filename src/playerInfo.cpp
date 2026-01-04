@@ -1100,12 +1100,12 @@ void PlayerInfo::spawnUI(int monitor_index, RenderLayer* render_layer)
             screen->addStationTab(new DamageControlScreen(container), CrewPosition::damageControl, getCrewPositionName(CrewPosition::damageControl), getCrewPositionIcon(CrewPosition::damageControl));
         if (cps.has(CrewPosition::powerManagement))
             screen->addStationTab(new PowerManagementScreen(container), CrewPosition::powerManagement, getCrewPositionName(CrewPosition::powerManagement), getCrewPositionIcon(CrewPosition::powerManagement));
-        if (cps.has(CrewPosition::databaseView))
-            screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
         if (cps.has(CrewPosition::altScience))
             screen->addStationTab(new ScienceScreen(container, false), CrewPosition::altScience, getCrewPositionName(CrewPosition::altScience), getCrewPositionIcon(CrewPosition::altScience));
         if (cps.has(CrewPosition::scanOnly))
             screen->addStationTab(new ScannerScreen(container), CrewPosition::scanOnly, getCrewPositionName(CrewPosition::scanOnly), getCrewPositionIcon(CrewPosition::scanOnly));
+        if (cps.has(CrewPosition::databaseView))
+            screen->addStationTab(new DatabaseScreen(container), CrewPosition::databaseView, getCrewPositionName(CrewPosition::databaseView), getCrewPositionIcon(CrewPosition::databaseView));
         if (cps.has(CrewPosition::altRelay))
             screen->addStationTab(new RelayScreen(container, false), CrewPosition::altRelay, getCrewPositionName(CrewPosition::altRelay), getCrewPositionIcon(CrewPosition::altRelay));
         if (cps.has(CrewPosition::commsOnly))
@@ -1154,9 +1154,9 @@ string getCrewPositionName(CrewPosition position)
     case CrewPosition::singlePilot: return tr("station","Single Pilot");
     case CrewPosition::damageControl: return tr("station","Damage Control");
     case CrewPosition::powerManagement: return tr("station","Power Management");
-    case CrewPosition::databaseView: return tr("station","Database");
-    case CrewPosition::altScience: return tr("station","Strategic Radar");
+    case CrewPosition::altScience: return tr("station","Long-range Radar");
     case CrewPosition::scanOnly: return tr("station","Scanner");
+    case CrewPosition::databaseView: return tr("station","Database");
     case CrewPosition::altRelay: return tr("station","Strategic Map");
     case CrewPosition::commsOnly: return tr("station","Comms");
     case CrewPosition::shipLog: return tr("station","Ship's Log");
@@ -1179,9 +1179,9 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::singlePilot: return "";
     case CrewPosition::damageControl: return "";
     case CrewPosition::powerManagement: return "";
-    case CrewPosition::databaseView: return "";
     case CrewPosition::altScience: return "";
     case CrewPosition::scanOnly: return "";
+    case CrewPosition::databaseView: return "";
     case CrewPosition::altRelay: return "";
     case CrewPosition::commsOnly: return "";
     case CrewPosition::shipLog: return "";
