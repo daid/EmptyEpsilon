@@ -44,7 +44,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     strategic_map = new GuiRadarView(this, "STRATEGIC", 50000.0f, nullptr);
     strategic_map->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     strategic_map->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->hide();
-    strategic_map->setAutoCentering(false)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
+    strategic_map->setAutoCentering(true)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
 
     // Overlays
     onscreen_comms = new GuiCommsOverlay(this);
