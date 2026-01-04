@@ -40,9 +40,9 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
         if (hull) {
             hull_display->setValue(string(int(100 * hull->current / hull->max)) + "%");
             if (hull->current < hull->max / 4.0f)
-                hull_display->setColor(glm::u8vec4(255, 0, 0, 255));
+                hull_display->setBackColor(glm::u8vec4(255, 0, 0, 255));
             else
-                hull_display->setColor(glm::u8vec4{255,255,255,255});
+                hull_display->setBackColor(glm::u8vec4{255,255,255,255});
         }
 
         for(unsigned int n=0; n<ShipSystem::COUNT; n++)
@@ -52,11 +52,11 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
             if (sys) {
                 system_health[n]->setValue(string(int(sys->health * 100)) + "%");
                 if (sys->health < 0)
-                    system_health[n]->setColor(glm::u8vec4(255, 0, 0, 255));
+                    system_health[n]->setBackColor(glm::u8vec4(255, 0, 0, 255));
                 else if (sys->health_max < 1.0f)
-                    system_health[n]->setColor(glm::u8vec4(255, 255, 0, 255));
+                    system_health[n]->setBackColor(glm::u8vec4(255, 255, 0, 255));
                 else
-                    system_health[n]->setColor(glm::u8vec4{255,255,255,255});
+                    system_health[n]->setBackColor(glm::u8vec4{255,255,255,255});
             }
             
         }
