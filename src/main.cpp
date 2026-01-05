@@ -172,9 +172,12 @@ int main(int argc, char** argv)
     // Since there is no way to access it (yet) via a touchscreen, compile out.
 #if !defined(ANDROID)
     // Set up voice chat and key bindings.
-    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(&keys.voice_all, 0);
-    nar->addKeyActivation(&keys.voice_ship, 1);
+    if (PreferencesManager::get("voice_chat_enabled", "1") == "1")
+    {
+        NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+        nar->addKeyActivation(&keys.voice_all, 0);
+        nar->addKeyActivation(&keys.voice_ship, 1);
+    }
 #endif
 
     P<HardwareController> hardware_controller = new HardwareController();
