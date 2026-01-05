@@ -62,13 +62,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
-    keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
-    string keyboard_cinematic = "";
-
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Cinematic View"))
-        keyboard_cinematic += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-
-    keyboard_help->setText(keyboard_cinematic);
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {"Cinematic View"});
     keyboard_help->moveToFront();
 }
 

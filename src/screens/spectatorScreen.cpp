@@ -100,13 +100,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 
     new GuiIndicatorOverlays(this);
 
-    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
-    string keyboard_topdown = "";
-
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down View"))
-        keyboard_topdown += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-
-    keyboard_help->setText(keyboard_topdown);
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Top-down View")});
     keyboard_help->moveToFront();
 
     new GuiIndicatorOverlays(this);
