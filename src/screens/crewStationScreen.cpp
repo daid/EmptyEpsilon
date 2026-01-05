@@ -68,13 +68,9 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
-
-    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "General")})
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(category))
-            keyboard_general += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-    }
+    if (PreferencesManager::get("voice_chat_enabled", "1") == "1")
+        hotkey_categories.push_back(tr("hotkey_menu", "Voice Chat"));
+    keyboard_help = new GuiHotkeyHelpOverlay(this, hotkey_categories);
 
 #ifndef __ANDROID__
     if (PreferencesManager::get("music_enabled") == "1")
@@ -107,124 +103,6 @@ GuiContainer* CrewStationScreen::getTabContainer()
     return main_panel;
 }
 
-string CrewStationScreen::populateShortcutsList(CrewPosition position)
-{
-    string ret = "";
-
-    bool show_additional_shortcuts_string = false;
-
-    // Add shortcuts for this position.
-    for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(position)))
-    {
-        if(binding->isBound())
-        {
-            ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-        }
-        else
-        {
-            show_additional_shortcuts_string = true;
-        }
-    }
-
-    // Check special positions that include multiple core positions' functions.
-    if (position == CrewPosition::tacticalOfficer)
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
-        {
-            if(binding->isBound())
-            {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            }
-            else
-            {
-                show_additional_shortcuts_string = true;
-            }
-        }
-
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
-        {
-            if (binding->getLabel() != "Toggle shields")
-            {
-                if(binding->isBound())
-                {
-                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-                }
-                else
-                {
-                    show_additional_shortcuts_string = true;
-                }
-            }
-        }
-    }
-    else if (position == CrewPosition::engineeringAdvanced)
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::engineering)))
-        {
-            if(binding->isBound())
-            {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            }
-            else
-            {
-                show_additional_shortcuts_string = true;
-            }
-        }
-
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
-        {
-            if (binding->getLabel() == "Toggle shields")
-            {
-                if(binding->isBound())
-                {
-                    ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-                }
-                else
-                {
-                    show_additional_shortcuts_string = true;
-                }
-            }
-        }
-    }
-    else if (position == CrewPosition::singlePilot)
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::helmsOfficer)))
-        {
-            if(binding->isBound())
-            {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            }
-            else
-            {
-                show_additional_shortcuts_string = true;
-            }
-        }
-
-        for (auto binding : sp::io::Keybinding::listAllByCategory(getCrewPositionName(CrewPosition::weaponsOfficer)))
-        {
-            if(binding->isBound())
-            {
-                ret += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            }
-            else
-            {
-                show_additional_shortcuts_string = true;
-            }
-        }
-    }
-
-    if (show_additional_shortcuts_string)
-    {
-        ret += "\n" + tr("More shortcuts available in settings") + "\n";
-    }
-
-    //    -- not yet used --
-    //    else if (station == "Operations")
-    //        return ret;
-    //    ----
-
-    return ret;
-}
-
 void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position, string name, string icon)
 {
     CrewTabInfo info;
@@ -248,9 +126,7 @@ void CrewStationScreen::addStationTab(GuiElement* element, CrewPosition position
         select_station_button->setText(name);
         select_station_button->setIcon(icon);
 
-        string keyboard_category = "";
-        keyboard_category = populateShortcutsList(position);
-        keyboard_help->setText(keyboard_general + keyboard_category);
+        keyboard_help->addCategory(getCrewPositionName(position));
     }
     else
     {
@@ -302,11 +178,9 @@ void CrewStationScreen::update(float delta)
             returnToShipSelection(getRenderLayer());
         }
     }
-    if (keys.help.getDown())
-    {
-        // Toggle keyboard help.
-        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-    }
+
+    // Toggle keyboard help.
+    if (keys.help.getDown()) keyboard_help->toggle();
 
     if (keys.pause.getDown())
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
@@ -404,9 +278,9 @@ void CrewStationScreen::showTab(GuiElement* element)
             select_station_button->setText(info.button->getText());
             select_station_button->setIcon(info.button->getIcon());
 
-            string keyboard_category = "";
-            keyboard_category = populateShortcutsList(info.position);
-            keyboard_help->setText(keyboard_general + keyboard_category);
+            std::vector<string> categories = hotkey_categories;
+            categories.push_back(getCrewPositionName(current_position));
+            keyboard_help->setCategories(categories);
 
             // Explicitly reset focus after switching tabs, such as when changed
             // via hotkey.
