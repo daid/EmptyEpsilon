@@ -1,16 +1,17 @@
 #include "objectCreationView.h"
 #include "GMActions.h"
-#include "components/faction.h"
+#include "i18n.h"
+#include "gameGlobalInfo.h"
 #include "ecs/query.h"
+#include "components/collision.h"
+#include "components/faction.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_textentry.h"
 #include "menus/luaConsole.h"
-#include "i18n.h"
-#include "gameGlobalInfo.h"
-#include "components/collision.h"
 #include <unordered_set>
 
 
