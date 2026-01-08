@@ -4,6 +4,7 @@
 #include "gui/gui2_resizabledialog.h"
 #include "ecs/entity.h"
 
+class GuiButton;
 class GuiTextEntry;
 class GuiScrollText;
 class GuiRadarView;
@@ -23,6 +24,7 @@ private:
 
     GuiTextEntry* text_entry;
     GuiScrollText* chat_text;
+    GuiButton* use_comms_script;
 
     void disableComms(string title);
 
