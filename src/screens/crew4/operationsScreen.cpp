@@ -1,10 +1,11 @@
+#include "operationsScreen.h"
 #include "playerInfo.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
-#include "operationsScreen.h"
 #include "preferenceManager.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_togglebutton.h"
 
 #include "components/scanning.h"
 #include "components/radar.h"
@@ -62,6 +63,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 if (my_spaceship)
                     my_player_info->commandAddWaypoint(position);
                 mode = TargetSelection;
+                place_waypoint_button->setValue(false);
                 break;
             case MoveWaypoint:
                 mode = TargetSelection;
@@ -84,7 +86,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
         ->setSize(200.0f, 50.0f);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(relay_functions, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() { mode = WaypointPlacement; });
+    place_waypoint_button = new GuiToggleButton(relay_functions, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this](bool value) {
+        mode = value ? WaypointPlacement : TargetSelection;
+    });
     place_waypoint_button->setSize(200.0f, 50.0f);
 
     delete_waypoint_button = new GuiButton(relay_functions, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
