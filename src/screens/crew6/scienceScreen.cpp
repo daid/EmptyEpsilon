@@ -477,7 +477,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 auto sys = ShipSystem::get(target, ShipSystem::Type(n));
                 if (sys) {
                     float system_health = sys->health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
                 }
             }
         }
