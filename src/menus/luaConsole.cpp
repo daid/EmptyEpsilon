@@ -77,6 +77,7 @@ void LuaConsole::addLog(const string& message)
         auto linespace = console->log->getLineSpacing();
         console->top->layout.size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace);
         console->top->show();
+        console->top->setEnable(false);
     }
 }
 
@@ -92,6 +93,7 @@ void LuaConsole::update(float delta)
             top->layout.size.y = 450;
             message_show_timers.clear();
             top->show();
+            top->setEnable(true);
             entry->show();
         }
     }
