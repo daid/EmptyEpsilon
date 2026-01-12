@@ -17,6 +17,11 @@ GuiTextEntry::~GuiTextEntry()
         SDL_StopTextInput();
 }
 
+float GuiTextEntry::getLineSpacing() const {
+    const auto& front = front_style->get(getState());
+    return front.font->getLineSpacing(32) * text_size / float(32);
+}
+
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
     const auto& back = back_style->get(getState());

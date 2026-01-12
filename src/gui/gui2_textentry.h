@@ -57,6 +57,8 @@ public:
     GuiTextEntry* upCallback(func_t func);
     GuiTextEntry* downCallback(func_t func);
 
+    float getLineSpacing() const;
+
     void setCursorPosition(int offset);
 protected:
     int getTextOffsetForPosition(glm::vec2 position);
