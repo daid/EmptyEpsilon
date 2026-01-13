@@ -443,16 +443,17 @@ void GuiTextEntry::setCursorPosition(int offset)
 
 int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
 {
-    position -= rect.position;
+    position = position - rect.position - render_offset;
     position.x -= 16.0f;
     int result = text.size();
+    const auto& front = front_style->get(getState());
     //if (vertical_scroll)
     //    position.y -= vertical_scroll->getValue();
     std::string shown_text = text;
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
-    auto pfs = sp::RenderTarget::getDefaultFont()->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {
@@ -474,6 +475,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
             break;
         result = d.string_offset;
     }
+
     return result;
 }
 
