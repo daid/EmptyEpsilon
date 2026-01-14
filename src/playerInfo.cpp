@@ -1192,3 +1192,4 @@ bool PlayerInfo::hasPlayerAtPosition(sp::ecs::Entity entity, CrewPosition positi
     }
     return false;
 }
+
