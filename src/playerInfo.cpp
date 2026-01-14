@@ -1002,6 +1002,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                             auto cb = f.callback;
                             cb.call<void>();
                             csf->functions.erase(std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) { return f.name == name; }), csf->functions.end());
+                            csf->functions_dirty = true;
                         }
                         break;
                     }
