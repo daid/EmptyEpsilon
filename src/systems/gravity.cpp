@@ -78,7 +78,7 @@ void GravitySystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e,
     if (game_server && (component.wormhole_target.x != 0.0f || component.wormhole_target.y != 0.0f))
     {
         if (auto transform = e.getComponent<sp::Transform>())
-            renderer.drawLine(screen_position, screen_position + (component.wormhole_target - transform->getPosition()) * scale, glm::u8vec4(255, 255, 255, 32));
+            renderer.drawLine(screen_position, screen_position + (component.wormhole_target - transform->getPosition()) * scale, 1.0f, glm::u8vec4(255, 255, 255, 32));
     }
     renderer.drawCircleOutline(screen_position, component.range * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }

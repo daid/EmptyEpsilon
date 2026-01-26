@@ -124,7 +124,7 @@ void GameMasterChatDialog::onDraw(sp::RenderTarget& renderer)
         }
 
         if (auto transform = transmitter->target.getComponent<sp::Transform>())
-            renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), glm::u8vec4(128, 255, 128, 128));
+            renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), 2.0f, glm::u8vec4(128, 255, 128, 128));
 
         // Hide the use_comms_script button if the comms target can't use it.
         // TODO: Confirm this works if callback is present
@@ -135,7 +135,7 @@ void GameMasterChatDialog::onDraw(sp::RenderTarget& renderer)
     }
 
     if (auto transform = player.getComponent<sp::Transform>())
-        renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), glm::u8vec4(128, 255, 128, 128));
+        renderer.drawLine(rect.center(), radar->worldToScreen(transform->getPosition()), 2.0f, glm::u8vec4(128, 255, 128, 128));
 }
 
 void GameMasterChatDialog::disableComms(string title)

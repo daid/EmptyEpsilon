@@ -50,7 +50,7 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
         if (element->visible)
         {
             renderer.fillRect(element->rect, glm::u8vec4(255, 255, 255, 5));
-            renderer.outlineRect(element->rect, glm::u8vec4(255, 0, 255, 255));
+            renderer.drawRectOutline(element->rect, 1.0f, glm::u8vec4(255, 0, 255, 255));
 
             element->drawDebugElements(element->rect, renderer);
 
