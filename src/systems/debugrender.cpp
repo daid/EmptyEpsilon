@@ -74,7 +74,7 @@ void DebugRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entit
             auto p2 = screen_position - rotateVec2(s0, rotation);
             auto p3 = screen_position - rotateVec2(s1, rotation);
             std::vector<glm::vec2> points{p0, p1, p2, p3, p0};
-            renderer.drawLine(points, {255, 255, 255, 128});
+            renderer.drawLine(points, 1.0f, {255, 255, 255, 128});
         }
         break;
     }

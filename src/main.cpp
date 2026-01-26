@@ -243,11 +243,17 @@ int main(int argc, char** argv)
 
     engine->runMainLoop();
 
-    // Set FSAA and fullscreen defaults from windowManager.
+    // Set FSAA and fullscreen defaults from windowManager, and line drawing
+    // defaults from renderTarget.
     if (windows.size() > 0)
     {
         PreferencesManager::set("fsaa", windows[0]->getFSAA());
         PreferencesManager::set("fullscreen", (int)windows[0]->getMode());
+
+        if (PreferencesManager::get("line_drawing_mode", "gl") == "gl")
+            sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
+        else
+            sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
     }
 
     // Set the default music_, sound_, and engine_volume to the current volume.
