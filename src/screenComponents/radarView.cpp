@@ -149,14 +149,13 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
     // Draw the initial background 'clear' color.
     if (style == Rectangular)
-    {
         drawBackground(renderer);
-    }
     
     // Draw the radar's outline first, and before any stencil kicks in.
     // This way, the outline is not even part of the rendering area.
+    const float radar_outline_thickness = 4.0f;
     if (style == CircularMasked || style == Circular)
-        renderer.drawCircleOutline(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f, 2.0f, colorConfig.radar_outline);
+        renderer.drawCircleOutline(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f, radar_outline_thickness, colorConfig.radar_outline);
 
     // Stencil setup.
     renderer.finish();
@@ -188,7 +187,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
         // Draws the radar circle shape.
         // Note that this draws both in the stencil and the color buffer!
-        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f - 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.fillCircle(getCenterPoint(), (std::min(rect.size.x, rect.size.y) - radar_outline_thickness) / 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
         renderer.finish();
     }
 
@@ -472,7 +471,7 @@ void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
     for(float circle_size=range_indicator_step_size; circle_size < distance; circle_size+=range_indicator_step_size)
     {
         float s = circle_size * scale;
-        renderer.drawCircleOutline(radar_screen_center, s, 2.0, glm::u8vec4(255, 255, 255, 16));
+        renderer.drawCircleOutline(radar_screen_center, s, 3.0, glm::u8vec4(255, 255, 255, 16));
         renderer.drawText(sp::Rect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K, sp::Alignment::Center, 20, bold_font, glm::u8vec4(255, 255, 255, 32));
     }
 }
