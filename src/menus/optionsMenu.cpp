@@ -6,6 +6,7 @@
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "windowManager.h"
+#include "graphics/renderTarget.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -355,6 +356,26 @@ void OptionsMenu::setupGraphicsOptions()
             window->setFSAA(fsaa[index]);
         }
     }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Line drawing mode selector.
+    int line_mode_index = (PreferencesManager::get("line_drawing_mode", "quad") == "gl") ? 1 : 0;
+    (new GuiSelector(graphics_page, "GRAPHICS_LINE_DRAWING_MODE",
+        [](int index, string value)
+        {
+            if (index == 0)
+            {
+                PreferencesManager::set("line_drawing_mode", "quad");
+                sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
+            }
+            else
+            {
+                PreferencesManager::set("line_drawing_mode", "gl");
+                sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
+            }
+        }
+    ))->setOptions({tr("options", "Line rendering: High quality"), tr("options", "Line rendering: Low quality")})
+        ->setSelectionIndex(line_mode_index)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
