@@ -366,11 +366,11 @@ void OptionsMenu::setupGraphicsOptions()
         ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // Line drawing mode selector.
-    int line_mode_index = (sp::RenderTarget::getLineDrawingMode() == sp::RenderTarget::LineDrawingMode::GL) ? 1 : 0;
+    int line_mode_index = (sp::RenderTarget::getLineDrawingMode() == sp::RenderTarget::LineDrawingMode::GL) ? 0 : 1;
     (new GuiSelector(graphics_page, "GRAPHICS_LINE_DRAWING_MODE",
         [](int index, string value)
         {
-            if (index == 0)
+            if (index == 1)
             {
                 PreferencesManager::set("line_drawing_mode", "quad");
                 sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::Quad);
@@ -381,7 +381,7 @@ void OptionsMenu::setupGraphicsOptions()
                 sp::RenderTarget::setLineDrawingMode(sp::RenderTarget::LineDrawingMode::GL);
             }
         }
-    ))->setOptions({tr("options", "Line rendering: High quality"), tr("options", "Line rendering: Low quality")})
+    ))->setOptions({tr("options", "Line rendering: Quads (High quality)"), tr("options", "Line rendering: GL (Low quality)")})
         ->setSelectionIndex(line_mode_index)
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
