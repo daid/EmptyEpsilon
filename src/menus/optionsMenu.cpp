@@ -217,6 +217,8 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
                 //Render default font is applied on back only
                 PreferencesManager::set("guitheme", theme_name);
             }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+            (new GuiLabel(interface_left_column, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+                ->setSize(GuiElement::GuiSizeMax, 30.0f);
         }
     }
 
@@ -354,7 +356,13 @@ void OptionsMenu::setupGraphicsOptions()
         foreach(Window, window, windows) {
             window->setFSAA(fsaa[index]);
         }
-    }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+    }))
+        ->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})
+        ->setSelectionIndex(fsaa_index)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    (new GuiLabel(graphics_page, "THEME_APPLICATION_LABEL", tr("Restart EmptyEpsilon to apply FSAA change"), 20.0f))
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
