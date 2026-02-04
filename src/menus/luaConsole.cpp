@@ -74,8 +74,10 @@ void LuaConsole::addLog(const string& message)
     if (!console->is_open) {
         console->message_show_timers.emplace_back();
         console->message_show_timers.back().start(5.0f);
-        console->top->layout.size.y = std::min(450.0f, 15.0f + console->message_show_timers.size() * 15.0f);
+        auto linespace = console->log->getLineSpacing();
+        console->top->layout.size.y = std::min(450.0f, (0.3f + console->message_show_timers.size()) * linespace);
         console->top->show();
+        console->top->setEnable(false);
     }
 }
 
@@ -91,6 +93,7 @@ void LuaConsole::update(float delta)
             top->layout.size.y = 450;
             message_show_timers.clear();
             top->show();
+            top->setEnable(true);
             entry->show();
         }
     }
@@ -99,7 +102,8 @@ void LuaConsole::update(float delta)
         if (message_show_timers.empty()) {
             top->hide();
         } else {
-            top->layout.size.y = std::min(450.0f, 15.0f + message_show_timers.size() * 15.0f);
+            auto linespace = console->log->getLineSpacing();
+            top->layout.size.y = std::min(450.0f, (0.3f + message_show_timers.size()) * linespace);
         }
     }
 }
