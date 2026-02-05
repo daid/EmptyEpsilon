@@ -19,6 +19,7 @@
 #include "screenComponents/customShipFunctions.h"
 #include "screenComponents/alertLevelButton.h"
 
+#include "gui/mouseRenderer.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
@@ -74,6 +75,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                     my_player_info->commandAddWaypoint(position);
                 mode = TargetSelection;
                 option_buttons->show();
+                cancel_button->hide();
                 break;
             case MoveWaypoint:
                 mode = TargetSelection;
@@ -84,6 +86,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                     my_player_info->commandLaunchProbe(position);
                 mode = TargetSelection;
                 option_buttons->show();
+                cancel_button->hide();
                 break;
             }
         }
@@ -113,8 +116,19 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     option_buttons = new GuiElement(this, "BUTTONS");
     option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
+    // Cancel
+    cancel_button = new GuiButton(this, "CANCEL_MODE", tr("Cancel"),
+        [this]()
+        {
+            mode = TargetSelection;
+            option_buttons->show();
+            cancel_button->hide();
+        }
+    );
+    cancel_button->setPosition(20, 50)->setSize(250, 50)->hide();
+
     // Open comms button.
-    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", tr("Open comms"), &targets, allow_comms))->setSize(GuiElement::GuiSizeMax, 50);
+    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Hack target
     hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
@@ -126,7 +140,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     hack_target_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Link probe to science button.
-    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to Science"), [this](bool value){
+    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to science"), [this](bool value){
         if (value)
         {
             my_player_info->commandSetScienceLink(targets.get());
@@ -139,12 +153,13 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() {
         mode = WaypointPlacement;
         option_buttons->hide();
+        cancel_button->setText(tr("Cancel waypoint"))->show();
     }))->setSize(GuiElement::GuiSizeMax, 50);
 
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"), [this]() {
         if (my_spaceship && targets.getWaypointIndex() >= 0)
         {
             my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
@@ -153,14 +168,15 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
 
     // Launch probe button.
-    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch Probe"), [this]() {
+    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"), [this]() {
         mode = LaunchProbe;
         option_buttons->hide();
+        cancel_button->setText(tr("Cancel probe"))->show();
     });
     launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Center on ship
-    center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center On Ship"), [this](bool value) {
+    center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center on ship"), [this](bool value) {
         if(!my_spaceship) return;
         radar->setAutoCentering(value);
     });
@@ -186,6 +202,12 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         new ShipsLog(this);
         (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
+}
+
+RelayScreen::~RelayScreen()
+{
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+        mouse_renderer->setSpriteImage("mouse.png");
 }
 
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
@@ -263,12 +285,14 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
         if (auto arl = target.getComponent<AllowRadarLink>())
         {
-            if (arl->owner == my_spaceship) {
-                auto rl = my_spaceship.getComponent<RadarLink>();
-                if (rl)
+            if (arl->owner == my_spaceship)
+            {
+                if (auto rl = my_spaceship.getComponent<RadarLink>())
                     link_to_science_button->setValue(rl->linked_entity == target);
                 link_to_science_button->enable();
-            } else {
+            }
+            else
+            {
                 link_to_science_button->setValue(false);
                 link_to_science_button->disable();
             }
@@ -278,18 +302,18 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
             link_to_science_button->setValue(false);
             link_to_science_button->disable();
         }
-        if (canHack(target))
-        {
-            hack_target_button->enable();
-        }else{
-            hack_target_button->disable();
-        }
-    }else{
+
+        if (canHack(target)) hack_target_button->enable();
+        else hack_target_button->disable();
+    }
+    else
+    {
         hack_target_button->disable();
         link_to_science_button->disable();
         link_to_science_button->setValue(false);
         info_callsign->setValue("-");
     }
+
     if (my_spaceship)
     {
         // Toggle ship capabilities.
@@ -305,11 +329,25 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         info_clock->setValue(gameGlobalInfo->getMissionTime());
 
         if (auto spl = my_spaceship.getComponent<ScanProbeLauncher>())
-            launch_probe_button->setText(tr("Launch Probe") + " (" + string(spl->stock) + ")");
+            launch_probe_button->setText(tr("Launch probe ({stock})").format({{"stock", static_cast<string>(spl->stock)}}));
     }
 
-    if (targets.getWaypointIndex() >= 0)
-        delete_waypoint_button->enable();
-    else
-        delete_waypoint_button->disable();
+    delete_waypoint_button->setEnable(targets.getWaypointIndex() >= 0);
+
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+    {
+        switch(mode)
+        {
+        case TargetSelection:
+        case MoveWaypoint:
+            mouse_renderer->setSpriteImage("mouse.png");
+            break;
+        case WaypointPlacement:
+            mouse_renderer->setSpriteImage("waypoint.png");
+            break;
+        case LaunchProbe:
+            mouse_renderer->setSpriteImage("radar/probe.png");
+            break;
+        }
+    }
 }

@@ -1,10 +1,8 @@
-#ifndef GUI2_LISTBOX_H
-#define GUI2_LISTBOX_H
+#pragma once
 
-#include "gui2_element.h"
 #include "gui2_entrylist.h"
-#include "gui2_togglebutton.h"
-#include "gui2_scrollbar.h"
+
+class GuiScrollbar;
 
 class GuiListbox : public GuiEntryList
 {
@@ -33,5 +31,3 @@ public:
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI2_LISTBOX_H

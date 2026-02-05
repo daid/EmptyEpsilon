@@ -185,7 +185,23 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
-    database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    database_view
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("padding", "20");
+
+    // Pad top of details column if crew screen selection controls are visible,
+    // and bottom of item list column to prevent overlap with probe/radar view
+    // selectors.
+    int details_padding = 0;
+    if (my_player_info)
+    {
+        if (my_player_info->main_screen_control != 0) details_padding = 120;
+        else if (my_player_info->countTotalPlayerPositions() > 1) details_padding = 70;
+    }
+    database_view
+        ->setDetailsPadding(details_padding)
+        ->setItemsPadding(120);
 
     // Probe view button
     probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
@@ -477,7 +493,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 auto sys = ShipSystem::get(target, ShipSystem::Type(n));
                 if (sys) {
                     float system_health = sys->health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
                 }
             }
         }
