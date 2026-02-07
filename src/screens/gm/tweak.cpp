@@ -373,6 +373,10 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
         };
     }
 
+    // Physics component
+    ADD_PAGE(tr("tweak-tab", "Physics"), sp::Physics);
+    // TODO: Figure out how to set Physics values
+
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
     ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
 
