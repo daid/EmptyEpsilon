@@ -489,6 +489,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamWeaponSys, frequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
