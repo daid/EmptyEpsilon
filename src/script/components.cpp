@@ -504,6 +504,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cooldown);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
     sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
