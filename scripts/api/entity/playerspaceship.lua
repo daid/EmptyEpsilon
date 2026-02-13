@@ -44,7 +44,7 @@ function Entity:getWaypoint(index)
     end
     return 0, 0
 end
---- Returns the visual ID of the given waypoint index.
+--- Returns the numeric label for the given waypoint index.
 --- Waypoints are 1-indexed.
 --- Example:
 --- id = ship:getWaypointID(1)
