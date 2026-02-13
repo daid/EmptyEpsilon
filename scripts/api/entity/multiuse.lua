@@ -34,7 +34,7 @@ end
 
 --- Sets this entity's radius.
 --- Default sizes vary by entity type. Asteroids default to random values between 110 and 130. Explosions default to 1.0.
---- If the entity as an AvoidObject component, this also sets that radius to 2x the given value.
+--- If the entity has an AvoidObject component, this also sets that radius to 2x the given value.
 --- Examples: obj:setSize(150) -- sets the entity's size to 150
 ---           explosion:setSize(1000) -- sets the explosion radius to 1U
 function Entity:setSize(radius)

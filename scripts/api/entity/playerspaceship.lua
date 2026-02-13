@@ -38,7 +38,7 @@ function Entity:getWaypoint(index)
 end
 --- Returns visual ID of the waypoint.
 --- Waypoints are 1-indexed.
---- Example: x,y = player:getWaypointID(1)
+--- Example: id = player:getWaypointID(1)
 function Entity:getWaypointID(index)
     if self.components.waypoints and index > 0 and index <= #self.components.waypoints then
         local wp = self.components.waypoints[index]
@@ -523,12 +523,11 @@ function Entity:commandSetBeamSystemTarget(target)
     commandSetBeamSystemTarget(self, target)
     return self
 end
---- Sets this SpaceShip's shield frequency index.
+--- Commands this PlayerSpaceship to calibrate its shield frequency to the given index.
 --- To convert the index to the value used by players, multiply it by 20, then add 400.
 --- Valid values are 0 (400THz) to 20 (800THz).
 --- Unlike SpaceShip:setShieldsFrequency(), this initiates shield calibration to change the frequency, which disables shields for a period.
---- Example:
---- frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
+--- Example: player:commandSetShieldFrequency(10) -- calibrate shield frequency to 600THz
 function Entity:commandSetShieldFrequency(index)
     commandSetShieldFrequency(self, index)
     return self
@@ -671,7 +670,7 @@ function Entity:onProbeLaunch(callback)
     return self
 end
 --- Defines a function to call when this PlayerSpaceship links a probe to the science screen.
---- Passes the PlayerShip and linked ScanProbe.
+--- Passes the PlayerSpaceship and linked ScanProbe.
 --- Example:
 --- -- Prints probe linking details to the console output or logging file
 --- player:onProbeLink(function (player, probe)
@@ -682,7 +681,7 @@ function Entity:onProbeLink(callback)
     return self
 end
 --- Defines a function to call when this PlayerSpaceship unlinks a probe from the science screen.
---- Passes the PlayerShip and previously linked ScanProbe.
+--- Passes the PlayerSpaceship and previously linked ScanProbe.
 --- This function is not called when the probe is destroyed or expires.
 --- See ScanProbe:onDestruction() and ScanProbe:onExpiration().
 --- Example:
@@ -732,7 +731,7 @@ end
 function Entity:getCanScan()
     return self.components.science_scanner ~= nil
 end
---- Defines whether hacking features appear on related crew screens in thisPlayerSpaceship.
+--- Defines whether hacking features appear on related crew screens in this PlayerSpaceship.
 --- Example: player:setCanHack(true)
 function Entity:setCanHack(enabled)
     if enabled then self.components.hacking_device = {} else self.components.hacking_device = nil end

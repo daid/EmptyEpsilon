@@ -88,9 +88,9 @@ function Entity:getLocaleFaction()
         return f.entity.components.faction_info.locale_name
     end
 end
---- Returns the faction to which this SpaceObject belongs, by the faction's index in the faction list.
---- Use with SpaceObject:getFactionId() to ensure that two objects belong to the same faction.
---- Example: local faction_id = obj:getFactionId()
+--- Sets the faction to which this SpaceObject belongs, by a faction entity reference.
+--- Use with SpaceObject:getFactionId() to copy one object's faction to another.
+--- Example: obj:setFactionId(other:getFactionId()) -- sets obj's faction to match other's faction
 function Entity:setFactionId(faction_id)
     if faction_id == nil then
         self.components.faction = nil
@@ -188,7 +188,7 @@ end
 --- Returns true when the hail is accepted.
 --- Returns false if the hail is refused, or when the target player cannot be hailed right now, for example because it's already communicating with something else.
 --- This logs a message in the target's comms log. To avoid logging, use SpaceObject:sendCommsMessageNoLog().
---- Requires a target PlayerShip and message, though the message can be an empty string.
+--- Requires a target PlayerSpaceship and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
     if self:isFriendly(target) then
@@ -353,7 +353,7 @@ function Entity:getRadarSignatureGravity()
     if self.components.radar_signature then return self.components.radar_signature.gravity end
     return 0.0
 end
---- Returns this SpaceObject's electical radar signature value.
+--- Returns this SpaceObject's electrical radar signature value.
 --- Example: obj:getRadarSignatureElectrical()
 function Entity:getRadarSignatureElectrical()
     if self.components.radar_signature then return self.components.radar_signature.electrical end
@@ -373,14 +373,14 @@ function Entity:setScanningParameters(complexity, depth)
     self:setScanned(false)
     return self
 end
---- Returns the scanning complexity for the given SpaceObject.
---- Example: obj:scanningComplexity(obj)
+--- Returns the scanning complexity for this SpaceObject.
+--- Example: obj:scanningComplexity()
 function Entity:scanningComplexity()
     if self.components.scan_state then return self.components.scan_state.complexity end
     return 0
 end
---- Returns the maximum scanning depth for the given SpaceObject.
---- Example: obj:scanningChannelDepth(obj)
+--- Returns the maximum scanning depth for this SpaceObject.
+--- Example: obj:scanningChannelDepth()
 function Entity:scanningChannelDepth()
     if self.components.scan_state then return self.components.scan_state.depth end
     return 0

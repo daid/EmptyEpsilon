@@ -148,7 +148,7 @@ end
 --- - "evasion" maintains distance from enemy weapons and evades attacks
 --- - "fighter" prefers strafing maneuvers and attacks briefly at close range while passing
 --- - "missilevolley" prefers lining up missile attacks from long range
---- Example: template:setAI("fighter") -- default to the "fighter" combat AI state
+--- Example: template:setDefaultAI("fighter") -- default to the "fighter" combat AI state
 function ShipTemplate:setDefaultAI(default_ai)
     self.ai_controller = {new_name=default_ai}
     return self
@@ -228,7 +228,7 @@ end
 --- - damage: Sets the base damage done by the beam to the target. System effectiveness modifies the damage.
 --- To add multiple beam weapons to a ship, invoke this function multiple times, assigning each weapon a unique index value.
 --- To create a turreted beam, also add ShipTemplate:setBeamWeaponTurret(), and set the beam weapon's arc to be smaller than the turret's arc.
---- Example: setBeamWeapon(0,90,-15,1200,3,1) -- index 0, 90-degree arc centered -15 degrees from forward, extending 1.2U, firing every 3 seconds and dealing 1 damage
+--- Example: template:setBeamWeapon(0,90,-15,1200,3,1) -- index 0, 90-degree arc centered -15 degrees from forward, extending 1.2U, firing every 3 seconds and dealing 1 damage
 function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
     if self.beam_weapons == nil then self.beam_weapons = {} end
     while #self.beam_weapons < index + 1 do
@@ -440,7 +440,7 @@ end
 --- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock missiles on docked CpuShips.
 --- To restock docked PlayerSpaceships' weapons, use a comms script. See ShipTemplateBasedObject:setCommsScript() and :setCommsFunction().
 --- Defaults to false.
---- Example template:setRestocksMissilesDocked(true)
+--- Example: template:setRestocksMissilesDocked(true)
 function ShipTemplate:setRestocksMissilesDocked(enabled)
     if self.docking_bay then self.docking_bay.restock_missiles = enabled end
     return self
@@ -521,7 +521,7 @@ end
 --- Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.
 --- Valid values are filenames of PNG images relative to the resources/radar/ directory.
 --- Radar trace images should be white with a transparent background.
---- Defaults to arrow.png. ShipTemplate:setType("station") sets this to blip.png.
+--- Defaults to ship.png. ShipTemplate:setType("station") sets this to blip.png.
 --- Example: template:setRadarTrace("cruiser.png")
 function ShipTemplate:setRadarTrace(trace)
     self.radar_trace.icon = "radar/" .. trace

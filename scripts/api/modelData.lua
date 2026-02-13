@@ -31,8 +31,8 @@ end
 --- To view resource pack paths, extract strings from the pack, such as by running "strings packs/Angryfly.pack | grep -i model"  on *nix.
 --- For example, this lists "battleship_destroyer_2_upgraded/battleship_destroyer_2_upgraded.model", which is a valid mesh path.
 --- Examples:
---- setMesh("space_station_1/space_station_1.model") -- loads this model from a resource pack
---- setMesh("mesh/sphere.obj") -- loads this model from the resources/ directory
+--- model:setMesh("space_station_1/space_station_1.model") -- loads this model from a resource pack
+--- model:setMesh("mesh/sphere.obj") -- loads this model from the resources/ directory
 function ModelData:setMesh(name)
     if self.mesh_render == nil then self.mesh_render = {} end
     self.mesh_render.mesh=name

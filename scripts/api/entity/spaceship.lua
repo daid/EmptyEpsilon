@@ -197,7 +197,7 @@ end
 --- To convert the index to the value used by players, multiply it by 20, then add 400.
 --- Valid values are 0 (400THz) to 20 (800THz). Defaults to a random value.
 --- Unlike PlayerSpaceship:commandSetShieldFrequency(), this instantly changes the frequency with no calibration delay.
---- Example: frequency = ship:setShieldsFrequency(10) -- frequency is 600THz
+--- Example: ship:setShieldsFrequency(10) -- sets the shield frequency to 600THz
 function Entity:setShieldsFrequency(frequency)
     if self.components.shields then self.components.shields.frequency = frequency end
     return self
@@ -279,34 +279,34 @@ function Entity:getSystemHackedLevel(system_name)
 end
 --- Sets the hacked level for the given system on this SpaceShip.
 --- Valid range is 0.0 (unhacked) to 1.0 (fully hacked).
---- Example: ship:setSystemHackedLevel("impulse",0.5) -- sets the ship's impulse drive to half hacked
+--- Example: ship:setSystemHackedLevel("impulse", 0.5) -- sets the ship's impulse drive to half hacked
 function Entity:setSystemHackedLevel(system_name, level)
     __setSystemPropertyByName(self, system_name, "hacked_level", level)
     return self
 end
 --- Returns the given system's health on this SpaceShip.
 --- System health is related to damage, and is separate from its hacked level.
---- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
+--- Returns a value between -1.0 (-100%, fully disabled) and 1.0 (100%, undamaged). Values below 0.0 indicate the system is disabled.
 --- Example: ship:getSystemHealth("impulse")
 function Entity:getSystemHealth(system_name)
     return __getSystemPropertyByName(self, system_name, "health")
 end
 --- Sets the given system's health on this SpaceShip.
 --- System health is related to damage, and is separate from its hacked level.
---- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
---- Example: ship:setSystemHealth("impulse",0.5) -- sets the ship's impulse drive to half damaged
+--- Valid range is -1.0 (-100%, fully disabled) to 1.0 (100%, undamaged). Values below 0.0 indicate the system is disabled.
+--- Example: ship:setSystemHealth("impulse", 0.5) -- sets the ship's impulse drive to half damaged
 function Entity:setSystemHealth(system_name, amount)
     __setSystemPropertyByName(self, system_name, "health", amount)
     return self
 end
 --- Returns the given system's maximum health on this SpaceShip.
---- Returns a value between 0.0 (fully disabled) and 1.0 (undamaged).
+--- Returns a value between -1.0 (-100%, fully disabled) and 1.0 (100%, undamaged).
 --- Example: ship:getSystemHealthMax("impulse")
 function Entity:getSystemHealthMax(system_name)
     return __getSystemPropertyByName(self, system_name, "health_max")
 end
 --- Sets the given system's maximum health on this SpaceShip.
---- Valid range is 0.0 (fully disabled) and 1.0 (undamaged).
+--- Valid range is -1.0 (-100%, fully disabled) to 1.0 (100%, undamaged).
 --- Example: ship:setSystemHealthMax("impulse", 0.5) -- limits the ship's impulse drive health to half
 function Entity:setSystemHealthMax(system_name, amount)
     __setSystemPropertyByName(self, system_name, "health_max", amount)
@@ -339,13 +339,13 @@ function Entity:setSystemHeatRate(system_name, amount)
     return self
 end
 --- Returns the given system's power level on this SpaceShip.
---- Returns a value between 0.0 (unpowered) and 1.0 (fully powered).
+--- Returns a value between 0.0 (unpowered) and 3.0 (maximum overpower). The default is 1.0.
 --- Example: ship:getSystemPower("impulse")
 function Entity:getSystemPower(system_name)
     return __getSystemPropertyByName(self, system_name, "power_level")
 end
 --- Sets the given system's power level.
---- Valid range is 0.0 (unpowered) to 1.0 (fully powered).
+--- Valid range is 0.0 (unpowered) to 3.0 (maximum overpower). The default is 1.0.
 --- Example: ship:setSystemPower("impulse", 0.5) -- sets the ship's impulse drive to half power
 function Entity:setSystemPower(system_name, amount)
     __setSystemPropertyByName(self, system_name, "power_level", amount)
@@ -404,8 +404,8 @@ function Entity:setSystemCoolantRate(system_name, amount)
 end
 --- Returns this SpaceShip's forward and reverse impulse speed limits.
 --- Examples:
---- forward,reverse = getImpulseMaxSpeed()
---- forward = getImpulseMaxSpeed() -- forward speed only
+--- forward,reverse = ship:getImpulseMaxSpeed()
+--- forward = ship:getImpulseMaxSpeed() -- forward speed only
 function Entity:getImpulseMaxSpeed()
     if self.components.impulse_engine then return self.components.impulse_engine.max_speed_forward, self.components.impulse_engine.max_speed_reverse end
     return 0.0, 0.0
@@ -439,10 +439,8 @@ function Entity:setRotationMaxSpeed(speed)
     if self.components.maneuvering_thrusters then self.components.maneuvering_thrusters.speed = speed end
     return self
 end
---- Returns the SpaceShip's forward and reverse impulse acceleration values, in (unit?)
---- Examples:
---- forward,reverse = getAcceleration()
---- forward = getAcceleration() -- forward acceleration only
+--- Returns the SpaceShip's forward impulse acceleration value, in (unit?)
+--- Example: forward = ship:getAcceleration()
 function Entity:getAcceleration()
     if self.components.impulse_engine then return self.components.impulse_engine.acceleration_forward end
     return 0.0
@@ -543,7 +541,7 @@ function Entity:setWarpSpeed(speed)
 end
 --- Returns this SpaceShip's warp speed factor.
 --- Actual warp speed can be modified by "warp" system effectiveness.
---- Example: ship:getWarpSpeed(()
+--- Example: ship:getWarpSpeed()
 function Entity:getWarpSpeed()
     if self.components.warp_drive then return self.components.warp_drive.speed_per_level end
     return 0.0
@@ -578,6 +576,8 @@ function Entity:getBeamWeaponTurretDirection(index)
     if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_direction end
     return 0.0
 end
+--- Returns the turret's rotation rate, in degrees per tick, for the BeamWeapon with the given index on this SpaceShip.
+--- Example: ship:getBeamWeaponTurretRotationRate(0) -- returns beam weapon 0's turret rotation rate
 function Entity:getBeamWeaponTurretRotationRate(index)
     if self.components.beam_weapons and #self.components.beam_weapons > index then return self.components.beam_weapons[index+1].turret_rotation_rate end
     return 0.0

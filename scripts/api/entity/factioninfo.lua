@@ -67,7 +67,7 @@ end
 --- Sets the given faction to appear as friendly to SpaceObjects of this faction.
 --- For example, PlayerSpaceships of this faction can gain reputation with it.
 --- Defaults to no friendly factions.
---- Example: faction:setFriendly(exuari) -- sets the Human Navy to appear as friendly to this faction
+--- Example: faction:setFriendly(human_navy) -- sets the Human Navy to appear as friendly to this faction
 function Entity:setFriendly(other_faction)
     if self.components.faction_info == nil then error("setFriendly can only be called on factions.", 2) end
     if other_faction.components.faction_info == nil then error("setFriendly can only be called on factions.", 2) end

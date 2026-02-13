@@ -180,11 +180,10 @@ end
 --- Sets this STBO's maximum shield points per segment, and can also create new segments.
 --- The number of parameters defines the STBO's number of shield segments, to a maximum of 8 segments.
 --- The segments' order starts with the front-facing segment, then proceeds clockwise.
---- If more parameters are provided than the STBO has shield segments, the excess parameters create new segments with the defined max but 0 current shield points.
+--- If more parameters are provided than the STBO has shield segments, the excess parameters create new segments with the current shield points set to the defined max.
 --- A STBO with one shield segment has only a front shield generator system, and a STBO with two or more segments has only front and rear generator systems.
---- Setting a lower maximum points value than the segment's current number of points also reduces the points to the limit.
---- However, increasing the maximum value to a higher value than the current points does NOT automatically increase the current points,
---- which requires a separate call to ShipTemplateBasedObject:setShield().
+--- Increasing the maximum value to a higher value than the current points does NOT automatically increase the current points,
+--- which requires a separate call to ShipTemplateBasedObject:setShields().
 --- Example:
 --- -- On a ship with 4 segments, this sets the forward shield max to 50, right to 40, rear 30, left 20
 --- -- On a ship with 2 segments, this does the same, but its current rear shield points become right shield points, and the new rear and left shield segments have 0 points
@@ -224,9 +223,9 @@ function Entity:setImpulseSoundFile(filename)
     if self.components.impulse_engine then self.components.impulse_engine.sound = filename end
     return self
 end
---- Defines whether this STBO's shields are activated.
+--- Returns whether this STBO's shields are activated.
 --- Always returns true except for PlayerSpaceships, because only players can deactivate shields.
---- Example stbo:getShieldsActive() -- returns true if up, false if down
+--- Example: stbo:getShieldsActive() -- returns true if up, false if down
 function Entity:getShieldsActive()
     if self.components.shields then return self.components.shields.active end
     return false
@@ -238,7 +237,7 @@ function Entity:getSharesEnergyWithDocked()
     return false
 end
 --- Defines whether this STBO supplies energy to docked PlayerSpaceships.
---- Example: stbo:getSharesEnergyWithDocked(false)
+--- Example: stbo:setSharesEnergyWithDocked(false)
 function Entity:setSharesEnergyWithDocked(allow_energy_share)
     if self.components.docking_bay then self.components.docking_bay.share_energy = allow_energy_share end
     return self
@@ -286,18 +285,18 @@ function Entity:getFrontShield()
     return self.getShieldLevel(0)
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldsMax().
+--- Use ShipTemplateBasedObject:getShieldMax() with an index value.
 function Entity:getFrontShieldMax()
     return self.getShieldMax(0)
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
+--- Use ShipTemplateBasedObject:setShields() with an index value.
 function Entity:setFrontShield(amount)
     if self.components.shields then self.components.shields[1].level = amount end
     return self
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldsMax().
+--- Use ShipTemplateBasedObject:setShieldsMax() with the appropriate number of arguments.
 function Entity:setFrontShieldMax(amount)
     if self.components.shields then self.components.shields[1].max = amount end
     return self
@@ -308,18 +307,18 @@ function Entity:getRearShield()
     return self.getShieldLevel(1)
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldsMax().
+--- Use ShipTemplateBasedObject:getShieldMax() with an index value.
 function Entity:getRearShieldMax()
     return self.getShieldMax(1)
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
+--- Use ShipTemplateBasedObject:setShields() with an index value.
 function Entity:setRearShield(amount)
     if self.components.shields then self.components.shields[2].level = amount end
     return self
 end
 --- [DEPRECATED]
---- Use ShipTemplateBasedObject:setShieldsMax().
+--- Use ShipTemplateBasedObject:setShieldsMax() with the appropriate number of arguments.
 function Entity:setRearShieldMax(amount)
     if self.components.shields then self.components.shields[2].max = amount end
     return self
@@ -333,7 +332,7 @@ function Entity:onTakingDamage(callback)
 end
 --- Defines a function to call when this STBO is destroyed by taking damage.
 --- Passes the object taking damage and the instigator SpaceObject that delivered the destroying damage (or nil) to the function.
---- Example: stbo:onTakingDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
+--- Example: stbo:onDestruction(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)
 function Entity:onDestruction(callback)
     if self.components.hull then self.components.hull.on_destruction = callback end
     return self

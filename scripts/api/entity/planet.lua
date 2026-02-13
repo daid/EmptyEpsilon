@@ -35,7 +35,7 @@ end
 --- Valid values are filenames of PNG files relative to the resources/ directory.
 --- Optional; if defined, atmosphere textures should be transparent or translucent.
 --- For stars, you can set an atmosphere texture such as planets/star-1.png with no surface texture.
---- Example: planet:setPlanetSurfaceTexture("planets/atmosphere.png")
+--- Example: planet:setPlanetAtmosphereTexture("planets/atmosphere.png")
 function Entity:setPlanetAtmosphereTexture(texture)
     if self.components.planet_render then self.components.planet_render.atmosphere_texture = texture end
     return self
@@ -85,7 +85,7 @@ function Entity:setPlanetRadius(size)
     end
     return self
 end
---- Sets this Planet's collision radius.
+--- Returns this Planet's collision radius.
 --- Defaults to a function of the Planet's radius and its z-position.
 --- AI behaviors use this size to plot routes that try to avoid colliding with this Planet.
 --- Example: planet:getCollisionSize()
