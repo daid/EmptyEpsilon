@@ -75,7 +75,7 @@ function Entity:onPlayerCollision(callback)
 end
 --- Defines a function to call once when a player ship collides with the entity and allowPickup is enabled.
 --- Passes the entity and colliding player ship to the called function.
---- Example: artifact:onPickUp(function(entity, player) print("Entity retrieved") end)
+--- Example: entity:onPickUp(function(entity, player) print("Entity retrieved") end)
 function Entity:onPickUp(callback)
     self.components.pickup = {callback = callback}
     return self
