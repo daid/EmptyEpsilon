@@ -1,7 +1,7 @@
 --- An Asteroid is an inert piece of space terrain.
---- Upon collision with another entity, it deals damage and is destroyed.
---- It has a default rotation speed, random z-offset, and model, and AI behaviors attempt to avoid hitting them.
---- To create a customizable object with more complex actions upon collisions, use an Artifact or SupplyDrop.
+--- Upon colliding with another entity, it deals damage and is destroyed.
+--- It has a default rotation speed, random z-offset, and model. AI-controlled entities attempt to avoid hitting them.
+--- To create a customizable collidable object, use an Artifact or SupplyDrop.
 --- For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 --- @type creation

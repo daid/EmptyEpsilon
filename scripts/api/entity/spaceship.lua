@@ -143,8 +143,6 @@ function Entity:getWeaponStorageMax(weapon_type)
 end
 --- Sets the number of the given weapon type stocked by this ship.
 --- Example: ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
---- Sets the weapon type and amount restocked upon pickup when a ship collides with this SupplyDrop.
---- Example: supply_drop:setWeaponStorage("Homing",6)
 function Entity:setWeaponStorage(weapon_type, amount)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)

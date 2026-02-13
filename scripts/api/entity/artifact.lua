@@ -1,3 +1,7 @@
+--[[
+artifact.lua - Functions that were associated with the legacy Artifact class. These functions aren't necessarily limited to artifacts in ECS.
+]]--
+
 --- An Artifact is a configurable entity that can interact with other entities via collisions or scripting.
 --- Use this to define arbitrary objects or collectible pickups in scenario scripts.
 --- Example: artifact = Artifact():setModel("artifact6"):setSpin(0.5)
@@ -84,7 +88,7 @@ end
 function Entity:onPickup(callback)
     return self:onPickUp(callback)
 end
---- Defines whether the entity rotates, and if so at what rotational velocity. (unit?)
+--- Defines whether the entity rotates, and if so at what rotational velocity in degrees/second.
 --- For reference, normal asteroids spin at a rate between 0.1 and 0.8.
 --- Example: entity:setSpin(0.5)
 function Entity:setSpin(spin)
