@@ -27,9 +27,9 @@ function ElectricExplosionEffect()
 end
 
 local Entity = getLuaEntityFunctionTable()
--- Defines whether to draw the ExplosionEffect on short-range radar.
--- Defaults to false.
--- Example: explosion:setOnRadar(true)
+--- Defines whether to draw the ExplosionEffect on short-range radar.
+--- Defaults to false.
+--- Example: explosion:setOnRadar(true)
 function Entity:setOnRadar(is_on_radar)
     if self.components.explosion_effect then self.components.explosion_effect.radar = is_on_radar end
     return self

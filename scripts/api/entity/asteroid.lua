@@ -37,6 +37,11 @@ function Asteroid()
     return e
 end
 
+--- A VisualAsteroid is a cosmetic asteroid rendered above or below the movement plane.
+--- Unlike Asteroid, it has no collision, physics, or radar trace, and does not interact with other SpaceObjects.
+--- Use VisualAsteroids to add depth to asteroid fields without affecting gameplay.
+--- Example: visual_asteroid = VisualAsteroid():setPosition(1000,2000)
+--- @type creation
 function VisualAsteroid()
     local z = random(300, 800);
     if random(0, 100) < 50 then z = -z end

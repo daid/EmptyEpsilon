@@ -96,7 +96,7 @@ function Entity:isDocked(target)
     end
     return false
 end
---- Returns the SoaceObject with which this SpaceShip is docked.
+--- Returns the SpaceObject with which this SpaceShip is docked.
 --- Example: base = ship:getDockedWith()
 function Entity:getDockedWith()
     if self.components.docking_port and self.components.docking_port.state == "docked" then
@@ -320,7 +320,7 @@ function Entity:getSystemHeat(system_name)
 end
 --- Sets the given system's heat level on this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
---- Valid range is 0.0 (fully disabled) to 1.0 (undamaged).
+--- Valid range is 0.0 (no heat) to 1.0 (overheating).
 --- Example: ship:setSystemHeat("impulse", 0.5) -- sets the ship's impulse drive heat to half of capacity
 function Entity:setSystemHeat(system_name, amount)
     __setSystemPropertyByName(self, system_name, "heat_level", amount)
@@ -385,7 +385,7 @@ end
 --- Sets the coolant quantity for the given system in this SpaceShip.
 --- CpuShips don't generate or manage heat. Setting this has no effect on them.
 --- Valid range is 0.0 (none) to 1.0 (capacity).
---- Example: ship:setSystemPowerFactor("impulse", 4)
+--- Example: ship:setSystemCoolant("impulse", 0.5)
 function Entity:setSystemCoolant(system_name, amount)
     __setSystemPropertyByName(self, system_name, "coolant_level", amount)
     return self
@@ -837,7 +837,7 @@ function Entity:addBroadcast(target, message)
     return self
 end
 --- Sets the scan state of this SpaceShip for every faction.
---- Example: ship:setScanState("fullscan") -- every faction treats this ship as fully scanned
+--- Example: ship:setScanState("full") -- every faction treats this ship as fully scanned
 function Entity:setScanState(state)
     local ss = self.components.scan_state
     if ss ~= nil then
@@ -848,7 +848,7 @@ function Entity:setScanState(state)
     return self
 end
 --- Sets the scan state of this SpaceShip for a given faction.
---- Example: ship:setScanStateByFaction("Kraylor","fullscan") -- Kraylor faction treats this ship as fully scanned
+--- Example: ship:setScanStateByFaction("Kraylor","full") -- Kraylor faction treats this ship as fully scanned
 function Entity:setScanStateByFaction(faction, state)
     local ss = self.components.scan_state
     if ss ~= nil then

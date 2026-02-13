@@ -9,12 +9,12 @@ local Entity = getLuaEntityFunctionTable()
 --- If a faction doesn't have a relationship with another faction, it treats those factions as neutral.
 --- Friendly and hostile faction relationships are automatically reciprocated when set with setEnemy() and setFriendly().
 ---
---- If this faction consideres another faction to be hostile, it can target and fire weapons at it, and CpuShips with certain orders might pursue it.
+--- If this faction considers another faction to be hostile, it can target and fire weapons at it, and CpuShips with certain orders might pursue it.
 --- If neutral, this faction can't target and fire weapons at the other faction, and other factions can dock with its stations or dockable ships.
 --- If friendly, this faction acts as neutral but also shares short-range radar with PlayerSpaceships in Relay, and can grant reputation points to PlayerSpaceships of the same faction.
 ---
---- Many scenario and comms scripts also give friendly factions benefits at a reputation cost that netural factions do not.
---- Factions are loaded from resources/factionInfo.lua upon launching a scenario, and accessed by using the getFactionInfo() global function.
+--- Many scenario and comms scripts also give friendly factions benefits at a reputation cost that neutral factions do not.
+--- Factions are loaded from scripts/factionInfo.lua upon launching a scenario, and accessed by using the getFactionInfo() global function.
 ---
 --- Example:
 --- human_navy = getFactionInfo("Human Navy")

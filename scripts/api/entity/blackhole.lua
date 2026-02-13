@@ -24,6 +24,7 @@ end
 --- Any SpaceObject that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 2U margin.
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
+--- @type creation
 function WormHole()
     local e = createEntity()
     local radius = 2500

@@ -258,14 +258,14 @@ function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
 end
 --- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on SpaceShips created from this ShipTemplate.
 --- See BeamEffect:setTexture().
---- Example: template:setBeamWeaponTexture("texture/beam_blue.png")
+--- Example: template:setBeamTexture(0, "texture/beam_blue.png")
 function ShipTemplate:setBeamTexture(index, texture)
     self.beam_weapons[index + 1].texture = texture
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired.
 --- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
---- Defaults to 3.0, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
+--- Defaults to 3.0, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
     self.beam_weapons[index + 1].energy_per_beam_fire = amount
@@ -273,7 +273,7 @@ function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired.
 --- Only PlayerSpaceships generate and manage heat. Setting this for other ShipTemplateBasedObject types has no effect.
---- Defaults to 0.02, as defined in src/spaceObjects/spaceshipParts/beamWeapon.cpp.
+--- Defaults to 0.02, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponHeatPerFire(0,0.5) -- sets beam 0 to generate 0.5 (50%) system heat per firing
 function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
     self.beam_weapons[index + 1].heat_per_beam_fire = amount
@@ -348,7 +348,6 @@ function ShipTemplate:setTubeSize(index, size)
     return self
 end
 --- Sets the number of default hull points for ShipTemplateBasedObjects created from this ShipTemplate.
---- Defaults to 70.
 --- Example: template:setHull(100)
 function ShipTemplate:setHull(amount)
     self.hull = {current=amount, max=amount}
@@ -488,7 +487,7 @@ end
 --- If a system room isn't accessible via other rooms connected by doors, repair crews on PlayerSpaceships might not be able to repair that system.
 --- Rooms are placed on a 0-indexed integer x/y grid, with the given values representing the room's upper-left corner, and are sized by damage crew capacity (minimum 1x1).
 --- To place multiple rooms, declare addRoom() multiple times.
---- Example: template::addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
+--- Example: template:addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
 function ShipTemplate:addRoom(x, y, w, h)
     if self.internal_rooms == nil then self.internal_rooms = {} end
     self.internal_rooms[#self.internal_rooms+1] = {position={x, y}, size={w, h}}

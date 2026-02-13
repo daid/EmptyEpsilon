@@ -37,7 +37,7 @@ function Entity:setHeading(heading)
     return self
 end
 --- Returns this SpaceObject's heading, in degrees ranging from 0 to 360.
---- Example: heading = obj:getHeading(0)
+--- Example: heading = obj:getHeading()
 function Entity:getHeading()
     if self.components.transform then
         local heading = self.components.transform.rotation - 270

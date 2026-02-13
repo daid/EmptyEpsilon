@@ -268,13 +268,13 @@ function Entity:getMaxScanProbeCount()
     return 0
 end
 --- Adds a custom interactive button with the given reference name to the given crew position screen.
---- By default, custom buttons and info are stacked in order of creation. Use the order value to specify a priority, with lower values appearing higher in the list.
+--- By default, custom buttons and info are stacked in order of creation.
 --- If the reference name is unique, this creates a new button. If the reference name exists, this modifies the existing button.
 --- The caption sets the button's text label.
 --- When clicked, the button calls the given function.
 --- Example:
---- -- Add a custom button to Engineering, lower in the order relative to other items, that prints the player ship's coolant max to the console or logging file when clicked
---- player:addCustomButton("engineering","get_coolant_max","Get Coolant Max",function() print("Coolant: " .. player:getMaxCoolant()) end,10)
+--- -- Add a custom button to Engineering that prints the player ship's coolant max to the console or logging file when clicked
+--- player:addCustomButton("engineering","get_coolant_max","Get Coolant Max",function() print("Coolant: " .. player:getMaxCoolant()) end)
 function Entity:addCustomButton(station, key, label, callback)
     setPlayerShipCustomFunction(self, "button", key, label, station, callback, 0)
     return self
@@ -398,13 +398,9 @@ function Entity:commandUnloadTube(index)
     commandUnloadTube(self, index)
     return self
 end
---- Commands this PlayerSpaceship to fire the WeaponTube with the given index at the given missile target angle in degrees, without a weapons target.
---- The target angle behaves as if the Weapons crew had unlocked targeting and manually aimed its trajectory.
---- A target angle value of 0 is equivalent to a heading of 90 degrees ("east").
---- Accepts 0, positive, or negative values.
---- Examples:
---- player:commandFireTube(0,0) -- command firing tube 0 at a heading 90
---- target_heading = 180; player:commandFireTube(0,target_heading - 90) -- command firing tube 0 at a heading 180
+--- Commands this PlayerSpaceship to fire the WeaponTube with the given index.
+--- The tube fires in its current direction. To fire at a specific target, use PlayerSpaceship:commandFireTubeAtTarget().
+--- Example: player:commandFireTube(0) -- command firing tube 0
 function Entity:commandFireTube(index)
     commandFireTube(self, index)
     return self
@@ -720,7 +716,7 @@ end
 --- Sets this PlayerSpaceship's short-range radar range.
 --- PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
 --- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this SpaceShip can detect objects.
---- Example: player:setShortRangeRadarRange(5000) -- sets the ship's long-range radar range to 5U
+--- Example: player:setShortRangeRadarRange(5000) -- sets the ship's short-range radar range to 5U
 function Entity:setShortRangeRadarRange(range)
     if self.components.long_range_radar then self.components.long_range_radar.short_range = range end
     return self
