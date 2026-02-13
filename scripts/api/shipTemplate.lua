@@ -4,13 +4,13 @@ __player_ship_templates = {}
 __allow_new_player_ships = true
 
 -- Called by the engine to populate the list of player ships that can be spawned.
--- Returns a list of {key, label, description}.
+-- Returns a list of {key, label, description, radar trace}.
 function getSpawnablePlayerShips()
     local result = {}
     if __allow_new_player_ships then
         for i, v in ipairs(__player_ship_templates) do
             if not v.__hidden then
-                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description}
+                result[#result+1] = {__spawnPlayerShipFunc(v.typename.type_name), v.typename.localized, v.__description, v.radar_trace.icon}
             end
         end
     end
@@ -119,6 +119,7 @@ function ShipTemplate:setType(template_type)
     if template_type == "station" then
         if self.docking_bay == nil then self.docking_bay = {} end
         self.docking_bay.repair = true
+        self.docking_bay.restock_probes = true
         self.docking_bay.share_energy = true
         if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"

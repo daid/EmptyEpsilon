@@ -1,16 +1,16 @@
 [vertex]
 // Program inputs.
-uniform mat4 projection;
-uniform mat4 view;
-uniform vec2 velocity;
+uniform mat4 u_projection;
+uniform mat4 u_view;
+uniform vec2 u_velocity;
 
 // Per-vertex inputs
-attribute vec3 position;
-attribute float sign_value;
+attribute vec3 a_position;
+attribute float a_sign_value;
 
 void main()
 {    
-    gl_Position = projection * view * vec4(position.xy + sign_value * velocity, position.z, 1.);
+    gl_Position = u_projection * u_view * vec4(a_position.xy + a_sign_value * u_velocity, a_position.z, 1.);
 }
 
 [fragment]

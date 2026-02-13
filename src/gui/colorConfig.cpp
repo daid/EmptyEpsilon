@@ -41,6 +41,7 @@ void ColorConfig::load()
     DEF_COLOR(log_receive_neutral);
     DEF_WIDGETCOLORSET(textbox);
     DEF_COLOR(overlay_damaged);
+    DEF_COLOR(overlay_docked);
     DEF_COLOR(overlay_jammed);
     DEF_COLOR(overlay_hacked);
     DEF_COLOR(overlay_no_power);

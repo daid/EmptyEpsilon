@@ -3,6 +3,7 @@
 #include "powerDamageIndicator.h"
 #include "systems/warpsystem.h"
 #include "components/reactor.h"
+#include "components/docking.h"
 #include "components/shipsystem.h"
 #include "main.h"
 
@@ -13,12 +14,12 @@ GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string nam
 
 void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 {
-    if (!my_spaceship)
-        return;
+    if (!my_spaceship) return;
+
     auto reactor = my_spaceship.getComponent<Reactor>();
     auto sys = ShipSystem::get(my_spaceship, system);
-    if (!sys)
-        return;
+    if (!sys) return;
+    auto port = my_spaceship.getComponent<DockingPort>();
 
     glm::u8vec4 color;
     string display_text;
@@ -29,8 +30,8 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     float hacked_level = sys->hacked_level;
     if (system == ShipSystem::Type::FrontShield)
     {
-        auto rear = ShipSystem::get(my_spaceship, ShipSystem::Type::RearShield);
-        if (rear) {
+        if (auto rear = ShipSystem::get(my_spaceship, ShipSystem::Type::RearShield))
+        {
             power = std::max(power, rear->power_level);
             health = std::max(health, rear->health);
             heat = std::max(heat, rear->heat_level);
@@ -41,6 +42,10 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         color = colorConfig.overlay_damaged;
         display_text = tr("systems", "DAMAGED");
+    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
+    {
+        color = colorConfig.overlay_docked;
+        display_text = port->state == DockingPort::State::Docking ? tr("systems", "DOCKING") :  tr("systems", "DOCKED");
     }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         color = colorConfig.overlay_jammed;
@@ -121,10 +126,16 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
     }
-    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
+
+    if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
+    {
+        drawIcon(renderer, "gui/icons/docking", colorConfig.overlay_docked);
+    }
+    else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
     {
         drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
     }
+
     if (power == 0.0f)
     {
         drawIcon(renderer, "gui/icons/status_no_power", colorConfig.overlay_no_power);
@@ -133,10 +144,12 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     {
         drawIcon(renderer, "gui/icons/status_low_power", colorConfig.overlay_low_power);
     }
+
     if (reactor && reactor->energy < 10.0f)
     {
         drawIcon(renderer, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
     }
+
     if (heat > 0.90f)
     {
         drawIcon(renderer, "gui/icons/status_overheat", colorConfig.overlay_overheating);
@@ -145,6 +158,6 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
 
 void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, glm::u8vec4 color)
 {
-    renderer.drawSprite(icon_name, icon_position, icon_size);
+    renderer.drawSprite(icon_name, icon_position, icon_size, color);
     icon_position += icon_offset;
 }

@@ -32,6 +32,7 @@
 #include "multiplayer/missiletubes.h"
 #include "multiplayer/internalrooms.h"
 #include "multiplayer/orbit.h"
+#include "multiplayer/sfx.h"
 #include "multiplayer/spin.h"
 #include "multiplayer/moveto.h"
 #include "multiplayer/radarblock.h"
@@ -51,6 +52,7 @@
 #include "systems/missilesystem.h"
 #include "systems/maneuvering.h"
 #include "systems/energysystem.h"
+#include "systems/sfx.h"
 #include "systems/selfdestruct.h"
 #include "systems/basicmovement.h"
 #include "systems/gravity.h"
@@ -98,10 +100,12 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<TypeNameReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<OrbitReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlayerControlReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WaypointsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanProbeLauncherReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarTraceReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RawRadarSignatureInfoReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<LongRangeRadarReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<RadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShareShortRangeRadarReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<AllowRadarLinkReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<RadarBlockReplication>();
@@ -116,7 +120,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SelfDestructReplication>();
-    //Sfx
+    sp::ecs::MultiplayerReplication::registerComponentReplication<SfxReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShieldsReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ShipLogReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<SpinReplication>();
@@ -142,6 +146,7 @@ void initSystemsAndComponents()
     engine->registerSystem<CoolantSystem>();
     engine->registerSystem<ShipSystemsSystem>();
     engine->registerSystem<SelfDestructSystem>();
+    engine->registerSystem<SfxSystem>();
     engine->registerSystem<BasicMovementSystem>();
     engine->registerSystem<GravitySystem>();
     engine->registerSystem<InternalCrewSystem>();

@@ -54,6 +54,13 @@ public:
     sp::io::Keybinding helms_zero_impulse;
     sp::io::Keybinding helms_max_impulse;
     sp::io::Keybinding helms_min_impulse;
+    sp::io::Keybinding helms_increase_jump_100;
+    sp::io::Keybinding helms_increase_jump_1k;
+    sp::io::Keybinding helms_decrease_jump_100;
+    sp::io::Keybinding helms_decrease_jump_1k;
+    sp::io::Keybinding helms_set_jump;
+    sp::io::Keybinding helms_max_jump;
+    sp::io::Keybinding helms_min_jump;
     sp::io::Keybinding helms_turn_left;
     sp::io::Keybinding helms_turn_right;
     sp::io::Keybinding helms_warp0;
@@ -149,6 +156,7 @@ public:
         CinematicKeys();
         void init();
         sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding toggle_callsigns;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding cycle_camera;
         sp::io::Keybinding previous_player_ship;
@@ -170,6 +178,7 @@ public:
         TopDownKeys();
         void init();
         sp::io::Keybinding toggle_ui;
+        sp::io::Keybinding toggle_callsigns;
         sp::io::Keybinding lock_camera;
         sp::io::Keybinding previous_player_ship;
         sp::io::Keybinding next_player_ship;
@@ -183,6 +192,7 @@ public:
     //GM
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
+    sp::io::Keybinding gm_show_callsigns;
 
     //Various
     sp::io::Keybinding spectator_show_callsigns;

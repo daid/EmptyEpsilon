@@ -17,39 +17,59 @@ static sp::ecs::Entity script_active_entity;
 void CommsSystem::update(float delta)
 {
     for(auto [entity, comms] : sp::ecs::Query<CommsTransmitter>()) {
-        if (comms.open_delay > 0.0f)
-            comms.open_delay -= delta;
-        if (game_server) {
-            if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f) {
-                if (!comms.target) {
+        if (comms.open_delay > 0.0f) comms.open_delay -= delta;
+
+        if (game_server)
+        {
+            // If the channel opening delay is expired, determine whether to
+            // initialize comms with the target.
+            if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f)
+            {
+                // Exit with a broken channel if the target no longer exists.
+                if (!comms.target)
+                {
                     comms.state = CommsTransmitter::State::ChannelBroken;
-                }else{
+                    return;
+                }
+                else
+                {
                     comms.script_replies.clear();
                     comms.script_replies_dirty = true;
+
+                    // If the other target is itself a comms transmitter, hail it.
                     if (auto other_transmitter = comms.target.getComponent<CommsTransmitter>())
                     {
                         comms.open_delay = channel_open_time;
 
-                        if (other_transmitter->state == CommsTransmitter::State::Inactive || other_transmitter->state == CommsTransmitter::State::ChannelFailed || other_transmitter->state == CommsTransmitter::State::ChannelBroken || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
+                        if (other_transmitter->state == CommsTransmitter::State::Inactive
+                            || other_transmitter->state == CommsTransmitter::State::ChannelFailed
+                            || other_transmitter->state == CommsTransmitter::State::ChannelBroken
+                            || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
                         {
                             other_transmitter->state = CommsTransmitter::State::BeingHailed;
                             other_transmitter->target = entity;
+
                             if (auto callsign = entity.getComponent<CallSign>())
                                 other_transmitter->target_name = callsign->callsign;
                             else
                                 other_transmitter->target_name = "?";
                         }
-                    }else if (gameGlobalInfo->intercept_all_comms_to_gm) {
-                        comms.state = CommsTransmitter::State::ChannelOpenGM;
-                    }else if (openChannel(entity, comms.target)) {
-                        comms.state = CommsTransmitter::State::ChannelOpen;
-                    } else {
-                        comms.state = CommsTransmitter::State::ChannelFailed;
                     }
+                    // If all other comms are intercepted by the GM, open a chat
+                    // with the GM.
+                    else if (gameGlobalInfo->intercept_all_comms_to_gm && comms.state != CommsTransmitter::State::ChannelOpen)
+                        comms.state = CommsTransmitter::State::ChannelOpenGM;
+                    // Otherwise, open a standard comms channel to the target.
+                    else if (openChannel(entity, comms.target))
+                        comms.state = CommsTransmitter::State::ChannelOpen;
+                    else
+                        comms.state = CommsTransmitter::State::ChannelFailed;
                 }
             }
+
             if (comms.state == CommsTransmitter::State::ChannelOpen || comms.state == CommsTransmitter::State::ChannelOpenPlayer)
             {
+                // Exit with a broken channel if the target no longer exists.
                 if (!comms.target)
                     comms.state = CommsTransmitter::State::ChannelBroken;
             }
@@ -349,23 +369,28 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     player.removeComponent<CommsTransmitterEnvironment>();
     transmitter->incomming_message = "???";
 
+    // comms_script (comms from file) is prioritized over
+    // comms_callback (comms from inline function). Scenario authors must clear
+    // comms_script on an entity with a script in order to use comms_callback.
     if (script_name != "")
     {
         auto& env = player.addComponent<CommsTransmitterEnvironment>();
         env.script_environment = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
         setupSubEnvironment(*env.script_environment.get());
-        // consider "player" deprecated, but keep it for a long time
+        // Consider "player" deprecated, but keep it for a long time.
         env.script_environment->setGlobal("player", player);
         env.script_environment->setGlobal("comms_source", player);
         env.script_environment->setGlobal("comms_target", target);
         i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
         LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
-    }else if (receiver->callback)
+    }
+    else if (receiver->callback)
     {
         receiver->callback.setGlobal("comms_source", player);
         receiver->callback.setGlobal("comms_target", transmitter->target);
         LuaConsole::checkResult(receiver->callback.call<void>(player, target));
     }
+
     script_active_entity = {};
     return transmitter->incomming_message != "???";
 }

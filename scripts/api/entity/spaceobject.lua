@@ -255,6 +255,7 @@ function Entity:setReputationPoints(amount)
     if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
         self.components.faction.entity.components.faction_info.reputation_points = amount
     end
+    return self
 end
 --- Deducts a given number of faction reputation points from this SpaceObject.
 --- Returns true if there are enough points to deduct the specified amount, then does so.
@@ -279,6 +280,7 @@ function Entity:addReputationPoints(amount)
             self.components.faction.entity.components.faction_info.reputation_points = points + amount
         end
     end
+    return self
 end
 --- Returns the name of the map sector, such as "A4", where this SpaceObject is located.
 --- Example: obj:getSectorName()
@@ -443,9 +445,9 @@ end
 function Entity:isScannedByFaction(faction_name)
     local ss = self.components.scan_state
     if ss then
-        local f = getFactionInfo(faction)
+        local f = getFactionInfo(faction_name)
         if f ~= nil then
-            for n=1,#ss do
+            for n = 1, #ss do
                 if ss[n].faction == f then
                     if ss[n].state == "full" then return true end
                     if ss[n].state == "simple" then return true end

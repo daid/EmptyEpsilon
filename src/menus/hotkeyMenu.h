@@ -1,6 +1,6 @@
-#ifndef HOTKEYMENU_H
-#define HOTKEYMENU_H
+#pragma once
 
+#include "optionsMenu.h"
 #include "gui/gui2_arrowbutton.h"
 #include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
@@ -31,6 +31,7 @@ private:
     const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
     const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
     const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
+    const float RESET_LABEL_TIMEOUT = 5.0f;
 
     GuiScrollText* help_text;
     GuiElement* container;
@@ -46,19 +47,19 @@ private:
     std::vector<GuiLabel*> label_entries;
     GuiArrowButton* previous_page;
     GuiArrowButton* next_page;
-    GuiOverlay* error_window;
+    GuiLabel* reset_label;
 
     string category = "";
     int category_index = 1;
+    float reset_label_timer = 0.0f;
     std::vector<string> category_list;
     std::vector<sp::io::Keybinding*> hotkey_list;
+    OptionsMenu::ReturnTo return_to;
 
     void setCategory(int cat);
     void pageHotkeys(int direction);
 public:
-    HotkeyMenu();
+    HotkeyMenu(OptionsMenu::ReturnTo return_to=OptionsMenu::ReturnTo::Main);
 
     virtual void update(float delta) override;
 };
-
-#endif //HOTKEYMENU_H

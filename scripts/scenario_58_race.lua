@@ -947,7 +947,7 @@ function setStations()
 	table.insert(stationList,stationOutpost33)
 	stationOutpost33.comms_data.goods.luxury = {cost = 75, quantity = 5}
 	--Lando
-	stationLando = placeStation(random(-60000,-30000),random(612500,70000),"Lando","Independent","Small Station")
+	stationLando = placeStation(random(-60000,-30000),random(61250,70000),"Lando","Independent","Small Station")
 	table.insert(stationList,stationLando)
 	--Komov
 	stationKomov = placeStation(random(-55000,-30000),random(70000,80000),"Komov","Independent","Small Station")
@@ -1035,7 +1035,7 @@ function setStations()
 	art3 = Artifact():setModel("artifact6"):allowPickup(false):setScanningParameters(3,2):setRadarSignatureInfo(random(7,13),random(4,20), random(2,12))
 	art1:setPosition(random(-50000,50000),random(-80000,-70000))
 	art2:setPosition(random(-90000,-75000),random(-40000,-20000))
-	art3:setPosition(random(50000,75000),random(625000,80000))
+	art3:setPosition(random(50000,75000),random(62500,80000))
 	artChoice = math.random(6)
 	if artChoice == 1 then
 		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
@@ -2490,7 +2490,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = comms_source:getWaypoint(n)
@@ -2498,7 +2498,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -2516,10 +2516,10 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),comms_source:getWaypointID(n)))
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -2586,9 +2586,9 @@ function friendlyComms()
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), comms_source:getWaypointID(n)), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end

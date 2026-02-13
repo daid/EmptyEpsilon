@@ -378,21 +378,6 @@ template<> struct Convert<CustomShipFunctions::Function::Type> {
         return CustomShipFunctions::Function::Type::Info;
     }
 };
-template<> struct Convert<CrewPosition> {
-    static int toLua(lua_State* L, CrewPosition value) {
-        lua_pushstring(L, crewPositionToString(value).c_str());
-        return 1;
-    }
-    static CrewPosition fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-
-        auto result = tryParseCrewPosition(str);
-        if (!result.has_value()) {
-            luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
-        }
-        return result.value_or(CrewPosition::helmsOfficer);
-    }
-};
 
 template<> struct Convert<MainScreenSetting> {
     static int toLua(lua_State* L, MainScreenSetting value) {

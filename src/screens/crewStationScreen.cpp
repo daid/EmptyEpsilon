@@ -1,6 +1,7 @@
 #include "crewStationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "playerInfo.h"
 #include "multiplayer_client.h"
@@ -69,7 +70,7 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
 
     keyboard_help = new GuiHelpOverlay(main_panel, tr("hotkey_F1", "Keyboard Shortcuts"));
 
-    for (const auto& category : {"Console", "Basic", "General"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "General")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
             keyboard_general += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
@@ -306,11 +307,9 @@ void CrewStationScreen::update(float delta)
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (viewport)
     {
@@ -408,7 +407,11 @@ void CrewStationScreen::showTab(GuiElement* element)
             string keyboard_category = "";
             keyboard_category = populateShortcutsList(info.position);
             keyboard_help->setText(keyboard_general + keyboard_category);
-        } 
+
+            // Explicitly reset focus after switching tabs, such as when changed
+            // via hotkey.
+            focus(main_panel);
+        }
         else 
         {
             info.element->hide();

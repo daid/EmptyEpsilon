@@ -4,8 +4,9 @@
 #include "featureDefs.h"
 #include "ecs/query.h"
 #include "systems/collision.h"
-#include "components/collision.h"
 #include "components/beamweapon.h"
+#include "components/collision.h"
+#include "components/docking.h"
 #include "components/hull.h"
 #include "components/shields.h"
 #include "components/missiletubes.h"
@@ -49,8 +50,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     missile_tube_controls(nullptr),
     view_position(0.0f,0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     auto_distance(true),
     distance(5000.0f),
     long_range(false),
@@ -78,8 +80,9 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     missile_tube_controls(nullptr),
     view_position(0.0f, 0.0f),
     view_rotation(0),
-    auto_center_on_my_ship(true),
-    auto_rotate_on_my_ship(false),
+    auto_center_target(my_spaceship),
+    auto_center_on_ship(true),
+    auto_rotate_on_ship(false),
     distance(distance),
     long_range(false),
     show_ghost_dots(false),
@@ -101,16 +104,29 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
-    //Hacky, when not relay and we have a ship, center on it.
-    auto transform = my_spaceship.getComponent<sp::Transform>();
-    if (transform) {
-        if (auto_center_on_my_ship) {
-            view_position = transform->getPosition();
-        }
-        if (auto_rotate_on_my_ship) {
-            view_rotation = transform->getRotation() + 90;
-        }
+    // Auto-center on the target, defaulting to my_spaceship on creation.
+    auto transform = auto_center_target.getComponent<sp::Transform>();
+
+    // If target has no transform, it might be docked inside another ship.
+    // Otherwise, if the target doesn't physically exist, fall back to
+    // my_spaceship if possible.
+    if (!transform)
+    {
+        if (auto dp = auto_center_target.getComponent<DockingPort>())
+            transform = dp->target.getComponent<sp::Transform>();
+        else if (!transform && my_spaceship)
+            auto_center_target = my_spaceship;
+        else
+            auto_center_target = sp::ecs::Entity();
     }
+
+    if (transform && auto_center_on_ship)
+    {
+        view_position = transform->getPosition();
+        if (auto_rotate_on_ship)
+            view_rotation = transform->getRotation() + 90;
+    }
+
     if (auto_distance)
     {
         distance = long_range ? 30000.0f : 5000.0f;
@@ -425,25 +441,25 @@ void GuiRadarView::drawGhostDots(sp::RenderTarget& renderer)
 
 void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
 {
-    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    if (!lrr)
+    auto waypoints = my_spaceship.getComponent<Waypoints>();
+    if (!waypoints)
         return;
 
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
 
-    for(unsigned int n=0; n<lrr->waypoints.size(); n++)
+    for(unsigned int n=0; n<waypoints->waypoints.size(); n++)
     {
-        auto screen_position = worldToScreen(lrr->waypoints[n]);
+        auto screen_position = worldToScreen(waypoints->waypoints[n].position);
 
         renderer.drawSprite("waypoint.png", screen_position - glm::vec2(0, 10), 20, colorConfig.ship_waypoint_background);
-        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(n + 1), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
+        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
 
         if (style != Rectangular && glm::length(screen_position - radar_screen_center) > std::min(rect.size.x, rect.size.y) * 0.5f)
         {
             screen_position = radar_screen_center + ((screen_position - radar_screen_center) / glm::length(screen_position - radar_screen_center) * std::min(rect.size.x, rect.size.y) * 0.4f);
 
             renderer.drawRotatedSprite("waypoint.png", screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, colorConfig.ship_waypoint_background);
-            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(n + 1), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, bold_font, colorConfig.ship_waypoint_text);
         }
     }
 }
@@ -669,6 +685,9 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
         flags |= RadarRenderSystem::FlagShortRange;
     if (show_game_master_data)
         flags |= RadarRenderSystem::FlagGM;
+    if (show_callsigns)
+        flags |= RadarRenderSystem::FlagCallsigns;
+
     glm::vec2 radar_screen_center = rect.center();
 
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
@@ -722,12 +741,14 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
         }
     }
 
-    auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-    if (my_spaceship && lrr && targets->getWaypointIndex() > -1 && targets->getWaypointIndex() < int(lrr->waypoints.size()))
+    auto waypoints = my_spaceship.getComponent<Waypoints>();
+    if (my_spaceship && waypoints && targets->getWaypointIndex() > -1)
     {
-        auto object_position_on_screen = worldToScreen(lrr->waypoints[targets->getWaypointIndex()]);
+        if (auto waypoint_position = waypoints->get(targets->getWaypointIndex())) {
+            auto object_position_on_screen = worldToScreen(waypoint_position.value());
 
-        renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
+            renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
+        }
     }
 }
 

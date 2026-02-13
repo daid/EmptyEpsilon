@@ -22,7 +22,7 @@ protected:
     float missile_fire_delay = 0;
     bool has_missiles = false;
     bool has_beams = false;
-    float beam_weapon_range = 1000;
+    float beam_weapon_range = 0.0f;
     float short_range = 5000;
     float long_range = 30000;
     float relay_range = 60000;
@@ -35,10 +35,10 @@ protected:
         Side,
         Rear
     };
-    EWeaponDirection weapon_direction;
-    EMissileWeapons best_missile_type;
+    EWeaponDirection weapon_direction = EWeaponDirection::Front;
+    EMissileWeapons best_missile_type = EMissileWeapons::MW_Homing;
 
-    float update_target_delay;
+    float update_target_delay = 0.0f;
 
     PathPlanner pathPlanner;
 public:
@@ -65,7 +65,7 @@ protected:
     virtual void updateTarget();
     virtual void runOrders();
     virtual void runAttack(sp::ecs::Entity target);
-    virtual void flyTowards(glm::vec2 target, float keep_distance = 100.0);
+    virtual void flyTowards(glm::vec2 target, float keep_distance = 0.0);
     virtual void flyFormation(sp::ecs::Entity target, glm::vec2 offset);
 
     sp::ecs::Entity findBestTarget(glm::vec2 position, float radius);

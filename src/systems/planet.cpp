@@ -132,8 +132,9 @@ void PlanetRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, P
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
             gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+            gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get());
+            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
     }
 }
@@ -191,8 +192,9 @@ void PlanetTransparentRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& t
             gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
             gl::ScopedVertexAttribArray texcoords(shader.get().attribute(ShaderRegistry::Attributes::Texcoords));
             gl::ScopedVertexAttribArray normals(shader.get().attribute(ShaderRegistry::Attributes::Normal));
+            gl::ScopedVertexAttribArray tangents(shader.get().attribute(ShaderRegistry::Attributes::Tangent));
 
-            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get());
+            planet_mesh[level_of_detail]->render(positions.get(), texcoords.get(), normals.get(), tangents.get());
         }
     }
     if (pr.atmosphere_texture != "" && pr.atmosphere_size > 0)

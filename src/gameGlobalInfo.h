@@ -3,7 +3,6 @@
 
 #include "script.h"
 #include "script/gm.h"
-#include "gameStateLogger.h"
 #include "components/faction.h"
 #include "Updatable.h"
 #include "multiplayer.h"
@@ -12,7 +11,6 @@
 #include <unordered_map>
 
 
-class GameStateLogger;
 class GameGlobalInfo;
 extern P<GameGlobalInfo> gameGlobalInfo;
 
@@ -71,6 +69,8 @@ public:
     sp::script::Callback on_new_player_ship;
 
     std::function<void(glm::vec2)> on_gm_click;
+    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
+    string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     GameGlobalInfo();
     virtual ~GameGlobalInfo();
@@ -103,6 +103,7 @@ public:
         sp::script::Callback create_callback;
         string label;
         string description;
+        string icon;
     };
     std::vector<ShipSpawnInfo> getSpawnablePlayerShips();
     struct ObjectSpawnInfo {
@@ -110,6 +111,7 @@ public:
         string label;
         string category;
         string description;
+        string icon;
     };
     std::vector<ObjectSpawnInfo> getGMSpawnableObjects();
     string getEntityExportString(sp::ecs::Entity entity);
@@ -120,8 +122,9 @@ public:
     std::vector<std::unique_ptr<sp::script::Environment>> additional_scripts;
     std::unique_ptr<sp::script::Environment> script_environment_base;
     std::unique_ptr<sp::script::Environment> main_scenario_script;
+    std::vector<sp::script::CoroutinePtr> script_threads;
+    std::vector<sp::script::CoroutinePtr> new_script_threads;
 private:
-    P<GameStateLogger> state_logger;
     sp::ecs::Entity victory_faction;
     int callsign_counter;
 

@@ -54,7 +54,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     bool show_additional_shortcuts_string = false;
     string keyboard_help_text = "";
 
-    for (const auto& category : {"Console", "Basic", "Main Screen"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "Main Screen")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
         {
@@ -107,11 +107,9 @@ void ScreenMainScreen::update(float delta)
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (game_client && game_client->getStatus() == GameClient::Disconnected)
     {

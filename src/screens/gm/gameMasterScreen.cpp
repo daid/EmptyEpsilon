@@ -246,7 +246,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_help_text = "";
 
-    for (const auto& category : {"Console", "Basic", "GM"})
+    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
         {
@@ -302,15 +302,16 @@ void GameMasterScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+
+    pause_button->setValue(engine->getGameSpeed() == 0.0f);
+
+    if (keys.gm_show_callsigns.getDown())
     {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
-    if (engine->getGameSpeed() == 0.0f) {
-        pause_button->setValue(true);
-    } else {
-        pause_button->setValue(false);
+        // Toggle callsigns.
+        main_radar->showCallsigns(!main_radar->getCallsigns());
     }
 
     bool has_object = false;
@@ -441,19 +442,26 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-            mouse_renderer->setSpriteImage("mouse_create.png");
+        if (mouse_renderer)
+        {
+            if (gameGlobalInfo->on_gm_click_cursor == "")
+                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
+            else
+                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
+        }
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
-        if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+        if (mouse_renderer)
         {
             if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
             else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
@@ -477,7 +485,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
         {
             gameGlobalInfo->on_gm_click(position);
         }else{
-            click_and_drag_state = CD_BoxSelect;
+            click_and_drag_state = CD_ClickSelectOrBoxSelect;
 
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
 
@@ -485,7 +493,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
             {
                 if (auto transform = obj.getComponent<sp::Transform>())
                     if (glm::length(transform->getPosition() - position) < min_drag_distance)
-                        click_and_drag_state = CD_DragObjects;
+                        click_and_drag_state = CD_ClickSelectOrDragObjects;
             }
         }
     }
@@ -503,14 +511,18 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
         position -= (position - drag_previous_position);
         break;
+    case CD_ClickSelectOrDragObjects:
     case CD_DragObjects:
+        click_and_drag_state = CD_DragObjects;
         for(auto obj : targets.getTargets())
         {
             if (auto transform = obj.getComponent<sp::Transform>())
                 transform->setPosition(transform->getPosition() + (position - drag_previous_position));
         }
         break;
+    case CD_ClickSelectOrBoxSelect:
     case CD_BoxSelect:
+        click_and_drag_state = CD_BoxSelect;
         {
             auto p0 = main_radar->worldToScreen(drag_start_position);
             auto p1 = main_radar->worldToScreen(position);
@@ -537,6 +549,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
+
             for(auto entity : sp::CollisionSystem::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
@@ -601,6 +614,8 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             gameGlobalInfo->on_gm_click = nullptr;
         }
         break;
+    case CD_ClickSelectOrBoxSelect:
+    case CD_ClickSelectOrDragObjects:
     case CD_BoxSelect:
         {
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
@@ -608,23 +623,44 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
 
-            for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
-            {
-                auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
-                if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x))
-                    continue;
-                if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x))
-                    continue;
-                if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y))
-                    continue;
-                if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y))
-                    continue;
-                if (ctrl_down && !entity.hasComponent<PlayerControl>() && !entity.hasComponent<AIController>() && !entity.hasComponent<DockingBay>())
-                    continue;
-                if (alt_down && (!entity.hasComponent<Faction>() || (Faction::getInfo(entity).name != faction_selector->getSelectionValue())))
-                    continue;
-                entities.push_back(entity);
+            auto find_targets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found) {
+                for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
+                {
+                    auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                    if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x))
+                        continue;
+                    if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x))
+                        continue;
+                    if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y))
+                        continue;
+                    if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y))
+                        continue;
+                    if (ctrl_down && !entity.hasComponent<PlayerControl>() && !entity.hasComponent<AIController>() && !entity.hasComponent<DockingBay>())
+                        continue;
+                    if (alt_down && (!entity.hasComponent<Faction>() || (Faction::getInfo(entity).name != faction_selector->getSelectionValue())))
+                        continue;
+
+                    found(entity, transform);
+                }
+            };
+
+            if (click_and_drag_state == CD_BoxSelect) {
+                find_targets([&](auto entity, auto) { entities.push_back(entity); });
+            } else {
+                sp::ecs::Entity closest_entity;
+                auto closest_len2 = std::numeric_limits<float>::max();
+                find_targets([&](auto entity, auto transform) {
+                    auto len2 = glm::length2(transform.getPosition() - position);
+                    if (len2 < closest_len2) {
+                        closest_len2 = len2;
+                        closest_entity = entity;
+                    }
+                });
+                if (closest_len2 != std::numeric_limits<float>::max()) {
+                    entities.push_back(closest_entity);
+                }
             }
+
             if (shift_down)
             {
                 for(auto e : entities)
@@ -661,6 +697,7 @@ GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
         if (d->player == entity)
             return d;
     auto dialog = new GameMasterChatDialog(chat_layer, main_radar, entity);
+    dialog->setPosition(0, 0)->setSize(300, 300);
     chat_dialog_per_ship.push_back(dialog);
     return dialog;
 }

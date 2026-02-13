@@ -1,5 +1,4 @@
-#ifndef RELAY_SCREEN_H
-#define RELAY_SCREEN_H
+#pragma once
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
@@ -21,9 +20,8 @@ private:
         WaypointPlacement,
         LaunchProbe,
         MoveWaypoint
-    };
+    } mode = TargetSelection;
 
-    EMode mode;
     TargetsContainer targets;
     int drag_waypoint_index;
     GuiRadarView* radar;
@@ -34,11 +32,12 @@ private:
     GuiKeyValueDisplay* info_reputation;
     GuiKeyValueDisplay* info_clock;
     GuiElement* option_buttons;
+    GuiButton* cancel_button;
     GuiButton* hack_target_button;
     GuiToggleButton* link_to_science_button;
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
-    GuiButton* center_button;
+    GuiToggleButton* center_button;
 
     GuiSlider* zoom_slider;
     GuiLabel* zoom_label;
@@ -48,8 +47,7 @@ private:
     glm::vec2 mouse_down_position{};
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
+    virtual ~RelayScreen();
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//RELAY_SCREEN_H

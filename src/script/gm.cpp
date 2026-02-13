@@ -44,7 +44,7 @@ static int lua_getGMSelection(lua_State* L)
     return 1;
 }
 
-static void lua_onGMClick(sp::script::Callback callback)
+static void lua_onGMClick(sp::script::Callback callback, string icon = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR)
 {
     if (callback) {
         gameGlobalInfo->on_gm_click=[callback](glm::vec2 position) mutable {
@@ -54,6 +54,8 @@ static void lua_onGMClick(sp::script::Callback callback)
     } else {
         gameGlobalInfo->on_gm_click = nullptr;
     }
+
+    gameGlobalInfo->on_gm_click_cursor = icon;
 }
 
 void registerScriptGMFunctions(sp::script::Environment& env)
@@ -83,12 +85,14 @@ void registerScriptGMFunctions(sp::script::Environment& env)
     /// Use in GM functions to apply them to specific objects.
     /// Example: addGMFunction("Destroy selected", function() for _, obj in ipairs(getGMSelection()) do obj:destroy() end end)
     env.setGlobal("getGMSelection", &lua_getGMSelection);
-    /// void onGMClick(ScriptSimpleCallback callback)
+    /// void onGMClick(ScriptSimpleCallback callback, string icon)
     /// Defines a function to call when the GM clicks on the background of their console.
     /// Passes the x and y game-space coordinates of the click location.
     /// These work only when added via scenario script, but not via the HTTP API. (#1807)
+    /// Optionally also provides an icon to replace the mouse cursor used before clicking.
     /// Examples:
     ///   onGMClick(function(x,y) print(x,y) end) -- print the clicked position's coordinates
+    ///   onGMClick(function(x,y) print(x,y) end, "redicule.png") -- same, but with a different mouse cursor
     ///   onGMClick(nil) -- reset the callback
     env.setGlobal("onGMClick", &lua_onGMClick);
 }

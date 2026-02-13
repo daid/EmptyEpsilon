@@ -72,6 +72,11 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
             timing_graph_points[key].push_back(value);
         }
 
+        // Update max_size after adding new points
+        max_size = 0;
+        for (auto it : timing_graph_points)
+            max_size = std::max(it.second.size(), max_size);
+
         std::vector<string> key_order;
         std::map<string, float> total;
         for(auto& [key, data] : timing_graph_points) {
@@ -84,11 +89,16 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         std::sort(key_order.begin(), key_order.end(), [&total](const auto& a, const auto& b) { return total[a] > total[b]; });
 
         std::map<string, std::vector<glm::vec2>> points;
-        for(unsigned int n=0; n<max_size; n++) {
-            float sum = 0;
-            for(const auto& key : key_order) {
-                sum += timing_graph_points[key][n];
-                points[key].emplace_back(float(n), window_size.y - sum * 10000);
+        for (unsigned int n = 0; n < max_size; n++)
+        {
+            float sum = 0.0f;
+            for (const auto& key : key_order)
+            {
+                // Bounds check if vectors are different sizes
+                if (n < timing_graph_points[key].size())
+                    sum += timing_graph_points[key][n];
+
+                points[key].emplace_back(float(n), window_size.y - sum * 10000.0f);
             }
         }
 

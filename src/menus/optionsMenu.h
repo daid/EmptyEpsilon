@@ -1,5 +1,4 @@
-#ifndef OPTIONS_MENU_H
-#define OPTIONS_MENU_H
+#pragma once
 
 #include "gui/gui2_canvas.h"
 #include "Updatable.h"
@@ -12,6 +11,13 @@ class GuiLabel;
 
 class OptionsMenu : public GuiCanvas, public Updatable
 {
+public:
+    enum class ReturnTo
+    {
+        Main,
+        ShipSelection,
+        None
+    };
 private:
     GuiElement* container;
     GuiToggleButton* graphics_button;
@@ -20,6 +26,10 @@ private:
     GuiElement* graphics_page;
     GuiElement* audio_page;
     GuiElement* interface_page;
+
+    GuiToggleButton* helms_radar_lock_toggle;
+    GuiToggleButton* weapons_radar_lock_toggle;
+    GuiToggleButton* science_radar_lock_toggle;
     GuiSlider* sound_volume_slider;
     GuiSlider* music_volume_slider;
     GuiSlider* impulse_volume_slider;
@@ -31,12 +41,13 @@ private:
 
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
+    OptionsMenu::ReturnTo return_to;
 
+    void setupInterfaceOptions(OptionsMenu::ReturnTo return_to);
     void setupGraphicsOptions();
     void setupAudioOptions();
 public:
-    OptionsMenu();
+    OptionsMenu(ReturnTo return_to=ReturnTo::Main);
 
     virtual void update(float delta) override;
 };
-#endif//OPTIONS_MENU_H

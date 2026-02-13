@@ -2,6 +2,7 @@
 #include "soundManager.h"
 #include "theme.h"
 
+#include "gui2_scrollbar.h"
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center), mouse_scroll_steps(25)

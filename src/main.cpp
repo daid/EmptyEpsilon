@@ -17,7 +17,6 @@
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
-#include "menus/optionsMenu.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -173,9 +172,12 @@ int main(int argc, char** argv)
     // Since there is no way to access it (yet) via a touchscreen, compile out.
 #if !defined(ANDROID)
     // Set up voice chat and key bindings.
-    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(&keys.voice_all, 0);
-    nar->addKeyActivation(&keys.voice_ship, 1);
+    if (PreferencesManager::get("voice_chat_enabled", "0") == "1")
+    {
+        NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+        nar->addKeyActivation(&keys.voice_all, 0);
+        nar->addKeyActivation(&keys.voice_ship, 1);
+    }
 #endif
 
     P<HardwareController> hardware_controller = new HardwareController();
@@ -201,8 +203,9 @@ int main(int argc, char** argv)
 
     if (!tutorial.empty())
     {
+        bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
         LOG(DEBUG) << "Starting tutorial: " << tutorial;
-        new TutorialGame(false, tutorial);
+        new TutorialGame(repeat_tutorial, tutorial);
     }
     else if (server_scenario.empty())
         returnToMainMenu(defaultRenderLayer);
@@ -344,9 +347,9 @@ void returnToShipSelection(RenderLayer* render_layer)
     }
 }
 
-void returnToOptionMenu()
+void returnToOptionMenu(OptionsMenu::ReturnTo return_to)
 {
-    new OptionsMenu();
+    new OptionsMenu(return_to);
 }
 
 std::unordered_map<string, string> loadScenarioSettingsFromPrefs()

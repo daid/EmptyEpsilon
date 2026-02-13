@@ -68,7 +68,7 @@ end
 function Entity:setOwner(owner)
     if self.components.allow_radar_link then self.components.allow_radar_link.owner = owner end
     if owner and owner:isValid() and owner.components.faction then
-        self.components.faction.entity = owner.components.faction.entity
+        self.components.faction = {entity = owner.components.faction.entity}
     else
         self.components.faction = nil
     end

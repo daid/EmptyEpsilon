@@ -21,8 +21,9 @@ function PlayerSpaceship()
         transform = {rotation=random(0, 360)},
         callsign = {callsign=generateRandomCallSign()},
         scan_state = scan_state,
-        long_range_radar = {},
         comms_transmitter = {},
+        radar_link = {},
+        waypoints = {},
     }
     e:setFaction(__default_player_ship_faction)
     return e
@@ -32,16 +33,26 @@ end
 --- Waypoints are 1-indexed.
 --- Example: x,y = player:getWaypoint(1)
 function Entity:getWaypoint(index)
-    if self.components.long_range_radar and index > 0 and index <= #self.components.long_range_radar then
-        local wp = self.components.long_range_radar[index]
+    if self.components.waypoints and index > 0 and index <= #self.components.waypoints then
+        local wp = self.components.waypoints[index]
         return wp.x, wp.y
     end
     return 0, 0
 end
+--- Returns visual ID of the waypoint.
+--- Waypoints are 1-indexed.
+--- Example: x,y = player:getWaypointID(1)
+function Entity:getWaypointID(index)
+    if self.components.waypoints and index > 0 and index <= #self.components.waypoints then
+        local wp = self.components.waypoints[index]
+        return wp.id
+    end
+    return 0
+end
 --- Returns the total number of active waypoints owned by this PlayerSpaceship.
 --- Example: player:getWaypointCount()
 function Entity:getWaypointCount()
-    if self.components.long_range_radar then return #self.components.long_range_radar end
+    if self.components.waypoints then return #self.components.waypoints end
     return 0
 end
 --- Returns this PlayerSpaceship's EAlertLevel.
@@ -674,7 +685,7 @@ end
 ---     print("Probe " .. probe:getCallSign() .. " linked to Science on ship " .. player:getCallSign())
 --- end)
 function Entity:onProbeLink(callback)
-    if self.components.long_range_radar then self.components.long_range_radar.on_probe_link = callback end
+    if self.components.radar_link then self.components.radar_link.on_link = callback end
     return self
 end
 --- Defines a function to call when this PlayerSpaceship unlinks a probe from the science screen.
@@ -687,7 +698,7 @@ end
 ---     print("Probe " .. probe:getCallSign() .. " unlinked from Science on ship " .. player:getCallSign())
 --- end)
 function Entity:onProbeUnlink(callback)
-    if self.components.long_range_radar then self.components.long_range_radar.on_probe_unlink = callback end
+    if self.components.radar_link then self.components.radar_link.on_unlink = callback end
     return self
 end
 --- Returns this ships's long-range radar range.
