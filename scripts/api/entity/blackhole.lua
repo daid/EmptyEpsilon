@@ -1,6 +1,6 @@
---- A BlackHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
---- A SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
---- Upon reaching the center, any SpaceObject is instantly destroyed even if it's otherwise incapable of taking damage.
+--- A BlackHole is a piece of space terrain that pulls all nearby entities within a 5U radius, including otherwise immobile entities like stations, toward its center.
+--- An entity capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
+--- Upon reaching the center, any entity is instantly destroyed even if it's otherwise incapable of taking damage.
 --- AI behaviors avoid BlackHoles by a 2U margin.
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
 --- Example: black_hole = BlackHole():setPosition(1000,2000)
@@ -20,8 +20,8 @@ function BlackHole()
 end
 
 
---- A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 2.5U radius, including otherwise immobile objects like SpaceStations, toward its center.
---- Any SpaceObject that reaches its center is teleported to another point in space.
+--- A WormHole is a piece of space terrain that pulls all nearby entities within a 2.5U radius, including otherwise immobile entities like stations, toward its center.
+--- Any entity that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 0.5U margin.
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 --- @type creation
@@ -41,20 +41,20 @@ function WormHole()
 end
 
 local Entity = getLuaEntityFunctionTable()
---- Sets the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+--- Sets the target teleportation coordinates for entities that pass through the center of this WormHole.
 --- Example: wormhole:setTargetPosition(10000,10000)
 function Entity:setTargetPosition(x, y)
     if self.components.gravity then self.components.gravity.wormhole_target = {x, y} end
     return self
 end
---- Returns the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+--- Returns the target teleportation coordinates for entities that pass through the center of this WormHole.
 --- Example: wormhole:getTargetPosition()
 function Entity:getTargetPosition()
     if self.components.gravity then return self.components.gravity.wormhole_target end
     return nil
 end
---- Defines a function to call when this WormHole teleports a SpaceObject.
---- Passes the WormHole object and the teleported SpaceObject.
+--- Defines a function to call when this WormHole teleports an entity.
+--- Passes the WormHole object and the teleported entity.
 --- Example:
 --- -- Outputs teleportation details to the console window and logging file
 --- wormhole:onTeleportation(function(this_wormhole,teleported_object) print(teleported_object:getCallSign() .. " teleported to " .. this_wormhole:getTargetPosition()) end)

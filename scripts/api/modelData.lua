@@ -1,19 +1,19 @@
 __model_data = {}
 
 --- A ModelData object contains 3D appearance and SeriousProton physics collision details.
---- Almost all SpaceObjects have a ModelData associated with them to define how they appear in 3D views.
+--- Almost all entities have a ModelData associated with them to define how they appear in 3D views.
 --- A ScienceDatabase entry can also have ModelData associated with and displayed in it.
 ---
---- This defines a 3D mesh file, an albedo map ("texture"), a specular/normal map, and an illumination map.
+--- This defines a 3D mesh file, typically in OBJ format; an albedo map, or base color textures; a specular map, for shininess under lighting; an illumination map, which renders as if always lit; and a normal map, which simulates surface details.
 --- These files might be located in the resources/ directory or loaded from resource packs.
 ---
 --- ModelData also defines the model's position offset and scale relative to its mesh coordinates.
---- If the model is for a SpaceShip with weapons or thrusters, this also defines the origin positions of its weapon effects, and particle emitters for thruster and engine effects.
---- For physics, this defines the model's radius for a circle collider, or optional box collider dimensions.
---- (While ModelData defines 3D models, EmptyEpsilon uses a 2D physics engine for collisions.)
+--- If the model is for an entity with weapon components or maneuvering thrusters, ModelData also defines the origin positions of its weapon effects, and particle emitters for thruster and engine effects.
+--- For physics, ModelData defines the model's radius for a circle collider, or optional box collider dimensions.
+--- (ModelData defines 3D models, but EmptyEpsilon uses a 2D physics engine for collisions.)
 --- 
---- EmptyEpsilon loads ModelData from scripts/model_data.lua when launched, and loads meshes and textures when an object using this ModelData is first viewed.
----  
+--- EmptyEpsilon loads ModelData from scripts/model_data.lua when launched, and loads meshes and textures when an entity using this ModelData is first viewed.
+--- 
 --- For complete examples, see scripts/model_data.lua.
 ModelData = createClass()
 
@@ -79,8 +79,10 @@ function ModelData:setIllumination(texture)
 end
 --- Sets this ModelData's normal map.
 --- Optional; if omitted, no normal map is applied.
---- Valid values include PNG- or JPG-format images relative to the resources/ directory.
---- You can also reference textures from resource packs.
+--- Valid values include PNG- or JPG-format images relative to the resources/ directory, or paths defined within a resource pack loaded from the packs/ directory.
+--- Example:
+--- model:setNormalMap("space_station_1/space_station_1_normal.jpg") -- loads this texture from a resource pack
+--- model:setNormalMap("mesh/ship/Ender Battlecruiser_normal.png") -- loads this texture from the resources/ directory
 function ModelData:setNormalMap(texture)
     if self.mesh_render == nil then self.mesh_render = {} end
     self.mesh_render.normal_texture=texture
@@ -107,7 +109,7 @@ function ModelData:setScale(scale)
 end
 --- Sets this ModelData's base radius.
 --- By default, EmptyEpsilon uses this to create a circular collider around objects that use this ModelData.
---- SpaceObject:setRadius() can override this for colliders.
+--- setRadius() can override this for colliders.
 --- Setting a box collider with ModelData:setCollisionBox() also overrides this.
 --- Defaults to 1.0.
 --- Example: model:setRadius(100) -- sets the object's collisionable radius to 0.1U
@@ -125,7 +127,7 @@ function ModelData:setCollisionBox(w, h)
     self.physics.size = {w, h}
     return self
 end
---- Adds a BeamEffect origin position to this ModelData.
+--- Adds a beam weapons origin position to this ModelData.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- Example:
@@ -136,7 +138,7 @@ function ModelData:addBeamPosition(x, y, z)
     self.__beam_positions[#self.__beam_positions + 1] = {x, y, z}
     return self
 end
---- Adds a WeaponTube origin position to this ModelData.
+--- Adds a weapons tube origin position to this ModelData.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- -- Add a tube position at the given model X/Y/Z coordinates.
@@ -153,7 +155,7 @@ function ModelData:addEngineEmitor(x, y, z, r, g, b, scale)
     return self:addEngineEmitter(x, y, z, r, g, b, scale)
 end
 --- Adds an impulse engine particle effect emitter to this ModelData.
---- When a SpaceShip engages impulse engines, this defines the position, color, and size of a particle trail effect.
+--- When a ship engages impulse engines, this defines the position, color, and size of a particle trail effect.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- Example:

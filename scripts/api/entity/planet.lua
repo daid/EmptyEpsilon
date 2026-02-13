@@ -1,4 +1,4 @@
---- A Planet is a spherical piece of space terrain that can orbit other SpaceObjects.
+--- A Planet is a spherical piece of space terrain that can orbit other entities.
 --- Each Planet has separate textures for its surface, atmosphere, and cloud layers.
 --- Several planetary textures are included in the resources/planets/ directory.
 --- Planets can collide with objects and run callback functions upon collisions.
@@ -131,7 +131,7 @@ function Entity:setAxialRotationTime(rotation_time)
     end
     return self
 end
---- Sets a SpaceObject around which this SpaceObject orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
+--- Sets an entity around which this entity orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
 --- An orbit can be cancelled by setting the target to nil
 --- Example:
 --- moon:setOrbit(planet, 20)

@@ -58,13 +58,13 @@ function Entity:getSize()
     return 100.0
 end
 
---- Sets this SpaceShip's energy level.
+--- Sets this ship's energy level.
 --- Valid values are any greater than 0 and less than the energy capacity (getMaxEnergy()).
 --- Invalid values are ignored.
---- CpuShips don't consume energy. Setting this value has no effect on their behavior or functionality.
---- For PlayerSpaceships, see PlayerSpaceship:setEnergyLevel().
+--- CPU ships don't consume energy. Setting this value has no effect on their behavior or functionality.
+--- For player ships, see setEnergyLevel().
 --- Example: ship:setEnergy(1000) -- sets the ship's energy to 1000 if its capacity is 1000 or more
---- Sets the amount of energy recharged upon pickup when a PlayerSpaceship collides with this SupplyDrop.
+--- Sets the amount of energy recharged upon pickup when a player ship collides with this SupplyDrop.
 --- Example: supply_drop:setEnergy(500)
 function Entity:setEnergy(amount)
     if self.components.reactor then self.components.reactor.energy = amount end
@@ -72,8 +72,8 @@ function Entity:setEnergy(amount)
     return self
 end
 
---- Returns this SpaceShip's weapons target.
---- For a CpuShip, this can differ from its orders target.
+--- Returns this ship's weapons target.
+--- For a CPU ship, this can differ from its orders target.
 --- Example: target = ship:getTarget()
 --- Returns this ScanProbe's target coordinates.
 --- Example: targetX,targetY = probe:getTarget()
@@ -88,7 +88,7 @@ function Entity:getTarget()
     return nil
 end
 
---- Returns this ScanProbe's owner SpaceObject.
+--- Returns this ScanProbe's owner entity.
 --- Example: probe:getOwner()
 function Entity:getOwner()
     if self.components.delayed_explode_on_touch then
@@ -101,9 +101,9 @@ function Entity:getOwner()
 end
 
 --- Sets this ScanProbe's target coordinates.
---- If the probe has reached its target, ScanProbe:setTarget() moves it again toward the new target coordinates.
+--- If the probe has reached its target, setTarget() moves it again toward the new target coordinates.
 --- Example: probe:setTarget(1000,5000)
---- Sets the BeamEffect's target SpaceObject.
+--- Sets the BeamEffect's target entity.
 --- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
 --- Example: beamfx:setTarget(target,0,0,0)
 function Entity:setTarget(a, b, c, d)

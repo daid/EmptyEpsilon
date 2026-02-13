@@ -11,7 +11,7 @@ function BeamEffect()
 end
 
 local Entity = getLuaEntityFunctionTable()
---- Sets the BeamEffect's origin SpaceObject.
+--- Sets the BeamEffect's origin entity.
 --- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
 --- Example: beamfx:setSource(source, 0,0,0)
 function Entity:setSource(source, x, y, z)

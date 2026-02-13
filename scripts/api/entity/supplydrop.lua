@@ -1,6 +1,6 @@
---- A SupplyDrop is a collectible item picked up on collision with a friendly SpaceShip.
---- On pickup, the SupplyDrop restocks one type of the colliding SpaceShip's weapons.
---- If the ship is a PlayerSpaceship, it can also recharge its energy.
+--- A SupplyDrop is a collectible item picked up on collision with a friendly ship.
+--- On pickup, the SupplyDrop restocks one type of the colliding ship's weapons.
+--- If the ship is a player ship, it can also recharge its energy.
 --- A SupplyDrop can also trigger a scripting function upon pickup.
 --- For a more generic object with similar collision properties, see Artifact.
 --- Example: SupplyDrop():setEnergy(500):setWeaponStorage("Homing",6)

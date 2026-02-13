@@ -27,8 +27,8 @@ function allowNewPlayerShips(enabled)
     return __allow_new_player_ships
 end
 
---- A ShipTemplate defines the base functionality, stats, models, and other details for the ShipTemplateBasedObjects created from it.
---- ShipTemplateBasedObjects belong to either the SpaceStation or SpaceShip subclasses. SpaceShips in turn belong to the CpuShip or PlayerSpaceship classes.
+--- A ShipTemplate defines the base functionality, stats, models, and other details for entities created from it.
+--- Entities created from ShipTemplates include those made by CpuShip(), PlayerSpaceship(), and SpaceStation().
 --- ShipTemplates appear in ship and space station creation lists, such as the ship selection screen on scenarios that allow player ship creation, or the GM console's object creation tool.
 --- They also appear as default entries in the science database.
 --- EmptyEpsilon loads scripts/shipTemplates.lua at launch, which requires files containing ShipTemplates located in scripts/shiptemplates/.
@@ -63,7 +63,7 @@ function ShipTemplate:setName(name)
     self.typename = {type_name=name, localized=name}
     return self
 end
---- Sets the displayed vessel model designation for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the displayed vessel model designation for entities created from this ShipTemplate.
 --- Use with the _ function to expose the localized name to translation.
 --- Examples:
 --- template:setLocaleName("Phobos T3")
@@ -72,7 +72,7 @@ function ShipTemplate:setLocaleName(name)
     self.typename.localized = name
     return self
 end
---- Sets the vessel class and subclass for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the vessel class and subclass for entities created from this ShipTemplate.
 --- Vessel classes are used to define certain traits across similar ships, such as dockability.
 --- See also ShipTemplate:setExternalDockClasses() and ShipTemplate:setInternalDockClasses().
 --- For consistent class usage across translations, wrap class name strings in the _ function.
@@ -89,15 +89,15 @@ function ShipTemplate:setClass(class, subclass)
     end
     return self
 end
---- Sets the description shown in the science database for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the description shown in the science database for entities created from this ShipTemplate.
 --- Example: template:setDescription(_("The Phobos T3 is most any navy's workhorse frigate."))
 function ShipTemplate:setDescription(description)
     self.__description = description
     return self
 end
---- Sets the object-oriented subclass of ShipTemplateBasedObject to create from this ShipTemplate.
---- Defaults to "ship" (CpuShip).
---- Valid values are "ship", "playership" (PlayerSpaceship), and "station" (SpaceStation).
+--- Sets the type of entity to create from this ShipTemplate.
+--- Defaults to "ship".
+--- Valid values are "ship", "playership", and "station".
 --- Using setType("station") is equivalent to also using ShipTemplate:setRepairDocked(true) and ShipTemplate:setRadarTrace("blip.png").
 --- Example: template:setType("playership")
 function ShipTemplate:setType(template_type)
@@ -140,9 +140,9 @@ function ShipTemplate:hidden()
     self.__hidden = true
     return self
 end
---- Sets the default combat AI state for CpuShips created from this ShipTemplate.
+--- Sets the default combat AI state for CPU ships created from this ShipTemplate.
 --- Combat AI states determine the AI's combat tactics and responses.
---- They're distinct from orders, which determine the ship's active objectives and are defined by CpuShip:order...() functions.
+--- They're distinct from orders, which determine the ship's active objectives and are defined by order...() functions.
 --- Valid combat AI states are:
 --- - "default" directly pursues enemies at beam range while making opportunistic missile attacks
 --- - "evasion" maintains distance from enemy weapons and evades attacks
@@ -153,7 +153,7 @@ function ShipTemplate:setDefaultAI(default_ai)
     self.ai_controller = {new_name=default_ai}
     return self
 end
---- Sets the 3D appearance, by ModelData name, of ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the 3D appearance, by ModelData name, of entities created from this ShipTemplate.
 --- ModelData objects define a 3D mesh, textures, adjustments, and collision box, and are loaded from scripts/model_data.lua when EmptyEpsilon is launched.
 --- Example: template:setModel("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
 function ShipTemplate:setModel(model_data_name)
@@ -180,36 +180,36 @@ end
 function ShipTemplate:setDockClasses(...)
     return self:setExternalDockClasses(...)
 end
---- Defines a list of vessel classes that can be externally docked to ShipTemplateBasedObjects created from this ShipTemplate.
+--- Defines a list of vessel classes that can be externally docked to entities created from this ShipTemplate.
 --- External docking keeps the docked ship attached to the outside of the carrier.
---- By default, SpaceStations allow all classes of SpaceShips to dock externally.
+--- By default, stations allow all classes of ships to dock externally.
 --- For consistent class usage across translations, wrap class name strings in the _ function.
---- Example: template:setExternalDockClasses(_("class","Frigate"),_("class","Corvette")) -- all Frigate and Corvette ships can dock to the outside of this ShipTemplateBasedObject
+--- Example: template:setExternalDockClasses(_("class","Frigate"),_("class","Corvette")) -- all Frigate and Corvette ships can dock to the outside of this entity
 function ShipTemplate:setExternalDockClasses(...)
     if self.docking_bay == nil then self.docking_bay = {} end
     self.docking_bay.external_dock_classes = {...}
     return self
 end
---- Defines a list of ship classes that can be docked inside of ShipTemplateBasedObjects created from this ShipTemplate.
---- Internal docking stores the docked ship inside of this derived ShipTemplateBasedObject.
+--- Defines a list of ship classes that can be docked inside of entities created from this ShipTemplate.
+--- Internal docking stores the docked ship inside of this entity.
 --- For consistent class usage across translations, wrap class name strings in the _ function.
---- Example: template:setInternalDockClasses(_("class","Starfighter")) -- all Starfighter ships can dock inside of this ShipTemplateBasedObject
+--- Example: template:setInternalDockClasses(_("class","Starfighter")) -- all Starfighter ships can dock inside of this entity
 function ShipTemplate:setInternalDockClasses(...)
     if self.docking_bay == nil then self.docking_bay = {} end
     self.docking_bay.internal_dock_classes = {...}
     return self
 end
---- Sets the amount of energy available for PlayerSpaceships created from this ShipTemplate.
---- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
+--- Sets the amount of energy available for player ships created from this ShipTemplate.
+--- Only player ships consume energy. Setting this for other entity types has no effect.
 --- Defaults to 1000.
 --- Example: template:setEnergyStorage(500)
 function ShipTemplate:setEnergyStorage(amount)
     self.reactor = {max_energy=amount, energy=amount}
     return self
 end
---- Sets the default number of repair crew for PlayerSpaceships created from this ShipTemplate.
+--- Sets the default number of repair crew for player ships created from this ShipTemplate.
 --- Defaults to 3.
---- Only PlayerSpaceships use repair crews. Setting this for other ShipTemplateBasedObject types has no effect.
+--- Only player ships use repair crews. Setting this for other entity types has no effect.
 --- Example: template:setRepairCrewCount(5)
 function ShipTemplate:setRepairCrewCount(amount)
     self.__repair_crew_count = amount
@@ -219,7 +219,7 @@ end
 function ShipTemplate:setBeam(index, arc, direction, range, cycle_time, damage)
     return self:setBeamWeapon(index, arc, direction, range, cycle_time, damage)
 end
---- Defines the traits of a BeamWeapon for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Defines the traits of a BeamWeapon for entities created from this ShipTemplate.
 --- - index: Each beam weapon in this ShipTemplate must have a unique index.
 --- - arc: Sets the arc of its firing capability, in degrees.
 --- - direction: Sets the default center angle of the arc, in degrees relative to the ship's forward bearing. Value can be negative.
@@ -240,7 +240,7 @@ function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, da
     end
     return self
 end
---- Converts a BeamWeapon into a turret and defines its traits for SpaceShips created from this ShipTemplate.
+--- Converts a BeamWeapon into a turret and defines its traits for ships created from this ShipTemplate.
 --- A turreted beam weapon rotates within its turret arc toward the weapons target at the given rotation rate.
 --- - index: Must match the index of an existing beam weapon.
 --- - arc: Sets the turret's maximum targeting angles, in degrees. The turret arc must be larger than the associated beam weapon's arc.
@@ -256,7 +256,7 @@ function ShipTemplate:setBeamWeaponTurret(index, arc, direction, rotation_rate)
     self.beam_weapons[index + 1].turret_rotation_rate = rotation_rate
     return self
 end
---- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on SpaceShips created from this ShipTemplate.
+--- Sets the BeamEffect texture, by filename, for the BeamWeapon with the given index on ships created from this ShipTemplate.
 --- See BeamEffect:setTexture().
 --- Example: template:setBeamTexture(0, "texture/beam_blue.png")
 function ShipTemplate:setBeamTexture(index, texture)
@@ -264,7 +264,7 @@ function ShipTemplate:setBeamTexture(index, texture)
     return self
 end
 --- Sets how much energy is drained each time the BeamWeapon with the given index is fired.
---- Only PlayerSpaceships consume energy. Setting this for other ShipTemplateBasedObject types has no effect.
+--- Only player ships consume energy. Setting this for other entity types has no effect.
 --- Defaults to 3.0, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponEnergyPerFire(0,1) -- sets beam 0 to use 1 energy per firing
 function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
@@ -272,14 +272,14 @@ function ShipTemplate:setBeamWeaponEnergyPerFire(index, amount)
     return self
 end
 --- Sets how much "beamweapon" system heat is generated, in percentage of total system heat capacity, each time the BeamWeapon with the given index is fired.
---- Only PlayerSpaceships generate and manage heat. Setting this for other ShipTemplateBasedObject types has no effect.
+--- Only player ships generate and manage heat. Setting this for other entity types has no effect.
 --- Defaults to 0.02, as defined in src/components/beamweapon.h.
 --- Example: template:setBeamWeaponHeatPerFire(0,0.5) -- sets beam 0 to generate 0.5 (50%) system heat per firing
 function ShipTemplate:setBeamWeaponHeatPerFire(index, amount)
     self.beam_weapons[index + 1].heat_per_beam_fire = amount
     return self
 end
---- Sets the number of WeaponTubes for ShipTemplateBasedObjects created from this ShipTemplate, and the default delay for loading and unloading each tube, in seconds.
+--- Sets the number of WeaponTubes for entities created from this ShipTemplate, and the default delay for loading and unloading each tube, in seconds.
 --- Weapon tubes are 0-indexed. For example, 3 tubes would be indexed 0, 1, and 2.
 --- Ships are limited to a maximum of 16 weapon tubes.
 --- The default ShipTemplate adds 0 tubes and an 8-second loading time.
@@ -331,7 +331,7 @@ function ShipTemplate:setWeaponTubeExclusiveFor(index, type)
     self.missile_tubes[index+1]["allow_"..type] = true
     return self
 end
---- Sets the angle, relative to the ShipTemplateBasedObject's forward bearing, toward which the WeaponTube with the given index points.
+--- Sets the angle, relative to the entity's forward bearing, toward which the WeaponTube with the given index points.
 --- Defaults to 0. Accepts negative and positive values.
 --- Example:
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
@@ -347,17 +347,17 @@ function ShipTemplate:setTubeSize(index, size)
     self.missile_tubes[index+1].size = size
     return self
 end
---- Sets the number of default hull points for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the number of default hull points for entities created from this ShipTemplate.
 --- Example: template:setHull(100)
 function ShipTemplate:setHull(amount)
     self.hull = {current=amount, max=amount}
     return self
 end
---- Sets the maximum points per shield segment for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the maximum points per shield segment for entities created from this ShipTemplate.
 --- Each argument segments the shield clockwise by dividing the arc equally for each segment, up to a maximum of 8 segments.
 --- The center of the first segment's arc always faces forward.
---- A ShipTemplateBasedObject with one shield segment has only a front shield generator system, and one with two or more segments has only front and rear generator systems.
---- If not defined, the ShipTemplateBasedObject defaults to having no shield capabilities.
+--- An entity with one shield segment has only a front shield generator system, and one with two or more segments has only front and rear generator systems.
+--- If not defined, the entity defaults to having no shield capabilities.
 --- Examples:
 --- template:setShields(400) -- one shield segment; hits from all angles damage the same shield
 --- template:setShields(100,80) -- two shield segments; the front 180-degree shield has 100 points, the rear 80
@@ -372,11 +372,11 @@ function ShipTemplate:setShields(...)
     end
     return self
 end
---- Sets the impulse speed, rotational speed, and impulse acceleration for SpaceShips created from this ShipTemplate.
+--- Sets the impulse speed, rotational speed, and impulse acceleration for ships created from this ShipTemplate.
 --- (unit?)
 --- The optional fourth and fifth arguments set the reverse speed and reverse acceleration.
 --- If the reverse speed and acceleration aren't explicitly set, the defaults are equal to the forward speed and acceleration.
---- See also SpaceShip:setImpulseMaxSpeed(), SpaceShip:setRotationMaxSpeed(), SpaceShip:setAcceleration().
+--- See also setImpulseMaxSpeed(), setRotationMaxSpeed(), setAcceleration().
 --- Defaults to the equivalent value of (500,10,20).
 --- Example:
 --- -- Sets the forward impulse speed to 80, rotational speed to 15, forward acceleration to 25, reverse speed to 20, and reverse acceleration to the same as the forward acceleration
@@ -393,7 +393,7 @@ function ShipTemplate:setSpeed(forward_speed, turn_rate, forward_acceleration, r
     self.impulse_engine.acceleration_reverse = reverse_acceleration
     return self
 end
---- Sets the combat maneuver capacity for SpaceShips created from this ShipTemplate.
+--- Sets the combat maneuver capacity for ships created from this ShipTemplate.
 --- The boost value sets the forward maneuver capacity, and the strafe value sets the lateral maneuver capacity.
 --- Defaults to (0,0).
 --- Example: template:setCombatManeuver(400,250)
@@ -403,7 +403,7 @@ function ShipTemplate:setCombatManeuver(boost, strafe)
     self.combat_maneuvering_thrusters.strafe_speed = strafe
     return self
 end
---- Sets the warp speed factor for SpaceShips created from this ShipTemplate.
+--- Sets the warp speed factor for ships created from this ShipTemplate.
 --- Defaults to 0. The typical warp speed value for a warp-capable ship is 1000, which is equivalent to 60U/minute at warp 1.
 --- Setting any value also enables the "warp" system and controls.
 --- Example: template:setWarpSpeed(1000)
@@ -416,36 +416,36 @@ function ShipTemplate:setWarpSpeed(speed)
     end
     return self
 end
---- Defines whether ShipTemplateBasedObjects created from this ShipTemplate supply energy to docked PlayerSpaceships.
+--- Defines whether entities created from this ShipTemplate supply energy to docked player ships.
 --- Defaults to true.
 --- Example: template:setSharesEnergyWithDocked(false)
 function ShipTemplate:setSharesEnergyWithDocked(enabled)
     if self.docking_bay then self.docking_bay.share_energy = enabled end
     return self
 end
---- Defines whether ShipTemplateBasedObjects created from this template repair docked SpaceShips.
+--- Defines whether entities created from this template repair docked ships.
 --- Defaults to false. ShipTemplate:setType("station") sets this to true.
 --- Example: template:setRepairDocked(true)
 function ShipTemplate:setRepairDocked(enabled)
     if self.docking_bay then self.docking_bay.repair = enabled end
     return self
 end
---- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock scan probes on docked PlayerSpaceships.
+--- Defines whether entities created from this ShipTemplate restock scan probes on docked player ships.
 --- Defaults to false.
 --- Example: template:setRestocksScanProbes(true)
 function ShipTemplate:setRestocksScanProbes(enabled)
     if self.docking_bay then self.docking_bay.restock_probes = enabled end
     return self
 end
---- Defines whether ShipTemplateBasedObjects created from this ShipTemplate restock missiles on docked CpuShips.
---- To restock docked PlayerSpaceships' weapons, use a comms script. See ShipTemplateBasedObject:setCommsScript() and :setCommsFunction().
+--- Defines whether entities created from this ShipTemplate restock missiles on docked CPU ships.
+--- To restock docked player ships' weapons, use a comms script. See setCommsScript() and setCommsFunction().
 --- Defaults to false.
 --- Example: template:setRestocksMissilesDocked(true)
 function ShipTemplate:setRestocksMissilesDocked(enabled)
     if self.docking_bay then self.docking_bay.restock_missiles = enabled end
     return self
 end
---- Defines whether SpaceShips created from this ShipTemplate have a jump drive.
+--- Defines whether ships created from this ShipTemplate have a jump drive.
 --- Defaults to false.
 --- Example: template:setJumpDrive(true)
 function ShipTemplate:setJumpDrive(enabled)
@@ -456,7 +456,7 @@ function ShipTemplate:setJumpDrive(enabled)
     end
     return self
 end
---- Sets the minimum and maximum jump distances for SpaceShips created from this ShipTemplate.
+--- Sets the minimum and maximum jump distances for ships created from this ShipTemplate.
 --- Defaults to (5000,50000).
 --- Example: template:setJumpDriveRange(2500,25000) -- sets the minimum jump distance to 2.5U and maximum to 25U
 function ShipTemplate:setJumpDriveRange(min, max)
@@ -472,7 +472,7 @@ function ShipTemplate:setCloaking(enabled)
     return self
 end
 
---- Sets the storage capacity of the given weapon type for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the storage capacity of the given weapon type for entities created from this ShipTemplate.
 --- Example: template:setWeaponStorage("HVLI", 6):setWeaponStorage("Homing",4) -- sets HVLI capacity to 6 and Homing capacity to 4
 function ShipTemplate:setWeaponStorage(type, amount)
     if self.missile_tubes == nil then self.missile_tubes = {} end
@@ -484,7 +484,7 @@ end
 
 --- Adds an empty room to a ShipTemplate.
 --- Rooms are displayed on the engineering and damcon screens.
---- If a system room isn't accessible via other rooms connected by doors, repair crews on PlayerSpaceships might not be able to repair that system.
+--- If a system room isn't accessible via other rooms connected by doors, repair crews on player ships might not be able to repair that system.
 --- Rooms are placed on a 0-indexed integer x/y grid, with the given values representing the room's upper-left corner, and are sized by damage crew capacity (minimum 1x1).
 --- To place multiple rooms, declare addRoom() multiple times.
 --- Example: template:addRoom(0,0,3,2) -- adds a 3x2 room with its upper-left coordinate at position 0,0
@@ -496,7 +496,7 @@ end
 
 --- Adds a room containing a ship system to a ShipTemplate.
 --- Rooms are displayed on the engineering and damcon screens.
---- If a system room doesn't exist or isn't accessible via other rooms connected by doors, repair crews on PlayerSpaceships won't be able to repair that system.
+--- If a system room doesn't exist or isn't accessible via other rooms connected by doors, repair crews on player ships won't be able to repair that system.
 --- Rooms are placed on a 0-indexed integer x/y grid, with the given values representing the room's upper-left corner, and are sized by damage crew capacity (minimum 1x1).
 --- To place multiple rooms, declare addRoomSystem() multiple times.
 --- Example: template:addRoomSystem(1,2,3,4,"reactor")  -- adds a 3x4 room with its upper-left coordinate at position 1,2 that contains the Reactor system
@@ -507,7 +507,7 @@ function ShipTemplate:addRoomSystem(x, y, w, h, system)
 end
 --- Adds a door between rooms in a ShipTemplate.
 --- Doors connect rooms as displayed on the engineering and damcon screens. All doors are 1 damage crew wide.
---- If a system room isn't accessible via other rooms connected by doors, repair crews on PlayerSpaceships might not be able to repair that system.
+--- If a system room isn't accessible via other rooms connected by doors, repair crews on player ships might not be able to repair that system.
 --- The horizontal value defines whether the door is oriented horizontally (true) or vertically (false).
 --- Doors are placed on a 0-indexed integer x/y grid, with the given values representing the door's left-most point (horizontal) or top-most point (vertical) point.
 --- To place multiple doors, declare addDoor() multiple times.
@@ -518,7 +518,7 @@ function ShipTemplate:addDoor(x, y, horizontal)
     self.internal_rooms.doors[#self.internal_rooms.doors+1] = {x, y, horizontal}
     return self
 end
---- Sets the default radar trace image for ShipTemplateBasedObjects created from this ShipTemplate.
+--- Sets the default radar trace image for entities created from this ShipTemplate.
 --- Valid values are filenames of PNG images relative to the resources/radar/ directory.
 --- Radar trace images should be white with a transparent background.
 --- Defaults to ship.png. ShipTemplate:setType("station") sets this to blip.png.
@@ -527,26 +527,26 @@ function ShipTemplate:setRadarTrace(trace)
     self.radar_trace.icon = "radar/" .. trace
     return self
 end
---- Sets the long-range radar range of SpaceShips created from this ShipTemplate.
---- PlayerSpaceships use this range on the science and operations screens' radar.
---- AI orders of CpuShips use this range to detect potential targets.
+--- Sets the long-range radar range of ships created from this ShipTemplate.
+--- Player ships use this range on the science and operations screens' radar.
+--- AI orders of CPU ships use this range to detect potential targets.
 --- Defaults to 30000.0 (30U).
 --- Example: template:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function ShipTemplate:setLongRangeRadarRange(range)
     if self.long_range_radar then self.long_range_radar.long_range = range end
     return self
 end
---- Sets the short-range radar range of SpaceShips created from this ShipTemplate.
---- PlayerSpaceships use this range on the helms, weapons, and single pilot screens' radar.
---- AI orders of CpuShips use this range to decide when to disengage pursuit of fleeing targets.
---- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this SpaceShip can detect objects.
+--- Sets the short-range radar range of ships created from this ShipTemplate.
+--- Player ships use this range on the helms, weapons, and single pilot screens' radar.
+--- AI orders of CPU ships use this range to decide when to disengage pursuit of fleeing targets.
+--- This also defines the shared radar radius on the relay screen for friendly ships and stations, and how far into nebulae that this ship can detect objects.
 --- Defaults to 5000.0 (5U).
 --- Example: template:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function ShipTemplate:setShortRangeRadarRange(range)
     if self.long_range_radar then self.long_range_radar.short_range = range end
     return self
 end
---- Sets the sound file used for the impulse drive sounds on SpaceShips created from this ShipTemplate.
+--- Sets the sound file used for the impulse drive sounds on ships created from this ShipTemplate.
 --- Valid values are filenames to WAV files relative to the resources directory.
 --- Use a looping sound file that tolerates being pitched up and down as the ship's impulse speed changes.
 --- Defaults to sfx/engine.wav.
@@ -555,42 +555,42 @@ function ShipTemplate:setImpulseSoundFile(sfx)
     if self.impulse_engine then self.impulse_engine.sound = sfx end
     return self
 end
---- Defines whether scanning features appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether scanning features appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanScan(false)
 function ShipTemplate:setCanScan(enabled)
     if enabled then self.science_scanner = {} else self.science_scanner = nil end
     return self
 end
---- Defines whether hacking features appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether hacking features appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanHack(false)
 function ShipTemplate:setCanHack(enabled)
     if enabled then self.hacking_device = {} else self.hacking_device = nil end
     return self
 end
---- Defines whether the "Request Docking" button appears on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether the "Request Docking" button appears on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanDock(false)
 function ShipTemplate:setCanDock(enabled)
     if enabled then self.docking_port = {} else self.docking_port = nil end
     return self
 end
---- Defines whether combat maneuver controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether combat maneuver controls appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanCombatManeuver(false)
 function ShipTemplate:setCanCombatManeuver(enabled)
     if enabled then self.combat_maneuvering_thrusters = {} else self.combat_maneuvering_thrusters = nil end
     return self
 end
---- Defines whether self-destruct controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether self-destruct controls appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanSelfDestruct(false)
 function ShipTemplate:setCanSelfDestruct(enabled)
     if enabled then self.self_destruct = {} else self.self_destruct = nil end
     return self
 end
---- Defines whether ScanProbe-launching controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
+--- Defines whether ScanProbe-launching controls appear on related crew screens in player ships created from this ShipTemplate.
 --- Defaults to true.
 --- Example: template:setCanLaunchProbe(false)
 function ShipTemplate:setCanLaunchProbe(enabled)
