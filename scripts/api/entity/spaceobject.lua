@@ -191,6 +191,7 @@ end
 --- Requires a target PlayerShip and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
+    -- Color values should match log_receive_friendly, _neutral, _enemy in colors.ini
     if self:isFriendly(target) then
         target:addToShipLog(message, "#C0C0FF")
     elseif self:isEnemy(target) then
