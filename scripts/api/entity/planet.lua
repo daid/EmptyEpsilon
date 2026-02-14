@@ -124,7 +124,7 @@ end
 --- Defaults to 0.
 --- Example: planet:setAxialRotationTime(20)
 function Entity:setAxialRotationTime(rotation_time)
-    if spin ~= 0.0 then
+    if rotation_time ~= 0.0 then
         self.components.spin = {rate=360.0/rotation_time}
     else
         self.components.spin = nil
