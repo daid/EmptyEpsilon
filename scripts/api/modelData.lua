@@ -130,7 +130,7 @@ end
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- Example:
 --- -- Add a beam position at the given model X/Y/Z coordinates.
---- model:addBeamPosition(21,-28.2,-2)
+--- model:addBeamPosition(21, -28.2, -2)
 function ModelData:addBeamPosition(x, y, z)
     if self.__beam_positions == nil then self.__beam_positions = {} end
     self.__beam_positions[#self.__beam_positions + 1] = {x, y, z}
@@ -140,8 +140,8 @@ end
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- -- Add a tube position at the given model X/Y/Z coordinates.
---- model:addTubePosition(21,-28.2,-2)
-function ModelData:addTubePosition()
+--- model:addTubePosition(21, -28.2, -2)
+function ModelData:addTubePosition(x, y, z)
     if self.__tube_positions == nil then self.__tube_positions = {} end
     self.__tube_positions[#self.__tube_positions + 1] = {x, y, z}
     return self
