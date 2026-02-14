@@ -823,11 +823,11 @@ function Entity:addBroadcast(target, message)
 
         elseif not ent:isEnemy(self) and target >= 1 then
             add = true
-            color = {255, 102, 102, 255}
+            color = {128, 128, 128, 255}
 
         elseif target >= 2 then
             add = true
-            color = {128, 128, 128, 255}
+            color = {255, 102, 102, 255}
         end
 
         if add then
