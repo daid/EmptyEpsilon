@@ -106,9 +106,9 @@ function Entity:addKeyValue(key, value)
     self.components.science_database[#self.components.science_database+1] = {key=key, value=value}
     return self
 end
---- Sets the value of all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
---- If the key already exists, this changes its value.
---- If duplicate matching keys exist, this changes all of their values.
+--- Sets the value of the first key/value pair matching the given key in this ScienceDatabase entry's key/value data.
+--- Key matching is case-sensitive.
+--- If the key already exists, this changes the first matching entry's value.
 --- If the key doesn't exist, this acts as addKeyValue().
 --- Examples:
 --- -- Assuming entry already has "Legs","4" as a key/value
@@ -124,7 +124,7 @@ function Entity:setKeyValue(key, value)
     end
     return self:addKeyValue(key, value)
 end
---- Returns the value of the first matching case-insensitive key found in this ScienceDatabase entry's key/value data.
+--- Returns the value of the first matching key found in this ScienceDatabase entry's key/value data. Key matching is case-sensitive.
 --- Returns an empty string if the key doesn't exist.
 --- Example: entry:getKeyValue("Legs") -- returns the value if found or "" if not
 function Entity:getKeyValue(key)
@@ -149,7 +149,7 @@ function Entity:getKeyValues()
     end
     return result
 end
---- Removes all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
+--- Removes all key/value pairs matching the given key in this ScienceDatabase entry's key/value data. Key matching is case-sensitive.
 --- If duplicate matching keys exist, this removes all of them.
 --- Example: entry:removeKey("Legs") -- removes all key/value data with the key "Legs"
 function Entity:removeKey(key)

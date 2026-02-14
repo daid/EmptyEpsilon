@@ -1,4 +1,4 @@
---- A Planet is a spherical piece of space terrain that can orbit other SpaceObjects.
+--- A Planet is a spherical piece of space terrain that can orbit other entities.
 --- Each Planet has separate textures for its surface, atmosphere, and cloud layers.
 --- Several planetary textures are included in the resources/planets/ directory.
 --- Planets can collide with objects and run callback functions upon collisions.
@@ -35,7 +35,7 @@ end
 --- Valid values are filenames of PNG files relative to the resources/ directory.
 --- Optional; if defined, atmosphere textures should be transparent or translucent.
 --- For stars, you can set an atmosphere texture such as planets/star-1.png with no surface texture.
---- Example: planet:setPlanetSurfaceTexture("planets/atmosphere.png")
+--- Example: planet:setPlanetAtmosphereTexture("planets/atmosphere.png")
 function Entity:setPlanetAtmosphereTexture(texture)
     if self.components.planet_render then self.components.planet_render.atmosphere_texture = texture end
     return self
@@ -85,7 +85,7 @@ function Entity:setPlanetRadius(size)
     end
     return self
 end
---- Sets this Planet's collision radius.
+--- Returns this Planet's collision radius.
 --- Defaults to a function of the Planet's radius and its z-position.
 --- AI behaviors use this size to plot routes that try to avoid colliding with this Planet.
 --- Example: planet:getCollisionSize()
@@ -131,7 +131,7 @@ function Entity:setAxialRotationTime(rotation_time)
     end
     return self
 end
---- Sets a SpaceObject around which this SpaceObject orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
+--- Sets an entity around which this entity orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
 --- An orbit can be cancelled by setting the target to nil
 --- Example:
 --- moon:setOrbit(planet, 20)

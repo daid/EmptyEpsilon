@@ -1,6 +1,6 @@
 --- A Zone is a polygonal area of space defined by a series of coordinates.
---- Although a Zone is a SpaceObject, it isn't affected by physics and isn't rendered in 3D.
---- Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether a SpaceObject is within their bounds.
+--- Although a Zone is an entity, it isn't affected by physics and isn't rendered in 3D.
+--- Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether an entity is within their bounds.
 --- New Zones can't be created via the exec.lua HTTP API.
 --- Example:
 --- -- Defines a blue rectangular 200sqU zone labeled "Home" around 0,0
@@ -68,7 +68,7 @@ function Entity:setLocalSkybox(skybox, transition)
     end
     return self
 end
---- Returns whether the given SpaceObject is inside this Zone.
+--- Returns whether the given entity is inside this Zone.
 --- Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
 function Entity:isInside(obj)
     local x, y = obj:getPosition()
