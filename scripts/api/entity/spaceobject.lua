@@ -259,10 +259,11 @@ function Entity:setReputationPoints(amount)
 end
 --- Deducts a given number of faction reputation points from this SpaceObject.
 --- Returns true if there are enough points to deduct the specified amount, then does so.
---- Returns false if there are not enough points, then does not deduct any.
---- Example: obj:takeReputationPoints(1000) -- returns false if `obj` has fewer than 1000 reputation points, otherwise returns true and deducts the points
+--- Returns false and doesn't modify the value if there aren't enough points, or if the argument's value is negative.
+--- Example:
+--- -- Return false if `obj` has fewer than 1000 reputation points or the passed value is negative. Otherwise, return true and deduct the points.--- entity:takeReputationPoints(1000)
 function Entity:takeReputationPoints(amount)
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
+    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
         local points = self.components.faction.entity.components.faction_info.reputation_points
         if points >= amount then
             self.components.faction.entity.components.faction_info.reputation_points = points - amount
@@ -271,14 +272,12 @@ function Entity:takeReputationPoints(amount)
     end
     return false
 end
---- Adds a given number of faction reputation points to this SpaceObject.
---- Example: obj:addReputationPoints(1000)
+--- Adds a given number of faction reputation points to this entity.
+--- Discards negative values. Returns the entity.
+--- Example: entity:addReputationPoints(1000)
 function Entity:addReputationPoints(amount)
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
-        local points = self.components.faction.entity.components.faction_info.reputation_points
-        if points >= -amount then
-            self.components.faction.entity.components.faction_info.reputation_points = points + amount
-        end
+    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
+        self.components.faction.entity.components.faction_info.reputation_points = self.components.faction.entity.components.faction_info.reputation_points + amount
     end
     return self
 end
