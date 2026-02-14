@@ -100,7 +100,7 @@ end
 --- If this value isn't larger than the Planet's radius, the cloud layer won't be visible.
 --- Example: planet:setPlanetCloudRadius(2500) -- sets this Planet's cloud radius to 2.5U
 function Entity:setPlanetCloudRadius(radius)
-    if self.planet_render then self.components.planet_render.cloud_size = radius end
+    if self.components.planet_render then self.components.planet_render.cloud_size = radius end
     return self
 end
 --- Sets the z-position of this Planet, the distance by which it's offset above (positive) or below (negative) the movement plane.
