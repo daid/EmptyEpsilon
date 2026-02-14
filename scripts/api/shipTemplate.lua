@@ -234,7 +234,14 @@ function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, da
     while #self.beam_weapons < index + 1 do
         self.beam_weapons[#self.beam_weapons + 1] = {}
     end
-    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
+
+    local model = __model_data[self.__model_data_name]
+    local scale = model.mesh_render.scale or 1
+    local pos = (model.__beam_positions or {})[index+1]
+    if pos then
+        pos = {pos[1] * scale, pos[2] * scale, pos[3] * scale}
+    end
+    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage, position=pos}
     if range <= 0 and #self.beam_weapons == index + 1 then
         self.beam_weapons[index + 1] = nil
     end

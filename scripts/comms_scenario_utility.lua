@@ -7873,7 +7873,7 @@ function minorUpgrades()
 											comms_source:setBeamWeaponTurret(beam.index,beam.tarc,beam.dir,beam.tspd)
 										end
 										comms_source:setBeamWeaponDamageType(beam.index,"emp")
-										comms_source:setBeamWeaponArcColor(beam.index,0,0,128,0,0,255)
+										comms_source:setBeamWeaponArcColor(beam.index,0,0,0.5,0,0,1.0)
 									end
 									comms_source.beams_for_shields = true
 									local beams_for_shields_installed = {

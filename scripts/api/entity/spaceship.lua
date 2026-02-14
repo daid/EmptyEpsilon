@@ -672,11 +672,11 @@ function Entity:setBeamWeaponHeatPerFire(index, heat)
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this SpaceShip.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
---- Example: ship:setBeamWeaponArcColor(0,0,128,0,0,255,0) -- makes beam 0's arc green
+--- Example: ship:setBeamWeaponArcColor(0,0,0.5,0,0,1.0,0) -- makes beam 0's arc green
 function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
     if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
-    self.components.beam_weapons[index + 1].arc_color = {idle_r, idle_g, idle_b, 255}
-    self.components.beam_weapons[index + 1].arc_color_fire = {fire_r, fire_g, fire_b, 255}
+    self.components.beam_weapons[index + 1].arc_color = {255*idle_r, 255*idle_g, 255*idle_b, 255}
+    self.components.beam_weapons[index + 1].arc_color_fire = {255*fire_r, 255*fire_g, 255*fire_b, 255}
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this SpaceShip.
