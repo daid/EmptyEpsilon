@@ -30,7 +30,7 @@ local Entity = getLuaEntityFunctionTable()
 --- No warp/jump travel is possible within this radius.
 --- Example: jammer:getRange()
 function Entity:getRange()
-    if self.warp_jammer then return self.warp_jammer.range end
+    if self.components.warp_jammer then return self.components.warp_jammer.range end
     return 0
 end
 --- Sets this WarpJammer's jamming radius.
@@ -38,6 +38,6 @@ end
 --- Defaults to 7000.0.
 --- Example: jammer:setRange(10000) -- sets a 10U jamming radius 
 function Entity:setRange(range)
-    if self.warp_jammer then self.warp_jammer.range = range end
+    if self.components.warp_jammer then self.components.warp_jammer.range = range end
     return self
 end
