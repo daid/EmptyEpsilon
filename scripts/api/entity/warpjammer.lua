@@ -18,7 +18,7 @@ function WarpJammer()
         physics = {type="static",size=300},
     }
     for k, v in pairs(__model_data["shield_generator"]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end

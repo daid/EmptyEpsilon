@@ -163,7 +163,7 @@ function ShipTemplate:setModel(model_data_name)
 
     self.__model_data_name = model_data_name
     for k, v in pairs(__model_data[model_data_name]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             self[k] = table.deepcopy(v)
         end
     end

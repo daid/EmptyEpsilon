@@ -27,7 +27,7 @@ function ScanProbe()
     if idx == 2 then model = "SensorBuoyMKII" end
     if idx == 3 then model = "SensorBuoyMKIII" end
     for k, v in pairs(__model_data[model]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end
