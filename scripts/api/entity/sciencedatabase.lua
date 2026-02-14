@@ -209,7 +209,7 @@ end
 --- Example: entry:setModelDataName("AtlasHeavyFighterYellow") -- uses the ModelData named "AtlasHeavyFighterYellow"
 function Entity:setModelDataName(model_data_name)
     if __model_data[model_data_name] then
-        self.components.mesh_render = __model_data[model_data_name].mesh_render
+        self.components.mesh_render = table.deepcopy(__model_data[model_data_name].mesh_render)
     else
         self.components.mesh_render = nil
     end
