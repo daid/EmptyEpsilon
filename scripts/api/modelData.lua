@@ -153,19 +153,27 @@ function ModelData:addEngineEmitor(x, y, z, r, g, b, scale)
     return self:addEngineEmitter(x, y, z, r, g, b, scale)
 end
 --- Adds an impulse engine particle effect emitter to this ModelData.
---- When a SpaceShip engages impulse engines, this defines the position, color, and size of a particle trail effect.
+--- When a ship engages impulse engines, this defines the position, color, and size of particle trail effects for an engine on the ship's 3D model.
 --- If no origin positions are defined, this defaults to the model's origin (0,0,0).
+--- If no mesh scale is defined, this sets it to the MeshRender default (1.0).
 --- If you view the model in Blender, these coordinate values are equivalent to -X,+Y,+Z.
 --- Example:
---- -- Add an engine emitter at the given model X/Y/Z coordinates, with a RGB color of 1.0/0.2/0.2 and scale of 3.
---- model:addEngineEmitter(-28, 1.5,-5,1.0,0.2,0.2,3.0)
+--- -- Add an engine emitter at model X/Y/Z coordinates -28.0, 1.5, -5.0, with a RGB color of 1.0, 0.2, 0.2 and scale of 3.0.
+--- model:addEngineEmitter(-28.0, 1.5, -5.0, 1.0, 0.2, 0.2, 3.0)
 function ModelData:addEngineEmitter(x, y, z, r, g, b, scale)
     if self.engine_emitter == nil then self.engine_emitter = {} end
     if self.mesh_render then
+        -- Set mesh_render.scale to 1.0 and warn if not defined
+        if self.mesh_render.scale == nil then
+            print("addEngineEmitter() called without mesh_render.scale value; using default 1.0 for mesh_render.scale")
+            self.mesh_render.scale = 1.0
+        else
+            scale = scale * self.mesh_render.scale
+        end
+
         x = x * self.mesh_render.scale
         y = y * self.mesh_render.scale
         z = z * self.mesh_render.scale
-        scale = scale * self.mesh_render.scale
     end
     self.engine_emitter[#self.engine_emitter+1] = {position = {x, y, z}, color={r, g, b}, scale=scale}
     return self
