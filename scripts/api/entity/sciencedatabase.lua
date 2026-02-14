@@ -13,6 +13,7 @@ local Entity = getLuaEntityFunctionTable()
 --- Each ScienceDatabase entry has a unique identifier regardless of its displayed order, and multiple entries can have the same name.
 --- Changes to ScienceDatabases appear in the UI only after a player opens the Database or selects an entry.
 ---
+--- [NOT IMPLEMENTED YET]
 --- To retrieve a 1-indexed table of all parentless entries, use the global function getScienceDatabases().
 --- You can then use this class's functions to get child entries and entry data.
 ---
@@ -65,10 +66,10 @@ function Entity:addEntry(name)
     child.components.science_database.parent = self
     return child
 end
---- Returns the first child ScienceDatabase entry of this ScienceDatabase entry found with the given case-insensitive name.
+--- Returns the first child ScienceDatabase entry of this ScienceDatabase entry found with the given name.
 --- Multiple entries can have the same name.
 --- Returns nil if no entry is found.
---- Example: entry:getEntryByName("canines") -- returns the "Canines" entry in sdb
+--- Example: entry:getEntryByName("Canines") -- returns the "Canines" entry in sdb
 function Entity:getEntryByName(name)
     name = string.lower(name)
     for idx, e in ipairs(getEntitiesWithComponent("science_database")) do
@@ -77,6 +78,7 @@ function Entity:getEntryByName(name)
     return nil
 end
 --- Returns a 1-indexed table of all child entries in this ScienceDatabase entry, in arbitrary order.
+--- [NOT IMPLEMENTED YET]
 --- To return parentless top-level ScienceDatabase entries, use the global function getScienceDatabases().
 --- Examples:
 --- entry = getScienceDatabases()[1] -- returns the first parentless entry
@@ -91,7 +93,7 @@ end
 --- Returns true if this ScienceDatabase entry has child entries.
 --- Example: entry:hasEntries()
 function Entity:hasEntries()
-    return #getEntries() > 0
+    return #self:getEntries() > 0
 end
 --- Adds a key/value pair to this ScienceDatabase entry's key/value data.
 --- The Database view's center column displays all key/value data when its entry is selected.
@@ -213,7 +215,6 @@ function Entity:setModelDataName(model_data_name)
     end
     return self
 end
-
 
 --- ScienceDatabase queryScienceDatabase(...)
 --- Returns the first ScienceDatabase entry with a matching case-insensitive name within the ScienceDatabase hierarchy.
