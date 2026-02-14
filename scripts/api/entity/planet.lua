@@ -120,9 +120,10 @@ function Entity:setDistanceFromMovementPlane(z)
     end
     return self
 end
---- Sets this Planet's axial rotation time, seconds per full rotation.
+--- Sets this entity's axial rotation time, in seconds per full rotation.
+--- This uses the Spin component.
 --- Defaults to 0.
---- Example: planet:setAxialRotationTime(20)
+--- Example: entity:setAxialRotationTime(20)
 function Entity:setAxialRotationTime(rotation_time)
     if rotation_time ~= 0.0 then
         self.components.spin = {rate=360.0/rotation_time}
@@ -131,8 +132,8 @@ function Entity:setAxialRotationTime(rotation_time)
     end
     return self
 end
---- Sets a SpaceObject around which this SpaceObject orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
---- An orbit can be cancelled by setting the target to nil
+--- Sets an entity around which this entity orbits, as well as its orbital period in seconds. Setting time to 0 will stop movement, while still being locked in orbit.
+--- An orbit can be cancelled by setting the target to nil.
 --- Example:
 --- moon:setOrbit(planet, 20)
 --- moon:setOrbit(nil) -- undo orbiting
