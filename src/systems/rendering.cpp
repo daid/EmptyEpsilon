@@ -210,6 +210,17 @@ void ExplosionRenderSystem::update(float delta)
     }
 }
 
+void ExplosionRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, ExplosionEffect& explosion)
+{
+    if (!explosion.radar) return;
+
+    // Fade alpha over lifetime
+    uint8_t alpha = static_cast<uint8_t>(64.0f * explosion.lifetime / ExplosionEffect::max_lifetime);
+
+    // Draw electrical/EMP explosions blue, rest red
+    renderer.fillCircle(screen_position, explosion.size * scale, explosion.electrical ? glm::u8vec4(0, 0, 255, alpha) : glm::u8vec4(255, 0, 0, alpha));
+}
+
 void ExplosionRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, ExplosionEffect& ee)
 {
     float f = (1.0f - (ee.lifetime / ee.max_lifetime));

@@ -45,7 +45,9 @@ void SelfDestructSystem::update(float delta)
                     for(int n = 0; n < 5; n++)
                     {
                         auto e = sp::ecs::Entity::create();
-                        e.addComponent<ExplosionEffect>().size = self_destruct.size * 0.67f;
+                        auto& ee = e.addComponent<ExplosionEffect>();
+                        ee.size = self_destruct.size * 0.67f;
+                        ee.radar = true;
                         e.addComponent<sp::Transform>(*transform);
                         e.addComponent<RawRadarSignatureInfo>(0.0f, 0.6f, 0.6f);
                     }
