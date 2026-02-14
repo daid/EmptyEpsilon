@@ -283,12 +283,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getFrontShield()
-    return self.getShieldLevel(0)
+    return self:getShieldLevel(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getFrontShieldMax()
-    return self.getShieldMax(0)
+    return self:getShieldMax(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
@@ -305,12 +305,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getRearShield()
-    return self.getShieldLevel(1)
+    return self:getShieldLevel(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getRearShieldMax()
-    return self.getShieldMax(1)
+    return self:getShieldMax(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
