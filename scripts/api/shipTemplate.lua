@@ -577,11 +577,22 @@ function ShipTemplate:setCanHack(enabled)
     if enabled then self.hacking_device = {} else self.hacking_device = nil end
     return self
 end
---- Defines whether the "Request Docking" button appears on related crew screens in PlayerSpaceships created from this ShipTemplate.
---- Defaults to true.
+--- Defines whether the entity can dock with other entities.
+--- If true, adds an empty DockingPort component to the entity if it lacks one.
+--- If false, removes any existing DockingPort component, if any.
+--- To specify the entity's ship class for docking logic with DockingBays, use setClass() instead.
 --- Example: template:setCanDock(false)
 function ShipTemplate:setCanDock(enabled)
-    if enabled then self.docking_port = {} else self.docking_port = nil end
+    if enabled then
+        -- Don't overwrite an existing DockingPort component
+        if self.docking_port ~= nil then
+            return self
+        else
+            self.docking_port = {}
+        end
+    else
+        self.docking_port = nil
+    end
     return self
 end
 --- Defines whether combat maneuver controls appear on related crew screens in PlayerSpaceships created from this ShipTemplate.
