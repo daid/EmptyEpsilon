@@ -1,5 +1,4 @@
-#ifndef COMBAT_MANEUVER_H
-#define COMBAT_MANEUVER_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -22,5 +21,3 @@ public:
     void setBoostValue(float value);
     void setStrafeValue(float value);
 };
-
-#endif//COMBAT_MANEUVER_H
