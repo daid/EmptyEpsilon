@@ -130,10 +130,11 @@ void GuiWarpControls::onUpdate()
     }
 
     // If the control request has diverged from the warp drive, send the warp
-    // drive command and update the slider. This should also update the slider
-    // if the request is changed by means other than the controls.
+    // drive command.
     if (command_value != current_request_value)
         my_player_info->commandWarp(command_value);
 
+    // Always update the slider to the request value, since the warp request
+    // could be changed by means other than the controls.
     slider->setValue(static_cast<float>(command_value));
 }
