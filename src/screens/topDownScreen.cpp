@@ -43,13 +43,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
-    keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
-    string keyboard_topdown = "";
-
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down View"))
-        keyboard_topdown += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-
-    keyboard_help->setText(keyboard_topdown);
+    keyboard_help = new GuiHotkeyHelpOverlay(viewport, {tr("hotkey_menu", "Top-down View")});
     keyboard_help->moveToFront();
 
     // Lock onto the first player ship to start.

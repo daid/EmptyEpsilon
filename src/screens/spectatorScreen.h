@@ -1,5 +1,4 @@
-#ifndef SPECTATOR_SCREEN_H
-#define SPECTATOR_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
@@ -12,7 +11,7 @@ class GuiLabel;
 class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
-class GuiHelpOverlay;
+class GuiHotkeyHelpOverlay;
 
 class SpectatorScreen : public GuiCanvas, public Updatable
 {
@@ -44,7 +43,7 @@ public:
     std::vector<GuiKeyValueDisplay*> info_items;
     GuiElement* camera_lock_controls;
     GuiSelector* camera_lock_selector;
-    GuiHelpOverlay* keyboard_help;
+    GuiHotkeyHelpOverlay* keyboard_help;
 
     virtual void update(float delta) override;
 
@@ -52,6 +51,3 @@ public:
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
 };
-
-
-#endif//SPECTATOR_SCREEN_H

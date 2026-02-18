@@ -316,23 +316,26 @@ Keys::Keys() :
 
 void Keys::init()
 {
+    // Basic
     pause.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Pause game"));
     help.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Show in-game help"));
     escape.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Return to ship options menu"));
     zoom_in.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom in on zoomable stations"));
     zoom_out.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom out on zoomable stations"));
-    voice_all.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to server"));
-    voice_ship.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to ship"));
     fullscreen_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Fullscreen toggle"));
 
     //General
-    next_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to next crew station"));
-    prev_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to previous crew station"));
-    station_helms.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to helms station"));
-    station_weapons.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to weapons station"));
-    station_engineering.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to engineering station"));
-    station_science.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to science station"));
-    station_relay.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to relay station"));
+    next_station.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to next crew station"));
+    prev_station.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to previous crew station"));
+    station_helms.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to helms station"));
+    station_weapons.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to weapons station"));
+    station_engineering.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to engineering station"));
+    station_science.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to science station"));
+    station_relay.setLabel(tr("hotkey_menu", "Crew Screens"), tr("hotkey_CrewScreens", "Switch to relay station"));
+
+    // Voice chat
+    voice_all.setLabel(tr("hotkey_menu", "Voice Chat"), tr("hotkey_VoiceChat", "Broadcast voice chat to server"));
+    voice_ship.setLabel(tr("hotkey_menu", "Voice Chat"), tr("hotkey_VoiceChat", "Broadcast voice chat to ship"));
 
     //Main screen
     mainscreen_forward.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View forward"));
