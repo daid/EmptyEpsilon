@@ -738,8 +738,8 @@ end
 --- The crew is assigned a random set of coordinates within the room.
 --- Using this function to assign multiple crews to the same room can stack them on the same square, which players should not be able to do!
 --- Example:
---- target_position = {3, 2} -- must be a table
---- entity:moveRepairCrewToPosition(1, target_position)
+--- target_room = entity:getInternalRoomForSystem("beamweapons")
+--- entity:moveRepairCrewToRoom(1, target_room)
 function Entity:moveRepairCrewToRoom(crew_index, room)
     local ir = self.components.internal_rooms
     if not ir then return false end
