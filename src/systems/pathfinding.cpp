@@ -7,6 +7,7 @@
 
 const float small_object_grid_size = 5000.0f;
 const float small_object_max_size = 1000.0f;
+const int small_object_subcell_count = 5;
 static PathFindingSystem* path_finding_system;
 
 
@@ -186,10 +187,10 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
 
     {
         // Bresenham's line algorithm to
-        int x1 = std::floor(start.x / small_object_grid_size);
-        int y1 = std::floor(start.y / small_object_grid_size);
-        int x2 = std::floor(end.x / small_object_grid_size);
-        int y2 = std::floor(end.y / small_object_grid_size);
+        int x1 = std::floor(small_object_subcell_count * start.x / small_object_grid_size);
+        int y1 = std::floor(small_object_subcell_count * start.y / small_object_grid_size);
+        int x2 = std::floor(small_object_subcell_count * end.x / small_object_grid_size);
+        int y2 = std::floor(small_object_subcell_count * end.y / small_object_grid_size);
 
         const bool steep = abs(y2 - y1) > abs(x2 - x1);
         if(steep)
@@ -209,38 +210,61 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
 
         int error = dx / 2;
         const int ystep = (y1 < y2) ? 1 : -1;
-        int y = y1;
+        int sy = y1;
 
-        for(int x=x1; x<=x2; x++)
+        int last_cell_x = x1 / small_object_subcell_count - 5; // definitely not equal to the initial cell
+        int last_cell_y = 0;
+
+        for(int sx=x1; sx<=x2; sx++)
         {
-            uint32_t hash;
-            if(steep)
-            {
-                hash = hashPosition({y * small_object_grid_size, x * small_object_grid_size});
-            }
+            // roughly `int x = floor((float)sx / (float)small_object_subcell_count);`, but with pure integer maths
+            int x;
+            if (sx >= 0)
+                x = sx / small_object_subcell_count;
             else
-            {
-                hash = hashPosition({x * small_object_grid_size, y * small_object_grid_size});
-            }
+                x = (sx + 1) / small_object_subcell_count - 1;
 
-            for(auto e : path_finding_system->small_entities[hash])
-            {
-                auto ao = e.getComponent<AvoidObject>();
-                auto transform = e.getComponent<sp::Transform>();
-                if (ao && transform)
+            int y;
+            if (sy >= 0)
+                y = sy / small_object_subcell_count;
+            else
+                y = (sy + 1) / small_object_subcell_count - 1;
+
+            // if we moved to a different avoid cell, check its contents
+            if (x != last_cell_x || y != last_cell_y) {
+                last_cell_x = x;
+                last_cell_y = y;
+
+                uint32_t hash;
+
+                if(steep)
                 {
-                    glm::vec2 position = transform->getPosition();
-                    float f = glm::dot(startEndDiff, position - start) / startEndLength;
-                    if (f > 0 && f < startEndLength - ao->range)
+                    hash = hashPosition({y * small_object_grid_size, x * small_object_grid_size});
+                }
+                else
+                {
+                    hash = hashPosition({x * small_object_grid_size, y * small_object_grid_size});
+                }
+
+                for(auto e : path_finding_system->small_entities[hash])
+                {
+                    auto ao = e.getComponent<AvoidObject>();
+                    auto transform = e.getComponent<sp::Transform>();
+                    if (ao && transform)
                     {
-                        glm::vec2 q = start + startEndDiff / startEndLength * f;
-                        if (glm::length2(q - position) < (ao->range + my_size) * (ao->range + my_size))
+                        glm::vec2 position = transform->getPosition();
+                        float f = glm::dot(startEndDiff, position - start) / startEndLength;
+                        if (f > 0 && f < startEndLength - ao->range)
                         {
-                            if (f < firstAvoidF)
+                            glm::vec2 q = start + startEndDiff / startEndLength * f;
+                            if (glm::length2(q - position) < (ao->range + my_size) * (ao->range + my_size))
                             {
-                                avoidObject = e;
-                                firstAvoidF = f;
-                                firstAvoidQ = q;
+                                if (f < firstAvoidF)
+                                {
+                                    avoidObject = e;
+                                    firstAvoidF = f;
+                                    firstAvoidQ = q;
+                                }
                             }
                         }
                     }
@@ -250,7 +274,7 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
             error -= dy;
             if(error < 0)
             {
-                y += ystep;
+                sy += ystep;
                 error += dx;
             }
         }
