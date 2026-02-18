@@ -8,6 +8,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/shields.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "multiplayer_server.h"
 #include "i18n.h"
@@ -80,8 +81,8 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
             shield_low_warning_overlay->setAlpha(0);
         }
 
-        if (auto hull = my_spaceship.getComponent<Hull>())
-            hull_hit_overlay->setAlpha(128 * (hull->damage_indicator / 1.5f));
+        if (auto health = my_spaceship.getComponent<Health>())
+            hull_hit_overlay->setAlpha(128 * (health->damage_indicator / 1.5f));
     }else{
         shield_hit_overlay->setAlpha(0);
         shield_low_warning_overlay->setAlpha(0);
