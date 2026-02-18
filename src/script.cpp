@@ -95,6 +95,17 @@ static int luaRequire(lua_State* L)
 
 static int luaTranslate(lua_State* L)
 {
+    if (lua_type(L, 1) == LUA_TNUMBER) {
+        auto n = luaL_checkinteger(L, 1);
+        auto str_1 = luaL_checkstring(L, 2);
+        auto str_2 = luaL_checkstring(L, 3);
+        auto str_3 = luaL_optstring(L, 4, nullptr);
+        if (str_3)
+            lua_pushstring(L, trn(n, str_1, str_2, str_3).c_str());
+        else
+            lua_pushstring(L, trn(n, str_1, str_2).c_str());
+        return 1;
+    }
     auto str_1 = luaL_checkstring(L, 1);
     auto str_2 = luaL_optstring(L, 2, nullptr);
     if (str_2)
