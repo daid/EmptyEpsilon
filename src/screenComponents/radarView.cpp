@@ -149,17 +149,13 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
     // Draw the initial background 'clear' color.
     if (style == Rectangular)
-    {
         drawBackground(renderer);
-    }
     
-    if ((style == CircularMasked || style == Circular))
-    {
-        // Draw the radar's outline. First, and before any stencil kicks in.
-        // this way, the outline is not even a part of the rendering area.
-        float r = std::min(rect.size.x, rect.size.y) * 0.5f;
-        renderer.drawCircleOutline(getCenterPoint(), r, 2.0f, colorConfig.radar_outline);
-    }
+    // Draw the radar's outline first, and before any stencil kicks in.
+    // This way, the outline is not even part of the rendering area.
+    const float radar_outline_thickness = 4.0f;
+    if (style == CircularMasked || style == Circular)
+        renderer.drawCircleOutline(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f, radar_outline_thickness, colorConfig.radar_outline);
 
     // Stencil setup.
     renderer.finish();
@@ -191,7 +187,7 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 
         // Draws the radar circle shape.
         // Note that this draws both in the stencil and the color buffer!
-        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) / 2.0f - 2.0f, glm::u8vec4{ 20, 20, 20, background_alpha });
+        renderer.fillCircle(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f - radar_outline_thickness, glm::u8vec4{20, 20, 20, background_alpha});
         renderer.finish();
     }
 
@@ -330,8 +326,8 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    constexpr float sector_size = 20000;
-    const float sub_sector_size = sector_size / 8;
+    constexpr float sector_size = 20000.0f;
+    const float sub_sector_size = sector_size / 8.0f;
 
     int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sector_size) + 1;
     int sector_x_max = floor((view_position.x + (rect.position.x + rect.size.x - radar_screen_center.x) / scale) / sector_size);
@@ -352,12 +348,12 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     for(int sector_x = sector_x_min; sector_x <= sector_x_max; sector_x++)
     {
         float x = sector_x * sector_size;
-        renderer.drawLine(worldToScreen(glm::vec2(x, (sector_y_min-1)*sector_size)), worldToScreen(glm::vec2(x, (sector_y_max+1)*sector_size)), color);
+        renderer.drawLine(worldToScreen(glm::vec2(x, (sector_y_min-1)*sector_size)), worldToScreen(glm::vec2(x, (sector_y_max+1)*sector_size)), 1.0f, color);
     }
     for(int sector_y = sector_y_min; sector_y <= sector_y_max; sector_y++)
     {
         float y = sector_y * sector_size;
-        renderer.drawLine(worldToScreen(glm::vec2((sector_x_min-1)*sector_size, y)), worldToScreen(glm::vec2((sector_x_max+1)*sector_size, y)), color);
+        renderer.drawLine(worldToScreen(glm::vec2((sector_x_min-1)*sector_size, y)), worldToScreen(glm::vec2((sector_x_max+1)*sector_size, y)), 1.0f, color);
     }
 
     color = glm::u8vec4(64, 64, 128, 255);
@@ -475,7 +471,7 @@ void GuiRadarView::drawRangeIndicators(sp::RenderTarget& renderer)
     for(float circle_size=range_indicator_step_size; circle_size < distance; circle_size+=range_indicator_step_size)
     {
         float s = circle_size * scale;
-        renderer.drawCircleOutline(radar_screen_center, s, 2.0, glm::u8vec4(255, 255, 255, 16));
+        renderer.drawCircleOutline(radar_screen_center, s, 3.0, glm::u8vec4(255, 255, 255, 16));
         renderer.drawText(sp::Rect(radar_screen_center.x, radar_screen_center.y - s - 20, 0, 0), string(int(circle_size / 1000.0f + 0.1f)) + DISTANCE_UNIT_1K, sp::Alignment::Center, 20, bold_font, glm::u8vec4(255, 255, 255, 32));
     }
 }
@@ -532,7 +528,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     missile_path.push_back(worldToScreen(fire_position + (turn_center + vec2FromAngle(fire_angle - angle_diff / 10.0f * cnt - left_or_right) * turn_radius)));
                 missile_path.push_back(worldToScreen(fire_position + turn_exit));
                 missile_path.push_back(worldToScreen(fire_position + (turn_exit + vec2FromAngle(missile_target_angle) * length_after_turn)));
-                renderer.drawLine(missile_path, glm::u8vec4(255, 255, 255, 128));
+                renderer.drawLine(missile_path, 1.0f, glm::u8vec4(255, 255, 255, 128));
 
                 float offset = seconds_per_distance_tick * data.speed;
                 for(int cnt=0; cnt<floor(data.lifetime / seconds_per_distance_tick); cnt++)
@@ -550,7 +546,7 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                     n = rotateVec2(n, -view_rotation);
                     n = glm::normalize(n);
 
-                    renderer.drawLine(p - glm::vec2(n.x, n.y) * 10.0f, p + glm::vec2(n.x, n.y) * 10.0f, glm::u8vec4{255,255,255,255});
+                    renderer.drawLine(p - glm::vec2(n.x, n.y) * 10.0f, p + glm::vec2(n.x, n.y) * 10.0f, 2.0f, glm::u8vec4{255,255,255,255});
 
                     offset += seconds_per_distance_tick * data.speed;
                 }
@@ -570,12 +566,12 @@ void GuiRadarView::drawTargetProjections(sp::RenderTarget& renderer)
                 continue;
 
             auto start = worldToScreen(transform->getPosition());
-            renderer.drawLine(start, worldToScreen(transform->getPosition() + physics->getVelocity() * 60.0f), glm::u8vec4(255, 255, 255, 128), glm::u8vec4(255, 255, 255, 0));
+            renderer.drawLine(start, worldToScreen(transform->getPosition() + physics->getVelocity() * 60.0f), 2.0f, glm::u8vec4(255, 255, 255, 128), glm::u8vec4(255, 255, 255, 0));
             glm::vec2 n = glm::normalize(rotateVec2(glm::vec2(-physics->getVelocity().y, physics->getVelocity().x), -view_rotation)) * 10.0f;
             for(int cnt=0; cnt<5; cnt++)
             {
                 auto p = rotateVec2(physics->getVelocity() * (seconds_per_distance_tick * (cnt + 1.0f) * scale), -view_rotation);
-                renderer.drawLine(start + p + n, start + p - n, glm::u8vec4(255, 255, 255, 128 - cnt * 20));
+                renderer.drawLine(start + p + n, start + p - n, 2.0f, glm::u8vec4(255, 255, 255, 128 - cnt * 20));
             }
         }
     }
@@ -596,7 +592,7 @@ void GuiRadarView::drawMissileTubes(sp::RenderTarget& renderer)
 
         float fire_angle = transform->getRotation() + mount.direction - view_rotation;
 
-        renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), glm::u8vec4(128, 128, 128, 128), glm::u8vec4(128, 128, 128, 0));
+        renderer.drawLine(fire_draw_position, fire_draw_position + (vec2FromAngle(fire_angle) * 1000.0f * scale), 2.0f, glm::u8vec4(128, 128, 128, 128), glm::u8vec4(128, 128, 128, 0));
     }
 }
 
@@ -785,7 +781,7 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
         renderer.drawLine(
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 40),
-            {255, 255, 255, 255});
+            2.0f, {255, 255, 255, 255});
     }
 
     for(unsigned int n = 0; n < 360; n += small_tig_interval)
@@ -793,7 +789,7 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
         renderer.drawLine(
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 20),
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 30),
-            {255, 255, 255, 255});
+            1.0f, {255, 255, 255, 255});
     }
 
     for(unsigned int n = 0; n < 360; n += tig_interval)
