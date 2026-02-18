@@ -112,7 +112,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     });
     missile_aim->hide()->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(110, 50);
+    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(145, 50);
 
     // Combat maneuver and propulsion controls in the bottom right corner.
     (new GuiCombatManeuver(this, "COMBAT_MANEUVER"))->setPosition(-20, -390, sp::Alignment::BottomRight)->setSize(200, 150);

@@ -63,7 +63,7 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     radar->enableTargetProjections(tube_controls);
 
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
-    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(130, 50);
+    lock_aim->setPosition(250, 20, sp::Alignment::TopCenter)->setSize(145, 50);
 
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
