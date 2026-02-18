@@ -156,8 +156,9 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
-    bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+    const auto& active_theme = GuiTheme::getCurrentTheme();
+    main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
+    bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
@@ -166,6 +167,11 @@ int main(int argc, char** argv)
     }
 
     sp::RenderTarget::setDefaultFont(main_font);
+
+    // Apply baseline offset adjustments to fonts
+    // Positive values move text down, negative values move text up
+    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
+    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
