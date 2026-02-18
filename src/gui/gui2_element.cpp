@@ -111,6 +111,31 @@ GuiElement* GuiElement::setMargins(float left, float top, float right, float bot
     return this;
 }
 
+GuiElement* GuiElement::setParent(GuiContainer* new_parent)
+{
+    if (GuiContainer* old_owner = this->getOwner())
+    {
+        // Works only if both the old owner and new parent are valid.
+        if (new_parent && old_owner != new_parent)
+        {
+            // Remove from old owner's children list.
+            old_owner->children.remove(this);
+
+            // Add to new owner's children list.
+            new_parent->children.push_back(this);
+
+            // Update owner pointer.
+            this->owner = new_parent;
+        }
+        else
+            LOG(Debug, "GuiElement::setParent called, but new parent is invalid.");
+    }
+    else
+        LOG(Debug, "GuiElement::setParent called, but old owner is invalid.");
+
+    return this;
+}
+
 GuiElement* GuiElement::setPosition(float x, float y, sp::Alignment alignment)
 {
     layout.position.x = x;
