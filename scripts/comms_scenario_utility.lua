@@ -244,7 +244,7 @@ function isObjectType(obj,typ)
 				elseif typ == "ScanProbe" then
 					return obj.components.allow_radar_link
 				elseif typ == "CpuShip" then
-					return obj.ai_controller
+					return obj.components.ai_controller
 				elseif typ == "Asteroid" then
 					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
 				else
