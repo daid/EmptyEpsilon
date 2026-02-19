@@ -12,6 +12,8 @@
 --- Scenario
 -- @script scenario_07_gftp
 
+require("utils.lua")
+
 function init()
     -- Spawn Marco Polo, its defenders, and a Ktlitan strike team
     marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription(_("scienceDescription-station", "A merchant and entertainment hub.")):setPosition(-21200, 45250)
@@ -824,19 +826,11 @@ end
 function create(object_type, amount, dist_min, dist_max, x0, y0)
     for n = 1, amount do
         local r = random(0, 360)
-        local distance = random(dist_min, dist_max)
-        x = x0 + math.cos(r / 180 * math.pi) * distance
-        y = y0 + math.sin(r / 180 * math.pi) * distance
+        local create_distance = random(dist_min, dist_max)
+        x = x0 + math.cos(r / 180 * math.pi) * create_distance
+        y = y0 + math.sin(r / 180 * math.pi) * create_distance
         object_type():setPosition(x, y)
     end
-end
-
--- Return the distance between two objects
-function distance(obj1, obj2)
-    x1, y1 = obj1:getPosition()
-    x2, y2 = obj2:getPosition()
-    xd, yd = (x1 - x2), (y1 - y2)
-    return math.sqrt(xd * xd + yd * yd)
 end
 
 -- Return the bearing of an object from the player's coordinates
