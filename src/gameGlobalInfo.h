@@ -1,5 +1,4 @@
-#ifndef GAME_GLOBAL_INFO_H
-#define GAME_GLOBAL_INFO_H
+#pragma once
 
 #include "script.h"
 #include "script/gm.h"
@@ -77,11 +76,7 @@ public:
 
     void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
     void playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name);
-    /*!
-     * \brief Set a faction to victorious.
-     * \param string Name of the faction that won.
-     */
-    void setVictory(string faction_name) { victory_faction = Faction::find(faction_name); }
+    void setVictory(string faction_name);
     /*!
      * \brief Get ID of faction that won.
      * \param int
@@ -136,5 +131,3 @@ private:
 
 string getSectorName(glm::vec2 position);
 glm::vec2 sectorToXY(string sectorName);
-
-#endif//GAME_GLOBAL_INFO_H

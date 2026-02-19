@@ -88,6 +88,17 @@ void GameGlobalInfo::playSoundOnMainScreen(sp::ecs::Entity ship, string sound_na
     broadcastServerCommand(packet);
 }
 
+/*!
+ * \brief Set a faction to victorious.
+ * \param string Name of the faction that won.
+ */
+void GameGlobalInfo::setVictory(string faction_name)
+{
+    victory_faction = Faction::find(faction_name);
+    if (!victory_faction)
+        LOG(Error, "Attempted to set victory faction to ", faction_name, ", but no faction name matched.");
+}
+
 void GameGlobalInfo::update(float delta)
 {
     if (global_message_timeout > 0.0f)
