@@ -128,10 +128,10 @@ function commsNSA()
         _("NSA-comms", "Locate the infected Swarm Commander."),
         function()
             if (comms_target:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear.")) then
-                setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %d. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %.0f. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
                 comms_target:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             else
-                setCommsMessage(string.format(_("NSA-comms", "The array picks up a very strong signal at approximate heading %d. However, it seems that you picked up a garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "The array picks up a very strong signal at approximate heading %.0f. However, it seems that you picked up a garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
             end
         end
     )
