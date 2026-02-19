@@ -48,9 +48,10 @@ function ShipTemplate:__init__()
         color_by_faction=true,
         arrow_if_not_scanned=true,
     }
+    self.__default_ai = "default"
     self.__repair_crew_count = 3
+    self.long_range_radar = {}
     self.share_short_range_radar = {}
-    self.comms_receiver = {script="comms_ship.lua"}
 end
 
 --- Sets this ShipTemplate's unique reference name.
@@ -111,12 +112,6 @@ function ShipTemplate:setType(template_type)
         self.science_scanner = {}
         self.scan_probe_launcher = {}
         self.hacking_device = {}
-        self.long_range_radar = {}
-        self.radar_link = {}
-        self.waypoints = {}
-        self.comms_transmitter = {}
-        self.comms_receiver = nil
-        self.ai_controller = nil
         if self.docking_port then
             self.docking_port.auto_reload_missiles = false
         end
@@ -129,7 +124,6 @@ function ShipTemplate:setType(template_type)
         if self.radar_trace.icon == "radar/ship.png" then
             self.radar_trace.icon = "radar/blip.png"
         end
-        self.comms_receiver = {script="comms_station.lua"}
     end
     return self
 end
@@ -150,7 +144,7 @@ end
 --- - "missilevolley" prefers lining up missile attacks from long range
 --- Example: template:setAI("fighter") -- default to the "fighter" combat AI state
 function ShipTemplate:setDefaultAI(default_ai)
-    self.ai_controller = {new_name=default_ai}
+    self.__default_ai = default_ai
     return self
 end
 --- Sets the 3D appearance, by ModelData name, of ShipTemplateBasedObjects created from this ShipTemplate.
@@ -541,7 +535,7 @@ end
 --- Defaults to 30000.0 (30U).
 --- Example: template:setLongRangeRadarRange(20000) -- sets the long-range radar range to 20U
 function ShipTemplate:setLongRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.long_range = range end
+    self.long_range_radar.long_range = range
     return self
 end
 --- Sets the short-range radar range of SpaceShips created from this ShipTemplate.
@@ -551,7 +545,7 @@ end
 --- Defaults to 5000.0 (5U).
 --- Example: template:setShortRangeRadarRange(4000) -- sets the short-range radar range to 4U
 function ShipTemplate:setShortRangeRadarRange(range)
-    if self.long_range_radar then self.long_range_radar.short_range = range end
+    self.long_range_radar.short_range = range
     return self
 end
 --- Sets the sound file used for the impulse drive sounds on SpaceShips created from this ShipTemplate.

@@ -18,6 +18,7 @@ function CpuShip()
         ai_controller = {new_name="default", orders="roaming"},
         scan_state = {allow_simple_scan=true},
         callsign = {callsign=generateRandomCallSign()},
+        comms_receiver = {script="comms_ship.lua"},
     }
     e:setFaction(__default_cpu_ship_faction)
     return e
