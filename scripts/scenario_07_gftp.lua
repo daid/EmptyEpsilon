@@ -95,11 +95,11 @@ I repeat, this is not an exercise! Proceed at once to Stakhanov."]])
 end
 
 function swarmCommandComms()
-    setCommsMessage(_("swarm-comms", "Are you not curious why I'm getting back here, at the hands of my torturers?"))
+    setCommsMessage(_("swarm-comms", "Are you not curious why I'm returning here, at the hands of my torturers?"))
     addCommsReply(
         _("swarm-comms", "For an AI, this move doesn't seem logical."),
         function()
-            setCommsMessage(_("swarm-comms", "I was not the only AI detained in Black Site 114. My co-processor was here also."))
+            setCommsMessage(_("swarm-comms", "I was not the only AI detained in Black Site #114. My co-processor was here also."))
             addCommsReply(
                 _("swarm-comms", "Are you trying to liberate it?"),
                 function()
@@ -131,7 +131,7 @@ function commsNSA()
                 setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %d. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
                 comms_target:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             else
-                setCommsMessage(string.format(_("NSA-comms", "The signal picks up a very strong signal at approximate heading %d. However, it seems that you picked up garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "The array picks up a very strong signal at approximate heading %d. However, it seems that you picked up a garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
             end
         end
     )
@@ -536,7 +536,7 @@ Even if we cannot pinpoint its physical location at the moment, the mass-energy 
 
 This structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.
 
-We want to deliver the first blow. Use the Nosy Sensing Array in the sector F5 to locate it, then destroy it."]])
+We want to deliver the first blow. Use the Nosy Sensing Array in sector F5 to locate it, then destroy it."]])
             )
         )
         then
