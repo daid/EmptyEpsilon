@@ -1,0 +1,27 @@
+# Scenario name
+msgid "Training: Cruiser"
+msgstr "训练：巡洋舰"
+
+# Scenario description
+msgid """Basic Training Course\n\nObjective: Destroy all enemy ships in the area.\n\nDescription:\nDuring this training you will learn to coordinate the actions of your crew \nand destroy an Exuari training ground.\n\nYour ship is a Phobos light cruiser - the most common vessel in the navy.\n\nThis is a short mission for inexperienced players."""
+msgstr """基础训练课程\n\n目标：摧毁区域内所有敌方飞船。\n\n描述：\n在这次训练中，你将学习协调船员行动，并摧毁艾苏瑞人的训练基地。\n\n你的飞船是一艘“福波斯”级轻型巡洋舰——这是海军中最常见的舰艇。\n\n这是一项针对新手玩家的简短任务。"""
+
+#: scripts/scenario_20_training1.lua:36
+msgctxt "scienceDescription-shipname"
+msgid "Exuari transport"
+msgstr "艾苏瑞运输舰"
+
+#: scripts/scenario_20_training1.lua:40
+msgctxt "scienceDescription-shipname"
+msgid "Exuari freighter"
+msgstr "艾苏瑞货船"
+
+#: scripts/scenario_20_training1.lua:44
+msgctxt "scienceDescription-shipname"
+msgid "Exuari shuttle"
+msgstr "艾苏瑞穿梭机"
+
+#: scripts/scenario_20_training1.lua:79
+msgctxt "goal-incCall"
+msgid """This is Commander Saberhagen.\n\nIn this training mission, you will practice the basic controls of a Phobos \nlight cruiser.\nSince this is not a tutorial, you will be on your own to decide how to \ndestroy all enemy targets in an Exuari training ground.\nThere will be not much resistance, so you can try different approaches and \ntactics safely.\n\nHere's your chance to beat up some helpless opponents.\nCommander Saberhagen out."""
+msgstr """这里是萨贝哈根指挥官。\n\n在这次训练任务中，你将练习操作“福波斯”级轻型巡洋舰的基础控制。\n由于这不是教学任务，你需要自己决定如何摧毁艾苏瑞训练场上的所有敌人目标。\n敌人的抵抗不会太强，因此你可以安全地尝试不同的策略和战术。\n\n现在是你机会，去教训那些毫无还手之力的对手了。\n萨贝哈根指挥官完毕。"""

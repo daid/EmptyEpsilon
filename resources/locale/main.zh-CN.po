@@ -1,0 +1,3489 @@
+#: src/scienceDatabase.cpp:397
+msgctxt "database direction"
+msgid "Front"
+msgstr "前"
+
+#: src/scienceDatabase.cpp:399
+msgctxt "database direction"
+msgid "Right"
+msgstr "右"
+
+#: src/scienceDatabase.cpp:401
+msgctxt "database direction"
+msgid "Left"
+msgstr "左"
+
+#: src/scienceDatabase.cpp:403
+msgctxt "database direction"
+msgid "Rear"
+msgstr "后"
+
+#: src/scienceDatabase.cpp:426
+msgctxt "database"
+msgid "Factions"
+msgstr "派系"
+
+#: src/scienceDatabase.cpp:439 src/scienceDatabase.cpp:442
+msgctxt "stance"
+msgid "Neutral"
+msgstr "中立"
+
+#: src/scienceDatabase.cpp:443
+msgctxt "stance"
+msgid "Enemy"
+msgstr "敌对"
+
+#: src/scienceDatabase.cpp:444
+msgctxt "stance"
+msgid "Friendly"
+msgstr "友善"
+
+#: src/scienceDatabase.cpp:453
+msgctxt "database"
+msgid "Ships"
+msgstr "飞船"
+
+#: src/scienceDatabase.cpp:454
+msgid ""
+"Spaceships are vessels capable of withstanding the dangers of travel through "
+"deep space. They can fill many functions and vary broadly in size, from "
+"small tugs to massive dreadnoughts."
+msgstr ""
+"宇宙飞船是能够承受深空旅行危险的载具。它们功能多样，尺寸从小型拖船到巨型无畏舰不等。"
+
+#: src/scienceDatabase.cpp:500
+msgctxt "database"
+msgid "Class"
+msgstr "类别"
+
+#: src/scienceDatabase.cpp:501
+msgctxt "database"
+msgid "Sub-class"
+msgstr "子类别"
+
+#: src/scienceDatabase.cpp:502
+msgctxt "database"
+msgid "Size"
+msgstr "尺寸"
+
+#: src/scienceDatabase.cpp:513 src/scienceDatabase.cpp:619
+msgctxt "database"
+msgid "Shield"
+msgstr "护盾"
+
+#: src/scienceDatabase.cpp:516 src/scienceDatabase.cpp:622
+msgid "Hull"
+msgstr "船体"
+
+#: src/scienceDatabase.cpp:520
+msgctxt "database"
+msgid "Move speed"
+msgstr "移动速度"
+
+#: src/scienceDatabase.cpp:520 src/scienceDatabase.cpp:521
+#: src/scienceDatabase.cpp:528
+msgctxt "database"
+msgid "{speed} u/min"
+msgstr "{speed} 单位/分钟"
+
+#: src/scienceDatabase.cpp:521
+msgctxt "database"
+msgid "Reverse move speed"
+msgstr "倒退速度"
+
+#: src/scienceDatabase.cpp:524
+msgctxt "database"
+msgid "Turn speed"
+msgstr "转向速度"
+
+#: src/scienceDatabase.cpp:524
+msgctxt "database"
+msgid "{turnspeed} deg/sec"
+msgstr "{turnspeed} 度/秒"
+
+#: src/scienceDatabase.cpp:528
+msgctxt "database"
+msgid "Warp speed"
+msgstr "跃迁速度"
+
+#: src/scienceDatabase.cpp:533
+msgctxt "database"
+msgid "Jump range"
+msgstr "跃迁范围"
+
+#: src/scienceDatabase.cpp:534
+msgctxt "database"
+msgid "{mindistance} - {maxdistance} u"
+msgstr "{mindistance} - {maxdistance} 单位"
+
+#: src/scienceDatabase.cpp:544
+msgid "{direction} beam weapon"
+msgstr "{direction} 光束武器"
+
+#: src/scienceDatabase.cpp:545
+msgctxt "database"
+msgid "{damage} Dmg / {interval} sec"
+msgstr "{damage} 伤害 / {interval} 秒"
+
+#: src/scienceDatabase.cpp:555
+msgctxt "database"
+msgid "{direction} tube"
+msgstr "{direction} 发射管"
+
+#: src/scienceDatabase.cpp:558
+msgctxt "database"
+msgid "{direction} small tube"
+msgstr "{direction} 小型发射管"
+
+#: src/scienceDatabase.cpp:562
+msgctxt "database"
+msgid "{direction} large tube"
+msgstr "{direction} 大型发射管"
+
+#: src/scienceDatabase.cpp:566
+msgctxt "database"
+msgid "{loadtime} sec"
+msgstr "{loadtime} 秒"
+
+#: src/scienceDatabase.cpp:574
+msgid "Storage {weapon}"
+msgstr "存储 {weapon}"
+
+#: src/scienceDatabase.cpp:584
+msgctxt "database"
+msgid "Stations"
+msgstr "空间站"
+
+#: src/scienceDatabase.cpp:585
+msgid ""
+"Space stations are permanent, immobile structures ranging in scale from "
+"small outposts to city-sized communities. Many provide restocking and repair "
+"services to neutral and friendly ships."
+msgstr ""
+"空间站是永久性、不可移动的结构，其规模从小哨站到城市大小的聚居地不等。许多空间站为中立和友方飞船提供补给和维修服务。"
+
+#: src/playerInfo.cpp:253
+msgctxt "station"
+msgid "Helms"
+msgstr "驾驶"
+
+#: src/playerInfo.cpp:254
+msgctxt "station"
+msgid "Weapons"
+msgstr "武器"
+
+#: src/playerInfo.cpp:255
+msgctxt "station"
+msgid "Engineering"
+msgstr "工程"
+
+#: src/playerInfo.cpp:256
+msgctxt "station"
+msgid "Science"
+msgstr "科学"
+
+#: src/playerInfo.cpp:257
+msgctxt "station"
+msgid "Relay"
+msgstr "通讯"
+
+#: src/playerInfo.cpp:258
+msgctxt "station"
+msgid "Tactical"
+msgstr "战术"
+
+#: src/playerInfo.cpp:259
+msgctxt "station"
+msgid "Engineering+"
+msgstr "高级工程"
+
+#: src/playerInfo.cpp:260
+msgctxt "station"
+msgid "Operations"
+msgstr "行动"
+
+#: src/playerInfo.cpp:261
+msgctxt "station"
+msgid "Single Pilot"
+msgstr "单人驾驶"
+
+#: src/playerInfo.cpp:262
+msgctxt "station"
+msgid "Damage Control"
+msgstr "损管"
+
+#: src/playerInfo.cpp:263
+msgctxt "station"
+msgid "Power Management"
+msgstr "能量管理"
+
+#: src/playerInfo.cpp:264
+msgctxt "station"
+msgid "Database"
+msgstr "数据库"
+
+#: src/playerInfo.cpp:265
+msgctxt "station"
+msgid "Strategic Map"
+msgstr "战略地图"
+
+#: src/playerInfo.cpp:266
+msgctxt "station"
+msgid "Comms"
+msgstr "通讯"
+
+#: src/playerInfo.cpp:267
+msgctxt "station"
+msgid "Ship's Log"
+msgstr "飞船日志"
+
+#: src/shipTemplate.cpp:317
+msgid "No class"
+msgstr "无类别"
+
+#: src/shipTemplate.cpp:318
+msgid "No sub-class"
+msgstr "无子类别"
+
+#: src/shipTemplate.cpp:576
+msgctxt "system"
+msgid "Reactor"
+msgstr "反应堆"
+
+#: src/shipTemplate.cpp:577
+msgctxt "system"
+msgid "Beam Weapons"
+msgstr "光束武器"
+
+#: src/shipTemplate.cpp:578
+msgctxt "system"
+msgid "Missile System"
+msgstr "导弹系统"
+
+#: src/shipTemplate.cpp:579
+msgctxt "system"
+msgid "Maneuvering"
+msgstr "机动系统"
+
+#: src/shipTemplate.cpp:580
+msgctxt "system"
+msgid "Impulse Engines"
+msgstr "脉冲引擎"
+
+#: src/shipTemplate.cpp:581
+msgctxt "system"
+msgid "Warp Drive"
+msgstr "跃迁引擎"
+
+#: src/shipTemplate.cpp:582
+msgctxt "system"
+msgid "Jump Drive"
+msgstr "超空间引擎"
+
+#: src/shipTemplate.cpp:583
+msgctxt "system"
+msgid "Front Shield Generator"
+msgstr "前护盾发生器"
+
+#: src/shipTemplate.cpp:584
+msgctxt "system"
+msgid "Rear Shield Generator"
+msgstr "后护盾发生器"
+
+#: src/scenarioInfo.cpp:103 src/scenarioInfo.cpp:104
+msgid "setting"
+msgstr "设置"
+
+#: src/tutorialGame.cpp:101
+msgid "Next"
+msgstr "下一步"
+
+#: src/tutorialGame.cpp:108
+msgid "Reset"
+msgstr "重置"
+
+#: src/menus/joinServerMenu.cpp:17
+msgctxt "connectserver"
+msgid "Connecting..."
+msgstr "连接中..."
+
+#: src/menus/joinServerMenu.cpp:19 src/menus/shipSelectionScreen.cpp:58
+#: src/menus/shipSelectionScreen.cpp:559 src/screens/gm/gameMasterScreen.cpp:93
+#: src/screens/gm/objectCreationView.cpp:142
+#: src/screens/gm/globalMessageEntryView.cpp:19
+#: src/screenComponents/selfDestructButton.cpp:25
+#: src/screenComponents/commsOverlay.cpp:25
+#: src/screenComponents/scanningDialog.cpp:36
+msgctxt "button"
+msgid "Cancel"
+msgstr "取消"
+
+#: src/menus/joinServerMenu.cpp:62
+msgid "Please enter the server password:"
+msgstr "请输入服务器密码："
+
+#: src/menus/serverBrowseMenu.cpp:22
+msgctxt "game_client_disconnect_reason"
+msgid "still connected"
+msgstr "仍连接中"
+
+#: src/menus/serverBrowseMenu.cpp:24
+msgctxt "game_client_disconnect_reason"
+msgid "failed to connect to server"
+msgstr "连接服务器失败"
+
+#: src/menus/serverBrowseMenu.cpp:26
+msgctxt "game_client_disconnect_reason"
+msgid "bad credentials"
+msgstr "凭据无效"
+
+#: src/menus/serverBrowseMenu.cpp:28
+msgctxt "game_client_disconnect_reason"
+msgid "closed by server"
+msgstr "服务器关闭"
+
+#: src/menus/serverBrowseMenu.cpp:30
+msgctxt "game_client_disconnect_reason"
+msgid "timed out"
+msgstr "连接超时"
+
+#: src/menus/serverBrowseMenu.cpp:32
+msgctxt "game_client_disconnect_reason"
+msgid "unknown"
+msgstr "未知错误"
+
+#: src/menus/serverBrowseMenu.cpp:34
+msgctxt "game_client_disconnect_reason"
+msgid "version mismatch"
+msgstr "版本不匹配"
+
+#: src/menus/serverBrowseMenu.cpp:36
+msgctxt "game_client_disconnect_reason"
+msgid "unspecified error {error}"
+msgstr "未指明错误 {error}"
+
+#: src/menus/serverBrowseMenu.cpp:50 src/menus/tutorialMenu.cpp:65
+#: src/menus/optionsMenu.cpp:192 src/menus/hotkeyMenu.cpp:71
+#: src/screenComponents/databaseView.cpp:102
+#: src/screenComponents/databaseView.cpp:106
+msgctxt "button"
+msgid "Back"
+msgstr "返回"
+
+#: src/menus/serverBrowseMenu.cpp:57
+msgid "Connection error: {message}"
+msgstr "连接错误：{message}"
+
+#: src/menus/serverBrowseMenu.cpp:62
+msgctxt "screenLan"
+msgid "Connect"
+msgstr "连接"
+
+#: src/menus/serverBrowseMenu.cpp:110
+msgid "Last Session ({last})"
+msgstr "上次会话 ({last})"
+
+#: src/menus/mainMenus.cpp:72
+msgctxt "Credits"
+msgid "Version: {version}"
+msgstr "版本: {version}"
+
+#: src/menus/mainMenus.cpp:74
+msgctxt "mainMenu"
+msgid "Your name:"
+msgstr "你的名字："
+
+#: src/menus/mainMenus.cpp:79
+msgctxt "mainMenu"
+msgid "Start server"
+msgstr "启动服务器"
+
+#: src/menus/mainMenus.cpp:84
+msgctxt "mainMenu"
+msgid "Start client"
+msgstr "启动客户端"
+
+#: src/menus/mainMenus.cpp:89
+msgctxt "mainMenu"
+msgid "Options"
+msgstr "选项"
+
+#: src/menus/mainMenus.cpp:94
+msgctxt "mainMenu"
+msgid "Quit"
+msgstr "退出"
+
+#: src/menus/mainMenus.cpp:98
+msgctxt "mainMenu"
+msgid "Tutorials"
+msgstr "教程"
+
+#: src/menus/mainMenus.cpp:104
+msgctxt "Credits"
+msgid "Credits"
+msgstr "鸣谢"
+
+#: src/menus/mainMenus.cpp:105
+msgctxt "Credits"
+msgid "Programming:"
+msgstr "程序："
+
+#: src/menus/mainMenus.cpp:112
+msgctxt "Credits"
+msgid "Graphics:"
+msgstr "图形："
+
+#: src/menus/mainMenus.cpp:115
+msgctxt "Credits"
+msgid "Localization:"
+msgstr "本地化："
+
+#: src/menus/mainMenus.cpp:119
+msgctxt "Credits"
+msgid "Music:"
+msgstr "音乐："
+
+#: src/menus/mainMenus.cpp:126
+msgctxt "Credits"
+msgid "Models:"
+msgstr "模型："
+
+#: src/menus/mainMenus.cpp:130
+msgctxt "Credits"
+msgid "Crew sprites:"
+msgstr "船员立绘："
+
+#: src/menus/mainMenus.cpp:133
+msgctxt "Credits"
+msgid "Special thanks:"
+msgstr "特别鸣谢："
+
+#: src/menus/serverCreationScreen.cpp:30
+msgid "Server configuration"
+msgstr "服务器配置"
+
+#: src/menus/serverCreationScreen.cpp:35
+msgid "Server name: "
+msgstr "服务器名称："
+
+#: src/menus/serverCreationScreen.cpp:42
+msgid "Server password: "
+msgstr "服务器密码："
+
+#: src/menus/serverCreationScreen.cpp:49
+msgid "GM control code: "
+msgstr "GM控制代码："
+
+#: src/menus/serverCreationScreen.cpp:56
+msgid "List on master server: "
+msgstr "列入主服务器列表："
+
+#: src/menus/serverCreationScreen.cpp:58
+msgid "No"
+msgstr "否"
+
+#: src/menus/serverCreationScreen.cpp:58
+msgid "Yes"
+msgstr "是"
+
+#: src/menus/serverCreationScreen.cpp:62
+msgid "Server port: "
+msgstr "服务器端口："
+
+#: src/menus/serverCreationScreen.cpp:66
+msgid "Server info"
+msgstr "服务器信息"
+
+#: src/menus/serverCreationScreen.cpp:74
+msgid "Server was configured to connect to reverse proxy:"
+msgstr "服务器已配置连接反向代理："
+
+#: src/menus/serverCreationScreen.cpp:88
+msgid "Server IP: "
+msgstr "服务器IP："
+
+#: src/menus/serverCreationScreen.cpp:100
+#: src/menus/serverCreationScreen.cpp:135
+#: src/menus/serverCreationScreen.cpp:214 src/menus/shipSelectionScreen.cpp:260
+msgid "Close"
+msgstr "关闭"
+
+#: src/menus/serverCreationScreen.cpp:106
+msgid "Start server"
+msgstr "启动服务器"
+
+#: src/menus/serverCreationScreen.cpp:142
+msgid "Continue"
+msgstr "继续"
+
+#: src/menus/serverCreationScreen.cpp:191
+msgid "Category"
+msgstr "类别"
+
+#: src/menus/serverCreationScreen.cpp:197
+msgid "Scenario"
+msgstr "剧本"
+
+#: src/menus/serverCreationScreen.cpp:205
+msgid "Description"
+msgstr "描述"
+
+#: src/menus/serverCreationScreen.cpp:206
+#: src/menus/serverCreationScreen.cpp:280
+msgid "Select a scenario..."
+msgstr "选择一个剧本..."
+
+#: src/menus/serverCreationScreen.cpp:221
+#: src/menus/serverCreationScreen.cpp:337
+msgid "Start scenario"
+msgstr "开始剧本"
+
+#: src/menus/serverCreationScreen.cpp:331
+msgid "Back"
+msgstr "返回"
+
+#: src/menus/tutorialMenu.cpp:28
+msgctxt "title"
+msgid "Tutorials"
+msgstr "教程"
+
+#: src/menus/tutorialMenu.cpp:58
+msgid "Start Tutorial"
+msgstr "开始教程"
+
+#: src/menus/optionsMenu.cpp:36
+msgid "Graphics options"
+msgstr "图形选项"
+
+#: src/menus/optionsMenu.cpp:45
+msgid "Audio options"
+msgstr "音频选项"
+
+#: src/menus/optionsMenu.cpp:54
+msgid "Interface options"
+msgstr "界面选项"
+
+#: src/menus/optionsMenu.cpp:75
+msgid "Radar Rotation"
+msgstr "雷达旋转"
+
+#: src/menus/optionsMenu.cpp:77
+msgid "Helms Radar Lock"
+msgstr "驾驶员雷达锁定"
+
+#: src/menus/optionsMenu.cpp:85
+msgid "Weapons Radar Lock"
+msgstr "武器雷达锁定"
+
+#: src/menus/optionsMenu.cpp:91
+msgid "Science Radar Lock"
+msgstr "科学雷达锁定"
+
+#: src/menus/optionsMenu.cpp:98
+msgid "Control Options"
+msgstr "控制选项"
+
+#: src/menus/optionsMenu.cpp:101 src/menus/hotkeyMenu.cpp:38
+msgid "Configure Keyboard/Joystick"
+msgstr "配置键盘/摇杆"
+
+#: src/menus/optionsMenu.cpp:109
+msgid "Language (applies on back)"
+msgstr "语言 (返回后生效)"
+
+#: src/menus/optionsMenu.cpp:178
+msgid "Interface Theme"
+msgstr "界面主题"
+
+#: src/menus/optionsMenu.cpp:202
+msgctxt "options"
+msgid "Save"
+msgstr "保存"
+
+#: src/menus/optionsMenu.cpp:226
+msgid "Fullscreen toggle"
+msgstr "全屏切换"
+
+#: src/menus/optionsMenu.cpp:259 src/menus/optionsMenu.cpp:264
+msgid "FoV: {fov}"
+msgstr "视野: {fov}"
+
+#: src/menus/optionsMenu.cpp:280 src/menus/optionsMenu.cpp:285
+msgid "Sound Volume: {volume}%"
+msgstr "音量: {volume}%"
+
+#: src/menus/optionsMenu.cpp:289
+msgid "Music Playback"
+msgstr "音乐播放"
+
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
+msgid "Disabled"
+msgstr "禁用"
+
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
+msgid "Enabled"
+msgstr "启用"
+
+#: src/menus/optionsMenu.cpp:299 src/menus/optionsMenu.cpp:324
+msgid "Main Screen only"
+msgstr "仅主屏幕"
+
+#: src/menus/optionsMenu.cpp:305 src/menus/optionsMenu.cpp:310
+msgid "Music Volume: {volume}%"
+msgstr "音乐音量: {volume}%"
+
+#: src/menus/optionsMenu.cpp:314
+msgid "Impulse Engine sound"
+msgstr "脉冲引擎音效"
+
+#: src/menus/optionsMenu.cpp:330 src/menus/optionsMenu.cpp:335
+msgid "Impulse Volume: {volume}%"
+msgstr "脉冲音量: {volume}%"
+
+#: src/menus/optionsMenu.cpp:347
+msgid "Preview Soundtracks"
+msgstr "预览音轨"
+
+#: src/menus/shipSelectionScreen.cpp:42 src/menus/shipSelectionScreen.cpp:306
+msgid "Enter this ship's control code:"
+msgstr "请输入此飞船的控制代码："
+
+#: src/menus/shipSelectionScreen.cpp:67
+msgid "Ok"
+msgstr "确定"
+
+#: src/menus/shipSelectionScreen.cpp:74
+msgid "OK"
+msgstr "确定"
+
+#: src/menus/shipSelectionScreen.cpp:106
+msgid ""
+"Control code accepted.\n"
+"Granting access."
+msgstr ""
+"控制代码已接受。\n"
+"正在授予访问权限。"
+
+#: src/menus/shipSelectionScreen.cpp:115
+msgid "Incorrect control code. Re-enter code:"
+msgstr "控制代码不正确。请重新输入："
+
+#: src/menus/shipSelectionScreen.cpp:159
+msgid "Game master"
+msgstr "游戏管理员"
+
+#: src/menus/shipSelectionScreen.cpp:164 src/menus/shipSelectionScreen.cpp:191
+msgid "Enter the GM control code:"
+msgstr "请输入GM控制代码："
+
+#: src/menus/shipSelectionScreen.cpp:186
+msgid "Spectate (view all)"
+msgstr "旁观 (总览)"
+
+#: src/menus/shipSelectionScreen.cpp:212
+msgid "Cinematic"
+msgstr "电影模式"
+
+#: src/menus/shipSelectionScreen.cpp:228
+msgid "Scan complexity: "
+msgstr "扫描复杂度："
+
+#: src/menus/shipSelectionScreen.cpp:231
+msgctxt "scanning"
+msgid "None (delay)"
+msgstr "无 (延迟)"
+
+#: src/menus/shipSelectionScreen.cpp:231
+msgctxt "scanning"
+msgid "Simple"
+msgstr "简单"
+
+#: src/menus/shipSelectionScreen.cpp:231
+msgctxt "scanning"
+msgid "Normal"
+msgstr "普通"
+
+#: src/menus/shipSelectionScreen.cpp:231
+msgctxt "scanning"
+msgid "Advanced"
+msgstr "高级"
+
+#: src/menus/shipSelectionScreen.cpp:236
+msgid "Hacking difficulty: "
+msgstr "入侵难度："
+
+#: src/menus/shipSelectionScreen.cpp:239
+msgctxt "hacking"
+msgid "Simple"
+msgstr "简单"
+
+#: src/menus/shipSelectionScreen.cpp:239
+msgctxt "hacking"
+msgid "Normal"
+msgstr "普通"
+
+#: src/menus/shipSelectionScreen.cpp:239
+msgctxt "hacking"
+msgid "Difficult"
+msgstr "困难"
+
+#: src/menus/shipSelectionScreen.cpp:239
+msgctxt "hacking"
+msgid "Fiendish"
+msgstr "极难"
+
+#: src/menus/shipSelectionScreen.cpp:244
+msgid "Hacking type: "
+msgstr "入侵类型："
+
+#: src/menus/shipSelectionScreen.cpp:247
+msgctxt "hacking"
+msgid "Mine"
+msgstr "地雷"
+
+#: src/menus/shipSelectionScreen.cpp:247
+msgctxt "hacking"
+msgid "Lights"
+msgstr "灯光"
+
+#: src/menus/shipSelectionScreen.cpp:247
+msgctxt "hacking"
+msgid "All"
+msgstr "全部"
+
+#: src/menus/shipSelectionScreen.cpp:252
+msgid "Beam/shield frequencies"
+msgstr "光束/护盾频率"
+
+#: src/menus/shipSelectionScreen.cpp:256
+msgid "Per-system damage"
+msgstr "按系统划分的伤害"
+
+#: src/menus/shipSelectionScreen.cpp:267
+msgid "Extra settings"
+msgstr "额外设置"
+
+#: src/menus/shipSelectionScreen.cpp:280
+msgid "Ship info..."
+msgstr "飞船信息..."
+
+#: src/menus/shipSelectionScreen.cpp:286
+msgid "Select ship"
+msgstr "选择飞船"
+
+#: src/menus/shipSelectionScreen.cpp:287
+msgid "Waiting for server to spawn a ship"
+msgstr "等待服务器生成飞船"
+
+#: src/menus/shipSelectionScreen.cpp:358
+msgid "Spawn player ship"
+msgstr "生成玩家飞船"
+
+#: src/menus/shipSelectionScreen.cpp:379
+msgid "Scenario selection"
+msgstr "剧本选择"
+
+#: src/menus/shipSelectionScreen.cpp:386
+msgid "Disconnect"
+msgstr "断开连接"
+
+#: src/menus/shipSelectionScreen.cpp:490
+msgid "6/5 player crew"
+msgstr "6/5人船员"
+
+#: src/menus/shipSelectionScreen.cpp:512
+msgid "4/3/1 player crew"
+msgstr "4/3/1人船员"
+
+#: src/menus/shipSelectionScreen.cpp:521
+msgid "3D screens"
+msgstr "3D屏幕"
+
+#: src/menus/shipSelectionScreen.cpp:524
+msgid "Main screen"
+msgstr "主屏幕"
+
+#: src/menus/shipSelectionScreen.cpp:534 src/menus/autoConnectScreen.cpp:28
+msgid "Ship window"
+msgstr "飞船窗口"
+
+#: src/menus/shipSelectionScreen.cpp:553
+msgid "Top-down 3D view"
+msgstr "俯视3D视图"
+
+#: src/menus/shipSelectionScreen.cpp:563
+msgctxt "button"
+msgid "Ready"
+msgstr "准备就绪"
+
+#: src/menus/shipSelectionScreen.cpp:570
+msgid "Alternative options"
+msgstr "其他选项"
+
+#: src/menus/shipSelectionScreen.cpp:574
+msgid "Main screen controls"
+msgstr "主屏幕控制"
+
+#: src/menus/shipSelectionScreen.cpp:584
+msgid ""
+"You can select multiple stations and switch between them during the game.\n"
+"If mainscreen is selected alongside stations, it will be shown next to the "
+"current station (if the total screen size is wide enough)."
+msgstr ""
+"你可以在游戏过程中选择多个工作站并进行切换。\n"
+"如果主屏幕与工作站一同选择，则主屏幕将显示在当前工作站旁边（如果总屏幕尺寸足够宽）。"
+
+#: src/menus/shipSelectionScreen.cpp:624
+msgid "--- Crew ---"
+msgstr "--- 船员 ---"
+
+#: src/menus/hotkeyMenu.cpp:70
+msgid ""
+"Left Click: Assign input. Middle Click: Add input. Right Click: Delete "
+"inputs.\n"
+"Possible inputs: Keyboard keys, joystick buttons, joystick axes."
+msgstr ""
+"左键点击：分配输入。中键点击：添加输入。右键点击：删除输入。\n"
+"可用输入：键盘按键、摇杆按钮、摇杆轴。"
+
+#: src/menus/luaConsole.cpp:21 src/gui/hotkeyConfig.cpp:317
+#: src/gui/hotkeyConfig.cpp:318 src/gui/hotkeyConfig.cpp:319
+#: src/gui/hotkeyConfig.cpp:320 src/gui/hotkeyConfig.cpp:321
+#: src/gui/hotkeyConfig.cpp:322 src/gui/hotkeyConfig.cpp:323
+msgctxt "hotkey_menu"
+msgid "General"
+msgstr "通用"
+
+#: src/menus/luaConsole.cpp:21
+msgctxt "hotkey_General"
+msgid "Open LUA console"
+msgstr "打开LUA控制台"
+
+#: src/screens/cinematicViewScreen.cpp:41 src/screens/topDownScreen.cpp:33
+msgctxt "button"
+msgid "Lock camera on ship"
+msgstr "锁定飞船视角"
+
+#: src/screens/cinematicViewScreen.cpp:44
+msgctxt "button"
+msgid "Lock camera on ship's target"
+msgstr "锁定飞船目标视角"
+
+#: src/screens/cinematicViewScreen.cpp:47
+msgctxt "button"
+msgid "Cycle through ships"
+msgstr "循环切换飞船"
+
+#: src/screens/crewStationScreen.cpp:54 src/screens/gm/gameMasterScreen.cpp:223
+#: src/screens/gm/tweak.cpp:99 src/screenComponents/commsOverlay.cpp:110
+#: src/screenComponents/commsOverlay.cpp:140
+#: src/screenComponents/hackingDialog.cpp:42
+msgctxt "button"
+msgid "Close"
+msgstr "关闭"
+
+#: src/screens/crewStationScreen.cpp:69 src/screens/mainScreen.cpp:53
+msgctxt "hotkey_F1"
+msgid "Keyboard Shortcuts"
+msgstr "键盘快捷键"
+
+#: src/screens/crewStationScreen.cpp:73
+msgctxt "hotkey_F1"
+msgid "{label}: {button}\n"
+msgstr "{label}: {button}\n"
+
+#: src/screens/mainScreen.cpp:55 src/gui/hotkeyConfig.cpp:326
+#: src/gui/hotkeyConfig.cpp:327 src/gui/hotkeyConfig.cpp:328
+#: src/gui/hotkeyConfig.cpp:329 src/gui/hotkeyConfig.cpp:330
+#: src/gui/hotkeyConfig.cpp:331 src/gui/hotkeyConfig.cpp:332
+#: src/gui/hotkeyConfig.cpp:333
+msgctxt "hotkey_menu"
+msgid "Main Screen"
+msgstr "主屏幕"
+
+#: src/screens/mainScreen.cpp:56
+msgctxt "hotkey_F1"
+msgid "{label}:\t{button}\n"
+msgstr "{label}:\t{button}\n"
+
+#: src/screens/crew4/operationsScreen.cpp:67
+#: src/screens/crew6/relayScreen.cpp:101
+#: src/screens/crew1/singlePilotScreen.cpp:119
+msgid "Open Comms"
+msgstr "开启通讯"
+
+#: src/screens/crew4/operationsScreen.cpp:70
+#: src/screens/crew6/relayScreen.cpp:130
+msgid "Place Waypoint"
+msgstr "设置航路点"
+
+#: src/screens/crew4/operationsScreen.cpp:75
+#: src/screens/crew6/relayScreen.cpp:135
+msgid "Delete Waypoint"
+msgstr "删除航路点"
+
+#: src/screens/crew4/operationsScreen.cpp:87
+#: src/screens/crew6/relayScreen.cpp:151
+msgid "Reputation"
+msgstr "声望"
+
+#: src/screens/crew4/operationsScreen.cpp:91
+#: src/screens/crew6/relayScreen.cpp:155
+#: src/screens/gm/gameMasterScreen.cpp:147
+msgid "Clock"
+msgstr "时钟"
+
+#: src/screens/crew4/tacticalScreen.cpp:72
+#: src/screens/crew6/engineeringScreen.cpp:33
+#: src/screens/crew6/weaponsScreen.cpp:80 src/screens/crew6/helmsScreen.cpp:73
+#: src/screens/crew1/singlePilotScreen.cpp:79
+#: src/screens/extra/powerManagement.cpp:19
+msgid "Energy"
+msgstr "能量"
+
+#: src/screens/crew4/tacticalScreen.cpp:74 src/screens/crew6/helmsScreen.cpp:75
+#: src/screens/crew1/singlePilotScreen.cpp:81
+msgid "Heading"
+msgstr "航向"
+
+#: src/screens/crew4/tacticalScreen.cpp:76 src/screens/crew6/helmsScreen.cpp:77
+#: src/screens/crew1/singlePilotScreen.cpp:83
+msgid "Speed"
+msgstr "速度"
+
+#: src/screens/crew4/tacticalScreen.cpp:78
+#: src/screens/crew1/singlePilotScreen.cpp:85
+msgid "Shields"
+msgstr "护盾"
+
+#: src/screens/crew4/tacticalScreen.cpp:91
+#: src/screens/crew1/singlePilotScreen.cpp:104
+msgid "Beams"
+msgstr "光束"
+
+#: src/screens/crew4/tacticalScreen.cpp:124
+#: src/screens/crew6/helmsScreen.cpp:99
+#: src/screens/crew1/singlePilotScreen.cpp:137
+msgid "{value} {unit}/min"
+msgstr "{value} {unit}/分钟"
+
+#: src/screens/crew6/engineeringScreen.cpp:35
+msgctxt "health"
+msgid "Hull"
+msgstr "船体"
+
+#: src/screens/crew6/engineeringScreen.cpp:37
+#: src/screens/crew6/weaponsScreen.cpp:82
+msgctxt "shields"
+msgid "Front"
+msgstr "前方"
+
+#: src/screens/crew6/engineeringScreen.cpp:39
+#: src/screens/crew6/weaponsScreen.cpp:84
+msgctxt "shields"
+msgid "Rear"
+msgstr "后方"
+
+#: src/screens/crew6/engineeringScreen.cpp:41
+msgctxt "total"
+msgid "Coolant"
+msgstr "冷却液"
+
+#: src/screens/crew6/engineeringScreen.cpp:142
+msgctxt "slider"
+msgid "Power"
+msgstr "能量"
+
+#: src/screens/crew6/engineeringScreen.cpp:144
+msgctxt "slider"
+msgid "Coolant"
+msgstr "冷却液"
+
+#: src/screens/crew6/engineeringScreen.cpp:195
+#: src/screens/crew6/engineeringScreen.cpp:287
+msgid "{energy}/min"
+msgstr "{energy}/分钟"
+
+#: src/screens/crew6/engineeringScreen.cpp:271
+msgctxt "slider"
+msgid "Power: {current_level}% / {requested}%"
+msgstr "能量：{current_level}% / {requested}%"
+
+#: src/screens/crew6/engineeringScreen.cpp:273
+msgctxt "slider"
+msgid "Coolant: {current_level}% / {requested}%"
+msgstr "冷却液：{current_level}% / {requested}%"
+
+#: src/screens/crew6/engineeringScreen.cpp:281
+msgctxt "Engineer"
+msgid "Maximal health"
+msgstr "最大生命值"
+
+#: src/screens/crew6/engineeringScreen.cpp:287
+msgid "Energy production"
+msgstr "能量产出"
+
+#: src/screens/crew6/engineeringScreen.cpp:290
+msgid "Firing rate"
+msgstr "射速"
+
+#: src/screens/crew6/engineeringScreen.cpp:297
+msgctxt "Engineer"
+msgid "Turret rotation rate"
+msgstr "炮塔旋转速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:303
+msgctxt "missile"
+msgid "Reload rate"
+msgstr "重装速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:306
+msgid "Turning speed"
+msgstr "转向速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:308
+#: src/screens/crew6/engineeringScreen.cpp:313
+msgid "Combat recharge rate"
+msgstr "战斗充能速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:311
+msgid "Impulse speed"
+msgstr "脉冲速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:316
+msgid "Warp drive speed"
+msgstr "跃迁引擎速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:319
+msgid "Jump drive recharge rate"
+msgstr "超空间引擎充能速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:320
+msgid "Jump drive jump speed"
+msgstr "超空间引擎跃迁速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:324
+#: src/screens/crew6/engineeringScreen.cpp:338
+msgctxt "shields"
+msgid "Calibration speed"
+msgstr "校准速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:325
+#: src/screens/crew6/engineeringScreen.cpp:339
+msgctxt "shields"
+msgid "Charge rate"
+msgstr "充能速度"
+
+#: src/screens/crew6/engineeringScreen.cpp:331
+#: src/screens/crew6/engineeringScreen.cpp:345
+msgid "Extra damage"
+msgstr "额外伤害"
+
+#: src/screens/crew6/engineeringScreen.cpp:333
+#: src/screens/crew6/engineeringScreen.cpp:347
+msgid "Damage negate"
+msgstr "伤害抵消"
+
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Scanning"
+msgstr "扫描"
+
+#: src/screens/crew6/scienceScreen.cpp:80
+msgctxt "scienceTab"
+msgid "Other"
+msgstr "其他"
+
+#: src/screens/crew6/scienceScreen.cpp:96
+msgctxt "science"
+msgid "Callsign"
+msgstr "呼号"
+
+#: src/screens/crew6/scienceScreen.cpp:98
+msgctxt "science"
+msgid "Distance"
+msgstr "距离"
+
+#: src/screens/crew6/scienceScreen.cpp:100
+msgctxt "science"
+msgid "Bearing"
+msgstr "方位"
+
+#: src/screens/crew6/scienceScreen.cpp:102
+msgctxt "science"
+msgid "Rel. Speed"
+msgstr "相对速度"
+
+#: src/screens/crew6/scienceScreen.cpp:104
+msgctxt "science"
+msgid "Faction"
+msgstr "派系"
+
+#: src/screens/crew6/scienceScreen.cpp:106
+msgctxt "science"
+msgid "Type"
+msgstr "类型"
+
+#: src/screens/crew6/scienceScreen.cpp:108
+msgctxt "scienceButton"
+msgid "DB"
+msgstr "数据库"
+
+#: src/screens/crew6/scienceScreen.cpp:122
+msgctxt "science"
+msgid "Shields"
+msgstr "护盾"
+
+#: src/screens/crew6/scienceScreen.cpp:124
+msgctxt "science"
+msgid "Hull"
+msgstr "船体"
+
+#: src/screens/crew6/scienceScreen.cpp:136
+msgctxt "scienceTab"
+msgid "Tactical"
+msgstr "战术"
+
+#: src/screens/crew6/scienceScreen.cpp:140
+msgctxt "scienceTab"
+msgid "Systems"
+msgstr "系统"
+
+#: src/screens/crew6/scienceScreen.cpp:143
+msgctxt "scienceTab"
+msgid "Description"
+msgstr "描述"
+
+#: src/screens/crew6/scienceScreen.cpp:178
+msgctxt "scienceButton"
+msgid "Probe View"
+msgstr "探测器视角"
+
+#: src/screens/crew6/scienceScreen.cpp:204
+#: src/screens/crew6/scienceScreen.cpp:246
+msgctxt "scienceButton"
+msgid "Zoom: {zoom}x"
+msgstr "缩放：{zoom}倍"
+
+#: src/screens/crew6/scienceScreen.cpp:217
+msgctxt "scienceButton"
+msgid "Radar"
+msgstr "雷达"
+
+#: src/screens/crew6/scienceScreen.cpp:217
+msgctxt "scienceButton"
+msgid "Database"
+msgstr "数据库"
+
+#: src/screens/crew6/relayScreen.cpp:81
+msgid "Callsign"
+msgstr "呼号"
+
+#: src/screens/crew6/relayScreen.cpp:84
+msgid "Faction"
+msgstr "派系"
+
+#: src/screens/crew6/relayScreen.cpp:88
+msgid "Zoom: {zoom}x"
+msgstr "缩放：{zoom}倍"
+
+#: src/screens/crew6/relayScreen.cpp:103
+msgid "Link to Comms"
+msgstr "连接通讯"
+
+#: src/screens/crew6/relayScreen.cpp:107
+msgid "Start hacking"
+msgstr "开始入侵"
+
+#: src/screens/crew6/relayScreen.cpp:117
+msgid "Link to Science"
+msgstr "连接科学"
+
+#: src/screens/crew6/relayScreen.cpp:144 src/screens/crew6/relayScreen.cpp:301
+msgid "Launch Probe"
+msgstr "发射探测器"
+
+#: src/screens/crew6/weaponsScreen.cpp:65
+msgid "Beam info"
+msgstr "光束信息"
+
+#: src/screens/extra/damcon.cpp:20
+msgctxt "damagecontrol"
+msgid "Hull"
+msgstr "船体"
+
+#: src/screens/extra/powerManagement.cpp:21
+msgid "Coolant"
+msgstr "冷却液"
+
+#: src/screens/extra/powerManagement.cpp:39
+msgctxt "button"
+msgid "Power"
+msgstr "能量"
+
+#: src/screens/extra/powerManagement.cpp:40
+msgctxt "button"
+msgid "Coolant"
+msgstr "冷却液"
+
+#: src/screens/extra/powerManagement.cpp:41
+msgctxt "button"
+msgid "Heat"
+msgstr "热量"
+
+#: src/screens/gm/gameMasterScreen.cpp:40
+msgctxt "button"
+msgid "Pause"
+msgstr "暂停"
+
+#: src/screens/gm/gameMasterScreen.cpp:48
+msgctxt "button"
+msgid "Intercept all comms"
+msgstr "拦截所有通讯"
+
+#: src/screens/gm/gameMasterScreen.cpp:64
+msgctxt "button"
+msgid "Global message"
+msgstr "全局消息"
+
+#: src/screens/gm/gameMasterScreen.cpp:78
+msgctxt "button"
+msgid "Create..."
+msgstr "创建..."
+
+#: src/screens/gm/gameMasterScreen.cpp:83
+msgctxt "button"
+msgid "Copy scenario"
+msgstr "复制剧本"
+
+#: src/screens/gm/gameMasterScreen.cpp:88
+msgctxt "button"
+msgid "Copy selected"
+msgstr "复制已选"
+
+#: src/screens/gm/gameMasterScreen.cpp:98
+msgctxt "button"
+msgid "Tweak"
+msgstr "调整"
+
+#: src/screens/gm/gameMasterScreen.cpp:132
+msgctxt "button"
+msgid "Hail ship"
+msgstr "呼叫飞船"
+
+#: src/screens/gm/gameMasterScreen.cpp:170
+msgid "Defend location"
+msgstr "防守地点"
+
+#: src/screens/gm/gameMasterScreen.cpp:175
+msgid "Stand ground"
+msgstr "坚守阵地"
+
+#: src/screens/gm/gameMasterScreen.cpp:180
+msgid "Roaming"
+msgstr "巡逻"
+
+#: src/screens/gm/gameMasterScreen.cpp:185
+msgid "Idle"
+msgstr "待命"
+
+#: src/screens/gm/gameMasterScreen.cpp:190
+msgid "Orders:"
+msgstr "指令："
+
+#: src/screens/gm/gameMasterScreen.cpp:350
+msgid "*mixed*"
+msgstr "*混合*"
+
+#: src/screens/gm/gameMasterScreen.cpp:357
+msgctxt "gm_info"
+msgid "Position"
+msgstr "位置"
+
+#: src/screens/gm/gameMasterScreen.cpp:369
+msgid "gm_info"
+msgstr "GM信息"
+
+#: src/screens/gm/objectCreationView.cpp:36
+msgctxt "create"
+msgid "cpu ship"
+msgstr "AI飞船"
+
+#: src/screens/gm/objectCreationView.cpp:37
+msgctxt "create"
+msgid "player ship"
+msgstr "玩家飞船"
+
+#: src/screens/gm/objectCreationView.cpp:58
+msgctxt "create"
+msgid "Artifact"
+msgstr "神器"
+
+#: src/screens/gm/objectCreationView.cpp:62
+msgctxt "create"
+msgid "Warp Jammer"
+msgstr "跃迁干扰器"
+
+#: src/screens/gm/objectCreationView.cpp:66
+msgctxt "create"
+msgid "Mine"
+msgstr "水雷"
+
+#: src/screens/gm/objectCreationView.cpp:71
+msgctxt "create"
+msgid "Supply Drop"
+msgstr "补给投放"
+
+#: src/screens/gm/objectCreationView.cpp:75
+msgctxt "create"
+msgid "Asteroid"
+msgstr "小行星"
+
+#: src/screens/gm/objectCreationView.cpp:79
+msgctxt "create"
+msgid "Visual Asteroid"
+msgstr "视觉小行星"
+
+#: src/screens/gm/objectCreationView.cpp:83
+msgctxt "create"
+msgid "Planet"
+msgstr "行星"
+
+#: src/screens/gm/objectCreationView.cpp:87
+msgctxt "create"
+msgid "BlackHole"
+msgstr "黑洞"
+
+#: src/screens/gm/objectCreationView.cpp:91
+msgctxt "create"
+msgid "Nebula"
+msgstr "星云"
+
+#: src/screens/gm/objectCreationView.cpp:95
+msgctxt "create"
+msgid "Worm Hole"
+msgstr "虫洞"
+
+#: src/screens/gm/globalMessageEntryView.cpp:23
+#: src/screenComponents/commsOverlay.cpp:102
+msgctxt "button"
+msgid "Send"
+msgstr "发送"
+
+#: src/screens/gm/chatDialog.cpp:46
+msgctxt "chatGM"
+msgid "Target - Destroyed"
+msgstr "目标 - 已摧毁"
+
+#: src/screens/gm/chatDialog.cpp:59
+msgctxt "chatGM"
+msgid "Channel not open, enter name to hail as to hail target."
+msgstr "频道未开启，请输入名称以呼叫目标。"
+
+#: src/screens/gm/chatDialog.cpp:60
+msgctxt "chatGM"
+msgid "{callsign} - Inactive"
+msgstr "{callsign} - 未激活"
+
+#: src/screens/gm/chatDialog.cpp:64
+msgctxt "chatGM"
+msgid "{callsign} - Opening communications with {target}"
+msgstr "{callsign} - 正在与 {target} 建立通讯"
+
+#: src/screens/gm/chatDialog.cpp:67
+msgctxt "chatGM"
+msgid "{callsign} - Hailing as {target}"
+msgstr "{callsign} - 正在以 {target} 的名义呼叫"
+
+#: src/screens/gm/chatDialog.cpp:71
+msgctxt "chatGM"
+msgid "{callsign} - Communicating with {target}"
+msgstr "{callsign} - 正在与 {target} 通讯"
+
+#: src/screens/gm/chatDialog.cpp:75
+msgctxt "chatGM"
+msgid "**{callsign} - Communicating as {target}**"
+msgstr "**{callsign} - 正在以 {target} 的名义通讯**"
+
+#: src/screens/gm/chatDialog.cpp:77
+msgctxt "chatGM"
+msgid "{callsign} - Communicating as {target}"
+msgstr "{callsign} - 正在以 {target} 的名义通讯"
+
+#: src/screens/gm/tweak.cpp:31
+msgctxt "tab"
+msgid "Base"
+msgstr "基础"
+
+#: src/screens/gm/tweak.cpp:36
+msgctxt "tab"
+msgid "Template-based"
+msgstr "基于模板"
+
+#: src/screens/gm/tweak.cpp:42
+msgctxt "tab"
+msgid "Ship"
+msgstr "飞船"
+
+#: src/screens/gm/tweak.cpp:48
+msgctxt "tab"
+msgid "Asteroid"
+msgstr "小行星"
+
+#: src/screens/gm/tweak.cpp:54
+msgctxt "tab"
+msgid "Jammer"
+msgstr "干扰器"
+
+#: src/screens/gm/tweak.cpp:60
+msgctxt "tab"
+msgid "Shields"
+msgstr "护盾"
+
+#: src/screens/gm/tweak.cpp:66
+msgctxt "tab"
+msgid "Tubes"
+msgstr "发射管"
+
+#: src/screens/gm/tweak.cpp:68
+msgctxt "tab"
+msgid "Missiles"
+msgstr "导弹"
+
+#: src/screens/gm/tweak.cpp:70
+msgctxt "tab"
+msgid "Beams"
+msgstr "光束"
+
+#: src/screens/gm/tweak.cpp:72
+msgctxt "tab"
+msgid "Systems"
+msgstr "系统"
+
+#: src/screens/gm/tweak.cpp:74
+msgctxt "tab"
+msgid "Power"
+msgstr "能量"
+
+#: src/screens/gm/tweak.cpp:76
+msgctxt "tab"
+msgid "Coolant Rate"
+msgstr "冷却液速率"
+
+#: src/screens/gm/tweak.cpp:78
+msgctxt "tab"
+msgid "Heat Rate"
+msgstr "热量速率"
+
+#: src/screens/gm/tweak.cpp:80
+msgctxt "tab"
+msgid "Power Rate"
+msgstr "能量速率"
+
+#: src/screens/gm/tweak.cpp:86
+msgctxt "tab"
+msgid "Player"
+msgstr "玩家"
+
+#: src/screens/gm/tweak.cpp:88
+msgctxt "tab"
+msgid "Player 2"
+msgstr "玩家 2"
+
+#: src/screens/gm/tweak.cpp:134
+msgid "Type name:"
+msgstr "类型名称："
+
+#: src/screens/gm/tweak.cpp:143
+msgid "Docked ship services:"
+msgstr "停靠飞船服务："
+
+#: src/screens/gm/tweak.cpp:144
+msgid "Shares energy"
+msgstr "共享能量"
+
+#: src/screens/gm/tweak.cpp:150
+msgid "Repairs ships"
+msgstr "维修飞船"
+
+#: src/screens/gm/tweak.cpp:156
+msgid "Restocks scan probes"
+msgstr "补给扫描探测器"
+
+#: src/screens/gm/tweak.cpp:162
+msgid "Restocks cpuship missiles"
+msgstr "补给AI飞船导弹"
+
+#: src/screens/gm/tweak.cpp:169
+msgid "Hull max:"
+msgstr "船体最大值："
+
+#: src/screens/gm/tweak.cpp:176 src/screens/gm/tweak.cpp:408
+msgid "Hull current:"
+msgstr "船体当前值："
+
+#: src/screens/gm/tweak.cpp:183
+msgid "Could be destroyed"
+msgstr "可能被摧毁"
+
+#: src/screens/gm/tweak.cpp:189
+msgid "Short-range radar range:"
+msgstr "短程雷达范围："
+
+#: src/screens/gm/tweak.cpp:195
+msgid "Long-range radar range:"
+msgstr "远程雷达范围："
+
+#: src/screens/gm/tweak.cpp:234
+msgid "Impulse max speed:"
+msgstr "脉冲最大速度："
+
+#: src/screens/gm/tweak.cpp:240
+msgid "Impulse acceleration:"
+msgstr "脉冲加速度："
+
+#: src/screens/gm/tweak.cpp:246
+msgid "Impulse max reverse speed:"
+msgstr "脉冲最大倒退速度："
+
+#: src/screens/gm/tweak.cpp:252
+msgid "Impulse reverse acceleration:"
+msgstr "脉冲倒退加速度："
+
+#: src/screens/gm/tweak.cpp:258
+msgid "Turn speed:"
+msgstr "转向速度："
+
+#: src/screens/gm/tweak.cpp:264
+msgid "Docking state:"
+msgstr "停靠状态："
+
+#: src/screens/gm/tweak.cpp:265 src/screens/gm/tweak.cpp:327
+msgid "Not docked"
+msgstr "未停靠"
+
+#: src/screens/gm/tweak.cpp:279
+msgctxt "tweak_ship"
+msgid "Special drives:"
+msgstr "特殊驱动器："
+
+#: src/screens/gm/tweak.cpp:281
+msgid "Warp Drive"
+msgstr "跃迁引擎"
+
+#: src/screens/gm/tweak.cpp:286
+msgid "Warp speed:"
+msgstr "跃迁速度："
+
+#: src/screens/gm/tweak.cpp:292
+msgid "Jump Drive"
+msgstr "超空间引擎"
+
+#: src/screens/gm/tweak.cpp:297
+msgid "Jump min distance:"
+msgstr "超空间跃迁最小距离："
+
+#: src/screens/gm/tweak.cpp:303
+msgid "Jump max distance:"
+msgstr "超空间跃迁最大距离："
+
+#: src/screens/gm/tweak.cpp:309
+msgid "Jump charge:"
+msgstr "超空间跃迁充能："
+
+#: src/screens/gm/tweak.cpp:331
+msgid "Docking..."
+msgstr "正在停靠..."
+
+#: src/screens/gm/tweak.cpp:335
+msgid "Docked"
+msgstr "已停靠"
+
+#: src/screens/gm/tweak.cpp:368
+msgctxt "missiles"
+msgid "Storage space:"
+msgstr "存储空间："
+
+#: src/screens/gm/tweak.cpp:381
+msgctxt "missiles"
+msgid "Stored amount:"
+msgstr "存储量："
+
+#: src/screens/gm/tweak.cpp:402
+msgid "Jammer Range:"
+msgstr "干扰器范围："
+
+#: src/screens/gm/tweak.cpp:436
+msgid "Asteroid Size:"
+msgstr "小行星尺寸："
+
+#: src/screens/gm/tweak.cpp:482
+msgid "Tube count:"
+msgstr "发射管数量："
+
+#: src/screens/gm/tweak.cpp:506
+msgid "Tube: {id_tube}"
+msgstr "发射管：{id_tube}"
+
+#: src/screens/gm/tweak.cpp:509
+msgctxt "tube"
+msgid "Direction:"
+msgstr "方向："
+
+#: src/screens/gm/tweak.cpp:515
+msgctxt "tube"
+msgid "Load time:"
+msgstr "装填时间："
+
+#: src/screens/gm/tweak.cpp:521
+msgctxt "tube"
+msgid "Size:"
+msgstr "尺寸："
+
+#: src/screens/gm/tweak.cpp:526
+msgctxt "tube"
+msgid "Small"
+msgstr "小型"
+
+#: src/screens/gm/tweak.cpp:527
+msgctxt "tube"
+msgid "Medium"
+msgstr "中型"
+
+#: src/screens/gm/tweak.cpp:528
+msgctxt "tube"
+msgid "Large"
+msgstr "大型"
+
+#: src/screens/gm/tweak.cpp:532
+msgctxt "tube"
+msgid "Allowed use:"
+msgstr "允许使用："
+
+#: src/screens/gm/tweak.cpp:575
+msgid "Shield {id_shield} max:"
+msgstr "护盾 {id_shield} 最大值："
+
+#: src/screens/gm/tweak.cpp:585
+msgid "Shield {id_shield}:"
+msgstr "护盾 {id_shield}："
+
+#: src/screens/gm/tweak.cpp:639
+msgid "Beam: {id_beam}"
+msgstr "光束：{id_beam}"
+
+#: src/screens/gm/tweak.cpp:642
+msgctxt "beam"
+msgid "Arc:"
+msgstr "弧度："
+
+#: src/screens/gm/tweak.cpp:648
+msgctxt "beam"
+msgid "Direction:"
+msgstr "方向："
+
+#: src/screens/gm/tweak.cpp:654
+msgctxt "beam"
+msgid "Turret arc:"
+msgstr "炮塔弧度："
+
+#: src/screens/gm/tweak.cpp:660
+msgctxt "beam"
+msgid "Turret direction:"
+msgstr "炮塔方向："
+
+#: src/screens/gm/tweak.cpp:666
+msgctxt "beam"
+msgid "Turret rotation rate:"
+msgstr "炮塔旋转速度："
+
+#: src/screens/gm/tweak.cpp:681
+msgctxt "beam"
+msgid "Range:"
+msgstr "射程："
+
+#: src/screens/gm/tweak.cpp:687
+msgctxt "beam"
+msgid "Cycle time:"
+msgstr "循环时间："
+
+#: src/screens/gm/tweak.cpp:693
+msgctxt "beam"
+msgid "Energy used per fire:"
+msgstr "每次射击消耗能量："
+
+#: src/screens/gm/tweak.cpp:699
+msgctxt "beam"
+msgid "Heat generated per fire:"
+msgstr "每次射击产生热量："
+
+#: src/screens/gm/tweak.cpp:712
+msgctxt "beam"
+msgid "Damage:"
+msgstr "伤害："
+
+#: src/screens/gm/tweak.cpp:756
+msgid "{system} health"
+msgstr "{system} 生命值"
+
+#: src/screens/gm/tweak.cpp:765
+msgid "{system} health max"
+msgstr "{system} 最大生命值"
+
+#: src/screens/gm/tweak.cpp:775
+msgid "{system} heat"
+msgstr "{system} 热量"
+
+#: src/screens/gm/tweak.cpp:818
+msgid "current factor"
+msgstr "当前系数"
+
+#: src/screens/gm/tweak.cpp:819
+msgid "desired factor"
+msgstr "期望系数"
+
+#: src/screens/gm/tweak.cpp:824 src/screens/gm/tweak.cpp:887
+msgid "{system}"
+msgstr "{system}"
+
+#: src/screens/gm/tweak.cpp:848 src/screens/gm/tweak.cpp:911
+msgid "Applies on [Enter]"
+msgstr "按[回车]生效"
+
+#: src/screens/gm/tweak.cpp:881
+msgid "current rate"
+msgstr "当前速率"
+
+#: src/screens/gm/tweak.cpp:882
+msgid "desired rate"
+msgstr "期望速率"
+
+#: src/screens/gm/tweak.cpp:983
+msgid "Control code:"
+msgstr "控制代码："
+
+#: src/screens/gm/tweak.cpp:992
+msgid "Reputation:"
+msgstr "声望："
+
+#: src/screens/gm/tweak.cpp:1000
+msgid "Max energy:"
+msgstr "最大能量："
+
+#: src/screens/gm/tweak.cpp:1008
+msgid "Current energy:"
+msgstr "当前能量："
+
+#: src/screens/gm/tweak.cpp:1016
+msgid "Boost Speed:"
+msgstr "推进速度："
+
+#: src/screens/gm/tweak.cpp:1022
+msgid "Strafe Speed:"
+msgstr "平移速度："
+
+#: src/screens/gm/tweak.cpp:1030 src/screens/gm/tweak.cpp:1072
+msgid "Positions occupied: "
+msgstr "已占位置："
+
+#: src/screens/gm/tweak.cpp:1064
+msgid "position"
+msgstr "位置"
+
+#: src/screens/gm/tweak.cpp:1113
+msgid "Repair Crews:"
+msgstr "维修船员："
+
+#: src/screens/gm/tweak.cpp:1119
+msgid "Coolant:"
+msgstr "冷却液："
+
+#: src/screens/gm/tweak.cpp:1125
+msgid "Max Scan Probes:"
+msgstr "最大扫描探测器："
+
+#: src/screens/gm/tweak.cpp:1131
+msgid "Scan Probes:"
+msgstr "扫描探测器："
+
+#: src/screens/gm/tweak.cpp:1181
+msgctxt "button"
+msgid "Can scan"
+msgstr "可扫描"
+
+#: src/screens/gm/tweak.cpp:1187
+msgctxt "button"
+msgid "Can hack"
+msgstr "可入侵"
+
+#: src/screens/gm/tweak.cpp:1193
+msgctxt "button"
+msgid "Can dock"
+msgstr "可停靠"
+
+#: src/screens/gm/tweak.cpp:1199
+msgctxt "button"
+msgid "Can combat maneuver"
+msgstr "可进行战斗机动"
+
+#: src/screens/gm/tweak.cpp:1205
+msgctxt "button"
+msgid "Can self destruct"
+msgstr "可自毁"
+
+#: src/screens/gm/tweak.cpp:1211
+msgctxt "button"
+msgid "Can launch probes"
+msgstr "可发射探测器"
+
+#: src/screens/gm/tweak.cpp:1216
+msgctxt "button"
+msgid "Auto coolant"
+msgstr "自动冷却"
+
+#: src/screens/gm/tweak.cpp:1221
+msgctxt "button"
+msgid "Auto repair"
+msgstr "自动维修"
+
+#: src/screens/gm/tweak.cpp:1242
+msgctxt "player_tweak"
+msgid "Warp (E/s): {energy_per_second}"
+msgstr "跃迁 (能量/秒)：{energy_per_second}"
+
+#: src/screens/gm/tweak.cpp:1243
+msgctxt "player_tweak"
+msgid "Shields (E/s): {energy_per_second}"
+msgstr "护盾 (能量/秒)：{energy_per_second}"
+
+#: src/screens/gm/tweak.cpp:1268
+msgid "Callsign:"
+msgstr "呼号："
+
+#: src/screens/gm/tweak.cpp:1279
+msgid "Unscanned description:"
+msgstr "未扫描描述："
+
+#: src/screens/gm/tweak.cpp:1286
+msgid "Friend or Foe Description:"
+msgstr "友敌描述："
+
+#: src/screens/gm/tweak.cpp:1293
+msgid "Simple Scan Description:"
+msgstr "简单扫描描述："
+
+#: src/screens/gm/tweak.cpp:1300
+msgid "Full Scan Description:"
+msgstr "完全扫描描述："
+
+#: src/screens/gm/tweak.cpp:1310
+msgid "Heading:"
+msgstr "航向："
+
+#: src/screens/gm/tweak.cpp:1316
+msgid "Scanning Complexity:"
+msgstr "扫描复杂度："
+
+#: src/screens/gm/tweak.cpp:1322
+msgid "Scanning Depth:"
+msgstr "扫描深度："
+
+#: src/screenComponents/aimLock.cpp:11
+msgctxt "missile"
+msgid "Lock"
+msgstr "锁定"
+
+#: src/screenComponents/alertLevelButton.cpp:10
+msgid "Alert level"
+msgstr "警戒级别"
+
+#: src/screenComponents/helpOverlay.cpp:24
+msgctxt "hotkey_F1"
+msgid "Close"
+msgstr "关闭"
+
+#: src/screenComponents/missileTubeControls.cpp:109
+#: src/screenComponents/missileTubeControls.cpp:123
+#: src/screenComponents/missileTubeControls.cpp:141
+msgctxt "missile"
+msgid "Load"
+msgstr "装填"
+
+#: src/screenComponents/missileTubeControls.cpp:111
+msgctxt "missile"
+msgid "Empty"
+msgstr "清空"
+
+#: src/screenComponents/missileTubeControls.cpp:116
+#: src/screenComponents/missileTubeControls.cpp:132
+msgctxt "missile"
+msgid "Unload"
+msgstr "卸载"
+
+#: src/screenComponents/missileTubeControls.cpp:128
+msgctxt "missile"
+msgid "Loading"
+msgstr "正在装填"
+
+#: src/screenComponents/missileTubeControls.cpp:137
+msgctxt "missile"
+msgid "Unloading"
+msgstr "正在卸载"
+
+#: src/screenComponents/missileTubeControls.cpp:143
+msgctxt "missile"
+msgid "Firing"
+msgstr "正在发射"
+
+#: src/screenComponents/selfDestructIndicator.cpp:15
+msgid "SELF DESTRUCT ACTIVATED"
+msgstr "自毁已激活"
+
+#: src/screenComponents/selfDestructIndicator.cpp:32
+msgid "Waiting for authorization input: {codes} left"
+msgstr "等待授权输入：剩余 {codes} 次"
+
+#: src/screenComponents/selfDestructIndicator.cpp:36
+msgid "Have a nice day."
+msgstr "祝你愉快。"
+
+#: src/screenComponents/selfDestructIndicator.cpp:40
+msgid "This ship will self-destruct in {seconds} seconds."
+msgstr "本飞船将在 {seconds} 秒后自毁。"
+
+#: src/screenComponents/selfDestructEntry.cpp:19
+msgid "Self destruct activated!"
+msgstr "自毁已激活！"
+
+#: src/screenComponents/selfDestructEntry.cpp:64
+msgid "Code [{letter}]: {self_destruct_code}"
+msgstr "代码 [{letter}]：{self_destruct_code}"
+
+#: src/screenComponents/selfDestructEntry.cpp:77
+msgctxt "selfdestruct"
+msgid "Enter [{letter}]"
+msgstr "输入 [{letter}]"
+
+#: src/screenComponents/dockingButton.cpp:67
+msgid "Request Dock"
+msgstr "请求停靠"
+
+#: src/screenComponents/dockingButton.cpp:76
+msgid "Cancel Docking"
+msgstr "取消停靠"
+
+#: src/screenComponents/dockingButton.cpp:80
+msgid "Undock"
+msgstr "解除停靠"
+
+#: src/screenComponents/shieldsEnableButton.cpp:23
+msgctxt "shields"
+msgid "Calibrating"
+msgstr "正在校准"
+
+#: src/screenComponents/shieldsEnableButton.cpp:43
+msgctxt "shields"
+msgid "ON"
+msgstr "开启"
+
+#: src/screenComponents/shieldsEnableButton.cpp:43
+msgctxt "shields"
+msgid "OFF"
+msgstr "关闭"
+
+#: src/screenComponents/shieldsEnableButton.cpp:45
+msgid "{frequency} Shields: {status}"
+msgstr "{frequency} 护盾：{status}"
+
+#: src/screenComponents/shieldsEnableButton.cpp:47
+msgid "Shields: {status}"
+msgstr "护盾：{status}"
+
+#: src/screenComponents/selfDestructButton.cpp:12
+msgid "Self destruct"
+msgstr "自毁"
+
+#: src/screenComponents/selfDestructButton.cpp:19
+msgctxt "selfdestruct"
+msgid "Confirm!"
+msgstr "确认！"
+
+#: src/screenComponents/shieldFreqencySelect.cpp:22
+msgctxt "shields"
+msgid "Calibrate"
+msgstr "校准"
+
+#: src/screenComponents/jumpControls.cpp:22
+#: src/screenComponents/jumpControls.cpp:53
+msgctxt "jumpcontrol"
+msgid "Distance"
+msgstr "距离"
+
+#: src/screenComponents/jumpControls.cpp:25
+msgctxt "jumpcontrol"
+msgid "Jump"
+msgstr "跃迁"
+
+#: src/screenComponents/jumpControls.cpp:39
+msgctxt "jumpcontrol"
+msgid "Jump in"
+msgstr "跃迁中"
+
+#: src/screenComponents/jumpControls.cpp:46
+msgctxt "jumpcontrol"
+msgid "Charging"
+msgstr "正在充能"
+
+#: src/screenComponents/impulseControls.cpp:18
+msgctxt "slider"
+msgid "Impulse"
+msgstr "脉冲"
+
+#: src/screenComponents/frequencyCurve.cpp:53
+msgctxt "scienceFrequencyGraph"
+msgid "Damage with your beams"
+msgstr "你的光束造成伤害"
+
+#: src/screenComponents/frequencyCurve.cpp:55
+msgctxt "scienceFrequencyGraph"
+msgid "Damage on your shields"
+msgstr "你的护盾承受伤害"
+
+#: src/screenComponents/frequencyCurve.cpp:61
+msgctxt "scienceFrequencyGraph"
+msgid "No enemy beams"
+msgstr "无敌方光束"
+
+#: src/screenComponents/frequencyCurve.cpp:63
+msgctxt "scienceFrequencyGraph"
+msgid "No enemy shields"
+msgstr "无敌方护盾"
+
+#: src/screenComponents/frequencyCurve.cpp:66
+msgctxt "scienceFrequencyGraph"
+msgid "No data"
+msgstr "无数据"
+
+#: src/screenComponents/powerDamageIndicator.cpp:34
+msgctxt "systems"
+msgid "DAMAGED"
+msgstr "受损"
+
+#: src/screenComponents/powerDamageIndicator.cpp:38
+msgctxt "systems"
+msgid "JAMMED"
+msgstr "被干扰"
+
+#: src/screenComponents/powerDamageIndicator.cpp:42
+msgctxt "systems"
+msgid "NO POWER"
+msgstr "无能量"
+
+#: src/screenComponents/powerDamageIndicator.cpp:46
+msgctxt "systems"
+msgid "LOW ENERGY"
+msgstr "能量不足"
+
+#: src/screenComponents/powerDamageIndicator.cpp:50
+msgctxt "systems"
+msgid "LOW POWER"
+msgstr "功率不足"
+
+#: src/screenComponents/powerDamageIndicator.cpp:54
+msgctxt "systems"
+msgid "OVERHEATING"
+msgstr "过热"
+
+#: src/screenComponents/powerDamageIndicator.cpp:58
+msgctxt "systems"
+msgid "HACKED"
+msgstr "被入侵"
+
+#: src/screenComponents/beamTargetSelector.cpp:9
+msgctxt "target"
+msgid "Hull"
+msgstr "船体"
+
+#: src/screenComponents/indicatorOverlays.cpp:24
+msgid "Game Paused"
+msgstr "游戏已暂停"
+
+#: src/screenComponents/indicatorOverlays.cpp:27
+msgid "Unpause"
+msgstr "取消暂停"
+
+#: src/screenComponents/indicatorOverlays.cpp:133
+msgid "Defeat!"
+msgstr "失败！"
+
+#: src/screenComponents/indicatorOverlays.cpp:136
+msgid "Victory!"
+msgstr "胜利！"
+
+#: src/screenComponents/indicatorOverlays.cpp:140
+msgid "{faction} wins"
+msgstr "{faction} 获胜"
+
+#: src/screenComponents/combatManeuver.cpp:16
+msgid "Combat maneuver"
+msgstr "战斗机动"
+
+#: src/screenComponents/shipDestroyedPopup.cpp:20
+msgid "SHIP DESTROYED!"
+msgstr "飞船被摧毁！"
+
+#: src/screenComponents/shipDestroyedPopup.cpp:21
+msgctxt "shipdestroyed"
+msgid "Return"
+msgstr "返回"
+
+#: src/screenComponents/warpControls.cpp:41
+msgctxt "slider"
+msgid "Warp"
+msgstr "跃迁"
+
+#: src/screenComponents/commsOverlay.cpp:20
+msgid "Opening communications..."
+msgstr "正在开启通讯..."
+
+#: src/screenComponents/commsOverlay.cpp:39
+msgid "Answer"
+msgstr "接听"
+
+#: src/screenComponents/commsOverlay.cpp:45
+msgid "Ignore"
+msgstr "忽略"
+
+#: src/screenComponents/commsOverlay.cpp:54
+msgid "No reply..."
+msgstr "没有回应..."
+
+#: src/screenComponents/commsOverlay.cpp:65
+msgid "Communications were suddenly cut"
+msgstr "通讯突然中断"
+
+#: src/screenComponents/commsOverlay.cpp:76
+msgid "Communications channel closed"
+msgstr "通讯频道已关闭"
+
+#: src/screenComponents/commsOverlay.cpp:157
+msgid "Hailed by {name}"
+msgstr "来自 {name} 的呼叫"
+
+#: src/screenComponents/jumpIndicator.cpp:24
+msgid "Jump in: {delay}"
+msgstr "跃迁倒计时：{delay}"
+
+#: src/screenComponents/scanningDialog.cpp:22
+msgctxt "scanning"
+msgid "Electric signature"
+msgstr "电磁信号"
+
+#: src/screenComponents/scanningDialog.cpp:28
+msgctxt "scanning"
+msgid "LOCKED"
+msgstr "已锁定"
+
+#: src/screenComponents/mainScreenControls.cpp:15
+msgctxt "controlbutton"
+msgid "Main screen"
+msgstr "主屏幕"
+
+#: src/screenComponents/mainScreenControls.cpp:32
+msgctxt "mainscreen"
+msgid "Front"
+msgstr "前方"
+
+#: src/screenComponents/mainScreenControls.cpp:40
+msgctxt "mainscreen"
+msgid "Back"
+msgstr "后方"
+
+#: src/screenComponents/mainScreenControls.cpp:48
+msgctxt "mainscreen"
+msgid "Left"
+msgstr "左侧"
+
+#: src/screenComponents/mainScreenControls.cpp:56
+msgctxt "mainscreen"
+msgid "Right"
+msgstr "右侧"
+
+#: src/screenComponents/mainScreenControls.cpp:69
+msgctxt "mainscreen"
+msgid "Target lock"
+msgstr "目标锁定"
+
+#: src/screenComponents/mainScreenControls.cpp:81
+msgctxt "mainscreen"
+msgid "Tactical"
+msgstr "战术"
+
+#: src/screenComponents/mainScreenControls.cpp:92
+msgctxt "mainscreen"
+msgid "Long Range"
+msgstr "远程"
+
+#: src/screenComponents/mainScreenControls.cpp:106
+msgctxt "mainscreen"
+msgid "Show comms"
+msgstr "显示通讯"
+
+#: src/screenComponents/mainScreenControls.cpp:117
+msgctxt "mainscreen"
+msgid "Hide comms"
+msgstr "隐藏通讯"
+
+#: src/screenComponents/hackingDialog.cpp:36
+msgctxt "hacking"
+msgid "Reset"
+msgstr "重置"
+
+#: src/screenComponents/hackingDialog.cpp:56
+msgctxt "hacking"
+msgid "Target system:"
+msgstr "目标系统："
+
+#: src/screenComponents/hackingDialog.cpp:116
+msgctxt "hacking"
+msgid "Hacking in Progress: {percent}%"
+msgstr "入侵进行中：{percent}%"
+
+#: src/screenComponents/hackingDialog.cpp:125
+msgctxt "hacking"
+msgid "{target}: hacked {percent}%"
+msgstr "{target}：已入侵 {percent}%"
+
+#: src/screenComponents/hackingDialog.cpp:142
+msgid "Hacking SUCCESS!"
+msgstr "入侵成功！"
+
+#: src/screenComponents/hackingDialog.cpp:142
+msgid "Hacking FAILURE!"
+msgstr "入侵失败！"
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:205
+#: src/spaceObjects/mine.cpp:157
+msgctxt "gm_info"
+msgid "Owner"
+msgstr "拥有者"
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:212
+msgctxt "gm_info"
+msgid "Target"
+msgstr "目标"
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:215
+#: src/spaceObjects/mine.cpp:160
+msgctxt "gm_info"
+msgid "Faction"
+msgstr "派系"
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:216
+msgctxt "gm_info"
+msgid "Lifetime"
+msgstr "寿命"
+
+#: src/spaceObjects/missiles/missileWeapon.cpp:217
+msgctxt "gm_info"
+msgid "Size"
+msgstr "尺寸"
+
+#: src/spaceObjects/spaceship.cpp:1915
+msgctxt "missile"
+msgid "Homing"
+msgstr "追踪导弹"
+
+#: src/spaceObjects/spaceship.cpp:1917
+msgctxt "missile"
+msgid "Nuke"
+msgstr "核弹"
+
+#: src/spaceObjects/spaceship.cpp:1919
+msgctxt "missile"
+msgid "Mine"
+msgstr "水雷"
+
+#: src/spaceObjects/spaceship.cpp:1921
+msgctxt "missile"
+msgid "EMP"
+msgstr "电磁脉冲"
+
+#: src/spaceObjects/spaceship.cpp:1923
+msgctxt "missile"
+msgid "HVLI"
+msgstr "高压低脉冲"
+
+#: src/spaceObjects/cpuShip.cpp:207
+msgctxt "cpulog"
+msgid "Searching for targets."
+msgstr "正在搜索目标。"
+
+#: src/spaceObjects/cpuShip.cpp:216
+msgctxt "cpulog"
+msgid "Searching for hostiles around {x},{y}."
+msgstr "正在搜索 {x},{y} 附近的敌机。"
+
+#: src/spaceObjects/cpuShip.cpp:225
+msgctxt "cpulog"
+msgid "Searching for supplies."
+msgstr "正在搜索补给。"
+
+#: src/spaceObjects/cpuShip.cpp:228 src/spaceObjects/cpuShip.cpp:312
+msgctxt "cpulog"
+msgid "Docking to {callsign}."
+msgstr "正在停靠 {callsign}。"
+
+#: src/spaceObjects/cpuShip.cpp:239
+msgctxt "cpulog"
+msgid "Standing ground for now."
+msgstr "暂时原地待命。"
+
+#: src/spaceObjects/cpuShip.cpp:247
+msgctxt "cpulog"
+msgid "Defending {x},{y}."
+msgstr "正在防守 {x},{y}。"
+
+#: src/spaceObjects/cpuShip.cpp:257
+msgctxt "cpulog"
+msgid "Defending {callsign}."
+msgstr "正在防守 {callsign}。"
+
+#: src/spaceObjects/cpuShip.cpp:267
+msgctxt "cpulog"
+msgid "Following {callsign}."
+msgstr "正在跟随 {callsign}。"
+
+#: src/spaceObjects/cpuShip.cpp:275 src/spaceObjects/cpuShip.cpp:283
+msgctxt "cpulog"
+msgid "Moving to {x},{y}."
+msgstr "正在前往 {x},{y}。"
+
+#: src/spaceObjects/cpuShip.cpp:298
+msgctxt "cpulog"
+msgid "Moving to attack {callsign}!"
+msgstr "正在前往攻击 {callsign}！"
+
+#: src/spaceObjects/cpuShip.cpp:312
+msgctxt "cpulog"
+msgid "Docking to {callsign}."
+msgstr "正在停靠 {callsign}。"
+
+#: src/spaceObjects/cpuShip.cpp:327
+msgctxt "gm_info"
+msgid "Orders"
+msgstr "指令"
+
+#: src/spaceObjects/cpuShip.cpp:385
+msgctxt "orderscpu"
+msgid "Idle"
+msgstr "待命"
+
+#: src/spaceObjects/cpuShip.cpp:386
+msgctxt "orderscpu"
+msgid "Roaming"
+msgstr "巡逻"
+
+#: src/spaceObjects/cpuShip.cpp:387
+msgctxt "orderscpu"
+msgid "Retreat"
+msgstr "撤退"
+
+#: src/spaceObjects/cpuShip.cpp:388
+msgctxt "orderscpu"
+msgid "Stand Ground"
+msgstr "坚守阵地"
+
+#: src/spaceObjects/cpuShip.cpp:389
+msgctxt "orderscpu"
+msgid "Defend Location"
+msgstr "防守地点"
+
+#: src/spaceObjects/cpuShip.cpp:390
+msgctxt "orderscpu"
+msgid "Defend Target"
+msgstr "防守目标"
+
+#: src/spaceObjects/cpuShip.cpp:391
+msgctxt "orderscpu"
+msgid "Fly in formation"
+msgstr "编队飞行"
+
+#: src/spaceObjects/cpuShip.cpp:392
+msgctxt "orderscpu"
+msgid "Fly towards"
+msgstr "飞向"
+
+#: src/spaceObjects/cpuShip.cpp:393
+msgctxt "orderscpu"
+msgid "Fly towards (ignore all)"
+msgstr "飞向 (忽略所有)"
+
+#: src/spaceObjects/cpuShip.cpp:394
+msgctxt "orderscpu"
+msgid "Attack"
+msgstr "攻击"
+
+#: src/spaceObjects/cpuShip.cpp:395
+msgctxt "orderscpu"
+msgid "Dock"
+msgstr "停靠"
+
+#: src/spaceObjects/playerSpaceship.cpp:514
+msgctxt "alert"
+msgid "RED ALERT"
+msgstr "红色警戒"
+
+#: src/spaceObjects/playerSpaceship.cpp:515
+msgctxt "alert"
+msgid "YELLOW ALERT"
+msgstr "黄色警戒"
+
+#: src/spaceObjects/playerSpaceship.cpp:516
+msgctxt "alert"
+msgid "Normal"
+msgstr "正常"
+
+#: src/spaceObjects/playerSpaceship.cpp:637
+msgctxt "shiplog"
+msgid "Start of log"
+msgstr "日志开始"
+
+#: src/spaceObjects/playerSpaceship.cpp:1304
+msgctxt "shiplog"
+msgid "Hailed by {name}"
+msgstr "被 {name} 呼叫"
+
+#: src/spaceObjects/playerSpaceship.cpp:1358
+msgctxt "shiplog"
+msgid "Communication channel closed by other side"
+msgstr "通讯频道被对方关闭"
+
+#: src/spaceObjects/playerSpaceship.cpp:1368
+msgctxt "shiplog"
+msgid "Hailing from {callsign} stopped"
+msgstr "来自 {callsign} 的呼叫已停止"
+
+#: src/spaceObjects/playerSpaceship.cpp:1372
+msgctxt "shiplog"
+msgid "Communication channel closed"
+msgstr "通讯频道已关闭"
+
+#: src/spaceObjects/playerSpaceship.cpp:1544
+#: src/spaceObjects/playerSpaceship.cpp:1621
+msgctxt "chatdialog"
+msgid "Opened comms with {name}"
+msgstr "已与 {name} 建立通讯"
+
+#: src/spaceObjects/playerSpaceship.cpp:1545
+msgctxt "shiplog"
+msgid "Hailing: {name}"
+msgstr "正在呼叫：{name}"
+
+#: src/spaceObjects/playerSpaceship.cpp:1568
+#: src/spaceObjects/playerSpaceship.cpp:1569
+msgctxt "chatdialog"
+msgid "Opened comms to {callsign}"
+msgstr "已开启与 {callsign} 的通讯"
+
+#: src/spaceObjects/playerSpaceship.cpp:1570
+#: src/spaceObjects/playerSpaceship.cpp:1571
+msgctxt "shiplog"
+msgid "Opened communication channel to {callsign}"
+msgstr "已开启与 {callsign} 的通讯频道"
+
+#: src/spaceObjects/playerSpaceship.cpp:1573
+msgctxt "shiplog"
+msgid "Refused communications from {callsign}"
+msgstr "拒绝了来自 {callsign} 的通讯"
+
+#: src/spaceObjects/playerSpaceship.cpp:1574
+msgctxt "shiplog"
+msgid "Refused communications to {callsign}"
+msgstr "拒绝了与 {callsign} 的通讯"
+
+#: src/spaceObjects/playerSpaceship.cpp:1583
+msgctxt "shiplog"
+msgid "Hail suddenly went dead."
+msgstr "呼叫突然中断。"
+
+#: src/spaceObjects/playerSpaceship.cpp:1586
+msgctxt "shiplog"
+msgid "Accepted hail from {callsign}"
+msgstr "接受了来自 {callsign} 的呼叫"
+
+#: src/spaceObjects/playerSpaceship.cpp:1606
+msgctxt "shiplog"
+msgid "Refused hail from {callsign}"
+msgstr "拒绝了来自 {callsign} 的呼叫"
+
+#: src/spaceObjects/playerSpaceship.cpp:1620
+msgctxt "shiplog"
+msgid "Opened communication channel to {name}"
+msgstr "已开启与 {name} 的通讯频道"
+
+#: src/spaceObjects/playerSpaceship.cpp:1623
+msgctxt "shiplog"
+msgid "Refused hail from {name}"
+msgstr "拒绝了来自 {name} 的呼叫"
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:337
+msgctxt "gm_info"
+msgid "CallSign"
+msgstr "呼号"
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:338
+msgctxt "gm_info"
+msgid "Type"
+msgstr "类型"
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:339
+msgctxt "gm_info"
+msgid "Hull"
+msgstr "船体"
+
+#: src/spaceObjects/shipTemplateBasedObject.cpp:344
+msgctxt "gm_info"
+msgid "Shield"
+msgstr "护盾"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:299
+msgctxt "tube"
+msgid "Front"
+msgstr "前方"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:301
+msgctxt "tube"
+msgid "Right"
+msgstr "右方"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:303
+msgctxt "tube"
+msgid "Left"
+msgstr "左方"
+
+#: src/spaceObjects/spaceshipParts/weaponTube.cpp:305
+msgctxt "tube"
+msgid "Rear"
+msgstr "后方"
+
+#: src/gui/hotkeyBinder.cpp:36
+msgid "[New input]"
+msgstr "[新输入]"
+
+#: src/gui/hotkeyConfig.cpp:31
+msgctxt "hotkey_menu"
+msgid "Cinematic View"
+msgstr "电影视角"
+
+#: src/gui/hotkeyConfig.cpp:32
+msgctxt "hotkey_Cinematic"
+msgid "Toggle UI"
+msgstr "切换UI"
+
+#: src/gui/hotkeyConfig.cpp:33
+msgctxt "hotkey_Cinematic"
+msgid "Camera lock"
+msgstr "镜头锁定"
+
+#: src/gui/hotkeyConfig.cpp:34
+msgctxt "hotkey_Cinematic"
+msgid "Camera cycle"
+msgstr "循环切换镜头"
+
+#: src/gui/hotkeyConfig.cpp:35
+msgctxt "hotkey_Cinematic"
+msgid "Cycle previous player ship"
+msgstr "切换到上一艘玩家飞船"
+
+#: src/gui/hotkeyConfig.cpp:36
+msgctxt "hotkey_Cinematic"
+msgid "Cycle next player ship"
+msgstr "切换到下一艘玩家飞船"
+
+#: src/gui/hotkeyConfig.cpp:37
+msgctxt "hotkey_Cinematic"
+msgid "Move forward"
+msgstr "向前移动"
+
+#: src/gui/hotkeyConfig.cpp:38
+msgctxt "hotkey_Cinematic"
+msgid "Move backward"
+msgstr "向后移动"
+
+#: src/gui/hotkeyConfig.cpp:39
+msgctxt "hotkey_Cinematic"
+msgid "Strafe left"
+msgstr "向左平移"
+
+#: src/gui/hotkeyConfig.cpp:40
+msgctxt "hotkey_Cinematic"
+msgid "Strafe right"
+msgstr "向右平移"
+
+#: src/gui/hotkeyConfig.cpp:41
+msgctxt "hotkey_Cinematic"
+msgid "Move up"
+msgstr "向上移动"
+
+#: src/gui/hotkeyConfig.cpp:42
+msgctxt "hotkey_Cinematic"
+msgid "Move down"
+msgstr "向下移动"
+
+#: src/gui/hotkeyConfig.cpp:43
+msgctxt "hotkey_Cinematic"
+msgid "Rotate left"
+msgstr "向左旋转"
+
+#: src/gui/hotkeyConfig.cpp:44
+msgctxt "hotkey_Cinematic"
+msgid "Rotate right"
+msgstr "向右旋转"
+
+#: src/gui/hotkeyConfig.cpp:45
+msgctxt "hotkey_Cinematic"
+msgid "Tilt down"
+msgstr "向下倾斜"
+
+#: src/gui/hotkeyConfig.cpp:46
+msgctxt "hotkey_Cinematic"
+msgid "Tilt up"
+msgstr "向上倾斜"
+
+#: src/gui/hotkeyConfig.cpp:62
+msgctxt "hotkey_menu"
+msgid "Top-down View"
+msgstr "俯视视图"
+
+#: src/gui/hotkeyConfig.cpp:63
+msgctxt "hotkey_Topdown"
+msgid "Toggle UI"
+msgstr "切换UI"
+
+#: src/gui/hotkeyConfig.cpp:64
+msgctxt "hotkey_Topdown"
+msgid "Camera lock"
+msgstr "镜头锁定"
+
+#: src/gui/hotkeyConfig.cpp:65
+msgctxt "hotkey_Topdown"
+msgid "Cycle previous player ship"
+msgstr "切换到上一艘玩家飞船"
+
+#: src/gui/hotkeyConfig.cpp:66
+msgctxt "hotkey_Topdown"
+msgid "Cycle next player ship"
+msgstr "切换到下一艘玩家飞船"
+
+#: src/gui/hotkeyConfig.cpp:67
+msgctxt "hotkey_Topdown"
+msgid "Pan up"
+msgstr "向上平移"
+
+#: src/gui/hotkeyConfig.cpp:68
+msgctxt "hotkey_Topdown"
+msgid "Pan down"
+msgstr "向下平移"
+
+#: src/gui/hotkeyConfig.cpp:69
+msgctxt "hotkey_Topdown"
+msgid "Pan left"
+msgstr "向左平移"
+
+#: src/gui/hotkeyConfig.cpp:70
+msgctxt "hotkey_Topdown"
+msgid "Pan right"
+msgstr "向右平移"
+
+#: src/gui/hotkeyConfig.cpp:307 src/gui/hotkeyConfig.cpp:308
+#: src/gui/hotkeyConfig.cpp:309 src/gui/hotkeyConfig.cpp:310
+#: src/gui/hotkeyConfig.cpp:311 src/gui/hotkeyConfig.cpp:312
+#: src/gui/hotkeyConfig.cpp:313 src/gui/hotkeyConfig.cpp:314
+msgctxt "hotkey_menu"
+msgid "Basic"
+msgstr "基础"
+
+#: src/gui/hotkeyConfig.cpp:307
+msgctxt "hotkey_Basic"
+msgid "Pause game"
+msgstr "暂停游戏"
+
+#: src/gui/hotkeyConfig.cpp:308
+msgctxt "hotkey_Basic"
+msgid "Show in-game help"
+msgstr "显示游戏内帮助"
+
+#: src/gui/hotkeyConfig.cpp:309
+msgctxt "hotkey_Basic"
+msgid "Return to ship options menu"
+msgstr "返回飞船选项菜单"
+
+#: src/gui/hotkeyConfig.cpp:310
+msgctxt "hotkey_Basic"
+msgid "Zoom in on zoomable stations"
+msgstr "放大可缩放工作站"
+
+#: src/gui/hotkeyConfig.cpp:311
+msgctxt "hotkey_Basic"
+msgid "Zoom out on zoomable stations"
+msgstr "缩小可缩放工作站"
+
+#: src/gui/hotkeyConfig.cpp:312
+msgctxt "hotkey_Basic"
+msgid "Broadcast voice chat to server"
+msgstr "向服务器广播语音聊天"
+
+#: src/gui/hotkeyConfig.cpp:313
+msgctxt "hotkey_Basic"
+msgid "Broadcast voice chat to ship"
+msgstr "向飞船广播语音聊天"
+
+#: src/gui/hotkeyConfig.cpp:314
+msgctxt "hotkey_Basic"
+msgid "Fullscreen toggle"
+msgstr "全屏切换"
+
+#: src/gui/hotkeyConfig.cpp:317
+msgctxt "hotkey_General"
+msgid "Switch to next crew station"
+msgstr "切换到下一个船员工作站"
+
+#: src/gui/hotkeyConfig.cpp:318
+msgctxt "hotkey_General"
+msgid "Switch to previous crew station"
+msgstr "切换到上一个船员工作站"
+
+#: src/gui/hotkeyConfig.cpp:319
+msgctxt "hotkey_General"
+msgid "Switch to helms station"
+msgstr "切换到驾驶工作站"
+
+#: src/gui/hotkeyConfig.cpp:320
+msgctxt "hotkey_General"
+msgid "Switch to weapons station"
+msgstr "切换到武器工作站"
+
+#: src/gui/hotkeyConfig.cpp:321
+msgctxt "hotkey_General"
+msgid "Switch to engineering station"
+msgstr "切换到工程工作站"
+
+#: src/gui/hotkeyConfig.cpp:322
+msgctxt "hotkey_General"
+msgid "Switch to science station"
+msgstr "切换到科学工作站"
+
+#: src/gui/hotkeyConfig.cpp:323
+msgctxt "hotkey_General"
+msgid "Switch to relay station"
+msgstr "切换到通讯工作站"
+
+#: src/gui/hotkeyConfig.cpp:326
+msgctxt "hotkey_MainScreen"
+msgid "View forward"
+msgstr "前向视图"
+
+#: src/gui/hotkeyConfig.cpp:327
+msgctxt "hotkey_MainScreen"
+msgid "View left"
+msgstr "左侧视图"
+
+#: src/gui/hotkeyConfig.cpp:328
+msgctxt "hotkey_MainScreen"
+msgid "View right"
+msgstr "右侧视图"
+
+#: src/gui/hotkeyConfig.cpp:329
+msgctxt "hotkey_MainScreen"
+msgid "View backward"
+msgstr "后向视图"
+
+#: src/gui/hotkeyConfig.cpp:330
+msgctxt "hotkey_MainScreen"
+msgid "Lock view on weapons target"
+msgstr "锁定武器目标视图"
+
+#: src/gui/hotkeyConfig.cpp:331
+msgctxt "hotkey_MainScreen"
+msgid "View tactical radar"
+msgstr "查看战术雷达"
+
+#: src/gui/hotkeyConfig.cpp:332
+msgctxt "hotkey_MainScreen"
+msgid "View long-range radar"
+msgstr "查看远程雷达"
+
+#: src/gui/hotkeyConfig.cpp:333
+msgctxt "hotkey_MainScreen"
+msgid "Toggle first-person view"
+msgstr "切换第一人称视图"
+
+#: src/gui/hotkeyConfig.cpp:336 src/gui/hotkeyConfig.cpp:337
+#: src/gui/hotkeyConfig.cpp:338 src/gui/hotkeyConfig.cpp:339
+#: src/gui/hotkeyConfig.cpp:340 src/gui/hotkeyConfig.cpp:341
+#: src/gui/hotkeyConfig.cpp:342 src/gui/hotkeyConfig.cpp:343
+#: src/gui/hotkeyConfig.cpp:344 src/gui/hotkeyConfig.cpp:345
+#: src/gui/hotkeyConfig.cpp:346 src/gui/hotkeyConfig.cpp:347
+#: src/gui/hotkeyConfig.cpp:348 src/gui/hotkeyConfig.cpp:349
+#: src/gui/hotkeyConfig.cpp:350 src/gui/hotkeyConfig.cpp:351
+#: src/gui/hotkeyConfig.cpp:352 src/gui/hotkeyConfig.cpp:353
+#: src/gui/hotkeyConfig.cpp:354 src/gui/hotkeyConfig.cpp:355
+#: src/gui/hotkeyConfig.cpp:356 src/gui/hotkeyConfig.cpp:357
+#: src/gui/hotkeyConfig.cpp:358 src/gui/hotkeyConfig.cpp:359
+#: src/gui/hotkeyConfig.cpp:360 src/gui/hotkeyConfig.cpp:361
+#: src/gui/hotkeyConfig.cpp:362 src/gui/hotkeyConfig.cpp:363
+#: src/gui/hotkeyConfig.cpp:364
+msgctxt "hotkey_menu"
+msgid "Helms"
+msgstr "驾驶"
+
+#: src/gui/hotkeyConfig.cpp:336
+msgctxt "hotkey_Helms"
+msgid "Increase impulse"
+msgstr "增加脉冲"
+
+#: src/gui/hotkeyConfig.cpp:337
+msgctxt "hotkey_Helms"
+msgid "Increase impulse 1%"
+msgstr "增加脉冲1%"
+
+#: src/gui/hotkeyConfig.cpp:338
+msgctxt "hotkey_Helms"
+msgid "Increase impulse 10%"
+msgstr "增加脉冲10%"
+
+#: src/gui/hotkeyConfig.cpp:339
+msgctxt "hotkey_Helms"
+msgid "Decrease impulse"
+msgstr "减少脉冲"
+
+#: src/gui/hotkeyConfig.cpp:340
+msgctxt "hotkey_Helms"
+msgid "Decrease impulse 1%"
+msgstr "减少脉冲1%"
+
+#: src/gui/hotkeyConfig.cpp:341
+msgctxt "hotkey_Helms"
+msgid "Decrease impulse 10%"
+msgstr "减少脉冲10%"
+
+#: src/gui/hotkeyConfig.cpp:342
+msgctxt "hotkey_Helms"
+msgid "Set impulse (joystick)"
+msgstr "设置脉冲 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:343
+msgctxt "hotkey_Helms"
+msgid "Zero impulse"
+msgstr "脉冲归零"
+
+#: src/gui/hotkeyConfig.cpp:344
+msgctxt "hotkey_Helms"
+msgid "Max impulse"
+msgstr "最大脉冲"
+
+#: src/gui/hotkeyConfig.cpp:345
+msgctxt "hotkey_Helms"
+msgid "Max reverse impulse"
+msgstr "最大倒退脉冲"
+
+#: src/gui/hotkeyConfig.cpp:346
+msgctxt "hotkey_Helms"
+msgid "Turn left"
+msgstr "左转"
+
+#: src/gui/hotkeyConfig.cpp:347
+msgctxt "hotkey_Helms"
+msgid "Turn right"
+msgstr "右转"
+
+#: src/gui/hotkeyConfig.cpp:348
+msgctxt "hotkey_Helms"
+msgid "Warp off"
+msgstr "跃迁关闭"
+
+#: src/gui/hotkeyConfig.cpp:349
+msgctxt "hotkey_Helms"
+msgid "Warp 1"
+msgstr "跃迁1"
+
+#: src/gui/hotkeyConfig.cpp:350
+msgctxt "hotkey_Helms"
+msgid "Warp 2"
+msgstr "跃迁2"
+
+#: src/gui/hotkeyConfig.cpp:351
+msgctxt "hotkey_Helms"
+msgid "Warp 3"
+msgstr "跃迁3"
+
+#: src/gui/hotkeyConfig.cpp:352
+msgctxt "hotkey_Helms"
+msgid "Warp 4"
+msgstr "跃迁4"
+
+#: src/gui/hotkeyConfig.cpp:353
+msgctxt "hotkey_Helms"
+msgid "Increase Warp"
+msgstr "增加跃迁速度"
+
+#: src/gui/hotkeyConfig.cpp:354
+msgctxt "hotkey_Helms"
+msgid "Decrease Warp"
+msgstr "减少跃迁速度"
+
+#: src/gui/hotkeyConfig.cpp:355
+msgctxt "hotkey_Helms"
+msgid "Dock request/abort/undock"
+msgstr "停靠请求/中止/解除停靠"
+
+#: src/gui/hotkeyConfig.cpp:356
+msgctxt "hotkey_Helms"
+msgid "Initiate docking"
+msgstr "发起停靠"
+
+#: src/gui/hotkeyConfig.cpp:357
+msgctxt "hotkey_Helms"
+msgid "Abort docking"
+msgstr "中止停靠"
+
+#: src/gui/hotkeyConfig.cpp:358
+msgctxt "hotkey_Helms"
+msgid "Undock"
+msgstr "解除停靠"
+
+#: src/gui/hotkeyConfig.cpp:359
+msgctxt "hotkey_Helms"
+msgid "Increase jump distance"
+msgstr "增加超空间跃迁距离"
+
+#: src/gui/hotkeyConfig.cpp:360
+msgctxt "hotkey_Helms"
+msgid "Decrease jump distance"
+msgstr "减少超空间跃迁距离"
+
+#: src/gui/hotkeyConfig.cpp:361
+msgctxt "hotkey_Helms"
+msgid "Initiate jump"
+msgstr "发起超空间跃迁"
+
+#: src/gui/hotkeyConfig.cpp:362
+msgctxt "hotkey_Helms"
+msgid "Combat boost left"
+msgstr "向左战斗推进"
+
+#: src/gui/hotkeyConfig.cpp:363
+msgctxt "hotkey_Helms"
+msgid "Combat boost right"
+msgstr "向右战斗推进"
+
+#: src/gui/hotkeyConfig.cpp:364
+msgctxt "hotkey_Helms"
+msgid "Combat boost forwards"
+msgstr "向前战斗推进"
+
+#: src/gui/hotkeyConfig.cpp:367 src/gui/hotkeyConfig.cpp:368
+#: src/gui/hotkeyConfig.cpp:369 src/gui/hotkeyConfig.cpp:370
+#: src/gui/hotkeyConfig.cpp:371 src/gui/hotkeyConfig.cpp:374
+#: src/gui/hotkeyConfig.cpp:375 src/gui/hotkeyConfig.cpp:376
+#: src/gui/hotkeyConfig.cpp:378 src/gui/hotkeyConfig.cpp:379
+#: src/gui/hotkeyConfig.cpp:380 src/gui/hotkeyConfig.cpp:381
+#: src/gui/hotkeyConfig.cpp:382 src/gui/hotkeyConfig.cpp:383
+#: src/gui/hotkeyConfig.cpp:384 src/gui/hotkeyConfig.cpp:385
+#: src/gui/hotkeyConfig.cpp:386 src/gui/hotkeyConfig.cpp:387
+#: src/gui/hotkeyConfig.cpp:388 src/gui/hotkeyConfig.cpp:389
+#: src/gui/hotkeyConfig.cpp:390 src/gui/hotkeyConfig.cpp:391
+#: src/gui/hotkeyConfig.cpp:392 src/gui/hotkeyConfig.cpp:393
+#: src/gui/hotkeyConfig.cpp:394
+msgctxt "hotkey_menu"
+msgid "Weapons"
+msgstr "武器"
+
+#: src/gui/hotkeyConfig.cpp:367
+msgctxt "hotkey_Weapons"
+msgid "Select homing"
+msgstr "选择追踪弹"
+
+#: src/gui/hotkeyConfig.cpp:368
+msgctxt "hotkey_Weapons"
+msgid "Select nuke"
+msgstr "选择核弹"
+
+#: src/gui/hotkeyConfig.cpp:369
+msgctxt "hotkey_Weapons"
+msgid "Select mine"
+msgstr "选择水雷"
+
+#: src/gui/hotkeyConfig.cpp:370
+msgctxt "hotkey_Weapons"
+msgid "Select EMP"
+msgstr "选择电磁脉冲"
+
+#: src/gui/hotkeyConfig.cpp:371
+msgctxt "hotkey_Weapons"
+msgid "Select HVLI"
+msgstr "选择高压低脉冲"
+
+#: src/gui/hotkeyConfig.cpp:374
+msgctxt "hotkey_Weapons"
+msgid "Load tube {number}"
+msgstr "装填发射管 {number}"
+
+#: src/gui/hotkeyConfig.cpp:375
+msgctxt "hotkey_Weapons"
+msgid "Unload tube {number}"
+msgstr "卸载发射管 {number}"
+
+#: src/gui/hotkeyConfig.cpp:376
+msgctxt "hotkey_Weapons"
+msgid "Fire tube {number}"
+msgstr "发射发射管 {number}"
+
+#: src/gui/hotkeyConfig.cpp:378
+msgctxt "hotkey_Weapons"
+msgid "Select next hostile target"
+msgstr "选择下一个敌对目标"
+
+#: src/gui/hotkeyConfig.cpp:379
+msgctxt "hotkey_Weapons"
+msgid "Select next target (any)"
+msgstr "选择下一个目标 (任意)"
+
+#: src/gui/hotkeyConfig.cpp:380
+msgctxt "hotkey_Weapons"
+msgid "Toggle shields"
+msgstr "切换护盾"
+
+#: src/gui/hotkeyConfig.cpp:381
+msgctxt "hotkey_Weapons"
+msgid "Enable shields"
+msgstr "启用护盾"
+
+#: src/gui/hotkeyConfig.cpp:382
+msgctxt "hotkey_Weapons"
+msgid "Disable shields"
+msgstr "禁用护盾"
+
+#: src/gui/hotkeyConfig.cpp:383
+msgctxt "hotkey_Weapons"
+msgid "Increase shield frequency target"
+msgstr "增加护盾频率目标"
+
+#: src/gui/hotkeyConfig.cpp:384
+msgctxt "hotkey_Weapons"
+msgid "Decrease shield frequency target"
+msgstr "减少护盾频率目标"
+
+#: src/gui/hotkeyConfig.cpp:385
+msgctxt "hotkey_Weapons"
+msgid "Start shield calibration"
+msgstr "开始护盾校准"
+
+#: src/gui/hotkeyConfig.cpp:386
+msgctxt "hotkey_Weapons"
+msgid "Next beam subsystem target type"
+msgstr "下一个光束子系统目标类型"
+
+#: src/gui/hotkeyConfig.cpp:387
+msgctxt "hotkey_Weapons"
+msgid "Previous beam subsystem target type"
+msgstr "上一个光束子系统目标类型"
+
+#: src/gui/hotkeyConfig.cpp:388
+msgctxt "hotkey_Weapons"
+msgid "Increase beam frequency"
+msgstr "增加光束频率"
+
+#: src/gui/hotkeyConfig.cpp:389
+msgctxt "hotkey_Weapons"
+msgid "Decrease beam frequency"
+msgstr "减少光束频率"
+
+#: src/gui/hotkeyConfig.cpp:390
+msgctxt "hotkey_Weapons"
+msgid "Toggle missile aim lock"
+msgstr "切换导弹瞄准锁定"
+
+#: src/gui/hotkeyConfig.cpp:391
+msgctxt "hotkey_Weapons"
+msgid "Enable missile aim lock"
+msgstr "启用导弹瞄准锁定"
+
+#: src/gui/hotkeyConfig.cpp:392
+msgctxt "hotkey_Weapons"
+msgid "Disable missile aim lock"
+msgstr "禁用导弹瞄准锁定"
+
+#: src/gui/hotkeyConfig.cpp:393
+msgctxt "hotkey_Weapons"
+msgid "Turn missile aim to the left"
+msgstr "导弹瞄准向左转"
+
+#: src/gui/hotkeyConfig.cpp:394
+msgctxt "hotkey_Weapons"
+msgid "Turn missile aim to the right"
+msgstr "导弹瞄准向右转"
+
+#: src/gui/hotkeyConfig.cpp:397 src/gui/hotkeyConfig.cpp:398
+#: src/gui/hotkeyConfig.cpp:401 src/gui/hotkeyConfig.cpp:402
+#: src/gui/hotkeyConfig.cpp:403
+msgctxt "hotkey_menu"
+msgid "Science"
+msgstr "科学"
+
+#: src/gui/hotkeyConfig.cpp:397
+msgctxt "hotkey_Science"
+msgid "Scan object"
+msgstr "扫描目标"
+
+#: src/gui/hotkeyConfig.cpp:398
+msgctxt "hotkey_Science"
+msgid "Select next scannable object"
+msgstr "选择下一个可扫描目标"
+
+#: src/gui/hotkeyConfig.cpp:401
+msgctxt "hotkey_Science"
+msgid "Scanning parameter {number} increase"
+msgstr "扫描参数 {number} 增加"
+
+#: src/gui/hotkeyConfig.cpp:402
+msgctxt "hotkey_Science"
+msgid "Scanning parameter {number} decrease"
+msgstr "扫描参数 {number} 减少"
+
+#: src/gui/hotkeyConfig.cpp:403
+msgctxt "hotkey_Science"
+msgid "Set scanning parameter {number} (joystick)"
+msgstr "设置扫描参数 {number} (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:407 src/gui/hotkeyConfig.cpp:408
+#: src/gui/hotkeyConfig.cpp:409 src/gui/hotkeyConfig.cpp:410
+#: src/gui/hotkeyConfig.cpp:411 src/gui/hotkeyConfig.cpp:412
+#: src/gui/hotkeyConfig.cpp:413 src/gui/hotkeyConfig.cpp:414
+#: src/gui/hotkeyConfig.cpp:415 src/gui/hotkeyConfig.cpp:416
+#: src/gui/hotkeyConfig.cpp:417 src/gui/hotkeyConfig.cpp:418
+#: src/gui/hotkeyConfig.cpp:419 src/gui/hotkeyConfig.cpp:420
+#: src/gui/hotkeyConfig.cpp:421 src/gui/hotkeyConfig.cpp:422
+#: src/gui/hotkeyConfig.cpp:423 src/gui/hotkeyConfig.cpp:424
+#: src/gui/hotkeyConfig.cpp:425 src/gui/hotkeyConfig.cpp:426
+#: src/gui/hotkeyConfig.cpp:427 src/gui/hotkeyConfig.cpp:428
+#: src/gui/hotkeyConfig.cpp:429 src/gui/hotkeyConfig.cpp:430
+#: src/gui/hotkeyConfig.cpp:431 src/gui/hotkeyConfig.cpp:432
+#: src/gui/hotkeyConfig.cpp:433 src/gui/hotkeyConfig.cpp:434
+#: src/gui/hotkeyConfig.cpp:435 src/gui/hotkeyConfig.cpp:436
+#: src/gui/hotkeyConfig.cpp:437 src/gui/hotkeyConfig.cpp:439
+#: src/gui/hotkeyConfig.cpp:440 src/gui/hotkeyConfig.cpp:441
+#: src/gui/hotkeyConfig.cpp:442 src/gui/hotkeyConfig.cpp:443
+#: src/gui/hotkeyConfig.cpp:444 src/gui/hotkeyConfig.cpp:445
+#: src/gui/hotkeyConfig.cpp:446 src/gui/hotkeyConfig.cpp:447
+#: src/gui/hotkeyConfig.cpp:449 src/gui/hotkeyConfig.cpp:450
+#: src/gui/hotkeyConfig.cpp:451 src/gui/hotkeyConfig.cpp:452
+#: src/gui/hotkeyConfig.cpp:453 src/gui/hotkeyConfig.cpp:454
+#: src/gui/hotkeyConfig.cpp:455 src/gui/hotkeyConfig.cpp:456
+#: src/gui/hotkeyConfig.cpp:457
+msgctxt "hotkey_menu"
+msgid "Engineering"
+msgstr "工程"
+
+#: src/gui/hotkeyConfig.cpp:407
+msgctxt "hotkey_Engineering"
+msgid "Select reactor system"
+msgstr "选择反应堆系统"
+
+#: src/gui/hotkeyConfig.cpp:408
+msgctxt "hotkey_Engineering"
+msgid "Select beam weapon system"
+msgstr "选择光束武器系统"
+
+#: src/gui/hotkeyConfig.cpp:409
+msgctxt "hotkey_Engineering"
+msgid "Select missile weapon system"
+msgstr "选择导弹武器系统"
+
+#: src/gui/hotkeyConfig.cpp:410
+msgctxt "hotkey_Engineering"
+msgid "Select maneuvering system"
+msgstr "选择机动系统"
+
+#: src/gui/hotkeyConfig.cpp:411
+msgctxt "hotkey_Engineering"
+msgid "Select impulse system"
+msgstr "选择脉冲系统"
+
+#: src/gui/hotkeyConfig.cpp:412
+msgctxt "hotkey_Engineering"
+msgid "Select warp system"
+msgstr "选择跃迁系统"
+
+#: src/gui/hotkeyConfig.cpp:413
+msgctxt "hotkey_Engineering"
+msgid "Select jump drive system"
+msgstr "选择超空间引擎系统"
+
+#: src/gui/hotkeyConfig.cpp:414
+msgctxt "hotkey_Engineering"
+msgid "Select front shields system"
+msgstr "选择前护盾系统"
+
+#: src/gui/hotkeyConfig.cpp:415
+msgctxt "hotkey_Engineering"
+msgid "Select rear shields system"
+msgstr "选择后护盾系统"
+
+#: src/gui/hotkeyConfig.cpp:416
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 0%"
+msgstr "将系统能量设置为0%"
+
+#: src/gui/hotkeyConfig.cpp:417
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 30%"
+msgstr "将系统能量设置为30%"
+
+#: src/gui/hotkeyConfig.cpp:418
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 50%"
+msgstr "将系统能量设置为50%"
+
+#: src/gui/hotkeyConfig.cpp:419
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 100%"
+msgstr "将系统能量设置为100%"
+
+#: src/gui/hotkeyConfig.cpp:420
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 150%"
+msgstr "将系统能量设置为150%"
+
+#: src/gui/hotkeyConfig.cpp:421
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 200%"
+msgstr "将系统能量设置为200%"
+
+#: src/gui/hotkeyConfig.cpp:422
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 250%"
+msgstr "将系统能量设置为250%"
+
+#: src/gui/hotkeyConfig.cpp:423
+msgctxt "hotkey_Engineering"
+msgid "Set system power to 300%"
+msgstr "将系统能量设置为300%"
+
+#: src/gui/hotkeyConfig.cpp:424
+msgctxt "hotkey_Engineering"
+msgid "Increase system power"
+msgstr "增加系统能量"
+
+#: src/gui/hotkeyConfig.cpp:425
+msgctxt "hotkey_Engineering"
+msgid "Decrease system power"
+msgstr "减少系统能量"
+
+#: src/gui/hotkeyConfig.cpp:426
+msgctxt "hotkey_Engineering"
+msgid "Set system power (joystick)"
+msgstr "设置系统能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:427
+msgctxt "hotkey_Engineering"
+msgid "Increase system coolant"
+msgstr "增加系统冷却液"
+
+#: src/gui/hotkeyConfig.cpp:428
+msgctxt "hotkey_Engineering"
+msgid "Decrease system coolant"
+msgstr "减少系统冷却液"
+
+#: src/gui/hotkeyConfig.cpp:429
+msgctxt "hotkey_Engineering"
+msgid "Set system coolant (joystick)"
+msgstr "设置系统冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:430
+msgctxt "hotkey_Engineering"
+msgid "Next repair crew"
+msgstr "下一个维修船员"
+
+#: src/gui/hotkeyConfig.cpp:431
+msgctxt "hotkey_Engineering"
+msgid "Crew move up"
+msgstr "船员向上移动"
+
+#: src/gui/hotkeyConfig.cpp:432
+msgctxt "hotkey_Engineering"
+msgid "Crew move down"
+msgstr "船员向下移动"
+
+#: src/gui/hotkeyConfig.cpp:433
+msgctxt "hotkey_Engineering"
+msgid "Crew move left"
+msgstr "船员向左移动"
+
+#: src/gui/hotkeyConfig.cpp:434
+msgctxt "hotkey_Engineering"
+msgid "Crew move right"
+msgstr "船员向右移动"
+
+#: src/gui/hotkeyConfig.cpp:435
+msgctxt "hotkey_Engineering"
+msgid "Start self-destruct"
+msgstr "开始自毁"
+
+#: src/gui/hotkeyConfig.cpp:436
+msgctxt "hotkey_Engineering"
+msgid "Confirm self-destruct"
+msgstr "确认自毁"
+
+#: src/gui/hotkeyConfig.cpp:437
+msgctxt "hotkey_Engineering"
+msgid "Cancel self-destruct"
+msgstr "取消自毁"
+
+#: src/gui/hotkeyConfig.cpp:439
+msgctxt "hotkey_Engineering"
+msgid "Set reactor power (joystick)"
+msgstr "设置反应堆能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:440
+msgctxt "hotkey_Engineering"
+msgid "Set beam weapon power (joystick)"
+msgstr "设置光束武器能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:441
+msgctxt "hotkey_Engineering"
+msgid "Set missile weapon power (joystick)"
+msgstr "设置导弹武器能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:442
+msgctxt "hotkey_Engineering"
+msgid "Set maneuvering power (joystick)"
+msgstr "设置机动系统能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:443
+msgctxt "hotkey_Engineering"
+msgid "Set impulse power (joystick)"
+msgstr "设置脉冲能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:444
+msgctxt "hotkey_Engineering"
+msgid "Set warp power (joystick)"
+msgstr "设置跃迁能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:445
+msgctxt "hotkey_Engineering"
+msgid "Set jump drive power (joystick)"
+msgstr "设置超空间引擎能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:446
+msgctxt "hotkey_Engineering"
+msgid "Set front shields power (joystick)"
+msgstr "设置前护盾能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:447
+msgctxt "hotkey_Engineering"
+msgid "Set rear shields power (joystick)"
+msgstr "设置后护盾能量 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:449
+msgctxt "hotkey_Engineering"
+msgid "Set reactor coolant (joystick)"
+msgstr "设置反应堆冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:450
+msgctxt "hotkey_Engineering"
+msgid "Set beam weapon coolant (joystick)"
+msgstr "设置光束武器冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:451
+msgctxt "hotkey_Engineering"
+msgid "Set missile weapon coolant (joystick)"
+msgstr "设置导弹武器冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:452
+msgctxt "hotkey_Engineering"
+msgid "Set maneuvering coolant (joystick)"
+msgstr "设置机动系统冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:453
+msgctxt "hotkey_Engineering"
+msgid "Set impulse coolant (joystick)"
+msgstr "设置脉冲冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:454
+msgctxt "hotkey_Engineering"
+msgid "Set warp coolant (joystick)"
+msgstr "设置跃迁冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:455
+msgctxt "hotkey_Engineering"
+msgid "Set jump drive coolant (joystick)"
+msgstr "设置超空间引擎冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:456
+msgctxt "hotkey_Engineering"
+msgid "Set front shields coolant (joystick)"
+msgstr "设置前护盾冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:457
+msgctxt "hotkey_Engineering"
+msgid "Set rear shields coolant (joystick)"
+msgstr "设置后护盾冷却液 (摇杆)"
+
+#: src/gui/hotkeyConfig.cpp:459 src/gui/hotkeyConfig.cpp:460
+#: src/gui/hotkeyConfig.cpp:461
+msgctxt "hotkey_menu"
+msgid "Relay"
+msgstr "通讯"
+
+#: src/gui/hotkeyConfig.cpp:459
+msgctxt "hotkey_Relay"
+msgid "Alert level: Normal"
+msgstr "警戒级别：正常"
+
+#: src/gui/hotkeyConfig.cpp:460
+msgctxt "hotkey_Relay"
+msgid "Alert level: Yellow"
+msgstr "警戒级别：黄色"
+
+#: src/gui/hotkeyConfig.cpp:461
+msgctxt "hotkey_Relay"
+msgid "Alert level: Red"
+msgstr "警戒级别：红色"
+
+#: src/gui/hotkeyConfig.cpp:466 src/gui/hotkeyConfig.cpp:467
+msgctxt "hotkey_menu"
+msgid "GM"
+msgstr "GM"
+
+#: src/gui/hotkeyConfig.cpp:466
+msgctxt "hotkey_GM"
+msgid "Delete"
+msgstr "删除"
+
+#: src/gui/hotkeyConfig.cpp:467
+msgctxt "hotkey_GM"
+msgid "Copy to clipboard"
+msgstr "复制到剪贴板"
+
+#: src/gui/hotkeyConfig.cpp:470 src/gui/hotkeyConfig.cpp:473
+#: src/gui/hotkeyConfig.cpp:474
+msgctxt "hotkey_menu"
+msgid "Various"
+msgstr "杂项"
+
+#: src/gui/hotkeyConfig.cpp:470
+msgctxt "hotkey_various"
+msgid "Show callsigns (spectator)"
+msgstr "显示呼号 (旁观者)"
+
+#: src/gui/hotkeyConfig.cpp:473
+msgctxt "hotkey_debug"
+msgid "Show FPS"
+msgstr "显示帧数"
+
+#: src/gui/hotkeyConfig.cpp:474
+msgctxt "hotkey_debug"
+msgid "Show debug timing"
+msgstr "显示调试计时"
