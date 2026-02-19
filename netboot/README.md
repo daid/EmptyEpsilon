@@ -1,77 +1,79 @@
-In this directory you will find the setup files to setup a network boot environment for EmptyEpsilon.
+The EmptyEpsilon repo includes a `netboot` directory containing scripts to build and configure a Preboot Execution Environment (PXE) server. A PXE server allows clients to boot an operating system and launch EmptyEpsilon over a network.
 
-READ FIRST
-==========
-Do you know the following terms:
+**This is an advanced configuration.** Unless you're familiar with Linux, PXE servers, DHCP, and working from the command line, don't attempt this. You can damage your operating system and lose data if you don't know what you're doing.
 
-1. Linux
+## What is this?
 
-2. PXE
+The `netboot/build_netboot_system.sh` setup script creates a network boot environment. Most computers built since the year 2000 can be configured to boot from a network server, even if they lack their own storage.
 
-3. Commandline
+How is this useful for EmptyEpsilon? In a local network environment, you can use a PXE server to ensure that every system runs the exact same version of EmptyEpsilon, without needing to install any software onto those systems. You only have to update the server and restart the clients to run the latest version of EmptyEpsilon with minimal fuss.
 
-4. DHCP
+It also reduces the number of hardware dependencies, since only one server must have a working storage device.
+This makes it easier to find and use donor or recycled systems as EmptyEpsilon clients.
 
-If not. Do not try to use this. You can seriously screw up your system if you do not know what you are doing.
+With some additional configuration, all of these clients can then autoconnect to the server and immediately launch into gameplay.
 
-What is this?
-=============
+## Requirements
 
-It's a setup script for a network boot environment. Just about any computer build after the year 2000 has the feature to boot from the network. This means these computers do not need any actual harddisk to run.
+Setting up a PXE server and netboot requires planning and a time investment before play. The initial PXE server installation and configuration can take several hours. Once complete, however, you no longer have to copy, install, configure, and update EmptyEpsilon onto each client.
 
-Why is this useful for EmptyEpsilon? Well, it ensures that every computer runs the exact same version of EmptyEpsilon.
-You only have to update a single machine and restart all others to get the latest version running wiht minimal fuzz.
-It also reduces the amount of hardware dependencies, as only a single machine needs a working harddrive.
-As harddrives are usually the first thing to break in a computer, this makes it easier to get donor computers for a setup.
-We use a lot of donor laptops which no longer have harddisks and/or batteries.
+You also need to have a standalone wired network, or a second wired network interface on the server. The vast majority of unmodified devices don't support booting over WiFi. This process also runs a DHCP server to assign IP addresses to clients, which can't run on a network that already has a DHCP server.
 
-With some added configuration, you can also have all these machines auto-connect to a server and reduce the overal setup times of your games. Which is more of an advanced use.
+## Installation
 
-It DOES require a time investment before hand. Just installing this system takes about 3 hours. However, it saves us about 30 minutes in setup time when we want to run the game with 6 clients. As we no longer have to copy anything.
+1. Perform a fresh OS install of Debian Linux. Use the Netinstall installer, and install only the base system with standard utilities, no graphical shell, and no server features.
+1. Confirm that the freshly installed Debian system can access the internet.
+1. Copy the `build_netboot_system.sh` script to the freshly installed Debian system.
+1. Run `build_netboot_system.sh` as the root user. This installs several packages, downloads an additional Linux installation for the network boot environment, and compiles EmptyEpsilon in this environment from source.
 
-It also requires a wired network. Network booting does not work on wireless. The largest bit of our setup time is laying down all the cables.
+   This script sets up your system to run a DHCP server over its network interface. After running this script, the DHCP server is not yet activated; however, on the following reboot it will distribute IP addresses to network clients. **If this system is on an existing network that already has an active DHCP server, this will disrupt your local network. You have been warned!**
 
-This runs a DHCP server, as network booting does DHCP, this means it will require a stand alone network, or two network cards. The default setup is a stand-alone setup.
+1. Disconnect the network cable from the server.
+1. Reboot.
+1. After rebooting, connect the server and your clients (powered off) to a separate stand-alone wired network.
+1. Power up each client and enter its BIOS.
+1. Enable network booting in client's BIOS. This option depends on support in the system's BIOS, and steps to enable and configure can depend on the system.
+1. If available in the client's BIOS, also enable booting upon power connection. This saves you from pressing the system's power button. While many systems support this feature, it isn't always dependable.
+1. Boot the clients from the network with the new BIOS setup.
 
-Installation
-============
-Start of by doing a fresh OS install of Linux Debian, Jessie. Use the "Netinstall" and only install the base system with standard utilities. No graphical shell, no server features.
+## Configuration
 
-Copy the "build_netboot_system.sh" script to the freshly installed machine. And make sure it has internet.
+The `netboot` directory of this repo also includes a Python script named `config_manager.py`. After running `build_netboot_system.sh`, this script is also located in the server's home directory. Use this tool to edit and administrate `options.ini` Preferences Files for each client.
 
-Run the "build_netboot_system.sh" script as root. This will take a long time as it will install extra tools, will download a whole extra Linux install for the network boot environment and compile EmptyEpsilon in this environment from source.
+To launch it, run `python config_manager.py` from the server's home directory. This launches a `(Cmd)` prompt where you can enter commands.
 
-This "build_netboot_system.sh" script will setup your machine to have the network card serve DHCP. After running this it is not yet active, but on next reboot it will hand out IP addresses and mess up your local network. You have been warned!
+## Rename clients (setname)
 
-So, before rebooting, disconnect the network cable, and then reboot. After rebooting, hook up a seperate stand-alone network with your clients connected.
+By default, each client uses its hardware MAC address as its name and displays its name in the upper-left corner of the EmptyEpsilon main menu. You can configure names for each client using the `config_manager.py` tool's `setname` command. 
 
-For each client, you need to enable network booting in the BIOS. Every machine I've seen so far can do this, but it depends on the BIOS where and how this needs to be enabled.
-If it is an option, and you are in the BIOS settings anyhow, check if you can boot up the machine on power connection. This saves you pressing the power button. Note: While this feature is present in a lot of computers, it does not always function. So do not depend on it.
+For example, to rename the system with a specific MAC address to `Red_shirt` from the `(Cmd)` prompt, run:
 
-Boot the client machines from the network with the new BIOS setup. And enjoy your easy EmptyEpsilon setup.
+`setname 00b0d0a6b323 Red_shirt`
 
-Configuration
-=============
-A tool called "config_manager.py" is provided. It is located in your home directory after the build_netboot_system.sh. This tool can be used to quickly edit and administrate different option.ini files per client. Start it with "python config_manager.py"
+When that client is rebooted, it will display `Red_shirt` in the upper-left corner.
 
-Per default, each client will show their name in the top left corner of the main menu. And per default each client has their MAC address as name.
+### Other functions
 
-The "config_manager.py" tool can set different names per client, with the "setname" command. Example "setname 00b0d0a6b323 Red_shirt" will name the machine with that mac address to "Red_shirt",
-if that client is rebooted, it will show "Red_shirt" in the top left corner.
+The `config_manager.py` tool can also reboot systems, restart EE on systems, and configure autoconnect settings.
 
-The "config_manager.py" tool can also reboot machines, restart EE on machines, set autoconnect-to-crew-position settings. And for more advanced uses, open option.ini files directly in an text editor, execute any command on remote machines.
+To list the tool's functions, run `help` from the `(Cmd)` prompt. Run `help <function>` from the prompt for a description of the function.
 
-Doing updates/changes/use internet
-==================================
-The "build_netboot_system.sh" script will install 3 helper scripts in your home directory.
+### Manual configuration
 
-If you run "dhcp_client.sh", the network port in the machine will switch to client mode and will stop serving DHCP request. This means you can hook it back up to your normal network, and access the internet from this machine. This will not stay this way if you reboot.
+For more advanced uses, open the `options.ini` files directly in an text editor, or execute any command on the clients.
 
-If you run "dhcp_server.sh", the network port is put back in dhcp mode, undoing the "dhcp_client.sh" script. Combined these scripts can be used to switch between serving EE, and having internet.
+## Performing updates, changes, and using the internet
 
-If you run "update.sh", it will try to update your local EmptyEpsilon installation. This requires internet, so you need "dhcp_client.sh" first.
+The `build_netboot_system.sh` script also installs three helper scripts in your server's home directory.
 
-distcc
-======
-The clients are setup for distributed compiling of EmptyEpsilon. Which means every on computer can assist in the build of EmptyEpsilon.
-This reduced the compile time from 20 minutes to 3 minutes in my case. However, I haven't setup scripts to do this yet. As this wasn't 100% reliable yet.
+- If you run `dhcp_client.sh`, the system's network port switches to DHCP client mode and stops serving DHCP requests. This means you can reconnect it to your normal network and access the internet from this system. This doesn't persist if you reboot the server.
+
+- If you run `dhcp_server.sh`, the system's network port switches back to DHCP server mode, undoing the `dhcp_client.sh` script. Combine these scripts to switch between serving EE and accessing the internet.
+
+- If you run `update.sh`, the server attempts to update its local EmptyEpsilon installation. This requires internet, so you must first run `dhcp_client.sh`.
+
+## Experimental distributed compiling (distcc)
+
+Clients are also configured to distribute the compiling of EmptyEpsilon from source, which means every powered client can assist in building EmptyEpsilon.
+
+For example, this reduced daid's compilation time from 20 minutes to 3 minutes. However, daid hasn't set up scripts to do this since it wasn't fully reliable.
