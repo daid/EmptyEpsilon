@@ -23,45 +23,48 @@ GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
 
 void GuiImpulseControls::onDraw(sp::RenderTarget& target)
 {
-    if (my_spaceship)
+    if (!my_spaceship) return;
+
+    if (auto engine = my_spaceship.getComponent<ImpulseEngine>())
     {
-        auto engine = my_spaceship.getComponent<ImpulseEngine>();
-        if (engine) {
-            label->setValue(string(int(std::round(engine->actual * 100.0f))) + "%");
-            slider->setValue(engine->request);
-        }
+        label->setValue(string(int(std::round(engine->actual * 100.0f))) + "%");
+        slider->setValue(engine->request);
     }
 }
 
 void GuiImpulseControls::onUpdate()
 {
+    if (!my_spaceship) return;
+
     auto engine = my_spaceship.getComponent<ImpulseEngine>();
     setVisible(engine != nullptr);
-    if (my_spaceship && engine)
+    if (!isVisible() || !slider->isEnabled()) return;
+
+    // Change impulse value by keybind.
+    float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+    if (change != 0.0f)
+        my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
+    if (keys.helms_increase_impulse_1.getDown())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+    if (keys.helms_decrease_impulse_1.getDown())
+        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
+    if (keys.helms_increase_impulse_10.getDown())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
+    if (keys.helms_decrease_impulse_10.getDown())
+        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
+    if (keys.helms_zero_impulse.getDown())
+        my_player_info->commandImpulse(0.0f);
+    if (keys.helms_max_impulse.getDown())
+        my_player_info->commandImpulse(1.0f);
+    if (keys.helms_min_impulse.getDown())
+        my_player_info->commandImpulse(-1.0f);
+
+    // Change impulse value by axis.
+    float set_value = keys.helms_set_impulse.getValue();
+    if (set_value != engine->request && (set_value != 0.0f || set_active))
     {
-        float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
-        if (change != 0.0f)
-            my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
-        if (keys.helms_increase_impulse_1.getDown())
-            my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
-        if (keys.helms_decrease_impulse_1.getDown())
-            my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
-        if (keys.helms_increase_impulse_10.getDown())
-            my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-        if (keys.helms_decrease_impulse_10.getDown())
-            my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-        if (keys.helms_zero_impulse.getDown())
-            my_player_info->commandImpulse(0.0f);
-        if (keys.helms_max_impulse.getDown())
-            my_player_info->commandImpulse(1.0f);
-        if (keys.helms_min_impulse.getDown())
-            my_player_info->commandImpulse(-1.0f);
-        
-        float set_value = keys.helms_set_impulse.getValue();
-        if (set_value != engine->request && (set_value != 0.0f || set_active))
-        {
-            my_player_info->commandImpulse(set_value);
-            set_active = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
-        }
+        my_player_info->commandImpulse(set_value);
+        // Ensure the next update is sent, even if it is back to zero.
+        set_active = set_value != 0.0f;
     }
 }

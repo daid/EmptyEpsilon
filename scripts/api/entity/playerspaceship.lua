@@ -357,10 +357,9 @@ function Entity:commandImpulse(target)
     commandImpulse(self, target)
     return self
 end
---- Commands this PlayerSpaceship to request a new warp level.
+--- Commands this PlayerSpaceship to request a new warp factor.
 --- Valid values are any positive integer, or 0.
---- Warp controls on crew position screens are limited to 4.
---- Example: player:commandWarp(2) -- activate the warp drive at level 2
+--- Example: player:commandWarp(2) -- request warp factor 2
 function Entity:commandWarp(target)
     commandWarp(self, target)
     return self
