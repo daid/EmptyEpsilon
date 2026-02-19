@@ -625,6 +625,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanState, allow_simple_scan);
     BIND_MEMBER(ScanState, complexity);
     BIND_MEMBER(ScanState, depth);
+    BIND_MEMBER(ScanState, on_scan_initiated);
+    BIND_MEMBER(ScanState, on_scan_completed);
+    BIND_MEMBER(ScanState, on_scan_cancelled);
     BIND_ARRAY_DIRTY_FLAG(ScanState, per_faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, state, per_faction_dirty);

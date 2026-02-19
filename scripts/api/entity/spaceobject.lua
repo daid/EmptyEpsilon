@@ -467,3 +467,48 @@ function Entity:onDestroyed(callback)
     if self.components.hull then self.components.hull.on_destruction = callback end
     return self
 end
+--- Defines a function to call when a scan is initiated against this entity.
+--- The callback receives three parameters:
+--- - target: The entity being scanned (the entity this callback is registered on)
+--- - scanner: The entity performing the scan (player ship or probe)
+--- - source: The entity that initiated the scan command (player ship, or probe if scan was initiated via radar link)
+--- Example:
+--- obj:onScanInitiated(function(target, scanner, source)
+---     print(target:getCallSign() .. " is being scanned by " .. scanner:getCallSign())
+---     if source ~= scanner then
+---         print("(Scan initiated via radar-linked probe)")
+---     end
+--- end)
+function Entity:onScanInitiated(callback)
+    if self.components.scan_state then self.components.scan_state.on_scan_initiated = callback end
+    return self
+end
+--- Defines a function to call when a scan is completed against this entity.
+--- The callback receives three parameters:
+--- - target: The entity being scanned (the entity this callback is registered on)
+--- - scanner: The entity performing the scan (player ship or probe)
+--- - source: The entity that initiated the scan command (player ship, or probe if scan was initiated via radar link)
+--- Example:
+--- obj:onScanCompleted(function(target, scanner, source)
+---     print(target:getCallSign() .. " has been scanned by " .. scanner:getCallSign())
+---     if source ~= scanner then
+---         print("(Scan completed via radar-linked probe)")
+---     end
+--- end)
+function Entity:onScanCompleted(callback)
+    if self.components.scan_state then self.components.scan_state.on_scan_completed = callback end
+    return self
+end
+--- Defines a function to call when a scan is cancelled against this entity.
+--- The callback receives three parameters:
+--- - target: The entity being scanned (the entity this callback is registered on)
+--- - scanner: The entity performing the scan (player ship or probe)
+--- - source: The entity that initiated the scan command (player ship, or probe if scan was initiated via radar link)
+--- Example:
+--- obj:onScanCancelled(function(target, scanner, source)
+---     print("Scan of " .. target:getCallSign() .. " was cancelled")
+--- end)
+function Entity:onScanCancelled(callback)
+    if self.components.scan_state then self.components.scan_state.on_scan_cancelled = callback end
+    return self
+end
