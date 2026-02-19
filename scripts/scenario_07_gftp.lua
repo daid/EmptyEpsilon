@@ -801,7 +801,7 @@ end
 
 -- Spawn and return a hacker transport
 function spawnHacker()
-    ship = CpuShip():setTemplate("Transport1x1")
+    local ship = CpuShip():setTemplate("Transport1x1")
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(50, 50):setShields(50, 50)
     ship:setImpulseMaxSpeed(120):setRotationMaxSpeed(10)
@@ -810,7 +810,7 @@ end
 
 -- Spawn and return a nuke-armed ship
 function spawnNuker()
-    ship = CpuShip():setTemplate("Phobos T3")
+    local ship = CpuShip():setTemplate("Phobos T3")
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(100, 100):setShields(100, 100)
     ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
@@ -837,7 +837,7 @@ end
 function find(x_target, y_target, randomness)
     pi = 3.14
     x_player, y_player = player:getPosition()
-    angle = round(((random(-randomness, randomness) + 270 + 180 * math.atan2(y_player - y_target, x_player - x_target) / 3.14) % 360), 1)
+    angle = round(((random(-randomness, randomness) + 270 + 180 * math.atan2(y_player - y_target, x_player - x_target) / pi) % 360), 1)
     return angle
 end
 
