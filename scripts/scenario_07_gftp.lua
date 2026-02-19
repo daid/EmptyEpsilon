@@ -714,7 +714,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
                     player,
                     _("incCall", [[We're in. Protect us while we take what we need inside.]])
                 )
-                mission_time = 0
+                mission_timer = 0
                 main_mission = 13
 
                 CpuShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-1"):setPosition(40000, 53000):orderAttack(scout)
