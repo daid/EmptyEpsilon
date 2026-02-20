@@ -300,6 +300,83 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
 
+    // Transform component, custom implementation since it uses functions
+    // instead of direct access to members
+    ADD_PAGE(tr("tweak-tab", "Transform"), sp::Transform);
+    {
+        // Position X text field
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Position X:"), 20.0f);
+        label
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto t = entity.getComponent<sp::Transform>())
+                return string(t->getPosition().x, 1);
+
+            return "";
+        };
+        ui->callback([this](string text) {
+            if (auto t = entity.getComponent<sp::Transform>())
+                t->setPosition(glm::vec2(text.toFloat(), t->getPosition().y));
+        });
+    }
+    {
+        // Position Y text field
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Position Y:"), 20.0f);
+        label
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto t = entity.getComponent<sp::Transform>())
+                return string(t->getPosition().y, 1);
+
+            return "";
+        };
+        ui->callback([this](string text) {
+            if (auto t = entity.getComponent<sp::Transform>())
+                t->setPosition(glm::vec2(t->getPosition().x, text.toFloat()));
+        });
+    }
+    {
+        // Rotation slider
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Rotation:"), 20.0f);
+        label
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        auto ui = new GuiSliderTweak(row, "", -180.0f, 180.0f, 0.0f,
+            [this](float value)
+            {
+                if (auto t = entity.getComponent<sp::Transform>())
+                    t->setRotation(value);
+            }
+        );
+        ui->addOverlay(1u, 20.0f);
+        ui->update_func = [this]() -> float {
+            if (auto t = entity.getComponent<sp::Transform>())
+                return t->getRotation();
+
+            return 0.0f;
+        };
+    }
+
+    // Physics component
+    ADD_PAGE(tr("tweak-tab", "Physics"), sp::Physics);
+    // TODO: Figure out how to set Physics values
+
     ADD_PAGE(tr("tweak-tab", "Callsign"), CallSign);
     ADD_TEXT_TWEAK(tr("tweak-text", "Callsign:"), CallSign, callsign);
 
