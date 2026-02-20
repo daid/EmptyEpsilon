@@ -2,10 +2,12 @@
 #include "warpControls.h"
 #include "playerInfo.h"
 #include "powerDamageIndicator.h"
-#include "components/warpdrive.h"
 
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"
+
+#include "components/docking.h"
+#include "components/warpdrive.h"
 
 GuiWarpControls::GuiWarpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -68,7 +70,11 @@ void GuiWarpControls::onUpdate()
 
     auto warp = my_spaceship.getComponent<WarpDrive>();
     setVisible(warp != nullptr);
-    if (!warp || !slider->isEnabled()) return;
+    if (!isVisible()) return;
+
+    auto docking_port = my_spaceship.getComponent<DockingPort>();
+    slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
+    if (!slider->isEnabled()) return;
 
     // Read current state of the warp drive and controls.
     const int current_request_value = warp->request;
