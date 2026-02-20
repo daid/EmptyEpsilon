@@ -87,7 +87,8 @@ void GuiMissileTubeControls::onUpdate()
         if (tube.canOnlyLoad(MW_Mine))
             rows[n].fire_button->setIcon("gui/icons/weapon-mine", sp::Alignment::CenterLeft);
         else
-            rows[n].fire_button->setIcon("gui/icons/missile", sp::Alignment::CenterLeft, tube.direction);
+            rows[n].fire_button->setIcon("gui/icons/missile-bars-"+getMissileSizeString(tube.size), sp::Alignment::CenterLeft, tube.direction);
+
         switch(tube.state)
         {
         case MissileTubes::MountPoint::State::Empty:
