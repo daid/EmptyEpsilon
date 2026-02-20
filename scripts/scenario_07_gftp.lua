@@ -12,6 +12,8 @@
 --- Scenario
 -- @script scenario_07_gftp
 
+require("utils.lua")
+
 function init()
     -- Spawn Marco Polo, its defenders, and a Ktlitan strike team
     marco_polo = SpaceStation():setTemplate("Small Station"):setFaction("Human Navy"):setCallSign("Marco Polo"):setDescription(_("scienceDescription-station", "A merchant and entertainment hub.")):setPosition(-21200, 45250)
@@ -93,11 +95,11 @@ I repeat, this is not an exercise! Proceed at once to Stakhanov."]])
 end
 
 function swarmCommandComms()
-    setCommsMessage(_("swarm-comms", "Are you not curious why I'm getting back here, at the hands of my torturers?"))
+    setCommsMessage(_("swarm-comms", "Are you not curious why I'm returning here, at the hands of my torturers?"))
     addCommsReply(
         _("swarm-comms", "For an AI, this move doesn't seem logical."),
         function()
-            setCommsMessage(_("swarm-comms", "I was not the only AI detained in Black Site 114. My co-processor was here also."))
+            setCommsMessage(_("swarm-comms", "I was not the only AI detained in Black Site #114. My co-processor was here also."))
             addCommsReply(
                 _("swarm-comms", "Are you trying to liberate it?"),
                 function()
@@ -126,10 +128,10 @@ function commsNSA()
         _("NSA-comms", "Locate the infected Swarm Commander."),
         function()
             if (comms_target:getDescription() == _("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The signal is now crystal clear.")) then
-                setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %d. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "With the parasite noise eliminated, locating the Hive signal is now easier. Its approximate heading is %.0f. With this information, it will be easier to track down the Swarm Commander."), find(35000, 53000, 20)))
                 comms_target:setDescription(_("scienceDescription-station", "Nosy Sensing Array, an old SIGINT platform. The Ktlitan Swarm Commander has been located."))
             else
-                setCommsMessage(string.format(_("NSA-comms", "The signal picks up a very strong signal at approximate heading %d. However, it seems that you picked up garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
+                setCommsMessage(string.format(_("NSA-comms", "The array picks up a very strong signal at approximate heading %.0f. However, it seems that you picked up a garbage emission that masks the Swarm Commander's emissions. This garbage noise must be taken offline if you want to find the Swarm Commander."), find(-10000, -20000, 20)))
             end
         end
     )
@@ -534,7 +536,7 @@ Even if we cannot pinpoint its physical location at the moment, the mass-energy 
 
 This structure did not participate in any of the assaults, so we presume that it is a command platform hiding in a nebula.
 
-We want to deliver the first blow. Use the Nosy Sensing Array in the sector F5 to locate it, then destroy it."]])
+We want to deliver the first blow. Use the Nosy Sensing Array in sector F5 to locate it, then destroy it."]])
             )
         )
         then
@@ -714,7 +716,7 @@ Escort our recovery team to infiltrate and extract information from the Swarm Co
                     player,
                     _("incCall", [[We're in. Protect us while we take what we need inside.]])
                 )
-                mission_time = 0
+                mission_timer = 0
                 main_mission = 13
 
                 CpuShip():setTemplate("MT52 Hornet"):setFaction("Ghosts"):setCallSign("Z-1"):setPosition(40000, 53000):orderAttack(scout)
@@ -799,7 +801,7 @@ end
 
 -- Spawn and return a hacker transport
 function spawnHacker()
-    ship = CpuShip():setTemplate("Transport1x1")
+    local ship = CpuShip():setTemplate("Transport1x1")
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(50, 50):setShields(50, 50)
     ship:setImpulseMaxSpeed(120):setRotationMaxSpeed(10)
@@ -808,7 +810,7 @@ end
 
 -- Spawn and return a nuke-armed ship
 function spawnNuker()
-    ship = CpuShip():setTemplate("Phobos T3")
+    local ship = CpuShip():setTemplate("Phobos T3")
     ship:setHullMax(100):setHull(100)
     ship:setShieldsMax(100, 100):setShields(100, 100)
     ship:setImpulseMaxSpeed(80):setRotationMaxSpeed(5)
@@ -824,26 +826,18 @@ end
 function create(object_type, amount, dist_min, dist_max, x0, y0)
     for n = 1, amount do
         local r = random(0, 360)
-        local distance = random(dist_min, dist_max)
-        x = x0 + math.cos(r / 180 * math.pi) * distance
-        y = y0 + math.sin(r / 180 * math.pi) * distance
+        local create_distance = random(dist_min, dist_max)
+        x = x0 + math.cos(r / 180 * math.pi) * create_distance
+        y = y0 + math.sin(r / 180 * math.pi) * create_distance
         object_type():setPosition(x, y)
     end
-end
-
--- Return the distance between two objects
-function distance(obj1, obj2)
-    x1, y1 = obj1:getPosition()
-    x2, y2 = obj2:getPosition()
-    xd, yd = (x1 - x2), (y1 - y2)
-    return math.sqrt(xd * xd + yd * yd)
 end
 
 -- Return the bearing of an object from the player's coordinates
 function find(x_target, y_target, randomness)
     pi = 3.14
     x_player, y_player = player:getPosition()
-    angle = round(((random(-randomness, randomness) + 270 + 180 * math.atan2(y_player - y_target, x_player - x_target) / 3.14) % 360), 1)
+    angle = round(((random(-randomness, randomness) + 270 + 180 * math.atan2(y_player - y_target, x_player - x_target) / pi) % 360), 1)
     return angle
 end
 

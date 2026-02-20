@@ -39,3 +39,7 @@ BASIC_REPLICATION_IMPL(PlanetRenderReplication, PlanetRender)
     BASIC_REPLICATION_FIELD(atmosphere_color);
     BASIC_REPLICATION_FIELD(distance_from_movement_plane);
 }
+BASIC_REPLICATION_IMPL(BillboardRendererReplication, BillboardRenderer)
+    BASIC_REPLICATION_FIELD(size);
+    BASIC_REPLICATION_FIELD(texture);
+}

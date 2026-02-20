@@ -116,6 +116,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<NebulaRendererReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ExplosionEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlanetRenderReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BillboardRendererReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
