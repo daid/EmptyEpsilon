@@ -33,8 +33,8 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_image.h"
 
-ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background)
+ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosition crew_position)
+: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background), allow_scanning(allow_scanning)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     targets.setAllowWaypointSelection();
@@ -101,8 +101,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     custom_function_sidebar = new GuiCustomShipFunctions(radar_view, crew_position, "");
     custom_function_sidebar->setPosition(-15, 210, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax)->hide();
 
-    // Scan button.
-    scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets);
+    // Scan button (link to scanner on altScience).
+    scan_button = new GuiScanTargetButton(info_sidebar, "SCAN_BUTTON", &targets, allow_scanning);
     scan_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScienceScanner>());
 
     // Simple scan data.
@@ -118,7 +118,9 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this]() {
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this, allow_scanning]() {
+        if (!allow_scanning) return;
+
         auto ship = targets.get();
         if (auto tn = ship.getComponent<TypeName>())
         {
@@ -131,7 +133,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             }
         }
     });
-    info_type_button->setTextSize(20)->setPosition(0, 1, sp::Alignment::TopLeft)->setSize(50, 28);
+    info_type_button->setTextSize(20)->setPosition(0, 1, sp::Alignment::TopLeft)->setSize(50, 28)->setVisible(allow_scanning);
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
     info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
@@ -203,25 +205,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setDetailsPadding(details_padding)
         ->setItemsPadding(120);
 
-    // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
-        auto rl = my_spaceship.getComponent<RadarLink>();
-        if (value && rl && rl->linked_entity)
-        {
-            auto transform = rl->linked_entity.getComponent<sp::Transform>();
-            if (transform) {
-                science_radar->hide();
-                probe_radar->show();
-                probe_radar->setViewPosition(transform->getPosition())->show();
-            }
-        }else{
-            probe_view_button->setValue(false);
-            science_radar->show();
-            probe_radar->hide();
-        }
-    });
-    probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
-
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
     {
@@ -233,16 +216,54 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
     zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
-    // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
-        radar_view->setVisible(index == 0);
-        background_gradient->setVisible(index == 0);
-        database_view->setVisible(index == 1);
-    });
-    view_mode_selection->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
+    // View controls.
+    GuiElement* view_controls = new GuiElement(radar_view, "VIEW_CONTROLS");
+    view_controls
+        ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, 150.0f)
+        ->setAttribute("layout", "verticalbottom");
 
-    // Scanning dialog.
-    new GuiScanningDialog(this, "SCANNING_DIALOG");
+    // Probe view button.
+    probe_view_button = new GuiToggleButton(view_controls, "PROBE_VIEW", tr("scienceButton", "Probe View"),
+        [this](bool value)
+        {
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (value && rl && rl->linked_entity)
+            {
+                if (auto transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    science_radar->hide();
+                    probe_radar->show();
+                    probe_radar->setViewPosition(transform->getPosition())->show();
+                }
+            }
+            else
+            {
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
+        }
+    );
+    probe_view_button->setSize(200.0f, 50.0f)->disable();
+
+    // Radar/database view toggle, create only on Science/Ops (allow_scanning).
+    view_mode_selection = new GuiListbox(view_controls, "VIEW_SELECTION",
+        [this](int index, string value)
+        {
+            radar_view->setVisible(index == 0);
+            background_gradient->setVisible(index == 0);
+            database_view->setVisible(index == 1);
+        }
+    );
+    view_mode_selection
+        ->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})
+        ->setSelectionIndex(0)
+        ->setSize(200.0f, 100.0f)
+        ->setVisible(allow_scanning);
+
+    // Scanning dialog, create only on Science/Ops.
+    if (allow_scanning) new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
@@ -364,7 +385,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                 if (std::abs(rel_velocity) < 0.01f)
                     rel_velocity = 0.0f;
-                info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                info_relspeed->setValue(tr("science", "{relative_speed}/min").format({{"relative_speed", string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K}}));
             }
         }
         if (auto cs = target.getComponent<CallSign>())
@@ -522,7 +543,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
                     info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
                     info_heading->setValue(string(int(heading)));
-                    info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                    info_relspeed->setValue(tr("science", "{relative_speed}/min").format({{"relative_speed", string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K}}));
                 }
             }
         }
@@ -531,12 +552,12 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
 void ScienceScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (my_spaceship
+        && my_spaceship.hasComponent<ScienceScanner>()
+        && (!allow_scanning || my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f))
     {
         // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+        if (keys.science_scan_object.getDown())
         {
             auto obj = targets.get();
 
@@ -551,11 +572,10 @@ void ScienceScreen::onUpdate()
         }
 
         // Cycle selection through scannable objects.
-        if (keys.science_select_next_scannable.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+        if (keys.science_select_next_scannable.getDown())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
             }

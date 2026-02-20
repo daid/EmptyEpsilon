@@ -13,6 +13,8 @@ string crewPositionToString(CrewPosition value) {
     case CrewPosition::singlePilot: return "singlepilot";
     case CrewPosition::damageControl: return "damagecontrol";
     case CrewPosition::powerManagement: return "powermanagement";
+    case CrewPosition::altScience: return "altscience";
+    case CrewPosition::scanOnly: return "scanonly";
     case CrewPosition::databaseView: return "database";
     case CrewPosition::altRelay: return "altrelay";
     case CrewPosition::commsOnly: return "commsonly";
@@ -51,6 +53,10 @@ std::optional<CrewPosition> tryParseCrewPosition(string value) {
         return CrewPosition::damageControl;
     else if (value == "powermanagement")
         return CrewPosition::powerManagement;
+    else if (value == "altscience" || value == "tacticalmap")
+        return CrewPosition::altScience;
+    else if (value == "scanonly")
+        return CrewPosition::scanOnly;
     else if (value == "database" || value == "databaseview")
         return CrewPosition::databaseView;
     else if (value == "altrelay")

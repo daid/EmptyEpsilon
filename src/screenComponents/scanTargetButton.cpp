@@ -1,4 +1,5 @@
 #include "scanTargetButton.h"
+#include "gameGlobalInfo.h"
 #include "playerInfo.h"
 #include "targetsContainer.h"
 #include "gui/gui2_button.h"
@@ -8,8 +9,8 @@
 #include "i18n.h"
 
 
-GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets)
-: GuiElement(owner, id), targets(targets)
+GuiScanTargetButton::GuiScanTargetButton(GuiContainer* owner, string id, TargetsContainer* targets, bool allow_scanning)
+: GuiElement(owner, id), targets(targets), allow_scanning(allow_scanning)
 {
     button = new GuiButton(this, id + "_BUTTON", tr("scienceButton", "Scan"), [this]() {
         if (my_spaceship && this->targets && this->targets->get())
@@ -28,28 +29,47 @@ void GuiScanTargetButton::onUpdate()
 void GuiScanTargetButton::onDraw(sp::RenderTarget& target)
 {
     auto ss = my_spaceship.getComponent<ScienceScanner>();
-    if (!ss)
-        return;
+    if (!ss) return;
 
     if (ss->delay > 0.0f)
     {
-        progress->show();
-        progress->setRange(0, ss->max_scanning_delay);
-        progress->setValue(ss->delay);
-        button->hide();
+        if (allow_scanning && gameGlobalInfo->scanning_complexity == EScanningComplexity::SC_None)
+        {
+            progress
+                ->setText(tr("scienceButton", "Scanning..."))
+                ->setRange(0.0f, ss->max_scanning_delay)
+                ->setValue(ss->delay)
+                ->show();
+            button->hide();
+        }
+        else
+        {
+            progress->hide();
+            button
+                ->setText(tr("scienceButton", "Scan initiated..."))
+                ->disable();
+        }
     }
     else
     {
-        sp::ecs::Entity obj;
-        if (targets)
-            obj = targets->get();
-
         button->show();
+        progress->hide();
+
+        sp::ecs::Entity obj;
+        if (targets) obj = targets->get();
+
         auto scanstate = obj.getComponent<ScanState>();
         if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
-            button->enable();
+        {
+            button
+                ->setText(allow_scanning ? tr("sciencebutton", "Scan"): tr("sciencebutton", "Link to scanner"))
+                ->enable();
+        }
         else
-            button->disable();
-        progress->hide();
+        {
+            button
+                ->setText(tr("sciencebutton", "No scanner target"))
+                ->disable();
+        }
     }
 }
