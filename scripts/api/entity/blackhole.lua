@@ -40,13 +40,15 @@ function WormHole()
 end
 
 local Entity = getLuaEntityFunctionTable()
---- Sets the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+--- Sets the target teleportation coordinates for entities that pass through the center of this wormhole.
+--- Avoid the default value of {0,0}, which should be treated as no destination.
 --- Example: wormhole:setTargetPosition(10000,10000)
 function Entity:setTargetPosition(x, y)
     if self.components.gravity then self.components.gravity.wormhole_target = {x, y} end
     return self
 end
 --- Returns the target teleportation coordinates for SpaceObjects that pass through the center of this WormHole.
+--- The default value of {0,0} should be treated as no destination.
 --- Example: wormhole:getTargetPosition()
 function Entity:getTargetPosition()
     if self.components.gravity then return self.components.gravity.wormhole_target end
