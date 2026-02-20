@@ -40,6 +40,7 @@ uniform sampler2D u_specularMap;
 #endif
 #ifdef ILLUMINATION
 uniform sampler2D u_illuminationMap;
+uniform vec4 u_illuminationModulation;
 #endif
 #ifdef NORMAL
 uniform sampler2D u_normalMap;
@@ -62,7 +63,7 @@ void main()
 	
 	vec4 base = texture2D(u_baseMap, v_texcoords.st);
 #ifdef ILLUMINATION
-	vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st);
+	vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st) * u_illuminationModulation;
 #else
     vec4 illumination = vec4(0.0, 0.0, 0.0, 0.0);
 #endif
