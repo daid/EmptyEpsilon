@@ -330,7 +330,9 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    constexpr float sector_size = 20000;
+    float sector_size = 20000;
+    const float super_sector_size = sector_size * 8;
+    if (distance > super_sector_size) sector_size = super_sector_size;
     const float sub_sector_size = sector_size / 8;
 
     int sector_x_min = floor((view_position.x - (radar_screen_center.x - rect.position.x) / scale) / sector_size) + 1;
@@ -338,14 +340,17 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     int sector_y_min = floor((view_position.y - (radar_screen_center.y - rect.position.y) / scale) / sector_size) + 1;
     int sector_y_max = floor((view_position.y + (rect.position.y + rect.size.y - radar_screen_center.y) / scale) / sector_size);
     glm::u8vec4 color(64, 64, 128, 128);
-    for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
+    if (distance <= super_sector_size)
     {
-        float x = sector_x * sector_size;
-        for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+        for(int sector_x = sector_x_min - 1; sector_x <= sector_x_max; sector_x++)
         {
-            float y = sector_y * sector_size;
-            auto pos = worldToScreen(glm::vec2(x+(30/scale),y+(30/scale)));
-            renderer.drawText(sp::Rect(pos.x-10, pos.y-10, 20, 20), getSectorName(glm::vec2(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), sp::Alignment::Center, 30, bold_font, color);
+            float x = sector_x * sector_size;
+            for(int sector_y = sector_y_min - 1; sector_y <= sector_y_max; sector_y++)
+            {
+                float y = sector_y * sector_size;
+                auto pos = worldToScreen(glm::vec2(x+(30/scale),y+(30/scale)));
+                renderer.drawText(sp::Rect(pos.x-10, pos.y-10, 20, 20), getSectorName(glm::vec2(sector_x * sector_size + sub_sector_size, sector_y * sector_size + sub_sector_size)), sp::Alignment::Center, 30, bold_font, color);
+            }
         }
     }
 
@@ -375,6 +380,7 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
             renderer.drawPoint(worldToScreen(glm::vec2(x,y)), color);
         }
     }
+
     //We finish the rendering here, to make sure the sector grid lines are drawn below anything else.
     renderer.finish();
 }
