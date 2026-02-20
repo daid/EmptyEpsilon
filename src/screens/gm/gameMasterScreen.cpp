@@ -80,13 +80,20 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->layout.fill_width = false;
     box_selection_overlay->hide();
 
-    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {
-        if (!value)
-            engine->setGameSpeed(1.0f);
-        else
-            engine->setGameSpeed(0.0f);
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
+        if (!value) engine->setGameSpeed(pow(2.0f, game_time_scale->getSelectionIndex()));
+        else engine->setGameSpeed(0.0f);
     });
-    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(250, 50);
+    pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(150, 50);
+
+    game_time_scale = new GuiSelector(this, "GAME_TIME_SCALE_SELECTOR", [this](int index, string value) {
+        engine->setGameSpeed(pow(2, index));
+    });
+    game_time_scale
+        ->setOptions({"1x", "2x", "4x", "8x"})
+        ->setSelectionIndex(0)
+        ->setPosition(170, 20, sp::Alignment::TopLeft)
+        ->setSize(100, 50);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
@@ -303,10 +310,47 @@ void GameMasterScreen::update(float delta)
         returnToShipSelection(getRenderLayer());
     }
 
+    const float game_speed = engine->getGameSpeed();
     if (keys.pause.getDown())
-        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
+    {
+        if (game_server && !gameGlobalInfo->getVictoryFaction())
+            engine->setGameSpeed(
+                game_speed > 0.0f
+                    ? 0.0f
+                    : std::pow(2.0f, game_time_scale->getSelectionIndex())
+            );
+    }
 
-    pause_button->setValue(engine->getGameSpeed() == 0.0f);
+    if (game_speed == 0.0f)
+    {
+        pause_button->setValue(true);
+        game_time_scale
+            ->setSelectionIndex(0)
+            ->disable();
+    }
+    else
+    {
+        pause_button->setValue(false);
+        game_time_scale->enable();
+
+        switch (static_cast<int>(game_speed))
+        {
+            case 1:
+                game_time_scale->setSelectionIndex(0);
+                break;
+            case 2:
+                game_time_scale->setSelectionIndex(1);
+                break;
+            case 4:
+                game_time_scale->setSelectionIndex(2);
+                break;
+            case 8:
+                game_time_scale->setSelectionIndex(3);
+                break;
+            default:
+                LOG(Warning, "Lua setGameSpeed: Invalid value ", static_cast<int>(game_speed), "; must be 0, 1, 2, 4, or 8");
+        }
+    }
 
     if (keys.gm_show_callsigns.getDown())
     {

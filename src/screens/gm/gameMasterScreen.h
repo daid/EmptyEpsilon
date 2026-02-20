@@ -48,6 +48,7 @@ private:
     GuiButton* player_comms_hail;
     GuiButton* global_message_button;
     GuiToggleButton* pause_button;
+    GuiSelector* game_time_scale;
     GuiToggleButton* intercept_comms_button;
     GuiButton* tweak_button;
     GuiButton* copy_scenario_button;
