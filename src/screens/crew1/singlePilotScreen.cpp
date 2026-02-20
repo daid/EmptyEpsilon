@@ -67,18 +67,23 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
                 my_player_info->commandSetTarget(targets.get());
                 drag_rotate = false;
             } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                float angle = vec2ToAngle(position - transform->getPosition());
+                my_player_info->commandTargetRotation(angle);
+                radar->setTargetHeading(angle+90);
                 drag_rotate = true;
             }
         },
         [this](glm::vec2 position) {
             if (drag_rotate) {
-                if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                    my_player_info->commandTargetRotation(vec2ToAngle(position - transform->getPosition()));
+                if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+                    float angle = vec2ToAngle(position - transform->getPosition());
+                    my_player_info->commandTargetRotation(angle);
+                    radar->setTargetHeading(angle+90);
+                }
             }
         },
         [this](glm::vec2 position) {
-           drag_rotate=false;
+            drag_rotate=false;
         }
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
@@ -166,7 +171,10 @@ void SinglePilotScreen::onUpdate()
         if (angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
+                radar->setTargetHeading(transform->getRotation()+angle+90);
+            }
         }
 
         if (keys.weapons_enemy_next_target.getDown())

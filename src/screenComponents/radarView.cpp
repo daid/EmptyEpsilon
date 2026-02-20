@@ -802,6 +802,14 @@ void GuiRadarView::drawHeadingIndicators(sp::RenderTarget& renderer)
             radar_screen_center + vec2FromAngle(float(n) - 90 - view_rotation) * (scale - 50), n-view_rotation,
             string(n), 15.0f, main_font, {255, 255, 255, 255});
     }
+    
+    if (show_target_heading)
+    {
+        renderer.drawLine(
+            radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 0),
+            radar_screen_center + vec2FromAngle(target_heading - 90 - view_rotation) * (scale - 40),
+            {255, 255, 255, 255});
+    }
 }
 
 glm::vec2 GuiRadarView::worldToScreen(glm::vec2 world_position)
