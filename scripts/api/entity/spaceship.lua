@@ -711,7 +711,9 @@ end
 function Entity:getWeaponTubeLoadType(index)
     local tubes = self.components.missile_tubes
     local missile_type = "none"
-    if  tubes and index >= 0 and index < #tubes then missile_type = tubes[index+1].type_loaded end
+    if tubes and index >= 0 and index < #tubes then
+        missile_type = tubes[index+1].type_loaded
+    end
     if missile_type == "none" then return nil end
     return missile_type
 end
@@ -749,33 +751,48 @@ end
 --- Accepts 0, negative, and positive values.
 --- Example:
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
---- ship:setWeaponTubeDirection(0,90):setWeaponTubeDirection(1,-90)
+--- ship:setWeaponTubeDirection(0, 90):setWeaponTubeDirection(1, -90)
 function Entity:setWeaponTubeDirection(index, direction)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].direction = direction end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].direction = direction
+    end
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function Entity:setTubeSize(index, size)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].size = size end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].size = size
+    end
     return self
 end
 --- Returns the size of the weapon tube with the given index on this SpaceShip.
 --- Example: ship:getTubeSize(0)
 function Entity:getTubeSize(index)
-    if self.components.missile_tubes then return self.components.missile_tubes[index+1].size end
-    return "medium"
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        return self.components.missile_tubes[index+1].size
+    end
+    return "none"
 end
 --- Returns the delay, in seconds, for loading and unloading the WeaponTube with the given index on this SpaceShip.
 --- Example: ship:getTubeLoadTime(0)
 function Entity:getTubeLoadTime(index)
-    if self.components.missile_tubes then return self.components.missile_tubes[index+1].load_time end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        return self.components.missile_tubes[index+1].load_time
+    end
     return 0.0
 end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this SpaceShip.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].load_time = load_time end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].load_time = load_time
+    end
     return self
 end
 --- Returns the dynamic gravitational radar signature value emitted by this SpaceShip.
@@ -823,11 +840,11 @@ function Entity:addBroadcast(target, message)
 
         elseif not ent:isEnemy(self) and target >= 1 then
             add = true
-            color = {255, 102, 102, 255}
+            color = {128, 128, 128, 255}
 
         elseif target >= 2 then
             add = true
-            color = {128, 128, 128, 255}
+            color = {255, 102, 102, 255}
         end
 
         if add then

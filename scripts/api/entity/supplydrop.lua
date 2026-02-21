@@ -7,13 +7,13 @@
 --- @type creation
 function SupplyDrop()
     local e = createEntity()
-    e.components.transform = {}
     for k, v in pairs(__model_data["ammo_box"]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end
     e.components = {
+        transform = {},
         physics={type="Sensor"},
         radar_trace={
             color={100, 200, 255},

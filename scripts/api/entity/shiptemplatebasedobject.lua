@@ -207,13 +207,15 @@ end
 --- Sets the radar trace image for this entity.
 --- Valid values are filenames of PNG images relative to the resources/radar directory.
 --- Radar trace images should be white with a transparent background.
---- Only scanned SpaceShips use a specific radar trace image. Unscanned SpaceShips always display as an arrow.
---- Example: stbo:setRadarTrace("arrow.png") -- sets the radar trace to resources/radar/arrow.png
---- Example: ship:setRadarTrace("blip.png") -- displays a dot for this ship on radar when scanned
+--- Unscanned entities appear on player radar as their defined radar_trace.icon by default, unless radar_trace.arrow_if_not_scanned=true, in which case the entity appears as an arrow (equivalent to an argument value of "ship.png").
+--- Examples:
+--- entity:setRadarTrace("arrow.png") -- sets the radar trace for this entity to resources/radar/arrow.png
+--- entity:setRadarTrace("blip.png") -- displays a dot for this entity on radar when scanned
 function Entity:setRadarTrace(filename)
     if self.components.radar_trace then
         self.components.radar_trace.icon = "radar/" .. filename
     end
+    return self
 end
 
 --- Sets this STBO's impulse engine sound effect.
@@ -283,12 +285,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getFrontShield()
-    return self.getShieldLevel(0)
+    return self:getShieldLevel(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getFrontShieldMax()
-    return self.getShieldMax(0)
+    return self:getShieldMax(0)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.
@@ -305,12 +307,12 @@ end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:getShieldLevel() with an index value.
 function Entity:getRearShield()
-    return self.getShieldLevel(1)
+    return self:getShieldLevel(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldsMax().
 function Entity:getRearShieldMax()
-    return self.getShieldMax(1)
+    return self:getShieldMax(1)
 end
 --- [DEPRECATED]
 --- Use ShipTemplateBasedObject:setShieldLevel() with an index value.

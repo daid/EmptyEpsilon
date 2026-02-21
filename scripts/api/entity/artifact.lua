@@ -32,7 +32,7 @@ local Entity = getLuaEntityFunctionTable()
 --- Example: artifact:setModel("artifact6")
 function Entity:setModel(model_name)
     for k, v in pairs(__model_data[model_name]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             self.components[k] = table.deepcopy(v)
         end
     end

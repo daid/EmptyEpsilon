@@ -27,22 +27,23 @@ end
 function Entity:getRotation()
     if self.components.transform then return self.components.transform.rotation end
 end
---- Sets this SpaceObject's heading, in degrees ranging from 0 to 360.
---- Unlike SpaceObject:setRotation(), a value of 0 points to the top of the map ("north").
+--- Sets this entity's heading, in degrees ranging from 0 to 360.
+--- Unlike setRotation(), a value of 0 points to the top of the map ("north"), which matches player radars.
 --- Values that are negative or greater than 360 are converted to values within that range.
 --- SpaceObject:setHeading() and SpaceObject:setRotation() do not change the helm's target heading on PlayerSpaceships. To do that, use PlayerSpaceship:commandTargetRotation().
 --- Example: obj:setHeading(0)
 function Entity:setHeading(heading)
-    if self.components.transform then self.components.transform.rotation = heading + 270 end
+    if self.components.transform then
+        self.components.transform.rotation = (heading + 270) % 360
+    end
     return self
 end
 --- Returns this SpaceObject's heading, in degrees ranging from 0 to 360.
---- Example: heading = obj:getHeading(0)
+--- Example: heading = obj:getHeading()
 function Entity:getHeading()
     if self.components.transform then
-        local heading = self.components.transform.rotation - 270
-        while heading < 0 do heading = heading + 360 end
-        while heading > 360 do heading = heading - 360 end
+        local heading = (self.components.transform.rotation - 270) % 360
+        if heading < 0 then heading = heading + 360 end
         return heading
     end
     return 0
@@ -191,6 +192,7 @@ end
 --- Requires a target PlayerShip and message, though the message can be an empty string.
 --- Example: obj:sendCommsMessage(player, "Prepare to die")
 function Entity:sendCommsMessage(target, message)
+    -- Color values should match log_receive_friendly, _neutral, _enemy in colors.ini
     if self:isFriendly(target) then
         target:addToShipLog(message, "#C0C0FF")
     elseif self:isEnemy(target) then
@@ -259,10 +261,11 @@ function Entity:setReputationPoints(amount)
 end
 --- Deducts a given number of faction reputation points from this SpaceObject.
 --- Returns true if there are enough points to deduct the specified amount, then does so.
---- Returns false if there are not enough points, then does not deduct any.
---- Example: obj:takeReputationPoints(1000) -- returns false if `obj` has fewer than 1000 reputation points, otherwise returns true and deducts the points
+--- Returns false and doesn't modify the value if there aren't enough points, or if the argument's value is negative.
+--- Example:
+--- -- Return false if `obj` has fewer than 1000 reputation points or the passed value is negative. Otherwise, return true and deduct the points.--- entity:takeReputationPoints(1000)
 function Entity:takeReputationPoints(amount)
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
+    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
         local points = self.components.faction.entity.components.faction_info.reputation_points
         if points >= amount then
             self.components.faction.entity.components.faction_info.reputation_points = points - amount
@@ -271,14 +274,12 @@ function Entity:takeReputationPoints(amount)
     end
     return false
 end
---- Adds a given number of faction reputation points to this SpaceObject.
---- Example: obj:addReputationPoints(1000)
+--- Adds a given number of faction reputation points to this entity.
+--- Discards negative values. Returns the entity.
+--- Example: entity:addReputationPoints(1000)
 function Entity:addReputationPoints(amount)
-    if self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
-        local points = self.components.faction.entity.components.faction_info.reputation_points
-        if points >= -amount then
-            self.components.faction.entity.components.faction_info.reputation_points = points + amount
-        end
+    if amount > 0 and self.components.faction and self.components.faction.entity and self.components.faction.entity.components.faction_info then
+        self.components.faction.entity.components.faction_info.reputation_points = self.components.faction.entity.components.faction_info.reputation_points + amount
     end
     return self
 end
