@@ -94,7 +94,7 @@ end
 --- Give multiple CpuShips the same SpaceObject and different offsets to create a formation.
 --- Example: ship:orderFlyFormation(leader, 500, 250) -- fly 0.5U off the wing and 0.25U off the tail of the SpaceObject `leader`
 function Entity:orderFlyFormation(target, offset_x, offset_y)
-    if self.components.ai_controller then self.components.ai_controller = {orders = "fly in formation", order_target=target, order_target_location={offset_x, offset_y}} end
+    if self.components.ai_controller then self.components.ai_controller = {orders = "Fly in formation", order_target=target, order_target_location={offset_x, offset_y}} end
     return self
 end
 --- Orders this CpuShip to move toward the given coordinates, and to attack hostiles that approach within its short-range radar range during transit.
