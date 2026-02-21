@@ -318,6 +318,18 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
+
+    sp::script::ComponentHandler<MissileHoming>::name("missile_homing");
+    BIND_MEMBER(MissileHoming, turn_rate);
+    BIND_MEMBER(MissileHoming, range);
+    BIND_MEMBER(MissileHoming, target);
+    BIND_MEMBER(MissileHoming, target_angle);
+
+    sp::script::ComponentHandler<ExplodeOnTimeout>::name("explode_on_timeout");
+
     sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
     BIND_MEMBER(ExplosionEffect, size);
     BIND_MEMBER(ExplosionEffect, radar);
