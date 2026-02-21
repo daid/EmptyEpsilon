@@ -34,20 +34,16 @@ end
 --- Example: obj:setHeading(0)
 function Entity:setHeading(heading)
     if self.components.transform then
-        local heading = self.components.transform.rotation + 270
-        while heading < 0 do heading = heading + 360 end
-        while heading > 360 do heading = heading - 360 end
-        self.components.transform.rotation = heading
+        self.components.transform.rotation = (heading + 270) % 360
     end
     return self
 end
 --- Returns this SpaceObject's heading, in degrees ranging from 0 to 360.
---- Example: heading = obj:getHeading(0)
+--- Example: heading = obj:getHeading()
 function Entity:getHeading()
     if self.components.transform then
-        local heading = self.components.transform.rotation - 270
-        while heading < 0 do heading = heading + 360 end
-        while heading > 360 do heading = heading - 360 end
+        local heading = (self.components.transform.rotation - 270) % 360
+        if heading < 0 then heading = heading + 360 end
         return heading
     end
     return 0
