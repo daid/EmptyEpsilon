@@ -160,15 +160,22 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
 
 void SinglePilotScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (my_spaceship && my_player_info && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-        if (angle != 0.0f)
+        auto current_turn_request = keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue();
+        // Handle joystick input that are redundant by giving right priority
+        if (keys.helms_turn_right.getValue() == keys.helms_turn_right.getValue())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
+            current_turn_request = keys.helms_turn_right.getValue();
         }
 
+        // Update only if changed
+        if (current_turn_request != turn_request )
+        {
+            turn_request = current_turn_request;
+            my_player_info->commandTurnSpeed(turn_request);
+        }
+        
         if (keys.weapons_enemy_next_target.getDown())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
