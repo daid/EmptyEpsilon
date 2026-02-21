@@ -92,21 +92,50 @@ int main(int argc, char** argv)
 #else
     Logging::setLogLevel(LOGLEVEL_INFO);
 #endif
+
+// Log to STDOUT unless on non-debug Windows builds, which won't have
+// terminals for log output.
 #if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #else
     Logging::setLogStdout();
 #endif
+
     LOG(Info, "Starting...");
     new Engine();
     initSystemsAndComponents();
 
     auto configuration_path = initConfiguration(argc, argv);
 
+    if (PreferencesManager::get("headless") == "")
+    {
+#ifdef _WIN32
+        mkdir(configuration_path.c_str());
+#else
+        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+// On macOS non-debug builds, redirect the log to the configuration directory if
+// invoked as an app bundle.
+#ifdef __APPLE__
+        const char* argv0 = *argv;
+        std::string launch_path(argv0);
+
+        // Check if the path ends with .app/Contents/MacOS/
+        // If so, we're invoked as an app bundle. Write the log to file.
+        size_t pos = launch_path.find(".app/Contents/MacOS/");
+        if (pos != std::string::npos)
+            Logging::setLogFile(configuration_path + "/EmptyEpsilon.log");
+        // If not, we might be invoked as a binary and can log to STDOUT.
+        else Logging::setLogStdout();
+#endif // __APPLE__
+
+#endif // _WIN32
+    }
+
     if (PreferencesManager::get("proxy") != "")
         return runProxyServer();
 
-    if (PreferencesManager::get("headless") != "") {
+    if (PreferencesManager::get("headless") != "")
+    {
         textureManager.setDisabled(true);
         Logging::setLogStdout();
     }
@@ -264,11 +293,6 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
-#ifdef _WIN32
-        mkdir(configuration_path.c_str());
-#else
-        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#endif
         PreferencesManager::save(configuration_path + "/options.ini");
         sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
