@@ -634,7 +634,7 @@ void ShipSelectionScreen::update(float delta)
     player_ship_list->setVisible(player_ship_list->entryCount() > 0);
 
     // Sync our configured user name with the server
-    if (my_player_info->name != PreferencesManager::get("username"))
+    if (my_player_info && my_player_info->name != PreferencesManager::get("username"))
         my_player_info->commandSetName(PreferencesManager::get("username"));
 
     // Update the list of connected players
