@@ -88,15 +88,18 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                         gameGlobalInfo->on_gm_click_cursor = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR;
                     else
                         gameGlobalInfo->on_gm_click_cursor = info.icon;
-                    gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position)
+                    gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position, std::optional<float> rotation)
                     {
                         auto res = info.create_callback.call<sp::ecs::Entity>();
                         LuaConsole::checkResult(res);
                         if (res.isOk()) {
                             auto e = res.value();
-                            auto transform = e.getComponent<sp::Transform>();
-                            if (transform)
+                            if (auto transform = e.getComponent<sp::Transform>())
+                            {
                                 transform->setPosition(position);
+                                if (rotation)
+                                    transform->setRotation(*rotation);
+                            }
                             if (auto faction = e.getComponent<Faction>()) {
                                 for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
                                     if (info.name == faction_selector->getSelectionValue())

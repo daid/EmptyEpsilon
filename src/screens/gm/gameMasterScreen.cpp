@@ -1,6 +1,7 @@
 #include "gameMasterScreen.h"
 #include "i18n.h"
 #include "main.h"
+#include "vectorUtils.h"
 #include "gui/mouseRenderer.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
@@ -483,7 +484,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
     {
         if (gameGlobalInfo->on_gm_click)
         {
-            gameGlobalInfo->on_gm_click(position);
+            click_and_drag_state = CD_CreateWithDrag;
         }else{
             click_and_drag_state = CD_ClickSelectOrBoxSelect;
 
@@ -676,6 +677,15 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         faction_selector->setSelectionIndex(n);
                 }
             }
+        }
+        break;
+    case CD_CreateWithDrag:
+        {
+            float min_drag_distance = main_radar->getDistance() / 450 * 10;
+            std::optional<float> rotation;
+            if (glm::length(position - drag_start_position) > min_drag_distance)
+                rotation = vec2ToAngle(position - drag_start_position);
+            gameGlobalInfo->on_gm_click(drag_start_position, rotation);
         }
         break;
     default:
