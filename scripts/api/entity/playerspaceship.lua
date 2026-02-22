@@ -614,24 +614,37 @@ function Entity:commandSetAlertLevel(level)
     return self
 end
 
---- Returns the number of repair crews on this PlayerSpaceship.
---- Example: player:getRepairCrewCount()
+--- Returns a 1-indexed table of internal_crew entities that are assigned to this entity.
+--- Example: local crew = entity:getRepairCrew()
+function Entity:getRepairCrew()
+    local crew = {}
+
+    for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        if e.components.internal_crew.ship == self then
+            table.insert(crew, e)
+        end
+    end
+
+    return crew
+end
+--- Returns the number of repair crews on this entity.
+--- Example: entity:getRepairCrewCount()
 function Entity:getRepairCrewCount()
     local count = 0
-    for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+    for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
         if e.components.internal_crew.ship == self then
             count = count + 1
         end
     end
     return count
 end
---- Sets the total number of repair crews on this PlayerSpaceship.
+--- Sets the total number of repair crews on this entity.
 --- If the value is less than the number of repair crews, this function removes repair crews.
---- If the value is greater, this function adds new repair crews into random rooms.
---- Example: player:setRepairCrewCount(5)
+--- If the value is greater, this function adds new repair crews to random rooms.
+--- Example: entity:setRepairCrewCount(5)
 function Entity:setRepairCrewCount(amount)
     if self.components.internal_rooms then
-        for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
             if e.components.internal_crew.ship == self then
                 amount = amount - 1
                 if amount < 0 then
@@ -639,13 +652,105 @@ function Entity:setRepairCrewCount(amount)
                 end
             end
         end
-        for n=1,amount do
+        for n = 1, amount do
             local crew = createEntity()
             crew.components.internal_crew = {ship=self}
             crew.components.internal_repair_crew = {}
         end
     end
     return self
+end
+--- Returns true if the given table of {x,y} coordinates is within one of this entity's internal rooms. or false otherwise.
+--- setRepairCrewPosition() uses this to validate target positions.
+--- Examples:
+--- entity:isValidCrewPosition({4,3}) -- returns false on default player Atlantis
+--- entity:isValidCrewPosition({3,2}) -- returns true on default player Atlantis
+function Entity:isValidCrewPosition(pos)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    for i = 1, #ir do
+        local rp = ir[i].position
+        local rs = ir[i].size
+        if pos[1] >= rp[1] and pos[1] < rp[1] + rs[1] and pos[2] >= rp[2] and pos[2] < rp[2] + rs[2] then
+            return true
+        end
+    end
+
+    return false
+end
+--- Returns the internal room that contains a given ship system.
+--- Returns nil if the system is invalid, if the ship lacks internal rooms, or if no room is assigned to this system.
+--- Example:
+--- entity:getInternalRoomForSystem("beamweapons")
+function Entity:getInternalRoomForSystem(system)
+    local ir = self.components.internal_rooms
+    if not ir then return nil end
+
+    for i = 1, #ir do
+        if system == ir[i].system then
+            return ir[i]
+        end
+    end
+
+    return nil
+end
+--- Returns a table containing tables of all valid {x,y} coordinates for a given internal room.
+--- Example:
+--- local room = entity:getInternalRoomForSystem("beamweapons")
+--- local coords = entity:getCoordinatesForInternalRoom(room)
+function Entity:getCoordinatesForInternalRoom(room)
+    if not room then return nil end
+
+    local coords = {}
+    for x = room.position[1], room.position[1] + room.size[1] - 1 do
+        for y = room.position[2], room.position[2] + room.size[2] - 1 do
+            table.insert(coords, {x, y})
+        end
+    end
+
+    return coords
+end
+--- Sets the target coordinates of a repair crew within this entity's internal rooms.
+--- Returns a Boolean value indicating success.
+--- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
+--- If the x,y coordinates are outside of any room, this returns false. Otherwise, this returns true.
+--- Using this function to assign multiple crews to the same coordinates will stack them on the same square, which players should not be able to do!
+--- Example:
+--- target_position = {3, 2} -- must be a table
+--- entity:moveRepairCrewToPosition(1, target_position)
+function Entity:moveRepairCrewToPosition(crew_index, pos)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    if not self:isValidCrewPosition(pos) then return false end
+
+    local crew = self:getRepairCrew()
+    if not crew[crew_index] then return false end
+
+    crew[crew_index].components.internal_crew.target_position = pos
+    return true
+end
+--- Sets the target room of a repair crew within this entity's internal rooms, selected by passing a room.
+--- Returns a Boolean value indicating success.
+--- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
+--- The crew is assigned a random set of coordinates within the room.
+--- Using this function to assign multiple crews to the same room can stack them on the same square, which players should not be able to do!
+--- Example:
+--- target_room = entity:getInternalRoomForSystem("beamweapons")
+--- entity:moveRepairCrewToRoom(1, target_room)
+function Entity:moveRepairCrewToRoom(crew_index, room)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    local crew = self:getRepairCrew()
+    if not crew[crew_index] then return false end
+
+    local coordinates_list = self:getCoordinatesForInternalRoom(room)
+    if not coordinates_list or #coordinates_list == 0 then return false end
+    local coords = coordinates_list[math.random(#coordinates_list)]
+    crew[crew_index].components.internal_crew.target_position = coords
+    return true
 end
 --- Defines whether automatic coolant distribution is enabled on this PlayerSpaceship.
 --- If true, coolant is automatically distributed proportionally to the amount of heat in that system.
