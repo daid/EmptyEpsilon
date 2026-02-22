@@ -68,8 +68,10 @@ public:
     sp::io::Keybinding helms_warp2;
     sp::io::Keybinding helms_warp3;
     sp::io::Keybinding helms_warp4;
+    sp::io::Keybinding helms_warp_max;
     sp::io::Keybinding helms_increase_warp;
     sp::io::Keybinding helms_decrease_warp;
+    sp::io::Keybinding helms_set_warp;
     sp::io::Keybinding helms_dock_action;
     sp::io::Keybinding helms_dock_request;
     sp::io::Keybinding helms_dock_abort;

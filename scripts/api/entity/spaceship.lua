@@ -667,11 +667,11 @@ function Entity:setBeamWeaponHeatPerFire(index, heat)
 end
 --- Sets the colors used to draw the radar arc for the BeamWeapon with the given index on this ship.
 --- The first three-number value sets the RGB color for the arc when idle, and the second sets the color when firing.
---- Example: ship:setBeamWeaponArcColor(0,0,128,0,0,255,0) -- makes beam 0's arc green
+--- Example: ship:setBeamWeaponArcColor(0,0,0.5,0,0,1.0,0) -- makes beam 0's arc green
 function Entity:setBeamWeaponArcColor(index, idle_r, idle_g, idle_b, fire_r, fire_g, fire_b)
     if self.components.beam_weapons == nil or #self.components.beam_weapons <= index then return self end
-    self.components.beam_weapons[index + 1].arc_color = {idle_r, idle_g, idle_b, 255}
-    self.components.beam_weapons[index + 1].arc_color_fire = {fire_r, fire_g, fire_b, 255}
+    self.components.beam_weapons[index + 1].arc_color = {255*idle_r, 255*idle_g, 255*idle_b, 255}
+    self.components.beam_weapons[index + 1].arc_color_fire = {255*fire_r, 255*fire_g, 255*fire_b, 255}
     return self
 end
 --- Sets the damage type dealt by the BeamWeapon with the given index on this ship.
@@ -706,7 +706,9 @@ end
 function Entity:getWeaponTubeLoadType(index)
     local tubes = self.components.missile_tubes
     local missile_type = "none"
-    if  tubes and index >= 0 and index < #tubes then missile_type = tubes[index+1].type_loaded end
+    if tubes and index >= 0 and index < #tubes then
+        missile_type = tubes[index+1].type_loaded
+    end
     if missile_type == "none" then return nil end
     return missile_type
 end
@@ -744,33 +746,48 @@ end
 --- Accepts 0, negative, and positive values.
 --- Example:
 --- -- Sets tube 0 to point 90 degrees right of forward, and tube 1 to point 90 degrees left of forward
---- ship:setWeaponTubeDirection(0,90):setWeaponTubeDirection(1,-90)
+--- ship:setWeaponTubeDirection(0, 90):setWeaponTubeDirection(1, -90)
 function Entity:setWeaponTubeDirection(index, direction)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].direction = direction end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].direction = direction
+    end
     return self
 end
 --- Sets the weapon size launched from the WeaponTube with the given index on this ship.
 --- Example: ship:setTubeSize(0,"large") -- sets tube 0 to fire large weapons
 function Entity:setTubeSize(index, size)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].size = size end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].size = size
+    end
     return self
 end
 --- Returns the size of the weapon tube with the given index on this ship.
 --- Example: ship:getTubeSize(0)
 function Entity:getTubeSize(index)
-    if self.components.missile_tubes then return self.components.missile_tubes[index+1].size end
-    return "medium"
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        return self.components.missile_tubes[index+1].size
+    end
+    return "none"
 end
 --- Returns the delay, in seconds, for loading and unloading the WeaponTube with the given index on this ship.
 --- Example: ship:getTubeLoadTime(0)
 function Entity:getTubeLoadTime(index)
-    if self.components.missile_tubes then return self.components.missile_tubes[index+1].load_time end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        return self.components.missile_tubes[index+1].load_time
+    end
     return 0.0
 end
 --- Sets the time, in seconds, required to load the weapon tube with the given index on this ship.
 --- Example: ship:setTubeLoadTime(0,12) -- sets the loading time for tube 0 to 12 seconds
 function Entity:setTubeLoadTime(index, load_time)
-    if self.components.missile_tubes then self.components.missile_tubes[index+1].load_time = load_time end
+    local tubes = self.components.missile_tubes
+    if tubes and index >= 0 and index < #tubes then
+        self.components.missile_tubes[index+1].load_time = load_time
+    end
     return self
 end
 --- Returns the dynamic gravitational radar signature value emitted by this ship.
@@ -818,11 +835,11 @@ function Entity:addBroadcast(target, message)
 
         elseif not ent:isEnemy(self) and target >= 1 then
             add = true
-            color = {255, 102, 102, 255}
+            color = {128, 128, 128, 255}
 
         elseif target >= 2 then
             add = true
-            color = {128, 128, 128, 255}
+            color = {255, 102, 102, 255}
         end
 
         if add then

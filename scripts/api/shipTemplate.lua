@@ -163,7 +163,7 @@ function ShipTemplate:setModel(model_data_name)
 
     self.__model_data_name = model_data_name
     for k, v in pairs(__model_data[model_data_name]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             self[k] = table.deepcopy(v)
         end
     end
@@ -234,7 +234,14 @@ function ShipTemplate:setBeamWeapon(index, arc, direction, range, cycle_time, da
     while #self.beam_weapons < index + 1 do
         self.beam_weapons[#self.beam_weapons + 1] = {}
     end
-    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage}
+
+    local model = __model_data[self.__model_data_name]
+    local scale = model.mesh_render.scale or 1
+    local pos = (model.__beam_positions or {})[index+1]
+    if pos then
+        pos = {pos[1] * scale, pos[2] * scale, pos[3] * scale}
+    end
+    self.beam_weapons[index + 1] = {arc=arc, direction=direction, range=range, cycle_time=cycle_time, damage=damage, position=pos}
     if range <= 0 and #self.beam_weapons == index + 1 then
         self.beam_weapons[index + 1] = nil
     end
@@ -569,11 +576,22 @@ function ShipTemplate:setCanHack(enabled)
     if enabled then self.hacking_device = {} else self.hacking_device = nil end
     return self
 end
---- Defines whether the "Request Docking" button appears on related crew screens in player ships created from this ShipTemplate.
---- Defaults to true.
+--- Defines whether the entity can dock with other entities.
+--- If true, adds an empty DockingPort component to the entity if it lacks one.
+--- If false, removes any existing DockingPort component, if any.
+--- To specify the entity's ship class for docking logic with DockingBays, use setClass() instead.
 --- Example: template:setCanDock(false)
 function ShipTemplate:setCanDock(enabled)
-    if enabled then self.docking_port = {} else self.docking_port = nil end
+    if enabled then
+        -- Don't overwrite an existing DockingPort component
+        if self.docking_port ~= nil then
+            return self
+        else
+            self.docking_port = {}
+        end
+    else
+        self.docking_port = nil
+    end
     return self
 end
 --- Defines whether combat maneuver controls appear on related crew screens in player ships created from this ShipTemplate.

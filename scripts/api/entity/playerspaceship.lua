@@ -128,7 +128,7 @@ end
 function Entity:isCommsBeingHailed()
     if self.components.comms_transmitter then
         local state = self.components.comms_transmitter.state
-        return state == "hailed" or state == "hailed_player" or state == "hailed_gm"
+        return state == "hailed" or state == "hailed_gm"
     end
 end
 --- Returns whether this ship is being hailed by the GM.
@@ -413,9 +413,7 @@ function Entity:commandImpulse(target)
 end
 --- Commands this player ship to request a new warp level.
 --- Valid values are any positive integer, or 0.
---- Warp controls on crew position screens are limited to 4.
---- Example:
---- ship:commandWarp(2) -- activate the warp drive at level 2
+--- Example: player:commandWarp(2) -- request warp factor 2
 function Entity:commandWarp(target)
     commandWarp(self, target)
     return self

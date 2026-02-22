@@ -12,77 +12,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: src/playerInfo.cpp:1141
+#: src/playerInfo.cpp:1167
 msgctxt "station"
 msgid "Helms"
 msgstr "Steuerkonsole"
 
-#: src/playerInfo.cpp:1142
+#: src/playerInfo.cpp:1168
 msgctxt "station"
 msgid "Weapons"
 msgstr "Waffen"
 
-#: src/playerInfo.cpp:1143
+#: src/playerInfo.cpp:1169
 msgctxt "station"
 msgid "Engineering"
 msgstr "Maschinenraum"
 
-#: src/playerInfo.cpp:1144
+#: src/playerInfo.cpp:1170
 msgctxt "station"
 msgid "Science"
 msgstr "Wissenschaft"
 
-#: src/playerInfo.cpp:1145
+#: src/playerInfo.cpp:1171
 msgctxt "station"
 msgid "Relay"
 msgstr "Kommunikation"
 
-#: src/playerInfo.cpp:1146
+#: src/playerInfo.cpp:1172
 msgctxt "station"
 msgid "Tactical"
 msgstr "Taktik"
 
-#: src/playerInfo.cpp:1147
+#: src/playerInfo.cpp:1173
 msgctxt "station"
 msgid "Engineering+"
 msgstr "Maschinenraum+"
 
-#: src/playerInfo.cpp:1148
+#: src/playerInfo.cpp:1174
 msgctxt "station"
 msgid "Operations"
 msgstr "Ops"
 
-#: src/playerInfo.cpp:1149
+#: src/playerInfo.cpp:1175
 msgctxt "station"
 msgid "Single Pilot"
 msgstr "Einzelplatzsteuerung"
 
-#: src/playerInfo.cpp:1150
+#: src/playerInfo.cpp:1176
 msgctxt "station"
 msgid "Damage Control"
 msgstr "Schadenskontrolle"
 
-#: src/playerInfo.cpp:1151
+#: src/playerInfo.cpp:1177
 msgctxt "station"
 msgid "Power Management"
 msgstr "Energie-Management"
 
-#: src/playerInfo.cpp:1152
+#: src/playerInfo.cpp:1178
 msgctxt "station"
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/playerInfo.cpp:1153
+#: src/playerInfo.cpp:1179
 msgctxt "station"
 msgid "Strategic Map"
 msgstr "Strategische Karte"
 
-#: src/playerInfo.cpp:1154
+#: src/playerInfo.cpp:1180
 msgctxt "station"
 msgid "Comms"
 msgstr "Nachrichten"
 
-#: src/playerInfo.cpp:1155
+#: src/playerInfo.cpp:1181
 msgctxt "station"
 msgid "Ship's Log"
 msgstr "Schiffslog"
@@ -116,11 +116,11 @@ msgstr "HGBI"
 msgid "setting"
 msgstr "Einstellung"
 
-#: src/tutorialGame.cpp:91
+#: src/tutorialGame.cpp:92
 msgid "Next"
 msgstr "Weiter"
 
-#: src/tutorialGame.cpp:98
+#: src/tutorialGame.cpp:99
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -394,7 +394,7 @@ msgstr "Speichern"
 msgid "Interface language"
 msgstr "Oberflächen-Sprache"
 
-#: src/menus/optionsMenu.cpp:165
+#: src/menus/optionsMenu.cpp:165 src/menus/optionsMenu.cpp:220
 msgid "Click Back to apply change"
 msgstr "Wird bei \"Zurück\" angewendet, tlw. auch erst bei Neustart"
 
@@ -402,102 +402,106 @@ msgstr "Wird bei \"Zurück\" angewendet, tlw. auch erst bei Neustart"
 msgid "Interface theme"
 msgstr "Oberflächen-Theme"
 
-#: src/menus/optionsMenu.cpp:226
+#: src/menus/optionsMenu.cpp:228
 msgid "Control options"
 msgstr "Steuerung"
 
-#: src/menus/optionsMenu.cpp:231
+#: src/menus/optionsMenu.cpp:233
 msgid "Configure keyboard/joystick"
 msgstr "Tasten- und Joystickbelegung"
 
-#: src/menus/optionsMenu.cpp:247
+#: src/menus/optionsMenu.cpp:249
 msgid "Radar rotation lock"
 msgstr "Radar oder Schiffs-Icon drehen"
 
-#: src/menus/optionsMenu.cpp:260
+#: src/menus/optionsMenu.cpp:262
 msgctxt "radar_locks"
 msgid ""
 "Helms, Tactical,\n"
 "Single Pilot"
 msgstr "Steuerkonsole, Taktik, Einzelplatzsteuerung"
 
-#: src/menus/optionsMenu.cpp:264
+#: src/menus/optionsMenu.cpp:266
 msgctxt "radar_locks"
 msgid "Lock to 0"
 msgstr "?"
 
-#: src/menus/optionsMenu.cpp:271 src/menus/optionsMenu.cpp:275
-#: src/menus/optionsMenu.cpp:295 src/menus/optionsMenu.cpp:299
-#: src/menus/optionsMenu.cpp:320 src/menus/optionsMenu.cpp:324
+#: src/menus/optionsMenu.cpp:273 src/menus/optionsMenu.cpp:277
+#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:301
+#: src/menus/optionsMenu.cpp:322 src/menus/optionsMenu.cpp:326
 msgctxt "radar_locks"
 msgid "Radar rotates"
 msgstr "Radar rotiert"
 
-#: src/menus/optionsMenu.cpp:271 src/menus/optionsMenu.cpp:275
-#: src/menus/optionsMenu.cpp:295 src/menus/optionsMenu.cpp:299
-#: src/menus/optionsMenu.cpp:320 src/menus/optionsMenu.cpp:324
+#: src/menus/optionsMenu.cpp:273 src/menus/optionsMenu.cpp:277
+#: src/menus/optionsMenu.cpp:297 src/menus/optionsMenu.cpp:301
+#: src/menus/optionsMenu.cpp:322 src/menus/optionsMenu.cpp:326
 msgctxt "radar_locks"
 msgid "Ship rotates"
 msgstr "Schiff rotiert"
 
-#: src/menus/optionsMenu.cpp:286
+#: src/menus/optionsMenu.cpp:288
 msgctxt "radar_locks"
 msgid "Weapons"
 msgstr "Waffen"
 
-#: src/menus/optionsMenu.cpp:290 src/menus/optionsMenu.cpp:314
+#: src/menus/optionsMenu.cpp:292 src/menus/optionsMenu.cpp:316
 msgctxt "radar_locks"
 msgid "Lock"
 msgstr "?"
 
-#: src/menus/optionsMenu.cpp:310
+#: src/menus/optionsMenu.cpp:312
 msgctxt "radar_locks"
 msgid ""
 "Science,\n"
 "Operations"
 msgstr "Wissenschaft, Ops"
 
-#: src/menus/optionsMenu.cpp:332
+#: src/menus/optionsMenu.cpp:334
 msgid "Fullscreen toggle"
 msgstr "Vollbild umschalten"
 
-#: src/menus/optionsMenu.cpp:365 src/menus/optionsMenu.cpp:370
+#: src/menus/optionsMenu.cpp:364
+msgid "Restart EmptyEpsilon to apply FSAA change"
+msgstr "Neustart erforderlich, um FSAA-Änderungen zu übernehmen"
+
+#: src/menus/optionsMenu.cpp:373 src/menus/optionsMenu.cpp:378
 msgid "FoV: {fov}"
 msgstr "FoV: {fov}"
 
-#: src/menus/optionsMenu.cpp:386 src/menus/optionsMenu.cpp:391
+#: src/menus/optionsMenu.cpp:394 src/menus/optionsMenu.cpp:399
 msgid "Sound Volume: {volume}%"
 msgstr "Lautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:395
+#: src/menus/optionsMenu.cpp:403
 msgid "Music Playback"
 msgstr "Musik-Playback"
 
-#: src/menus/optionsMenu.cpp:405 src/menus/optionsMenu.cpp:430
+#: src/menus/optionsMenu.cpp:413 src/menus/optionsMenu.cpp:438
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: src/menus/optionsMenu.cpp:405 src/menus/optionsMenu.cpp:430
+#: src/menus/optionsMenu.cpp:413 src/menus/optionsMenu.cpp:438
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: src/menus/optionsMenu.cpp:405 src/menus/optionsMenu.cpp:430
+#: src/menus/optionsMenu.cpp:413 src/menus/optionsMenu.cpp:438
 msgid "Main Screen only"
 msgstr "Nur Hauptschirm"
 
-#: src/menus/optionsMenu.cpp:411 src/menus/optionsMenu.cpp:416
+#: src/menus/optionsMenu.cpp:419 src/menus/optionsMenu.cpp:424
 msgid "Music Volume: {volume}%"
 msgstr "Musiklautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:420
+#: src/menus/optionsMenu.cpp:428
 msgid "Impulse Engine sound"
 msgstr "Impulsantriebs-Sound"
 
-#: src/menus/optionsMenu.cpp:436 src/menus/optionsMenu.cpp:441
+#: src/menus/optionsMenu.cpp:444 src/menus/optionsMenu.cpp:449
 msgid "Impulse Volume: {volume}%"
 msgstr "Impulslautstärke: {volume}%"
 
-#: src/menus/optionsMenu.cpp:453
+#: src/menus/optionsMenu.cpp:461
 msgid "Preview Soundtracks"
 msgstr "Vorschau Soundtracks"
 
@@ -798,7 +802,6 @@ msgid "Bindings reset to defaults"
 msgstr "Steuerung zurücksetzen"
 
 #: src/menus/hotkeyMenu.cpp:87
-#| msgid "Reset"
 msgctxt "button"
 msgid "Reset"
 msgstr "Reset"
@@ -1146,23 +1149,23 @@ msgctxt "scienceTab"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: src/screens/crew6/scienceScreen.cpp:191
+#: src/screens/crew6/scienceScreen.cpp:207
 msgctxt "scienceButton"
 msgid "Probe View"
 msgstr "Sondenansicht"
 
-#: src/screens/crew6/scienceScreen.cpp:213
-#: src/screens/crew6/scienceScreen.cpp:259
+#: src/screens/crew6/scienceScreen.cpp:229
+#: src/screens/crew6/scienceScreen.cpp:275
 msgctxt "scienceButton"
 msgid "Zoom: {zoom}x"
 msgstr "Zoom: {zoom}x"
 
-#: src/screens/crew6/scienceScreen.cpp:226
+#: src/screens/crew6/scienceScreen.cpp:242
 msgctxt "scienceButton"
 msgid "Radar"
 msgstr "Radar"
 
-#: src/screens/crew6/scienceScreen.cpp:226
+#: src/screens/crew6/scienceScreen.cpp:242
 msgctxt "scienceButton"
 msgid "Database"
 msgstr "Datenbank"
@@ -2427,7 +2430,7 @@ msgstr "Front"
 #: src/screenComponents/mainScreenControls.cpp:83
 msgctxt "mainscreen"
 msgid "Back"
-msgstr "Zurück"
+msgstr "Heck"
 
 #: src/screenComponents/mainScreenControls.cpp:93
 msgctxt "mainscreen"
@@ -2458,6 +2461,11 @@ msgstr "Langstreckeckenradar"
 msgctxt "mainscreen"
 msgid "Comms overlay"
 msgstr "Nachrichten anzeigen"
+
+#: src/screenComponents/databaseView.cpp:29
+msgctxt "databaseView"
+msgid "Back"
+msgstr "Zurück"
 
 #: src/screenComponents/hackingDialog.cpp:36
 msgctxt "hacking"

@@ -126,8 +126,10 @@ Keys::Keys() :
     helms_warp2("HELMS_WARP2", "8"),
     helms_warp3("HELMS_WARP3", "9"),
     helms_warp4("HELMS_WARP4", "0"),
+    helms_warp_max("HELMS_WARP_MAX"),
     helms_increase_warp("HELMS_WARP_INCREASE"),
     helms_decrease_warp("HELMS_WARP_DECREASE"),
+    helms_set_warp("HELMS_SET_WARP"),
     helms_dock_action("HELMS_DOCK_ACTION", "D"),
     helms_dock_request("HELMS_DOCK_REQUEST"),
     helms_dock_abort("HELMS_DOCK_ABORT"),
@@ -357,13 +359,15 @@ void Keys::init()
     helms_min_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Max reverse impulse"));
     helms_turn_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn left"));
     helms_turn_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Turn right"));
-    helms_warp0.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp off"));
-    helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 1"));
-    helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 2"));
-    helms_warp3.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 3"));
-    helms_warp4.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Warp 4"));
-    helms_increase_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase Warp"));
-    helms_decrease_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease Warp"));
+    helms_warp0.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero warp"));
+    helms_warp1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 1"));
+    helms_warp2.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 2"));
+    helms_warp3.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 3"));
+    helms_warp4.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request warp 4"));
+    helms_warp_max.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Request max warp"));
+    helms_increase_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase warp request"));
+    helms_decrease_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease warp request"));
+    helms_set_warp.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set warp request (joystick)"));
     helms_dock_action.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Dock request/abort/undock"));
     helms_dock_request.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Initiate docking"));
     helms_dock_abort.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Abort docking"));

@@ -30,33 +30,38 @@ GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 
 void GuiCombatManeuver::onUpdate()
 {
-    setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
+    if (!my_spaceship) return;
 
-    if (isVisible())
-    {
-        float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
-        float boost = std::max(0.0f, keys.helms_combat_boost.getValue());
-        if (strafe != 0.0f || hotkey_strafe_active)
-            setStrafeValue(strafe);
-        hotkey_strafe_active = strafe != 0.0f;
-        if (boost > 0.0f || hotkey_boost_active)
-            setBoostValue(boost);
-        hotkey_boost_active = boost > 0.0f;
-    }
+    setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
+    if (!isVisible() || !slider->isEnabled()) return;
+
+    float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
+    float boost = std::max(0.0f, keys.helms_combat_boost.getValue());
+
+    if (strafe != 0.0f || hotkey_strafe_active)
+        setStrafeValue(strafe);
+    hotkey_strafe_active = strafe != 0.0f;
+
+    if (boost > 0.0f || hotkey_boost_active)
+        setBoostValue(boost);
+    hotkey_boost_active = boost > 0.0f;
 }
 
 void GuiCombatManeuver::onDraw(sp::RenderTarget& target)
 {
-    if (my_spaceship)
+    if (!my_spaceship) return;
+
+    if (auto thrusters = my_spaceship.getComponent<CombatManeuveringThrusters>())
     {
-        auto thrusters = my_spaceship.getComponent<CombatManeuveringThrusters>();
-        if (thrusters) {
-            charge_bar->setValue(thrusters->charge)->show();
-            slider->show();
-        } else {
-            charge_bar->hide();
-            slider->hide();
-        }
+        charge_bar
+            ->setValue(thrusters->charge)
+            ->show();
+        slider->show();
+    }
+    else
+    {
+        charge_bar->hide();
+        slider->hide();
     }
 }
 
