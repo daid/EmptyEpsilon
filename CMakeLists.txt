@@ -424,6 +424,8 @@ set(MAIN_SOURCES
     src/systems/scanning.cpp
     src/systems/planet.h
     src/systems/planet.cpp
+    src/systems/player.h
+    src/systems/player.cpp
     src/systems/gm.h
     src/systems/gm.cpp
     src/systems/radar.h

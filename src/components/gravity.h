@@ -10,6 +10,7 @@ public:
     float range = 5000.0f;
     float force = 50.0f;
     bool damage = false;
+    bool visual_effect = false;
 
     glm::vec2 wormhole_target{};
     sp::script::Callback on_teleportation;

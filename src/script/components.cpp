@@ -651,6 +651,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
     BIND_MEMBER(PlayerControl, allowed_positions);
+    BIND_MEMBER(PlayerControl, gravity_alpha);
+    BIND_MEMBER(PlayerControl, in_gravity);
+    BIND_MEMBER(PlayerControl, just_teleported);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
     sp::script::ComponentHandler<ShipLog>::name("ship_log");
@@ -707,6 +710,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Gravity, range);
     BIND_MEMBER(Gravity, force);
     BIND_MEMBER(Gravity, damage);
+    BIND_MEMBER(Gravity, visual_effect);
     BIND_MEMBER(Gravity, wormhole_target);
     BIND_MEMBER(Gravity, on_teleportation);
 

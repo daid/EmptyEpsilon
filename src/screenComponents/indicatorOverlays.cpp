@@ -9,6 +9,7 @@
 #include "components/jumpdrive.h"
 #include "components/shields.h"
 #include "components/hull.h"
+#include "components/player.h"
 #include "multiplayer_server.h"
 #include "i18n.h"
 
@@ -92,14 +93,21 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
     {
         auto jump = my_spaceship.getComponent<JumpDrive>();
         auto warp = my_spaceship.getComponent<WarpDrive>();
+        auto player = my_spaceship.getComponent<PlayerControl>();
         if (jump && jump->just_jumped > 0.0f)
         {
             glitchPostProcessor->enabled = true;
             glitchPostProcessor->setUniform("u_magtitude", jump->just_jumped * 10.0f);
             glitchPostProcessor->setUniform("u_delta", random(0, 360));
-        }else{
+        } else if (player && player->gravity_alpha > 0.0f)
+        {
+            glitchPostProcessor->enabled = true;
+            glitchPostProcessor->setUniform("u_magtitude", player->gravity_alpha * 10.0f);
+            glitchPostProcessor->setUniform("u_delta", random(0, 360));
+        } else{
             glitchPostProcessor->enabled = false;
         }
+
         if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
         {
             warpPostProcessor->enabled = true;

@@ -1,6 +1,7 @@
 #include "systems/gravity.h"
 #include "components/gravity.h"
 #include "components/collision.h"
+#include "components/player.h"
 #include "components/hull.h"
 #include "systems/collision.h"
 #include "systems/damage.h"
@@ -15,6 +16,7 @@ void GravitySystem::update(float delta)
 {
     static constexpr float max_force = 10000.0f;
     static constexpr float wormhole_target_spread = 500.0f;
+    static constexpr float max_gravity_alpha = 2.0f;
     if (delta <= 0.0f) return;
 
     for(auto [source, grav, source_transform] : sp::ecs::Query<Gravity, sp::Transform>()) {
@@ -30,13 +32,20 @@ void GravitySystem::update(float delta)
                 force = max_force;
             tt->setPosition(tt->getPosition() + diff / std::sqrt(dist2) * delta * force);
 
-            if (grav.wormhole_target.x || grav.wormhole_target.y) {
-                /*TODO
-                // Warp postprocessor-alpha is calculated using alpha = (1 - (delay/10))
-                if (spaceship)
-                    spaceship->wormhole_alpha = ((distance / grav.range) * ALPHA_MULTIPLIER);
-                */
+            auto player = target.getComponent<PlayerControl>();
+            if (player)
+            {
+                player->in_gravity = (1 - (dist2 / (grav.range * grav.range)));
+                if (grav.visual_effect)
+                {
+                    // Apply glitch effect that gets stronger the closer to the center of the gravity system
+                    player->gravity_alpha = ((1 - (dist2 / (grav.range * grav.range))) * max_gravity_alpha);
+                }
 
+            }
+
+
+            if (grav.wormhole_target.x || grav.wormhole_target.y) {
                 if (force >= max_force)
                 {
                     if (game_server) {
@@ -46,8 +55,10 @@ void GravitySystem::update(float delta)
                             LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
                             continue; //callback could destroy the entity, so do no extra processing.
                         }
-                        //if (spaceship)
-                        //    spaceship->wormhole_alpha = 0.0;
+                        if (player)
+                            // set just_teleported for use by hardware
+                            player->just_teleported = 2.0f;
+                            player->in_gravity = 0.0f;
                     }
                 }
             }

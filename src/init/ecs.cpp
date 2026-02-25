@@ -67,6 +67,7 @@
 #include "systems/gm.h"
 #include "systems/pickup.h"
 #include "systems/debugrender.h"
+#include "systems/player.h"
 
 
 void initSystemsAndComponents()
@@ -164,6 +165,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<GMRadarRender>();
     engine->registerSystem<PickupSystem>();
+    engine->registerSystem<PlayerSystem>();
 #ifdef DEBUG
     engine->registerSystem<DebugRenderSystem>();
 #endif

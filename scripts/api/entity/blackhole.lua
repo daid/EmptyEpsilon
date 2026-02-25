@@ -10,7 +10,7 @@ function BlackHole()
     e.components = {
         transform = {},
         never_radar_blocked = {},
-        gravity = {range=5000, damage=true},
+        gravity = {range=5000, damage=true, visual_effect=true},
         avoid_object = {range=7000},
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=5000},
@@ -24,13 +24,14 @@ end
 --- Any SpaceObject that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 2U margin.
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
+--- @type creation
 function WormHole()
     local e = createEntity()
     local radius = 2500
     e.components = {
         transform = {},
         never_radar_blocked = {},
-        gravity = {range=radius, damage=false},
+        gravity = {range=radius, damage=false, visual_effect=true},
         avoid_object = {range=radius*1.2},
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/wormHole.png", min_size=0, max_size=2048, radius=radius},

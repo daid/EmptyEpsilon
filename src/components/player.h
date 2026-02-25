@@ -44,6 +44,12 @@ public:
     string control_code;
 
     CrewPositions allowed_positions = CrewPositions::all();
+
+    float gravity_alpha = 0.0f; //[output] used for visual effect going through a wormhole.
+
+    float just_teleported = 0.0f; //[output] used for triggers after going through a wormhole.
+
+    float in_gravity = 0.0f; //[output] used when in a gravity well.
 };
 
 class Waypoints
