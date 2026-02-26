@@ -126,8 +126,12 @@ void GuiJumpControls::onUpdate()
 
     auto jump = my_spaceship.getComponent<JumpDrive>();
     setVisible(jump != nullptr);
-    if (!isVisible() || !slider->isEnabled()) return;
-
+    if (!isVisible()) return;
+    // keybindings that work when the slider is visible, but disabked
+    if (keys.helms_abort_jump.getDown())
+        my_player_info->commandAbortJump();
+    // ---
+    if (!slider->isEnabled()) return;
     float value = slider->getValue();
 
     // Set jump distance by keybind.
