@@ -141,16 +141,30 @@ function Entity:getWeaponStorageMax(weapon_type)
     end
     return 0
 end
---- Sets the number of the given weapon type stocked by this ship.
---- Example: ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
+--- Sets the number of the given weapon type stocked by this entity.
+--- If the entity has MissileTubes, this sets the weapon type and amount carried by this entity.
+--- If the entity is a SupplyDrop, this sets the weapon type and amount that entity restocks upon pickup.
+--- Examples:
+--- ship:setWeaponStorage("Homing", 2) -- this ship has 2 Homing missiles
+--- supply_drop:setWeaponStorage("Homing", 6) -- this SupplyDrop adds 6 Homing missiles to the entity that picks it up
 function Entity:setWeaponStorage(weapon_type, amount)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then self.components.missile_tubes.storage_homing = amount end
-        if weapon_type == "nuke" then self.components.missile_tubes.storage_nuke = amount end
-        if weapon_type == "mine" then self.components.missile_tubes.storage_mine = amount end
-        if weapon_type == "emp" then self.components.missile_tubes.storage_emp = amount end
-        if weapon_type == "hvli" then self.components.missile_tubes.storage_hvli = amount end
+        if weapon_type == "homing" then
+            self.components.missile_tubes.storage_homing = math.min(self.components.missile_tubes.max_homing, amount)
+        end
+        if weapon_type == "nuke" then
+            self.components.missile_tubes.storage_nuke = math.min(self.components.missile_tubes.max_nuke, amount)
+        end
+        if weapon_type == "mine" then
+            self.components.missile_tubes.storage_mine = math.min(self.components.missile_tubes.max_mine, amount)
+        end
+        if weapon_type == "emp" then
+            self.components.missile_tubes.storage_emp = math.min(self.components.missile_tubes.max_emp, amount)
+        end
+        if weapon_type == "hvli" then
+            self.components.missile_tubes.storage_hvli = math.min(self.components.missile_tubes.max_hvli, amount)
+        end
     end
     if self.components.pickup then
         weapon_type = string.lower(weapon_type)
@@ -162,19 +176,34 @@ function Entity:setWeaponStorage(weapon_type, amount)
     end
     return self
 end
---- Sets this ship's capacity for the given weapon type.
+--- Sets this entity's capacity for the given weapon type.
 --- If this ship has more stock of that weapon type than the new capacity, its stock is reduced.
 --- However, if this ship's capacity for a weapon type is increased, its stocks are not.
---- Use setWeaponStorage() to update the stocks.
---- Example: ship:setWeaponStorageMax("Homing", 4) -- this ship can carry 4 Homing missiles
+--- Use Entity:setWeaponStorage() to update the stocks.
+--- Example: entity:setWeaponStorageMax("Homing", 4) -- this ship can carry 4 Homing missiles
 function Entity:setWeaponStorageMax(weapon_type, amount)
     if self.components.missile_tubes then
         weapon_type = string.lower(weapon_type)
-        if weapon_type == "homing" then self.components.missile_tubes.max_homing = amount end
-        if weapon_type == "nuke" then self.components.missile_tubes.max_nuke = amount end
-        if weapon_type == "mine" then self.components.missile_tubes.max_mine = amount end
-        if weapon_type == "emp" then self.components.missile_tubes.max_emp = amount end
-        if weapon_type == "hvli" then self.components.missile_tubes.max_hvli = amount end
+        if weapon_type == "homing" then
+            self.components.missile_tubes.max_homing = amount
+            self:setWeaponStorage("homing", self.components.missile_tubes.storage_homing)
+        end
+        if weapon_type == "nuke" then
+            self.components.missile_tubes.max_nuke = amount
+            self:setWeaponStorage("nuke", self.components.missile_tubes.storage_nuke)
+        end
+        if weapon_type == "mine" then
+            self.components.missile_tubes.max_mine = amount
+            self:setWeaponStorage("mine", self.components.missile_tubes.storage_mine)
+        end
+        if weapon_type == "emp" then
+            self.components.missile_tubes.max_emp = amount
+            self:setWeaponStorage("emp", self.components.missile_tubes.storage_emp)
+        end
+        if weapon_type == "hvli" then
+            self.components.missile_tubes.max_hvli = amount
+            self:setWeaponStorage("hvli", self.components.missile_tubes.storage_hvli)
+        end
     end
     return self
 end

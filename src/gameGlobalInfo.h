@@ -7,6 +7,7 @@
 #include "multiplayer.h"
 #include <list>
 #include <functional>
+#include <optional>
 #include <unordered_map>
 
 
@@ -67,7 +68,7 @@ public:
     //Callback called when a new player ship is created on the ship selection screen.
     sp::script::Callback on_new_player_ship;
 
-    std::function<void(glm::vec2)> on_gm_click;
+    std::function<void(glm::vec2, std::optional<float>)> on_gm_click;
     const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
     string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 

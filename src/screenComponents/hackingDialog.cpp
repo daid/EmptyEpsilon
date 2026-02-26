@@ -37,13 +37,13 @@ GuiHackingDialog::GuiHackingDialog(GuiContainer* owner, string id)
     {
         game->reset();
     });
-    reset_button->setSize(200, 50);
+    reset_button->setSize(150.0f, 50.0f);
     reset_button->setPosition(25, -25, sp::Alignment::BottomLeft);
     close_button = new GuiButton(minigame_box, "", tr("button", "Close"), [this]()
     {
         hide();
     });
-    close_button->setSize(200, 50);
+    close_button->setSize(150.0f, 50.0f);
     close_button->setPosition(-25, -25, sp::Alignment::BottomRight);
 
     progress_bar = new GuiProgressbar(minigame_box, "", 0, 1, 0.0);

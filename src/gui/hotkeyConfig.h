@@ -79,6 +79,7 @@ public:
     sp::io::Keybinding helms_increase_jump_distance;
     sp::io::Keybinding helms_decrease_jump_distance;
     sp::io::Keybinding helms_execute_jump;
+    sp::io::Keybinding helms_abort_jump;
     sp::io::Keybinding helms_combat_left;
     sp::io::Keybinding helms_combat_right;
     sp::io::Keybinding helms_combat_boost;
