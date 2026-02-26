@@ -50,7 +50,7 @@ jobs:
     steps:
       - name: Dependencies
         run: |
-          brew install ninja sdl2 freetype
+          brew install sdl2
       - name: SeriousProton Checkout
         uses: actions/checkout@v4
         with:
