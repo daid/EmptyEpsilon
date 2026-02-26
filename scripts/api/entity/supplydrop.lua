@@ -20,7 +20,7 @@ function SupplyDrop()
         pickup={}
     }
     for k, v in pairs(__model_data["ammo_box"]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end
