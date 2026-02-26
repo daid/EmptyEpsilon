@@ -1,11 +1,13 @@
 #include <i18n.h>
 #include "playerInfo.h"
-#include "components/maneuveringthrusters.h"
 #include "combatManeuver.h"
 #include "powerDamageIndicator.h"
 #include "snapSlider.h"
 
 #include "gui/gui2_progressbar.h"
+
+#include "components/docking.h"
+#include "components/maneuveringthrusters.h"
 
 GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -33,7 +35,11 @@ void GuiCombatManeuver::onUpdate()
     if (!my_spaceship) return;
 
     setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
-    if (!isVisible() || !slider->isEnabled()) return;
+    if (!isVisible()) return;
+
+    if (auto docking_port = my_spaceship.getComponent<DockingPort>())
+    slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
+    if (!slider->isEnabled()) return;
 
     float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
     float boost = std::max(0.0f, keys.helms_combat_boost.getValue());

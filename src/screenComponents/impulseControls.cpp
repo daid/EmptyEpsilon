@@ -1,10 +1,13 @@
 #include <i18n.h>
 #include "playerInfo.h"
 #include "impulseControls.h"
-#include "components/impulse.h"
 #include "powerDamageIndicator.h"
+
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_slider.h"
+
+#include "components/docking.h"
+#include "components/impulse.h"
 
 GuiImpulseControls::GuiImpulseControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -38,7 +41,11 @@ void GuiImpulseControls::onUpdate()
 
     auto engine = my_spaceship.getComponent<ImpulseEngine>();
     setVisible(engine != nullptr);
-    if (!isVisible() || !slider->isEnabled()) return;
+    if (!isVisible()) return;
+
+    auto docking_port = my_spaceship.getComponent<DockingPort>();
+    slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
+    if (!slider->isEnabled()) return;
 
     // Change impulse value by keybind.
     float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
