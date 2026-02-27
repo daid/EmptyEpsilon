@@ -373,15 +373,21 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     LuaConsole::checkResult(res);
     if (res.isOk() && main_scenario_script->isFunction("init"))
     {
+        bool is_headless = !PreferencesManager::get("headless").empty();
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
         if (res.isErr())
         {
             main_script_error_count = max_repeated_script_errors;
-            LuaConsole::addLog("init() function failed, not going to call update()");
+            const string error_message = "init() function failed, not going to call update()";
+            if (is_headless)
+                printf(error_message.c_str());
+            else
+                LuaConsole::addLog(error_message);
         }
-        // Announce StdinLuaConsole()
-        else if (!PreferencesManager::get("headless").empty())
+
+        // Announce StdinLuaConsole() on headless mode.
+        if (is_headless)
         {
             LOG(Info, "\n=== EmptyEpsilon version ", string(VERSION_NUMBER), " - headless mode detected ===\nStandard input serves as the Lua console in headless mode.\nEnter Lua code in this running process to execute it. Enter !help for commands.\nFor line editing and history navigation on Linux, run EmptyEpsilon with rlwrap --remember EmptyEpsilon headless=...\n===\n\n");
             printf("EE> ");
