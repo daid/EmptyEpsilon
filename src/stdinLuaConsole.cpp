@@ -6,11 +6,6 @@
 #include <sys/select.h>
 #include <unistd.h>
 #endif
-#include <unordered_set>
-
-StdinLuaConsole::StdinLuaConsole()
-{
-}
 
 void StdinLuaConsole::update(float delta)
 {
@@ -75,7 +70,6 @@ void StdinLuaConsole::executeCommand(const string& cmd)
     if (cmd == "!help")
     {
         printf("\n!help         Print this help\n");
-        printf("!globals      Print names of all global values and functions\n");
         printf("!history      Print Lua command history\n");
         printf("!<N>          Run a Lua command by its number (<N>) in the history list\n");
         printf("!!            Run the most recent Lua command in the history list\n");
@@ -121,54 +115,6 @@ void StdinLuaConsole::executeCommand(const string& cmd)
     {
         history.clear();
         printf("History cleared.\n");
-        printPrompt();
-        return;
-    }
-
-    // !globals: Print names of all global values and functions
-    if (cmd == "!globals" && gameGlobalInfo)
-    {
-        if (gameGlobalInfo->main_scenario_script)
-        {
-            if (lua_State* L = sp::script::Environment::getL())
-            {
-                std::vector<string> names;
-                std::unordered_set<string> seen;
-
-                auto scanEnv = [&](sp::script::Environment* env)
-                {
-                    if (!env) return;
-
-                    lua_rawgetp(L, LUA_REGISTRYINDEX, env);
-                    lua_pushnil(L);
-
-                    while (lua_next(L, -2))
-                    {
-                        if (lua_type(L, -2) == LUA_TSTRING)
-                        {
-                            string key = lua_tostring(L, -2);
-                            if (!seen.count(key))
-                            {
-                                seen.insert(key);
-                                names.push_back(key);
-                            }
-                        }
-                        lua_pop(L, 1);
-                    }
-                    lua_pop(L, 1);  // pop env table
-                };
-
-                // Enumerate E_main first (scenario globals shadow base globals of the same name)
-                scanEnv(gameGlobalInfo->main_scenario_script.get());
-                // Then E_base (C++ globals)
-                scanEnv(gameGlobalInfo->script_environment_base.get());
-
-                std::sort(names.begin(), names.end());
-                for (auto name : names)
-                    printf("%s\n", name.c_str());
-            }
-        }
-
         printPrompt();
         return;
     }

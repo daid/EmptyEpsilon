@@ -7,7 +7,6 @@
 class StdinLuaConsole : public Updatable
 {
 public:
-    StdinLuaConsole();
     void update(float delta) override;
 
 private:
