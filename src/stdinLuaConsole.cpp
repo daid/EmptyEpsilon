@@ -126,45 +126,47 @@ void StdinLuaConsole::executeCommand(const string& cmd)
     }
 
     // !globals: Print names of all global values and functions
-    if (cmd == "!globals")
+    if (cmd == "!globals" && gameGlobalInfo)
     {
-        lua_State* L = sp::script::Environment::getL();
-        if (gameGlobalInfo && L)
+        if (gameGlobalInfo->main_scenario_script)
         {
-            std::vector<string> names;
-            std::unordered_set<string> seen;
-
-            auto scanEnv = [&](sp::script::Environment* env)
+            if (lua_State* L = sp::script::Environment::getL())
             {
-                if (!env) return;
+                std::vector<string> names;
+                std::unordered_set<string> seen;
 
-                lua_rawgetp(L, LUA_REGISTRYINDEX, env);
-                lua_pushnil(L);
-
-                while (lua_next(L, -2))
+                auto scanEnv = [&](sp::script::Environment* env)
                 {
-                    if (lua_type(L, -2) == LUA_TSTRING)
+                    if (!env) return;
+
+                    lua_rawgetp(L, LUA_REGISTRYINDEX, env);
+                    lua_pushnil(L);
+
+                    while (lua_next(L, -2))
                     {
-                        string key = lua_tostring(L, -2);
-                        if (!seen.count(key))
+                        if (lua_type(L, -2) == LUA_TSTRING)
                         {
-                            seen.insert(key);
-                            names.push_back(key);
+                            string key = lua_tostring(L, -2);
+                            if (!seen.count(key))
+                            {
+                                seen.insert(key);
+                                names.push_back(key);
+                            }
                         }
+                        lua_pop(L, 1);
                     }
-                    lua_pop(L, 1);
-                }
-                lua_pop(L, 1);  // pop env table
-            };
+                    lua_pop(L, 1);  // pop env table
+                };
 
-            // Enumerate E_main first (scenario globals shadow base globals of the same name)
-            scanEnv(gameGlobalInfo->main_scenario_script.get());
-            // Then E_base (C++ globals)
-            scanEnv(gameGlobalInfo->script_environment_base.get());
+                // Enumerate E_main first (scenario globals shadow base globals of the same name)
+                scanEnv(gameGlobalInfo->main_scenario_script.get());
+                // Then E_base (C++ globals)
+                scanEnv(gameGlobalInfo->script_environment_base.get());
 
-            std::sort(names.begin(), names.end());
-            for (auto name : names)
-                printf("%s\n", name.c_str());
+                std::sort(names.begin(), names.end());
+                for (auto name : names)
+                    printf("%s\n", name.c_str());
+            }
         }
 
         printPrompt();
