@@ -83,14 +83,28 @@ find_program(APKSIGNER apksigner PATHS "${ANDROID_SDK_PATH}/build-tools/${ANDROI
 find_file(ANDROID_PLATFORM_JAR android.jar PATHS "${ANDROID_SDK_PATH}/platforms/android-${ANDROID_API_TARGET}" NO_DEFAULT_PATH)
 find_program(ADB adb PATHS "${ANDROID_SDK_PATH}/platform-tools" NO_DEFAULT_PATH)
 
-
 set(SDL_BASE_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SDL/${ANDROID_ABI}")
 set(SDL_SRC_PATH "${SDL_BASE_PATH}/source")
 set(SDL_INSTALL_PATH "${SDL_BASE_PATH}/install")
 if(NOT EXISTS "${SDL_SRC_PATH}")
-    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.32.8.zip "${SDL_BASE_PATH}/SDL2_src.zip" SHOW_PROGRESS)
+    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.32.10.zip "${SDL_BASE_PATH}/SDL2_src.zip" SHOW_PROGRESS)
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf SDL2_src.zip WORKING_DIRECTORY "${SDL_BASE_PATH}")
-    file(RENAME "${SDL_BASE_PATH}/SDL2-2.32.8" "${SDL_SRC_PATH}")
+    file(RENAME "${SDL_BASE_PATH}/SDL2-2.32.10" "${SDL_SRC_PATH}")
+    # Apply patch to manually desugar Java 8 lambda expressions
+    # If SDL2 is updated again, this patch needs revisiting
+    find_program(PATCH_EXECUTABLE patch)
+    if(PATCH_EXECUTABLE)
+        execute_process(
+            COMMAND ${PATCH_EXECUTABLE} -p1 -i "${CMAKE_CURRENT_LIST_DIR}/cmake/android/sdl-remove-lambdas.patch"
+            WORKING_DIRECTORY "${SDL_SRC_PATH}"
+            RESULT_VARIABLE PATCH_RESULT
+        )
+        if(NOT PATCH_RESULT EQUAL 0)
+            message(WARNING "Failed to apply SDL lambda desugaring patch.")
+        endif()
+    else()
+        message(WARNING "patch command not found. SDL lambda desugaring patch not applied.")
+    endif()
 endif()
 if(NOT EXISTS "${SDL_INSTALL_PATH}")
     file(MAKE_DIRECTORY "${SDL_BASE_PATH}/build")
@@ -125,7 +139,7 @@ macro(android_apk NAME APK_WITH_PACKS)
     )
 
     # Generate apk with resource files and manifest, but nothing else
-    # Compile the java sources (TODO, warning about bootstrap classpath, rt.jar wrong version)
+    # Compile the java sources
     file(GLOB JAVA_SOURCES "${SDL_SRC_PATH}/android-project/app/src/main/java/org/libsdl/app/*.java")
     list(APPEND JAVA_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/R.java" "${CMAKE_CURRENT_BINARY_DIR}/java_source/eu/daid/${NAME}/Activity.java")
     file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/")
@@ -138,13 +152,13 @@ macro(android_apk NAME APK_WITH_PACKS)
     # Convert sources into dex file
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex"
-        COMMAND "${DX}" ARGS "--dex" "--min-sdk-version=26" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
+        COMMAND "${DX}" ARGS "--dex" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
         DEPENDS "java_compiled/eu/daid/${NAME}/R.class"
     )
     
     file(COPY "${SDL_INSTALL_PATH}/lib/libSDL2.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     #file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    
+
     set(MAINLIB_FILENAME lib${MAINLIB_NAME}.so)
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/${MAINLIB_FILENAME}"
@@ -168,7 +182,7 @@ macro(android_apk NAME APK_WITH_PACKS)
         OUTPUT "${APK}"
         COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
         COMMAND "${AAPT}" ARGS add "${APK}" classes.dex
-        # COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
+        COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so
         COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
         DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"
