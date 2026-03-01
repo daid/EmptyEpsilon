@@ -103,13 +103,14 @@ void DebugRenderer::render(sp::RenderTarget& renderer)
         }
 
         int index = 0;
-        for(const auto& key : key_order) {
-            renderer.drawLine(points[key], line_colors[index % 6]);
+        for (const auto& key : key_order)
+        {
+            renderer.drawLine(points[key], 1.0f, line_colors[index % 6]);
             index += 1;
         }
 
-        //60FPS line
-        renderer.drawLine({0, window_size.y - 166}, {window_size.x, window_size.y - 166}, glm::u8vec4{255,255,255,128});
+        // 60 FPS line
+        renderer.drawLine({0, window_size.y - 166}, {window_size.x, window_size.y - 166}, 2.0f, glm::u8vec4{255,255,255,128});
 
         index = 0;
         for(const auto& key : key_order) {
