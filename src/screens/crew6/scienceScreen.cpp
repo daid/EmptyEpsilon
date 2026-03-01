@@ -74,7 +74,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     probe_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position)
+        {
             if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
                 if (scanner->delay > 0.0f)
                     return;
@@ -204,22 +205,27 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setItemsPadding(120);
 
     // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
-        auto rl = my_spaceship.getComponent<RadarLink>();
-        if (value && rl && rl->linked_entity)
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"),
+        [this](bool value)
         {
-            auto transform = rl->linked_entity.getComponent<sp::Transform>();
-            if (transform) {
-                science_radar->hide();
-                probe_radar->show();
-                probe_radar->setViewPosition(transform->getPosition())->show();
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (value && rl && rl->linked_entity)
+            {
+                if (auto transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    science_radar->hide();
+                    probe_radar->show();
+                    probe_radar->setViewPosition(transform->getPosition())->show();
+                }
             }
-        }else{
-            probe_view_button->setValue(false);
-            science_radar->show();
-            probe_radar->hide();
+            else
+            {
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
         }
-    });
+    );
     probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
 
     // Draw the zoom slider.
@@ -545,7 +551,12 @@ void ScienceScreen::onUpdate()
             auto scanstate = obj.getComponent<ScanState>();
             if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
-                my_player_info->commandScan(obj);
+                // Check for active radar link and validate the linked entity
+                auto rl = my_spaceship.getComponent<RadarLink>();
+                if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
+                    my_player_info->commandScan(obj, rl->linked_entity);
+                else
+                    my_player_info->commandScan(obj);
                 return;
             }
         }

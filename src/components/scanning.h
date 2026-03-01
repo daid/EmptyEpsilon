@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ecs/entity.h"
+#include "script/callback.h"
 #include <vector>
 
 
@@ -35,6 +36,10 @@ public:
     void setStateFor(sp::ecs::Entity entity, State state);
     State getStateForFaction(sp::ecs::Entity entity);
     void setStateForFaction(sp::ecs::Entity entity, State state);
+
+    sp::script::Callback on_scan_initiated;
+    sp::script::Callback on_scan_completed;
+    sp::script::Callback on_scan_cancelled;
 };
 
 class ScienceDescription
@@ -52,4 +57,5 @@ public:
     float delay = 0.0f; // When a delay based scan is done, this will count down.
     float max_scanning_delay = 6.0f;
     sp::ecs::Entity target;
+    sp::ecs::Entity source;
 };
