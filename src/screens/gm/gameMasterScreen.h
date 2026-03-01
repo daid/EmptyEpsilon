@@ -22,7 +22,7 @@ class GuiTextEntry;
 class GameMasterChatDialog;
 class GuiObjectCreationView;
 class GuiGlobalMessageEntryView;
-class GuiHelpOverlay;
+class GuiHotkeyHelpOverlay;
 class GuiPanel;
 
 class GameMasterScreen : public GuiCanvas, public Updatable
@@ -58,7 +58,7 @@ private:
     GuiScrollText* message_text;
     GuiButton* message_close_button;
 
-    GuiHelpOverlay* keyboard_help;
+    GuiHotkeyHelpOverlay* keyboard_help;
 
     enum EClickAndDragState
     {
