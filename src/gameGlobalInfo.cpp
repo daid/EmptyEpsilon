@@ -381,7 +381,7 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
             main_script_error_count = max_repeated_script_errors;
             const string error_message = "init() function failed, not going to call update()";
             if (is_headless)
-                printf(error_message.c_str());
+                printf("%s", error_message.c_str());
             else
                 LuaConsole::addLog(error_message);
         }
