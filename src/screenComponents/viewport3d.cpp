@@ -161,7 +161,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     if (GLAD_GL_ES_VERSION_2_0)
         glClearDepthf(1.f);
     else
-        glClearDepth(1.f);
+        glClearDepth(1.0);
 
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -258,19 +258,34 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     glDepthMask(GL_TRUE);
 
     // Emit engine particles.
-    for(auto [entity, ee, transform, impulse] : sp::ecs::Query<EngineEmitter, sp::Transform, ImpulseEngine>()) {
-        if (impulse.actual != 0.0f) {
-            float engine_scale = std::abs(impulse.actual);
+    for (auto [entity, mrc, ee, transform, impulse] : sp::ecs::Query<MeshRenderComponent, EngineEmitter, sp::Transform, ImpulseEngine>())
+    {
+        if (impulse.actual != 0.0f)
+        {
             if (engine->getElapsedTime() - ee.last_engine_particle_time > 0.1f)
             {
-                for(auto ed : ee.emitters)
+                for (auto ed : ee.emitters)
                 {
-                    glm::vec3 offset = ed.position;
-                    glm::vec2 pos2d = transform.getPosition() + rotateVec2(glm::vec2(offset.x, offset.y), transform.getRotation());
-                    glm::vec3 color = ed.color;
-                    glm::vec3 pos3d = glm::vec3(pos2d.x, pos2d.y, offset.z);
-                    float scale = ed.scale * engine_scale;
-                    ParticleEngine::spawn(pos3d, pos3d, color, color, scale, 0.0, 5.0);
+                    // Apply banking rotation in local space. Flip the banking
+                    // angle since the emitters effectively face the opposite
+                    // direction.
+                    glm::vec3 local_offset = ed.position;
+
+                    if (mrc.bank_angle != 0.0f)
+                    {
+                        glm::mat4 bank_matrix = glm::rotate(
+                            glm::mat4(1.0f),
+                            glm::radians(-mrc.bank_angle),
+                            glm::vec3(1.0f, 0.0f, 0.0f)
+                        );
+                        local_offset = glm::vec3(bank_matrix * glm::vec4(local_offset, 1.0f));
+                    }
+
+                    // Rotate by ship's heading and translate to world position.
+                    const glm::vec3 pos3d = glm::vec3(transform.getPosition() + rotateVec2(glm::vec2(local_offset.x, local_offset.y), transform.getRotation()), local_offset.z);
+
+                    const float scale = ed.scale * std::abs(impulse.actual);
+                    ParticleEngine::spawn(pos3d, pos3d, ed.color, ed.color, scale, 0.0f, 5.0f);
                 }
                 ee.last_engine_particle_time = engine->getElapsedTime();
             }
@@ -433,7 +448,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
                 continue;
             float radius = 300.0f;
             if (auto physics = entity.getComponent<sp::Physics>())
-                radius = physics->getSize().x;
+                radius = std::min(physics->getSize().x, physics->getSize().y);
             glm::vec3 screen_position = worldToScreen(renderer, glm::vec3(transform.getPosition().x, transform.getPosition().y, radius));
             if (screen_position.z < 0.0f)
                 continue;
