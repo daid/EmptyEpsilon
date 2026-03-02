@@ -89,6 +89,7 @@ bool createDisplayWindows()
             window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name") + postfix);
         else
             window->setTitle("EmptyEpsilon" + postfix);
+        window->setIcon("logo_icon.png");
     }
 
     if (gl::isAvailable())
