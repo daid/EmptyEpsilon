@@ -132,6 +132,36 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
     }
 }
 
+void GuiContainer::clearElementOwner(GuiElement* e)
+{
+    e->owner = nullptr;
+}
+
+void GuiContainer::setElementHover(GuiElement* e, bool h)
+{
+    e->hover = h;
+}
+
+void GuiContainer::setElementFocus(GuiElement* e, bool f)
+{
+    e->focus = f;
+}
+
+void GuiContainer::callDrawElements(GuiContainer* c, glm::vec2 mp, sp::Rect r, sp::RenderTarget& rt)
+{
+    c->drawElements(mp, r, rt);
+}
+
+GuiElement* GuiContainer::callGetClickElement(GuiContainer* c, sp::io::Pointer::Button b, glm::vec2 p, sp::io::Pointer::ID id)
+{
+    return c->getClickElement(b, p, id);
+}
+
+GuiElement* GuiContainer::callExecuteScrollOnElement(GuiContainer* c, glm::vec2 p, float v)
+{
+    return c->executeScrollOnElement(p, v);
+}
+
 void GuiContainer::setAttribute(const string& key, const string& value)
 {
     if (key == "size")
