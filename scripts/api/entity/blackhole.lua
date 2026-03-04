@@ -1,5 +1,5 @@
 --- A BlackHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
---- A SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
+--- An SpaceObject capable of taking damage is dealt an increasing amount of damage as it approaches the BlackHole's center.
 --- Upon reaching the center, any SpaceObject is instantly destroyed even if it's otherwise incapable of taking damage.
 --- AI behaviors avoid BlackHoles by a 2U margin.
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
@@ -7,23 +7,26 @@
 --- @type creation
 function BlackHole()
     local e = createEntity()
+    local radius = 5000
     e.components = {
         transform = {},
         never_radar_blocked = {},
-        gravity = {range=5000, damage=true},
-        avoid_object = {range=7000},
+        gravity = {range=radius, damage=true},
+        avoid_object = {range=radius*1.4},
         radar_signature = {gravity=0.9},
-        radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=5000},
-        billboard_render = {texture="blackHole3d.png", size=5000}
+        radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=radius},
+        billboard_render = {texture="blackHole3d.png", size=radius},
+        warppostprocessor = { max_radius = radius, effect_strength=1 }
     }
     return e
 end
 
 
---- A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 5U radius, including otherwise immobile objects like SpaceStations, toward its center.
+--- A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 2.5U radius, including otherwise immobile objects like SpaceStations, toward its center.
 --- Any SpaceObject that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 2U margin.
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
+--- @type creation
 function WormHole()
     local e = createEntity()
     local radius = 2500
@@ -34,7 +37,8 @@ function WormHole()
         avoid_object = {range=radius*1.2},
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/wormHole.png", min_size=0, max_size=2048, radius=radius},
-        billboard_render = {texture="wormHole3d.png", size=5000}
+        billboard_render = {texture="wormHole3d.png", size=radius*2},
+        glitchpostprocessor = { max_radius = radius, effect_strength=20}
     }
     return e
 end
