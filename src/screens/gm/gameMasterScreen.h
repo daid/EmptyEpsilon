@@ -90,6 +90,8 @@ private:
         ResizeChat      // Drag mode, chat dialog resize handle
     } gm_cursor_mode;
 
+    bool has_cpu_ship = false;
+
     GuiButton* create_button;
     GuiButton* cancel_action_button;
 

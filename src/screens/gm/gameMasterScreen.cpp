@@ -323,7 +323,7 @@ void GameMasterScreen::update(float delta)
     }
 
     bool has_object = false;
-    bool has_cpu_ship = false;
+    has_cpu_ship = false;
     bool has_player_ship = false;
 
     // Add and remove entries from the player ship list.
@@ -507,7 +507,7 @@ void GameMasterScreen::update(float delta)
             break;
         case GMCursorMode::SelectFaction:
             mouse_renderer->setSpriteImage("cursors/mouse_select_faction.png");
-            // TODO: Match to selected faction
+            // TODO: Match color to selected faction
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             mouse_renderer->setCursorHotspotTopLeft();
             break;
@@ -531,22 +531,18 @@ void GameMasterScreen::update(float delta)
             mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SetAITarget:
-            // Placeholder: default cursor with a red tint for order targeting.
             mouse_renderer->setSpriteImage("cursors/mouse_ai_target.png");
             mouse_renderer->setSpriteColor({255, 64, 64, 255});
             break;
         case GMCursorMode::ZoomCamera:
-            // Placeholder: default cursor, no tint.
             mouse_renderer->setSpriteImage("cursors/mouse_zoom.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
         case GMCursorMode::PanCamera:
-            // Placeholder: default cursor with a light-blue tint.
             mouse_renderer->setSpriteImage("cursors/mouse_pan.png");
             mouse_renderer->setSpriteColor({180, 180, 255, 255});
             break;
         case GMCursorMode::ResizeChat:
-            // Placeholder: default cursor.
             mouse_renderer->setSpriteImage("cursors/mouse_resize_chat.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
@@ -560,8 +556,16 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 
     if (button == sp::io::Pointer::Button::Right)
     {
-        click_and_drag_state = CD_DragViewOrOrder;
-        gm_cursor_mode = GMCursorMode::SetAITarget;
+        if (has_cpu_ship)
+        {
+            click_and_drag_state = CD_DragViewOrOrder;
+            gm_cursor_mode = GMCursorMode::SetAITarget;
+        }
+        else
+        {
+            click_and_drag_state = CD_DragView;
+            gm_cursor_mode = GMCursorMode::PanCamera;
+        }
     }
     else
     {
