@@ -44,14 +44,13 @@ jobs:
           cmake ../EmptyEpsilon -G Ninja -DCMAKE_MAKE_PROGRAM=ninja -DCMAKE_TOOLCHAIN_FILE=../EmptyEpsilon/cmake/mingw.toolchain -DSERIOUS_PROTON_DIR=../SeriousProton -DWARNING_IS_ERROR=1
           ninja package
   macos:
-    if: false
+    if: true
     name: MacOS
     runs-on: macos-latest
     steps:
       - name: Dependencies
         run: |
-          brew uninstall --ignore-dependencies cmake || true
-          brew install cmake ninja sdl2 freetype
+          brew install sdl2
       - name: SeriousProton Checkout
         uses: actions/checkout@v4
         with:
@@ -88,7 +87,13 @@ jobs:
           mkdir dmg_contents
           cp -R "$APP_PATH" dmg_contents/
           ln -s /Applications dmg_contents/Applications
-          hdiutil create -volname EmptyEpsilon -srcfolder dmg_contents -ov -format UDZO "MacOS_EmptyEpsilon_EE-${VERSION}-arm64.dmg"
+          i=0
+          until hdiutil create -volname EmptyEpsilon -srcfolder dmg_contents -ov -format UDZO "MacOS_EmptyEpsilon_EE-${VERSION}-arm64.dmg"
+          do
+            if [ $i -eq 10 ]; then exit 1; fi
+            i=$((i+1))
+            sleep 1
+          done
           rm -rf dmg_contents
       - name: Upload artifact
         uses: actions/upload-artifact@v4

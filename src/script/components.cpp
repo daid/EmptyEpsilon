@@ -588,7 +588,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
-    
+    BIND_MEMBER(JumpDrive, just_jumped);
+
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");

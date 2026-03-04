@@ -2,13 +2,15 @@
 #include "playerInfo.h"
 #include "jumpControls.h"
 #include "powerDamageIndicator.h"
-#include "components/jumpdrive.h"
 #include "featureDefs.h"
 
 #include "gui/gui2_slider.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_button.h"
+
+#include "components/docking.h"
+#include "components/jumpdrive.h"
 
 GuiJumpControls::GuiJumpControls(GuiContainer* owner, string id)
 : GuiElement(owner, id)
@@ -114,8 +116,12 @@ void GuiJumpControls::onDraw(sp::RenderTarget& target)
             ->show();
         button
             ->setText(tr("jumpcontrol", "Jump"))
-            ->setStyle("button")
-            ->enable();
+            ->setStyle("button");
+
+        // Disable jump button if docking.
+        auto docking_port = my_spaceship.getComponent<DockingPort>();
+        button->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
+
         charge_bar->hide();
     }
 }
@@ -126,8 +132,12 @@ void GuiJumpControls::onUpdate()
 
     auto jump = my_spaceship.getComponent<JumpDrive>();
     setVisible(jump != nullptr);
-    if (!isVisible() || !slider->isEnabled()) return;
-
+    if (!isVisible()) return;
+    // keybindings that work when the slider is visible, but disabked
+    if (keys.helms_abort_jump.getDown())
+        my_player_info->commandAbortJump();
+    // ---
+    if (!slider->isEnabled()) return;
     float value = slider->getValue();
 
     // Set jump distance by keybind.
