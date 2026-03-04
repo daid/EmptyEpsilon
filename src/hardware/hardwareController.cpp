@@ -404,6 +404,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("RedAlert", PlayerControl, c->alert_level != AlertLevel::RedAlert ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestruct", SelfDestruct, c->active ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / 10.0f);
+    SHIP_VARIABLE("Gravity", PlayerControl, c->in_gravity * 100);
+    SHIP_VARIABLE("Teleported", PlayerControl, c->just_teleported > 0.0f ? 1.0f : 0.0f);
+
     for(unsigned int n=0; n<16; n++)
     {
         SHIP_VARIABLE("TubeLoaded" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loaded ? 1.0f : 0.0f);
