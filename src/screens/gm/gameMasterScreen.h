@@ -69,7 +69,7 @@ private:
         CD_ClickSelectOrDragObjects,
         CD_DragObjects,
         CD_CreateWithDrag
-    } click_and_drag_state;
+    } click_and_drag_state = CD_None;
 
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};

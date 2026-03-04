@@ -66,7 +66,7 @@ static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
 }
 
 GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
-: GuiCanvas(render_layer), click_and_drag_state(CD_None)
+: GuiCanvas(render_layer)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
