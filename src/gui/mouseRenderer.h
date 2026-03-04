@@ -2,8 +2,8 @@
 
 #include "Renderable.h"
 
-// Render the mouse cursor. Defaults to 32x32 sprite resources/mouse.png with
-// the click point at the center.
+// Render the mouse cursor. Defaults to 32x32 sprite resources/cursors/mouse.png
+// with the click point at the center.
 class MouseRenderer : public Renderable
 {
 public:
@@ -43,7 +43,8 @@ private:
     // The cursor's position.
     glm::vec2 position;
     // The cursor's sprite, relative to resources/.
-    string sprite = "mouse.png";
+    // TODO: Set via theme.
+    string sprite = "cursors/mouse.png";
     // The length of the square cursor sprite's side in pixels.
     float sprite_size = 32.0f;
     // The cursor sprite's RGBA color.

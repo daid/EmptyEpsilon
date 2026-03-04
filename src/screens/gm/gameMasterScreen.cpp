@@ -265,7 +265,7 @@ GameMasterScreen::~GameMasterScreen()
 {
     if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
     {
-        mouse_renderer->setSpriteImage("mouse.png");
+        mouse_renderer->setSpriteImage("cursors/mouse.png");
         mouse_renderer->setSpriteSize(32.0f);
         mouse_renderer->setSpriteColor({255, 255, 255, 255});
         mouse_renderer->setClickPointCenter();
@@ -487,61 +487,67 @@ void GameMasterScreen::update(float delta)
 
     if (mouse_renderer)
     {
+        mouse_renderer->setClickPointCenter();
         // Placeholders; colors shouldn't be used exclusively to differentiate.
         switch (gm_cursor_mode)
         {
         case GMCursorMode::Normal:
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
         case GMCursorMode::SelectArea:
-            mouse_renderer->setSpriteImage("mouse_select.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_select_area.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setClickPointTopLeft();
             break;
         case GMCursorMode::SelectShips:
-            mouse_renderer->setSpriteImage("mouse_ship.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_select_ships.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setClickPointTopLeft();
             break;
         case GMCursorMode::SelectFaction:
-            mouse_renderer->setSpriteImage("mouse_faction.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_select_faction.png");
+            // TODO: Match to selected faction
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setClickPointTopLeft();
             break;
         case GMCursorMode::AddToSelection:
-            mouse_renderer->setSpriteImage("mouse_add.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_add.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setClickPointTopLeft();
             break;
         case GMCursorMode::CreateEntity:
-            mouse_renderer->setSpriteImage("mouse_create.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_create.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
         case GMCursorMode::SetDirection:
-            // Placeholder: reuse create image with a yellow tint for direction phase.
-            mouse_renderer->setSpriteImage("mouse_create.png");
+            // Placeholder: reuse create image with a yellow tint.
+            mouse_renderer->setSpriteImage("cursors/mouse_create.png");
             mouse_renderer->setSpriteColor({255, 255, 0, 255});
             break;
         case GMCursorMode::MoveEntities:
-            // Placeholder: reuse ship image with a green tint.
-            mouse_renderer->setSpriteImage("mouse_ship.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
             mouse_renderer->setSpriteColor({0, 255, 0, 255});
+            mouse_renderer->setClickPointTopLeft();
             break;
         case GMCursorMode::SetAITarget:
             // Placeholder: default cursor with a red tint for order targeting.
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_ai_target.png");
             mouse_renderer->setSpriteColor({255, 64, 64, 255});
             break;
         case GMCursorMode::ZoomCamera:
             // Placeholder: default cursor, no tint.
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_zoom.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
         case GMCursorMode::PanCamera:
             // Placeholder: default cursor with a light-blue tint.
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_pan.png");
             mouse_renderer->setSpriteColor({180, 180, 255, 255});
             break;
         case GMCursorMode::ResizeChat:
             // Placeholder: default cursor.
-            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteImage("cursors/mouse_resize_chat.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             break;
         }
