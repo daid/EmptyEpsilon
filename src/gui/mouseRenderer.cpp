@@ -13,13 +13,13 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    renderer.drawSprite(sprite, position + click_point, sprite_size, sprite_color);
+    renderer.drawSprite(sprite, position + cursor_hotspot, sprite_size, sprite_color);
 
     if (show_bounds)
     {
         // Draw yellow square around cursor sprite.
         const float sprite_bounds = sprite_size * 0.5f;
-        const glm::vec2 center = position + click_point;
+        const glm::vec2 center = position + cursor_hotspot;
         const glm::vec2 top_left{center.x - sprite_bounds, center.y - sprite_bounds};
         const glm::vec2 top_right{center.x + sprite_bounds, center.y - sprite_bounds};
         const glm::vec2 bottom_right{center.x + sprite_bounds, center.y + sprite_bounds};
@@ -64,7 +64,7 @@ void MouseRenderer::setSpriteSize(float size)
 
     // Set the click point in the new size to the same position relative to its
     // current size.
-    click_point = click_point * (new_size / sprite_size);
+    cursor_hotspot = cursor_hotspot * (new_size / sprite_size);
     sprite_size = new_size;
 }
 
@@ -73,19 +73,19 @@ void MouseRenderer::setSpriteColor(glm::u8vec4 color)
     sprite_color = color;
 }
 
-void MouseRenderer::setClickPoint(glm::vec2 point)
+void MouseRenderer::setCursorHotspot(glm::vec2 point)
 {
     const float sprite_bounds = sprite_size * 0.5f;
-    click_point = glm::clamp(point, -sprite_bounds, sprite_bounds);
+    cursor_hotspot = glm::clamp(point, -sprite_bounds, sprite_bounds);
 }
 
-void MouseRenderer::setClickPointCenter()
+void MouseRenderer::setCursorHotspotCenter()
 {
-    click_point = glm::vec2{0.0f, 0.0f};
+    cursor_hotspot = glm::vec2{0.0f, 0.0f};
 }
 
-void MouseRenderer::setClickPointTopLeft()
+void MouseRenderer::setCursorHotspotTopLeft()
 {
     const float sprite_bounds = sprite_size * 0.5f;
-    click_point = glm::vec2{sprite_bounds, sprite_bounds};
+    cursor_hotspot = glm::vec2{sprite_bounds, sprite_bounds};
 }

@@ -32,13 +32,13 @@ public:
     void setSpriteColor(glm::u8vec4 color);
     // Set the cursor sprite's click point, in pixels relative to its center
     // point (0, 0). Positive
-    void setClickPoint(glm::vec2 point);
+    void setCursorHotspot(glm::vec2 point);
     // Convenience function to set the cursor's click point to the sprite's
     // center point (0, 0).
-    void setClickPointCenter();
+    void setCursorHotspotCenter();
     // Convenience function to set the cursor's click point to the sprite's
     // upper-leftmost point.
-    void setClickPointTopLeft();
+    void setCursorHotspotTopLeft();
 private:
     // The cursor's position.
     glm::vec2 position;
@@ -50,5 +50,5 @@ private:
     glm::u8vec4 sprite_color{255, 255, 255, 255};
     // The cursor sprite's click point, in pixels relative to its center point
     // (0, 0).
-    glm::vec2 click_point{0.0f, 0.0f};
+    glm::vec2 cursor_hotspot{0.0f, 0.0f};
 };
