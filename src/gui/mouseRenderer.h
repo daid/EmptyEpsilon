@@ -22,6 +22,8 @@ public:
     virtual void onPointerLeave(sp::io::Pointer::ID id) override;
     // Callback run when the cursor is being dragged.
     virtual void onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    // Expose the cursor's position.
+    glm::vec2 getPosition() const { return position; }
 
     // Set the square cursor sprite image to a path relative to resources/.
     // Scales to sprite_size.
