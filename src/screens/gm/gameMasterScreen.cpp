@@ -268,7 +268,7 @@ GameMasterScreen::~GameMasterScreen()
         mouse_renderer->setSpriteImage("cursors/mouse.png");
         mouse_renderer->setSpriteSize(32.0f);
         mouse_renderer->setSpriteColor({255, 255, 255, 255});
-        mouse_renderer->setClickPointCenter();
+        mouse_renderer->setCursorHotspotCenter();
     }
 }
 
@@ -487,7 +487,7 @@ void GameMasterScreen::update(float delta)
 
     if (mouse_renderer)
     {
-        mouse_renderer->setClickPointCenter();
+        mouse_renderer->setCursorHotspotCenter();
         // Placeholders; colors shouldn't be used exclusively to differentiate.
         switch (gm_cursor_mode)
         {
@@ -498,23 +498,23 @@ void GameMasterScreen::update(float delta)
         case GMCursorMode::SelectArea:
             mouse_renderer->setSpriteImage("cursors/mouse_select_area.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setClickPointTopLeft();
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectShips:
             mouse_renderer->setSpriteImage("cursors/mouse_select_ships.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setClickPointTopLeft();
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectFaction:
             mouse_renderer->setSpriteImage("cursors/mouse_select_faction.png");
             // TODO: Match to selected faction
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setClickPointTopLeft();
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::AddToSelection:
             mouse_renderer->setSpriteImage("cursors/mouse_add.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setClickPointTopLeft();
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::CreateEntity:
             mouse_renderer->setSpriteImage("cursors/mouse_create.png");
@@ -528,7 +528,7 @@ void GameMasterScreen::update(float delta)
         case GMCursorMode::MoveEntities:
             mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
             mouse_renderer->setSpriteColor({0, 255, 0, 255});
-            mouse_renderer->setClickPointTopLeft();
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SetAITarget:
             // Placeholder: default cursor with a red tint for order targeting.
