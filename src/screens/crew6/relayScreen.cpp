@@ -204,12 +204,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     }
 }
 
-RelayScreen::~RelayScreen()
-{
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-        mouse_renderer->setSpriteImage("mouse.png");
-}
-
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
@@ -333,21 +327,4 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     delete_waypoint_button->setEnable(targets.getWaypointIndex() >= 0);
-
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-    {
-        switch(mode)
-        {
-        case TargetSelection:
-        case MoveWaypoint:
-            mouse_renderer->setSpriteImage("mouse.png");
-            break;
-        case WaypointPlacement:
-            mouse_renderer->setSpriteImage("waypoint.png");
-            break;
-        case LaunchProbe:
-            mouse_renderer->setSpriteImage("radar/probe.png");
-            break;
-        }
-    }
 }

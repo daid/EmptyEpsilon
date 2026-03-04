@@ -2,7 +2,6 @@
 #include "i18n.h"
 #include "main.h"
 #include "vectorUtils.h"
-#include "gui/mouseRenderer.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
@@ -259,10 +258,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     gameGlobalInfo->on_gm_click = nullptr;
 }
 
-//due to a suspected compiler bug this deconstructor needs to be explicitly defined
+// Due to a suspected compiler bug this deconstructor needs to be explicitly defined
 GameMasterScreen::~GameMasterScreen()
 {
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer")) mouse_renderer->setSpriteImage("mouse.png");
 }
 
 void GameMasterScreen::update(float delta)
@@ -443,32 +441,16 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
-    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
-
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
         object_creation_view->hide();
         cancel_action_button->show();
-        if (mouse_renderer)
-        {
-            if (gameGlobalInfo->on_gm_click_cursor == "")
-                mouse_renderer->setSpriteImage(gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR);
-            else
-                mouse_renderer->setSpriteImage(gameGlobalInfo->on_gm_click_cursor);
-        }
     }
     else
     {
         create_button->show();
         cancel_action_button->hide();
-        if (mouse_renderer)
-        {
-            if (SDL_GetModState() & KMOD_CTRL) mouse_renderer->setSpriteImage("mouse_ship.png");
-            else if (SDL_GetModState() & KMOD_ALT) mouse_renderer->setSpriteImage("mouse_faction.png");
-            else if (SDL_GetModState() & KMOD_SHIFT) mouse_renderer->setSpriteImage("mouse_add.png");
-            else mouse_renderer->setSpriteImage("mouse.png");
-        }
     }
 }
 
