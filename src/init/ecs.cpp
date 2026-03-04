@@ -38,6 +38,7 @@
 #include "multiplayer/radarblock.h"
 #include "multiplayer/shiplog.h"
 #include "multiplayer/zone.h"
+#include "multiplayer/postprocessor.h"
 
 #include "systems/ai.h"
 #include "systems/docking.h"
@@ -67,7 +68,8 @@
 #include "systems/gm.h"
 #include "systems/pickup.h"
 #include "systems/debugrender.h"
-
+#include "systems/player.h"
+#include "systems/postprocessor.h"
 
 void initSystemsAndComponents()
 {
@@ -129,10 +131,14 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpDriveReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<WarpJammerReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<GlitchPostProcessorReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<WarpPostProcessorReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
 
+
     engine->registerSystem<AISystem>();
+    engine->registerSystem<PlayerSystem>();
     engine->registerSystem<DamageSystem>();
     engine->registerSystem<EnergySystem>();
     engine->registerSystem<DockingSystem>();
@@ -164,6 +170,8 @@ void initSystemsAndComponents()
     engine->registerSystem<ZoneSystem>();
     engine->registerSystem<GMRadarRender>();
     engine->registerSystem<PickupSystem>();
+    engine->registerSystem<PostProcessorSystem>();
+
 #ifdef DEBUG
     engine->registerSystem<DebugRenderSystem>();
 #endif
