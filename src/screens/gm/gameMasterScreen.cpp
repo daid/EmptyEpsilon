@@ -11,6 +11,7 @@
 #include "chatDialog.h"
 #include "ecs/query.h"
 #include "components/ai.h"
+#include "components/radar.h"
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/gravity.h"
@@ -69,13 +70,59 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
     main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
-    main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false);
-    main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    main_radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
-        [this](glm::vec2 position) { this->onMouseDrag(position); },
-        [this](glm::vec2 position) { this->onMouseUp(position); }
-    );
+    main_radar
+        ->setStyle(GuiRadarView::Rectangular)
+        ->longRange()
+        ->gameMaster()
+        ->enableTargetProjections(nullptr)
+        ->setAutoCentering(false)
+        ->setCallbacks(
+            [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
+            [this](glm::vec2 position) { this->onMouseDrag(position); },
+            [this](glm::vec2 position) { this->onMouseUp(position); }
+        )
+        ->setOverlayCallback(
+            [this](sp::RenderTarget& renderer)
+            {
+                if (gm_cursor_mode != GMCursorMode::CreateEntity && gm_cursor_mode != GMCursorMode::SetDirection) return;
+                if (!gameGlobalInfo->on_gm_preview_trace) return;
+                const RadarTrace& trace = *gameGlobalInfo->on_gm_preview_trace;
+                if (trace.icon.empty()) return;
+
+                float scale = main_radar->getScale();
+                float size = std::clamp(trace.radius * scale * 2.0f, trace.min_size, trace.max_size);
+
+                glm::u8vec4 color = (trace.flags & RadarTrace::ColorByFaction)
+                    ? gameGlobalInfo->on_gm_preview_faction_color
+                    : trace.color;
+                color.a /= 2;
+
+                glm::vec2 screen_pos;
+                float rotation = 0.0f;
+                if (gm_cursor_mode == GMCursorMode::SetDirection)
+                {
+                    screen_pos = main_radar->worldToScreen(drag_start_position);
+                    rotation = vec2ToAngle(drag_previous_position - drag_start_position);
+                }
+                else
+                {
+                    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+                    if (!mouse_renderer) return;
+                    screen_pos = mouse_renderer->getPosition();
+                }
+
+                if ((trace.flags & RadarTrace::BlendAdd) && (trace.flags & RadarTrace::Rotate))
+                    renderer.drawRotatedSpriteBlendAdd(trace.icon, screen_pos, size, rotation);
+                else if (trace.flags & RadarTrace::BlendAdd)
+                    renderer.drawRotatedSpriteBlendAdd(trace.icon, screen_pos, size, 0);
+                else if (trace.flags & RadarTrace::Rotate)
+                    renderer.drawRotatedSprite(trace.icon, screen_pos, size, rotation, color);
+                else
+                    renderer.drawSprite(trace.icon, screen_pos, size, color);
+            }
+        )
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     box_selection_overlay = new GuiOverlay(main_radar, "BOX_SELECTION", glm::u8vec4(255, 255, 255, 32));
     box_selection_overlay->layout.fill_height = false;
     box_selection_overlay->layout.fill_width = false;
@@ -136,6 +183,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
         gameGlobalInfo->on_gm_click = nullptr;
+        gameGlobalInfo->on_gm_preview_trace = std::nullopt;
     });
     cancel_action_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50)->hide();
 
@@ -728,6 +776,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                 }
             }
             gameGlobalInfo->on_gm_click = nullptr;
+        gameGlobalInfo->on_gm_preview_trace = std::nullopt;
         }
         break;
     case CD_ClickSelectOrBoxSelect:
