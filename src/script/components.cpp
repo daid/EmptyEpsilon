@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/postprocessor.h"
 
 
 #define STRINGIFY(n) #n
@@ -652,6 +653,12 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, alert_level);
     BIND_MEMBER(PlayerControl, control_code);
     BIND_MEMBER(PlayerControl, allowed_positions);
+    BIND_MEMBER(PlayerControl, glitch_alpha);
+    BIND_MEMBER(PlayerControl, glitch_alpha_decay_rate);
+    BIND_MEMBER(PlayerControl, warp_alpha);
+    BIND_MEMBER(PlayerControl, warp_alpha_decay_rate);
+    BIND_MEMBER(PlayerControl, in_gravity);
+    BIND_MEMBER(PlayerControl, just_teleported);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
     sp::script::ComponentHandler<ShipLog>::name("ship_log");
@@ -788,6 +795,16 @@ void initComponentScriptBindings()
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, crew_positions, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, callback, functions_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(CustomShipFunctions, functions, order, functions_dirty);
+
+    sp::script::ComponentHandler<GlitchPostProcessor>::name("glitchpostprocessor");
+    BIND_MEMBER(GlitchPostProcessor, effect_strength);
+    BIND_MEMBER(GlitchPostProcessor, min_radius);
+    BIND_MEMBER(GlitchPostProcessor, max_radius);
+
+    sp::script::ComponentHandler<WarpPostProcessor>::name("warppostprocessor");
+    BIND_MEMBER(WarpPostProcessor, effect_strength);
+    BIND_MEMBER(WarpPostProcessor, min_radius);
+    BIND_MEMBER(WarpPostProcessor, max_radius);
 
     sp::script::ComponentHandler<Zone>::name("zone");
     BIND_MEMBER(Zone, color);

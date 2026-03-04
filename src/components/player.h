@@ -44,6 +44,15 @@ public:
     string control_code;
 
     CrewPositions allowed_positions = CrewPositions::all();
+
+    float glitch_alpha = 0.0f; //[output] used for visual effect in range of a glitchpostprocessor component.
+    float warp_alpha = 0.0f; //[output] used for visual effect in range of a warppostprocessor component.
+    float glitch_alpha_decay_rate = 20.0f;
+    float warp_alpha_decay_rate = 2.0f;
+
+    float just_teleported = 0.0f; //[output] used for triggers after going through a wormhole.
+
+    float in_gravity = 0.0f; //[output] used when in a gravity well.
 };
 
 class Waypoints
