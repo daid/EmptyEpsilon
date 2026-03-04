@@ -2,12 +2,15 @@
 #include "i18n.h"
 #include "main.h"
 #include "vectorUtils.h"
+#include "multiplayer_server.h"
 #include "gameGlobalInfo.h"
 #include "objectCreationView.h"
 #include "globalMessageEntryView.h"
 #include "tweak.h"
 #include "clipboard.h"
 #include "chatDialog.h"
+#include "ecs/query.h"
+#include "components/ai.h"
 #include "components/faction.h"
 #include "components/collision.h"
 #include "components/gravity.h"
@@ -17,13 +20,11 @@
 #include "components/name.h"
 #include "components/docking.h"
 #include "systems/collision.h"
-#include "ecs/query.h"
-#include "multiplayer_server.h"
 
 #include "screenComponents/radarView.h"
 #include "screenComponents/helpOverlay.h"
 
-#include "components/ai.h"
+#include "gui/mouseRenderer.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
@@ -258,9 +259,17 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     gameGlobalInfo->on_gm_click = nullptr;
 }
 
-// Due to a suspected compiler bug this deconstructor needs to be explicitly defined
+// Due to a suspected compiler bug, this deconstructor must be explicitly
+// defined.
 GameMasterScreen::~GameMasterScreen()
 {
+    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
+    {
+        mouse_renderer->setSpriteImage("mouse.png");
+        mouse_renderer->setSpriteSize(32.0f);
+        mouse_renderer->setSpriteColor({255, 255, 255, 255});
+        mouse_renderer->setClickPointCenter();
+    }
 }
 
 void GameMasterScreen::update(float delta)
@@ -441,6 +450,8 @@ void GameMasterScreen::update(float delta)
         message_frame->hide();
     }
 
+    P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+
     if (gameGlobalInfo->on_gm_click)
     {
         create_button->hide();
@@ -452,31 +463,124 @@ void GameMasterScreen::update(float delta)
         create_button->show();
         cancel_action_button->hide();
     }
+
+    if (click_and_drag_state == CD_None)
+    {
+        if (mouse_wheel_delta != 0.0f)
+            gm_cursor_mode = GMCursorMode::ZoomCamera;
+        else if (gameGlobalInfo->on_gm_click)
+            gm_cursor_mode = GMCursorMode::CreateEntity;
+        else
+            gm_cursor_mode = GMCursorMode::Normal;
+    }
+    else if (click_and_drag_state == CD_BoxSelect)
+    {
+        if (SDL_GetModState() & KMOD_SHIFT)
+            gm_cursor_mode = GMCursorMode::AddToSelection;
+        else if (SDL_GetModState() & KMOD_CTRL)
+            gm_cursor_mode = GMCursorMode::SelectShips;
+        else if (SDL_GetModState() & KMOD_ALT)
+            gm_cursor_mode = GMCursorMode::SelectFaction;
+        else
+            gm_cursor_mode = GMCursorMode::SelectArea;
+    }
+
+    if (mouse_renderer)
+    {
+        // Placeholders; colors shouldn't be used exclusively to differentiate.
+        switch (gm_cursor_mode)
+        {
+        case GMCursorMode::Normal:
+            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::SelectArea:
+            mouse_renderer->setSpriteImage("mouse_select.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::SelectShips:
+            mouse_renderer->setSpriteImage("mouse_ship.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::SelectFaction:
+            mouse_renderer->setSpriteImage("mouse_faction.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::AddToSelection:
+            mouse_renderer->setSpriteImage("mouse_add.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::CreateEntity:
+            mouse_renderer->setSpriteImage("mouse_create.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::SetDirection:
+            // Placeholder: reuse create image with a yellow tint for direction phase.
+            mouse_renderer->setSpriteImage("mouse_create.png");
+            mouse_renderer->setSpriteColor({255, 255, 0, 255});
+            break;
+        case GMCursorMode::MoveEntities:
+            // Placeholder: reuse ship image with a green tint.
+            mouse_renderer->setSpriteImage("mouse_ship.png");
+            mouse_renderer->setSpriteColor({0, 255, 0, 255});
+            break;
+        case GMCursorMode::SetAITarget:
+            // Placeholder: default cursor with a red tint for order targeting.
+            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteColor({255, 64, 64, 255});
+            break;
+        case GMCursorMode::ZoomCamera:
+            // Placeholder: default cursor, no tint.
+            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        case GMCursorMode::PanCamera:
+            // Placeholder: default cursor with a light-blue tint.
+            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteColor({180, 180, 255, 255});
+            break;
+        case GMCursorMode::ResizeChat:
+            // Placeholder: default cursor.
+            mouse_renderer->setSpriteImage("mouse.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            break;
+        }
+    }
 }
 
 void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position)
 {
-    if (click_and_drag_state != CD_None)
-        return;
+    if (click_and_drag_state != CD_None) return;
+
     if (button == sp::io::Pointer::Button::Right)
     {
         click_and_drag_state = CD_DragViewOrOrder;
+        gm_cursor_mode = GMCursorMode::SetAITarget;
     }
     else
     {
         if (gameGlobalInfo->on_gm_click)
         {
             click_and_drag_state = CD_CreateWithDrag;
-        }else{
+            gm_cursor_mode = GMCursorMode::CreateEntity;
+        }
+        else
+        {
             click_and_drag_state = CD_ClickSelectOrBoxSelect;
+            gm_cursor_mode = GMCursorMode::Normal;
 
             float min_drag_distance = main_radar->getDistance() / 450 * 10;
 
             for(auto obj : targets.getTargets())
             {
                 if (auto transform = obj.getComponent<sp::Transform>())
+                {
                     if (glm::length(transform->getPosition() - position) < min_drag_distance)
+                    {
                         click_and_drag_state = CD_ClickSelectOrDragObjects;
+                        gm_cursor_mode = GMCursorMode::MoveEntities;
+                    }
+                }
             }
         }
     }
@@ -491,22 +595,38 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
     case CD_DragViewOrOrder:
     case CD_DragView:
         click_and_drag_state = CD_DragView;
+        gm_cursor_mode = GMCursorMode::PanCamera;
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
         position -= (position - drag_previous_position);
         break;
     case CD_ClickSelectOrDragObjects:
     case CD_DragObjects:
         click_and_drag_state = CD_DragObjects;
+        gm_cursor_mode = GMCursorMode::MoveEntities;
         for(auto obj : targets.getTargets())
         {
             if (auto transform = obj.getComponent<sp::Transform>())
+            {
                 transform->setPosition(transform->getPosition() + (position - drag_previous_position));
+            }
         }
         break;
     case CD_ClickSelectOrBoxSelect:
     case CD_BoxSelect:
         click_and_drag_state = CD_BoxSelect;
         {
+            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
+            bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
+            bool alt_down = SDL_GetModState() & KMOD_ALT;
+            if (shift_down)
+                gm_cursor_mode = GMCursorMode::AddToSelection;
+            else if (ctrl_down)
+                gm_cursor_mode = GMCursorMode::SelectShips;
+            else if (alt_down)
+                gm_cursor_mode = GMCursorMode::SelectFaction;
+            else
+                gm_cursor_mode = GMCursorMode::SelectArea;
+
             auto p0 = main_radar->worldToScreen(drag_start_position);
             auto p1 = main_radar->worldToScreen(position);
             if (p0.x > p1.x) std::swap(p0.x, p1.x);
@@ -515,6 +635,9 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
             box_selection_overlay->setPosition(p0, sp::Alignment::TopLeft);
             box_selection_overlay->setSize(p1 - p0);
         }
+        break;
+    case CD_CreateWithDrag:
+        gm_cursor_mode = GMCursorMode::SetDirection;
         break;
     default:
         break;

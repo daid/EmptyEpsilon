@@ -1,5 +1,4 @@
-#ifndef GAME_MASTER_SCREEN_H
-#define GAME_MASTER_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_scrolltext.h"
@@ -71,15 +70,32 @@ private:
         CD_DragObjects,
         CD_CreateWithDrag
     } click_and_drag_state;
+
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};
+
+    enum class GMCursorMode
+    {
+        Normal,         // Not dragging, no mode
+        SelectArea,     // Drag mode, BoxSelect
+        SelectShips,    // Ctrl+Drag mode, BoxSelect
+        SelectFaction,  // Alt+Drag mode, BoxSelect
+        AddToSelection, // Shift+Drag mode, BoxSelect
+        CreateEntity,   // Create mode
+        SetDirection,   // Drag mode, CreateWithDrag
+        MoveEntities,   // Drag mode, DragObjects
+        SetAITarget,    // Order
+        ZoomCamera,     // Mousewheel
+        PanCamera,      // Drag mode, DragView
+        ResizeChat      // Drag mode, chat dialog resize handle
+    } gm_cursor_mode;
 
     GuiButton* create_button;
     GuiButton* cancel_action_button;
 
     GameMasterChatDialog* getChatDialog(sp::ecs::Entity entity);
-public:
 
+public:
     GameMasterScreen(RenderLayer* render_layer);
     virtual ~GameMasterScreen();
 
@@ -93,6 +109,3 @@ public:
 
     string getScriptExport(bool selected_only);
 };
-
-
-#endif//GAME_MASTER_SCREEN_H

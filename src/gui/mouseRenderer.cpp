@@ -75,6 +75,7 @@ void MouseRenderer::setSpriteColor(glm::u8vec4 color)
 
 void MouseRenderer::setCursorHotspot(glm::vec2 point)
 {
+    // Bind click point to sprite bounds.
     const float sprite_bounds = sprite_size * 0.5f;
     cursor_hotspot = glm::clamp(point, -sprite_bounds, sprite_bounds);
 }
