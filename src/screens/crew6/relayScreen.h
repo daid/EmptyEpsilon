@@ -47,7 +47,6 @@ private:
     glm::vec2 mouse_down_position{};
 public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
-    virtual ~RelayScreen();
 
     virtual void onDraw(sp::RenderTarget& target) override;
 };
