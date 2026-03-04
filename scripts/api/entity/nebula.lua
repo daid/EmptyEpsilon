@@ -1,7 +1,7 @@
 
 --- A Nebula is a piece of space terrain with a 5U radius that blocks long-range radar, but not short-range radar.
---- This hides any SpaceObjects inside of a Nebula, as well as SpaceObjects on the other side of its radar "shadow", from any SpaceShip outside of it.
---- Likewise, a SpaceShip fully inside of a nebula has effectively no long-range radar functionality.
+--- This hides any entities inside of a Nebula, as well as entities on the other side of its radar "shadow", from any ship outside of it.
+--- Likewise, a ship fully inside of a nebula has effectively no long-range radar functionality.
 --- In 3D space, a Nebula resembles a dense cloud of colorful gases.
 --- Example: nebula = Nebula():setPosition(1000,2000)
 --- @type creation
