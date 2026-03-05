@@ -14,6 +14,10 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
     if (!visible) return;
 
     renderer.drawSprite(sprite, position + cursor_hotspot, sprite_size, sprite_color);
+    if (!overlay1.empty())
+        renderer.drawSprite(overlay1, position + overlay1_offset, overlay1_size, overlay1_color);
+    if (!overlay2.empty())
+        renderer.drawSprite(overlay2, position + overlay2_offset, overlay2_size, overlay2_color);
 
     if (show_bounds)
     {
@@ -89,4 +93,28 @@ void MouseRenderer::setCursorHotspotTopLeft()
 {
     const float sprite_bounds = sprite_size * 0.5f;
     cursor_hotspot = glm::vec2{sprite_bounds, sprite_bounds};
+}
+
+void MouseRenderer::setSprite(string image, glm::vec2 offset, float size, glm::u8vec4 color)
+{
+    setSpriteImage(image);
+    setCursorHotspot(offset);
+    setSpriteSize(size);
+    setSpriteColor(color);
+}
+
+void MouseRenderer::setOverlay1(string image, glm::vec2 offset, float size, glm::u8vec4 color)
+{
+    overlay1 = image;
+    overlay1_offset = offset;
+    overlay1_size = size;
+    overlay1_color = color;
+}
+
+void MouseRenderer::setOverlay2(string image, glm::vec2 offset, float size, glm::u8vec4 color)
+{
+    overlay2 = image;
+    overlay2_offset = offset;
+    overlay2_size = size;
+    overlay2_color = color;
 }

@@ -534,36 +534,77 @@ void GameMasterScreen::update(float delta)
         gm_cursor_mode = GMCursorMode::MoveEntities;
 
     // Render modal mouse cursors.
+    // TODO: Refactor to compose sprites as overlays, probably bitwise.
     if (mouse_renderer)
     {
-        mouse_renderer->setCursorHotspotCenter();
+        mouse_renderer->setCursorHotspotTopLeft();
+        mouse_renderer->clearOverlay1();
+        mouse_renderer->clearOverlay2();
         switch (gm_cursor_mode)
         {
         case GMCursorMode::Normal:
             mouse_renderer->setSpriteImage("cursors/mouse.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectArea:
-            mouse_renderer->setSpriteImage("cursors/mouse_select_area.png");
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
+            mouse_renderer->setOverlay1(
+                "cursors/mouse_selection.png",
+                {16.0f, 16.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectShips:
-            mouse_renderer->setSpriteImage("cursors/mouse_select_ships.png");
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
+            mouse_renderer->setOverlay1(
+                "cursors/mouse_selection.png",
+                {16.0f, 16.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
+            mouse_renderer->setOverlay2(
+                "cursors/mouse_ship.png",
+                {20.0f, 20.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectFaction:
-            mouse_renderer->setSpriteImage("cursors/mouse_select_faction.png");
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
+            mouse_renderer->setOverlay1(
+                "cursors/mouse_selection.png",
+                {16.0f, 16.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
             // TODO: Match color to selected faction
+            mouse_renderer->setOverlay2(
+                "cursors/mouse_faction.png",
+                {20.0f, 20.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::AddToSelection:
-            mouse_renderer->setSpriteImage("cursors/mouse_add.png");
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
+            mouse_renderer->setOverlay1(
+                "cursors/mouse_selection.png",
+                {16.0f, 16.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
+            // TODO: Match color to selected faction
+            mouse_renderer->setOverlay2(
+                "cursors/mouse_create.png",
+                {20.0f, 20.0f},
+                32.0f,
+                {192, 192, 255, 255}
+            );
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::CreateEntity:
         case GMCursorMode::SetDirection:
@@ -574,7 +615,6 @@ void GameMasterScreen::update(float delta)
         case GMCursorMode::MoveEntities:
             mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
             mouse_renderer->setSpriteColor({0, 255, 0, 255});
-            mouse_renderer->setCursorHotspotTopLeft();
             break;
         // TODO: Modify by order type, or if blind (+SHIFT)
         case GMCursorMode::SetAITarget:
