@@ -142,14 +142,15 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(auto obj : targets.getTargets())
-        {
+        for (auto obj : targets.getTargets())
             obj.getOrAddComponent<Faction>().entity = Faction::find(value);
-        }
     });
-    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
-    faction_selector->setPosition(20, 70, sp::Alignment::TopLeft)->setSize(250, 50);
+    faction_selector
+        ->setSelectionIndex(0)
+        ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
+        ->setSize(250.0f, 50.0f);
 
     global_message_button = new GuiButton(this, "GLOBAL_MESSAGE_BUTTON", tr("button", "Global message"), [this]() {
         global_message_entry->show();
