@@ -100,12 +100,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                                 if (rotation)
                                     transform->setRotation(*rotation);
                             }
-                            if (auto faction = e.getComponent<Faction>()) {
-                                for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
-                                    if (info.name == faction_selector->getSelectionValue())
-                                        faction->entity = entity;
-                                }
-                            }
+                            e.getOrAddComponent<Faction>().entity = Faction::find(faction_selector->getSelectionValue());
                         }
                     };
                 } else {
