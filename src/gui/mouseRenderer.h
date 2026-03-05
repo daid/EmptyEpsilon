@@ -50,6 +50,8 @@ public:
     void clearOverlay1() { overlay1 = ""; }
     void setOverlay2(string image, glm::vec2 offset = {0.0f, 0.0f}, float size = 32.0f, glm::u8vec4 color = {255, 255, 255, 255});
     void clearOverlay2() { overlay2 = ""; }
+    void setOverlay3(string image, glm::vec2 offset = {0.0f, 0.0f}, float size = 32.0f, glm::u8vec4 color = {255, 255, 255, 255});
+    void clearOverlay3() { overlay3 = ""; }
 private:
     // The cursor's position.
     glm::vec2 position;
@@ -73,4 +75,8 @@ private:
     float overlay2_size = 32.0f;
     glm::u8vec4 overlay2_color{255, 255, 255, 255};
     glm::vec2 overlay2_offset{0.0f, 0.0f};
+    string overlay3;
+    float overlay3_size = 32.0f;
+    glm::u8vec4 overlay3_color{255, 255, 255, 255};
+    glm::vec2 overlay3_offset{0.0f, 0.0f};
 };

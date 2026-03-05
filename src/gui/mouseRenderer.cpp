@@ -18,6 +18,8 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
         renderer.drawSprite(overlay1, position + overlay1_offset, overlay1_size, overlay1_color);
     if (!overlay2.empty())
         renderer.drawSprite(overlay2, position + overlay2_offset, overlay2_size, overlay2_color);
+    if (!overlay3.empty())
+        renderer.drawSprite(overlay3, position + overlay3_offset, overlay3_size, overlay3_color);
 
     if (show_bounds)
     {
@@ -117,4 +119,12 @@ void MouseRenderer::setOverlay2(string image, glm::vec2 offset, float size, glm:
     overlay2_offset = offset;
     overlay2_size = size;
     overlay2_color = color;
+}
+
+void MouseRenderer::setOverlay3(string image, glm::vec2 offset, float size, glm::u8vec4 color)
+{
+    overlay3 = image;
+    overlay3_offset = offset;
+    overlay3_size = size;
+    overlay3_color = color;
 }
