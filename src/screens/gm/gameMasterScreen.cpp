@@ -538,6 +538,7 @@ void GameMasterScreen::update(float delta)
         mouse_renderer->setCursorHotspotTopLeft();
         mouse_renderer->clearOverlay1();
         mouse_renderer->clearOverlay2();
+        mouse_renderer->clearOverlay3();
 
         if ((gm_cursor_mode & (GMCursorMode::CreateEntity | GMCursorMode::SetDirection)) != GMCursorMode::None)
         {
@@ -582,12 +583,12 @@ void GameMasterScreen::update(float delta)
                 if (auto* info = FactionInfo::find(faction_selector->getSelectionValue()))
                     overlay_color = info->gm_color;
 
+            if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
+                mouse_renderer->setOverlay3("cursors/mouse_create.png", {10.0f, -5.0f}, 32.0f, overlay_color);
             if ((gm_cursor_mode & GMCursorMode::SelectShips) != GMCursorMode::None)
                 mouse_renderer->setOverlay2("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, overlay_color);
             else if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
                 mouse_renderer->setOverlay2("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, overlay_color);
-            else if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
-                mouse_renderer->setOverlay2("cursors/mouse_create.png", {20.0f, 20.0f}, 32.0f, overlay_color);
         }
     }
 }
@@ -670,7 +671,8 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     case ClickAndDragState::DragViewOrOrder:
         {
             // Right-click, with or without modifier
-            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
+            auto mods = SDL_GetModState();
+            bool shift_down = mods & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
 
