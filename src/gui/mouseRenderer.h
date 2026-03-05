@@ -53,5 +53,5 @@ private:
     glm::u8vec4 sprite_color{255, 255, 255, 255};
     // The cursor sprite's click point, in pixels relative to its center point
     // (0, 0).
-    glm::vec2 cursor_hotspot{0.0f, 0.0f};
+    glm::vec2 cursor_hotspot{16.0f, 16.0f};
 };

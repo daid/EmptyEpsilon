@@ -59,17 +59,17 @@ private:
 
     GuiHelpOverlay* keyboard_help;
 
-    enum EClickAndDragState
+    enum class ClickAndDragState
     {
-        CD_None,
-        CD_DragViewOrOrder,
-        CD_DragView,
-        CD_ClickSelectOrBoxSelect,
-        CD_BoxSelect,
-        CD_ClickSelectOrDragObjects,
-        CD_DragObjects,
-        CD_CreateWithDrag
-    } click_and_drag_state = CD_None;
+        None,
+        DragViewOrOrder,
+        DragView,
+        ClickSelectOrBoxSelect,
+        BoxSelect,
+        ClickSelectOrDragObjects,
+        DragObjects,
+        CreateWithDrag
+    } click_and_drag_state = ClickAndDragState::None;
 
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};
@@ -86,9 +86,8 @@ private:
         MoveEntities,   // Drag mode, DragObjects
         SetAITarget,    // Order
         ZoomCamera,     // Mousewheel
-        PanCamera,      // Drag mode, DragView
-        ResizeChat      // Drag mode, chat dialog resize handle
-    } gm_cursor_mode;
+        PanCamera       // Drag mode, DragView
+    } gm_cursor_mode = GMCursorMode::Normal;
 
     bool has_cpu_ship = false;
 

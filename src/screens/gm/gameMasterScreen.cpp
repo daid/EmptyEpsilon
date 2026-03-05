@@ -316,7 +316,7 @@ GameMasterScreen::~GameMasterScreen()
         mouse_renderer->setSpriteImage("cursors/mouse.png");
         mouse_renderer->setSpriteSize(32.0f);
         mouse_renderer->setSpriteColor({255, 255, 255, 255});
-        mouse_renderer->setCursorHotspotCenter();
+        mouse_renderer->setCursorHotspotTopLeft();
     }
 }
 
@@ -325,33 +325,21 @@ void GameMasterScreen::update(float delta)
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 100000)
-            view_distance = 100000;
-        if (view_distance < 5000)
-            view_distance = 5000;
+        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 100000.0f);
         main_radar->setDistance(view_distance);
-        if (view_distance < 10000)
-            main_radar->shortRange();
-        else
-            main_radar->longRange();
+        if (view_distance < 10000) main_radar->shortRange();
+        else main_radar->longRange();
     }
 
     if (keys.gm_delete.getDown())
-    {
-        for(auto obj : targets.getTargets())
-            obj.destroy();
-    }
-    if (keys.gm_clipboardcopy.getDown())
-    {
-        Clipboard::setClipboard(getScriptExport(false));
-    }
+        for(auto obj : targets.getTargets()) obj.destroy();
 
+    if (keys.gm_clipboardcopy.getDown())
+        Clipboard::setClipboard(getScriptExport(false));
+
+    // Toggle keyboard help.
     if (keys.help.getDown())
-    {
-        // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-    }
 
     if (keys.escape.getDown())
     {
@@ -364,18 +352,16 @@ void GameMasterScreen::update(float delta)
 
     pause_button->setValue(engine->getGameSpeed() == 0.0f);
 
+    // Toggle callsigns.
     if (keys.gm_show_callsigns.getDown())
-    {
-        // Toggle callsigns.
         main_radar->showCallsigns(!main_radar->getCallsigns());
-    }
 
     bool has_object = false;
     has_cpu_ship = false;
     bool has_player_ship = false;
 
     // Add and remove entries from the player ship list.
-    for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
+    for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
     {
         string ship_name;
         if (auto tn = entity.getComponent<TypeName>())
@@ -383,11 +369,9 @@ void GameMasterScreen::update(float delta)
         if (auto cs = entity.getComponent<CallSign>())
             ship_name += " " + cs->callsign;
         if (player_ship_selector->indexByValue(entity.toString()) == -1)
-        {
             player_ship_selector->addEntry(ship_name, entity.toString());
-        } else {
+        else
             player_ship_selector->setEntryName(player_ship_selector->indexByValue(entity.toString()), ship_name);
-        }
 
         auto transmitter = entity.getComponent<CommsTransmitter>();
         if (transmitter && (transmitter->state == CommsTransmitter::State::BeingHailedByGM || transmitter->state == CommsTransmitter::State::ChannelOpenGM))
@@ -395,24 +379,22 @@ void GameMasterScreen::update(float delta)
             auto cd = getChatDialog(entity);
             if (!cd->isVisible())
             {
-                auto transform = entity.getComponent<sp::Transform>();
-                if (transform)
+                if (auto transform = entity.getComponent<sp::Transform>())
                     cd->show()->setPosition(main_radar->worldToScreen(transform->getPosition()))->setSize(300, 300);
             }
         }
     }
-    for(int n=0; n<player_ship_selector->entryCount(); n++) {
+    for (int n = 0; n < player_ship_selector->entryCount(); n++)
+    {
         if (!sp::ecs::Entity::fromString(player_ship_selector->getEntryValue(n)))
             player_ship_selector->removeEntry(n);
     }
 
     // Record object type.
-    for(auto entity : targets.getTargets())
+    for (auto entity : targets.getTargets())
     {
-        if (entity.hasComponent<AIController>())
-            has_cpu_ship = true;
-        if (entity.hasComponent<PlayerControl>())
-            has_player_ship = true;
+        if (entity.hasComponent<AIController>()) has_cpu_ship = true;
+        if (entity.hasComponent<PlayerControl>()) has_player_ship = true;
         has_object = true;
     }
 
@@ -431,19 +413,15 @@ void GameMasterScreen::update(float delta)
     std::unordered_map<string, string> selection_info;
 
     // For each selected object, determine and report their type.
-    for(auto entity : targets.getTargets())
+    for (auto entity : targets.getTargets())
     {
         auto info = getGMInfo(entity);
-        for(auto i = info.begin(); i != info.end(); i++)
+        for (auto i = info.begin(); i != info.end(); i++)
         {
             if (selection_info.find(i->first) == selection_info.end())
-            {
                 selection_info[i->first] = i->second;
-            }
             else if (selection_info[i->first] != i->second)
-            {
                 selection_info[i->first] = tr("*mixed*");
-            }
         }
     }
 
@@ -454,19 +432,22 @@ void GameMasterScreen::update(float delta)
     }
 
     unsigned int cnt = 0;
-    for(std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
+    for (std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
     {
         if (cnt == info_items.size())
         {
             info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5, i->first, i->second));
             info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30);
-        }else{
+        }
+        else
+        {
             info_items[cnt]->show();
             info_items[cnt]->setKey(tr("gm_info", i->first))->setValue(i->second);
         }
         cnt++;
     }
-    while(cnt < info_items.size())
+
+    while (cnt < info_items.size())
     {
         info_items[cnt]->hide();
         cnt++;
@@ -474,19 +455,18 @@ void GameMasterScreen::update(float delta)
 
     bool gm_functions_changed = gm_script_options->entryCount() != int(gameGlobalInfo->gm_callback_functions.size());
     auto it = gameGlobalInfo->gm_callback_functions.begin();
-    for(int n=0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
+    for (int n = 0; !gm_functions_changed && n<gm_script_options->entryCount(); n++)
     {
         if (gm_script_options->getEntryName(n) != it->name)
             gm_functions_changed = true;
         it++;
     }
+
     if (gm_functions_changed)
     {
         gm_script_options->setOptions({});
-        for(const GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
-        {
+        for (const GMScriptCallback& callback : gameGlobalInfo->gm_callback_functions)
             gm_script_options->addEntry(callback.name, callback.name);
-        }
     }
 
     if (!gameGlobalInfo->gm_messages.empty())
@@ -494,9 +474,9 @@ void GameMasterScreen::update(float delta)
         const auto& message = gameGlobalInfo->gm_messages.front();
         message_text->setText(message);
         message_frame->show();
-    } else {
-        message_frame->hide();
     }
+    else
+        message_frame->hide();
 
     P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
 
@@ -512,16 +492,26 @@ void GameMasterScreen::update(float delta)
         cancel_action_button->hide();
     }
 
-    if (click_and_drag_state == CD_None)
+    // Set CursorMode based on combination of ClickAndDragState, GM screen
+    // state, and modifier keys.
+    // TODO: Handle mod key combos
+    // (i.e. Shift+Ctrl = add only ships to current selection)
+    if (click_and_drag_state == ClickAndDragState::None)
     {
         if (mouse_wheel_delta != 0.0f)
             gm_cursor_mode = GMCursorMode::ZoomCamera;
         else if (gameGlobalInfo->on_gm_click)
             gm_cursor_mode = GMCursorMode::CreateEntity;
+        else if (SDL_GetModState() & KMOD_SHIFT)
+            gm_cursor_mode = GMCursorMode::AddToSelection;
+        else if (SDL_GetModState() & KMOD_CTRL)
+            gm_cursor_mode = GMCursorMode::SelectShips;
+        else if (SDL_GetModState() & KMOD_ALT)
+            gm_cursor_mode = GMCursorMode::SelectFaction;
         else
             gm_cursor_mode = GMCursorMode::Normal;
     }
-    else if (click_and_drag_state == CD_BoxSelect)
+    else if (click_and_drag_state == ClickAndDragState::BoxSelect)
     {
         if (SDL_GetModState() & KMOD_SHIFT)
             gm_cursor_mode = GMCursorMode::AddToSelection;
@@ -532,16 +522,27 @@ void GameMasterScreen::update(float delta)
         else
             gm_cursor_mode = GMCursorMode::SelectArea;
     }
+    else if (click_and_drag_state == ClickAndDragState::DragViewOrOrder)
+        gm_cursor_mode = GMCursorMode::SetAITarget; // TODO: Handle mod keys
+    else if (click_and_drag_state == ClickAndDragState::DragView)
+        gm_cursor_mode = GMCursorMode::PanCamera;
+    else if (click_and_drag_state == ClickAndDragState::CreateWithDrag)
+        gm_cursor_mode = GMCursorMode::CreateEntity;
+    else if (click_and_drag_state == ClickAndDragState::ClickSelectOrBoxSelect)
+        gm_cursor_mode = GMCursorMode::Normal;
+    else if (click_and_drag_state == ClickAndDragState::ClickSelectOrDragObjects || click_and_drag_state == ClickAndDragState::DragObjects)
+        gm_cursor_mode = GMCursorMode::MoveEntities;
 
+    // Render modal mouse cursors.
     if (mouse_renderer)
     {
         mouse_renderer->setCursorHotspotCenter();
-        // Placeholders; colors shouldn't be used exclusively to differentiate.
         switch (gm_cursor_mode)
         {
         case GMCursorMode::Normal:
             mouse_renderer->setSpriteImage("cursors/mouse.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::SelectArea:
             mouse_renderer->setSpriteImage("cursors/mouse_select_area.png");
@@ -565,34 +566,31 @@ void GameMasterScreen::update(float delta)
             mouse_renderer->setCursorHotspotTopLeft();
             break;
         case GMCursorMode::CreateEntity:
+        case GMCursorMode::SetDirection:
             mouse_renderer->setSpriteImage("cursors/mouse_create.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::SetDirection:
-            // Placeholder: reuse create image with a yellow tint.
-            mouse_renderer->setSpriteImage("cursors/mouse_create.png");
-            mouse_renderer->setSpriteColor({255, 255, 0, 255});
+            mouse_renderer->setCursorHotspotCenter();
             break;
         case GMCursorMode::MoveEntities:
             mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
             mouse_renderer->setSpriteColor({0, 255, 0, 255});
             mouse_renderer->setCursorHotspotTopLeft();
             break;
+        // TODO: Modify by order type, or if blind (+SHIFT)
         case GMCursorMode::SetAITarget:
             mouse_renderer->setSpriteImage("cursors/mouse_ai_target.png");
             mouse_renderer->setSpriteColor({255, 64, 64, 255});
+            mouse_renderer->setCursorHotspotCenter();
             break;
         case GMCursorMode::ZoomCamera:
             mouse_renderer->setSpriteImage("cursors/mouse_zoom.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setCursorHotspotCenter();
             break;
         case GMCursorMode::PanCamera:
             mouse_renderer->setSpriteImage("cursors/mouse_pan.png");
             mouse_renderer->setSpriteColor({180, 180, 255, 255});
-            break;
-        case GMCursorMode::ResizeChat:
-            mouse_renderer->setSpriteImage("cursors/mouse_resize_chat.png");
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setCursorHotspotCenter();
             break;
         }
     }
@@ -600,44 +598,27 @@ void GameMasterScreen::update(float delta)
 
 void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position)
 {
-    if (click_and_drag_state != CD_None) return;
+    if (click_and_drag_state != ClickAndDragState::None) return;
 
     if (button == sp::io::Pointer::Button::Right)
     {
-        if (has_cpu_ship)
-        {
-            click_and_drag_state = CD_DragViewOrOrder;
-            gm_cursor_mode = GMCursorMode::SetAITarget;
-        }
-        else
-        {
-            click_and_drag_state = CD_DragView;
-            gm_cursor_mode = GMCursorMode::PanCamera;
-        }
+        if (has_cpu_ship) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
+        else click_and_drag_state = ClickAndDragState::DragView;
     }
     else
     {
-        if (gameGlobalInfo->on_gm_click)
-        {
-            click_and_drag_state = CD_CreateWithDrag;
-            gm_cursor_mode = GMCursorMode::CreateEntity;
-        }
+        if (gameGlobalInfo->on_gm_click) click_and_drag_state = ClickAndDragState::CreateWithDrag;
         else
         {
-            click_and_drag_state = CD_ClickSelectOrBoxSelect;
-            gm_cursor_mode = GMCursorMode::Normal;
+            click_and_drag_state = ClickAndDragState::ClickSelectOrBoxSelect;
+            float min_drag_distance = main_radar->getDistance() / 450.0f * 10.0f;
 
-            float min_drag_distance = main_radar->getDistance() / 450 * 10;
-
-            for(auto obj : targets.getTargets())
+            for (auto obj : targets.getTargets())
             {
                 if (auto transform = obj.getComponent<sp::Transform>())
                 {
                     if (glm::length(transform->getPosition() - position) < min_drag_distance)
-                    {
-                        click_and_drag_state = CD_ClickSelectOrDragObjects;
-                        gm_cursor_mode = GMCursorMode::MoveEntities;
-                    }
+                        click_and_drag_state = ClickAndDragState::ClickSelectOrDragObjects;
                 }
             }
         }
@@ -650,40 +631,28 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
 {
     switch(click_and_drag_state)
     {
-    case CD_DragViewOrOrder:
-    case CD_DragView:
-        click_and_drag_state = CD_DragView;
-        gm_cursor_mode = GMCursorMode::PanCamera;
+    case ClickAndDragState::DragViewOrOrder:
+    case ClickAndDragState::DragView:
+        click_and_drag_state = ClickAndDragState::DragView;
         main_radar->setViewPosition(main_radar->getViewPosition() - (position - drag_previous_position));
         position -= (position - drag_previous_position);
         break;
-    case CD_ClickSelectOrDragObjects:
-    case CD_DragObjects:
-        click_and_drag_state = CD_DragObjects;
-        gm_cursor_mode = GMCursorMode::MoveEntities;
-        for(auto obj : targets.getTargets())
+    case ClickAndDragState::ClickSelectOrDragObjects:
+    case ClickAndDragState::DragObjects:
+        click_and_drag_state = ClickAndDragState::DragObjects;
+        for (auto obj : targets.getTargets())
         {
             if (auto transform = obj.getComponent<sp::Transform>())
-            {
                 transform->setPosition(transform->getPosition() + (position - drag_previous_position));
-            }
         }
         break;
-    case CD_ClickSelectOrBoxSelect:
-    case CD_BoxSelect:
-        click_and_drag_state = CD_BoxSelect;
+    case ClickAndDragState::ClickSelectOrBoxSelect:
+    case ClickAndDragState::BoxSelect:
+        click_and_drag_state = ClickAndDragState::BoxSelect;
         {
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
-            if (shift_down)
-                gm_cursor_mode = GMCursorMode::AddToSelection;
-            else if (ctrl_down)
-                gm_cursor_mode = GMCursorMode::SelectShips;
-            else if (alt_down)
-                gm_cursor_mode = GMCursorMode::SelectFaction;
-            else
-                gm_cursor_mode = GMCursorMode::SelectArea;
 
             auto p0 = main_radar->worldToScreen(drag_start_position);
             auto p1 = main_radar->worldToScreen(position);
@@ -694,7 +663,7 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
             box_selection_overlay->setSize(p1 - p0);
         }
         break;
-    case CD_CreateWithDrag:
+    case ClickAndDragState::CreateWithDrag:
         gm_cursor_mode = GMCursorMode::SetDirection;
         break;
     default:
@@ -705,20 +674,21 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
 
 void GameMasterScreen::onMouseUp(glm::vec2 position)
 {
-    switch(click_and_drag_state)
+    switch (click_and_drag_state)
     {
-    case CD_DragViewOrOrder:
+    case ClickAndDragState::DragViewOrOrder:
         {
-            //Right click
+            // Right-click, with or without modifier
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
 
-            for(auto entity : sp::CollisionSystem::queryArea(position, position))
+            for (auto entity : sp::CollisionSystem::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
                 if (!transform) continue;
-                if (!target || glm::length(position - transform->getPosition()) < glm::length(position - target_position)) {
+                if (!target || glm::length(position - transform->getPosition()) < glm::length(position - target_position))
+                {
                     target = entity;
                     target_position = transform->getPosition();
                 }
@@ -726,7 +696,8 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
             glm::vec2 upper_bound(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
             glm::vec2 lower_bound(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
-            for(auto entity : targets.getTargets())
+
+            for (auto entity : targets.getTargets())
             {
                 if (!entity.hasComponent<AIController>()) continue;
                 auto transform = entity.getComponent<sp::Transform>();
@@ -739,7 +710,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             }
             glm::vec2 objects_center = (upper_bound + lower_bound) / 2.0f;
 
-            for(auto entity : targets.getTargets())
+            for (auto entity : targets.getTargets())
             {
                 if (auto ai = entity.getComponent<AIController>())
                 {
@@ -749,7 +720,9 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         {
                             ai->orders = AIOrder::Attack;
                             ai->order_target = target;
-                        }else{
+                        }
+                        else
+                        {
                             auto port = entity.getComponent<DockingPort>();
                             auto bay = target.getComponent<DockingBay>();
                             if (!shift_down && port && bay && port->canDockOn(*bay) != DockingStyle::None) 
@@ -758,11 +731,12 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                                 ai->orders = AIOrder::DefendTarget;
                             ai->order_target = target;
                         }
-                    } else {
-                        if (shift_down)
-                            ai->orders = AIOrder::FlyTowardsBlind;
-                        else
-                            ai->orders = AIOrder::FlyTowards;
+                    }
+                    else
+                    {
+                        if (shift_down) ai->orders = AIOrder::FlyTowardsBlind;
+                        else ai->orders = AIOrder::FlyTowards;
+
                         if (auto transform = entity.getComponent<sp::Transform>())
                             ai->order_target_location = position + transform->getPosition() - objects_center;
                         else
@@ -775,77 +749,100 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                         gravity->wormhole_target = position;
                 }
             }
+
+            // If nothing matches, clear on_gm properties.
             gameGlobalInfo->on_gm_click = nullptr;
-        gameGlobalInfo->on_gm_preview_trace = std::nullopt;
+            gameGlobalInfo->on_gm_preview_trace = std::nullopt;
         }
         break;
-    case CD_ClickSelectOrBoxSelect:
-    case CD_ClickSelectOrDragObjects:
-    case CD_BoxSelect:
+    case ClickAndDragState::ClickSelectOrBoxSelect:
+    case ClickAndDragState::ClickSelectOrDragObjects:
+    case ClickAndDragState::BoxSelect:
         {
             bool shift_down = SDL_GetModState() & KMOD_SHIFT;
             bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
 
-            auto find_targets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found) {
-                for(auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
+            auto find_targets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            {
+                for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
                     auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
-                    if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x))
+                    if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
+                    if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
+                    if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
+                    if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y)) continue;
+                    // If mod is Ctrl, select only STBOs as defined by control
+                    // type or docking bay.
+                    if (ctrl_down
+                        && !entity.hasComponent<PlayerControl>()
+                        && !entity.hasComponent<AIController>()
+                        && !entity.hasComponent<DockingBay>()
+                    )
                         continue;
-                    if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x))
-                        continue;
-                    if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y))
-                        continue;
-                    if (transform.getPosition().y - size > std::max(drag_start_position.y, position.y))
-                        continue;
-                    if (ctrl_down && !entity.hasComponent<PlayerControl>() && !entity.hasComponent<AIController>() && !entity.hasComponent<DockingBay>())
-                        continue;
-                    if (alt_down && (!entity.hasComponent<Faction>() || (Faction::getInfo(entity).name != faction_selector->getSelectionValue())))
+                    // If mod is Alt, select only entities of the same faction
+                    // as the faction selector.
+                    if (alt_down
+                        && (!entity.hasComponent<Faction>()
+                            || (Faction::getInfo(entity).name != faction_selector->getSelectionValue()))
+                    )
                         continue;
 
                     found(entity, transform);
                 }
             };
 
-            if (click_and_drag_state == CD_BoxSelect) {
+            // Select entities in the bounding box.
+            if (click_and_drag_state == ClickAndDragState::BoxSelect)
                 find_targets([&](auto entity, auto) { entities.push_back(entity); });
-            } else {
-                sp::ecs::Entity closest_entity;
-                auto closest_len2 = std::numeric_limits<float>::max();
-                find_targets([&](auto entity, auto transform) {
-                    auto len2 = glm::length2(transform.getPosition() - position);
-                    if (len2 < closest_len2) {
-                        closest_len2 = len2;
-                        closest_entity = entity;
-                    }
-                });
-                if (closest_len2 != std::numeric_limits<float>::max()) {
-                    entities.push_back(closest_entity);
-                }
-            }
-
-            if (shift_down)
+            // If no box, select the nearest entity by screen distance.
+            else
             {
-                for(auto e : entities)
-                    targets.add(e);
-            } else {
-                targets.set(entities);
+                sp::ecs::Entity closest_entity;
+                float closest_score = std::numeric_limits<float>::max();
+                glm::vec2 click_screen = main_radar->worldToScreen(position);
+
+                find_targets([&](auto entity, auto transform)
+                    {
+                        const float screen_dist = glm::length(main_radar->worldToScreen(transform.getPosition()) - click_screen);
+                        float screen_radius = 0.0f;
+
+                        if (auto physics = entity.getComponent<sp::Physics>())
+                            screen_radius = physics->getSize().x * main_radar->getScale();
+
+                        const float score = std::max(0.0f, screen_dist - screen_radius);
+                        if (score < closest_score)
+                        {
+                            closest_score = score;
+                            closest_entity = entity;
+                        }
+                    }
+                );
+
+                if (closest_score != std::numeric_limits<float>::max())
+                    entities.push_back(closest_entity);
             }
 
+            // If mod is Shift, add selection box entities to current selection.
+            // Otherwise, select only the entities in the selection box.
+            if (shift_down) for (auto e : entities) targets.add(e);
+            else targets.set(entities);
 
-            if (entities.size() > 0) {
-                for(int n=0; n<faction_selector->entryCount(); n++) {
+            // Set the faction selector to match the first selected entity's faction.
+            if (entities.size() > 0)
+            {
+                for (int n = 0; n < faction_selector->entryCount(); n++)
+                {
                     if (faction_selector->getEntryValue(n) == Faction::getInfo(entities[0]).name)
                         faction_selector->setSelectionIndex(n);
                 }
             }
         }
         break;
-    case CD_CreateWithDrag:
+    case ClickAndDragState::CreateWithDrag:
         {
-            float min_drag_distance = main_radar->getDistance() / 450 * 10;
+            float min_drag_distance = main_radar->getDistance() / 450.0f * 10.0f;
             std::optional<float> rotation;
             if (glm::length(position - drag_start_position) > min_drag_distance)
                 rotation = vec2ToAngle(position - drag_start_position);
@@ -855,7 +852,10 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     default:
         break;
     }
-    click_and_drag_state = CD_None;
+
+    // If nothing matches, we aren't dragging. Reset ClickAndDragState and hide
+    // the box.
+    click_and_drag_state = ClickAndDragState::None;
     box_selection_overlay->hide();
 }
 
@@ -866,33 +866,36 @@ std::vector<sp::ecs::Entity> GameMasterScreen::getSelection()
 
 GameMasterChatDialog* GameMasterScreen::getChatDialog(sp::ecs::Entity entity)
 {
-    //TODO: clean up old dialogs that are no longer valid.
-    for(auto d : chat_dialog_per_ship)
-        if (d->player == entity)
-            return d;
+    // TODO: Clean up old dialogs that are no longer valid.
+    for (auto d : chat_dialog_per_ship)
+        if (d->player == entity) return d;
+
+    // Init dialog position and size to avoid undefined behavior. These should
+    // be overridden, but in some cases aren't.
     auto dialog = new GameMasterChatDialog(chat_layer, main_radar, entity);
-    dialog->setPosition(0, 0)->setSize(300, 300);
+    dialog
+        ->setPosition(0.0f, 0.0f)
+        ->setSize(300.0f, 300.0f);
     chat_dialog_per_ship.push_back(dialog);
     return dialog;
 }
 
 string GameMasterScreen::getScriptExport(bool selected_only)
 {
+    // TODO: EE 2742, fix scripts/api/gm.lua getEntityExportString()
     string output;
     std::vector<sp::ecs::Entity> entities;
-    if (selected_only) {
-        entities = targets.getTargets();
-    }else{
-        for(auto [entity, transform] : sp::ecs::Query<sp::Transform>()) {
-            entities.push_back(entity);
-        }
-    }
 
-    for(auto entity : entities) {
+    if (selected_only) entities = targets.getTargets();
+    else for (auto [entity, transform] : sp::ecs::Query<sp::Transform>())
+        entities.push_back(entity);
+
+    for (auto entity : entities)
+    {
         string line = gameGlobalInfo->getEntityExportString(entity);
-        if (line == "")
-            continue;
+        if (line == "") continue;
         output += "    " + line + "\n";
     }
+
     return output;
 }
