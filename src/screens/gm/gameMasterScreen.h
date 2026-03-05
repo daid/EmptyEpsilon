@@ -74,20 +74,29 @@ private:
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};
 
-    enum class GMCursorMode
+    // Treat cursor mode as bitwise, since modifier keys can apply multiple
+    // simultaneous states.
+    enum class GMCursorMode : unsigned
     {
-        Normal,         // Not dragging, no mode
-        SelectArea,     // Drag mode, BoxSelect
-        SelectShips,    // Ctrl+Drag mode, BoxSelect
-        SelectFaction,  // Alt+Drag mode, BoxSelect
-        AddToSelection, // Shift+Drag mode, BoxSelect
-        CreateEntity,   // Create mode
-        SetDirection,   // Drag mode, CreateWithDrag
-        MoveEntities,   // Drag mode, DragObjects
-        SetAITarget,    // Order
-        ZoomCamera,     // Mousewheel
-        PanCamera       // Drag mode, DragView
-    } gm_cursor_mode = GMCursorMode::Normal;
+        None = 0,
+        SelectArea = 1 << 0,     // Drag mode, BoxSelect
+        SelectShips = 1 << 1,    // Ctrl: filter box select to ships/STBOs
+        SelectFaction = 1 << 2,  // Alt: filter box select to same faction
+        AddToSelection = 1 << 3, // Shift: add box select to current selection
+        CreateEntity = 1 << 4,   // GM click pending
+        SetDirection = 1 << 5,   // CreateWithDrag direction phase
+        MoveEntities = 1 << 6,   // Dragging selected objects
+        SetAITarget = 1 << 7,    // Right-click order
+        ZoomCamera = 1 << 8,     // Mousewheel zoom
+        PanCamera = 1 << 9,      // Right-click drag pan
+    } gm_cursor_mode = GMCursorMode::None;
+
+    friend GMCursorMode operator|(GMCursorMode a, GMCursorMode b)
+        { return GMCursorMode(unsigned(a) | unsigned(b)); }
+    friend GMCursorMode& operator|=(GMCursorMode& a, GMCursorMode b)
+        { return a = GMCursorMode(unsigned(a) | unsigned(b)); }
+    friend GMCursorMode operator&(GMCursorMode a, GMCursorMode b)
+        { return GMCursorMode(unsigned(a) & unsigned(b)); }
 
     bool has_cpu_ship = false;
 

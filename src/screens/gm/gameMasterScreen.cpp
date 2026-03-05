@@ -492,146 +492,96 @@ void GameMasterScreen::update(float delta)
         cancel_action_button->hide();
     }
 
-    // Set CursorMode based on combination of ClickAndDragState, GM screen
-    // state, and modifier keys.
-    // TODO: Handle mod key combos
-    // (i.e. Shift+Ctrl = add only ships to current selection)
-    if (click_and_drag_state == ClickAndDragState::None)
+    // Set cursor mode from the combination of drag state, GM screen state, and
+    // held modifier keys. Modifier flags are OR'd so combos set multiple flags
+    // simultaneously.
+    auto mods = SDL_GetModState();
+    if (click_and_drag_state == ClickAndDragState::None
+        || click_and_drag_state == ClickAndDragState::ClickSelectOrBoxSelect)
     {
         if (mouse_wheel_delta != 0.0f)
             gm_cursor_mode = GMCursorMode::ZoomCamera;
         else if (gameGlobalInfo->on_gm_click)
             gm_cursor_mode = GMCursorMode::CreateEntity;
-        else if (SDL_GetModState() & KMOD_SHIFT)
-            gm_cursor_mode = GMCursorMode::AddToSelection;
-        else if (SDL_GetModState() & KMOD_CTRL)
-            gm_cursor_mode = GMCursorMode::SelectShips;
-        else if (SDL_GetModState() & KMOD_ALT)
-            gm_cursor_mode = GMCursorMode::SelectFaction;
         else
-            gm_cursor_mode = GMCursorMode::Normal;
+        {
+            gm_cursor_mode = GMCursorMode::None;
+            if (mods & KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
+            if (mods & KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
+            if (mods & KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
+        }
     }
     else if (click_and_drag_state == ClickAndDragState::BoxSelect)
     {
-        if (SDL_GetModState() & KMOD_SHIFT)
-            gm_cursor_mode = GMCursorMode::AddToSelection;
-        else if (SDL_GetModState() & KMOD_CTRL)
-            gm_cursor_mode = GMCursorMode::SelectShips;
-        else if (SDL_GetModState() & KMOD_ALT)
-            gm_cursor_mode = GMCursorMode::SelectFaction;
-        else
-            gm_cursor_mode = GMCursorMode::SelectArea;
+        gm_cursor_mode = GMCursorMode::SelectArea;
+        if (mods & KMOD_SHIFT) gm_cursor_mode |= GMCursorMode::AddToSelection;
+        if (mods & KMOD_CTRL) gm_cursor_mode |= GMCursorMode::SelectShips;
+        if (mods & KMOD_ALT) gm_cursor_mode |= GMCursorMode::SelectFaction;
     }
     else if (click_and_drag_state == ClickAndDragState::DragViewOrOrder)
-        gm_cursor_mode = GMCursorMode::SetAITarget; // TODO: Handle mod keys
+        gm_cursor_mode = GMCursorMode::SetAITarget;
     else if (click_and_drag_state == ClickAndDragState::DragView)
         gm_cursor_mode = GMCursorMode::PanCamera;
     else if (click_and_drag_state == ClickAndDragState::CreateWithDrag)
-        gm_cursor_mode = GMCursorMode::CreateEntity;
-    else if (click_and_drag_state == ClickAndDragState::ClickSelectOrBoxSelect)
-        gm_cursor_mode = GMCursorMode::Normal;
-    else if (click_and_drag_state == ClickAndDragState::ClickSelectOrDragObjects || click_and_drag_state == ClickAndDragState::DragObjects)
+        gm_cursor_mode = GMCursorMode::SetDirection;
+    else if (click_and_drag_state == ClickAndDragState::ClickSelectOrDragObjects
+             || click_and_drag_state == ClickAndDragState::DragObjects)
         gm_cursor_mode = GMCursorMode::MoveEntities;
 
-    // Render modal mouse cursors.
-    // TODO: Refactor to compose sprites as overlays, probably bitwise.
+    // Render modal mouse cursors. Exclusive modes replace the cursor sprite.
+    // Composite SelectArea and modifier flags (SelectShips, SelectFaction,
+    // AddToSelection) as overlays on the default cursor.
     if (mouse_renderer)
     {
         mouse_renderer->setCursorHotspotTopLeft();
         mouse_renderer->clearOverlay1();
         mouse_renderer->clearOverlay2();
-        switch (gm_cursor_mode)
+
+        if ((gm_cursor_mode & (GMCursorMode::CreateEntity | GMCursorMode::SetDirection)) != GMCursorMode::None)
         {
-        case GMCursorMode::Normal:
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::SelectArea:
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setOverlay1(
-                "cursors/mouse_selection.png",
-                {16.0f, 16.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::SelectShips:
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setOverlay1(
-                "cursors/mouse_selection.png",
-                {16.0f, 16.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            mouse_renderer->setOverlay2(
-                "cursors/mouse_ship.png",
-                {20.0f, 20.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::SelectFaction:
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setOverlay1(
-                "cursors/mouse_selection.png",
-                {16.0f, 16.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            // TODO: Match color to selected faction
-            mouse_renderer->setOverlay2(
-                "cursors/mouse_faction.png",
-                {20.0f, 20.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::AddToSelection:
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setOverlay1(
-                "cursors/mouse_selection.png",
-                {16.0f, 16.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            // TODO: Match color to selected faction
-            mouse_renderer->setOverlay2(
-                "cursors/mouse_create.png",
-                {20.0f, 20.0f},
-                32.0f,
-                {192, 192, 255, 255}
-            );
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
-            break;
-        case GMCursorMode::CreateEntity:
-        case GMCursorMode::SetDirection:
             mouse_renderer->setSpriteImage("cursors/mouse_create.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             mouse_renderer->setCursorHotspotCenter();
-            break;
-        case GMCursorMode::MoveEntities:
+        }
+        else if ((gm_cursor_mode & GMCursorMode::MoveEntities) != GMCursorMode::None)
+        {
             mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
             mouse_renderer->setSpriteColor({0, 255, 0, 255});
-            break;
-        // TODO: Modify by order type, or if blind (+SHIFT)
-        case GMCursorMode::SetAITarget:
+        }
+        else if ((gm_cursor_mode & GMCursorMode::SetAITarget) != GMCursorMode::None)
+        {
+            // TODO: Modify by order type, or if blind (+Shift)
             mouse_renderer->setSpriteImage("cursors/mouse_ai_target.png");
             mouse_renderer->setSpriteColor({255, 64, 64, 255});
             mouse_renderer->setCursorHotspotCenter();
-            break;
-        case GMCursorMode::ZoomCamera:
+        }
+        else if ((gm_cursor_mode & GMCursorMode::ZoomCamera) != GMCursorMode::None)
+        {
             mouse_renderer->setSpriteImage("cursors/mouse_zoom.png");
             mouse_renderer->setSpriteColor({255, 255, 255, 255});
             mouse_renderer->setCursorHotspotCenter();
-            break;
-        case GMCursorMode::PanCamera:
+        }
+        else if ((gm_cursor_mode & GMCursorMode::PanCamera) != GMCursorMode::None)
+        {
             mouse_renderer->setSpriteImage("cursors/mouse_pan.png");
             mouse_renderer->setSpriteColor({180, 180, 255, 255});
             mouse_renderer->setCursorHotspotCenter();
-            break;
+        }
+        else
+        {
+            mouse_renderer->setSpriteImage("cursors/mouse.png");
+            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+
+            if ((gm_cursor_mode & GMCursorMode::SelectArea) != GMCursorMode::None)
+                mouse_renderer->setOverlay1("cursors/mouse_selection.png", {16.0f, 16.0f}, 32.0f, {192, 192, 255, 255});
+
+            if ((gm_cursor_mode & GMCursorMode::SelectShips) != GMCursorMode::None)
+                mouse_renderer->setOverlay2("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
+            else if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
+                // TODO: Match overlay color to selected faction
+                mouse_renderer->setOverlay2("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
+            else if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
+                mouse_renderer->setOverlay2("cursors/mouse_create.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
         }
     }
 }
@@ -690,10 +640,6 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
     case ClickAndDragState::BoxSelect:
         click_and_drag_state = ClickAndDragState::BoxSelect;
         {
-            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
-            bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
-            bool alt_down = SDL_GetModState() & KMOD_ALT;
-
             auto p0 = main_radar->worldToScreen(drag_start_position);
             auto p1 = main_radar->worldToScreen(position);
             if (p0.x > p1.x) std::swap(p0.x, p1.x);
@@ -704,7 +650,6 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
         }
         break;
     case ClickAndDragState::CreateWithDrag:
-        gm_cursor_mode = GMCursorMode::SetDirection;
         break;
     default:
         break;
@@ -804,7 +749,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
 
-            auto find_targets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
@@ -835,7 +780,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
             // Select entities in the bounding box.
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
-                find_targets([&](auto entity, auto) { entities.push_back(entity); });
+                findTargets([&](auto entity, auto) { entities.push_back(entity); });
             // If no box, select the nearest entity by screen distance.
             else
             {
@@ -843,7 +788,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
                 float closest_score = std::numeric_limits<float>::max();
                 glm::vec2 click_screen = main_radar->worldToScreen(position);
 
-                find_targets([&](auto entity, auto transform)
+                findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
                     {
                         const float screen_dist = glm::length(main_radar->worldToScreen(transform.getPosition()) - click_screen);
                         float screen_radius = 0.0f;
