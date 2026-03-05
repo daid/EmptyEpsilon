@@ -499,9 +499,10 @@ void GameMasterScreen::update(float delta)
     if (click_and_drag_state == ClickAndDragState::None
         || click_and_drag_state == ClickAndDragState::ClickSelectOrBoxSelect)
     {
+        /*
         if (mouse_wheel_delta != 0.0f)
             gm_cursor_mode = GMCursorMode::ZoomCamera;
-        else if (gameGlobalInfo->on_gm_click)
+        else */ if (gameGlobalInfo->on_gm_click)
             gm_cursor_mode = GMCursorMode::CreateEntity;
         else
         {
@@ -575,13 +576,17 @@ void GameMasterScreen::update(float delta)
             if ((gm_cursor_mode & GMCursorMode::SelectArea) != GMCursorMode::None)
                 mouse_renderer->setOverlay1("cursors/mouse_selection.png", {16.0f, 16.0f}, 32.0f, {192, 192, 255, 255});
 
+            glm::u8vec4 overlay_color = {192, 192, 255, 255};
+            if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
+                if (auto* info = FactionInfo::find(faction_selector->getSelectionValue()))
+                    overlay_color = info->gm_color;
+
             if ((gm_cursor_mode & GMCursorMode::SelectShips) != GMCursorMode::None)
-                mouse_renderer->setOverlay2("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
+                mouse_renderer->setOverlay2("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, overlay_color);
             else if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
-                // TODO: Match overlay color to selected faction
-                mouse_renderer->setOverlay2("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
+                mouse_renderer->setOverlay2("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, overlay_color);
             else if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
-                mouse_renderer->setOverlay2("cursors/mouse_create.png", {20.0f, 20.0f}, 32.0f, {192, 192, 255, 255});
+                mouse_renderer->setOverlay2("cursors/mouse_create.png", {20.0f, 20.0f}, 32.0f, overlay_color);
         }
     }
 }
