@@ -40,10 +40,12 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     col3->setAttribute("layout", "vertical");
 
     faction_selector = new GuiSelector(col1, "FACTION_SELECTOR", nullptr);
-    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+    faction_selector->addEntry(tr("No faction"), "No faction");
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
-    faction_selector->setSelectionIndex(0);
-    faction_selector->setSize(GuiElement::GuiSizeMax, 50);
+    faction_selector
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     category_selector = new GuiListbox(col1, "CATEGORY_SELECTOR", [this](int index, string)
     {
@@ -100,7 +102,11 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                                 if (rotation)
                                     transform->setRotation(*rotation);
                             }
-                            e.getOrAddComponent<Faction>().entity = Faction::find(faction_selector->getSelectionValue());
+                            const string faction_selector_value = faction_selector->getSelectionValue();
+                            if (faction_selector_value == "No faction")
+                                e.removeComponent<Faction>();
+                            else
+                                e.getOrAddComponent<Faction>().entity = Faction::find(faction_selector_value);
                         }
                     };
                 } else {

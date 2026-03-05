@@ -95,12 +95,11 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
-        for(auto obj : targets.getTargets())
-        {
+        for (auto obj : targets.getTargets())
             obj.getOrAddComponent<Faction>().entity = Faction::find(value);
-        }
     });
-    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+    faction_selector->addEntry(tr("No faction"), "No faction");
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
     faction_selector->setPosition(20, 70, sp::Alignment::TopLeft)->setSize(250, 50);
 
@@ -671,9 +670,13 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             }
 
 
-            if (entities.size() > 0) {
-                for(int n=0; n<faction_selector->entryCount(); n++) {
-                    if (faction_selector->getEntryValue(n) == Faction::getInfo(entities[0]).name)
+            if (entities.size() > 0)
+            {
+                const string faction_name = Faction::getInfo(entities[0]).name;
+
+                for (int n = 0; n < faction_selector->entryCount(); n++)
+                {
+                    if (faction_selector->getEntryValue(n) == faction_name)
                         faction_selector->setSelectionIndex(n);
                 }
             }
