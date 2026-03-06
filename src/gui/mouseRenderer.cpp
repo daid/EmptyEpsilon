@@ -27,7 +27,7 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
         const glm::vec2 top_right{center.x + sprite_bounds, center.y - sprite_bounds};
         const glm::vec2 bottom_right{center.x + sprite_bounds, center.y + sprite_bounds};
         const glm::vec2 bottom_left{center.x - sprite_bounds, center.y + sprite_bounds};
-        renderer.drawLine({top_left, top_right, bottom_right, bottom_left, top_left}, {255, 255, 0, 200});
+        renderer.drawLine({top_left, top_right, bottom_right, bottom_left, top_left}, {255, 255, 0, 64});
 
         // Draw white crosshair on click point.
         renderer.drawLine(position - glm::vec2{2.0f, 0.0f}, position + glm::vec2{2.0f, 0.0f}, {255, 255, 255, 255});

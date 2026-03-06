@@ -666,13 +666,16 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
 
 void GameMasterScreen::onMouseUp(glm::vec2 position)
 {
+    auto mods = SDL_GetModState();
+    const bool shift_down = mods & KMOD_SHIFT;
+    const bool ctrl_down = mods & KMOD_CTRL;
+    const bool alt_down = mods & KMOD_ALT;
+
     switch (click_and_drag_state)
     {
     case ClickAndDragState::DragViewOrOrder:
         {
             // Right-click, with or without modifier
-            auto mods = SDL_GetModState();
-            bool shift_down = mods & KMOD_SHIFT;
             sp::ecs::Entity target;
             glm::vec2 target_position;
 
@@ -752,9 +755,6 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     case ClickAndDragState::ClickSelectOrDragObjects:
     case ClickAndDragState::BoxSelect:
         {
-            bool shift_down = SDL_GetModState() & KMOD_SHIFT;
-            bool ctrl_down = SDL_GetModState() & KMOD_CTRL;
-            bool alt_down = SDL_GetModState() & KMOD_ALT;
             std::vector<sp::ecs::Entity> entities;
 
             auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
