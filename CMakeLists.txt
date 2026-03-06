@@ -701,6 +701,11 @@ if(WIN32)
     endif()
 endif()
 
+if(MSVC)
+    # tweak.cpp exceeds the default COFF section limit
+    set_source_files_properties(src/screens/gm/tweak.cpp PROPERTIES COMPILE_FLAGS "/bigobj")
+endif()
+
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
