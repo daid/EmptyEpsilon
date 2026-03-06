@@ -12,11 +12,15 @@ protected:
     float min_value;
     float max_value;
     float value;
+    float rotation_offset = 0.0f;
+    float ring_thickness = 0.0f;
+    float handle_arc = 20.0f;
+    float radius;
     func_t func;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
 public:
-    GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func);
+    GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, float rotation_offset, float ring_thickness, func_t func);
 
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
@@ -25,4 +29,7 @@ public:
 
     GuiRotationDial* setValue(float value);
     float getValue() const;
+    GuiRotationDial* setThickness(float width) { ring_thickness = std::max(0.0f, width); return this; }
+    GuiRotationDial* setRotationOffset(float offset) { rotation_offset = std::max(0.0f, offset); return this; }
+    GuiRotationDial* setHandleArc(float degrees) { handle_arc = std::clamp(degrees, 1.0f, 359.0f); return this; }
 };

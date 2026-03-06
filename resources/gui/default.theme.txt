@@ -403,11 +403,10 @@
     # GuiRotationDial
     [rotationdial] {
         [rotationdial.back] {
-            image: gui/widget/dial_background.png
+            color: #404040
         }
         [rotationdial.front] {
-            image: gui/widget/dial_button.png
-            color.hover: #CCCCCC
+            color: #FFFFFF
             color.disabled: #808080
         }
     }
