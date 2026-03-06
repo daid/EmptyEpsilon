@@ -21,7 +21,7 @@
 OperationScreen::OperationScreen(GuiContainer* owner)
 : GuiOverlay(owner, "", colorConfig.background)
 {
-    science = new ScienceScreen(this, CrewPosition::operationsOfficer);
+    science = new ScienceScreen(this, true, CrewPosition::operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
     science->science_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { // Down
