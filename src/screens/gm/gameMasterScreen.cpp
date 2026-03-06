@@ -314,9 +314,7 @@ GameMasterScreen::~GameMasterScreen()
 {
     if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
     {
-        mouse_renderer->setSpriteImage("cursors/mouse.png");
-        mouse_renderer->setSpriteSize(32.0f);
-        mouse_renderer->setSpriteColor({255, 255, 255, 255});
+        mouse_renderer->setPrimary("cursors/mouse.png");
         mouse_renderer->setCursorHotspotTopLeft();
     }
 }
@@ -536,59 +534,55 @@ void GameMasterScreen::update(float delta)
     if (mouse_renderer)
     {
         mouse_renderer->setCursorHotspotTopLeft();
-        mouse_renderer->clearOverlay1();
-        mouse_renderer->clearOverlay2();
-        mouse_renderer->clearOverlay3();
+        mouse_renderer->clearOverlays();
 
         if ((gm_cursor_mode & (GMCursorMode::CreateEntity | GMCursorMode::SetDirection)) != GMCursorMode::None)
         {
-            mouse_renderer->setSpriteImage("cursors/mouse_create.png");
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setPrimary("cursors/mouse_create.png");
             mouse_renderer->setCursorHotspotCenter();
         }
         else if ((gm_cursor_mode & GMCursorMode::MoveEntities) != GMCursorMode::None)
         {
-            mouse_renderer->setSpriteImage("cursors/mouse_move_entity.png");
-            mouse_renderer->setSpriteColor({0, 255, 0, 255});
+            mouse_renderer->setPrimary("cursors/mouse_move_entity.png", 32.0f, {0, 255, 0, 255});
         }
         else if ((gm_cursor_mode & GMCursorMode::SetAITarget) != GMCursorMode::None)
         {
             // TODO: Modify by order type, or if blind (+Shift)
-            mouse_renderer->setSpriteImage("cursors/mouse_ai_target.png");
-            mouse_renderer->setSpriteColor({255, 64, 64, 255});
+            mouse_renderer->setPrimary("cursors/mouse_ai_target.png", 32.0f, {255, 64, 64, 255});
             mouse_renderer->setCursorHotspotCenter();
         }
         else if ((gm_cursor_mode & GMCursorMode::ZoomCamera) != GMCursorMode::None)
         {
-            mouse_renderer->setSpriteImage("cursors/mouse_zoom.png");
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setPrimary("cursors/mouse_zoom.png");
             mouse_renderer->setCursorHotspotCenter();
         }
         else if ((gm_cursor_mode & GMCursorMode::PanCamera) != GMCursorMode::None)
         {
-            mouse_renderer->setSpriteImage("cursors/mouse_pan.png");
-            mouse_renderer->setSpriteColor({180, 180, 255, 255});
+            mouse_renderer->setPrimary("cursors/mouse_pan.png", 32.0f, {180, 180, 255, 255});
             mouse_renderer->setCursorHotspotCenter();
         }
         else
         {
-            mouse_renderer->setSpriteImage("cursors/mouse.png");
-            mouse_renderer->setSpriteColor({255, 255, 255, 255});
+            mouse_renderer->setPrimary("cursors/mouse.png");
 
+            // Layer 1: selection area indicator.
             if ((gm_cursor_mode & GMCursorMode::SelectArea) != GMCursorMode::None)
-                mouse_renderer->setOverlay1("cursors/mouse_selection.png", {16.0f, 16.0f}, 32.0f, {192, 192, 255, 255});
+                mouse_renderer->addOverlay("cursors/mouse_selection.png", {16.0f, 16.0f}, 32.0f, {192, 192, 255, 255});
 
             glm::u8vec4 overlay_color = {192, 192, 255, 255};
             if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
                 if (auto* info = FactionInfo::find(faction_selector->getSelectionValue()))
                     overlay_color = info->gm_color;
 
-            if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
-                mouse_renderer->setOverlay3("cursors/mouse_create.png", {10.0f, -5.0f}, 32.0f, overlay_color);
+            // Layer 2: mode type (ship or faction filter).
             if ((gm_cursor_mode & GMCursorMode::SelectShips) != GMCursorMode::None)
-                mouse_renderer->setOverlay2("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, overlay_color);
+                mouse_renderer->addOverlay("cursors/mouse_ship.png", {20.0f, 20.0f}, 32.0f, overlay_color);
             else if ((gm_cursor_mode & GMCursorMode::SelectFaction) != GMCursorMode::None)
-                mouse_renderer->setOverlay2("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, overlay_color);
+                mouse_renderer->addOverlay("cursors/mouse_faction.png", {20.0f, 20.0f}, 32.0f, overlay_color);
+
+            // Layer 3: addition option (add to selection).
+            if ((gm_cursor_mode & GMCursorMode::AddToSelection) != GMCursorMode::None)
+                mouse_renderer->addOverlay("cursors/mouse_create.png", {10.0f, -5.0f}, 32.0f, overlay_color);
         }
     }
 }
