@@ -543,7 +543,8 @@ void GameMasterScreen::update(float delta)
         }
         else if ((gm_cursor_mode & GMCursorMode::MoveEntities) != GMCursorMode::None)
         {
-            mouse_renderer->setPrimary("cursors/mouse_move_entity.png", 32.0f, {0, 255, 0, 255});
+            mouse_renderer->setPrimary("cursors/mouse.png");
+            mouse_renderer->addOverlay("cursors/mouse_pan.png", {20.0f, 20.0f}, 32.0f, {255, 255, 255, 255});
         }
         else if ((gm_cursor_mode & GMCursorMode::SetAITarget) != GMCursorMode::None)
         {
@@ -558,7 +559,7 @@ void GameMasterScreen::update(float delta)
         }
         else if ((gm_cursor_mode & GMCursorMode::PanCamera) != GMCursorMode::None)
         {
-            mouse_renderer->setPrimary("cursors/mouse_pan.png", 32.0f, {180, 180, 255, 255});
+            mouse_renderer->setPrimary("cursors/mouse_pan.png", 32.0f, {192, 192, 255, 255});
             mouse_renderer->setCursorHotspotCenter();
         }
         else
