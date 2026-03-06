@@ -4,9 +4,6 @@
 MouseRenderer::MouseRenderer(RenderLayer* render_layer)
 : Renderable(render_layer)
 {
-#ifdef DEBUG
-    show_bounds = true;
-#endif
 }
 
 void MouseRenderer::render(sp::RenderTarget& renderer)

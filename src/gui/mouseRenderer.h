@@ -10,7 +10,7 @@ public:
     // Show the mouse cursor.
     bool visible = true;
     // Show sprite outline (yellow) and click point (white crosshair) for
-    // debugging.
+    // debugging. Set via GuiCanvas Copy input.
     bool show_bounds = false;
 
     MouseRenderer(RenderLayer* render_layer);
