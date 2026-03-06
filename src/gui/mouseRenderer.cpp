@@ -1,32 +1,34 @@
 #include "mouseRenderer.h"
-#include "main.h"
 
 MouseRenderer::MouseRenderer(RenderLayer* render_layer)
 : Renderable(render_layer)
 {
-#ifdef DEBUG
-    show_bounds = true;
-#endif
 }
 
 void MouseRenderer::render(sp::RenderTarget& renderer)
 {
     if (!visible) return;
 
-    renderer.drawSprite(sprite, position + cursor_hotspot, sprite_size, sprite_color);
+    renderer.drawSprite(primary.sprite, position + primary.offset, primary.size, primary.color);
+    for (const auto& overlay : overlays)
+        renderer.drawSprite(overlay.sprite, position + overlay.offset, overlay.size, overlay.color);
 
     if (show_bounds)
     {
-        // Draw yellow square around cursor sprite.
-        const float sprite_bounds = sprite_size * 0.5f;
-        const glm::vec2 center = position + cursor_hotspot;
-        const glm::vec2 top_left{center.x - sprite_bounds, center.y - sprite_bounds};
-        const glm::vec2 top_right{center.x + sprite_bounds, center.y - sprite_bounds};
-        const glm::vec2 bottom_right{center.x + sprite_bounds, center.y + sprite_bounds};
-        const glm::vec2 bottom_left{center.x - sprite_bounds, center.y + sprite_bounds};
-        renderer.drawLine({top_left, top_right, bottom_right, bottom_left, top_left}, {255, 255, 0, 200});
+        // Draw yellow square around primary cursor sprite.
+        const float bounds = primary.size * 0.5f;
+        const glm::vec2 center = position + primary.offset;
+        renderer.drawLine(
+            {
+                {center.x - bounds, center.y - bounds},
+                {center.x + bounds, center.y - bounds},
+                {center.x + bounds, center.y + bounds},
+                {center.x - bounds, center.y + bounds},
+                {center.x - bounds, center.y - bounds},
+            },
+            {255, 255, 0, 64});
 
-        // Draw white crosshair on click point.
+        // Draw white crosshair on cursor hotspot.
         renderer.drawLine(position - glm::vec2{2.0f, 0.0f}, position + glm::vec2{2.0f, 0.0f}, {255, 255, 255, 255});
         renderer.drawLine(position - glm::vec2{0.0f, 2.0f}, position + glm::vec2{0.0f, 2.0f}, {255, 255, 255, 255});
     }
@@ -52,40 +54,44 @@ void MouseRenderer::onPointerDrag(glm::vec2 position, sp::io::Pointer::ID id)
     onPointerMove(position, id);
 }
 
-void MouseRenderer::setSpriteImage(string sprite_image)
+void MouseRenderer::setPrimary(string sprite, float size, glm::u8vec4 color)
 {
-    sprite = sprite_image;
-}
-
-void MouseRenderer::setSpriteSize(float size)
-{
-    // Render the sprite no smaller than 2x2.
-    const float new_size = std::max(2.0f, size);
-
-    // Set the click point in the new size to the same position relative to its
-    // current size.
-    cursor_hotspot = cursor_hotspot * (new_size / sprite_size);
-    sprite_size = new_size;
-}
-
-void MouseRenderer::setSpriteColor(glm::u8vec4 color)
-{
-    sprite_color = color;
+    primary.sprite = sprite;
+    // Clamp sprite size to minimum 2x2 pixels.
+    primary.size = std::max(2.0f, size);
+    primary.color = color;
 }
 
 void MouseRenderer::setCursorHotspot(glm::vec2 point)
 {
-    const float sprite_bounds = sprite_size * 0.5f;
-    cursor_hotspot = glm::clamp(point, -sprite_bounds, sprite_bounds);
+    // Hotspot should be within sprite bounds.
+    const float bounds = primary.size * 0.5f;
+    primary.offset = glm::clamp(point, -bounds, bounds);
 }
 
 void MouseRenderer::setCursorHotspotCenter()
 {
-    cursor_hotspot = glm::vec2{0.0f, 0.0f};
+    primary.offset = glm::vec2{0.0f, 0.0f};
 }
 
 void MouseRenderer::setCursorHotspotTopLeft()
 {
-    const float sprite_bounds = sprite_size * 0.5f;
-    cursor_hotspot = glm::vec2{sprite_bounds, sprite_bounds};
+    const float bounds = primary.size * 0.5f;
+    primary.offset = glm::vec2{bounds, bounds};
+}
+
+void MouseRenderer::addOverlay(string sprite, glm::vec2 offset, float size, glm::u8vec4 color)
+{
+    overlays.push_back({
+        sprite,
+        offset,
+        // Clamp sprite size to minimum 2x2 pixels.
+        std::max(2.0f, size),
+        color
+    });
+}
+
+void MouseRenderer::clearOverlays()
+{
+    overlays.clear();
 }
