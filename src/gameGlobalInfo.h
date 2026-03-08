@@ -3,6 +3,7 @@
 #include "script.h"
 #include "script/gm.h"
 #include "components/faction.h"
+#include "components/radar.h"
 #include "Updatable.h"
 #include "multiplayer.h"
 #include <list>
@@ -69,7 +70,9 @@ public:
     sp::script::Callback on_new_player_ship;
 
     std::function<void(glm::vec2, std::optional<float>)> on_gm_click;
-    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
+    std::optional<RadarTrace> on_gm_preview_trace;
+    glm::u8vec4 on_gm_preview_faction_color{255, 255, 255, 255};
+    const string DEFAULT_ON_GM_CLICK_CURSOR = "cursors/mouse_create.png";
     string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     GameGlobalInfo();

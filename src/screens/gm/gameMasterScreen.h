@@ -1,5 +1,4 @@
-#ifndef GAME_MASTER_SCREEN_H
-#define GAME_MASTER_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_scrolltext.h"
@@ -60,26 +59,53 @@ private:
 
     GuiHelpOverlay* keyboard_help;
 
-    enum EClickAndDragState
+    enum class ClickAndDragState
     {
-        CD_None,
-        CD_DragViewOrOrder,
-        CD_DragView,
-        CD_ClickSelectOrBoxSelect,
-        CD_BoxSelect,
-        CD_ClickSelectOrDragObjects,
-        CD_DragObjects,
-        CD_CreateWithDrag
-    } click_and_drag_state;
+        None,
+        DragViewOrOrder,
+        DragView,
+        ClickSelectOrBoxSelect,
+        BoxSelect,
+        ClickSelectOrDragObjects,
+        DragObjects,
+        CreateWithDrag
+    } click_and_drag_state = ClickAndDragState::None;
+
     glm::vec2 drag_start_position{};
     glm::vec2 drag_previous_position{};
+
+    // Treat cursor mode as bitwise, since modifier keys can apply multiple
+    // simultaneous states.
+    enum class GMCursorMode : unsigned
+    {
+        None = 0,
+        SelectArea = 1 << 0,     // Drag mode, BoxSelect
+        SelectShips = 1 << 1,    // Ctrl: filter box select to ships/STBOs
+        SelectFaction = 1 << 2,  // Alt: filter box select to same faction
+        AddToSelection = 1 << 3, // Shift: add box select to current selection
+        CreateEntity = 1 << 4,   // GM click pending
+        SetDirection = 1 << 5,   // CreateWithDrag direction phase
+        MoveEntities = 1 << 6,   // Dragging selected objects
+        SetAITarget = 1 << 7,    // Right-click order
+        ZoomCamera = 1 << 8,     // Mousewheel zoom
+        PanCamera = 1 << 9,      // Right-click drag pan
+    } gm_cursor_mode = GMCursorMode::None;
+
+    friend GMCursorMode operator|(GMCursorMode a, GMCursorMode b)
+        { return GMCursorMode(unsigned(a) | unsigned(b)); }
+    friend GMCursorMode& operator|=(GMCursorMode& a, GMCursorMode b)
+        { return a = GMCursorMode(unsigned(a) | unsigned(b)); }
+    friend GMCursorMode operator&(GMCursorMode a, GMCursorMode b)
+        { return GMCursorMode(unsigned(a) & unsigned(b)); }
+
+    bool has_cpu_ship = false;
 
     GuiButton* create_button;
     GuiButton* cancel_action_button;
 
     GameMasterChatDialog* getChatDialog(sp::ecs::Entity entity);
-public:
 
+public:
     GameMasterScreen(RenderLayer* render_layer);
     virtual ~GameMasterScreen();
 
@@ -93,6 +119,3 @@ public:
 
     string getScriptExport(bool selected_only);
 };
-
-
-#endif//GAME_MASTER_SCREEN_H
