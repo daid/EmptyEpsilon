@@ -8,6 +8,7 @@ EnttecDMXProDevice::EnttecDMXProDevice()
     for(int n=0; n<512; n++)
         channel_data[n] = 0;
     channel_count = 512;
+    resend_delay = 25;
 }
 
 EnttecDMXProDevice::~EnttecDMXProDevice()
@@ -36,6 +37,10 @@ bool EnttecDMXProDevice::configure(std::unordered_map<string, string> settings)
     if (settings.find("channels") != settings.end())
     {
         channel_count = std::max(1, std::min(512, settings["channels"].toInt()));
+    }
+    if (settings.find("resend_delay") != settings.end())
+    {
+        resend_delay = settings["resend_delay"].toInt();
     }
     if (port)
     {
@@ -74,6 +79,6 @@ void EnttecDMXProDevice::updateLoop()
         port->send(end_code, sizeof(end_code));
 
         //Delay a bit before sending again.
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(resend_delay));
     }
 }
