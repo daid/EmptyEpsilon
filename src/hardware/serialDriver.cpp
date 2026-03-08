@@ -427,7 +427,7 @@ void SerialPort::sendBreak()
 #endif
 #if (defined(__gnu_linux__) && !defined(ANDROID)) || (defined(__APPLE__) && defined(__MACH__))
     ioctl(handle, TIOCSBRK);
-    usleep(88);
+    usleep(100);
     ioctl(handle, TIOCCBRK);
 #endif
 }
