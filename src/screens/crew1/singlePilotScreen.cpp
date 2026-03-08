@@ -187,6 +187,17 @@ void SinglePilotScreen::onUpdate()
         }
 
         auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        // when using 15° steps, make sure the angle is a multiple of 15
+        if (keys.weapons_aim_left_step.getDown())
+        {
+            missile_aim->setValue(std::round(missile_aim->getValue()/15)*15);
+            aim_adjust =3.0f;
+        }
+        if (keys.weapons_aim_right_step.getDown())
+        {
+            missile_aim->setValue(std::round(missile_aim->getValue()/15)*15);
+            aim_adjust =-3.0f;
+        }
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);

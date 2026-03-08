@@ -219,6 +219,8 @@ Keys::Keys() :
     weapons_disable_aim_lock("WEAPONS_AIM_LOCK_DISABLE"),
     weapons_aim_left("WEAPONS_AIM_LEFT", "G"),
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
+    weapons_aim_left_step("WEAPONS_AIM_LEFT_STEP"),
+    weapons_aim_right_step("WEAPONS_AIM_RIGHT_STEP"),
 
     //Science
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
@@ -417,6 +419,8 @@ void Keys::init()
     weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
+    weapons_aim_left_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim left (15° steps)"));
+    weapons_aim_right_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim right (15° steps)"));
 
     //Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
