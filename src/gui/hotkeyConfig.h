@@ -120,6 +120,8 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
+    std::array<sp::io::Keybinding, 4> science_scan_param_increase_step;
+    std::array<sp::io::Keybinding, 4> science_scan_param_decrease_step;
 
     //Engineering
     sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];

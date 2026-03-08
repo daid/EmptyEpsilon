@@ -244,6 +244,18 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_3"},
         {"SCIENCE_SCAN_PARAM_SET_4"},
     }},
+    science_scan_param_increase_step{{
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_4"},
+    }},
+    science_scan_param_decrease_step{{
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_4"},
+    }},
 
     //Engineering
     engineering_select_system{
@@ -431,6 +443,8 @@ void Keys::init()
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n+1)}}));
+        science_scan_param_increase_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} increase stepwise").format({{"number", string(n+1)}}));
+        science_scan_param_decrease_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} decrease stepwise").format({{"number", string(n+1)}}));
     }
 
     //Engineering
