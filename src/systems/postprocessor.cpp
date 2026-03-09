@@ -31,8 +31,7 @@ void PostProcessorSystem::updatePostProcessor(sp::ecs::Entity& source, PostProce
             continue;
 
         float alpha_strength = 0.0f;
-        printf("max: %f\n", postprocessor.effect_strength);
-
+        
         if (dist2 < postprocessor.min_radius*postprocessor.min_radius){
             // Inside of min_radius, use max strength effect
             alpha_strength = postprocessor.effect_strength;
