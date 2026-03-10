@@ -707,6 +707,11 @@ if(WIN32)
     endif()
 endif()
 
+if(MSVC)
+    # tweak.cpp exceeds the default COFF section limit
+    set_source_files_properties(src/screens/gm/tweak.cpp PROPERTIES COMPILE_FLAGS "/bigobj")
+endif()
+
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
@@ -878,6 +883,6 @@ configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in io.github.daid.EmptyE
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
-  install(FILES resources/logo512.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
+  install(FILES resources/logo_icon.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.github.daid.EmptyEpsilon.metainfo.xml DESTINATION "share/metainfo")
 endif()

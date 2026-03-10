@@ -11,7 +11,7 @@ function BeamEffect()
 end
 
 local Entity = getLuaEntityFunctionTable()
---- Sets the BeamEffect's origin SpaceObject.
+--- Sets the BeamEffect's origin entity.
 --- Requires a 3D x/y/z vector positional offset relative to the object's origin point.
 --- Example: beamfx:setSource(source, 0,0,0)
 function Entity:setSource(source, x, y, z)
@@ -31,7 +31,8 @@ function Entity:setTexture(texture)
     end
     return self
 end
---- Sets the BeamEffect's sound effect.
+--- [NOT YET IMPLEMENTED]
+--- Intended to set the BeamEffect's sound effect.
 --- Valid values are filenames of WAV files relative to the resources/ directory.
 --- Defaults to "sfx/laser_fire.wav".
 --- Example: beamfx:setBeamFireSound("sfx/hvli_fire.wav")
@@ -39,7 +40,8 @@ function Entity:setBeamFireSound()
     --TODO
     return self
 end
---- Sets the magnitude of the BeamEffect's sound effect.
+--- [NOT YET IMPLEMENTED]
+--- Intended to set the magnitude of the BeamEffect's sound effect.
 --- Defaults to 1.0.
 --- Larger values are louder and can be heard from larger distances.
 --- This value also affects the sound effect's pitch.
