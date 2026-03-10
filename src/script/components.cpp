@@ -783,11 +783,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_EMP)], "give_emp");
     BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVLI)], "give_hvli");
-<<<<<<< Updated upstream
-    
-=======
 
->>>>>>> Stashed changes
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);
     BIND_MEMBER(CollisionCallback, player);
