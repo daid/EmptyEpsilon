@@ -5,9 +5,9 @@
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
 --- Example: black_hole = BlackHole():setPosition(1000,2000)
 --- @type creation
-function BlackHole()
+function BlackHole(radius)
+    radius = radius or 5000
     local e = createEntity()
-    local radius = 5000
     e.components = {
         transform = {},
         never_radar_blocked = {},
@@ -27,9 +27,9 @@ end
 --- AI behaviors avoid WormHoles by a 3U margin.
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 --- @type creation
-function WormHole()
+function WormHole(radius)
+    radius = radius or 2500
     local e = createEntity()
-    local radius = 2500
     e.components = {
         transform = {},
         never_radar_blocked = {},
