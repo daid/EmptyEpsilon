@@ -71,7 +71,7 @@ protected:
     virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
 
-    // Static helpers for subclass access to protected members.
+    // Access GuiElement/GuiContainer protected members in subclass
     static void clearElementOwner(GuiElement* element);
     static void setElementHover(GuiElement* element, bool has_hover);
     static void setElementFocus(GuiElement* element, bool has_focus);
