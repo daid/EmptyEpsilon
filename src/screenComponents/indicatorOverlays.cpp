@@ -102,6 +102,9 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 
         if (player && player->glitch_alpha > 0.0f)
             glitchMagnitude = std::max(glitchMagnitude, player->glitch_alpha);
+        
+        if (player && player->just_teleported > 0.0f)
+            glitchMagnitude = std::max(glitchMagnitude, player->just_teleported * 10.0f);
 
         if (glitchMagnitude > 0.0f)
         {
