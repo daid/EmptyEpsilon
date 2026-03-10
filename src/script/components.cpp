@@ -610,7 +610,6 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_mine", 1 << MW_Mine);
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_emp", 1 << MW_EMP);
     BIND_ARRAY_MEMBER_FLAG(MissileTubes, mounts, type_allowed_mask, "allow_hvli", 1 << MW_HVLI);
-    
     BIND_ARRAY_MEMBER(MissileTubes, mounts, direction);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, size);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, type_loaded);
