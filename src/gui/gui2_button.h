@@ -17,6 +17,7 @@ protected:
     string icon_name;
     sp::Alignment icon_alignment;
     float icon_rotation;
+    float icon_size = 0.8f;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
 public:
@@ -29,6 +30,7 @@ public:
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
     GuiButton* setIcon(string icon_name, sp::Alignment icon_alignment = sp::Alignment::CenterLeft, float rotation = 0);
+    GuiButton* setIconSize(float size);
     GuiButton* setStyle(const string& style);
     string getText() const;
     string getIcon() const;
