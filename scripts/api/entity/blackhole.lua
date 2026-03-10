@@ -24,8 +24,8 @@ function BlackHole(radius)
 end
 
 
---- A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 2.5U radius, including otherwise immobile objects like SpaceStations, toward its center.
---- Any SpaceObject that reaches its center is teleported to another point in space.
+--- A WormHole is a piece of space terrain that pulls all nearby entities within a 2.5U radius, including otherwise immobile entities like stations, toward its center.
+--- Any entity that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 0.5U margin.
 --- The optional radius parameter specifies the radius of the WormHole, default 2500
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
