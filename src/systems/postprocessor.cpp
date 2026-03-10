@@ -31,13 +31,13 @@ void PostProcessorSystem::updatePostProcessor(sp::ecs::Entity& source, PostProce
             continue;
 
         float alpha_strength = 0.0f;
-        
+
         if (dist2 < postprocessor.min_radius*postprocessor.min_radius){
             // Inside of min_radius, use max strength effect
-            alpha_strength = postprocessor.effect_strength;
+            alpha_strength = postprocessor.max_effect_strength;
         } else {
             // Outside of min_radius, scale effect by distance
-            alpha_strength = Tween<float>::easeInQuartic(dist2, postprocessor.max_radius*postprocessor.max_radius, postprocessor.min_radius*postprocessor.min_radius, 0.0f, postprocessor.effect_strength );
+            alpha_strength = Tween<float>::easeInQuartic(dist2, postprocessor.max_radius*postprocessor.max_radius, postprocessor.min_radius*postprocessor.min_radius, postprocessor.min_effect_strength, postprocessor.max_effect_strength );
         }
 
         switch (type){

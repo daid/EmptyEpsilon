@@ -3,10 +3,12 @@
 --- Upon reaching the center, any SpaceObject is instantly destroyed even if it's otherwise incapable of taking damage.
 --- AI behaviors avoid BlackHoles by a 2U margin.
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
+--- The optional radius parameter specifies the radius of the BlackHole, default 5000
 --- Example: black_hole = BlackHole():setPosition(1000,2000)
 --- @type creation
 function BlackHole(radius)
     radius = radius or 5000
+    radius = math.max(0, radius)
     local e = createEntity()
     e.components = {
         transform = {},
@@ -16,7 +18,7 @@ function BlackHole(radius)
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=radius},
         billboard_render = {texture="blackHole3d.png", size=radius},
-        warppostprocessor = { max_radius = radius, effect_strength=1 }
+        warppostprocessor = { max_radius = radius, max_effect_strength=1 }
     }
     return e
 end
@@ -24,11 +26,13 @@ end
 
 --- A WormHole is a piece of space terrain that pulls all nearby SpaceObjects within a 2.5U radius, including otherwise immobile objects like SpaceStations, toward its center.
 --- Any SpaceObject that reaches its center is teleported to another point in space.
---- AI behaviors avoid WormHoles by a 3U margin.
+--- AI behaviors avoid WormHoles by a 0.5U margin.
+--- The optional radius parameter specifies the radius of the WormHole, default 2500
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 --- @type creation
 function WormHole(radius)
     radius = radius or 2500
+    radius = math.max(0, radius)
     local e = createEntity()
     e.components = {
         transform = {},
@@ -38,7 +42,7 @@ function WormHole(radius)
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/wormHole.png", min_size=0, max_size=2048, radius=radius},
         billboard_render = {texture="wormHole3d.png", size=radius*2},
-        glitchpostprocessor = { max_radius = radius, effect_strength=20}
+        glitchpostprocessor = { max_radius = radius, max_effect_strength=20}
     }
     return e
 end

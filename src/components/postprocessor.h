@@ -10,7 +10,8 @@ public:
         Glitch,
         Warp
     };
-    float effect_strength = 1.0f; // postprocessor effect strength at min_radius
+    float min_effect_strength = 0.0f; //postprocessor effect strength at max_radius
+    float max_effect_strength = 1.0f; // postprocessor effect strength at min_radius
     float min_radius = 0.0f;
     float max_radius = 5000.0f;
 };
