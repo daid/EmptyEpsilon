@@ -382,7 +382,7 @@ static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
     if (!zone) return false;
     auto t = e.getComponent<sp::Transform>();
     if (!t) return false;
-    return insidePolygon(zone->outline, t->getPosition() - glm::vec2(x, y));
+    return insidePolygon(zone->outline, glm::vec2(x, y) - t->getPosition());
 }
 
 static void luaSetBanner(string banner)

@@ -175,7 +175,9 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
     if (auto transform = entity.getComponent<sp::Transform>()) {
         if (auto physics = entity.getComponent<sp::Physics>()) {
             auto e = sp::ecs::Entity::create();
-            e.addComponent<ExplosionEffect>().size = physics->getSize().x * 1.5f;
+            auto& ee = e.addComponent<ExplosionEffect>();
+            ee.size = physics->getSize().x * 1.5f;
+            ee.radar = true;
             e.addComponent<sp::Transform>(*transform);
             e.addComponent<RawRadarSignatureInfo>(0.0f, 0.4f, 0.4f);
         }

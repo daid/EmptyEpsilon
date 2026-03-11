@@ -352,12 +352,46 @@ function init()
     -- Start the players with 300 reputation.
     friendlyList[1]:addReputationPoints(300.0)
 
+    -- Spawn a random black hole, avoiding the player's starting position and stations.
+    local bh_x, bh_y
+    local spawn_hole = false
+    local bh_attempts = 0
+    while not spawn_hole and bh_attempts < 100 do
+        bh_attempts = bh_attempts + 1
+        local a = random(0, 360)
+        local d = random(10000, 45000)
+        bh_x, bh_y = vectorFromAngle(a, d)
+
+        spawn_hole = true
+        if distance(0, 0, bh_x, bh_y) < 5000 then
+            spawn_hole = false
+        end
+        if spawn_hole then
+            for _, station in ipairs(stationList) do
+                if distance(station, bh_x, bh_y) < 5000 then
+                    spawn_hole = false
+                    break
+                end
+            end
+        end
+    end
+    local black_hole
+    if spawn_hole then
+        black_hole = BlackHole():setPosition(bh_x, bh_y)
+    end
+
     -- Randomly scatter nebulae near the players' spawn point.
     local cx, cy = friendlyList[1]:getPosition()
-    setCirclePos(Nebula(), cx, cy, random(0, 360), 6000)
+    local ndx, ndy = vectorFromAngle(random(0, 360), 6000)
+    if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, cx + ndx, cy + ndy) < 5000) then
+        Nebula():setPosition(cx + ndx, cy + ndy)
+    end
 
     for idx = 1, 5 do
-        setCirclePos(Nebula(), 0, 0, random(0, 360), random(20000, 45000))
+        local ndx, ndy = vectorFromAngle(random(0, 360), random(20000, 45000))
+        if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, ndx, ndy) < 5000) then
+            Nebula():setPosition(ndx, ndy)
+        end
     end
     gmButtons()
 
@@ -393,6 +427,20 @@ function init()
         addWaveInner(enemyList, kind, a, d)
     end
 
+    -- Reposition any enemies that spawned within 5U of the black hole.
+    if black_hole and black_hole:isValid() then
+        for _, enemy in ipairs(enemyList) do
+            if enemy:isValid() then
+                local ex, ey = enemy:getPosition()
+                if distance(bh_x, bh_y, ex, ey) < 5000 then
+                    local safe_angle = angleRotation(bh_x, bh_y, ex, ey)
+                    local dx, dy = vectorFromAngle(safe_angle, 6000)
+                    enemy:setPosition(bh_x + dx, bh_y + dy)
+                end
+            end
+        end
+    end
+
     -- Spawn 2-5 random asteroid belts.
     for i_ = 1, irandom(2, 5) do
         local a = random(0, 360)
@@ -414,6 +462,9 @@ function init()
                         allow_spawn = false
                     end
                 end
+                if black_hole and black_hole:isValid() and distance(bh_x, bh_y, posx, posy) < 5000 then
+                    allow_spawn = false
+                end
                 if allow_spawn then
                     Asteroid():setPosition(posx, posy):setSize(random(100, 500))
                 end
@@ -423,7 +474,11 @@ function init()
         for j_ = 1, 50 do
             local dx1, dy1 = vectorFromAngle(a2, random(-1500, 1500))
             local dx2, dy2 = vectorFromAngle(a2 + 90, random(-20000, 20000))
-            VisualAsteroid():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+            local vax = x + dx1 + dx2
+            local vay = y + dy1 + dy2
+            if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, vax, vay) < 5000) then
+                VisualAsteroid():setPosition(vax, vay)
+            end
         end
     end
 
@@ -439,39 +494,18 @@ function init()
                 if random(0, 100) < 90 then
                     local dx1, dy1 = vectorFromAngle(a2, (nx * 1000) + random(-100, 100))
                     local dx2, dy2 = vectorFromAngle(a2 + 90, (ny * 1000) + random(-100, 100))
-                    Mine():setPosition(x + dx1 + dx2, y + dy1 + dy2)
+                    local mx = x + dx1 + dx2
+                    local my = y + dy1 + dy2
+                    if not (black_hole and black_hole:isValid() and distance(bh_x, bh_y, mx, my) < 5000) then
+                        Mine():setPosition(mx, my)
+                    end
                 end
             end
         end
     end
 
-    -- Spawn a random black hole.
-    local x, y
-    local spawn_hole = false
-
-    -- Avoid spawning black holes too close to stations.
-    while not spawn_hole do
-        -- Generate random coordinates between 10U and 45U from the origin.
-        local a = random(0, 360)
-        local d = random(10000, 45000)
-        x, y = vectorFromAngle(a, d)
-
-        -- Check station distance from possible black hole locations.
-        -- If it's too close to a station, generate new coordinates.
-        for i_, station in ipairs(stationList) do
-            if distance(station, x, y) > 5000 then
-                spawn_hole = true
-            else
-                spawn_hole = false
-            end
-        end
-    end
-
-    BlackHole():setPosition(x, y)
-    
     -- Spawn random neutral transports.
     Script():run("util_random_transports.lua")
-
 
     local station = friendlyList[1]
     if gametimeleft ~= nil then
