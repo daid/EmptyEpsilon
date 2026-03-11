@@ -108,14 +108,19 @@ end
 --- Note that setting this value to 0 doesn't immediately destroy the entity.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.components.hull then self.components.hull.current = amount end
+    if self.components.hull then self.components.hull.current = math.min(math.max(0, amount), self.components.hull.max) end
     return self
 end
 --- Sets this entity's maximum limit of hull points.
---- Note that stations can't repair their own hull, so this only changes the percentage of remaining hull.
+--- If its current hull is greater than the new limit, reduce the hull to the limit.
 --- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    if self.components.hull then self.components.hull.max = amount end
+    if self.components.hull then
+        self.components.hull.max = math.max(0, amount)
+        if self.components.hull.current > self.components.hull.max then
+            self.components.hull.current = self.components.hull.max
+        end
+    end
     return self
 end
 --- Defines whether this entity can be destroyed by damage.
