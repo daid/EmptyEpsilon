@@ -56,7 +56,7 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
     auto health = ship.getComponent<Health>();
     bool hull = ship.hasComponent<Hull>();
     if (hull && health)
-        threat += health->max - health->current;
+        threat += health->getHealthMax() - health->getHealth();
     auto shields = ship.getComponent<Shields>();
     if (shields) {
         if (shields->active)
@@ -87,7 +87,7 @@ float ThreatLevelEstimate::getThreatFor(sp::ecs::Entity ship)
             hull = entity.hasComponent<Hull>();
             float score = 200.0f;
             if (hull && health)
-                score += health->max;
+                score += health->getHealthMax();
             auto shields = entity.getComponent<Shields>();
             if (shields) {
                 for(auto& shield : shields->entries) {

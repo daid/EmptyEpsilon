@@ -94,22 +94,24 @@ void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const Damag
 void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const DamageInfo& info)
 {
     auto health = entity.getComponent<Health>();
-    if (!health)
-        return;
-    if (!(health->damaged_by_flags & (1 << int(info.type))))
-        return;
+    if (!health) return;
+    if (!(health->damaged_by_flags & (1 << int(info.type)))) return;
 
     // If taking non-EMP damage, light up the hull damage overlay.
     health->damage_indicator = 1.5f;
+
+    // Cache health values.
+    float current = health->getHealth();
+    const float max = health->getHealthMax();
 
     if (gameGlobalInfo->use_system_damage && health)
     {
         if (auto sys = ShipSystem::get(entity, info.system_target))
         {
             //Target specific system
-            if (health->max > 0.0f)
+            if (max > 0.0f)
             {
-                float system_damage = (amount / health->max) * 2.0f;
+                float system_damage = (amount / max) * 2.0f;
                 // Beam weapons penetrate the hull more easily and deal more
                 // system damage.
                 if (info.type == DamageType::Energy)
@@ -122,7 +124,7 @@ void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const 
                 {
                     auto random_system = ShipSystem::Type(irandom(0, ShipSystem::COUNT - 1));
                     //Damage the system compared to the amount of hull damage you would do. If we have less hull strength you get more system damage.
-                    float system_damage = (amount / health->max) * 1.0f;
+                    float system_damage = (amount / max) * 1.0f;
                     sys = ShipSystem::get(entity, random_system);
                     if (sys) {
                         sys->health -= system_damage;
@@ -139,9 +141,9 @@ void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const 
         }else{
             // Damage the system compared to the amount of hull damage dealt. If
             // we have less hull strength, we take more system damage.
-            if (health->max > 0.0f)
+            if (max > 0.0f)
             {
-                float system_damage = (amount / health->max) * 3.0f;
+                float system_damage = (amount / max) * 3.0f;
                 // Beam weapons penetrate the hull more easily and deal more
                 // system damage.
                 if (info.type == DamageType::Energy)
@@ -157,26 +159,27 @@ void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const 
         }
     }
 
-    health->current -= amount;
-    if (health->current <= 0.0f && !health->allow_destruction)
+    health->setHealth(current - amount);
+
+    // Check if the entity is destructible. If so and health goes negative,
+    // destroy the entity. Otherwise, zero out its health.
+    if (health->getHealth() < 0.0f)
     {
-        health->current = 1;
+        if (!health->allow_destruction) health->setHealth(0.0f);
+        else
+        {
+            destroyedByDamage(entity, info);
+            return;
+        }
     }
 
-    if (health->current <= 0.0f)
-    {
-        destroyedByDamage(entity, info);
-        return;
-    }
-
+    // Fire onTakingDamage callback.
     if (health->on_taking_damage)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(health->on_taking_damage.call<void>(entity, info.instigator));
-        } else {
+        else
             LuaConsole::checkResult(health->on_taking_damage.call<void>(entity));
-        }
     }
 }
 
@@ -196,13 +199,14 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
     auto health = entity.getComponent<Health>();
     if (info.instigator)
     {
-        float points = 0;
+        float points = 0.0f;
 
-        if (health) points += health->max * 0.1f;
+        if (health) points += health->getHealthMax() * 0.1f;
 
         auto shields = entity.getComponent<Shields>();
-        if (shields && !shields->entries.empty()) {
-            for(auto& shield : shields->entries)
+        if (shields && !shields->entries.empty())
+        {
+            for (auto& shield : shields->entries)
                 points += shield.max * 0.1f;
             points /= shields->entries.size();
         }
@@ -216,13 +220,11 @@ void DamageSystem::destroyedByDamage(sp::ecs::Entity entity, const DamageInfo& i
     if (health && health->on_destruction)
     {
         if (info.instigator)
-        {
             LuaConsole::checkResult(health->on_destruction.call<void>(entity, info.instigator));
-        } else {
+        else
             LuaConsole::checkResult(health->on_destruction.call<void>(entity));
-        }
     }
 
-    //Finally, destroy the entity.
+    // Finally, destroy the entity.
     entity.destroy();
 }

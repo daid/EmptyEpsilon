@@ -955,7 +955,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                 trace.color = {96, 192, 128, 255};
                 trace.flags = RadarTrace::LongRange;
                 auto& health = p.addComponent<Health>();
-                health.current = health.max = 1;
+                health.setHealth(1);
+                health.setHealthMax(1);
                 p.addComponent<Hull>();
                 p.addComponent<ShareShortRangeRadar>();
                 auto model = "SensorBuoy/SensorBuoyMKI.model";

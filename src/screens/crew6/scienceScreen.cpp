@@ -424,7 +424,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
             if (auto health = target.getComponent<Health>())
             {
                 if (target.hasComponent<Hull>())
-                    info_hull->setValue(static_cast<int>(ceil(health->current)));
+                    info_hull->setValue(static_cast<int>(ceil(health->getHealth())));
             }
         }
 

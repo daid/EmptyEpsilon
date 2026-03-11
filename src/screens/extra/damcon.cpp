@@ -41,8 +41,11 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
         auto hull = my_spaceship.hasComponent<Hull>();
         if (health && hull)
         {
-            hull_display->setValue(string(int(100 * health->current / health->max)) + "%");
-            if (health->current < health->max / 4.0f)
+            const float current = health->getHealth();
+            const float max = health->getHealthMax();
+
+            hull_display->setValue(string(static_cast<int>(100.0f * current / max)) + "%");
+            if (current < max / 4.0f)
                 hull_display->setBackColor(glm::u8vec4(255, 0, 0, 255));
             else
                 hull_display->setBackColor(glm::u8vec4{255,255,255,255});

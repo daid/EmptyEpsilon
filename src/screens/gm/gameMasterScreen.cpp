@@ -43,7 +43,7 @@ static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
     if (auto tn = entity.getComponent<TypeName>())
         result[trMark("gm_info", "Type")] = tn->localized;
     if (auto health = entity.getComponent<Health>())
-        result[trMark("gm_info", "Health")] = string(health->current) + "/" + string(health->max);
+        result[trMark("gm_info", "Health")] = string(health->getHealth()) + "/" + string(health->getHealthMax());
     //for(int n=0; n<shield_count; n++) {
         // Note, translators: this is a compromise.
         // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.

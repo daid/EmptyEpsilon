@@ -102,8 +102,10 @@ void HullInfoDisplay::onUpdate()
     auto health = my_spaceship.getComponent<Health>();
     if (health && my_spaceship.hasComponent<Hull>())
     {
-        setValue(toNearbyIntString(100.0f * health->current / health->max) + "%");
-        if (health->current < health->max / 4.0f)
+        float current = health->getHealth();
+        float max = health->getHealthMax();
+        setValue(toNearbyIntString(100.0f * current / max) + "%");
+        if (current < max / 4.0f)
             setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
             setBackColor(glm::u8vec4{255,255,255,255});

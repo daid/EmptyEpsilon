@@ -314,8 +314,52 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_BOOL_TWEAK(tr("tweak-text", "Auto levels:"), Coolant, auto_levels);
 
     ADD_PAGE(tr("tweak-tab", "Health"), Health);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Current:"), Health, current);
-    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Health, max);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Current:"), 20.0f);
+        label
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<Health>())
+                return string(v->getHealth(), 1);
+            return "";
+        };
+        ui->callback(
+            [this](string text)
+            {
+                if (auto v = entity.getComponent<Health>())
+                    v->setHealth(std::min(text.toFloat(), v->getHealthMax()));
+            }
+        );
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Max:"), 20.0f);
+        label
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        auto ui = new GuiTextTweak(row);
+        ui->update_func = [this]() -> string {
+            if (auto v = entity.getComponent<Health>())
+                return string(v->getHealthMax(), 1);
+            return "";
+        };
+        ui->callback(
+            [this](string text)
+            {
+                if (auto v = entity.getComponent<Health>())
+                    v->setHealthMax(text.toFloat());
+            }
+        );
+    }
     ADD_BOOL_TWEAK(tr("tweak-text", "Allow destruction:"), Health, allow_destruction);
 
     ADD_PAGE(tr("tweak-tab", "Hull"), Hull);

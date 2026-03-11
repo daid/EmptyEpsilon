@@ -376,8 +376,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(AllowRadarLink, owner);
 
     sp::script::ComponentHandler<Health>::name("health");
-    BIND_MEMBER(Health, current);
-    BIND_MEMBER(Health, max);
+    BIND_MEMBER_GS(Health, "current", getHealth, setHealth);
+    BIND_MEMBER_GS(Health, "max", getHealthMax, setHealthMax);
     BIND_MEMBER(Health, allow_destruction);
     BIND_MEMBER(Health, on_destruction);
     BIND_MEMBER(Health, on_taking_damage);

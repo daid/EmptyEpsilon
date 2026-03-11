@@ -529,7 +529,7 @@ void ShipAI::runOrders()
                 if (bay->flags & DockingBay::Repair)
                 {
                     auto health = owner.getComponent<Health>();
-                    if (health && health->current < health->max)
+                    if (health && health->getHealth() < health->getHealthMax())
                         allow_undock = false;
                 }
             }

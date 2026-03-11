@@ -68,11 +68,17 @@ void DockingSystem::update(float delta)
                 {
                     const auto hull = entity.hasComponent<Hull>();
                     auto health = entity.getComponent<Health>();
-                    if (hull && health && health->current < health->max)
+                    if (hull && health)
                     {
-                        health->current += delta;
-                        if (health->current > health->max)
-                            health->current = health->max;
+                        float current = health->getHealth();
+                        const float max = health->getHealthMax();
+                        
+                        // Cap repairs to the entity's max value.
+                        if (current < max)
+                        {
+                            current += delta;
+                            health->setHealth(std::min(current, max));
+                        }
                     }
                 }
 

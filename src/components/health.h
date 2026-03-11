@@ -16,12 +16,18 @@
 // in player UI.
 class Health
 {
-public:
+private:
     float current = 100.0f;
     float max = 100.0f;
+public:
     bool allow_destruction = true;
     int damaged_by_flags = (1 << int(DamageType::Energy)) | (1 << int(DamageType::Kinetic));
     float damage_indicator = 0.0f;  // Visual damage flash timer (1.5s)
+
+    float getHealth() const { return current; }
+    void setHealth(float value) { current = std::clamp(value, 0.0f, max); }
+    float getHealthMax() const { return max; }
+    void setHealthMax(float value) { max = std::max(0.0f, value); if (current > max) current = max; }
 
     sp::script::Callback on_destruction;
     sp::script::Callback on_taking_damage;

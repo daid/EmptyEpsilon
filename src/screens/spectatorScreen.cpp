@@ -261,7 +261,7 @@ void SpectatorScreen::update(float delta)
             info[trMark("gm_info", "Shields")] = shields_value;
         }
         if (auto health = target.getComponent<Health>())
-            info[trMark("gm_info", "Health")] = string(int(100.0f * health->current / health->max)) + "%";
+            info[trMark("gm_info", "Health")] = string(int(100.0f * health->getHealth() / health->getHealthMax())) + "%";
 
         for (auto i = info.begin(); i != info.end(); i++)
             selection_info[i->first] = i->second;
