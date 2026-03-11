@@ -88,6 +88,17 @@ void GameGlobalInfo::playSoundOnMainScreen(sp::ecs::Entity ship, string sound_na
     broadcastServerCommand(packet);
 }
 
+/*!
+ * \brief Set a faction to victorious.
+ * \param string Name of the faction that won.
+ */
+void GameGlobalInfo::setVictory(string faction_name)
+{
+    victory_faction = Faction::find(faction_name);
+    if (!victory_faction)
+        LOG(Error, "Attempted to set victory faction to ", faction_name, ", but no faction name matched.");
+}
+
 void GameGlobalInfo::update(float delta)
 {
     if (global_message_timeout > 0.0f)
@@ -112,6 +123,18 @@ void GameGlobalInfo::update(float delta)
             }
         } else {
             main_script_error_count = 0;
+        }
+    }
+    script_threads.insert(script_threads.end(), new_script_threads.begin(), new_script_threads.end());
+    new_script_threads.clear();
+    for(auto it = script_threads.begin(); it != script_threads.end(); )
+    {
+        auto res = (*it)->resume(delta);
+        LuaConsole::checkResult(res);
+        if (res.isErr() || !res.value()) {
+            it = script_threads.erase(it);
+        } else {
+            ++it;
         }
     }
     for(auto& as : additional_scripts) {
@@ -142,13 +165,23 @@ string GameGlobalInfo::getNextShipCallsign()
 
 void GameGlobalInfo::execScriptCode(const string& code)
 {
-    if (main_scenario_script) {
+    if (main_scenario_script)
+    {
         auto res = main_scenario_script->run<sp::script::CaptureAllResults>("return " + code);
-        if (res.isErr() && res.error().find('\n') < 0) // Errors without a traceback are parse errors, so we can try without the return.
+
+        // Errors without a traceback are parse errors, so we can try without the return.
+        if (res.isErr() && res.error().find('\n') < 0)
             res = main_scenario_script->run<sp::script::CaptureAllResults>(code);
+
         LuaConsole::checkResult(res);
-        for(const auto& s : res.value().result)
-            LuaConsole::addLog(s);
+
+        for (const auto& s : res.value().result)
+        {
+            if (PreferencesManager::get("headless").empty())
+                LuaConsole::addLog(s);
+            else
+                printf("%s\n", s.c_str());
+        }
     }
 }
 
@@ -235,9 +268,6 @@ string GameGlobalInfo::getEntityExportString(sp::ecs::Entity entity)
 
 void GameGlobalInfo::reset()
 {
-    if (state_logger)
-        state_logger->destroy();
-
     gm_callback_functions.clear();
     gm_messages.clear();
     on_gm_click = nullptr;
@@ -341,19 +371,28 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
-    if (res.isOk() && main_scenario_script->isFunction("init")) {
+    if (res.isOk() && main_scenario_script->isFunction("init"))
+    {
+        bool is_headless = !PreferencesManager::get("headless").empty();
         res = main_scenario_script->call<void>("init");
         LuaConsole::checkResult(res);
-        if (res.isErr()) {
+        if (res.isErr())
+        {
             main_script_error_count = max_repeated_script_errors;
-            LuaConsole::addLog("init() function failed, not going to call update()");
+            const string error_message = "init() function failed, not going to call update()";
+            if (is_headless)
+                printf("%s", error_message.c_str());
+            else
+                LuaConsole::addLog(error_message);
         }
-    }
 
-    if (PreferencesManager::get("game_logs", "1").toInt())
-    {
-        state_logger = new GameStateLogger();
-        state_logger->start();
+        // Announce StdinLuaConsole() on headless mode.
+        if (is_headless)
+        {
+            LOG(Info, "\n=== EmptyEpsilon version ", string(VERSION_NUMBER), " - headless mode detected ===\nStandard input serves as the Lua console in headless mode.\nEnter Lua code in this running process to execute it. Enter !help for commands.\nFor line editing and history navigation on Linux, run EmptyEpsilon with rlwrap --remember EmptyEpsilon headless=...\n===\n\n");
+            printf("EE> ");
+            fflush(stdout);
+        }
     }
 }
 

@@ -10,12 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: scripts/shiptemplates/frigates.lua:14
 msgctxt "ship"
 msgid "Phobos T3"
-msgstr ""
+msgstr "Phobos T3"
 
 #: scripts/shiptemplates/frigates.lua:14 scripts/shiptemplates/frigates.lua:87
 #: scripts/shiptemplates/frigates.lua:116
@@ -51,7 +51,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:28
 msgctxt "ship"
 msgid "Elara P2"
-msgstr ""
+msgstr "Elara P2"
 
 #: scripts/shiptemplates/frigates.lua:29
 msgid ""
@@ -66,7 +66,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:33
 msgctxt "ship"
 msgid "Phobos M3"
-msgstr ""
+msgstr "Phobos M3"
 
 #: scripts/shiptemplates/frigates.lua:34
 msgid ""
@@ -81,7 +81,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:41
 msgctxt "playerShip"
 msgid "Phobos M3P"
-msgstr ""
+msgstr "Phobos M3P"
 
 #: scripts/shiptemplates/frigates.lua:42
 msgid ""
@@ -95,7 +95,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:87
 msgctxt "ship"
 msgid "Nirvana R5"
-msgstr ""
+msgstr "Nirvana R5"
 
 #: scripts/shiptemplates/frigates.lua:87
 msgctxt "subclass"
@@ -113,7 +113,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:98
 msgctxt "ship"
 msgid "Nirvana R5A"
-msgstr ""
+msgstr "Nirvana R5A"
 
 #: scripts/shiptemplates/frigates.lua:99
 msgid ""
@@ -126,7 +126,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:106
 msgctxt "ship"
 msgid "Nirvana R3"
-msgstr ""
+msgstr "Nirvana R3"
 
 #: scripts/shiptemplates/frigates.lua:107
 msgid ""
@@ -144,7 +144,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:116
 msgctxt "ship"
 msgid "Storm"
-msgstr ""
+msgstr "Storm"
 
 #: scripts/shiptemplates/frigates.lua:116
 msgctxt "subclass"
@@ -162,7 +162,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:133
 msgctxt "playerShip"
 msgid "Hathcock"
-msgstr ""
+msgstr "Hathcock"
 
 #: scripts/shiptemplates/frigates.lua:133
 #: scripts/shiptemplates/frigates.lua:299
@@ -181,7 +181,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:179
 msgctxt "ship"
 msgid "Piranha F12"
-msgstr ""
+msgstr "Piranha F12"
 
 #: scripts/shiptemplates/frigates.lua:179
 msgctxt "subclass"
@@ -199,7 +199,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:201
 msgctxt "ship"
 msgid "Piranha F12.M"
-msgstr ""
+msgstr "Piranha F12.M"
 
 #: scripts/shiptemplates/frigates.lua:202
 msgid ""
@@ -217,7 +217,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:207
 msgctxt "ship"
 msgid "Piranha F8"
-msgstr ""
+msgstr "Piranha F8"
 
 #: scripts/shiptemplates/frigates.lua:208
 msgid ""
@@ -231,7 +231,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:216
 msgctxt "playerShip"
 msgid "Piranha"
-msgstr ""
+msgstr "Piranha"
 
 #: scripts/shiptemplates/frigates.lua:217
 msgid ""
@@ -244,7 +244,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:272
 msgctxt "ship"
 msgid "Stalker Q7"
-msgstr ""
+msgstr "Stalker Q7"
 
 #: scripts/shiptemplates/frigates.lua:272
 msgctxt "subclass"
@@ -264,7 +264,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:282
 msgctxt "ship"
 msgid "Stalker Q5"
-msgstr ""
+msgstr "Stalker Q5"
 
 #: scripts/shiptemplates/frigates.lua:283
 msgid ""
@@ -281,7 +281,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:288
 msgctxt "ship"
 msgid "Stalker R7"
-msgstr ""
+msgstr "Stalker R7"
 
 #: scripts/shiptemplates/frigates.lua:289
 msgid ""
@@ -296,7 +296,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:293
 msgctxt "ship"
 msgid "Stalker R5"
-msgstr ""
+msgstr "Stalker R5"
 
 #: scripts/shiptemplates/frigates.lua:294
 msgid ""
@@ -313,7 +313,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:299
 msgctxt "ship"
 msgid "Ranus U"
-msgstr ""
+msgstr "Ranus U"
 
 #: scripts/shiptemplates/frigates.lua:301
 msgid ""
@@ -330,7 +330,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:312
 msgctxt "ship"
 msgid "Flavia"
-msgstr ""
+msgstr "Flavia"
 
 #: scripts/shiptemplates/frigates.lua:312
 msgctxt "subclass"
@@ -351,7 +351,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:319
 msgctxt "ship"
 msgid "Flavia Falcon"
-msgstr ""
+msgstr "Flavia Falcon"
 
 #: scripts/shiptemplates/frigates.lua:320
 msgid ""
@@ -365,7 +365,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:325
 msgctxt "playerShip"
 msgid "Flavia P.Falcon"
-msgstr ""
+msgstr "Flavia P.Falcon"
 
 #: scripts/shiptemplates/frigates.lua:326
 msgid ""
@@ -378,7 +378,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:369
 msgctxt "playerShip"
 msgid "Repulse"
-msgstr ""
+msgstr "Repulse"
 
 #: scripts/shiptemplates/frigates.lua:369
 msgctxt "subclass"
@@ -392,7 +392,7 @@ msgstr "Sprung/Geschützturm-Version der Flavia Falcon"
 #: scripts/shiptemplates/frigates.lua:414
 msgctxt "ship"
 msgid "Fiend G3"
-msgstr ""
+msgstr "Fiend G3"
 
 #: scripts/shiptemplates/frigates.lua:414
 msgctxt "subclass"
@@ -418,7 +418,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:428
 msgctxt "ship"
 msgid "Fiend G4"
-msgstr ""
+msgstr "Fiend G4"
 
 #: scripts/shiptemplates/frigates.lua:429
 msgid ""
@@ -439,7 +439,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:433
 msgctxt "ship"
 msgid "Fiend G6"
-msgstr ""
+msgstr "Fiend G6"
 
 #: scripts/shiptemplates/frigates.lua:434
 msgid ""
@@ -459,7 +459,7 @@ msgstr ""
 #: scripts/shiptemplates/frigates.lua:437
 msgctxt "ship"
 msgid "Fiend G5"
-msgstr ""
+msgstr "Fiend G5"
 
 #: scripts/shiptemplates/frigates.lua:438
 msgid ""

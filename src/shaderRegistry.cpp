@@ -30,38 +30,44 @@ namespace ShaderRegistry
             "shaders/objectShader:ILLUMINATION",
             "shaders/objectShader:SPECULAR",
             "shaders/objectShader:ILLUMINATION:SPECULAR",
+            "shaders/objectShader:NORMAL",
+            "shaders/objectShader:ILLUMINATION:NORMAL",
+            "shaders/objectShader:SPECULAR:NORMAL",
+            "shaders/objectShader:ILLUMINATION:SPECULAR:NORMAL",
             "shaders/planet"
         };
 
         std::array<const char*, Uniforms_t(Uniforms::Count)> uniform_names{
-            "color",
-            "model_view_projection",
-            "projection",
-            "model",
-            "view",
-            "camera_position",
-            "atmosphereColor",
+            "u_color",
+            "u_projection",
+            "u_model",
+            "u_view",
+            "u_camera_position",
+            "u_atmosphereColor",
             
-            "textureMap",
-            "baseMap",
-            "specularMap",
-            "illuminationMap",
+            "u_textureMap",
+            "u_baseMap",
+            "u_specularMap",
+            "u_illuminationMap",
+            "u_normalMap",
 
-            "ambientLightDirection",
-            "specularLightDirection"
+            "u_ambientLightDirection",
+            "u_specularLightDirection"
         };
 
         std::array<const char*, Attributes_t(Attributes::Count)> attribute_names{
-            "position",
-            "texcoords",
-            "normal"
+            "a_position",
+            "a_texcoords",
+            "a_normal",
+            "a_tangent",
         };
 
-        std::array<std::tuple<Uniforms, int32_t>, 4> texture_units{
+        std::array<std::tuple<Uniforms, int32_t>, 5> texture_units{
             std::make_tuple(Uniforms::TextureMap, 0),
             std::make_tuple(Uniforms::BaseMap, 0),
             std::make_tuple(Uniforms::SpecularMap, 1),
             std::make_tuple(Uniforms::IlluminationMap, 2),
+            std::make_tuple(Uniforms::NormalMap, 3),
         };
 
         for (auto i = 0U; i < shader_names.size(); ++i)

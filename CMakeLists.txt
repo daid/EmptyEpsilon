@@ -233,7 +233,6 @@ set(MAIN_SOURCES
     src/script.cpp
     src/crewPosition.cpp
     src/playerInfo.cpp
-    src/gameStateLogger.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
@@ -397,6 +396,8 @@ set(MAIN_SOURCES
     src/systems/warpsystem.cpp
     src/systems/jumpsystem.h
     src/systems/jumpsystem.cpp
+    src/systems/sfx.h
+    src/systems/sfx.cpp
     src/systems/shieldsystem.h
     src/systems/shieldsystem.cpp
     src/systems/damage.h
@@ -487,6 +488,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/sfx.h
+    src/multiplayer/sfx.cpp
     src/multiplayer/spin.h
     src/multiplayer/spin.cpp
     src/multiplayer/moveto.h
@@ -527,7 +530,6 @@ set(MAIN_SOURCES
     src/epsilonServer.h
     src/featureDefs.h
     src/gameGlobalInfo.h
-    src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
     src/hardware/devices/dmx512SerialDevice.h
@@ -697,6 +699,11 @@ if(WIN32)
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
         target_link_libraries(${PROJECT_NAME} PUBLIC "-mconsole")
     endif()
+endif()
+
+if(MSVC)
+    # tweak.cpp exceeds the default COFF section limit
+    set_source_files_properties(src/screens/gm/tweak.cpp PROPERTIES COMPILE_FLAGS "/bigobj")
 endif()
 
 set_target_properties(${PROJECT_NAME}
@@ -870,6 +877,6 @@ configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in io.github.daid.EmptyE
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
-  install(FILES logo512.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
+  install(FILES resources/logo_icon.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.github.daid.EmptyEpsilon.metainfo.xml DESTINATION "share/metainfo")
 endif()

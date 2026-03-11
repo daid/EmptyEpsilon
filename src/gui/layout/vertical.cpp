@@ -14,7 +14,7 @@ void GuiLayoutVertical::update(GuiContainer& container, const sp::Rect& rect)
         float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
         total_height += height;
         if (w->layout.fill_height)
-            fill_height += w->layout.size.x;
+            fill_height += w->layout.size.y;
     }
     float remaining_height = rect.size.y - total_height;
     float y = rect.position.y;
@@ -41,7 +41,7 @@ void GuiLayoutVerticalBottom::update(GuiContainer& container, const sp::Rect& re
         float height = w->layout.size.y + w->layout.margin.top + w->layout.margin.bottom;
         total_height += height;
         if (w->layout.fill_height)
-            fill_height += w->layout.size.x;
+            fill_height += w->layout.size.y;
     }
     float remaining_height = rect.size.y - total_height;
     float y = rect.position.y + rect.size.y;

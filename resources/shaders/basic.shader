@@ -1,28 +1,28 @@
 [vertex]
-uniform vec4 color;
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform vec4 u_color;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_projection;
 
-attribute vec3 position;
-attribute vec2 texcoords;
+attribute vec3 a_position;
+attribute vec2 a_texcoords;
 
-varying vec2 fragtexcoords;
+varying vec2 v_fragtexcoords;
 
 void main()
 {
-    fragtexcoords = texcoords;
-    gl_Position = projection * view * model * vec4(position, 1.0);
+    v_fragtexcoords = a_texcoords;
+    gl_Position = u_projection * u_view * u_model * vec4(a_position, 1.0);
 }
 
 [fragment]
-uniform vec4 color;
-uniform sampler2D textureMap;
+uniform vec4 u_color;
+uniform sampler2D u_textureMap;
 
-varying vec2 fragtexcoords;
+varying vec2 v_fragtexcoords;
 
 void main()
 {
-    gl_FragColor = texture2D(textureMap, fragtexcoords.st) * color;
-    gl_FragColor.rgb *= color.a;
+    gl_FragColor = texture2D(u_textureMap, v_fragtexcoords.st) * u_color;
+    gl_FragColor.rgb *= u_color.a;
 }

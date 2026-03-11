@@ -1,12 +1,17 @@
 #include "gui2_arrowbutton.h"
-#include "gui2_selector.h"
+#include "soundManager.h"
+#include "theme.h"
+
 #include "gui2_label.h"
 #include "gui2_panel.h"
-#include "soundManager.h"
+#include "gui2_selector.h"
+#include "gui2_togglebutton.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30)
+: GuiEntryList(owner, id, func)
 {
+    back_style = theme->getStyle("selector.back");
+    front_style = theme->getStyle("selector.front");
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
         soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() <= 0)
@@ -35,13 +40,12 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     left->setEnable(enabled);
     right->setEnable(enabled);
 
-    glm::u8vec4 color = glm::u8vec4{255,255,255,255};
-    if (entries.size() < 1 || !enabled)
-        color = glm::u8vec4(128, 128, 128, 255);
+    const auto& back = back_style->get(getState());
+    const auto& front = front_style->get(getState());
 
-    renderer.drawStretched(rect, "gui/widget/SelectorBackground.png", color);
+    renderer.drawStretched(rect, back.texture, back.color);
     if (selection_index >= 0 && selection_index < (int)entries.size())
-        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, color);
+        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
 
     if (!focus)
         popup->hide();
@@ -94,4 +98,10 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         }
         popup->show()->moveToFront();
     }
+}
+
+void GuiSelector::onFocusLost()
+{
+    // Explicitly hide the popup when the selector loses focus.
+    popup->hide();
 }

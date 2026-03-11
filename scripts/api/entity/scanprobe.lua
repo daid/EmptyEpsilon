@@ -2,8 +2,8 @@
 --- A ScanProbe deploys a short-range radar with a limited lifetime at a high speed to a specific point.
 --- ScanProbes can be targeted and destroyed by hostiles.
 --- It's typically launched by the relay officer and can be linked to the science radar, but can also be created by scripts.
---- PlayerSpaceships have a limited stock of ScanProbes typically replenished automatically when docked to a SpaceStation or SpaceShip with the ScanProbe restocking feature enabled.
---- Example: probe = ScanProbe():setSpeed(1500):setLifetime(60 * 30):setTarget(10000,10000):onArrival(function() print("Probe arrived!") end)
+--- Player ships have a limited stock of ScanProbes typically replenished automatically when docked to a station or ship with the ScanProbe restocking feature enabled.
+--- Example: probe = ScanProbe():setLifetime(60 * 30):setTarget(10000,10000):setSpeed(1500):onArrival(function() print("Probe arrived!") end)
 --- @type creation
 function ScanProbe()
     local e = createEntity()
@@ -27,7 +27,7 @@ function ScanProbe()
     if idx == 2 then model = "SensorBuoyMKII" end
     if idx == 3 then model = "SensorBuoyMKIII" end
     for k, v in pairs(__model_data[model]) do
-        if string.sub(1, 2) ~= "__" then
+        if string.sub(k, 1, 2) ~= "__" then
             e.components[k] = table.deepcopy(v)
         end
     end
@@ -63,12 +63,12 @@ function Entity:getLifetime()
     if self.components.lifetime then return self.components.lifetime.lifetime end
     return 0.0
 end
---- Sets this ScanProbe's owner SpaceObject.
+--- Sets this ScanProbe's owner entity.
 --- Example: probe:setOwner(owner)
 function Entity:setOwner(owner)
     if self.components.allow_radar_link then self.components.allow_radar_link.owner = owner end
     if owner and owner:isValid() and owner.components.faction then
-        self.components.faction.entity = owner.components.faction.entity
+        self.components.faction = {entity = owner.components.faction.entity}
     else
         self.components.faction = nil
     end

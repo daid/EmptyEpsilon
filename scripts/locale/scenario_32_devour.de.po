@@ -3248,7 +3248,7 @@ msgstr "Wie geht's?"
 #: scripts/scenario_32_devour.lua:4882
 msgctxt "shipServices-comms"
 msgid "Service options"
-msgstr "Mögliche DIenstleistungen"
+msgstr "Mögliche Dienstleistungen"
 
 #: scripts/scenario_32_devour.lua:4900
 msgctxt "shipServices-comms"

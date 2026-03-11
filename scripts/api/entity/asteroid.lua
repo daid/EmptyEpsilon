@@ -1,7 +1,7 @@
 --- An Asteroid is an inert piece of space terrain.
---- Upon collision with another SpaceObject, it deals damage and is destroyed.
---- It has a default rotation speed, random z-offset, and model, and AI behaviors attempt to avoid hitting them.
---- To create a customizable object with more complex actions upon collisions, use an Artifact or SupplyDrop.
+--- Upon colliding with another entity, it deals damage and is destroyed.
+--- It has a default rotation speed, random z-offset, and model. AI-controlled entities attempt to avoid hitting them.
+--- To create a customizable collidable object, use an Artifact or SupplyDrop.
 --- For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 --- @type creation
@@ -19,6 +19,7 @@ function Asteroid()
             mesh_offset={0, 0, z},
             texture="Astroid_" .. model_number .. "_d.png",
             specular_texture="Astroid_" .. model_number .. "_s.png",
+            normal_texture="Astroid_" .. model_number .. "_n.png",
             scale=size,
         },
         physics = {type="Sensor", size=size},
@@ -36,6 +37,11 @@ function Asteroid()
     return e
 end
 
+--- A VisualAsteroid is a cosmetic asteroid rendered above or below the movement plane.
+--- Unlike Asteroid, it has no collision, physics, or radar trace, and does not interact with other entities.
+--- Use VisualAsteroids to add depth to asteroid fields without affecting gameplay.
+--- Example: visual_asteroid = VisualAsteroid():setPosition(1000,2000)
+--- @type creation
 function VisualAsteroid()
     local z = random(300, 800);
     if random(0, 100) < 50 then z = -z end
@@ -51,33 +57,10 @@ function VisualAsteroid()
             mesh_offset={0, 0, z},
             texture="Astroid_" .. model_number .. "_d.png",
             specular_texture="Astroid_" .. model_number .. "_s.png",
+            normal_texture="Astroid_" .. model_number .. "_n.png",
             scale=size,
         },
         spin={rate=random(0.1, 0.8)},
     }
     return e
-end
-
-local Entity = getLuaEntityFunctionTable()
---- Sets this Asteroid's radius.
---- Defaults to a random value between 110 and 130.
---- Example: asteroid:setSize(150)
---- Sets the ExplosionEffect's radius.
---- Defaults to 1.0.
---- Example: explosion:setSize(1000) -- sets the explosion radius to 1U
-function Entity:setSize(radius)
-    local comp = self.components
-    if comp.physics then comp.physics.size=radius end
-    if comp.mesh_render then comp.mesh_render.scale=radius end
-    if comp.avoid_object then comp.avoid_object.range=radius*2 end
-    if comp.explosion_effect then comp.explosion_effect.size=radius end
-    return self
-end
---- Returns this Asteroid's radius.
---- Example: asteroid:getSize()
-function Entity:getSize()
-    local comp = self.components
-    if comp.physics then return comp.physics.size end
-    if comp.mesh_render then return comp.mesh_render.scale end
-    return 100.0
 end

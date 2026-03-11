@@ -51,7 +51,7 @@ function init()
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS819"):setPosition(-44255, 22569):setRepairDocked(true):setRestocksScanProbes(true):setSharesEnergyWithDocked(true),
     SpaceStation():setTemplate("Medium Station"):setFaction("Human Navy"):setCallSign("DS818"):setPosition(-35690, 21033):setRepairDocked(true):setRestocksScanProbes(true):setSharesEnergyWithDocked(true)
   }
-  SpaceStation():setTemplate("Medium Station"):setFaction("Ghosts"):setCallSign("DS820"):setPosition(-38789, 14192)
+  reference_station = SpaceStation():setTemplate("Medium Station"):setFaction("Ghosts"):setCallSign("DS820"):setPosition(-38789, 14192)
   SpaceStation():setTemplate("Medium Station"):setFaction("Ghosts"):setCallSign("DS821"):setPosition(-47557, 15983)
 
   -- Wormholes
@@ -278,7 +278,7 @@ function init()
   Nebula():setPosition(-6675, -89873)
   Nebula():setPosition(-5525, -97105)
   Nebula():setPosition(-36819, -95056)
-  Nebula():setPosition(-47114, -92100)
+  reference_nebula = Nebula():setPosition(-47114, -92100)
   Nebula():setPosition(-37938, -76632)
   Nebula():setPosition(-43425, -85904)
   Nebula():setPosition(-47966, -84201)
@@ -314,7 +314,8 @@ function init()
   Nebula():setPosition(24127, -61561)
 
   -- A representative ship to get lost
-  local northNebulaTLx, northNebulaTLy = sectorToXY("A2")
+--  local northNebulaTLx, northNebulaTLy = sectorToXY("A2")
+  local northNebulaTLx, northNebulaTLy = sectorToXY(reference_nebula:getSectorName())
   Admin_station.lost_ship = CpuShip():setFaction("Human Navy"):setTemplate("Equipment Freighter 2"):setCallSign("VS1"):setPosition(northNebulaTLx + irandom(0, 80000), northNebulaTLy + irandom(0,60000)):orderRoaming():setCommsFunction(function()
     setCommsMessage(_("lost-comms", "We're pretty busy scanning for treasure... I mean, conducting research in this nebula. Can we call you back?"))
   end)
@@ -435,8 +436,11 @@ function init()
     SpaceStation():setTemplate("Small Station"):setFaction("Ghosts"):setCallSign("DS6268"):setPosition(-102543, 39055)
   }
 
+  reference_asteroid = Asteroid():setPosition(-68641, 31573):setSize(119)
+
   -- Using NE instead of more intuitive NW to be backwards compatible with old grid system
-  local droneNEx, droneNEy = sectorToXY("G1")
+--  local droneNEx, droneNEy = sectorToXY("G1")
+  local droneNEx, droneNEy = sectorToXY(reference_asteroid:getSectorName())
   Drone_artifacts = {}
   for i = 1, 3 + Difficulty do -- 4, 6, or 8 artifacts
     local a = Artifact():setPosition(droneNEx - irandom(2000, 38000), droneNEy + irandom(2000, 18000)):setModel("artifact"..i)
@@ -742,7 +746,6 @@ function init()
   Asteroid():setPosition(-77345, 13030):setSize(119)
   Asteroid():setPosition(-71290, 20599):setSize(124)
   Asteroid():setPosition(-68452, 23437):setSize(115)
-  Asteroid():setPosition(-68641, 31573):setSize(119)
   Asteroid():setPosition(-72425, 46521):setSize(129)
   Asteroid():setPosition(-81886, 59766):setSize(116)
   Asteroid():setPosition(-89833, 57874):setSize(121)
@@ -908,7 +911,18 @@ function InitTraffic()
   Traffic.new_ships = {}
   Traffic.factions = {'Independent', 'Independent', 'Independent', 'Independent', 'Arlenians', 'Arlenians', 'TSN'}
   Traffic.types = {'Atlantis', 'Transport1x2', 'Maverick', 'Kiriya', 'Hathcock', 'Flavia P.Falcon'}
-  Traffic.srcdest = {'J2','D0','B10','J8','zz1','zz6','zz8','D10','H11','K5'}
+  Traffic.srcdest = {	--'J2','D0','B10','J8','zz1','zz6','zz8','D10','H11','K5'
+  	{x = -60000,	y = 80000},		--J2
+  	{x = -100000,	y = -40000},	--D0
+  	{x = 100000,	y = -80000},	--B10
+  	{x = 60000,		y = 80000},		--J8
+  	{x = -80000,	y = -120000},	--zz1
+  	{x = 20000,		y = -120000},	--zz6
+  	{x = 60000,		y = -120000},	--zz8
+  	{x = 100000,	y = -40000},	--D10
+  	{x = 120000,	y = 40000},		--H11
+  	{x = 0,			y = 100000},	--K5
+  }
   Traffic.stations = {Admin_station, Defence_station, Wormhole_station, Colony_area_station}
   for idx, stn in ipairs(Patrol_stations) do
     table.insert(Traffic.stations,stn)
@@ -1038,12 +1052,14 @@ The SW Checkpoint is under attack. Don't mess around, get down there and help th
 end
 
 function SpawnConvoyEnemies()
-  local x, y = sectorToXY("F3") -- Rand nest location
-  Defence_station.convoy_enemies = SpawnEnemies(x + 10000, y + 15000, 40, "Ghosts")
+--  local x, y = sectorToXY("F3") -- Rand nest location
+  Defence_station.convoy_enemies = SpawnEnemies(90000, 35000, 40, "Ghosts")
   Defence_station.convites_arrived = 0
-  local dx, dy = sectorToXY("G0") -- Rand nest location
-  dx = dx + 10000
-  dy = dy + 10000
+--  local dx, dy = sectorToXY("G0") -- Rand nest location
+--  dx = dx + 10000
+--  dy = dy + 10000
+  local dx = -90000
+  local dy = 30000 
   for i, enemy in ipairs(Defence_station.convoy_enemies) do
     enemy.dx = dx
     enemy.dy = dy
@@ -1109,21 +1125,27 @@ end
 
 function SpawnKWEnemies(start_aggro)
   if Difficulty >= 1 then
-    local x, y = sectorToXY("AI23")
+--    local x, y = sectorToXY("AI23")
+	local reference_visual_asteroid = VisualAsteroid():setPosition(369999, 589207):setSize(118)
+    local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
     end
   end
   if Difficulty >= 3 then
-    local x, y = sectorToXY("AG26")
+--    local x, y = sectorToXY("AG26")
+	local reference_visual_asteroid = VisualAsteroid():setPosition(429747, 550234):setSize(112)
+    local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
     end
   end
   if Difficulty == 5 then
-    local x, y = sectorToXY("AI25")
+--    local x, y = sectorToXY("AI25")
+	local reference_visual_asteroid = VisualAsteroid():setPosition(410346, 589894):setSize(113)
+    local x, y = sectorToXY(reference_visual_asteroid:getSectorName())
     local enemies = SpawnEnemies(x, y, random(.8,1.2), "Kraylor")
     for idx, e in ipairs(enemies) do
       table.insert(Kw_enemies, e)
@@ -1695,7 +1717,8 @@ function StartMissionLost()
 It seems one of our researchers, Dr. Hendrix, and her crew have lost their way in a nearby nebula and need our help. They were running experiments in the nebula when their engines and transponder went offline. Please follow our scout vessel, SR7, to the nebula and search for them.]]))
 
   Admin_station.x, Admin_station.y = Admin_station:getPosition()
-  Admin_station.assist_ship = CpuShip():setCallSign("SR7"):setPosition(Admin_station.x + 200, Admin_station.y):orderFlyTowardsBlind(sectorToXY("D6")):setFaction("Human Navy"):setTemplate("Ktlitan Scout"):setWarpDrive(true):setCommsScript(""):setCommsFunction(function ()
+  local reference_visual_asteroid = VisualAsteroid():setPosition(29793, -29765):setSize(116)
+  Admin_station.assist_ship = CpuShip():setCallSign("SR7"):setPosition(Admin_station.x + 200, Admin_station.y):orderFlyTowardsBlind(sectorToXY(reference_visual_asteroid:getSectorName())):setFaction("Human Navy"):setTemplate("Ktlitan Scout"):setWarpDrive(true):setCommsScript(""):setCommsFunction(function ()
     if Admin_station.assist_ship.state == "flyToNebula" or Admin_station.assist_ship.state == "waiting" then
       setCommsMessage(_("adminStn-comms", "Meet me at the edge of the nebula"))
     end
@@ -1708,8 +1731,8 @@ end
 
 function UpdateMissionLost()
   if Admin_station.mission_state == nil or Admin_station.mission_state == "done" then return end
-
-  if Admin_station.assist_ship.state == "flyToNebula" and distance(Admin_station.assist_ship, sectorToXY("D6")) <= 1000 then
+  local reference_visual_asteroid = VisualAsteroid():setPosition(29793, -29765):setSize(116)
+  if Admin_station.assist_ship.state == "flyToNebula" and distance(Admin_station.assist_ship, sectorToXY(reference_visual_asteroid:getSectorName())) <= 1000 then
     Admin_station.assist_ship.state = "waiting"
     Admin_station.assist_ship:orderStandGround()
   end
@@ -2054,7 +2077,8 @@ function UpdateMissionDroneNest()
     end
 
     local px, py = Player:getPosition()
-    local gx, gy = sectorToXY("G-1")  -- -120000, 20000    (-120848, 27550)
+    local reference_visual_asteroid = VisualAsteroid():setPosition(-108533, 31942):setSize(114)
+    local gx, gy = sectorToXY(reference_visual_asteroid:getSectorName())  -- -120000, 20000    (-120848, 27550)
     if (px - gx > -2500) and (px - gx < 42500) and (py - gy > -2500) and (py - gy < 22500) then  -- Inside nest area
       if with_convoy and Player:getFaction() == "Ghosts" and not Defence_station.cover_blown then
         Defence_station.tier2_mission_state = "arrived"
@@ -2358,7 +2382,9 @@ function UpdateTraffic()
         local dst = Traffic.srcdest[irandom(1,#Traffic.srcdest)]
         table.remove(Traffic.docked_ships, i)
         table.insert(Traffic.leaving_ships, ship)
-        ship.dx, ship.dy = sectorToXY(dst)
+--        ship.dx, ship.dy = sectorToXY(dst)
+        ship.dx = dst.x
+        ship.dy = dst.y
         ship:orderFlyTowards(ship.dx, ship.dy)
     end
   end
@@ -2379,7 +2405,7 @@ function UpdateTraffic()
   local type = Traffic.types[irandom(1,#Traffic.types)]
   local src = Traffic.srcdest[irandom(1,#Traffic.srcdest)]
   local station = Traffic.stations[irandom(1,#Traffic.stations)]
-  local new_ship = CpuShip():setFaction(faction):setTemplate(type):setPosition(sectorToXY(src)):orderDock(station)
+  local new_ship = CpuShip():setFaction(faction):setTemplate(type):setPosition(src.x,src.y):orderDock(station)
   if faction == "TSN" then
     new_ship:setCommsFunction(function () setCommsMessage(_("newShip-comms", "Too busy to talk today, Captain.")) end)
   end

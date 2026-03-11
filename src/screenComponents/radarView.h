@@ -1,9 +1,7 @@
-#ifndef RADAR_VIEW_H
-#define RADAR_VIEW_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "engine.h"
-
 
 class GuiMissileTubeControls;
 class TargetsContainer;
@@ -46,8 +44,9 @@ private:
 
     glm::vec2 view_position{0, 0};
     float view_rotation;
-    bool auto_center_on_my_ship;
-    bool auto_rotate_on_my_ship;
+    sp::ecs::Entity auto_center_target;
+    bool auto_center_on_ship;
+    bool auto_rotate_on_ship;
     bool auto_distance = false;
     float distance;
     bool long_range;
@@ -65,6 +64,8 @@ private:
     bpfunc_t mouse_down_func;
     pfunc_t mouse_drag_func;
     pfunc_t mouse_up_func;
+    // Overlay callback
+    std::function<void(sp::RenderTarget&)> overlay_func;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -94,11 +95,17 @@ public:
     GuiRadarView* setBackgroundAlpha(uint8_t background_alpha) { this->background_alpha = background_alpha; return this; }
     GuiRadarView* setStyle(ERadarStyle style) { this->style = style; return this; }
     GuiRadarView* setFogOfWarStyle(EFogOfWarStyle style) { this->fog_style = style; return this; }
-    bool getAutoCentering() { return auto_center_on_my_ship; }
-    GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_my_ship = value; return this; }
-    bool getAutoRotating() { return auto_rotate_on_my_ship; }
-    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_my_ship = value; return this; }
+    bool getAutoCentering() { return auto_center_on_ship; }
+    GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_ship = value; return this; }
+    sp::ecs::Entity getAutoCenterTarget() { return auto_center_target; }
+    GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
+    bool getAutoRotating() { return auto_rotate_on_ship; }
+    GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    // Define the overlay callback function. This passes the onDraw()
+    // RenderTarget and runs near the end of the frame.
+    GuiRadarView* setOverlayCallback(std::function<void(sp::RenderTarget&)> f) { overlay_func = f; return this; }
+    float getScale() { return std::min(rect.size.x, rect.size.y) / 2.0f / distance; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
@@ -124,9 +131,6 @@ private:
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);
     void drawObjects(sp::RenderTarget& target);
-    void drawObjectsGM(sp::RenderTarget& target);
     void drawTargets(sp::RenderTarget& target);
     void drawHeadingIndicators(sp::RenderTarget& target);
 };
-
-#endif//RADAR_VIEW_H

@@ -14,5 +14,5 @@ public:
     void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, WarpJammer& component) override;
 
     static bool isWarpJammed(sp::ecs::Entity);
-    static glm::vec2 getFirstNoneJammedPosition(glm::vec2 start, glm::vec2 end);
+    static glm::vec2 getFirstNonJammedPosition(glm::vec2 start, glm::vec2 end);
 };

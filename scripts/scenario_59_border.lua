@@ -942,8 +942,8 @@ function setBorderZones()
 		if random(1,upBound) <= cutOff then
 			positiveBendCount = positiveBendCount + newBend
 		else
-			newBend = -1*newBend
 			negativeBendCount = negativeBendCount + newBend
+			newBend = -1*newBend
 		end
 	end
 	newBend = bendAngle + newBend
@@ -8439,7 +8439,7 @@ function masterCartographer()
 								end
 								local dsx, dsy = obj:getPosition()
 								comms_source:commandAddWaypoint(dsx,dsy)								
-								station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
+								station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointID(comms_source:getWaypointCount()),obj:getCallSign())
 								setCommsMessage(station_details)
 								addCommsReply(_("Back"),commsStation)
 							end)
@@ -8496,7 +8496,7 @@ function masterCartographer()
 					end
 					local dsx, dsy = obj:getPosition()
 					comms_source:commandAddWaypoint(dsx,dsy)
-					station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
+					station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointID(comms_source:getWaypointCount()),obj:getCallSign())
 					setCommsMessage(station_details)
 					addCommsReply(_("Back"),commsStation)
 				end)
@@ -8532,7 +8532,7 @@ function masterCartographer()
 						end
 						local dsx, dsy = obj:getPosition()
 						comms_source:commandAddWaypoint(dsx,dsy)
-						station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointCount(),obj:getCallSign())
+						station_details = string.format(_("cartographyOffice-comms", "%s\nAdded waypoint %i to your navigation system for %s"),station_details,comms_source:getWaypointID(comms_source:getWaypointCount()),obj:getCallSign())
 						setCommsMessage(station_details)
 						addCommsReply(_("Back"),commsStation)
 					end)
@@ -9049,7 +9049,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
 						if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
 							local position_x, position_y = comms_target:getPosition()
 							local target_x, target_y = comms_source:getWaypoint(n)
@@ -9057,7 +9057,7 @@ function handleUndockedState()
 							script:setVariable("position_x", position_x):setVariable("position_y", position_y)
 							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
 							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
+							setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)));
 						else
 							setCommsMessage(_("needRep-comms", "Not enough reputation!"));
 						end
@@ -9075,7 +9075,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
 						if treaty then
 							local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
 							local waypointInBorderZone = false
@@ -9086,16 +9086,16 @@ function handleUndockedState()
 								end
 							end
 							if waypointInBorderZone then
-								setCommsMessage("We cannot break the treaty by sending reinforcements to WP" .. n .. " in the neutral border zone")
+								setCommsMessage("We cannot break the treaty by sending reinforcements to WP" .. comms_source:getWaypointID(n) .. " in the neutral border zone")
 							elseif outerZone:isInside(tempAsteroid) then
-								setCommsMessage("We cannot break the treaty by sending reinforcements to WP" .. n .. " across the neutral border zones")							
+								setCommsMessage("We cannot break the treaty by sending reinforcements to WP" .. comms_source:getWaypointID(n) .. " across the neutral border zones")							
 							else
 								if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
 									local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 									ship:setCallSign(generateCallSign(nil,"Human Navy"))
 									ship:setCommsScript(""):setCommsFunction(commsShip):onDestroyed(friendlyVesselDestroyed)
 									table.insert(friendlyHelperFleet,ship)
-									setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
+									setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),comms_source:getWaypointID(n)))
 								else
 									setCommsMessage(_("needRep-comms", "Not enough reputation!"));
 								end
@@ -9907,7 +9907,7 @@ function friendlyComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), comms_source:getWaypointID(n)), function()
 					if treaty then
 						local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
 						local waypointInBorderZone = false
@@ -9918,17 +9918,17 @@ function friendlyComms(comms_data)
 							end
 						end
 						if waypointInBorderZone then
-							setCommsMessage("We cannot break the treaty by defending WP" .. n .. " in the neutral border zone")
+							setCommsMessage("We cannot break the treaty by defending WP" .. comms_source:getWaypointID(n) .. " in the neutral border zone")
 						elseif outerZone:isInside(tempAsteroid) then
-							setCommsMessage("We cannot break the treaty by defending WP" .. n .. " across the neutral border zones")							
+							setCommsMessage("We cannot break the treaty by defending WP" .. comms_source:getWaypointID(n) .. " across the neutral border zones")							
 						else
 							comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-							setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+							setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 						end
 						tempAsteroid:destroy()
 					else
 						comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-						setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+						setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 					end
 					addCommsReply(_("Back"), commsShip)
 				end)
@@ -10037,7 +10037,7 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"), n), function()
+						addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"), comms_source:getWaypointID(n)), function()
 							if treaty then
 								local tempAsteroid = VisualAsteroid():setPosition(comms_source:getWaypoint(n))
 								local waypointInBorderZone = false
@@ -10048,9 +10048,9 @@ function friendlyComms(comms_data)
 									end
 								end
 								if waypointInBorderZone then
-									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d in the neutral border zone"), n))
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d in the neutral border zone"), comms_source:getWaypointID(n)))
 								elseif outerZone:isInside(tempAsteroid) then
-									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d across the neutral border zones"), n))							
+									setCommsMessage(string.format(_("shipAssist-comms", "We cannot break the treaty by defending WP %d across the neutral border zones"), comms_source:getWaypointID(n)))							
 								else
 									for i, fleetShip in ipairs(friendlyDefensiveFleetList[comms_target.fleet]) do
 										if fleetShip ~= nil and fleetShip:isValid() then

@@ -28,10 +28,10 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
         scanner->scanLocalNetwork();
     }
 
-    status_label = new GuiLabel(this, "STATUS", "Searching for server...", 50);
-    status_label->setPosition(0, 300, sp::Alignment::TopCenter)->setSize(0, 50);
+    status_label = new GuiLabel(this, "STATUS", tr("Searching for server..."), 50.0f);
+    status_label->setPosition(0.0f, 300.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 50.0f);
 
-    (new GuiLabel(this, "POSITION", positions[0].describe(), 50))->setPosition(0, 400, sp::Alignment::TopCenter)->setSize(0, 30);
+    (new GuiLabel(this, "POSITION", positions[0].describe(), 50.0f))->setPosition(0.0f, 400.0f, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     for(string filter : ship_filter.split(";"))
     {
@@ -48,9 +48,7 @@ AutoConnectScreen::AutoConnectScreen(std::vector<AutoConnectPosition> positions,
     }
 
     if (PreferencesManager::get("instance_name") != "")
-    {
-        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(0, 18);
-    }
+        (new GuiLabel(this, "", PreferencesManager::get("instance_name"), 25.0f))->setAlignment(sp::Alignment::CenterLeft)->setPosition(20.0f, 20.0f, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 18.0f);
 }
 
 AutoConnectScreen::~AutoConnectScreen()
@@ -86,7 +84,7 @@ void AutoConnectScreen::update(float delta)
             }
 
             LOG(Info, "Connecting to server at " + autoconnect_address + ":" + string(autoconnect_port));
-            status_label->setText("Using autoconnect server " + autoconnect_address + ":" + string(autoconnect_port));
+            status_label->setText(tr("Using autoconnect server ") + autoconnect_address + ":" + string(autoconnect_port));
             connect_to_address = autoconnect_address;
             connect_to_port = autoconnect_port;
             tried_password = false;
@@ -98,7 +96,7 @@ void AutoConnectScreen::update(float delta)
                 if (name_filter != "" && name_filter != server.name)
                     continue;
 
-                status_label->setText("Found server " + server.name);
+                status_label->setText(tr("Found server ") + server.name);
                 connect_to_address = server.address;
                 connect_to_port = defaultServerPort;
                 tried_password = false;
@@ -107,7 +105,7 @@ void AutoConnectScreen::update(float delta)
                 return;
             }
 
-            status_label->setText("Searching for server...");
+            status_label->setText(tr("Searching for server..."));
         }
     } else {
         switch(game_client->getStatus())
@@ -115,9 +113,9 @@ void AutoConnectScreen::update(float delta)
         case GameClient::Connecting:
         case GameClient::Authenticating:
             if (!connect_to_address.getHumanReadable().empty())
-                status_label->setText("Connecting: " + connect_to_address.getHumanReadable()[0]);
+                status_label->setText(tr("Connecting: ") + connect_to_address.getHumanReadable()[0]);
             else
-                status_label->setText("Connecting...");
+                status_label->setText(tr("Connecting..."));
             break;
         case GameClient::WaitingForPassword:
             if (!tried_password) {
@@ -145,9 +143,9 @@ void AutoConnectScreen::update(float delta)
                 {
                     my_player_info->commandSetName(PreferencesManager::get("username"));
                     if (!connect_to_address.getHumanReadable().empty())
-                        status_label->setText("Waiting for ship on " + connect_to_address.getHumanReadable()[0] + "...");
+                        status_label->setText(tr("Waiting for ship on ") + connect_to_address.getHumanReadable()[0] + "...");
                     else
-                        status_label->setText("Waiting for ship...");
+                        status_label->setText(tr("Waiting for ship..."));
                     if (!my_spaceship)
                     {
                         for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
@@ -178,7 +176,7 @@ void AutoConnectScreen::update(float delta)
                         }
                     }
                 }else{
-                    status_label->setText("Connected, waiting for game data...");
+                    status_label->setText(tr("Connected, waiting for game data..."));
                 }
             }
             break;

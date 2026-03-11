@@ -253,10 +253,27 @@ function __fillDefaultDatabaseData()
 	-- Populate the Factions top-level entry.
 	local faction_database = ScienceDatabase():setName(_("database", "Factions"))
 	for name, info in pairs(__faction_info) do
-        local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+		local entry = faction_database:addEntry(info.components.faction_info.locale_name);
+
+		--[[ DB entries use locale-independent internal names.
+		     Sort the list of internal names by localized name to match the DatabaseView list.
+		     Lua in EE sorts by character index (for instance uppercase A > lowercase z), so lowercase the locale name for sorting purposes.
+		     Accents also break sorting, which for example affects the French translation of "Exuari" as "Éxuaris", which are listed last after MSU (USN).
+		     Since this isn't handled in DatabaseView on the C++ side either, this sorting is also "broken" here in the same manner for consistency.
+		     If sorting accented characters in DatabaseView is fixed, it should also be fixed here by replacing accented characters in locale names. ]]--
+		local faction_names2 = {}
 		for name2, info2 in pairs(__faction_info) do
-            if info ~= info2 then
-				local stance = _("stance", "Neutral");
+			table.insert(faction_names2, {string.lower(info2.components.faction_info.locale_name), name2})
+		end
+		-- Sort internal names by localized names
+		table.sort(faction_names2, function(f1, f2) return f1[1] < f2[1] end)
+
+		-- Build the sorted k/v list
+		for i, name2 in ipairs(faction_names2) do
+			local info2 = __faction_info[name2[2]] -- internal name from localized-sorted pair
+			local stance = "-"
+			if info ~= info2 then
+				stance = _("stance", "Neutral")
 				for idx, relation in ipairs(info.components.faction_info) do
 					if relation.other_faction == info2 then
 						if relation.relation == "neutral" then stance = _("stance", "Neutral") end
@@ -264,11 +281,11 @@ function __fillDefaultDatabaseData()
 						if relation.relation == "friendly" then stance = _("stance", "Friendly") end
 					end
 				end
-				entry:addKeyValue(info2.components.faction_info.locale_name, stance);
 			end
-        end
-        entry:setLongDescription(info.components.faction_info.description);
-    end
+			entry:addKeyValue(info2.components.faction_info.locale_name, stance);
+		end
+		entry:setLongDescription(info.components.faction_info.description);
+	end
 
     -- Populate the Ships top-level entry.
     local ship_database = ScienceDatabase():setName(_("database", "Ships"))

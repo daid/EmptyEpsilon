@@ -1,5 +1,4 @@
-#ifndef TOP_DOWN_SCREEN_H
-#define TOP_DOWN_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
@@ -23,5 +22,3 @@ public:
 
     virtual void update(float delta) override;
 };
-
-#endif//TOP_DOWN_SCREEN_H

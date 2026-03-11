@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.6\n"
 
 #: scripts/shiptemplates/corvette.lua:14
 msgctxt "ship"
@@ -97,12 +97,12 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:101
 msgctxt "playerShip"
 msgid "Crucible"
-msgstr ""
+msgstr "Crucible"
 
 #: scripts/shiptemplates/corvette.lua:101
 msgctxt "subclass"
 msgid "Popper"
-msgstr ""
+msgstr "Popper"
 
 #: scripts/shiptemplates/corvette.lua:102
 msgid ""
@@ -117,12 +117,12 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:157
 msgctxt "playerShip"
 msgid "Maverick"
-msgstr ""
+msgstr "Maverick"
 
 #: scripts/shiptemplates/corvette.lua:157
 msgctxt "subclass"
 msgid "Gunner"
-msgstr ""
+msgstr "Gunner"
 
 #: scripts/shiptemplates/corvette.lua:158
 msgid ""
@@ -137,7 +137,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "ship"
 msgid "Defense platform"
-msgstr ""
+msgstr "Verteidigungsplattform"
 
 #: scripts/shiptemplates/corvette.lua:217
 msgctxt "subclass"
@@ -174,7 +174,7 @@ msgstr "Fregatte"
 #, lua-format
 msgctxt "ship"
 msgid "Personnel Freighter %d"
-msgstr ""
+msgstr "Personenfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:235
 #: scripts/shiptemplates/corvette.lua:248
@@ -199,13 +199,13 @@ msgstr ""
 #, lua-format
 msgctxt "ship"
 msgid "Personnel Jump Freighter %d"
-msgstr ""
+msgstr "Personen-Sprungfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:248
 #, lua-format
 msgctxt "ship"
 msgid "Goods Freighter %d"
-msgstr ""
+msgstr "Güter-Frachter %d"
 
 #: scripts/shiptemplates/corvette.lua:249
 msgid ""
@@ -221,13 +221,13 @@ msgstr ""
 #, lua-format
 msgctxt "ship"
 msgid "Goods Jump Freighter %d"
-msgstr ""
+msgstr "Güter-Sprungfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:261
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Freighter %d"
-msgstr ""
+msgstr "Müllfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:262
 msgid ""
@@ -243,13 +243,13 @@ msgstr ""
 #, lua-format
 msgctxt "ship"
 msgid "Garbage Jump Freighter %d"
-msgstr ""
+msgstr "Müll-Sprungfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:274
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Freighter %d"
-msgstr ""
+msgstr "Gerätefrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:275
 msgid ""
@@ -263,13 +263,13 @@ msgstr ""
 #, lua-format
 msgctxt "ship"
 msgid "Equipment Jump Freighter %d"
-msgstr ""
+msgstr "Geräte-Sprungfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:287
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Freighter %d"
-msgstr ""
+msgstr "Treibstoff-Frachter %d"
 
 #: scripts/shiptemplates/corvette.lua:288
 msgid ""
@@ -284,12 +284,12 @@ msgstr ""
 #, lua-format
 msgctxt "ship"
 msgid "Fuel Jump Freighter %d"
-msgstr ""
+msgstr "Treibstoff-Sprungfrachter %d"
 
 #: scripts/shiptemplates/corvette.lua:301
 msgctxt "ship"
 msgid "Jump Carrier"
-msgstr ""
+msgstr "Sprungträger"
 
 #: scripts/shiptemplates/corvette.lua:302
 msgid ""
@@ -309,7 +309,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:315
 msgctxt "playerShip"
 msgid "Benedict"
-msgstr ""
+msgstr "Benedict"
 
 #: scripts/shiptemplates/corvette.lua:315
 msgctxt "subclass"
@@ -323,7 +323,7 @@ msgstr "Die Benedict ist eine verbesserte Version des Sprung-Trägers"
 #: scripts/shiptemplates/corvette.lua:349
 msgctxt "playerShip"
 msgid "Kiriya"
-msgstr ""
+msgstr "Kiriya"
 
 #: scripts/shiptemplates/corvette.lua:350
 msgid "Kiriya is an improved warp drive version of the Jump Carrier"
@@ -333,7 +333,7 @@ msgstr ""
 #: scripts/shiptemplates/corvette.lua:360
 msgctxt "playerShip"
 msgid "Saipan"
-msgstr ""
+msgstr "Saipan"
 
 #: scripts/shiptemplates/corvette.lua:360
 msgctxt "subclass"

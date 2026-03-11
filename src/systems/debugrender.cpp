@@ -48,6 +48,7 @@ void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp
         glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<GLvoid*>(&vertices[0]));
         glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, reinterpret_cast<GLvoid*>(&indices[0]));
     }
+    glEnable(GL_DEPTH_TEST);
 }
 
 void DebugRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, sp::Physics& physics)

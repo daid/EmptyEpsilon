@@ -1,26 +1,28 @@
-#ifndef MAIN_SCREEN_CONTROLS_H
-#define MAIN_SCREEN_CONTROLS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
 class GuiToggleButton;
 class GuiButton;
+class GuiPanel;
 
 class GuiMainScreenControls : public GuiElement
 {
 private:
-    GuiToggleButton* open_button = nullptr;
-    std::vector<GuiButton*> buttons;
-    GuiButton* target_lock_button = nullptr;
-    GuiButton* tactical_button = nullptr;
-    GuiButton* long_range_button = nullptr;
-    GuiButton* show_comms_button = nullptr;
-    GuiButton* hide_comms_button = nullptr;
-    bool onscreen_comms_active = false;
+    GuiPanel* button_strip;
+    GuiToggleButton* open_button;
+    std::vector<GuiToggleButton*> buttons;
+    GuiToggleButton* front_button;
+    GuiToggleButton* back_button;
+    GuiToggleButton* left_button;
+    GuiToggleButton* right_button;
+    GuiToggleButton* target_lock_button;
+    GuiToggleButton* tactical_button;
+    GuiToggleButton* long_range_button;
+    GuiToggleButton* show_comms_button;
+    bool onscreen_comms_active;
 
     void closePopup();
 public:
     GuiMainScreenControls(GuiContainer* owner);
 };
-
-#endif//MAIN_SCREEN_CONTROLS_H
