@@ -395,7 +395,7 @@ With the Kraylor flagship out of the way, we can land the final blow!]])
 
     -- If Shangri-La is destroyed, nobody wins.
     if (not shangri_la:isValid()) then
-        victory("Independents")
+        victory("Independent")
     end
 end
 

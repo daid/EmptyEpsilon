@@ -1,13 +1,14 @@
-#ifndef GAME_GLOBAL_INFO_H
-#define GAME_GLOBAL_INFO_H
+#pragma once
 
 #include "script.h"
 #include "script/gm.h"
 #include "components/faction.h"
+#include "components/radar.h"
 #include "Updatable.h"
 #include "multiplayer.h"
 #include <list>
 #include <functional>
+#include <optional>
 #include <unordered_map>
 
 
@@ -68,8 +69,10 @@ public:
     //Callback called when a new player ship is created on the ship selection screen.
     sp::script::Callback on_new_player_ship;
 
-    std::function<void(glm::vec2)> on_gm_click;
-    const string DEFAULT_ON_GM_CLICK_CURSOR = "mouse_create.png";
+    std::function<void(glm::vec2, std::optional<float>)> on_gm_click;
+    std::optional<RadarTrace> on_gm_preview_trace;
+    glm::u8vec4 on_gm_preview_faction_color{255, 255, 255, 255};
+    const string DEFAULT_ON_GM_CLICK_CURSOR = "cursors/mouse_create.png";
     string on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
     GameGlobalInfo();
@@ -77,11 +80,7 @@ public:
 
     void onReceiveServerCommand(sp::io::DataBuffer& packet) override;
     void playSoundOnMainScreen(sp::ecs::Entity ship, string sound_name);
-    /*!
-     * \brief Set a faction to victorious.
-     * \param string Name of the faction that won.
-     */
-    void setVictory(string faction_name) { victory_faction = Faction::find(faction_name); }
+    void setVictory(string faction_name);
     /*!
      * \brief Get ID of faction that won.
      * \param int
@@ -136,5 +135,3 @@ private:
 
 string getSectorName(glm::vec2 position);
 glm::vec2 sectorToXY(string sectorName);
-
-#endif//GAME_GLOBAL_INFO_H
