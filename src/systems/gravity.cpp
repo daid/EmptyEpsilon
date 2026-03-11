@@ -45,10 +45,11 @@ void GravitySystem::update(float delta)
                             LuaConsole::checkResult(grav.on_teleportation.call<void>(source, target));
                             continue; //callback could destroy the entity, so do no extra processing.
                         }
-                        if (player)
+                        if (player){
                             // set just_teleported for use by hardware
                             player->just_teleported = 2.0f;
                             player->in_gravity = 0.0f;
+                        }
                     }
                 }
             }
