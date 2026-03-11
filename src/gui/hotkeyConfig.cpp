@@ -137,6 +137,7 @@ Keys::Keys() :
     helms_increase_jump_distance("HELMS_JUMP_INCREASE", "]"),
     helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "["),
     helms_execute_jump("HELMS_JUMP_EXECUTE", "\\"),
+    helms_abort_jump("HELMS_JUMP_ABORT"),
     helms_combat_left("HELMS_COMBAT_LEFT"),
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
@@ -382,6 +383,7 @@ void Keys::init()
     helms_max_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Maximize jump distance"));
     helms_min_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Minimize jump distance"));
     helms_execute_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Initiate jump"));
+    helms_abort_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Abort jump"));
     helms_combat_left.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost left"));
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
