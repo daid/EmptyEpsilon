@@ -159,11 +159,11 @@ void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const 
         }
     }
 
-    health->setHealth(current - amount);
+    float new_health = current - amount;
 
     // Check if the entity is destructible. If so and health goes negative,
     // destroy the entity. Otherwise, zero out its health.
-    if (health->getHealth() < 0.0f)
+    if (new_health < 0.0f)
     {
         if (!health->allow_destruction) health->setHealth(0.0f);
         else
@@ -172,6 +172,7 @@ void DamageSystem::takeHealthDamage(sp::ecs::Entity entity, float amount, const 
             return;
         }
     }
+    else health->setHealth(new_health);
 
     // Fire onTakingDamage callback.
     if (health->on_taking_damage)
