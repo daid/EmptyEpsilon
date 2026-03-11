@@ -1,10 +1,11 @@
-#include "gui2_arrowbutton.h"
+#include "gui2_selector.h"
 #include "soundManager.h"
 #include "theme.h"
 
+#include "gui2_arrowbutton.h"
 #include "gui2_label.h"
 #include "gui2_panel.h"
-#include "gui2_selector.h"
+#include "gui2_scrollcontainer.h"
 #include "gui2_togglebutton.h"
 
 GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
@@ -33,6 +34,10 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 
     popup = new GuiPanel(getTopLevelContainer(), "");
     popup->hide();
+    popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
+    popup_scroll
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 }
 
 void GuiSelector::onDraw(sp::RenderTarget& renderer)
@@ -47,18 +52,16 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (selection_index >= 0 && selection_index < (int)entries.size())
         renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
 
-    if (!focus)
-        popup->hide();
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
     glm::vec2 screen_pos = rect.position + renderer.getTranslation();
+    const float max_popup_height = button_height * 10.0f;
+    float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
     float top = screen_pos.y;
-    float height = entries.size() * 50;
-    if (selection_index >= 0)
-        top -= selection_index * 50;
-    top = std::max(0.0f, top);
-    top = std::min(900.0f - height, top);
-    popup->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
+    top = std::clamp(top, 0.0f, 900.0f - popup_height);
+    popup
+        ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
+        ->setSize(rect.size.x, popup_height);
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -76,35 +79,54 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (rect.contains(position))
     {
+        if (popup->isVisible())
+        {
+            popup->hide();
+            return;
+        }
+
         soundManager->playSound("sfx/button.wav");
-        for(unsigned int n=0; n<entries.size(); n++)
+        for (unsigned int n = 0; n < entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
             {
-                popup_buttons.push_back(new GuiToggleButton(popup, "", entries[n].name, [this, n](bool b)
+                popup_buttons.push_back(new GuiToggleButton(popup_scroll, "", entries[n].name, [this, n](bool b)
                 {
                     setSelectionIndex(n);
                     callback();
+                    popup->hide();
                 }));
-                popup_buttons[n]->setSize(GuiElement::GuiSizeMax, 50);
-                popup_buttons[n]->setTextSize(text_size);
-            }else{
-                popup_buttons[n]->setText(entries[n].name);
-                popup_buttons[n]->show();
+
+                popup_buttons[n]
+                    ->setTextSize(text_size)
+                    ->setSize(GuiElement::GuiSizeMax, button_height);
             }
-            popup_buttons[n]->setValue(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
+            else
+            {
+                popup_buttons[n]
+                    ->setText(entries[n].name)
+                    ->show();
+            }
+            popup_buttons[n]->setValue(static_cast<int>(n) == selection_index);
         }
-        for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
-        {
+
+        // Hide each popup button.
+        for (auto n = entries.size(); n < popup_buttons.size(); n++)
             popup_buttons[n]->hide();
-        }
-        popup->show()->moveToFront();
+
+        // Scroll so the selected item is visible.
+        if (selection_index >= 0)
+            popup_scroll->scrollToOffset(selection_index * button_height);
+
+        popup
+            ->show()
+            ->moveToFront();
     }
 }
 
 void GuiSelector::onFocusLost()
 {
-    // Explicitly hide the popup when the selector loses focus.
-    popup->hide();
+    // Hide the popup on a focus change outside of the popup rect.
+    if (!popup->getRect().contains(hover_coordinates))
+        popup->hide();
 }
