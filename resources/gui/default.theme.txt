@@ -403,9 +403,16 @@
     # GuiRotationDial
     [rotationdial] {
         [rotationdial.back] {
+            image: gui/widget/RotationDialBackground.png
             color: #404040
         }
         [rotationdial.front] {
+            # 9-segment texture stretched across the handle
+            image: gui/widget/RotationDialHandle.png
+            image.hover: gui/widget/RotationDialHandle.png
+            image.disabled: gui/widget/RotationDialHandle.png
+            # Size of sprite corners for scaling, in pixels
+            size: 24.0
             color: #FFFFFF
             color.disabled: #808080
         }

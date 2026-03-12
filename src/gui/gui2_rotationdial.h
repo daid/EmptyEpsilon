@@ -32,4 +32,6 @@ public:
     GuiRotationDial* setThickness(float width) { ring_thickness = std::max(0.0f, width); return this; }
     GuiRotationDial* setRotationOffset(float offset) { rotation_offset = std::max(0.0f, offset); return this; }
     GuiRotationDial* setHandleArc(float degrees) { handle_arc = std::clamp(degrees, 1.0f, 359.0f); return this; }
+private:
+    float getUForSegment(int i, float arc_length, float u_corner, int handle_segments) const;
 };

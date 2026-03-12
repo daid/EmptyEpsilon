@@ -15,6 +15,19 @@ GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value
     front_style = theme->getStyle("rotationdial.front");
 }
 
+float GuiRotationDial::getUForSegment(int i, float arc_length, float u_corner, int handle_segments) const
+{
+    const float arc_pos = (static_cast<float>(i) / static_cast<float>(handle_segments)) * arc_length;
+    if (u_corner <= 0.0f)
+        return arc_length > 0.0f ? arc_pos / arc_length : 0.0f;
+    if (arc_pos <= u_corner)
+        return (arc_pos / u_corner) * 0.5f;
+    if (arc_pos >= arc_length - u_corner)
+        return 0.5f + ((arc_pos - (arc_length - u_corner)) / u_corner) * 0.5f;
+
+    return 0.5f;
+}
+
 void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 {
     const auto center = getCenterPoint();
@@ -28,37 +41,84 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
         ? radius * 0.1f
         : ring_thickness;
 
-    // Draw ring track using drawCircleOutline.
-    // TODO: Sprites from legacy are ignored if defined in the theme!
-    //       Warn if there's a sprite in the theme.
-    renderer.drawCircleOutline(center, radius, effective_thickness, back.color);
+    // Draw ring track using drawCircleOutline, then overlay the theme texture if set.
+    if (!back.texture.empty())
+        renderer.drawStretched(rect, back.texture, back.color);
+    else
+        renderer.drawCircleOutline(center, radius, effective_thickness, back.color);
 
     // Draw handle as an arc segment centered on the current value position.
-    // TODO: Sprites from legacy also ignored here.
     float fraction = (value - min_value) / (max_value - min_value);
     float offset_rad = rotation_offset * static_cast<float>(M_PI) / 180.0f;
     float angle_rad = static_cast<float>(M_PI) - fraction * static_cast<float>(M_PI) * 2.0f + offset_rad;
+
     // Draw handle by defined arc degrees on either side of the value.
     const float handle_half_arc = handle_arc * 0.5f * static_cast<float>(M_PI) / 180.0f;
     constexpr int handle_segments = 8;
     float outer_r = radius;
     float inner_r = radius - effective_thickness;
-    std::vector<glm::vec2> pts;
-    // Could just reserve 18 points, but left parameterized in case
-    // handle_segments needs tweaking.
-    pts.reserve((handle_segments + 1) * 2);
 
-    // Generate and draw handle triangles.
-    for (auto i = 0; i <= handle_segments; i++)
+    // Apply the theme texture with 9-segment UV scaling to the curved arc
+    // triangle mesh. Fix corners, stretch middle segments along arc (U), and
+    // stretch edge segments along radius (V).
+
+    // Approximate arc length at mid-radius for arc-axis corner sizing.
+    const float arc_length = 2.0f * handle_half_arc * ((inner_r + outer_r) * 0.5f);
+    // Use front.size as the corner size in pixels, as in drawStretchedHV.
+    // Clamp corner sizes so they never exceed half of each dimension.
+    const float u_corner = std::min(front.size, arc_length * 0.5f);
+    const float v_corner = std::min(front.size, effective_thickness * 0.5f);
+
+    // Build four radial (V-axis) rings from outer to inner edges.
+    const float radii[4] = {outer_r, outer_r - v_corner, inner_r + v_corner, inner_r};
+    constexpr float v_uvs[4] = {0.0f, 0.5f, 0.5f, 1.0f};
+
+    std::vector<glm::vec2> positions;
+    std::vector<glm::vec2> uvs;
+    const bool is_handle_textured = front.texture.empty();
+
+    // Reserve handle segment vertex positions. 1 if untextured, 3 if textured.
+    positions.reserve((handle_segments + 1) * 2 * (is_handle_textured ? 1 : 3));
+
+    // Reserve UVs if textured.
+    if (!is_handle_textured)
+        uvs.reserve((handle_segments + 1) * 2 * 3);
+
+    // Shared ring-building logic.
+    auto buildRing = [&](int band) {
+        for (int i = 0; i <= handle_segments; i++)
+        {
+            // Cache angle calculations.
+            const float angle = angle_rad - handle_half_arc + handle_half_arc * 2.0f * static_cast<float>(i) / static_cast<float>(handle_segments);
+            const float angle_sin = sinf(angle);
+            const float angle_cos = cosf(angle);
+
+            // Build upper and lower bands.
+            positions.push_back(center + glm::vec2{angle_sin * radii[band], angle_cos * radii[band]});
+
+            // Push UVs if textured.
+            if (!is_handle_textured)
+                uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band]});
+
+            positions.push_back(center + glm::vec2{angle_sin * radii[band + 1], angle_cos * radii[band + 1]});
+
+            // Push UVs if textured.
+            if (!is_handle_textured)
+                uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band + 1]});
+        }
+    };
+
+    // Use handle texture if present, draw with color only if not.
+    if (!is_handle_textured)
     {
-        const float angle = angle_rad - handle_half_arc + handle_half_arc * 2.0f * static_cast<float>(i) / static_cast<float>(handle_segments);
-        const float sine = sinf(angle);
-        const float cosine = cosf(angle);
-        pts.push_back(center + glm::vec2{sine * outer_r, cosine * outer_r});
-        pts.push_back(center + glm::vec2{sine * inner_r, cosine * inner_r});
+        for (int band = 0; band < 3; band++) buildRing(band);
+        renderer.drawTexturedTriangleStrip(front.texture, positions, uvs, front.color);
     }
-
-    renderer.drawTriangleStrip(pts, front.color);
+    else
+    {
+        buildRing(0);
+        renderer.drawTriangleStrip(positions, front.color);
+    }
 }
 
 bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
