@@ -13,27 +13,40 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
 {
     back_style = theme->getStyle("selector.back");
     front_style = theme->getStyle("selector.front");
-    left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
-        soundManager->playSound("sfx/button.wav");
-        if (getSelectionIndex() <= 0)
-            setSelectionIndex(entries.size() - 1);
-        else
-            setSelectionIndex(getSelectionIndex() - 1);
-        callback();
-    });
-    left->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
-    right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
-        soundManager->playSound("sfx/button.wav");
-        if (getSelectionIndex() >= (int)entries.size() - 1)
-            setSelectionIndex(0);
-        else
-            setSelectionIndex(getSelectionIndex() + 1);
-        callback();
-    });
-    right->setPosition(0, 0, sp::Alignment::TopRight)->setSize(GuiSizeMatchHeight, GuiSizeMax);
+
+    left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0,
+        [this]()
+        {
+            const int index = getSelectionIndex();
+            if (index <= 0)
+                setSelectionIndex(static_cast<int>(entries.size()) - 1);
+            else
+                setSelectionIndex(index - 1);
+            callback();
+        }
+    );
+    left
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
+
+    right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180,
+        [this]()
+        {
+            const int index = getSelectionIndex();
+            if (index >= static_cast<int>(entries.size()) - 1)
+                setSelectionIndex(0);
+            else
+                setSelectionIndex(index + 1);
+            callback();
+        }
+    );
+    right
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(GuiElement::GuiSizeMatchHeight, GuiElement::GuiSizeMax);
 
     popup = new GuiPanel(getTopLevelContainer(), "");
     popup->hide();
+
     popup_scroll = new GuiScrollContainer(popup, id + "_POPUP_SCROLL");
     popup_scroll
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
@@ -49,8 +62,11 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     const auto& front = front_style->get(getState());
 
     renderer.drawStretched(rect, back.texture, back.color);
-    if (selection_index >= 0 && selection_index < (int)entries.size())
-        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
+
+    // Fit selector text between the arrow buttons.
+    sp::Rect text_rect(rect.position.x + rect.size.y * 0.5f, rect.position.y, rect.size.x - rect.size.y, rect.size.y);
+    if (selection_index >= 0 && selection_index < static_cast<int>(entries.size()))
+        renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
 
     // rect.position is in layout space; the popup lives at the canvas level
     // (no scroll translation), so convert to screen coordinates first.
@@ -59,6 +75,9 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
     float top = screen_pos.y;
     top = std::clamp(top, 0.0f, 900.0f - popup_height);
+
+    // Size and position the popup, factoring its override width if set.
+    setPopupWidth(popup_width);
     popup
         ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
         ->setSize(rect.size.x, popup_height);
@@ -67,6 +86,12 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 GuiSelector* GuiSelector::setTextSize(float size)
 {
     text_size = size;
+    return this;
+}
+
+GuiSelector* GuiSelector::setPopupWidth(float width)
+{
+    popup_width = std::max(rect.size.x, width);
     return this;
 }
 
@@ -85,8 +110,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
             return;
         }
 
-        soundManager->playSound("sfx/button.wav");
-        for (unsigned int n = 0; n < entries.size(); n++)
+        for (size_t n = 0; n < entries.size(); n++)
         {
             if (popup_buttons.size() <= n)
             {
@@ -118,6 +142,7 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
         if (selection_index >= 0)
             popup_scroll->scrollToOffset(selection_index * button_height);
 
+        // Show and elevate the popup.
         popup
             ->show()
             ->moveToFront();
