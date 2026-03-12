@@ -1,14 +1,27 @@
 #include "debugrender.h"
+#include "gui/hotkeyConfig.h"
 #include <graphics/opengl.h>
 #include <glm/gtc/type_ptr.hpp>
 
 
+DebugRenderSystem::DebugRenderSystem()
+{
+#ifdef DEBUG
+    show_colliders = true;
+#endif
+}
+
 void DebugRenderSystem::update(float delta)
 {
+#ifdef DEBUG
+    if (keys.debug_show_colliders.getDown()) show_colliders = !show_colliders;
+#endif
 }
 
 void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp::Physics& physics)
 {
+    if (!show_colliders) return;
+
     ShaderRegistry::ScopedShader color_shader(ShaderRegistry::Shaders::BasicColor);
 
     glDisable(GL_DEPTH_TEST);
@@ -53,7 +66,10 @@ void DebugRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, sp
 
 void DebugRenderSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, sp::Physics& physics)
 {
+    if (!show_colliders) return;
+
     glm::u8vec4 color{255, 255, 255, 128};
+
     switch(physics.getType())
     {
     case sp::Physics::Type::Sensor: color = {255,128,128,128}; break;
