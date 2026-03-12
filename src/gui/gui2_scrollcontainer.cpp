@@ -19,6 +19,7 @@ GuiScrollContainer::GuiScrollContainer(GuiContainer* owner, const string& id, Sc
                 scroll_offset = static_cast<float>(value);
             }
         );
+        scrollbar_v->setClickChange(50);
         scrollbar_v
             ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
             ->setSize(scrollbar_width, GuiSizeMax);
