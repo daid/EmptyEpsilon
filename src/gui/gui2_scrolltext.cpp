@@ -7,7 +7,9 @@ GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
 {
     auto_scroll_down = false;
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
-    scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
+    scrollbar
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(50.0f, GuiElement::GuiSizeMax);
 }
 
 GuiScrollText* GuiScrollText::setText(string text)
@@ -37,8 +39,9 @@ void GuiScrollText::onDraw(sp::RenderTarget& renderer)
     if (scrollbar->getMax() != scroll_max)
     {
         int diff = scroll_max - scrollbar->getMax();
-        scrollbar->setRange(0, scroll_max);
-        scrollbar->setValueSize(text_rect.size.y);
+        scrollbar
+            ->setRange(0, scroll_max)
+            ->setValueSize(text_rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
@@ -119,8 +122,9 @@ void GuiScrollFormattedText::onDraw(sp::RenderTarget& renderer)
     if (scrollbar->getMax() != scroll_max)
     {
         int diff = scroll_max - scrollbar->getMax();
-        scrollbar->setRange(0, scroll_max);
-        scrollbar->setValueSize(text_rect.size.y);
+        scrollbar
+            ->setRange(0, scroll_max)
+            ->setValueSize(text_rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }
