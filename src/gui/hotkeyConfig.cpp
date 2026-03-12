@@ -84,6 +84,9 @@ Keys::Keys() :
     voice_ship("VOICE_SHIP"),
     debug_show_fps("DEBUG_SHOW_FPS", "F10"),
     debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+#ifdef DEBUG
+    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
+#endif
 
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),

@@ -24,6 +24,9 @@ public:
     sp::io::Keybinding voice_ship;
     sp::io::Keybinding debug_show_fps;
     sp::io::Keybinding debug_show_timing;
+#ifdef DEBUG
+    sp::io::Keybinding debug_show_colliders;
+#endif
 
     // Crew screen binds
     sp::io::Keybinding next_station;
