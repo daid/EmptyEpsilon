@@ -1,10 +1,9 @@
-#ifndef CUSTOM_SHIP_FUNCTIONS_H
-#define CUSTOM_SHIP_FUNCTIONS_H
+#pragma once
 
 #include "playerInfo.h"
-#include "gui/gui2_element.h"
+#include "gui/gui2_scrollcontainer.h"
 
-class GuiCustomShipFunctions : public GuiElement
+class GuiCustomShipFunctions : public GuiScrollContainer
 {
 public:
     GuiCustomShipFunctions(GuiContainer* owner, CrewPosition position, string id);
@@ -20,11 +19,11 @@ private:
         GuiElement* element;
     };
 
+    const float ROW_HEIGHT = 50.0f;
+    GuiScrollContainer* container;
     CrewPosition position;
     std::vector<Entry> entries;
 
     void checkEntries();
     void createEntries();
 };
-
-#endif//CUSTOM_SHIP_FUNCTIONS_H
