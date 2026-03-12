@@ -1,15 +1,14 @@
-#ifndef WEAPONS_SCREEN_H
-#define WEAPONS_SCREEN_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
-#include "screenComponents/radarView.h"
-#include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
+#include "screenComponents/targetsContainer.h"
 
-class GuiMissileTubeControls;
+class AimLock;
+class AimLockButton;
 class GuiKeyValueDisplay;
-class GuiToggleButton;
-class GuiRotationDial;
+class GuiMissileTubeControls;
+class GuiRadarView;
 
 class WeaponsScreen : public GuiOverlay
 {
@@ -22,8 +21,8 @@ private:
     GuiKeyValueDisplay* rear_shield_display;
     GuiRadarView* radar;
     GuiMissileTubeControls* tube_controls;
-    GuiRotationDial* missile_aim;
-    GuiToggleButton* lock_aim;
+    AimLock* missile_aim;
+    AimLockButton* lock_aim;
     GuiElement* beam_info_box;
 public:
     WeaponsScreen(GuiContainer* owner);
@@ -31,5 +30,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//WEAPONS_SCREEN_H

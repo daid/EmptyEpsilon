@@ -1,15 +1,13 @@
-#ifndef TACTICAL_SCREEN_H
-#define TACTICAL_SCREEN_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
-#include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
+#include "screenComponents/targetsContainer.h"
 
+class AimLock;
+class AimLockButton;
 class GuiMissileTubeControls;
 class GuiRadarView;
-class GuiKeyValueDisplay;
-class GuiToggleButton;
-class GuiRotationDial;
 
 class TacticalScreen : public GuiOverlay
 {
@@ -21,9 +19,9 @@ private:
 
     TargetsContainer targets;
     GuiRadarView* radar;
-    GuiRotationDial* missile_aim;
+    AimLock* missile_aim;
+    AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
-    GuiToggleButton* lock_aim;
     bool drag_rotate;
 public:
     TacticalScreen(GuiContainer* owner);
@@ -31,5 +29,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//TACTICAL_SCREEN_H
