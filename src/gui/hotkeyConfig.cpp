@@ -219,6 +219,8 @@ Keys::Keys() :
     weapons_disable_aim_lock("WEAPONS_AIM_LOCK_DISABLE"),
     weapons_aim_left("WEAPONS_AIM_LEFT", "G"),
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
+    weapons_aim_left_step("WEAPONS_AIM_LEFT_STEP"),
+    weapons_aim_right_step("WEAPONS_AIM_RIGHT_STEP"),
 
     //Science
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
@@ -241,6 +243,18 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_2"},
         {"SCIENCE_SCAN_PARAM_SET_3"},
         {"SCIENCE_SCAN_PARAM_SET_4"},
+    }},
+    science_scan_param_increase_step{{
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_4"},
+    }},
+    science_scan_param_decrease_step{{
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_4"},
     }},
 
     //Engineering
@@ -420,6 +434,8 @@ void Keys::init()
     weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
+    weapons_aim_left_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim left (15° steps)"));
+    weapons_aim_right_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim right (15° steps)"));
 
     //Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
@@ -430,6 +446,8 @@ void Keys::init()
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n+1)}}));
+        science_scan_param_increase_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} increase stepwise").format({{"number", string(n+1)}}));
+        science_scan_param_decrease_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} decrease stepwise").format({{"number", string(n+1)}}));
     }
 
     //Engineering

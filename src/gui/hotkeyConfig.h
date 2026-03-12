@@ -109,6 +109,8 @@ public:
     sp::io::Keybinding weapons_disable_aim_lock;
     sp::io::Keybinding weapons_aim_left;
     sp::io::Keybinding weapons_aim_right;
+    sp::io::Keybinding weapons_aim_left_step;
+    sp::io::Keybinding weapons_aim_right_step;
 
     //Science
     sp::io::Keybinding science_scan_object;
@@ -117,6 +119,8 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
+    std::array<sp::io::Keybinding, 4> science_scan_param_increase_step;
+    std::array<sp::io::Keybinding, 4> science_scan_param_decrease_step;
 
     //Engineering
     sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
