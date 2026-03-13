@@ -1,5 +1,4 @@
-#ifndef GUI_SCROLLTEXT_H
-#define GUI_SCROLLTEXT_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_scrollbar.h"
@@ -9,9 +8,9 @@ class GuiScrollText : public GuiElement
 protected:
     GuiScrollbar* scrollbar;
     string text;
-    float text_size;
-    bool auto_scroll_down;
-    int mouse_scroll_steps;
+    float text_size = 30.0f;
+    bool auto_scroll_down = false;
+    int mouse_scroll_steps = 25;
 
 public:
     GuiScrollText(GuiContainer* owner, string id, string text);
@@ -37,5 +36,3 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//GUI_SCROLLTEXT_H

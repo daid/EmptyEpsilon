@@ -3,9 +3,8 @@
 
 
 GuiScrollText::GuiScrollText(GuiContainer* owner, string id, string text)
-: GuiElement(owner, id), text(text), text_size(30), mouse_scroll_steps(25)
+: GuiElement(owner, id), text(text)
 {
-    auto_scroll_down = false;
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
 }
