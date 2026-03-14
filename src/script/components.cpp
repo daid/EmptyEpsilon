@@ -601,6 +601,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_EMP)], "max_emp");
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_HVLI)], "storage_hvli");
     BIND_MEMBER_NAMED(MissileTubes, storage_max[int(MW_HVLI)], "max_hvli");
+    BIND_MEMBER(MissileTubes, on_launch);
     BIND_ARRAY(MissileTubes, mounts);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, position);
     BIND_ARRAY_MEMBER(MissileTubes, mounts, load_time);

@@ -16,6 +16,7 @@
 #include "multiplayer_server.h"
 #include "particleEffect.h"
 #include "random.h"
+#include "menus/luaConsole.h"
 
 
 MissileSystem::MissileSystem()
@@ -371,6 +372,10 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         sfx.sound = mwd.fire_sound;
         sfx.volume = 55.0f + 15.0f * category_modifier;
         sfx.pitch += random(-0.1f, 0.1f);
+
+        auto source_tubes = source.getComponent<MissileTubes>();
+        if (source_tubes && source_tubes->on_launch)
+            LuaConsole::checkResult(source_tubes->on_launch.call<void>(source, missile));
     }
 }
 
