@@ -222,6 +222,55 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         }
     }
 
+    // Key repeat options.
+    {
+        (new GuiLabel(interface_left_column, "KEY_REPEAT_OPTIONS_LABEL", tr("Key repeat"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        key_repeat_toggle = new GuiToggleButton(interface_left_column, "KEY_REPEAT_TOGGLE", tr("key_repeat", "Enable key repeat"),
+            [](bool value)
+            {
+                PreferencesManager::set("key_repeat", value ? "1" : "0");
+                sp::io::Keybinding::setRepeating(value);
+            }
+        );
+        key_repeat_toggle
+            ->setValue(PreferencesManager::get("key_repeat", "0") == "1")
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        int initial_delay = PreferencesManager::get("key_repeat_delay", "0").toInt();
+        auto delay_slider = new GuiBasicSlider(interface_left_column, "KEY_REPEAT_DELAY_SLIDER", 0.0f, 1000.0f, float(initial_delay),
+            [this](float value)
+            {
+                value = std::round(value / 10.0f) * 10.0f;
+                PreferencesManager::set("key_repeat_delay", string(int(value)));
+                sp::io::Keybinding::setRepeatDelay(int(value));
+                key_repeat_delay_label->setText(tr("key_repeat", "Repeat delay: {ms} ms").format({{"ms", string(int(value))}}));
+            }
+        );
+        delay_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+        key_repeat_delay_label = new GuiLabel(delay_slider, "KEY_REPEAT_DELAY_LABEL",
+            tr("key_repeat", "Repeat delay: {ms} ms").format({{"ms", string(initial_delay)}}), 30);
+        key_repeat_delay_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
+        int initial_interval = PreferencesManager::get("key_repeat_interval", "40").toInt();
+        auto interval_slider = new GuiBasicSlider(interface_left_column, "KEY_REPEAT_INTERVAL_SLIDER", 10.0f, 500.0f, float(initial_interval),
+            [this](float value)
+            {
+                value = std::round(value / 10.0f) * 10.0f;
+                value = std::max(10.0f, value);
+                PreferencesManager::set("key_repeat_interval", string(int(value)));
+                sp::io::Keybinding::setRepeatInterval(int(value));
+                key_repeat_interval_label->setText(tr("key_repeat", "Repeat interval: {ms} ms").format({{"ms", string(int(value))}}));
+            }
+        );
+        interval_slider->setSize(GuiElement::GuiSizeMax, 50.0f);
+        key_repeat_interval_label = new GuiLabel(interval_slider, "KEY_REPEAT_INTERVAL_LABEL",
+            tr("key_repeat", "Repeat interval: {ms} ms").format({{"ms", string(initial_interval)}}), 30);
+        key_repeat_interval_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    }
+
     // Interface page, right column
 
     // Control configuration

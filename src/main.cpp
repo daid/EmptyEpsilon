@@ -209,6 +209,15 @@ int main(int argc, char** argv)
     }
 #endif
 
+    if (PreferencesManager::get("key_repeat", "0") == "1")
+    {
+        sp::io::Keybinding::setRepeating(true);
+        sp::io::Keybinding::setRepeatDelay(PreferencesManager::get("key_repeat_delay", "0").toInt());
+        int key_repeat_interval = PreferencesManager::get("key_repeat_interval", "40").toInt();
+        if (key_repeat_interval > 0)
+            sp::io::Keybinding::setRepeatInterval(key_repeat_interval);
+    }
+
     P<HardwareController> hardware_controller = new HardwareController();
     hardware_controller->loadConfiguration(configuration_path + "/hardware.ini");
 

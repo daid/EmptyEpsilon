@@ -39,6 +39,10 @@ private:
     GuiBasicSlider* graphics_fov_slider{};
     GuiLabel* graphics_fov_overlay_label{};
 
+    GuiToggleButton* key_repeat_toggle{};
+    GuiLabel* key_repeat_delay_label{};
+    GuiLabel* key_repeat_interval_label{};
+
     std::vector<string> hotkey_categories;
     GuiLabel* impulse_volume_overlay_label;
     OptionsMenu::ReturnTo return_to;
