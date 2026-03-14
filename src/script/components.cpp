@@ -68,6 +68,8 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Bind a member using getter and setter functions for validation.
+// The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -498,7 +500,7 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
-    BIND_MEMBER(BeamWeaponSys, frequency);
+    BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
