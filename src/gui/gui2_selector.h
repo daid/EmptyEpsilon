@@ -1,5 +1,4 @@
-#ifndef GUI2_SELECTOR_H
-#define GUI2_SELECTOR_H
+#pragma once
 
 #include "gui2_entrylist.h"
 
@@ -29,5 +28,3 @@ public:
 
     GuiSelector* setTextSize(float size);
 };
-
-#endif//GUI2_SELECTOR_H
