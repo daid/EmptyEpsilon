@@ -35,6 +35,8 @@ void GuiBeamFrequencySelector::onUpdate()
             setSelectionIndex(static_cast<int>(entries.size()) - 1);
         else
             setSelectionIndex(getSelectionIndex() - 1);
+
+        callback();
     }
 
     // Sync selector to current beam frequency.
