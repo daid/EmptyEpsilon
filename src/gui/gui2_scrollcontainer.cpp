@@ -57,8 +57,9 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     visible_height = rect.size.y - layout.padding.top - layout.padding.bottom;
 
     // Show the scrollbar only if we're clipping anything.
-    bool has_overflow = content_height > visible_height + 0.5f;
+    bool has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
     scrollbar_v->setVisible(has_overflow);
+
     // Don't factor scrollbar width if it isn't visible.
     const float sb_width = scrollbar_v->isVisible() ? scrollbar_width : 0.0f;
 
@@ -164,8 +165,10 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
     renderer.popTranslation();
     renderer.popScissorRect();
 
-    // Draw the scrollbar. Never clip nor scroll the scrollbar itself.
-    if (!scrollbar_v->isDestroyed() && scrollbar_v->isVisible())
+    // Draw the scrollbar if intended to be visible. Never clip nor scroll the
+    // scrollbar itself.
+    scrollbar_v->setVisible(scrollbar_v->isVisible() && mode != ScrollMode::None);
+    if (scrollbar_v->isVisible())
     {
         setElementHover(scrollbar_v, scrollbar_v->getRect().contains(mouse_position));
         scrollbar_v->onDraw(renderer);
