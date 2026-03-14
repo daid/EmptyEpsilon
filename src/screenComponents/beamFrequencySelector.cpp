@@ -19,7 +19,7 @@ void GuiBeamFrequencySelector::onUpdate()
     if (!isVisible()) return;
 
     // Handle inc/dec keybinds.
-    if (keys.weapons_beam_frequence_increase.getDown())
+    if (keys.weapons_beam_frequency_increase.getDown())
     {
         if (getSelectionIndex() >= static_cast<int>(entries.size()) - 1)
             setSelectionIndex(0);
@@ -29,7 +29,7 @@ void GuiBeamFrequencySelector::onUpdate()
         callback();
     }
 
-    if (keys.weapons_beam_frequence_decrease.getDown())
+    if (keys.weapons_beam_frequency_decrease.getDown())
     {
         if (getSelectionIndex() <= 0)
             setSelectionIndex(static_cast<int>(entries.size()) - 1);
