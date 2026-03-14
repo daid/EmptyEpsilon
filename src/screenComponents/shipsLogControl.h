@@ -1,9 +1,7 @@
-#ifndef SHIPS_LOG_CONTROL_H
-#define SHIPS_LOG_CONTROL_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
-class GuiPanel;
 class GuiAdvancedScrollText;
 
 class ShipsLog : public GuiElement
@@ -16,6 +14,5 @@ public:
 private:
     bool open;
     GuiAdvancedScrollText* log_text;
+    const float SIDE_MARGINS = 15.0f;
 };
-
-#endif//SHIPS_LOG_CONTROL_H
