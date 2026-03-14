@@ -325,8 +325,8 @@ end
 --- Example:
 --- -- Add a custom button to Engineering that prints the player ship's coolant max to the console or logging file when clicked
 --- ship:addCustomButton("engineering", "get_coolant_max", "Get Coolant Max", function() print("Coolant: " .. ship:getMaxCoolant()) end)
-function Entity:addCustomButton(station, key, label, callback)
-    setPlayerShipCustomFunction(self, "button", key, label, station, callback, 0)
+function Entity:addCustomButton(station, key, label, callback, order)
+    setPlayerShipCustomFunction(self, "button", key, label, station, callback, order or 0)
     return self
 end
 --- Adds a custom non-interactive info label with the given reference name to the given crew position screen.
@@ -337,7 +337,7 @@ end
 --- -- Displays the coolant max value on Engineering at or near the top of the custom button/info order
 --- ship:addCustomInfo("engineering", "show_coolant_max", "Coolant Max: " .. ship:getMaxCoolant(), 0)
 function Entity:addCustomInfo(station, key, label, order)
-    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order)
+    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order or 0)
     return self
 end
 --- Displays a dismissable message with the given reference name on the given crew position screen.
