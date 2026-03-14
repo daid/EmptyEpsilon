@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/destroy.h"
 
 
 #define STRINGIFY(n) #n
@@ -824,4 +825,7 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
+    BIND_MEMBER(OnDestroyed, callback);
 }
