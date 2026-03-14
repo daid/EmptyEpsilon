@@ -2,7 +2,7 @@
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     
     [button] {
-        color: #ffffff
+        color: #FFFFFF
         size: 30
         [button.back] {
             image: gui/widget/ButtonBackground.png
@@ -140,7 +140,7 @@
     }
 
     [listbox] {
-        color: #ffffff
+        color: #FFFFFF
         [listbox.back] {
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
@@ -161,6 +161,38 @@
         }
     }
     
+    [arrow] {
+        image: gui/widget/IndicatorArrow.png
+    }
+
+    [selector] {
+        [selector.back] {
+            image: gui/widget/SelectorBackground.png
+            color.disabled: #808080
+        }
+        [selector.front] {
+            color: #FFFFFF
+            color.disabled: #808080
+        }
+    }
+
+    [rotationdial] {
+        [rotationdial.back] {
+            image: gui/widget/dial_background.png
+        }
+        [rotationdial.front] {
+            image: gui/widget/dial_button.png
+            color.hover: #CCCCCC
+            color.disabled: #808080
+        }
+    }
+
+    [resizabledialog] {
+        [resizabledialog.corner] {
+            image: gui/widget/ResizeDialogCorner.png
+        }
+    }
+
     # Stronger font used at a few locations without UI widgets.
     [bold] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf

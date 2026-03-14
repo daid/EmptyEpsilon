@@ -127,8 +127,8 @@ void SpectatorScreen::update(float delta)
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 100000)
-            view_distance = 100000;
+        if (view_distance > 1000000)
+            view_distance = 1000000;
         if (view_distance < 5000)
             view_distance = 5000;
         main_radar->setDistance(view_distance);
@@ -200,7 +200,7 @@ void SpectatorScreen::update(float delta)
     }
 
     if (keys.pause.getDown())
-        if (game_server) engine->setGameSpeed(0.0);
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.spectator_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());

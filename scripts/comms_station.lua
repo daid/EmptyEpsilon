@@ -211,7 +211,7 @@ function commsStationSupplyDrop(comms_source, comms_target)
         setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"))
         for n = 1, comms_source:getWaypointCount() do
             addCommsReply(
-                formatWaypoint(n),
+                formatWaypoint(comms_source:getWaypointID(n)),
                 function(comms_source, comms_target)
                     local message
                     if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, "supplydrop")) then
@@ -269,7 +269,7 @@ function commsStationSpecificReinforcement(comms_source, comms_target, reinforce
         setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"))
         for n = 1, comms_source:getWaypointCount() do
             addCommsReply(
-                formatWaypoint(n),
+                formatWaypoint(comms_source:getWaypointID(n)),
                 function(comms_source, comms_target)
                     local message
                     if comms_source:takeReputationPoints(getServiceCost(comms_source, comms_target, reinforcement_type)) then
@@ -281,7 +281,7 @@ function commsStationSpecificReinforcement(comms_source, comms_target, reinforce
                     		["phobos_reinforcement"] =	"Phobos T3",
                     	}
                         local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate(reinforcement_template[reinforcement_type]):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                        message = string.format(_("stationAssist-comms", "We have dispatched %s to assist at %s."), ship:getCallSign(), formatWaypoint(n))
+                        message = string.format(_("stationAssist-comms", "We have dispatched %s to assist at %s."), ship:getCallSign(), formatWaypoint(comms_source:getWaypointID(n)))
                     else
                         message = _("needRep-comms", "Not enough reputation!")
                     end

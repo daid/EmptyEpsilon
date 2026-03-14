@@ -1,10 +1,11 @@
+#include "operationsScreen.h"
 #include "playerInfo.h"
 #include "i18n.h"
 #include "gameGlobalInfo.h"
-#include "operationsScreen.h"
 #include "preferenceManager.h"
 
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_togglebutton.h"
 
 #include "components/scanning.h"
 #include "components/radar.h"
@@ -33,13 +34,15 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             // is our ship...
             if (mode == TargetSelection && science->targets.getWaypointIndex() > -1 && my_spaceship)
             {
-                if (auto lrr = my_spaceship.getComponent<LongRangeRadar>()) {
+                if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
                     // ... and we select something near a waypoint, switch to move
                     // waypoint mode.
-                    if (glm::length(lrr->waypoints[science->targets.getWaypointIndex()] - position) < 1000.0f)
-                    {
-                        mode = MoveWaypoint;
-                        drag_waypoint_index = science->targets.getWaypointIndex();
+                    if (auto waypoint_position = waypoints->get(science->targets.getWaypointIndex())) {
+                        if (glm::length(waypoint_position.value() - position) < 1000.0f)
+                        {
+                            mode = MoveWaypoint;
+                            drag_waypoint_index = science->targets.getWaypointIndex();
+                        }
                     }
                 }
             }
@@ -60,6 +63,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 if (my_spaceship)
                     my_player_info->commandAddWaypoint(position);
                 mode = TargetSelection;
+                place_waypoint_button->setValue(false);
                 break;
             case MoveWaypoint:
                 mode = TargetSelection;
@@ -70,21 +74,31 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
 
-    (new GuiOpenCommsButton(science->radar_view, "OPEN_COMMS_BUTTON", tr("Open Comms"), &science->targets))->setPosition(-270, -20, sp::Alignment::BottomRight)->setSize(200, 50);
+    // Limited relay functions: comms and waypoints.
+    GuiElement* relay_functions = new GuiElement(science->radar_view, "RELAY_FUNCTIONS");
+    relay_functions
+        ->setPosition(-270.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(200.0f, 150.0f)
+        ->setAttribute("layout", "verticalbottom");
+
+    // Manage comms.
+    (new GuiOpenCommsButton(relay_functions, "OPEN_COMMS_BUTTON", tr("Open comms"), &science->targets))
+        ->setSize(200.0f, 50.0f);
 
     // Manage waypoints.
-    place_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_PLACE_BUTTON", tr("Place Waypoint"), [this]() {
-        mode = WaypointPlacement;
+    place_waypoint_button = new GuiToggleButton(relay_functions, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this](bool value) {
+        mode = value ? WaypointPlacement : TargetSelection;
     });
-    place_waypoint_button->setPosition(-270, -70, sp::Alignment::BottomRight)->setSize(200, 50);
+    place_waypoint_button->setSize(200.0f, 50.0f);
 
-    delete_waypoint_button = new GuiButton(science->radar_view, "WAYPOINT_DELETE_BUTTON", tr("Delete Waypoint"), [this]() {
-        if (my_spaceship && science->targets.getWaypointIndex() >= 0)
+    delete_waypoint_button = new GuiButton(relay_functions, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
+        [this]()
         {
-            my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
+            if (my_spaceship && science->targets.getWaypointIndex() >= 0)
+                my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
         }
-    });
-    delete_waypoint_button->setPosition(-270, -120, sp::Alignment::BottomRight)->setSize(200, 50);
+    );
+    delete_waypoint_button->setSize(200.0f, 50.0f);
 
     auto stats = new GuiElement(this, "OPERATIONS_STATS");
     stats->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(240, 80)->setAttribute("layout", "vertical");
@@ -106,8 +120,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
 
 void OperationScreen::onDraw(sp::RenderTarget& target)
 {
-    if (!my_spaceship)
-        return;
+    GuiOverlay::onDraw(target);
+
+    if (!my_spaceship) return;
     if (science->radar_view->isVisible())
     {
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0))->show();

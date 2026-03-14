@@ -283,9 +283,9 @@ template<> struct Convert<DockingPort::State> {
         string str = string(luaL_checkstring(L, idx)).lower();
         if (str == "not_docking")
             return DockingPort::State::NotDocking;
-        else if (str == "opening")
+        else if (str == "docking")
             return DockingPort::State::Docking;
-        else if (str == "hailed")
+        else if (str == "docked")
             return DockingPort::State::Docked;
         luaL_error(L, "Unknown DockingPort::State: %s", str.c_str());
         return DockingPort::State::NotDocking;
@@ -376,21 +376,6 @@ template<> struct Convert<CustomShipFunctions::Function::Type> {
             return CustomShipFunctions::Function::Type::Message;
         luaL_error(L, "Unknown CustomShipFunctions::Function::Type: %s", str.c_str());
         return CustomShipFunctions::Function::Type::Info;
-    }
-};
-template<> struct Convert<CrewPosition> {
-    static int toLua(lua_State* L, CrewPosition value) {
-        lua_pushstring(L, crewPositionToString(value).c_str());
-        return 1;
-    }
-    static CrewPosition fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-
-        auto result = tryParseCrewPosition(str);
-        if (!result.has_value()) {
-            luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
-        }
-        return result.value_or(CrewPosition::helmsOfficer);
     }
 };
 

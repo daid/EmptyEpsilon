@@ -180,7 +180,7 @@ void HardwareController::handleConfig(string section, std::unordered_map<string,
                 for(std::pair<string, string> item : settings)
                 {
                     std::vector<string> values = item.second.split(",");
-                    per_channel_settings[item.first] = values[idx % values.size()];
+                    per_channel_settings[item.first] = values[idx % values.size()].strip();
                 }
                 createNewHardwareMappingEvent(channel_numbers[idx], per_channel_settings);
             }

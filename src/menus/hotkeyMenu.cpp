@@ -1,4 +1,5 @@
 #include <i18n.h>
+#include "init/config.h"
 #include "engine.h"
 #include "hotkeyMenu.h"
 #include <regex>
@@ -67,6 +68,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     HotkeyMenu::setCategory(1);
 
     // Bottom: Menu navigation
+
     // Back button to return to the Options menu
     (new GuiScrollText(info_container, "INFO_LABEL", tr("Left Click: Assign input. Middle Click: Add input. Right Click: Delete inputs.\nPossible inputs: Keyboard keys, joystick buttons, joystick axes.")))->setPosition(10, 0, sp::Alignment::TopCenter)->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT*3);
     (new GuiButton(bottom_row, "BACK", tr("button", "Back"), [this, return_to]()
@@ -76,10 +78,42 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         soundManager->stopMusic();
         returnToOptionMenu(return_to);
     }))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(150, GuiElement::GuiSizeMax);
+
+    // Reset keybinds confirmation
+    reset_label = new GuiLabel(bottom_row, "RESET_LABEL", tr("Bindings reset to defaults"), 30.0f);
+    reset_label->setAlignment(sp::Alignment::CenterRight)->setPosition(0.0f, -50.0f, sp::Alignment::BottomRight)->setSize(100.0f, 50.0f)->hide();
+
+    // Reset keybinds button
+    (new GuiButton(bottom_row, "RESET", tr("button", "Reset"), [this]()
+    {
+        reset_label->setVisible(true);
+        reset_label_timer = RESET_LABEL_TIMEOUT;
+
+        // Iterate through all bindings and reset to defaults.
+        for (auto category : sp::io::Keybinding::getCategories())
+        {
+            for (auto item : sp::io::Keybinding::listAllByCategory(category))
+            {
+                // Clear current binding.
+                item->clearKeys();
+
+                // Get the default binding, if any, and set it as the item's new
+                // binding.
+                std::vector<string> default_bindings = item->getDefaultBindings();
+                for (auto binding : default_bindings) item->addKey(binding);
+            }
+        }
+    }))->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)->setSize(150.0f, GuiElement::GuiSizeMax);
 }
 
 void HotkeyMenu::update(float delta)
 {
+    if (reset_label->isVisible())
+    {
+        reset_label_timer -= delta;
+        reset_label->setVisible(reset_label_timer > 0.0f);
+    }
+
     if (keys.escape.getDown())
     {
         destroy();
@@ -91,28 +125,13 @@ void HotkeyMenu::update(float delta)
 void HotkeyMenu::setCategory(int cat)
 {
     // Remove any previous category's hotkey entries.
-    for (GuiHotkeyBinder* text : text_entries)
-    {
-        text->destroy();
-    }
+    for (GuiHotkeyBinder* text : text_entries) text->destroy();
     text_entries.clear();
-
-    for (auto label : label_entries)
-    {
-        label->destroy();
-    }
+    for (auto label : label_entries) label->destroy();
     label_entries.clear();
-
-    for (auto row : rebinding_rows)
-    {
-        row->destroy();
-    }
+    for (auto row : rebinding_rows) row->destroy();
     rebinding_rows.clear();
-
-    for (auto column : rebinding_columns)
-    {
-        column->destroy();
-    }
+    for (auto column : rebinding_columns) column->destroy();
     rebinding_columns.clear();
 
     // Reset the hotkey frame size and position
@@ -176,22 +195,15 @@ void HotkeyMenu::pageHotkeys(int direction)
     auto frame_position = rebinding_ui->getPositionOffset();
     auto frame_size = rebinding_ui->getSize();
 
-    if (frame_size.x < KEY_COLUMN_WIDTH * 2)
-    {
-        return;
-    }
+    if (frame_size.x < KEY_COLUMN_WIDTH * 2) return;
 
     // Move the frame left if the direction is negative, right if it's positive
     int new_offset = frame_position.x + KEY_COLUMN_WIDTH * direction;
 
+    // Don't let the frame move right if its left edge is on screen.
+    // Move the frame left only if its right edge is not on screen.
     if (new_offset >= 0)
-    {
-        // Don't let the frame move right if its left edge is on screen.
         rebinding_ui->setPosition(0, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
-    }
     else if (new_offset > -frame_size.x + KEY_COLUMN_WIDTH + FRAME_MARGIN)
-    {
-        // Move the frame left only if its right edge is not on screen.
         rebinding_ui->setPosition(new_offset, KEY_COLUMN_TOP, sp::Alignment::TopLeft);
-    }
 }

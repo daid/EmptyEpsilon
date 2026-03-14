@@ -3,40 +3,40 @@
 // Constants
 
 // Program inputs
-uniform mat4 projection;
-uniform mat4 view;
+uniform mat4 u_projection;
+uniform mat4 u_view;
 
 // Per-vertex inputs
-attribute vec3 center;
-attribute vec2 texcoords;
-attribute vec3 color;
-attribute float size;
+attribute vec3 a_center;
+attribute vec2 a_texcoords;
+attribute vec3 a_color;
+attribute float a_size;
 
 // Per-vertex outputs
-varying vec3 fragcolor;
-varying vec2 fragtexcoords;
+varying vec3 v_color;
+varying vec2 v_texcoords;
 
 void main()
 {
-    vec4 viewspace_center = view * vec4(center, 1.0);
-    vec4 viewspace_halfextents = vec4(texcoords.x - .5, texcoords.y - .5, 0., 0.) * size;
+    vec4 viewspace_center = u_view * vec4(a_center, 1.0);
+    vec4 viewspace_halfextents = vec4(a_texcoords.x - .5, a_texcoords.y - .5, 0., 0.) * a_size;
 
     // Outputs to fragment shader
-    gl_Position = projection * (viewspace_center + viewspace_halfextents);
-    fragtexcoords = texcoords;
-    fragcolor = color;
+    gl_Position = u_projection * (viewspace_center + viewspace_halfextents);
+    v_texcoords = a_texcoords;
+    v_color = a_color;
 }
 
 [fragment]
 
 // Program inputs
-uniform sampler2D textureMap;
+uniform sampler2D u_textureMap;
 
 // Per-fragment inputs
-varying vec3 fragcolor;
-varying vec2 fragtexcoords;
+varying vec3 v_color;
+varying vec2 v_texcoords;
 
 void main()
 {
-    gl_FragColor = texture2D(textureMap, fragtexcoords.st) * vec4(fragcolor, 1.);
+    gl_FragColor = texture2D(u_textureMap, v_texcoords.st) * vec4(v_color, 1.);
 }

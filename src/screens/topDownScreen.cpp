@@ -156,11 +156,9 @@ void TopDownScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     // Add and remove entries from the player ship list.
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())

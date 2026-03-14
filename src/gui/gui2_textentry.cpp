@@ -17,6 +17,11 @@ GuiTextEntry::~GuiTextEntry()
         SDL_StopTextInput();
 }
 
+float GuiTextEntry::getLineSpacing() const {
+    const auto& front = front_style->get(getState());
+    return front.font->getLineSpacing(32) * text_size / float(32);
+}
+
 void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
 {
     const auto& back = back_style->get(getState());
@@ -34,9 +39,30 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     if (shown_text.empty()) shown_text = " ";
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
     auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
+
+    if (multiline) {
+        // ensure the text fills the available space as much as possible
+        auto min_y = std::numeric_limits<float>::infinity();
+        auto max_y = -min_y;
+        for(auto& d : prepared.data) {
+            if (d.position.y < min_y)
+                min_y = d.position.y;
+            if (d.position.y > max_y)
+                max_y = d.position.y;
+        }
+        auto clipped_from_top = -min_y - render_offset.y;
+        auto space_at_bottom = rect.size.y - max_y - render_offset.y - linespacing * 0.3f;
+
+        if (space_at_bottom > 0 && clipped_from_top > 0) {
+            // the text goes off the top of the box but doesn't reach the bottom;
+            // scroll until it either stops going off the top, or reaches the bottom
+            render_offset.y += std::min(space_at_bottom, clipped_from_top);
+        }
+    }
+
     for(auto& d : prepared.data)
         d.position += render_offset;
-    auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
 
     float start_x = -1;
     int selection_min = std::min(selection_start, selection_end);
@@ -443,16 +469,17 @@ void GuiTextEntry::setCursorPosition(int offset)
 
 int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
 {
-    position -= rect.position;
+    position = position - rect.position - render_offset;
     position.x -= 16.0f;
     int result = text.size();
+    const auto& front = front_style->get(getState());
     //if (vertical_scroll)
     //    position.y -= vertical_scroll->getValue();
     std::string shown_text = text;
     if (hide_password) {
         shown_text = std::string(text.size(), '*');
     }
-    auto pfs = sp::RenderTarget::getDefaultFont()->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
+    auto pfs = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, rect.size - glm::vec2(32, 0), multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft);
     unsigned int n;
     for(n=0; n<pfs.data.size(); n++)
     {
@@ -474,6 +501,7 @@ int GuiTextEntry::getTextOffsetForPosition(glm::vec2 position)
             break;
         result = d.string_offset;
     }
+
     return result;
 }
 

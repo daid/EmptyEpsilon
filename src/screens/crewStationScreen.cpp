@@ -1,6 +1,7 @@
 #include "crewStationScreen.h"
 #include "epsilonServer.h"
 #include "main.h"
+#include "gameGlobalInfo.h"
 #include "preferenceManager.h"
 #include "playerInfo.h"
 #include "multiplayer_client.h"
@@ -306,11 +307,9 @@ void CrewStationScreen::update(float delta)
         // Toggle keyboard help.
         keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (viewport)
     {

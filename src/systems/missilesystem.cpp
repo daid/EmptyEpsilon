@@ -175,11 +175,9 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
     ee.size = eot.blast_range;
     ee.radar = true;
     if (!eot.explosion_sfx.empty()) {
-        //soundManager->playSound(explosion_sound, getPosition(), size * 2, 0.6);
         e.addComponent<Sfx>().sound = eot.explosion_sfx;
     }
     if (eot.damage_type == DamageType::EMP) {
-        e.addComponent<Sfx>().sound = "sfx/emp_explosion.wav";
         ee.electrical = true;
     }
     source.destroy();
@@ -238,7 +236,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 {
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return;
-    auto fireLocation = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
+    auto fire_location = source_transform->getPosition() + rotateVec2(glm::vec2(tube.position), source_transform->getRotation());
     auto category_modifier = MissileWeaponData::convertSizeToCategoryModifier(tube.size);
     auto& mwd = MissileWeaponData::getDataFor(tube.type_loaded);
 
@@ -253,6 +251,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_center = 35 * category_modifier;
             mc.damage_at_edge = 5 * category_modifier;
             mc.blast_range = 30 * category_modifier;
+            mc.explosion_sfx = "sfx/explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.1f, 0.2f);
         }
         break;
@@ -280,6 +279,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_center = 160.0f * category_modifier;
             mc.damage_at_edge = 30.0f * category_modifier;
             mc.blast_range = 1000.0f * category_modifier;
+            mc.explosion_sfx = "sfx/explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.05f, 0.0f);
         }
         break;
@@ -291,6 +291,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_center = 10.0f * category_modifier;
             mc.damage_at_edge = 10.0f * category_modifier;
             mc.blast_range = 20.0f * category_modifier;
+            mc.explosion_sfx = "sfx/explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
@@ -303,6 +304,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 30.0f * category_modifier;
             mc.blast_range = 1000.0f * category_modifier;
             mc.damage_type = DamageType::EMP;
+            mc.explosion_sfx = "sfx/emp_explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 1.0f, 0.0f);
             missile.addComponent<ExplodeOnTimeout>();
         }
@@ -332,8 +334,9 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 
         if (auto f = source.getComponent<Faction>())
             missile.addComponent<Faction>().entity = f->entity;
+
         auto& t = missile.addComponent<sp::Transform>();
-        t.setPosition(fireLocation);
+        t.setPosition(fire_location);
         t.setRotation(source_transform->getRotation() + tube.direction);
         auto& cpe = missile.addComponent<ConstantParticleEmitter>();
         if (tube.type_loaded == MW_Mine) {
@@ -363,6 +366,11 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
         trace.flags = RadarTrace::Rotate;
         trace.color = mwd.color;
+
+        auto& sfx = missile.addComponent<Sfx>();
+        sfx.sound = mwd.fire_sound;
+        sfx.volume = 55.0f + 15.0f * category_modifier;
+        sfx.pitch += random(-0.1f, 0.1f);
     }
 }
 

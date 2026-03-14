@@ -326,7 +326,8 @@ static int luaSectorToXY(lua_State* L)
     if(sector.length() < 2){
         lua_pushnumber(L, 0);
         lua_pushnumber(L, 0);
-        return 2;
+        lua_pushboolean(L, false);
+        return 3;
     }
 
     // Y axis is complicated
@@ -339,7 +340,8 @@ static int luaSectorToXY(lua_State* L)
         } catch(const std::exception& e) {
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         if(a1 > char('a')){
             // Case with two lowercase letters (zz10) counting down towards the North
@@ -356,7 +358,8 @@ static int luaSectorToXY(lua_State* L)
         }catch(const std::exception& e){
             lua_pushnumber(L, 0);
             lua_pushnumber(L, 0);
-            return 2;
+            lua_pushboolean(L, false);
+            return 3;
         }
         y = (alphaPart - char('F')) * sector_size;
     }
@@ -364,7 +367,8 @@ static int luaSectorToXY(lua_State* L)
     x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
     lua_pushnumber(L, x);
     lua_pushnumber(L, y);
-    return 2;
+    lua_pushboolean(L, true);
+    return 3;
 }
 
 static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
@@ -373,7 +377,7 @@ static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
     if (!zone) return false;
     auto t = e.getComponent<sp::Transform>();
     if (!t) return false;
-    return insidePolygon(zone->outline, t->getPosition() - glm::vec2(x, y));
+    return insidePolygon(zone->outline, glm::vec2(x, y) - t->getPosition());
 }
 
 static void luaSetBanner(string banner)
@@ -624,12 +628,17 @@ static void luaShutdownGame()
 
 static void luaPauseGame()
 {
-    engine->setGameSpeed(0.0);
+    engine->setGameSpeed(0.0f);
 }
 
 static void luaUnpauseGame()
 {
-    engine->setGameSpeed(1.0);
+    engine->setGameSpeed(1.0f);
+}
+
+static bool luaIsGamePaused()
+{
+    return engine->getGameSpeed() == 0.0f;
 }
 
 static void luaPlaySoundFile(string filename)
@@ -954,20 +963,26 @@ void luaCommandScan(sp::ecs::Entity ship, sp::ecs::Entity target) {
     }
 }
 void luaCommandSetSystemPowerRequest(sp::ecs::Entity ship, ShipSystem::Type system, float power_level) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetSystemPowerRequest(system, power_level); return; }
-    auto sys = ShipSystem::get(ship, system);
-    if (sys && power_level >= 0.0f && power_level <= 3.0f)
-        sys->power_request = power_level;
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetSystemPowerRequest(system, power_level);
+        return;
+    }
+
+    if (auto sys = ShipSystem::get(ship, system))
+        sys->power_request = std::clamp(power_level, 0.0f, 3.0f);
 }
 void luaCommandSetSystemCoolantRequest(sp::ecs::Entity ship, ShipSystem::Type system, float coolant_level) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetSystemCoolantRequest(system, coolant_level); return; }
-    auto coolant = ship.getComponent<Coolant>();
-    if (coolant) {
-        coolant_level = std::clamp(coolant_level, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
-        auto sys = ShipSystem::get(ship, system);
-        if (sys && coolant_level >= 0.0f && coolant_level <= 3.0f) {
-            sys->coolant_request = coolant_level;
-        }
+    if (my_player_info && my_player_info->ship == ship)
+    {
+        my_player_info->commandSetSystemCoolantRequest(system, coolant_level);
+        return;
+    }
+
+    if (auto coolant = ship.getComponent<Coolant>())
+    {
+        if (auto sys = ShipSystem::get(ship, system))
+            sys->coolant_request = std::clamp(coolant_level, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
     }
 }
 void luaCommandDock(sp::ecs::Entity ship, sp::ecs::Entity station) {
@@ -1038,27 +1053,23 @@ void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
 
 static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && lrr->waypoints.size() < 9) {
-        lrr->waypoints.push_back({x, y});
-        lrr->waypoints_dirty = true;
+    if (auto wp = ship.getComponent<Waypoints>()) {
+        wp->addNew({x, y});
     }
 }
 
 static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-        lrr->waypoints.erase(lrr->waypoints.begin() + index);
-        lrr->waypoints_dirty = true;
+    auto wp = ship.getComponent<Waypoints>();
+    if (wp && index >= 0 && index < int(wp->waypoints.size())) {
+        wp->waypoints.erase(wp->waypoints.begin() + index);
+        wp->dirty = true;
     }
 }
 static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}); return; }
-    auto lrr = ship.getComponent<LongRangeRadar>();
-    if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-        lrr->waypoints[index] = {x, y};
-        lrr->waypoints_dirty = true;
+    if (auto wp = ship.getComponent<Waypoints>()) {
+        wp->move(index, {x, y});
     }
 }
 static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship) {
@@ -1101,6 +1112,19 @@ static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     //TODO
 }
 
+static void luaStartThread(sp::script::Callback callback)
+{
+    auto res = callback.callCoroutine();
+    LuaConsole::checkResult(res);
+    if (res.isOk() && res.value())
+        gameGlobalInfo->new_script_threads.push_back(res.value());
+}
+
+static int luaYield(lua_State* lua)
+{
+    return lua_yield(lua, 0);
+}
+
 void setupSubEnvironment(sp::script::Environment& env)
 {
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
@@ -1115,8 +1139,17 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("_", &luaTranslate);
     
     env.setGlobal("createEntity", &luaCreateEntity);
+    /// table getEntitiesWithComponent(string component_name)
+    /// Returns a table of entities that have the given component type.
+    /// Component names are typically lowercased versions of their C++ equivalents with words separated by underscores instead of by case.
+    /// These names do not necessarily match their ShipSystem equivalents. For example, "beam_weapons" is the Lua component name to be used here, but "beamweapons" is the separate Lua ShipSystem name.
+    /// Examples:
+    ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
+    ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
+    env.setGlobal("startThread", &luaStartThread);
+    env.setGlobal("yield", &luaYield);
     
     env.setGlobal("createClass", &luaCreateClass);
 
@@ -1148,19 +1181,28 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("getSectorName", &luaGetSectorName);
     /// glm::vec2 sectorToXY(string sector_name)
     /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
+    /// If the sector name is invalid, this returns coordinates 0, 0. This function also returns a third optional Boolean value that indicates whether the sector name was valid.
     /// Examples:
-    /// x,y = sectorToXY("A0") -- x = -100000, y = -100000
-    /// x,y = sectorToXY("zz-23") -- x = -560000, y = -120000
-    /// x,y = sectorToXY("BA12") -- x = 140000, y = 940000
+    /// x, y = sectorToXY("F5") -- x = 0, y = 0
+    /// x, y = sectorToXY("A0") -- x = -100000, y = -100000
+    /// x, y = sectorToXY("zz-23") -- x = -560000, y = -120000
+    /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
+    /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
     env.setGlobal("sectorToXY", &luaSectorToXY);
+    /// bool isInsideZone(x, y, zone_entity)
+    /// Checks whether the given x/y coordinates are within the specified zone.
+    /// Example:
+    /// square_zone = Zone():setPoints(-2000, 2000, 2000, 2000, 2000, -2000, -2000, -2000) -- draw a 4U square zone around coordinates 0, 0
+    /// local inside_zone = isInsideZone(1000, 1000, square_zone) -- true, because coordinates 1000, 1000 are inside of the zone
+    /// local outside_zone = isInsideZone(10000, 10000, square_zone) -- false, because coordinates 10000, 10000 are outside of the zone
     env.setGlobal("isInsideZone", &luaIsInsideZone);
     /// void setBanner(string banner)
     /// Displays a scrolling banner containing the given text on the cinematic and top-down views.
     /// Example: setBanner("You will soon die!")
     env.setGlobal("setBanner", &luaSetBanner);
     /// void setDefaultSkybox(string skybox)
-    /// Sets the default skybox to show, "default" is the default skybox. See resources/skybox for other options.
-    /// Example: setDefaultSkybox("You will soon die!")
+    /// Sets the default skybox image set to use in 3D viewports. Each image set is a directory in resources/skybox containing top.png, right.png, left.png, front.png, bottom.png, and back.png images. Defaults to "default".
+    /// Example: setDefaultSkybox("simulation")
     env.setGlobal("setDefaultSkybox", &luaSetDefaultSkybox);
     /// float getScenarioTime()
     /// Returns the elapsed time of the scenario, in seconds.
@@ -1218,6 +1260,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Use to unpause a headless server, which doesn't have access to the GM screen.
     /// Example: unpauseGame()
     env.setGlobal("unpauseGame", &luaUnpauseGame);
+    /// bool isGamePaused()
+    /// Returns true if the game is paused.
+    /// Example: local is_paused = isGamePaused()
+    env.setGlobal("isGamePaused", &luaIsGamePaused);
     /// void playSoundFile(string filename)
     /// Plays the given audio file on the server.
     /// Paths are relative to the resources/ directory.

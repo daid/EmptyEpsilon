@@ -141,11 +141,9 @@ void CinematicViewScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.cinematic.move_forward.get())
     {

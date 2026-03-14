@@ -24,6 +24,7 @@ public:
     TextureRef texture;
     TextureRef specular_texture;
     TextureRef illumination_texture;
+    TextureRef normal_texture;
     glm::vec3 mesh_offset{};
     float scale = 1.0;
 
@@ -31,6 +32,7 @@ public:
     sp::Texture* getTexture();
     sp::Texture* getSpecularTexture();
     sp::Texture* getIlluminationTexture();
+    sp::Texture* getNormalTexture();
 };
 
 class EngineEmitter

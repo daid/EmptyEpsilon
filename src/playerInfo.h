@@ -30,6 +30,8 @@ public:
 
     void reset();
 
+    int countTotalPlayerPositions();
+    int countPlayerPositionsOnMonitor(int monitor);
     bool hasPosition(CrewPosition cp);
     bool isOnlyMainScreen(int monitor_index);
 

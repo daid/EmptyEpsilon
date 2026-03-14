@@ -1,21 +1,23 @@
-#ifndef GUI2_SELECTOR_H
-#define GUI2_SELECTOR_H
+#pragma once
 
 #include "gui2_entrylist.h"
-#include "gui2_togglebutton.h"
 
 
 class GuiArrowButton;
+class GuiThemeStyle;
+class GuiToggleButton;
 
 class GuiSelector : public GuiEntryList
 {
 protected:
-    float text_size;
+    float text_size = 30.0f;
     sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
     std::vector<GuiToggleButton*> popup_buttons;
+    const GuiThemeStyle* back_style;
+    const GuiThemeStyle* front_style;
 public:
     GuiSelector(GuiContainer* owner, string id, func_t func);
 
@@ -26,5 +28,3 @@ public:
 
     GuiSelector* setTextSize(float size);
 };
-
-#endif//GUI2_SELECTOR_H
