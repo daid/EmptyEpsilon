@@ -52,7 +52,7 @@ private:
     std::vector<CrewTabInfo> tabs;
     void showNextTab(int offset=1);
     void showTab(GuiElement* element);
-    std::vector<string> hotkey_categories = {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "Crew Screens")};
+    std::vector<string> hotkey_categories = {tr("hotkey_menu", "General"), tr("hotkey_menu", "Crew screens")};
 
     GuiElement* findTab(string name);
 
