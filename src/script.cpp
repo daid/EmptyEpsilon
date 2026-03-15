@@ -1032,7 +1032,7 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
 void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamFrequency(frequency); return; }
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
-        beamweapons->frequency = std::clamp(frequency, 0, BeamWeaponSys::max_frequency);
+        beamweapons->setFrequency(frequency);
 }
 
 void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) {
