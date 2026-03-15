@@ -233,11 +233,6 @@ static string luaGetScenarioVariation()
     return "None";
 }
 
-static void luaOnNewPlayerShip(sp::script::Callback callback)
-{
-    gameGlobalInfo->on_new_player_ship = callback;
-}
-
 static void luaGlobalMessage(string message, std::optional<float> timeout)
 {
     gameGlobalInfo->global_message = message;
@@ -382,7 +377,7 @@ static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
     if (!zone) return false;
     auto t = e.getComponent<sp::Transform>();
     if (!t) return false;
-    return insidePolygon(zone->outline, t->getPosition() - glm::vec2(x, y));
+    return insidePolygon(zone->outline, glm::vec2(x, y) - t->getPosition());
 }
 
 static void luaSetBanner(string banner)
@@ -1032,7 +1027,7 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
 void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamFrequency(frequency); return; }
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
-        beamweapons->frequency = std::clamp(frequency, 0, BeamWeaponSys::max_frequency);
+        beamweapons->setFrequency(frequency);
 }
 
 void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) {
@@ -1168,7 +1163,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// [DEPRECATED]
     /// As getScenarioSetting("variation").
     env.setGlobal("getScenarioVariation", &luaGetScenarioVariation);
-    env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
     /// void globalMessage(string message, std::optional<float> timeout)
     /// Displays a message on the main screens of all active player ships.
     /// The message appears for 5 seconds, but new messages immediately replace any displayed message.

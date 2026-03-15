@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/destroy.h"
 
 
 #define STRINGIFY(n) #n
@@ -68,6 +69,8 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Bind a member using getter and setter functions for validation.
+// The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -318,6 +321,18 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
+
+    sp::script::ComponentHandler<MissileHoming>::name("missile_homing");
+    BIND_MEMBER(MissileHoming, turn_rate);
+    BIND_MEMBER(MissileHoming, range);
+    BIND_MEMBER(MissileHoming, target);
+    BIND_MEMBER(MissileHoming, target_angle);
+
+    sp::script::ComponentHandler<ExplodeOnTimeout>::name("explode_on_timeout");
+
     sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
     BIND_MEMBER(ExplosionEffect, size);
     BIND_MEMBER(ExplosionEffect, radar);
@@ -486,9 +501,10 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
-    BIND_MEMBER(BeamWeaponSys, frequency);
+    BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
@@ -503,6 +519,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cooldown);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
     sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
@@ -573,7 +590,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
-    
+    BIND_MEMBER(JumpDrive, just_jumped);
+
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");
@@ -809,4 +827,7 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
+    BIND_MEMBER(OnDestroyed, callback);
 }

@@ -3,6 +3,8 @@
 #include "gui/gui2_element.h"
 #include "timer.h"
 
+class GuiThemeStyle;
+
 class GuiScrollingBanner : public GuiElement
 {
 public:
@@ -12,6 +14,7 @@ public:
 private:
     static constexpr float scroll_speed_per_second = 150.0f;
 
+    const GuiThemeStyle* banner_style;
     sp::SystemStopwatch update_clock;
     bool has_scrolling_started = false;
     float draw_offset = 0.0f;

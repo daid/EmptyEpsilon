@@ -1,5 +1,4 @@
-#ifndef HOTKEY_CONFIG_H
-#define HOTKEY_CONFIG_H
+#pragma once
 
 #include <tuple>
 #include <array>
@@ -15,7 +14,7 @@ public:
     Keys();
     void init();
 
-    //Basic
+    // General game-wide binds
     sp::io::Keybinding pause;
     sp::io::Keybinding help;
     sp::io::Keybinding escape;
@@ -23,8 +22,13 @@ public:
     sp::io::Keybinding zoom_out;
     sp::io::Keybinding voice_all;
     sp::io::Keybinding voice_ship;
+    sp::io::Keybinding debug_show_fps;
+    sp::io::Keybinding debug_show_timing;
+#ifdef DEBUG
+    sp::io::Keybinding debug_show_colliders;
+#endif
 
-    //General
+    // Crew screen binds
     sp::io::Keybinding next_station;
     sp::io::Keybinding prev_station;
     sp::io::Keybinding station_helms;
@@ -33,7 +37,7 @@ public:
     sp::io::Keybinding station_science;
     sp::io::Keybinding station_relay;
 
-    //Main screen
+    // Main screen binds
     sp::io::Keybinding mainscreen_forward;
     sp::io::Keybinding mainscreen_left;
     sp::io::Keybinding mainscreen_right;
@@ -43,7 +47,7 @@ public:
     sp::io::Keybinding mainscreen_long_range_radar;
     sp::io::Keybinding mainscreen_first_person;
 
-    //helms
+    // Helms screen binds
     sp::io::Keybinding helms_increase_impulse;
     sp::io::Keybinding helms_increase_impulse_1;
     sp::io::Keybinding helms_increase_impulse_10;
@@ -68,8 +72,10 @@ public:
     sp::io::Keybinding helms_warp2;
     sp::io::Keybinding helms_warp3;
     sp::io::Keybinding helms_warp4;
+    sp::io::Keybinding helms_warp_max;
     sp::io::Keybinding helms_increase_warp;
     sp::io::Keybinding helms_decrease_warp;
+    sp::io::Keybinding helms_set_warp;
     sp::io::Keybinding helms_dock_action;
     sp::io::Keybinding helms_dock_request;
     sp::io::Keybinding helms_dock_abort;
@@ -77,11 +83,12 @@ public:
     sp::io::Keybinding helms_increase_jump_distance;
     sp::io::Keybinding helms_decrease_jump_distance;
     sp::io::Keybinding helms_execute_jump;
+    sp::io::Keybinding helms_abort_jump;
     sp::io::Keybinding helms_combat_left;
     sp::io::Keybinding helms_combat_right;
     sp::io::Keybinding helms_combat_boost;
 
-    //weapons
+    // Weapons screen binds
     sp::io::Keybinding weapons_select_homing;
     sp::io::Keybinding weapons_select_nuke;
     sp::io::Keybinding weapons_select_mine;
@@ -100,15 +107,15 @@ public:
     sp::io::Keybinding weapons_shield_calibration_start;
     sp::io::Keybinding weapons_beam_subsystem_target_next;
     sp::io::Keybinding weapons_beam_subsystem_target_previous;
-    sp::io::Keybinding weapons_beam_frequence_increase;
-    sp::io::Keybinding weapons_beam_frequence_decrease;
+    sp::io::Keybinding weapons_beam_frequency_increase;
+    sp::io::Keybinding weapons_beam_frequency_decrease;
     sp::io::Keybinding weapons_toggle_aim_lock;
     sp::io::Keybinding weapons_enable_aim_lock;
     sp::io::Keybinding weapons_disable_aim_lock;
     sp::io::Keybinding weapons_aim_left;
     sp::io::Keybinding weapons_aim_right;
 
-    //Science
+    // Science screen binds
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_scan_abort;
     sp::io::Keybinding science_select_next_scannable;
@@ -116,7 +123,7 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
 
-    //Engineering
+    // Engineering screen binds
     sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
     sp::io::Keybinding engineering_select_system_next;
     sp::io::Keybinding engineering_select_system_prev;
@@ -146,12 +153,12 @@ public:
     sp::io::Keybinding engineering_set_power_for_system[ShipSystem::COUNT];
     sp::io::Keybinding engineering_set_coolant_for_system[ShipSystem::COUNT];
 
-    //Relay
+    // Relay screen binds
     sp::io::Keybinding relay_alert_level_none;
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
 
-    // Cinematic View
+    // Cinematic view binds
     struct CinematicKeys {
         CinematicKeys();
         void init();
@@ -173,7 +180,7 @@ public:
         sp::io::Keybinding tilt_up;
     } cinematic;
 
-    // Top-down View
+    // Top-down view binds
     struct TopDownKeys {
         TopDownKeys();
         void init();
@@ -187,20 +194,13 @@ public:
         sp::io::Keybinding pan_left;
         sp::io::Keybinding pan_right;
     } topdown;
-   
 
-    //GM
+    // GM screen binds
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
     sp::io::Keybinding gm_show_callsigns;
 
-    //Various
+    // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;
-
-    //Debug
-    sp::io::Keybinding debug_show_fps;
-    sp::io::Keybinding debug_show_timing;
 };
 extern Keys keys;
-
-#endif//HOTKEY_CONFIG_H

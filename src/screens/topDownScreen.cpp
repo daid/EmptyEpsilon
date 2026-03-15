@@ -46,7 +46,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_topdown = "";
 
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down View"))
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down view"))
         keyboard_topdown += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
 
     keyboard_help->setText(keyboard_topdown);

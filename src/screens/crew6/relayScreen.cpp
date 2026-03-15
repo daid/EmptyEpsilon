@@ -20,6 +20,7 @@
 #include "screenComponents/alertLevelButton.h"
 
 #include "gui/mouseRenderer.h"
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
@@ -37,7 +38,7 @@ static bool canHack(sp::ecs::Entity entity)
 }
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
-: GuiOverlay(owner, "RELAY_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
@@ -204,12 +205,6 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     }
 }
 
-RelayScreen::~RelayScreen()
-{
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-        mouse_renderer->setSpriteImage("mouse.png");
-}
-
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
     ///Handle mouse wheel
@@ -333,21 +328,4 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     delete_waypoint_button->setEnable(targets.getWaypointIndex() >= 0);
-
-    if (P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer"))
-    {
-        switch(mode)
-        {
-        case TargetSelection:
-        case MoveWaypoint:
-            mouse_renderer->setSpriteImage("mouse.png");
-            break;
-        case WaypointPlacement:
-            mouse_renderer->setSpriteImage("waypoint.png");
-            break;
-        case LaunchProbe:
-            mouse_renderer->setSpriteImage("radar/probe.png");
-            break;
-        }
-    }
 }

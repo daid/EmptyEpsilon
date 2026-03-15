@@ -47,7 +47,7 @@ static int lua_getGMSelection(lua_State* L)
 static void lua_onGMClick(sp::script::Callback callback, string icon = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR)
 {
     if (callback) {
-        gameGlobalInfo->on_gm_click=[callback](glm::vec2 position) mutable {
+        gameGlobalInfo->on_gm_click=[callback](glm::vec2 position, std::optional<float>) mutable {
             auto res = callback.call<void>(position.x, position.y);
             LuaConsole::checkResult(res);
         };

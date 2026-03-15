@@ -7,6 +7,7 @@
 #include "main.h"
 
 #include "gui/hotkeyBinder.h"
+#include "gui/theme.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_textentry.h"
@@ -16,8 +17,8 @@
 HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // TODO: Figure out how to make this an AutoLayout.
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
@@ -42,10 +43,15 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     // Category selector
     // Get a list of hotkey categories
     category_list = sp::io::Keybinding::getCategories();
-    (new GuiSelector(top_row, "Category", [this](int index, string value)
+    auto category_selector = new GuiSelector(top_row, "Category", [this](int index, string value)
     {
         HotkeyMenu::setCategory(index);
-    }))->setOptions(category_list)->setSelectionIndex(category_index)->setSize(300, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopCenter);
+    });
+    category_selector
+        ->setOptions(category_list)
+        ->setSelectionIndex(category_index)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 
     // Page navigation
     previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
@@ -64,8 +70,9 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
     rebinding_container = new GuiElement(rebinding_ui, "HOTKEY_CONFIG_CONTAINER");
     rebinding_container->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::TopLeft)->setAttribute("layout", "horizontal");
 
-    // Show category 1 ("General")
-    HotkeyMenu::setCategory(1);
+    // Show category 0 ("General")
+    HotkeyMenu::setCategory(0);
+    category_selector->setSelectionIndex(0);
 
     // Bottom: Menu navigation
 
