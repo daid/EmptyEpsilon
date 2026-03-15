@@ -21,6 +21,7 @@ public:
     GuiOverlay* setColor(glm::u8vec4 color);
     GuiOverlay* setAlpha(int alpha);
     GuiOverlay* setTextureTiled(string texture);
+    GuiOverlay* setTextureTiledThemed(string theme_element, GuiElement::State state = GuiElement::State::Normal);
     GuiOverlay* setTextureNone();
 };
 

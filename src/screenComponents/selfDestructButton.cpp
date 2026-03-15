@@ -1,6 +1,5 @@
 #include <i18n.h>
 #include "selfDestructButton.h"
-#include "gui/colorConfig.h"
 #include "playerInfo.h"
 #include "components/selfdestruct.h"
 

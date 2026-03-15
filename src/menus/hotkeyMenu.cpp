@@ -7,6 +7,7 @@
 #include "main.h"
 
 #include "gui/hotkeyBinder.h"
+#include "gui/theme.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_canvas.h"
 #include "gui/gui2_label.h"
@@ -20,9 +21,8 @@
 HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    // Background color/image
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     container = new GuiElement(this, "HOTKEY_CONFIG_CONTAINER");
     container
@@ -101,9 +101,9 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setAttribute("layout", "vertical");
 
-    // Show category 2 ("General")
-    HotkeyMenu::setCategory(2);
-    category_selector->setSelectionIndex(2);
+    // Show category 0 ("General")
+    HotkeyMenu::setCategory(0);
+    category_selector->setSelectionIndex(0);
 
     // Bottom: Menu navigation
 
