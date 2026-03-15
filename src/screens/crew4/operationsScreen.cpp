@@ -12,14 +12,14 @@
 
 #include "screens/crew6/scienceScreen.h"
 
+#include "gui/theme.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
 
-
 OperationScreen::OperationScreen(GuiContainer* owner)
-: GuiOverlay(owner, "", colorConfig.background)
+: GuiOverlay(owner, "", GuiTheme::getColor("background"))
 {
     science = new ScienceScreen(this, CrewPosition::operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);

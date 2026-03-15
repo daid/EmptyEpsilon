@@ -140,7 +140,6 @@ if(NOT meshoptimizer_POPULATED)
 endif()
 
 set(GUI_LIB_SOURCES
-    src/gui/colorConfig.cpp
     src/gui/hotkeyBinder.cpp
     src/gui/hotkeyConfig.cpp
     src/gui/joystickConfig.cpp
@@ -175,7 +174,6 @@ set(GUI_LIB_SOURCES
     src/gui/layout/horizontal.cpp
     src/gui/layout/vertical.cpp
 
-    src/gui/colorConfig.h
     src/gui/debugRenderer.h
     src/gui/gui2_advancedscrolltext.h
     src/gui/gui2_arrowbutton.h
