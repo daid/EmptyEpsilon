@@ -68,8 +68,6 @@ CrewStationScreen::CrewStationScreen(RenderLayer* render_layer, bool with_main_s
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
-    if (PreferencesManager::get("voice_chat_enabled", "1") == "1")
-        hotkey_categories.push_back(tr("hotkey_menu", "Voice Chat"));
     keyboard_help = new GuiHotkeyHelpOverlay(this, hotkey_categories);
 
 #ifndef __ANDROID__

@@ -43,7 +43,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(viewport, {tr("hotkey_menu", "Top-down View")});
+    keyboard_help = new GuiHotkeyHelpOverlay(viewport, {tr("hotkey_menu", "General"), tr("hotkey_menu", "Top-down view")});
     keyboard_help->moveToFront();
 
     // Lock onto the first player ship to start.

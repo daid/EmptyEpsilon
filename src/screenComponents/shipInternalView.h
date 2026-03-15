@@ -6,6 +6,7 @@
 class RepairCrew;
 class GuiShipRoomContainer;
 class GuiShipCrew;
+class GuiThemeStyle;
 
 class GuiShipInternalView : public GuiElement
 {
@@ -47,6 +48,7 @@ private:
     ShipSystem::Type system;
     float room_size;
     func_t func;
+    const GuiThemeStyle* room_theme;
 public:
     GuiShipRoom(GuiContainer* owner, string id, float room_size, glm::ivec2 room_dimensions, func_t func);
 
@@ -66,6 +68,7 @@ public:
 private:
     bool horizontal;
     func_t func;
+    const GuiThemeStyle* door_theme;
 public:
     GuiShipDoor(GuiContainer* owner, string id, func_t func);
 
@@ -86,6 +89,8 @@ public:
 private:
     sp::ecs::Entity& selected_crew_member;
     func_t func;
+    const GuiThemeStyle* crew_theme;
+    const GuiThemeStyle* selection_theme;
 public:
     GuiShipCrew(GuiContainer* owner, string id, sp::ecs::Entity crew, sp::ecs::Entity& selected_crew_member, func_t func);
 

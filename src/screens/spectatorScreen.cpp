@@ -100,7 +100,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 
     new GuiIndicatorOverlays(this);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Top-down View")});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "Spectator view"), tr("hotkey_menu", "Top-down view")});
     keyboard_help->moveToFront();
 
     new GuiIndicatorOverlays(this);
@@ -121,8 +121,8 @@ void SpectatorScreen::update(float delta)
     if (mouse_wheel_delta != 0.0f)
     {
         float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 100000)
-            view_distance = 100000;
+        if (view_distance > 1000000)
+            view_distance = 1000000;
         if (view_distance < 5000)
             view_distance = 5000;
         main_radar->setDistance(view_distance);

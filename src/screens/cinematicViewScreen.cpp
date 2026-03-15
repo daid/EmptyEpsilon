@@ -62,7 +62,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {"Cinematic View"});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {"Cinematic view"});
     keyboard_help->moveToFront();
 }
 

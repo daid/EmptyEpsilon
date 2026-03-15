@@ -50,10 +50,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiGlobalMessage(this);
     (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
-    std::vector<string> hotkey_categories = {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "Main Screen")};
-    if (PreferencesManager::get("voice_chat_enabled", "1") == "1")
-        hotkey_categories.emplace_back(tr("hotkey_menu", "Voice Chat"));
-    keyboard_help = new GuiHotkeyHelpOverlay(this, hotkey_categories);
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "Main screen")});
 
     if (PreferencesManager::get("music_enabled") != "0")
     {

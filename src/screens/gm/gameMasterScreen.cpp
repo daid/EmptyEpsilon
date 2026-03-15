@@ -293,7 +293,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")});
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "GM screen")});
 
     gameGlobalInfo->on_gm_click = nullptr;
 }
@@ -314,7 +314,7 @@ void GameMasterScreen::update(float delta)
     float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
     if (mouse_wheel_delta != 0.0f)
     {
-        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 100000.0f);
+        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 1000000.0f);
         main_radar->setDistance(view_distance);
         if (view_distance < 10000) main_radar->shortRange();
         else main_radar->longRange();

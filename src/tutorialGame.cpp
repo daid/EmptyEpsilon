@@ -1,5 +1,5 @@
-#include <i18n.h>
 #include "tutorialGame.h"
+#include <i18n.h>
 #include "playerInfo.h"
 #include "preferenceManager.h"
 #include "main.h"
@@ -7,9 +7,6 @@
 #include "gameGlobalInfo.h"
 
 #include "components/collision.h"
-
-#include "screenComponents/viewport3d.h"
-#include "screenComponents/radarView.h"
 
 #include "screens/crew6/helmsScreen.h"
 #include "screens/crew6/weaponsScreen.h"
@@ -20,12 +17,15 @@
 #include "screens/crew4/engineeringAdvancedScreen.h"
 #include "screens/crew4/operationsScreen.h"
 
-#include "screenComponents/indicatorOverlays.h"
-
 #include "menus/luaConsole.h"
+
+#include "gui/theme.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_button.h"
+#include "screenComponents/viewport3d.h"
+#include "screenComponents/radarView.h"
+#include "screenComponents/indicatorOverlays.h"
 
 P<TutorialGame> TutorialGame::instance;
 
@@ -34,8 +34,8 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
     instance = this;
     new LocalOnlyGame();
 
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     this->viewport = nullptr;
     this->repeated_tutorial = repeated_tutorial;
