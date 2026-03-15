@@ -212,8 +212,8 @@ Keys::Keys() :
     weapons_shield_calibration_start("WEAPONS_SHIELD_CALIBRATION_START", "/"),
     weapons_beam_subsystem_target_next("WEAPONS_SUBSYSTEM_TARGET_NEXT", '"'),
     weapons_beam_subsystem_target_previous("WEAPONS_SUBSYSTEM_TARGET_PREVIOUS", ";"),
-    weapons_beam_frequence_increase("WEAPONS_FREQUENCY_INCREASE", "M"),
-    weapons_beam_frequence_decrease("WEAPONS_FREQUENCY_DECREASE", "N"),
+    weapons_beam_frequency_increase("WEAPONS_FREQUENCY_INCREASE", "M"),
+    weapons_beam_frequency_decrease("WEAPONS_FREQUENCY_DECREASE", "N"),
     weapons_toggle_aim_lock("WEAPONS_AIM_LOCK_TOGGLE"),
     weapons_enable_aim_lock("WEAPONS_AIM_LOCK_ENABLE"),
     weapons_disable_aim_lock("WEAPONS_AIM_LOCK_DISABLE"),
@@ -413,8 +413,8 @@ void Keys::init()
     weapons_shield_calibration_start.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Start shield calibration"));
     weapons_beam_subsystem_target_next.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Next beam subsystem target type"));
     weapons_beam_subsystem_target_previous.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Previous beam subsystem target type"));
-    weapons_beam_frequence_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
-    weapons_beam_frequence_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
+    weapons_beam_frequency_increase.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Increase beam frequency"));
+    weapons_beam_frequency_decrease.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Decrease beam frequency"));
     weapons_toggle_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Toggle missile aim lock"));
     weapons_enable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Enable missile aim lock"));
     weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));

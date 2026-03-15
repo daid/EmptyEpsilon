@@ -102,8 +102,8 @@ public:
     sp::io::Keybinding weapons_shield_calibration_start;
     sp::io::Keybinding weapons_beam_subsystem_target_next;
     sp::io::Keybinding weapons_beam_subsystem_target_previous;
-    sp::io::Keybinding weapons_beam_frequence_increase;
-    sp::io::Keybinding weapons_beam_frequence_decrease;
+    sp::io::Keybinding weapons_beam_frequency_increase;
+    sp::io::Keybinding weapons_beam_frequency_decrease;
     sp::io::Keybinding weapons_toggle_aim_lock;
     sp::io::Keybinding weapons_enable_aim_lock;
     sp::io::Keybinding weapons_disable_aim_lock;
