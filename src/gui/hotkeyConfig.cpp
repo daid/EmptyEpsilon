@@ -5,7 +5,7 @@
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
 
-// Cinematic Keys
+// Cinematic view binds
 Keys::CinematicKeys::CinematicKeys() :
     toggle_ui("CINEMATIC_TOGGLE_UI", "H"),
     toggle_callsigns("CINEMATIC_TOGGLE_CALLSIGNS", "G"),
@@ -27,7 +27,7 @@ Keys::CinematicKeys::CinematicKeys() :
 
 void Keys::CinematicKeys::init()
 {
-    const auto localized_category = tr("hotkey_menu", "Cinematic View");
+    const auto localized_category = tr("hotkey_menu", "Cinematic view");
     toggle_ui.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle UI"));
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Cinematic", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Cinematic", "Camera lock"));
@@ -46,6 +46,7 @@ void Keys::CinematicKeys::init()
     tilt_up.setLabel(localized_category, tr("hotkey_Cinematic", "Tilt up"));
 }
 
+// Top-down view binds
 Keys::TopDownKeys::TopDownKeys() :
     toggle_ui("TOPDOWN_TOGGLE_UI", "H"),
     toggle_callsigns("TOPDOWN_TOGGLE_CALLSIGNS", "G"),
@@ -60,7 +61,7 @@ Keys::TopDownKeys::TopDownKeys() :
 
 void Keys::TopDownKeys::init()
 {
-    const auto localized_category = tr("hotkey_menu", "Top-down View");
+    const auto localized_category = tr("hotkey_menu", "Top-down view");
     toggle_ui.setLabel(localized_category, tr("hotkey_Topdown", "Toggle UI"));
     toggle_callsigns.setLabel(localized_category, tr("hotkey_Topdown", "Toggle callsigns"));
     lock_camera.setLabel(localized_category, tr("hotkey_Topdown", "Camera lock"));
@@ -73,7 +74,7 @@ void Keys::TopDownKeys::init()
 }
 
 Keys::Keys() :
-    //Basic
+    // General game-wide binds
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
@@ -81,8 +82,13 @@ Keys::Keys() :
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
+    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
+    debug_show_timing("DEBUG_SHOW_TIMING", "F11"),
+#ifdef DEBUG
+    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
+#endif
 
-    //General
+    // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
     station_helms("STATION_HELMS", "F2"),
@@ -91,7 +97,7 @@ Keys::Keys() :
     station_science("STATION_SCIENCE", "F5"),
     station_relay("STATION_RELAY", "F6"),
 
-    //Main screen
+    // Main screen
     mainscreen_forward("MAINSCREEN_FORWARD", "Up"),
     mainscreen_left("MAINSCREEN_LEFT", "Left"),
     mainscreen_right("MAINSCREEN_RIGHT", "Right"),
@@ -101,7 +107,7 @@ Keys::Keys() :
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
-    //helms
+    // Helms crew screen
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
     helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
     helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
@@ -142,7 +148,7 @@ Keys::Keys() :
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
 
-    //weapons
+    // Weapons crew screen
     weapons_select_homing("WEAPONS_SELECT_HOMING", "1"),
     weapons_select_nuke("WEAPONS_SELECT_NUKE", "2"),
     weapons_select_mine("WEAPONS_SELECT_MINE", "3"),
@@ -220,7 +226,7 @@ Keys::Keys() :
     weapons_aim_left("WEAPONS_AIM_LEFT", "G"),
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
 
-    //Science
+    // Science crew screen
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
     science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
@@ -243,7 +249,7 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_4"},
     }},
 
-    //Engineering
+    // Engineering crew screen
     engineering_select_system{
         {"ENGINEERING_SELECT_SYSTEM_REACTOR", "1"},
         {"ENGINEERING_SELECT_SYSTEM_BEAM_WEAPONS", "2"},
@@ -302,55 +308,55 @@ Keys::Keys() :
         {"ENGINEERING_SET_SYSTEM_COOLANT_READ_SHIELD"},
     },
 
+    // Relay crew screen
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
 
+    // GM screen
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
 
-    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C"),
-
-#ifdef DEBUG
-    debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
-#endif
-    debug_show_fps("DEBUG_SHOW_FPS", "F10"),
-    debug_show_timing("DEBUG_SHOW_TIMING", "F11")
+    // Spectator screen
+    spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
 {
 }
 
 void Keys::init()
 {
-    pause.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Pause game"));
-    help.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Show in-game help"));
-    escape.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Return to ship options menu"));
-    zoom_in.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom in on zoomable stations"));
-    zoom_out.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Zoom out on zoomable stations"));
-    voice_all.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to server"));
-    voice_ship.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Broadcast voice chat to ship"));
-    fullscreen_key.setLabel(tr("hotkey_menu", "Basic"), tr("hotkey_Basic", "Fullscreen toggle"));
+    // Common binds game-wide
+    pause.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Pause game"));
+    help.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show in-game help"));
+    escape.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Return to ship options menu"));
+    zoom_in.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom in on zoomable screens"));
+    zoom_out.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Zoom out on zoomable screens"));
+    voice_all.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to server"));
+    voice_ship.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to ship"));
+    fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
+    debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
+    debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
 
-    //General
-    next_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to next crew station"));
-    prev_station.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to previous crew station"));
-    station_helms.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to helms station"));
-    station_weapons.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to weapons station"));
-    station_engineering.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to engineering station"));
-    station_science.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to science station"));
-    station_relay.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Switch to relay station"));
+    // Crew screens
+    next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
+    prev_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to previous crew screen"));
+    station_helms.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to helms screen"));
+    station_weapons.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to weapons screen"));
+    station_engineering.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to engineering screen"));
+    station_science.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to science screen"));
+    station_relay.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to relay screen"));
 
-    //Main screen
-    mainscreen_forward.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View forward"));
-    mainscreen_left.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View left"));
-    mainscreen_right.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View right"));
-    mainscreen_back.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View backward"));
-    mainscreen_target.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
-    mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View tactical radar"));
-    mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "View long-range radar"));
-    mainscreen_first_person.setLabel(tr("hotkey_menu", "Main Screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
+    // Main screen
+    mainscreen_forward.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View forward"));
+    mainscreen_left.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View left"));
+    mainscreen_right.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View right"));
+    mainscreen_back.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View backward"));
+    mainscreen_target.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
+    mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View tactical radar"));
+    mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
 
-    //helms
+    // Helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
     helms_increase_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 1%"));
     helms_increase_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 10%"));
@@ -391,17 +397,17 @@ void Keys::init()
     helms_combat_right.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost right"));
     helms_combat_boost.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Combat boost forwards"));
 
-    //weapons
+    // Weapons
     weapons_select_homing.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select homing"));
     weapons_select_nuke.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select nuke"));
     weapons_select_mine.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select mine"));
     weapons_select_emp.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select EMP"));
     weapons_select_hvli.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select HVLI"));
-    for(auto n = 0u; n < weapons_load_tube.size(); n++)
+    for (auto n = 0u; n < weapons_load_tube.size(); n++)
     {
-        weapons_load_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Load tube {number}").format({{"number", string(n+1)}}));
-        weapons_unload_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Unload tube {number}").format({{"number", string(n+1)}}));
-        weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n+1)}}));
+        weapons_load_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Load tube {number}").format({{"number", string(n + 1)}}));
+        weapons_unload_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Unload tube {number}").format({{"number", string(n + 1)}}));
+        weapons_fire_tube[n].setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Fire tube {number}").format({{"number", string(n + 1)}}));
     }
     weapons_enemy_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next hostile target"));
     weapons_next_target.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Select next target (any)"));
@@ -421,18 +427,18 @@ void Keys::init()
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
 
-    //Science
+    // Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
-    for(auto n = 0u; n < science_scan_param_increase.size(); n++)
+    for (auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
-        science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n+1)}}));
-        science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n+1)}}));
-        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n+1)}}));
+        science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n + 1)}}));
+        science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n + 1)}}));
+        science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n + 1)}}));
     }
 
-    //Engineering
+    // Engineering
     engineering_select_system[static_cast<int>(ShipSystem::Type::Reactor)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select reactor system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::BeamWeapons)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select beam weapon system"));
     engineering_select_system[static_cast<int>(ShipSystem::Type::MissileSystem)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Select missile weapon system"));
@@ -487,21 +493,24 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
 
+    // Relay
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
 
+    // Cinematic view
     cinematic.init();
+
+    // Top-down view
     topdown.init();
-    //GM
-    gm_delete.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Delete"));
-    gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Copy to clipboard"));
-    gm_show_callsigns.setLabel(tr("hotkey_menu", "GM"), tr("hotkey_GM", "Show callsigns (GM)"));
 
-    //Various
-    spectator_show_callsigns.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_various", "Show callsigns (spectator)"));
+    // GM screen
+    gm_delete.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Delete"));
+    gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
+    gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
 
-    //Debug
-    debug_show_fps.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show FPS"));
-    debug_show_timing.setLabel(tr("hotkey_menu", "Various"), tr("hotkey_debug", "Show debug timing"));
+    // Spectator screen
+    spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));
+
+    // Lua console keybind defined in luaConsole.cpp
 }
