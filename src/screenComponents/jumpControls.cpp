@@ -143,7 +143,7 @@ void GuiJumpControls::onUpdate()
     // Set jump distance by keybind.
     float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
     if (key_change != 0.0f)
-        value = std::clamp(value + 1000.0f * key_change, slider->getRangeMin(), slider->getRangeMax());
+        value = std::clamp(value + 1000.0f * key_change, slider->getRangeMax(), slider->getRangeMin());
     if (keys.helms_increase_jump_100.getDown())
         value = std::min(value + 100.0f, slider->getRangeMin());
     if (keys.helms_decrease_jump_100.getDown())

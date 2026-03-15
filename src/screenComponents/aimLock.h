@@ -1,11 +1,10 @@
-#ifndef AIM_LOCK_H
-#define AIM_LOCK_H
+#pragma once
 
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_rotationdial.h"
-#include "screenComponents/radarView.h"
 
 class GuiMissileTubeControls;
+class GuiRadarView;
 
 class AimLockButton : public GuiToggleButton
 {
@@ -21,7 +20,8 @@ private:
 };
 
 
-class AimLock : public GuiRotationDial {
+class AimLock : public GuiRotationDial
+{
 public:
     AimLock(GuiContainer* owner, string id, GuiRadarView* radar, float min_value, float max_value, float start_value, func_t func);
 
@@ -32,5 +32,3 @@ public:
 private:
     GuiRadarView* radar;
 };
-
-#endif//AIM_LOCK_H
