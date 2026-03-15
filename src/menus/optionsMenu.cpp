@@ -19,7 +19,6 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-
 void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 {
     if (return_to == OptionsMenu::ReturnTo::Main)
@@ -32,8 +31,8 @@ void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Initialize autolayout columns.
     auto main_panel = new GuiPanel(this, "");
@@ -175,16 +174,16 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         while(iter != themes.end()) 
         {
             //strip extension
-            *iter = iter->substr(iter->find("/")+1, iter->find("."));
-            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter +".theme.txt"))
+            *iter = iter->substr(iter->find("/") + 1, iter->find("."));
+            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter + ".theme.txt"))
             {
-                LOG(ERROR, "Failed to load theme : ", *iter);
+                LOG(Error, "Failed to load theme ", *iter);
                 iter = themes.erase(iter);
             }
             else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
-             || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
+                     || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
             {
-                LOG(ERROR, "Missing base font or bold font for theme : ", *iter);
+                LOG(Error, "Missing base font or bold font for theme ", *iter);
                 iter = themes.erase(iter);
             }
             else
@@ -194,10 +193,10 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         }
         
         std::sort(themes.begin(), themes.end());
-        if(0 == themes.size())
+        if (themes.size() == 0)
         {
-            LOG(ERROR, "Failed to load any theme, exiting");
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing ? Should be gui/*.theme.txt. and not contain errors.", nullptr);
+            LOG(Error, "Failed to load any theme, exiting");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing? Should be gui/*.theme.txt and not contain errors.", nullptr);
             exit(1);
         }
 
@@ -205,7 +204,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
         auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
         if(default_elem != themes.end())
         {
-            default_index =  static_cast<int>(default_elem - themes.begin());
+            default_index = static_cast<int>(default_elem - themes.begin());
         }
 
         if (themes.size() > 1) {

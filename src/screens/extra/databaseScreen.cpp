@@ -3,9 +3,10 @@
 
 #include "screenComponents/databaseView.h"
 #include "screenComponents/customShipFunctions.h"
+#include "gui/theme.h"
 
 DatabaseScreen::DatabaseScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DATABASE_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "DATABASE_SCREEN", GuiTheme::getColor("background"))
 {
     // Render background decorations.
     (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))
