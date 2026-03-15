@@ -4,8 +4,11 @@
 #include "screenComponents/shipsLogControl.h"
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/theme.h"
+
+
 CommsScreen::CommsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "COMMS_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "COMMS_SCREEN", GuiTheme::getColor("background"))
 {
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
