@@ -16,6 +16,8 @@ private:
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
+
+    float turn_request = 0.0f;
 public:
     HelmsScreen(GuiContainer* owner);
 
