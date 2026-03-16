@@ -1,9 +1,9 @@
 #include "textureManager.h"
 #include "vectorUtils.h"
 #include "logging.h"
-#include "theme.h"
 #include "preferenceManager.h"
 
+#include "theme.h"
 #include "gui2_rotationdial.h"
 
 GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)

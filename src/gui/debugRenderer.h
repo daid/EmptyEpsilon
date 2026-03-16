@@ -1,5 +1,4 @@
-#ifndef DEBUG_RENDERER_H
-#define DEBUG_RENDERER_H
+#pragma once
 
 #include "Renderable.h"
 #include "timer.h"
@@ -23,5 +22,3 @@ public:
 
     virtual void render(sp::RenderTarget& target) override;
 };
-
-#endif//DEBUG_RENDERER_H
