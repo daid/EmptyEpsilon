@@ -269,20 +269,10 @@ msgstr ""
 #: scripts/scenario_00_basic.lua:539
 #, lua-format
 msgctxt "time-incCall"
-msgid "%s, you have %d minute remaining."
-msgstr ""
-
-#: scripts/scenario_00_basic.lua:544
-#, lua-format
-msgctxt "time-incCall"
-msgid "%s, you have %d minutes remaining."
-msgstr ""
-
-#: scripts/scenario_00_basic.lua:549
-#, lua-format
-msgctxt "time-incCall"
-msgid "%s, you have %d minutes remaining of mission time."
-msgstr ""
+msgid "%s, you have one minute remaining."
+msgid_plural "%s, you have %d minutes remaining."
+msgstr[0] ""
+msgstr[1] ""
 
 #: scripts/scenario_00_basic.lua:559
 msgctxt "msgMainscreen&Spectbanner"
