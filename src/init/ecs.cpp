@@ -66,6 +66,7 @@
 #include "systems/zone.h"
 #include "systems/gm.h"
 #include "systems/pickup.h"
+#include "systems/destroy.h"
 #include "systems/debugrender.h"
 
 
@@ -116,6 +117,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<NebulaRendererReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ExplosionEffectReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<PlanetRenderReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<BillboardRendererReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScanStateReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceDescriptionReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ScienceScannerReplication>();
@@ -130,6 +132,8 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<ZoneReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::TransformReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<sp::multiplayer::PhysicsReplication>();
+
+    sp::ecs::Entity::setPreDestroyCallback(OnDestroySystem::destroyCallback);
 
     engine->registerSystem<AISystem>();
     engine->registerSystem<DamageSystem>();

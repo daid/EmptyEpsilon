@@ -1,11 +1,11 @@
-#ifndef RADAR_VIEW_H
-#define RADAR_VIEW_H
+#pragma once
 
 #include "gui/gui2_element.h"
 #include "engine.h"
 
 class GuiMissileTubeControls;
 class TargetsContainer;
+class GuiThemeStyle;
 
 class GuiRadarView : public GuiElement
 {
@@ -65,6 +65,16 @@ private:
     bpfunc_t mouse_down_func;
     pfunc_t mouse_drag_func;
     pfunc_t mouse_up_func;
+    // Overlay callback
+    std::function<void(sp::RenderTarget&)> overlay_func;
+
+    const GuiThemeStyle* radar_style;
+    const GuiThemeStyle* radar_outline_style;
+    const GuiThemeStyle* radar_range_indicators_style;
+    const GuiThemeStyle* radar_sector_grid_style;
+    const GuiThemeStyle* ship_waypoint_style;
+    const GuiThemeStyle* ship_waypoint_background_style;
+    const GuiThemeStyle* ship_waypoint_text_style;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -101,6 +111,10 @@ public:
     bool getAutoRotating() { return auto_rotate_on_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    // Define the overlay callback function. This passes the onDraw()
+    // RenderTarget and runs near the end of the frame.
+    GuiRadarView* setOverlayCallback(std::function<void(sp::RenderTarget&)> f) { overlay_func = f; return this; }
+    float getScale() { return std::min(rect.size.x, rect.size.y) / 2.0f / distance; }
     GuiRadarView* setViewPosition(glm::vec2 view_position) { this->view_position = view_position; return this; }
     glm::vec2 getViewPosition() { return view_position; }
     GuiRadarView* setViewRotation(float view_rotation) { this->view_rotation = view_rotation; return this; }
@@ -126,9 +140,6 @@ private:
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);
     void drawObjects(sp::RenderTarget& target);
-    void drawObjectsGM(sp::RenderTarget& target);
     void drawTargets(sp::RenderTarget& target);
     void drawHeadingIndicators(sp::RenderTarget& target);
 };
-
-#endif//RADAR_VIEW_H

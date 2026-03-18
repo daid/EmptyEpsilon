@@ -1,6 +1,6 @@
+#include "scienceScreen.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "scienceScreen.h"
 #include "preferenceManager.h"
 #include "multiplayer_client.h"
 #include "i18n.h"
@@ -25,6 +25,7 @@
 #include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
 
+#include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_togglebutton.h"
 #include "gui/gui2_selector.h"
@@ -34,17 +35,17 @@
 #include "gui/gui2_image.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosition crew_position)
-: GuiOverlay(owner, "SCIENCE_SCREEN", colorConfig.background), allow_scanning(allow_scanning)
+: GuiOverlay(owner, "SCIENCE_SCREEN", GuiTheme::getColor("background")), allow_scanning(allow_scanning)
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     targets.setAllowWaypointSelection();
 
     // Render the radar shadow and background decorations.
-    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "gui/background/gradientOffset.png");
-    background_gradient->setPosition(glm::vec2(105, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
+    background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
+    background_gradient->setTextureThemed("background.gradient_offset")->setPosition(glm::vec2(105, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
 
     background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiled("gui/background/crosses.png");
+    background_crosses->setTextureTiledThemed("background.crosses");
 
     // Render the alert level color overlay.
     (new AlertLevelOverlay(this));
@@ -187,7 +188,23 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
-    database_view->hide()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    database_view
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("padding", "20");
+
+    // Pad top of details column if crew screen selection controls are visible,
+    // and bottom of item list column to prevent overlap with probe/radar view
+    // selectors.
+    int details_padding = 0;
+    if (my_player_info)
+    {
+        if (my_player_info->main_screen_control != 0) details_padding = 120;
+        else if (my_player_info->countTotalPlayerPositions() > 1) details_padding = 70;
+    }
+    database_view
+        ->setDetailsPadding(details_padding)
+        ->setItemsPadding(120);
 
     // Draw the zoom slider.
     zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
@@ -498,7 +515,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 auto sys = ShipSystem::get(target, ShipSystem::Type(n));
                 if (sys) {
                     float system_health = sys->health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
                 }
             }
         }

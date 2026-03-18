@@ -7,49 +7,67 @@
 #include "multiplayer_server.h"
 #include "gameGlobalInfo.h"
 #include "ecs/query.h"
-#include "gui/colorConfig.h"
+#include "gui/theme.h"
 #include "menus/luaConsole.h"
 
-
 static sp::ecs::Entity script_active_entity;
-
 
 void CommsSystem::update(float delta)
 {
     for(auto [entity, comms] : sp::ecs::Query<CommsTransmitter>()) {
-        if (comms.open_delay > 0.0f)
-            comms.open_delay -= delta;
-        if (game_server) {
-            if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f) {
-                if (!comms.target) {
+        if (comms.open_delay > 0.0f) comms.open_delay -= delta;
+
+        if (game_server)
+        {
+            // If the channel opening delay is expired, determine whether to
+            // initialize comms with the target.
+            if (comms.state == CommsTransmitter::State::OpeningChannel && comms.open_delay <= 0.0f)
+            {
+                // Exit with a broken channel if the target no longer exists.
+                if (!comms.target)
+                {
                     comms.state = CommsTransmitter::State::ChannelBroken;
-                }else{
+                    return;
+                }
+                else
+                {
                     comms.script_replies.clear();
                     comms.script_replies_dirty = true;
+
+                    // If the other target is itself a comms transmitter, hail it.
                     if (auto other_transmitter = comms.target.getComponent<CommsTransmitter>())
                     {
                         comms.open_delay = channel_open_time;
 
-                        if (other_transmitter->state == CommsTransmitter::State::Inactive || other_transmitter->state == CommsTransmitter::State::ChannelFailed || other_transmitter->state == CommsTransmitter::State::ChannelBroken || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
+                        if (other_transmitter->state == CommsTransmitter::State::Inactive
+                            || other_transmitter->state == CommsTransmitter::State::ChannelFailed
+                            || other_transmitter->state == CommsTransmitter::State::ChannelBroken
+                            || other_transmitter->state == CommsTransmitter::State::ChannelClosed)
                         {
                             other_transmitter->state = CommsTransmitter::State::BeingHailed;
                             other_transmitter->target = entity;
+
                             if (auto callsign = entity.getComponent<CallSign>())
                                 other_transmitter->target_name = callsign->callsign;
                             else
                                 other_transmitter->target_name = "?";
                         }
-                    }else if (gameGlobalInfo->intercept_all_comms_to_gm) {
-                        comms.state = CommsTransmitter::State::ChannelOpenGM;
-                    }else if (openChannel(entity, comms.target)) {
-                        comms.state = CommsTransmitter::State::ChannelOpen;
-                    } else {
-                        comms.state = CommsTransmitter::State::ChannelFailed;
                     }
+                    // If all other comms are intercepted by the GM, open a chat
+                    // with the GM.
+                    else if (gameGlobalInfo->intercept_all_comms_to_gm && comms.state != CommsTransmitter::State::ChannelOpen)
+                        comms.state = CommsTransmitter::State::ChannelOpenGM;
+                    // Otherwise, open a standard comms channel to the target.
+                    else if (openChannel(entity, comms.target))
+                        comms.state = CommsTransmitter::State::ChannelOpen;
+                    else
+                        comms.state = CommsTransmitter::State::ChannelFailed;
                 }
             }
+
             if (comms.state == CommsTransmitter::State::ChannelOpen || comms.state == CommsTransmitter::State::ChannelOpenPlayer)
             {
+                // Exit with a broken channel if the target no longer exists.
                 if (!comms.target)
                     comms.state = CommsTransmitter::State::ChannelBroken;
             }
@@ -73,7 +91,7 @@ void CommsSystem::openTo(sp::ecs::Entity player, sp::ecs::Entity target)
             transmitter->incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", transmitter->target_name}});
             transmitter->target = target;
             if (auto log = player.getComponent<ShipLog>())
-                log->add(tr("shiplog", "Hailing: {name}").format({{"name", transmitter->target_name}}), colorConfig.log_generic);
+                log->add(tr("shiplog", "Hailing: {name}").format({{"name", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
         } else {
             transmitter->state = CommsTransmitter::State::Inactive;
         }
@@ -98,14 +116,14 @@ void CommsSystem::answer(sp::ecs::Entity player, bool allow)
                 transmitter->incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", transmitter->target_name}});
                 other->incomming_message = tr("chatdialog", "Opened comms to {callsign}").format({{"callsign", other->target_name}});
                 if (auto log = player.getComponent<ShipLog>())
-                    log->add(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", transmitter->target_name}}), colorConfig.log_generic);
+                    log->add(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
                 if (auto log = transmitter->target.getComponent<ShipLog>())
-                    log->add(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", other->target_name}}), colorConfig.log_generic);
+                    log->add(tr("shiplog", "Opened communication channel to {callsign}").format({{"callsign", other->target_name}}), GuiTheme::getColor("log.generic"));
             }else{
                 if (auto log = player.getComponent<ShipLog>())
-                    log->add(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", transmitter->target_name}}), colorConfig.log_generic);
+                    log->add(tr("shiplog", "Refused communications from {callsign}").format({{"callsign", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
                 if (auto log = transmitter->target.getComponent<ShipLog>())
-                    log->add(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", other->target_name}}), colorConfig.log_generic);
+                    log->add(tr("shiplog", "Refused communications to {callsign}").format({{"callsign", other->target_name}}), GuiTheme::getColor("log.generic"));
                 transmitter->state = CommsTransmitter::State::Inactive;
                 other->state = CommsTransmitter::State::ChannelFailed;
             }
@@ -115,11 +133,11 @@ void CommsSystem::answer(sp::ecs::Entity player, bool allow)
                 if (!transmitter->target)
                 {
                     if (auto log = player.getComponent<ShipLog>())
-                        log->add(tr("shiplog", "Hail suddenly went dead."), colorConfig.log_generic);
+                        log->add(tr("shiplog", "Hail suddenly went dead."), GuiTheme::getColor("log.generic"));
                     transmitter->state = CommsTransmitter::State::ChannelBroken;
                 }else{
                     if (auto log = player.getComponent<ShipLog>())
-                        log->add(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", transmitter->target_name}}), colorConfig.log_generic);
+                        log->add(tr("shiplog", "Accepted hail from {callsign}").format({{"callsign", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
                     transmitter->script_replies.clear();
                     transmitter->script_replies_dirty = true;
                     if (transmitter->incomming_message == "")
@@ -138,7 +156,7 @@ void CommsSystem::answer(sp::ecs::Entity player, bool allow)
             }else{
                 if (auto cs = transmitter->target.getComponent<CallSign>()) {
                     if (auto log = player.getComponent<ShipLog>())
-                        log->add(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", cs->callsign}}), colorConfig.log_generic);
+                        log->add(tr("shiplog", "Refused hail from {callsign}").format({{"callsign", cs->callsign}}), GuiTheme::getColor("log.generic"));
                 }
                 transmitter->state = CommsTransmitter::State::Inactive;
             }
@@ -151,11 +169,11 @@ void CommsSystem::answer(sp::ecs::Entity player, bool allow)
             transmitter->state = CommsTransmitter::State::ChannelOpenGM;
 
             if (auto log = player.getComponent<ShipLog>())
-                log->add(tr("shiplog", "Opened communication channel to {name}").format({{"name", transmitter->target_name}}), colorConfig.log_generic);
+                log->add(tr("shiplog", "Opened communication channel to {name}").format({{"name", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
             transmitter->incomming_message = tr("chatdialog", "Opened comms with {name}").format({{"name", transmitter->target_name}});
         }else{
             if (auto log = player.getComponent<ShipLog>())
-                log->add(tr("shiplog", "Refused hail from {name}").format({{"name", transmitter->target_name}}), colorConfig.log_generic);
+                log->add(tr("shiplog", "Refused hail from {name}").format({{"name", transmitter->target_name}}), GuiTheme::getColor("log.generic"));
             transmitter->state = CommsTransmitter::State::Inactive;
         }
     }
@@ -175,7 +193,7 @@ void CommsSystem::close(sp::ecs::Entity player)
             if (other)
                 other->state = CommsTransmitter::State::ChannelClosed;
             if (auto log = transmitter->target.getComponent<ShipLog>())
-                log->add(tr("shiplog", "Communication channel closed by other side"), colorConfig.log_generic);
+                log->add(tr("shiplog", "Communication channel closed by other side"), GuiTheme::getColor("log.generic"));
         }
         if (transmitter->state == CommsTransmitter::State::OpeningChannel && transmitter->target)
         {
@@ -186,12 +204,12 @@ void CommsSystem::close(sp::ecs::Entity player)
                 {
                     other->state = CommsTransmitter::State::Inactive;
                     if (auto log = transmitter->target.getComponent<ShipLog>())
-                        log->add(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", other->target_name}}), colorConfig.log_generic);
+                        log->add(tr("shiplog", "Hailing from {callsign} stopped").format({{"callsign", other->target_name}}), GuiTheme::getColor("log.generic"));
                 }
             }
         }
         if (auto log = player.getComponent<ShipLog>())
-            log->add(tr("shiplog", "Communication channel closed"), colorConfig.log_generic);
+            log->add(tr("shiplog", "Communication channel closed"), GuiTheme::getColor("log.generic"));
         if (transmitter->state == CommsTransmitter::State::ChannelOpenGM)
             transmitter->state = CommsTransmitter::State::ChannelClosed;
         else
@@ -211,7 +229,7 @@ bool CommsSystem::hailByGM(sp::ecs::Entity player, string target_name)
 
     // Log the hail.
     if (auto log = player.getComponent<ShipLog>())
-        log->add(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), colorConfig.log_generic);
+        log->add(tr("shiplog", "Hailed by {name}").format({{"name", target_name}}), GuiTheme::getColor("log.generic"));
 
     // Set comms to the hail state and notify Relay/comms.
     transmitter->state = CommsTransmitter::State::BeingHailedByGM;
@@ -264,7 +282,7 @@ void CommsSystem::selectScriptReply(sp::ecs::Entity player, int index)
     if (index >= 0 && index < int(transmitter->script_replies.size()) && transmitter->target)
     {
         if (auto log = player.getComponent<ShipLog>())
-            log->add(transmitter->script_replies[index].message, colorConfig.log_send);
+            log->add(transmitter->script_replies[index].message, GuiTheme::getColor("log.send"));
         auto callback = transmitter->script_replies[index].callback;
         if (!player.hasComponent<CommsTransmitterEnvironment>()) {
             callback.setGlobal("comms_source", player);
@@ -349,23 +367,28 @@ bool CommsSystem::openChannel(sp::ecs::Entity player, sp::ecs::Entity target)
     player.removeComponent<CommsTransmitterEnvironment>();
     transmitter->incomming_message = "???";
 
+    // comms_script (comms from file) is prioritized over
+    // comms_callback (comms from inline function). Scenario authors must clear
+    // comms_script on an entity with a script in order to use comms_callback.
     if (script_name != "")
     {
         auto& env = player.addComponent<CommsTransmitterEnvironment>();
         env.script_environment = std::make_unique<sp::script::Environment>(gameGlobalInfo->script_environment_base.get());
         setupSubEnvironment(*env.script_environment.get());
-        // consider "player" deprecated, but keep it for a long time
+        // Consider "player" deprecated, but keep it for a long time.
         env.script_environment->setGlobal("player", player);
         env.script_environment->setGlobal("comms_source", player);
         env.script_environment->setGlobal("comms_target", target);
         i18n::load("locale/" + script_name.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
         LuaConsole::checkResult(env.script_environment->runFile<void>(script_name));
-    }else if (receiver->callback)
+    }
+    else if (receiver->callback)
     {
         receiver->callback.setGlobal("comms_source", player);
         receiver->callback.setGlobal("comms_target", transmitter->target);
         LuaConsole::checkResult(receiver->callback.call<void>(player, target));
     }
+
     script_active_entity = {};
     return transmitter->incomming_message != "???";
 }

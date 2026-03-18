@@ -5737,7 +5737,7 @@ function setPlayers()
 					pobj:setJumpDrive(true)
 					pobj:setJumpDriveRange(3000,40000)
 					--            		  Arc, Dir,Range, Cyc,Dmg
-					pobj:setBeamWeapon(0,  20,   0,	1200,	6,	8):setBeamWeaponDamageType(0,"emp"):setBeamWeaponArcColor(0,0,0,128,0,0,255)
+					pobj:setBeamWeapon(0,  20,   0,	1200,	6,	8):setBeamWeaponDamageType(0,"emp"):setBeamWeaponArcColor(0,0,0,0.5,0,0,1.0)
 					pobj:setBeamWeapon(1,  30,   0,	1000,	6,	8)
 				elseif tempPlayerType == "Striker" then
 					pobj:setJumpDrive(true)

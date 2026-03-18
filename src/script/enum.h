@@ -283,9 +283,9 @@ template<> struct Convert<DockingPort::State> {
         string str = string(luaL_checkstring(L, idx)).lower();
         if (str == "not_docking")
             return DockingPort::State::NotDocking;
-        else if (str == "opening")
+        else if (str == "docking")
             return DockingPort::State::Docking;
-        else if (str == "hailed")
+        else if (str == "docked")
             return DockingPort::State::Docked;
         luaL_error(L, "Unknown DockingPort::State: %s", str.c_str());
         return DockingPort::State::NotDocking;
