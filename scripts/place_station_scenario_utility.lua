@@ -96,6 +96,9 @@ function placeStation(x,y,name,faction,size,diagnostic)
 			station:setTemplate(szt())
 		end
 	end
+	if commsStation ~= nil then
+		station:setCommsScript(""):setCommsFunction(commsStation)
+	end
 	if diagnostic == nil then
 		diagnostic = false
 	else
