@@ -1,16 +1,148 @@
 [base] {
+    # Full-game interface properties:
+
+    # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
     # Positive offset moves the font down, negative moves it up.
     font_offset: 0.0
 
+    # Stronger font used at a few locations without UI widgets.
+    # UI widgets with their own font theme properties might set this on their own.
+    [bold] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+    }
+
+    # Background color and images
+    [background] {
+        color: #1F252D
+        [background.crosses] {
+            image: gui/background/crosses.png
+        }
+        [background.gradient] {
+            image: gui/background/gradient.png
+        }
+        [background.gradient_single] {
+            image: gui/background/gradientSingle.png
+        }
+        [background.gradient_offset] {
+            image: gui/background/gradientOffset.png
+        }
+    }
+
+    # Alert overlay
+    [alert_overlay] {
+        image: gui/alertOverlay.png
+    }
+
+    # Lua console
+    [luaconsole] {
+        size: 12.0
+        font: gui/fonts/RobotoMono-SemiBold.ttf
+        [luaconsole.log.back] {
+        }
+        [luaconsole.entry.back] {
+            image: gui/widget/TextEntryBackground.png
+            image.focus: gui/widget/TextEntryBackground.focused.png
+        }
+    }
+
+    # Used in multiple GuiElement classes:
+
+    # Waypoints
+    [ship_waypoint] {
+        image: waypoint.png
+        [ship_waypoint.background] {
+            color: #8080FFD0
+        }
+        [ship_waypoint.text] {
+            color: #000000D0
+        }
+    }
+
+    [radar] {
+        font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+
+        # Outermost border of circular radars
+        [radar.outline] {
+            color: #FFFFFF
+        }
+        [radar.range_indicators] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 20.0
+            # Circle alpha; text alpha is half of this.
+            color: #FFFFFF20
+        }
+        [radar.target_projections] {
+            # Distance tick line alpha; path alpha is half of this.
+            color: #FFFFFFFF
+        }
+        [radar.missile_tubes] {
+            color: #80808080
+        }
+        [radar.sector_grid] {
+            # Font and font size.
+            font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+            size: 30.0
+            # Main grid line alpha; subsector line alpha is half of this.
+            color: #404080FF
+        }
+    }
+
+    [missile_data] {
+        [missile_data.homing] {
+            color: #FFC800
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.nuke] {
+            color: #FF6420
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.mine] {
+            color: #FFFFFF
+            image: radar/mine.png
+            sound: sfx/missile_launch.wav
+        }
+        [missile_data.emp] {
+            color: #6420FF
+            image: radar/missile.png
+            sound: sfx/rlaunch.wav
+        }
+        [missile_data.hvli] {
+            color: #C8C8C8
+            image: radar/missile.png
+            sound: sfx/hvli_fire.wav
+        }
+    }
+
+    # Signal bands, used in radar views and sensor locking
+    # By default, biological = green, electrical = red, gravitational = blue.
+    # Scenarios or help text might refer to bands by color.
+    [signal_bands] {
+        [signal_bands.biological] {
+            color: #41FF51
+        }
+        [signal_bands.electrical] {
+            color: #FF2D54
+        }
+        [signal_bands.gravitational] {
+            color: #4678FF
+        }
+    }
+
+    # GuiElement classes:
+
+    # GuiButton, GuiToggleButton, GuiArrowButton
     [button] {
         color: #FFFFFF
-        size: 30
+        size: 30.0
         [button.back] {
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            
+
             [button.selfdestruct.back] {
                 color: #FF0000
                 color.disabled: #A08080
@@ -52,50 +184,32 @@
             color.disabled: #FFFFFF4D
         }
     }
-    
+
+    # GuiLabel
     [label] {
         [label.back] {
             image: gui/widget/LabelBackground.png
         }
     }
-    
+
+    # GuiTextEntry
     [textentry] {
-        size: 30
+        size: 30.0
         [textentry.back] {
             image: gui/widget/TextEntryBackground.png
             image.focus: gui/widget/TextEntryBackground.focused.png
         }
     }
 
-    [luaconsole] {
-        size: 12
-        font: gui/fonts/RobotoMono-SemiBold.ttf
-        [luaconsole.log.back] {
-        }
-        [luaconsole.entry.back] {
-            image: gui/widget/TextEntryBackground.png
-            image.focus: gui/widget/TextEntryBackground.focused.png
-        }
-    }
-
-    [luaconsole] {
-        size: 12
-        font: gui/fonts/RobotoMono-SemiBold.ttf
-        [luaconsole.log.back] {
-        }
-        [luaconsole.entry.back] {
-            image: gui/widget/TextEntryBackground.png
-            image.focus: gui/widget/TextEntryBackground.focused.png
-        }
-    }
-
+    # GuiSlider
     [slider] {
         [slider.back] {
-            size: 25
+            size: 25.0
             image: gui/widget/SliderBackground.png
         }
         [slider.tick] {
             image: gui/widget/SliderTick.png
+            color: #FFFFFF
         }
         [slider.front] {
             image: gui/widget/SliderKnob.png
@@ -103,7 +217,8 @@
             color.hover: #CCCCCC
         }
     }
-    
+
+    # GuiScrollbar
     [scrollbar] {
         [scrollbar.back] {
             image: gui/widget/ScrollbarBackground.png
@@ -114,22 +229,25 @@
             color.hover: #CCCCCC
         }
     }
-    
+
+    # GuiPanel
     [panel] {
         size: 25.0
         image: gui/widget/PanelBackground.png
     }
-    
+
+    # GuiProgressbar
     [progressbar] {
         [progressbar.back] {
             image: gui/widget/ProgressbarBackground.png
         }
         [progressbar.front] {
-            size: 25
+            size: 25.0
             image: gui/widget/ProgressbarFill.png
         }
     }
-    
+
+    # GuiKeyValueDisplay
     [keyvalue] {
         [keyvalue.back] {
             image: gui/widget/KeyValueBackground.png
@@ -141,13 +259,14 @@
         }
     }
 
+    # GuiListbox
     [listbox] {
         color: #FFFFFF
         [listbox.back] {
             image: gui/widget/ButtonBackground.png
             image.hover: gui/widget/ButtonBackground.hover.png
             image.disabled: gui/widget/ButtonBackground.disabled.png
-            
+
             [listbox.selected.back] {
                 image: gui/widget/ButtonBackground.active.png
                 image.hover: gui/widget/ButtonBackground.active.png
@@ -162,11 +281,114 @@
             }
         }
     }
-    
+
+    # GuiTextbox
+    [textbox] {
+        [textbox.back] {
+            color: #000000
+            color.hover: #000000
+            color.focus: #000000
+            color.disabled: #808080
+        }
+        [textbox.front] {
+            color: #FFFFFF
+            color.hover: #FFFFFF
+            color.focus: #FFFFFF
+            color.disabled: #808080
+        }
+    }
+
+    # GuiPowerDamageIndicator overlays
+    # Icons are all automatically suffixed with .png and should have transparent backgrounds.
+    [overlay] {
+        image: gui/widget/damagePowerOverlay.png
+        font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+        size: 30.0
+
+        # Icons are all automatically suffixed with .png and should have transparent backgrounds.
+        [overlay.damaged] {
+            color: #FF0000
+            image: gui/icons/status_damaged
+        }
+        [overlay.docked] {
+            color: #40C040
+            image: gui/icons/docking
+        }
+        [overlay.jammed] {
+            color: #FF0000
+            image: gui/icons/status_jammed
+        }
+        [overlay.hacked] {
+            color: #4040FF
+            image: gui/icons/station-relay
+        }
+        [overlay.no_power] {
+            color: #FF0000
+            image: gui/icons/status_no_power
+        }
+        [overlay.low_energy] {
+            color: #FF8000
+            image: gui/icons/status_low_energy
+        }
+        [overlay.low_power] {
+            color: #FF8000
+            image: gui/icons/status_low_power
+        }
+        [overlay.overheating] {
+            color: #FF8000
+            image: gui/icons/status_overheat
+        }
+    }
+
+    # ShipsLog
+    [log] {
+        [log.generic] {
+            color: #FFFFFF
+        }
+        [log.send] {
+            color: #C0FFC0
+        }
+        [log.receive_friendly] {
+            color: #C0C0FF
+        }
+        [log.receive_enemy] {
+            color: #FFC0C0
+        }
+        [log.receive_neutral] {
+            color: #C0C0FF
+        }
+    }
+
+    # GuiShipRoom (internal ship room)
+    [ship_room] {
+        # Sliced square image
+        image: room_background.png
+    }
+
+    # GuiShipDoor (internal ship door)
+    [ship_door] {
+        image: room_door.png
+    }
+
+    # GuiShipCrew (internal ship repair crew)
+    [ship_crew] {
+        # Sprite frame filename prefix, to be followed by 0.png, 1.png ... 5.png for each frame.
+        # For example, the default value is topdownCrew, and the files are topdownCrew0.png, topdownCrew1.png ... topdownCrew5.png.
+        image: topdownCrew
+        [ship_crew.selected] {
+            # Must have a transparent background.
+            image: redicule.png
+        }
+    }
+
+    # GuiArrow, as used on Engineering heat delta indicators.
+    # Arrow buttons are GuiArrowButtons styled in button.arrow.
     [arrow] {
         image: gui/widget/IndicatorArrow.png
     }
 
+    # GuiSelector
+    # Arrow buttons are GuiArrowButtons styled in button.arrow.
     [selector] {
         [selector.back] {
             image: gui/widget/SelectorBackground.png
@@ -178,6 +400,7 @@
         }
     }
 
+    # GuiRotationDial
     [rotationdial] {
         [rotationdial.back] {
             image: gui/widget/dial_background.png
@@ -189,15 +412,33 @@
         }
     }
 
+    # GuiResizableDialog
     [resizabledialog] {
+        # Corner handle for resizing the dialog.
         [resizabledialog.corner] {
             image: gui/widget/ResizeDialogCorner.png
         }
     }
 
-    # Stronger font used at a few locations without UI widgets.
-    [bold] {
+    # GuiScrollingBanner
+    [scrollingbanner] {
+        image: gui/widget/LabelBackground.png
+        size: 25.0
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
         offset: 0.0
+        color: #FFFFFF
+    }
+
+    # GuiSignalQualityIndicator
+    [signalquality] {
+        image: gui/widget/PanelBackground.png
+        size: 25.0
+    }
+
+    # GuiFrequencyCurve
+    [frequencycurve] {
+        [frequencycurve.indicator] {
+            image: gui/widget/IndicatorArrow.png
+        }
     }
 }

@@ -3,7 +3,7 @@
 #include <io/keyValueTreeLoader.h>
 #include <graphics/freetypefont.h>
 #include <logging.h>
-
+#include <unordered_set>
 
 static std::unordered_map<string, sp::Font*> fonts;
 std::unordered_map<string, GuiTheme*> GuiTheme::themes;
@@ -22,7 +22,7 @@ glm::u8vec4 GuiTheme::toColor(const string& s)
     return {255, 255, 255, 255};
 }
 
-static sp::Font* getFont(const string& s)
+static sp::Font* cacheFont(const string& s)
 {
     auto it = fonts.find(s);
     if (it != fonts.end())
@@ -268,7 +268,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
         if (input.find("font") != input.end())
         {
             string font_path = input["font"];
-            global_style.font = getFont(font_path);
+            global_style.font = cacheFont(font_path);
             // Fallback if font failed to load.
             if (!global_style.font)
             {
@@ -327,7 +327,7 @@ bool GuiTheme::loadTheme(const string& name, const string& resource_name)
             if (input.find("font." + postfix) != input.end())
             {
                 string state_font_path = input["font." + postfix];
-                style.states[n].font = getFont(state_font_path);
+                style.states[n].font = cacheFont(state_font_path);
                 if (!style.states[n].font)
                     LOG(Debug, "State-specific font '", state_font_path, "' failed to load for element ", element_name, " state ", postfix, " in theme ", name);
             }
@@ -368,4 +368,39 @@ GuiTheme::GuiTheme(const string& name)
 
 GuiTheme::~GuiTheme()
 {
+}
+
+glm::u8vec4 GuiTheme::getColor(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).color;
+}
+
+string GuiTheme::getSound(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).sound;
+}
+
+string GuiTheme::getImage(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).texture;
+}
+
+float GuiTheme::getSize(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).size;
+}
+
+sp::Font* GuiTheme::getFont(const string& element, GuiElement::State state)
+{
+    GuiTheme* theme = getCurrentTheme();
+    const GuiThemeStyle* style = theme->getStyle(element);
+    return style->get(state).font;
 }

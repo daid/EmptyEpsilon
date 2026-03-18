@@ -35,9 +35,11 @@ static std::unordered_map<string, std::unique_ptr<gl::CubemapTexture>> skybox_te
 GuiViewport3D::GuiViewport3D(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    show_callsigns = false;
-    show_headings = false;
-    show_spacedust = false;
+    base_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    // Guard against invalid pref values.
+    if (base_fov == 0.0f) base_fov = 60.0f;
+    // Clamp base field of vision to 30-140 deg. range.
+    base_fov = std::clamp(base_fov, 30.0f, 140.0f);
 
     // Load up our starbox into a cubemap.
     // Setup shader.
@@ -152,7 +154,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     
     glActiveTexture(GL_TEXTURE0);
 
-    float camera_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();
+    float camera_fov = std::clamp(base_fov + fov_modifier, 30.0f, 140.0f);
     {
         auto p0 = renderer.virtualToPixelPosition(rect.position);
         auto p1 = renderer.virtualToPixelPosition(rect.position + rect.size);
@@ -161,7 +163,7 @@ void GuiViewport3D::onDraw(sp::RenderTarget& renderer)
     if (GLAD_GL_ES_VERSION_2_0)
         glClearDepthf(1.f);
     else
-        glClearDepth(1.f);
+        glClearDepth(1.0);
 
     glClear(GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 

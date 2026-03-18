@@ -35,6 +35,8 @@ public:
 
     constexpr static int max_frequency = 20;
     int frequency = 0;
+    int getFrequency() const { return frequency; }
+    void setFrequency(int freq) { frequency = std::clamp(freq, 0, max_frequency); }
     ShipSystem::Type system_target = ShipSystem::Type::None;
 
     std::vector<MountPoint> mounts;
