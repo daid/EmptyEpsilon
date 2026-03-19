@@ -357,7 +357,7 @@ GuiTheme::GuiTheme(const string& name)
     fallback_state.font = nullptr;
     std::vector<string> fonts = findResources("gui/fonts/*.ttf");
     if(fonts.size() > 0)
-        fallback_state.font = getFont(fonts[0]);
+        fallback_state.font = cacheFont(fonts[0]);
     fallback_state.font_offset = 0.0f;
     fallback_state.texture = "";
     GuiThemeStyle fallback;
