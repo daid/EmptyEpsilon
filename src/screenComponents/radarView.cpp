@@ -170,15 +170,11 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     // Draw the "clear" radar background color on rectangular radars.
     if (style == Rectangular) drawBackground(renderer);
 
-    // Otherwise, draw the radar outline.
+    // Otherwise, draw the radar's outline first, and before any stencil kicks
+    // in. This way, the outline is not even a part of the rendering area.
+    const float radar_outline_thickness = 4.0f;
     if (style == CircularMasked || style == Circular)
-    {
-        // Draw the radar's outline. First, and before any stencil kicks in.
-        // this way, the outline is not even a part of the rendering area.
-        const float radar_outline_thickness = 4.0f;
-        if (style == CircularMasked || style == Circular)
-            renderer.drawCircleOutline(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f, radar_outline_thickness, radar_outline_style->get(getState()).color);
-    }
+        renderer.drawCircleOutline(getCenterPoint(), std::min(rect.size.x, rect.size.y) * 0.5f, radar_outline_thickness, radar_outline_style->get(getState()).color);
 
     // Stencil setup.
     renderer.finish();
@@ -361,7 +357,7 @@ void GuiRadarView::drawSectorGrid(sp::RenderTarget& renderer)
     auto radar_screen_center = rect.center();
     float scale = std::min(rect.size.x, rect.size.y) / 2.0f / distance;
 
-    constexpr float sector_size = 20000.0f;
+    float sector_size = 20000.0f;
     const float super_sector_size = sector_size * 8.0f;
     if (distance > super_sector_size) sector_size = super_sector_size;
     const float sub_sector_size = sector_size / 8.0f;
