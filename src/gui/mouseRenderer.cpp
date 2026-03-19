@@ -26,11 +26,12 @@ void MouseRenderer::render(sp::RenderTarget& renderer)
                 {center.x - bounds, center.y + bounds},
                 {center.x - bounds, center.y - bounds},
             },
+            1.0f,
             {255, 255, 0, 64});
 
         // Draw white crosshair on cursor hotspot.
-        renderer.drawLine(position - glm::vec2{2.0f, 0.0f}, position + glm::vec2{2.0f, 0.0f}, {255, 255, 255, 255});
-        renderer.drawLine(position - glm::vec2{0.0f, 2.0f}, position + glm::vec2{0.0f, 2.0f}, {255, 255, 255, 255});
+        renderer.drawLine(position - glm::vec2{2.0f, 0.0f}, position + glm::vec2{2.0f, 0.0f}, 1.0f, {255, 255, 255, 255});
+        renderer.drawLine(position - glm::vec2{0.0f, 2.0f}, position + glm::vec2{0.0f, 2.0f}, 1.0f, {255, 255, 255, 255});
     }
 }
 
