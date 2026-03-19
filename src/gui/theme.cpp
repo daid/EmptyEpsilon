@@ -94,6 +94,13 @@ const GuiThemeStyle* GuiTheme::getStyle(const string& element)
     int n = element.rfind(".");
     if (n == -1)
     {
+        // Fallback is defined at style init, so this should never happen. We
+        // want to know if it somehow does.
+        if (element == "fallback")
+        {
+            LOG(Error, "Theme ", name, " is missing the 'fallback' style.");
+            return nullptr;
+        }
         LOG(Warning, "Can't find ", element, " in theme ", name, ". Falling back to 'fallback' style.");
         return getStyle("fallback");
     }
