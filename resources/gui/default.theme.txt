@@ -3,6 +3,8 @@
 
     # Font used across EmptyEpsilon.
     font: gui/fonts/BigShouldersDisplay-SemiBold.ttf
+    # Positive offset moves the font down, negative moves it up.
+    font_offset: 0.0
 
     # Stronger font used at a few locations without UI widgets.
     # UI widgets with their own font theme properties might set this on their own.
@@ -423,6 +425,7 @@
         image: gui/widget/LabelBackground.png
         size: 25.0
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf
+        offset: 0.0
         color: #FFFFFF
     }
 
