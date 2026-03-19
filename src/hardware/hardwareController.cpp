@@ -400,8 +400,8 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     SHIP_VARIABLE("Jumping", JumpDrive, c->delay > 0.0f ? 1.0f : 0.0f);
     SHIP_VARIABLE("Jumped", JumpDrive, c->just_jumped > 0.0f ? 1.0f : 0.0f);
     SHIP_VARIABLE("Alert", PlayerControl, c->alert_level != AlertLevel::Normal ? 1.0f : 0.0f);
-    SHIP_VARIABLE("YellowAlert", PlayerControl, c->alert_level != AlertLevel::YellowAlert ? 1.0f : 0.0f);
-    SHIP_VARIABLE("RedAlert", PlayerControl, c->alert_level != AlertLevel::RedAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("YellowAlert", PlayerControl, c->alert_level == AlertLevel::YellowAlert ? 1.0f : 0.0f);
+    SHIP_VARIABLE("RedAlert", PlayerControl, c->alert_level == AlertLevel::RedAlert ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestruct", SelfDestruct, c->active ? 1.0f : 0.0f);
     SHIP_VARIABLE("SelfDestructCountdown", SelfDestruct, c->countdown / 10.0f);
     for(unsigned int n=0; n<16; n++)
