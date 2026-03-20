@@ -61,62 +61,71 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     // Apply the theme texture with 9-segment UV scaling to the curved arc
     // triangle mesh. Fix corners, stretch middle segments along arc (U), and
     // stretch edge segments along radius (V).
+    if (!front.texture.empty())
+    {
+        // Approximate arc length at mid-radius for arc-axis corner sizing.
+        const float arc_length = 2.0f * handle_half_arc * ((inner_r + outer_r) * 0.5f);
+        // Use front.size as the corner size in pixels, as in drawStretchedHV.
+        // Clamp corner sizes so they never exceed half of each dimension.
+        const float u_corner = std::min(front.size, arc_length * 0.5f);
+        const float v_corner = std::min(front.size, effective_thickness * 0.5f);
 
-    // Approximate arc length at mid-radius for arc-axis corner sizing.
-    const float arc_length = 2.0f * handle_half_arc * ((inner_r + outer_r) * 0.5f);
-    // Use front.size as the corner size in pixels, as in drawStretchedHV.
-    // Clamp corner sizes so they never exceed half of each dimension.
-    const float u_corner = std::min(front.size, arc_length * 0.5f);
-    const float v_corner = std::min(front.size, effective_thickness * 0.5f);
+        // Build four radial (V-axis) rings from outer to inner edges.
+        const float radii[4] = {outer_r, outer_r - v_corner, inner_r + v_corner, inner_r};
+        constexpr float v_uvs[4] = {0.0f, 0.5f, 0.5f, 1.0f};
 
-    // Build four radial (V-axis) rings from outer to inner edges.
-    const float radii[4] = {outer_r, outer_r - v_corner, inner_r + v_corner, inner_r};
-    constexpr float v_uvs[4] = {0.0f, 0.5f, 0.5f, 1.0f};
+        std::vector<glm::vec2> positions;
+        std::vector<glm::vec2> uvs;
 
-    std::vector<glm::vec2> positions;
-    std::vector<glm::vec2> uvs;
-    const bool is_handle_textured = !front.texture.empty();
-
-    // Reserve handle segment vertex positions. 1 if untextured, 3 if textured.
-    positions.reserve((handle_segments + 1) * 2 * (is_handle_textured ? 1 : 3));
-
-    // Reserve UVs if textured.
-    if (is_handle_textured)
+        // Reserve vertex positions and their UVs for handle segments across
+        // three radial rows.
+        positions.reserve((handle_segments + 1) * 2 * 3);
         uvs.reserve((handle_segments + 1) * 2 * 3);
 
-    // Shared ring-building logic.
-    auto buildRing = [&](int band) {
+        // Process each segment in each band.
+        for (int band = 0; band < 3; band++)
+        {
+            for (int i = 0; i <= handle_segments; i++)
+            {
+                // Cache angle calculations and U-axis coords for each segment.
+                const float angle = angle_rad - handle_half_arc + handle_half_arc * 2.0f * static_cast<float>(i) / static_cast<float>(handle_segments);
+                const float angle_sin = sinf(angle);
+                const float angle_cos = cosf(angle);
+                const float u = getUForSegment(i, arc_length, u_corner, handle_segments);
+
+                // Push positions and UVs for each band from the outer to inner
+                // edge.
+                positions.push_back(center + glm::vec2{angle_sin * radii[band], angle_cos * radii[band]});
+                uvs.push_back({u, v_uvs[band]});
+                positions.push_back(center + glm::vec2{angle_sin * radii[band + 1], angle_cos * radii[band + 1]});
+                uvs.push_back({u, v_uvs[band + 1]});
+            }
+        }
+
+        // Render the segments.
+        renderer.drawTexturedTriangleStrip(front.texture, positions, uvs, front.color);
+    }
+    // If not textured, draw the handle as a flat-colored triangle strip
+    // without segmenting on radial rings.
+    else
+    {
+        // Build the handle segments.
+        std::vector<glm::vec2> positions;
+        positions.reserve((handle_segments + 1) * 2);
+
         for (int i = 0; i <= handle_segments; i++)
         {
-            // Cache angle calculations.
+            // Cache angle calculations for each segment.
             const float angle = angle_rad - handle_half_arc + handle_half_arc * 2.0f * static_cast<float>(i) / static_cast<float>(handle_segments);
             const float angle_sin = sinf(angle);
             const float angle_cos = cosf(angle);
 
-            // Build upper and lower bands.
-            positions.push_back(center + glm::vec2{angle_sin * radii[band], angle_cos * radii[band]});
-
-            // Push UVs if textured.
-            if (is_handle_textured)
-                uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band]});
-
-            positions.push_back(center + glm::vec2{angle_sin * radii[band + 1], angle_cos * radii[band + 1]});
-
-            // Push UVs if textured.
-            if (is_handle_textured)
-                uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band + 1]});
+            // Push positions from the outer to inner edge.
+            positions.push_back(center + glm::vec2{angle_sin * outer_r, angle_cos * outer_r});
+            positions.push_back(center + glm::vec2{angle_sin * inner_r, angle_cos * inner_r});
         }
-    };
 
-    // Use handle texture if present, draw with color only if not.
-    if (is_handle_textured)
-    {
-        for (int band = 0; band < 3; band++) buildRing(band);
-        renderer.drawTexturedTriangleStrip(front.texture, positions, uvs, front.color);
-    }
-    else
-    {
-        buildRing(0);
+        // Render the segments.
         renderer.drawTriangleStrip(positions, front.color);
     }
 }
