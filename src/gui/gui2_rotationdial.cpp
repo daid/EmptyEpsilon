@@ -75,13 +75,13 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 
     std::vector<glm::vec2> positions;
     std::vector<glm::vec2> uvs;
-    const bool is_handle_textured = front.texture.empty();
+    const bool is_handle_textured = !front.texture.empty();
 
     // Reserve handle segment vertex positions. 1 if untextured, 3 if textured.
     positions.reserve((handle_segments + 1) * 2 * (is_handle_textured ? 1 : 3));
 
     // Reserve UVs if textured.
-    if (!is_handle_textured)
+    if (is_handle_textured)
         uvs.reserve((handle_segments + 1) * 2 * 3);
 
     // Shared ring-building logic.
@@ -97,19 +97,19 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
             positions.push_back(center + glm::vec2{angle_sin * radii[band], angle_cos * radii[band]});
 
             // Push UVs if textured.
-            if (!is_handle_textured)
+            if (is_handle_textured)
                 uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band]});
 
             positions.push_back(center + glm::vec2{angle_sin * radii[band + 1], angle_cos * radii[band + 1]});
 
             // Push UVs if textured.
-            if (!is_handle_textured)
+            if (is_handle_textured)
                 uvs.push_back({getUForSegment(i, arc_length, u_corner, handle_segments), v_uvs[band + 1]});
         }
     };
 
     // Use handle texture if present, draw with color only if not.
-    if (!is_handle_textured)
+    if (is_handle_textured)
     {
         for (int band = 0; band < 3; band++) buildRing(band);
         renderer.drawTexturedTriangleStrip(front.texture, positions, uvs, front.color);
