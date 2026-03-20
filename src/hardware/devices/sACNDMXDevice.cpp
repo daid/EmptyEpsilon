@@ -110,7 +110,7 @@ void StreamingAcnDMXDevice::updateLoop()
         sequence_number++;
 
         if (multicast)
-            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port);
+            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port, true);
         else
             socket.sendBroadcast(buffer.data(), buffer.size(), acn_port);
 
