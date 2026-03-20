@@ -11,37 +11,47 @@ GuiRotationDial::GuiRotationDial(GuiContainer* owner, string id, float min_value
 {
     radius = std::min(rect.size.x, rect.size.y) * 0.5f;
 
+    // Fetch styles
+    dial_style = theme->getStyle("rotationdial");
     back_style = theme->getStyle("rotationdial.back");
     front_style = theme->getStyle("rotationdial.front");
-}
-
-float GuiRotationDial::getUForSegment(int i, float arc_length, float u_corner, int handle_segments) const
-{
-    const float arc_pos = (static_cast<float>(i) / static_cast<float>(handle_segments)) * arc_length;
-    if (u_corner <= 0.0f)
-        return arc_length > 0.0f ? arc_pos / arc_length : 0.0f;
-    if (arc_pos <= u_corner)
-        return (arc_pos / u_corner) * 0.5f;
-    if (arc_pos >= arc_length - u_corner)
-        return 0.5f + ((arc_pos - (arc_length - u_corner)) / u_corner) * 0.5f;
-
-    return 0.5f;
+    texture_style = theme->getStyle("rotationdial.front.texture");
+    handle_style = theme->getStyle("rotationdial.front.handle");
 }
 
 void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
 {
-    const auto center = getCenterPoint();
+    // Refresh radius.
     radius = std::min(rect.size.x, rect.size.y) * 0.5f;
+    // Skip if radius < 1.
+    if (radius < 1.0f) return;
+
+    // Cache center point.
+    const glm::vec2 center = getCenterPoint();
 
     // Get theme properties.
-    const auto& back = back_style->get(getState());
-    const auto& front = front_style->get(getState());
+    const auto state = getState();
+    const auto& back = back_style->get(state);
+    const auto& front = front_style->get(state);
+    const auto& texture = texture_style->get(state);
 
+    // Calculate ring thickness and handle arc.
+
+    // The global theme default for the size property is 30, so omitting size
+    // results in 30% instead of 10%.
+    // TODO: Fix the global size default behavior, since use of size isn't
+    // limited to fonts.
+    const float thickness_pct = dial_style->get(GuiElement::State::Normal).size > 0.0f
+        ? dial_style->get(GuiElement::State::Normal).size
+        : 10.0f;
     const float effective_thickness = ring_thickness < 1.0f
-        ? radius * 0.1f
+        ? std::clamp(radius * thickness_pct / 100.0f, 1.0f, radius)
         : ring_thickness;
+    const float effective_handle_arc = handle_arc > 0.0f
+        ? handle_arc
+        : handle_style->get(state).size;
 
-    // Draw ring track using drawCircleOutline, then overlay the theme texture if set.
+    // Draw ring track, using the texture if defined or drawCircleOutline if not.
     if (!back.texture.empty())
         renderer.drawStretched(rect, back.texture, back.color);
     else
@@ -52,63 +62,95 @@ void GuiRotationDial::onDraw(sp::RenderTarget& renderer)
     float offset_rad = rotation_offset * static_cast<float>(M_PI) / 180.0f;
     float angle_rad = static_cast<float>(M_PI) - fraction * static_cast<float>(M_PI) * 2.0f + offset_rad;
 
-    // Draw handle by defined arc degrees on either side of the value.
-    const float handle_half_arc = handle_arc * 0.5f * static_cast<float>(M_PI) / 180.0f;
-    constexpr int handle_segments = 8;
+    // Draw handle on both sides of the value.
+    const float handle_half_arc = effective_handle_arc * 0.5f * static_cast<float>(M_PI) / 180.0f;
     float outer_r = radius;
     float inner_r = radius - effective_thickness;
 
     // Apply the theme texture with 9-segment UV scaling to the curved arc
     // triangle mesh. Fix corners, stretch middle segments along arc (U), and
     // stretch edge segments along radius (V).
-    if (!front.texture.empty())
+    if (!texture.texture.empty())
     {
         // Approximate arc length at mid-radius for arc-axis corner sizing.
         const float arc_length = 2.0f * handle_half_arc * ((inner_r + outer_r) * 0.5f);
-        // Use front.size as the corner size in pixels, as in drawStretchedHV.
-        // Clamp corner sizes so they never exceed half of each dimension.
-        const float u_corner = std::min(front.size, arc_length * 0.5f);
-        const float v_corner = std::min(front.size, effective_thickness * 0.5f);
+        // Use texture.size as the corner size in pixels. Clamp corner sizes so
+        // they never exceed half of each dimension.
+        const float u_corner = std::min(texture.size, arc_length * 0.5f);
+        const float v_corner = std::min(texture.size, effective_thickness * 0.5f);
 
-        // Build four radial (V-axis) rings from outer to inner edges.
+        // Build arc positions with corner-aligned subdivisions. Corners must
+        // always span a fixed pixel width regardless of handle_arc.
+        constexpr int corner_segs = 2;
+
+        // Scale middle mesh segments to middle arc length, at about 1 segment
+        // per 20px.
+        const int mid_segs = std::max(1, static_cast<int>((arc_length - 2.0f * u_corner) / 20.0f));
+        std::vector<std::pair<float, float>> arc_uvs;
+        arc_uvs.reserve(2 * corner_segs + mid_segs + 1);
+
+        // Left corner maps U to 0-0.5.
+        for (int i = 0; i <= corner_segs; i++)
+        {
+            const float t = static_cast<float>(i) / static_cast<float>(corner_segs);
+            arc_uvs.push_back({t * u_corner, t * 0.5f});
+        }
+
+        // Middle segment maps U to 0.5 (stretch 1 pixel).
+        if (arc_length > 2.0f * u_corner)
+        {
+            for (int i = 1; i <= mid_segs; i++)
+            {
+                const float t = static_cast<float>(i) / static_cast<float>(mid_segs);
+                arc_uvs.push_back({u_corner + t * (arc_length - 2.0f * u_corner), 0.5f});
+            }
+        }
+
+        // Right corner maps U to 0.5-1.0.
+        for (int i = 1; i <= corner_segs; i++)
+        {
+            const float t = static_cast<float>(i) / static_cast<float>(corner_segs);
+            arc_uvs.push_back({arc_length - u_corner + t * u_corner, 0.5f + t * 0.5f});
+        }
+
+        // Build four radial (V-axis) bands from outer to inner edges.
         const float radii[4] = {outer_r, outer_r - v_corner, inner_r + v_corner, inner_r};
         constexpr float v_uvs[4] = {0.0f, 0.5f, 0.5f, 1.0f};
 
-        std::vector<glm::vec2> positions;
-        std::vector<glm::vec2> uvs;
-
-        // Reserve vertex positions and their UVs for handle segments across
-        // three radial rows.
-        positions.reserve((handle_segments + 1) * 2 * 3);
-        uvs.reserve((handle_segments + 1) * 2 * 3);
-
-        // Process each segment in each band.
+        // Draw each radial band as its own strip.
         for (int band = 0; band < 3; band++)
         {
-            for (int i = 0; i <= handle_segments; i++)
+            std::vector<glm::vec2> positions;
+            std::vector<glm::vec2> uvs;
+            positions.reserve(arc_uvs.size() * 2);
+            uvs.reserve(arc_uvs.size() * 2);
+
+            for (const auto& [arc_pos, u] : arc_uvs)
             {
-                // Cache angle calculations and U-axis coords for each segment.
-                const float angle = angle_rad - handle_half_arc + handle_half_arc * 2.0f * static_cast<float>(i) / static_cast<float>(handle_segments);
+                // Map arc_pos back to an angle and compute the vertex position.
+                const float angle = arc_length > 0.0f
+                    ? angle_rad - handle_half_arc + (arc_pos / arc_length) * 2.0f * handle_half_arc
+                    : angle_rad;
                 const float angle_sin = sinf(angle);
                 const float angle_cos = cosf(angle);
-                const float u = getUForSegment(i, arc_length, u_corner, handle_segments);
 
-                // Push positions and UVs for each band from the outer to inner
-                // edge.
+                // Push positions and UVs for the outer and inner edge of this band.
                 positions.push_back(center + glm::vec2{angle_sin * radii[band], angle_cos * radii[band]});
                 uvs.push_back({u, v_uvs[band]});
                 positions.push_back(center + glm::vec2{angle_sin * radii[band + 1], angle_cos * radii[band + 1]});
                 uvs.push_back({u, v_uvs[band + 1]});
             }
-        }
 
-        // Render the segments.
-        renderer.drawTexturedTriangleStrip(front.texture, positions, uvs, front.color);
+            renderer.drawTexturedTriangleStrip(texture.texture, positions, uvs, front.color);
+        }
     }
     // If not textured, draw the handle as a flat-colored triangle strip
     // without segmenting on radial rings.
     else
     {
+        // Scale segments to arc length, about 1 segment per 10 degrees.
+        const int handle_segments = std::max(4, static_cast<int>(effective_handle_arc / 10.0f));
+
         // Build the handle segments.
         std::vector<glm::vec2> positions;
         positions.reserve((handle_segments + 1) * 2);
@@ -135,7 +177,7 @@ bool GuiRotationDial::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
     const auto diff = position - getCenterPoint();
     const float dist = glm::length(diff);
     const float effective_thickness = ring_thickness < 1.0f
-        ? radius * 0.1f
+        ? radius * dial_style->get(GuiElement::State::Normal).size / 100.0f
         : ring_thickness;
 
     // Ignore click if made outside of the ring outline.
@@ -172,7 +214,8 @@ GuiRotationDial* GuiRotationDial::setValue(float value)
     // Normalize any arbitrary float value to 0-360.
     const float range = std::abs(max_value - min_value);
     const float lower_range = std::min(min_value, max_value);
-    // fmod once to reduce value to -range, range, then again to reduce to 0, range.
+    // fmod once to reduce value to -range, range, then again to reduce to
+    // 0, range.
     this->value = lower_range + std::fmod(std::fmod(value - lower_range, range) + range, range);
 
     return this;

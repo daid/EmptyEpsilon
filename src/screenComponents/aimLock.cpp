@@ -64,8 +64,6 @@ void AimLockButton::setAimLock(bool value)
 AimLock::AimLock(GuiContainer* owner, string id, GuiRadarView* radar, float min_value, float max_value, float start_value, func_t func)
 : GuiRotationDial(owner, id, min_value, max_value, start_value, 0.0f, 0.0f, func), radar(radar)
 {
-    back_style = theme->getStyle("rotationdial.back");
-    front_style = theme->getStyle("rotationdial.front");
 }
 
 void AimLock::onUpdate()
