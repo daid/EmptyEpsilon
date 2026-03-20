@@ -1,12 +1,12 @@
 #ifndef SHIP_LOG_SCREEN_H
 #define SHIP_LOG_SCREEN_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 
 class GuiAdvancedScrollText;
 class GuiCustomShipFunctions;
 
-class ShipLogScreen : public GuiOverlay
+class ShipLogScreen : public BaseShipScreen
 {
 private:
     GuiAdvancedScrollText* log_text;

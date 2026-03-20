@@ -12,7 +12,7 @@
 
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DAMCON_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "DAMCON_SCREEN")
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -33,7 +33,7 @@ DamageControlScreen::DamageControlScreen(GuiContainer* owner)
 
 void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 
     if (my_spaceship)
     {

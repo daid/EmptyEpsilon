@@ -15,7 +15,7 @@
 #include "screenComponents/customShipFunctions.h"
 
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
-: GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "POWER_MANAGEMENT_SCREEN")
 {
     selected_system = ShipSystem::Type::None;
 
@@ -74,7 +74,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 
 void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
     if (my_spaceship)
     {
         auto reactor = my_spaceship.getComponent<Reactor>();
@@ -128,6 +128,7 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
 void PowerManagementScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship && isVisible())
     {
         auto coolant = my_spaceship.getComponent<Coolant>();

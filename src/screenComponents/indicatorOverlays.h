@@ -35,8 +35,6 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 
     void hasGlobalMessage() { has_global_message = true; }
-private:
-    void drawAlertLevel(sp::RenderTarget& renderer);
 };
 
 #endif//INDICATOR_OVERLAYS_H

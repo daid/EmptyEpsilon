@@ -15,6 +15,12 @@
     # Background color and images
     [background] {
         color: #1F252D
+        [background.red_alert] {
+            color: #401216
+        }
+        [background.yellow_alert] {
+            color: #404016
+        }
         [background.crosses] {
             image: gui/background/crosses.png
         }
@@ -151,6 +157,12 @@
                 color: #FF0000
                 color.disabled: #A08080
             }
+            [button.yellow_alert.back] {
+                color: #FFFF00
+            }
+            [button.red_alert.back] {
+                color: #FF0000
+            }
             [button.toggle.off.back] {
             }
             [button.toggle.on.back] {
@@ -171,6 +183,12 @@
                 color: #FF0000
                 color.active: #120000
                 color.disabled: #FF00004D
+            }
+            [button.yellow_alert.front] {
+                color: #FFFF00
+            }
+            [button.red_alert.front] {
+                color: #FF0000
             }
             [button.toggle.off.front] {
             }

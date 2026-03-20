@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "playerInfo.h"
 
 class GuiSelfDestructButton;
@@ -14,14 +14,13 @@ class GuiProgressbar;
 class GuiProgressSlider;
 class GuiThemeStyle;
 
-class EngineeringScreen : public GuiOverlay
+class EngineeringScreen : public BaseShipScreen
 {
 private:
     const GuiThemeStyle* background_style;
     const GuiThemeStyle* slider_tick_style;
     const GuiThemeStyle* overlay_damaged_style;
     const GuiThemeStyle* overlay_overheating_style;
-    GuiOverlay* background_crosses;
 
     GuiSelfDestructButton* self_destruct_button;
     GuiLabel* power_label;

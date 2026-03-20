@@ -28,16 +28,10 @@
 #include "gui/gui2_keyvaluedisplay.h"
 
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "WEAPONS_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "WEAPONS_SCREEN")
 {
-    // Render the radar shadow and background decorations.
+    // Render the radar shadow
     (new GuiImage(this, "BACKGROUND_GRADIENT", ""))->setTextureThemed("background.gradient")->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
-
-    // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
 
     radar = new GuiRadarView(this, "HELMS_RADAR", &targets);
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
@@ -132,11 +126,12 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
         if (beam_info_box)
             beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>());
     }
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 }
 
 void WeaponsScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship && isVisible())
     {
         if (keys.weapons_enemy_next_target.getDown())

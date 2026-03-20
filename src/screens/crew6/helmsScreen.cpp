@@ -28,16 +28,10 @@
 #include "gui/gui2_image.h"
 
 HelmsScreen::HelmsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "HELMS_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "HELMS_SCREEN")
 {
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", ""))->setTextureThemed("background.gradient")->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
-
-    // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
 
     GuiRadarView* radar = new GuiRadarView(this, "HELMS_RADAR", nullptr);
 
@@ -125,11 +119,12 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
 
 void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 }
 
 void HelmsScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship && isVisible())
     {
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;

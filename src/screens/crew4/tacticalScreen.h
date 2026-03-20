@@ -1,7 +1,7 @@
 #ifndef TACTICAL_SCREEN_H
 #define TACTICAL_SCREEN_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
 
@@ -11,11 +11,9 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class TacticalScreen : public GuiOverlay
+class TacticalScreen : public BaseShipScreen
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiElement* warp_controls;
     GuiElement* jump_controls;
 

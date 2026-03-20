@@ -1,10 +1,10 @@
 #pragma once
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 
 class DatabaseViewComponent;
 
-class DatabaseScreen : public GuiOverlay
+class DatabaseScreen : public BaseShipScreen
 {
 private:
 public:

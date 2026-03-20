@@ -7,13 +7,12 @@
 #include "screenComponents/customShipFunctions.h"
 
 ShipLogScreen::ShipLogScreen(GuiContainer* owner)
-: GuiOverlay(owner, "SHIP_LOG_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "SHIP_LOG_SCREEN")
 {
     GuiElement* shiplog_layout = new GuiElement(this, "SHIPLOG_LAYOUT");
     shiplog_layout->setPosition(50, 120)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setAttribute("layout", "horizontalright");
     custom_function_sidebar= new GuiCustomShipFunctions(shiplog_layout, CrewPosition::shipLog, "");
     custom_function_sidebar->setSize(270, GuiElement::GuiSizeMax);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
     log_text = new GuiAdvancedScrollText(shiplog_layout, "SHIP_LOG");
     log_text->enableAutoScrollDown();
     log_text->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -21,7 +20,7 @@ ShipLogScreen::ShipLogScreen(GuiContainer* owner)
 
 void ShipLogScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 
     if (my_spaceship)
     {
