@@ -3,6 +3,7 @@
 #include "sACNDMXDevice.h"
 #include "random.h"
 #include "logging.h"
+#include "io/network/udpSocket.h"
 
 StreamingAcnDMXDevice::StreamingAcnDMXDevice()
 {
@@ -110,7 +111,7 @@ void StreamingAcnDMXDevice::updateLoop()
         sequence_number++;
 
         if (multicast)
-            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port, true);
+            socket.sendMulticast(buffer.data(), buffer.size(), universe, acn_port, sp::io::network::UdpMulticastMode::SACN);
         else
             socket.sendBroadcast(buffer.data(), buffer.size(), acn_port);
 
