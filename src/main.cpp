@@ -145,8 +145,6 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
     keys.init();
-    colorConfig.load();
-
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();
@@ -158,13 +156,13 @@ int main(int argc, char** argv)
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");
-    if (!GuiTheme::loadTheme(theme_name, "gui/"+theme_name+".theme.txt"))
+    if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
     {
-        LOG(ERROR, "Failed to load "+ theme_name + " theme, trying default. Resources missing or contains errors ? Check gui/" + theme_name + ".theme.txt");
+        LOG(Error, "Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
         if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
         {
-            LOG(ERROR, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors ? Check gui/default.theme.txt", nullptr);
+            LOG(Error, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
             return 1;
         }
         GuiTheme::setCurrentTheme("default");
@@ -185,8 +183,9 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
-    bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+    const auto& active_theme = GuiTheme::getCurrentTheme();
+    main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
+    bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
@@ -195,6 +194,11 @@ int main(int argc, char** argv)
     }
 
     sp::RenderTarget::setDefaultFont(main_font);
+
+    // Apply baseline offset adjustments to fonts
+    // Positive values move text down, negative values move text up
+    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
+    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
 
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
