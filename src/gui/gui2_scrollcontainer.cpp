@@ -121,7 +121,7 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
     sp::Rect content_rect = getContentRect();
 
     // Capture clipping and scroll translation.
-    renderer.pushScissorRect(content_rect);
+    renderer.pushClipRegion(content_rect);
     renderer.pushTranslation({0.0f, -scroll_offset});
 
     // Track mouse position on element relative to the vertical scroll offset.
@@ -163,7 +163,7 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
 
     // Apply scroll translation and clipping. Order matters here.
     renderer.popTranslation();
-    renderer.popScissorRect();
+    renderer.popClipRegion();
 
     // Draw the scrollbar if intended to be visible. Never clip nor scroll the
     // scrollbar itself.
