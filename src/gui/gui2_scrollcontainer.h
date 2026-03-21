@@ -82,8 +82,6 @@ private:
     GuiElement* focused_element = nullptr;
     // Defines the element being clicked/tapped within this element's subtree.
     GuiElement* pressed_element = nullptr;
-    // Defines the scroll position of the pressed element.
-    float pressed_scroll = 0.0f;
 
     // Returns a rect for the area where content is visible.
     sp::Rect getContentRect() const;

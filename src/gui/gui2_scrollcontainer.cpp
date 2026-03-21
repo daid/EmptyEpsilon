@@ -110,6 +110,14 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     // Clamp scroll offset.
     scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
 
+    // Apply the scroll offset to non-scrollbar children so their rects are in
+    // screen space.
+    for (GuiElement* child : children)
+    {
+        if (child == scrollbar_v) continue;
+        offsetElementRect(child, {0.0f, -scroll_offset});
+    }
+
     // Sync scrollbar properties to new layout.
     scrollbar_v->setRange(0, static_cast<int>(content_height));
     scrollbar_v->setValueSize(static_cast<int>(visible_height));
@@ -120,14 +128,11 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
 {
     sp::Rect content_rect = getContentRect();
 
-    // Capture clipping and scroll translation.
+    // Clip child rendering to the visible content area.
     renderer.pushClipRegion(content_rect);
-    renderer.pushTranslation({0.0f, -scroll_offset});
 
-    // Track mouse position on element relative to the vertical scroll offset.
-    glm::vec2 layout_mouse = mouse_position + glm::vec2{0.0f, scroll_offset};
-
-    // Pass the relative mouse position through to each child element.
+    // Draw each child element and pass mouse events, skipping this container's
+    // scrollbar.
     for (auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
@@ -150,19 +155,17 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
             continue;
         }
 
-        setElementHover(element, element->getRect().contains(layout_mouse));
+        setElementHover(element, element->getRect().contains(mouse_position));
 
         if (element->isVisible())
         {
             element->onDraw(renderer);
-            callDrawElements(element, layout_mouse, element->getRect(), renderer);
+            callDrawElements(element, mouse_position, element->getRect(), renderer);
         }
 
         ++it;
     }
 
-    // Apply scroll translation and clipping. Order matters here.
-    renderer.popTranslation();
     renderer.popClipRegion();
 
     // Draw the scrollbar if intended to be visible. Never clip nor scroll the
@@ -194,8 +197,6 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
 
     // Pass the click to each nested child, which should take priority if it can
     // use it.
-    glm::vec2 layout_pos = position + glm::vec2{0.0f, scroll_offset};
-
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
         GuiElement* element = *it;
@@ -205,25 +206,22 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
         // We don't care about buttons that aren't visible or enabled.
         if (!element->isVisible() || !element->isEnabled()) continue;
 
-        // Figure out if we can click the element. If so, capture the scroll
-        // offset to pass to drag events, focus it, and click it.
-        GuiElement* clicked = callGetClickElement(element, button, layout_pos, id);
+        // Figure out if we can click the element. If so, focus it and click it.
+        GuiElement* clicked = callGetClickElement(element, button, position, id);
         if (clicked)
         {
             switchFocusTo(clicked);
             pressed_element = clicked;
-            pressed_scroll = scroll_offset;
             return this;
         }
 
         // The click didn't fire, but we still recurse into children regardless.
         // This helps find children or child-like elements (like GuiSelector
         // popups) that can exist outside of their parent's rect.
-        if (element->getRect().contains(layout_pos) && element->onMouseDown(button, layout_pos, id))
+        if (element->getRect().contains(position) && element->onMouseDown(button, position, id))
         {
             switchFocusTo(element);
             pressed_element = element;
-            pressed_scroll = scroll_offset;
             return this;
         }
     }
@@ -289,7 +287,7 @@ bool GuiScrollContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
 {
     if (pressed_element)
     {
-        pressed_element->onMouseDown(button, position + glm::vec2{0.0f, pressed_scroll}, id);
+        pressed_element->onMouseDown(button, position, id);
         pressed_element = nullptr;
         return true;
     }
@@ -299,14 +297,14 @@ bool GuiScrollContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
 
 void GuiScrollContainer::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (pressed_element) pressed_element->onMouseDrag(position + glm::vec2{0.0f, pressed_scroll}, id);
-}    
+    if (pressed_element) pressed_element->onMouseDrag(position, id);
+}
 
 void GuiScrollContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (pressed_element)
     {
-        pressed_element->onMouseUp(position + glm::vec2{0.0f, pressed_scroll}, id);
+        pressed_element->onMouseUp(position, id);
         pressed_element = nullptr;
     }
 }
@@ -329,8 +327,6 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
 
     // Execute the scroll on each nested child. If a child can use the mousewheel
     // scroll event, give it to them.
-    glm::vec2 layout_pos = position + glm::vec2{0.0f, scroll_offset};
-
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
         GuiElement* element = *it;
@@ -339,12 +335,12 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
         if (element
             && element->isVisible()
             && element->isEnabled()
-            && element->getRect().contains(layout_pos)
+            && element->getRect().contains(position)
         )
         {
-            GuiElement* scrolled = callExecuteScrollOnElement(element, layout_pos, value);
+            GuiElement* scrolled = callExecuteScrollOnElement(element, position, value);
             if (scrolled) return scrolled;
-            if (element->onMouseWheelScroll(layout_pos, value)) return element;
+            if (element->onMouseWheelScroll(position, value)) return element;
         }
     }
 

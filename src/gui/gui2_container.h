@@ -78,6 +78,9 @@ protected:
     static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target);
     static GuiElement* callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id);
     static GuiElement* callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value);
+    // Apply an offset to this rect's position, and then recursively to all of
+    // its descendents. Used for nested scrolling/GuiScrollContainer.
+    static void offsetElementRect(GuiContainer* container, glm::vec2 offset);
 
     friend class GuiElement;
 };
