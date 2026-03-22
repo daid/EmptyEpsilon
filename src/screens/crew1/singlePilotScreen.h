@@ -1,7 +1,7 @@
 #ifndef SINGLE_PILOT_SCREEN_H
 #define SINGLE_PILOT_SCREEN_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
 
@@ -13,11 +13,9 @@ class GuiToggleButton;
 class GuiRotationDial;
 class GuiCombatManeuver;
 
-class SinglePilotScreen : public GuiOverlay
+class SinglePilotScreen : public BaseShipScreen
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiElement* warp_controls;
     GuiElement* jump_controls;
     GuiCombatManeuver* combat_maneuver;

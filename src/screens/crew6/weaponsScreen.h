@@ -1,7 +1,7 @@
 #ifndef WEAPONS_SCREEN_H
 #define WEAPONS_SCREEN_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/targetsContainer.h"
 #include "gui/joystickConfig.h"
@@ -11,11 +11,9 @@ class GuiKeyValueDisplay;
 class GuiToggleButton;
 class GuiRotationDial;
 
-class WeaponsScreen : public GuiOverlay
+class WeaponsScreen : public BaseShipScreen
 {
 private:
-    GuiOverlay* background_crosses;
-
     TargetsContainer targets;
     GuiKeyValueDisplay* energy_display;
     GuiKeyValueDisplay* front_shield_display;

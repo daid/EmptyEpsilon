@@ -1,9 +1,9 @@
 #ifndef COMMS_SCREEN_H
 #define COMMS_SCREEN_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 
-class CommsScreen : public GuiOverlay
+class CommsScreen : public BaseShipScreen
 {
 public:
     CommsScreen(GuiContainer* owner);

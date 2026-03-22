@@ -6,12 +6,8 @@
 #include "gui/theme.h"
 
 DatabaseScreen::DatabaseScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DATABASE_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "DATABASE_SCREEN")
 {
-    // Render background decorations.
-    (new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255}))
-        ->setTextureTiled("gui/background/crosses.png");
-
     // Render database.
     DatabaseViewComponent* dvc = new DatabaseViewComponent(this);
     dvc->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)

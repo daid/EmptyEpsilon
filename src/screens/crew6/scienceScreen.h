@@ -2,7 +2,7 @@
 #define SCIENCE_SCREEN_H
 
 #include "screenComponents/targetsContainer.h"
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "playerInfo.h"
 
 class GuiListbox;
@@ -20,11 +20,10 @@ class GuiImage;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
 
-class ScienceScreen : public GuiOverlay
+class ScienceScreen : public BaseShipScreen
 {
 public:
     GuiImage* background_gradient;
-    GuiOverlay* background_crosses;
 
     GuiElement* radar_view;
     DatabaseViewComponent* database_view;

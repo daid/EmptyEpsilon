@@ -31,17 +31,11 @@
 #include "gui/gui2_panel.h"
 
 EngineeringScreen::EngineeringScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "ENGINEERING_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "ENGINEERING_SCREEN")
 {
     slider_tick_style = theme->getStyle("slider.tick");
     overlay_damaged_style = theme->getStyle("overlay.damaged");
     overlay_overheating_style = theme->getStyle("overlay.overheating");
-    // Render the background decorations.
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
-
-    // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
 
     auto stats = new GuiElement(this, "ENGINEER_STATS");
     stats->setPosition(20, 100, sp::Alignment::TopLeft)->setSize(240, 200)->setAttribute("layout", "vertical");
@@ -372,11 +366,12 @@ void EngineeringScreen::onDraw(sp::RenderTarget& renderer)
             }
         }
     }
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 }
 
 void EngineeringScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship && isVisible())
     {
         auto coolant = my_spaceship.getComponent<Coolant>();

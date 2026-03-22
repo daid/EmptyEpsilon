@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "gui/joystickConfig.h"
 
 class GuiKeyValueDisplay;
@@ -8,11 +8,9 @@ class GuiLabel;
 class GuiDockingButton;
 class GuiCombatManeuver;
 
-class HelmsScreen : public GuiOverlay
+class HelmsScreen : public BaseShipScreen
 {
 private:
-    GuiOverlay* background_crosses;
-
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;

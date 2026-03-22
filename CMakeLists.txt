@@ -255,6 +255,7 @@ set(MAIN_SOURCES
     src/screens/windowScreen.cpp
     src/screens/mainScreen.cpp
     src/screens/spectatorScreen.cpp
+    src/screens/baseShipScreen.cpp
     src/screens/crew4/operationsScreen.cpp
     src/screens/crew4/engineeringAdvancedScreen.cpp
     src/screens/crew4/tacticalScreen.cpp

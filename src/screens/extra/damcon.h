@@ -1,12 +1,12 @@
 #ifndef DAMCON_H
 #define DAMCON_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "components/shipsystem.h"
 
 class GuiKeyValueDisplay;
 
-class DamageControlScreen : public GuiOverlay
+class DamageControlScreen : public BaseShipScreen
 {
 private:
     GuiKeyValueDisplay* hull_display;

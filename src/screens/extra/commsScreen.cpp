@@ -5,7 +5,7 @@
 #include "gui/theme.h"
 
 CommsScreen::CommsScreen(GuiContainer* owner)
-: GuiOverlay(owner, "COMMS_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "COMMS_SCREEN")
 {
     new ShipsLog(this);
     (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);

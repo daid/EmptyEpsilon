@@ -22,7 +22,6 @@
 #include "screenComponents/frequencyCurve.h"
 #include "screenComponents/scanningDialog.h"
 #include "screenComponents/databaseView.h"
-#include "screenComponents/alertOverlay.h"
 #include "screenComponents/customShipFunctions.h"
 
 #include "gui/theme.h"
@@ -35,7 +34,7 @@
 #include "gui/gui2_image.h"
 
 ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
-: GuiOverlay(owner, "SCIENCE_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "SCIENCE_SCREEN")
 {
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     targets.setAllowWaypointSelection();
@@ -43,12 +42,6 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Render the radar shadow and background decorations.
     background_gradient = new GuiImage(this, "BACKGROUND_GRADIENT", "");
     background_gradient->setTextureThemed("background.gradient_offset")->setPosition(glm::vec2(105, 0), sp::Alignment::CenterLeft)->setSize(1200, 900);
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
-
-    // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
 
     // Draw the radar.
     radar_view = new GuiElement(this, "RADAR_VIEW");
@@ -248,7 +241,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
     if (!isVisible())
         return;
 
@@ -532,6 +525,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
 void ScienceScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship)
     {
         // Initiate a scan on scannable objects.

@@ -1,7 +1,7 @@
 #ifndef POWER_MANAGEMENT_H
 #define POWER_MANAGEMENT_H
 
-#include "gui/gui2_overlay.h"
+#include "screens/baseShipScreen.h"
 #include "components/shipsystem.h"
 
 class GuiPanel;
@@ -9,7 +9,7 @@ class GuiSlider;
 class GuiProgressbar;
 class GuiKeyValueDisplay;
 
-class PowerManagementScreen : public GuiOverlay
+class PowerManagementScreen : public BaseShipScreen
 {
 private:
     GuiKeyValueDisplay* energy_display;

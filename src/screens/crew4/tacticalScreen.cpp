@@ -37,16 +37,10 @@
 #include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
-: GuiOverlay(owner, "TACTICAL_SCREEN", GuiTheme::getColor("background"))
+: BaseShipScreen(owner, "TACTICAL_SCREEN")
 {
     // Render the radar shadow and background decorations.
     (new GuiImage(this, "BACKGROUND_GRADIENT", ""))->setTextureThemed("background.gradient_single")->setPosition(glm::vec2(0, 0), sp::Alignment::Center)->setSize(1200, 900);
-
-    background_crosses = new GuiOverlay(this, "BACKGROUND_CROSSES", glm::u8vec4{255,255,255,255});
-    background_crosses->setTextureTiledThemed("background.crosses");
-
-    // Render the alert level color overlay.
-    (new AlertLevelOverlay(this));
 
     // Short-range tactical radar with a 5U range.
     radar = new GuiRadarView(this, "TACTICAL_RADAR", &targets);
@@ -137,11 +131,12 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
         auto target = my_spaceship.getComponent<Target>();
         targets.set(target ? target->entity : sp::ecs::Entity{});
     }
-    GuiOverlay::onDraw(renderer);
+    BaseShipScreen::onDraw(renderer);
 }
 
 void TacticalScreen::onUpdate()
 {
+    BaseShipScreen::onUpdate();
     if (my_spaceship && isVisible())
     {
         auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;

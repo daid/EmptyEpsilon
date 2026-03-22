@@ -57,8 +57,6 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
 {
     if (my_spaceship)
     {
-        drawAlertLevel(renderer);
-
         float shield_hit = 0.0;
         bool low_shields = false;
         auto shields = my_spaceship.getComponent<Shields>();
@@ -165,27 +163,4 @@ bool GuiIndicatorOverlays::onMouseDown(sp::io::Pointer::Button button, glm::vec2
     if (pause_overlay->isVisible() || victory_overlay->isVisible())
         return true;
     return false;
-}
-
-void GuiIndicatorOverlays::drawAlertLevel(sp::RenderTarget& renderer)
-{
-    glm::u8vec4 multiply_color{255,255,255,255};
-
-    auto pc = my_spaceship.getComponent<PlayerControl>();
-    if (!pc) return;
-
-    switch(pc->alert_level)
-    {
-    case AlertLevel::RedAlert:
-        multiply_color = glm::u8vec4(255, 192, 192, 255);
-        break;
-    case AlertLevel::YellowAlert:
-        multiply_color = glm::u8vec4(255, 255, 192, 255);
-        break;
-    case AlertLevel::Normal:
-    default:
-        return;
-    }
-
-    renderer.drawRectColorMultiply(rect, multiply_color);
 }
