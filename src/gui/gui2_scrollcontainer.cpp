@@ -18,8 +18,8 @@ GuiScrollContainer::GuiScrollContainer(GuiContainer* owner, const string& id, Sc
             scroll_offset = static_cast<float>(value);
         }
     );
-    scrollbar_v->setClickChange(50);
     scrollbar_v
+        ->setClickChange(50)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
         ->setSize(scrollbar_width, GuiSizeMax)
         ->hide();
@@ -56,6 +56,10 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     this->rect = rect;
     visible_height = rect.size.y - layout.padding.top - layout.padding.bottom;
 
+    // Clamp scroll_offset using last frame's content_height to validate the
+    // value passed to the layout manager.
+    scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
+
     // Show the scrollbar only if we're clipping anything.
     bool has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
     scrollbar_v->setVisible(has_overflow);
@@ -63,7 +67,7 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     // Don't factor scrollbar width if it isn't visible.
     const float sb_width = scrollbar_v->isVisible() ? scrollbar_width : 0.0f;
 
-    // Manually factor padding into content layout around the scrollbar.
+    // Factor layout padding.
     glm::vec2 padding_offset{
         layout.padding.left,
         layout.padding.top
@@ -74,8 +78,10 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         layout.padding.top + layout.padding.bottom
     };
 
+    // Subtract scroll_offset from the layout rect so all children (and their
+    // descendants) are offset.
     sp::Rect content_layout_rect{
-        rect.position + padding_offset,
+        rect.position + padding_offset + glm::vec2{0.0f, -scroll_offset},
         rect.size - padding_size - glm::vec2{sb_width, 0.0f}
     };
 
@@ -95,33 +101,27 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         {scrollbar_width, rect.size.y}
     });
 
-    // Compute content_height from non-scrollbar visible children.
+    // Compute content_height. Child elements are scrolled, so add
+    // scroll_offset from extents.
     float max_bottom = 0.0f;
     for (GuiElement* child : children)
     {
         if (child == scrollbar_v) continue;
         if (!child->isVisible()) continue;
 
-        const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y;
+        const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y + scroll_offset;
         if (bottom > max_bottom) max_bottom = bottom;
     }
     content_height = max_bottom + layout.padding.bottom;
 
-    // Clamp scroll offset.
+    // Clamp again in case content shrank this frame.
     scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
 
-    // Apply the scroll offset to non-scrollbar children so their rects are in
-    // screen space.
-    for (GuiElement* child : children)
-    {
-        if (child == scrollbar_v) continue;
-        offsetElementRect(child, {0.0f, -scroll_offset});
-    }
-
     // Sync scrollbar properties to new layout.
-    scrollbar_v->setRange(0, static_cast<int>(content_height));
-    scrollbar_v->setValueSize(static_cast<int>(visible_height));
-    scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    scrollbar_v
+        ->setRange(0, static_cast<int>(content_height))
+        ->setValueSize(static_cast<int>(visible_height))
+        ->setValue(static_cast<int>(scroll_offset));
 }
 
 void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* parent_rect */, sp::RenderTarget& renderer)
