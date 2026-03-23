@@ -4,17 +4,18 @@
 
 class GuiScrollbar;
 
+// GuiContainer-like GuiElement with support for clipping or scrolling arbitrary
+// child elements that overflow its bounds.
 class GuiScrollContainer : public GuiElement
 {
 public:
+    // Define modes to indicate whether this element scrolls, and if so, how.
     enum class ScrollMode {
         None,   // Cut overflow off at element borders; no scrolling
         Scroll, // Scroll by fixed increments, regardless of contents or element size
         Page    // Scroll by increments equal to the element size
     };
 
-    // GuiContainer-like GuiElement with support for clipping or scrolling
-    // arbitrary child elements that overflow its bounds.
     GuiScrollContainer(GuiContainer* owner, const string& id, ScrollMode mode = ScrollMode::Scroll);
 
     // TODO: Right now this clips both horizontally and vertically, but supports
@@ -62,21 +63,30 @@ protected:
     // first if they can use it.
     virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value) override;
 
-private:
+    // Define whether this element scrolls, paginates, or only clips content.
     ScrollMode mode;
+    // Defines the scrollbar's width, in virtual pixels.
     float scrollbar_width = 30.0f;
-    GuiScrollbar* scrollbar_v = nullptr;
+    // Scrollbar element, visible only if there's overflow.
+    GuiScrollbar* scrollbar_v;
 
+    // Defines the scroll offset in virtual pixels, with 0 as the top.
     float scroll_offset = 0.0f;
+    // Defines the total height of content, in virtual pixels.
     float content_height = 0.0f;
+    // Defines the visible height of the element, in virtual pixels.
     float visible_height = 0.0f;
-    bool scrollbar_visible = false;
 
+    // Defines the element that has focus within this element's subtree.
     GuiElement* focused_element = nullptr;
+    // Defines the element being clicked/tapped within this element's subtree.
     GuiElement* pressed_element = nullptr;
-    float pressed_scroll = 0.0f;
 
+    // Returns a rect for the area where content is visible.
     sp::Rect getContentRect() const;
+    // Returns the effective scrollbar width, factoring in whether it appears
+    // at all.
     float getEffectiveScrollbarWidth() const;
+    // Passes focus to another element.
     void switchFocusTo(GuiElement* new_element);
 };

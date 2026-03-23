@@ -7,23 +7,22 @@
 GuiScrollContainer::GuiScrollContainer(GuiContainer* owner, const string& id, ScrollMode mode)
 : GuiElement(owner, id), mode(mode)
 {
-    // We need to manipulate layout size to hide/show the scrollbar.
+    // Don't lock content size to element.
+    // We need to manipulate content size when toggling scrollbar visibility.
     layout.match_content_size = false;
 
-    // Add a vertical scrollbar only if this element scrolls or pages.
-    if (mode == ScrollMode::Scroll || mode == ScrollMode::Page)
-    {
-        scrollbar_v = new GuiScrollbar(this, id + "_SCROLLBAR_V", 0, 100, 0,
-            [this](int value)
-            {
-                scroll_offset = static_cast<float>(value);
-            }
-        );
-        scrollbar_v->setClickChange(50);
-        scrollbar_v
-            ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
-            ->setSize(scrollbar_width, GuiSizeMax);
-    }
+    // Define the scrollbar and hide it.
+    scrollbar_v = new GuiScrollbar(this, id + "_SCROLLBAR_V", 0, 100, 0,
+        [this](int value)
+        {
+            scroll_offset = static_cast<float>(value);
+        }
+    );
+    scrollbar_v
+        ->setClickChange(50)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(scrollbar_width, GuiSizeMax)
+        ->hide();
 }
 
 GuiScrollContainer* GuiScrollContainer::setMode(ScrollMode new_mode)
@@ -42,14 +41,14 @@ void GuiScrollContainer::scrollToFraction(float fraction)
 {
     const float max_scroll = std::max(0.0f, content_height - visible_height);
     scroll_offset = std::clamp(fraction * max_scroll, 0.0f, max_scroll);
-    if (scrollbar_v) scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    scrollbar_v->setValue(static_cast<int>(scroll_offset));
 }
 
 void GuiScrollContainer::scrollToOffset(float pixel_offset)
 {
     const float max_scroll = std::max(0.0f, content_height - visible_height);
     scroll_offset = std::clamp(pixel_offset, 0.0f, max_scroll);
-    if (scrollbar_v) scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    scrollbar_v->setValue(static_cast<int>(scroll_offset));
 }
 
 void GuiScrollContainer::updateLayout(const sp::Rect& rect)
@@ -57,12 +56,18 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
     this->rect = rect;
     visible_height = rect.size.y - layout.padding.top - layout.padding.bottom;
 
-    // Show the scrollbar only if we're clipping anything.
-    scrollbar_visible = (scrollbar_v != nullptr) && (content_height > visible_height + 0.5f);
-    // Don't factor scrollbar width if it isn't visible.
-    const float sb_width = scrollbar_visible ? scrollbar_width : 0.0f;
+    // Clamp scroll_offset using last frame's content_height to validate the
+    // value passed to the layout manager.
+    scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
 
-    // Manually factor padding into content layout around the scrollbar.
+    // Show the scrollbar only if we're clipping anything.
+    bool has_overflow = (mode != ScrollMode::None) && (content_height > visible_height + 0.5f);
+    scrollbar_v->setVisible(has_overflow);
+
+    // Don't factor scrollbar width if it isn't visible.
+    const float sb_width = scrollbar_v->isVisible() ? scrollbar_width : 0.0f;
+
+    // Factor layout padding.
     glm::vec2 padding_offset{
         layout.padding.left,
         layout.padding.top
@@ -73,8 +78,10 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
         layout.padding.top + layout.padding.bottom
     };
 
+    // Subtract scroll_offset from the layout rect so all children (and their
+    // descendants) are offset.
     sp::Rect content_layout_rect{
-        rect.position + padding_offset,
+        rect.position + padding_offset + glm::vec2{0.0f, -scroll_offset},
         rect.size - padding_size - glm::vec2{sb_width, 0.0f}
     };
 
@@ -82,57 +89,50 @@ void GuiScrollContainer::updateLayout(const sp::Rect& rect)
 
     // Temporarily hide the scrollbar so the layout manager ignores it for
     // sizing, then restore it if enabled.
-    if (scrollbar_v) scrollbar_v->setVisible(false);
+    scrollbar_v->setVisible(false);
 
     layout_manager->updateLoop(*this, content_layout_rect);
 
-    if (scrollbar_v)
-    {
-        scrollbar_v->setVisible(scrollbar_visible);
+    scrollbar_v->setVisible(has_overflow);
 
-        // Override the scrollbar rect.
-        scrollbar_v->updateLayout({
-            {rect.position.x + rect.size.x - scrollbar_width, rect.position.y},
-            {scrollbar_width, rect.size.y}
-        });
-    }
+    // Override the scrollbar rect.
+    scrollbar_v->updateLayout({
+        {rect.position.x + rect.size.x - scrollbar_width, rect.position.y},
+        {scrollbar_width, rect.size.y}
+    });
 
-    // Compute content_height from non-scrollbar visible children.
+    // Compute content_height. Child elements are scrolled, so add
+    // scroll_offset from extents.
     float max_bottom = 0.0f;
     for (GuiElement* child : children)
     {
         if (child == scrollbar_v) continue;
         if (!child->isVisible()) continue;
 
-        const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y;
+        const float bottom = child->getRect().position.y + child->getRect().size.y + child->layout.margin.bottom - rect.position.y + scroll_offset;
         if (bottom > max_bottom) max_bottom = bottom;
     }
     content_height = max_bottom + layout.padding.bottom;
 
-    // Clamp scroll offset.
+    // Clamp again in case content shrank this frame.
     scroll_offset = std::clamp(scroll_offset, 0.0f, std::max(0.0f, content_height - visible_height));
 
     // Sync scrollbar properties to new layout.
-    if (scrollbar_v)
-    {
-        scrollbar_v->setRange(0, static_cast<int>(content_height));
-        scrollbar_v->setValueSize(static_cast<int>(visible_height));
-        scrollbar_v->setValue(static_cast<int>(scroll_offset));
-    }
+    scrollbar_v
+        ->setRange(0, static_cast<int>(content_height))
+        ->setValueSize(static_cast<int>(visible_height))
+        ->setValue(static_cast<int>(scroll_offset));
 }
 
 void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* parent_rect */, sp::RenderTarget& renderer)
 {
     sp::Rect content_rect = getContentRect();
 
-    // Capture clipping and scroll translation.
-    renderer.pushScissorRect(content_rect);
-    renderer.pushTranslation({0.0f, -scroll_offset});
+    // Clip child rendering to the visible content area.
+    renderer.pushClipRegion(content_rect);
 
-    // Track mouse position on element relative to the vertical scroll offset.
-    glm::vec2 layout_mouse = mouse_position + glm::vec2{0.0f, scroll_offset};
-
-    // Pass the relative mouse position through to each child element.
+    // Draw each child element and pass mouse events, skipping this container's
+    // scrollbar.
     for (auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
@@ -155,26 +155,23 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
             continue;
         }
 
-        setElementHover(element, element->getRect().contains(layout_mouse));
+        setElementHover(element, element->getRect().contains(mouse_position));
 
         if (element->isVisible())
         {
             element->onDraw(renderer);
-            callDrawElements(element, layout_mouse, element->getRect(), renderer);
+            callDrawElements(element, mouse_position, element->getRect(), renderer);
         }
 
         ++it;
     }
 
-    // Apply scroll translation and clipping. Order matters here.
-    renderer.popTranslation();
-    renderer.popScissorRect();
+    renderer.popClipRegion();
 
-    // Draw the scrollbar. Never clip nor scroll the scrollbar itself.
-    if (scrollbar_v
-        && !scrollbar_v->isDestroyed()
-        && scrollbar_v->isVisible()
-    )
+    // Draw the scrollbar if intended to be visible. Never clip nor scroll the
+    // scrollbar itself.
+    scrollbar_v->setVisible(scrollbar_v->isVisible() && mode != ScrollMode::None);
+    if (scrollbar_v->isVisible())
     {
         setElementHover(scrollbar_v, scrollbar_v->getRect().contains(mouse_position));
         scrollbar_v->onDraw(renderer);
@@ -185,8 +182,7 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
 GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     // Pass the click to the scrollbar first, and don't translate its position.
-    if (scrollbar_v
-        && scrollbar_v->isVisible()
+    if (scrollbar_v->isVisible()
         && scrollbar_v->isEnabled()
         && scrollbar_v->getRect().contains(position)
     )
@@ -201,8 +197,6 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
 
     // Pass the click to each nested child, which should take priority if it can
     // use it.
-    glm::vec2 layout_pos = position + glm::vec2{0.0f, scroll_offset};
-
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
         GuiElement* element = *it;
@@ -212,25 +206,22 @@ GuiElement* GuiScrollContainer::getClickElement(sp::io::Pointer::Button button, 
         // We don't care about buttons that aren't visible or enabled.
         if (!element->isVisible() || !element->isEnabled()) continue;
 
-        // Figure out if we can click the element. If so, capture the scroll
-        // offset to pass to drag events, focus it, and click it.
-        GuiElement* clicked = callGetClickElement(element, button, layout_pos, id);
+        // Figure out if we can click the element. If so, focus it and click it.
+        GuiElement* clicked = callGetClickElement(element, button, position, id);
         if (clicked)
         {
             switchFocusTo(clicked);
             pressed_element = clicked;
-            pressed_scroll = scroll_offset;
             return this;
         }
 
         // The click didn't fire, but we still recurse into children regardless.
         // This helps find children or child-like elements (like GuiSelector
         // popups) that can exist outside of their parent's rect.
-        if (element->getRect().contains(layout_pos) && element->onMouseDown(button, layout_pos, id))
+        if (element->getRect().contains(position) && element->onMouseDown(button, position, id))
         {
             switchFocusTo(element);
             pressed_element = element;
-            pressed_scroll = scroll_offset;
             return this;
         }
     }
@@ -296,7 +287,7 @@ bool GuiScrollContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
 {
     if (pressed_element)
     {
-        pressed_element->onMouseDown(button, position + glm::vec2{0.0f, pressed_scroll}, id);
+        pressed_element->onMouseDown(button, position, id);
         pressed_element = nullptr;
         return true;
     }
@@ -306,14 +297,14 @@ bool GuiScrollContainer::onMouseDown(sp::io::Pointer::Button button, glm::vec2 p
 
 void GuiScrollContainer::onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id)
 {
-    if (pressed_element) pressed_element->onMouseDrag(position + glm::vec2{0.0f, pressed_scroll}, id);
-}    
+    if (pressed_element) pressed_element->onMouseDrag(position, id);
+}
 
 void GuiScrollContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
     if (pressed_element)
     {
-        pressed_element->onMouseUp(position + glm::vec2{0.0f, pressed_scroll}, id);
+        pressed_element->onMouseUp(position, id);
         pressed_element = nullptr;
     }
 }
@@ -321,8 +312,7 @@ void GuiScrollContainer::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float value)
 {
     // Pass the scroll to the scrollbar first, and don't translate its position.
-    if (scrollbar_v
-        && scrollbar_v->isVisible()
+    if (scrollbar_v->isVisible()
         && scrollbar_v->isEnabled()
         && scrollbar_v->getRect().contains(position))
     {
@@ -337,8 +327,6 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
 
     // Execute the scroll on each nested child. If a child can use the mousewheel
     // scroll event, give it to them.
-    glm::vec2 layout_pos = position + glm::vec2{0.0f, scroll_offset};
-
     for (auto it = children.rbegin(); it != children.rend(); ++it)
     {
         GuiElement* element = *it;
@@ -347,12 +335,12 @@ GuiElement* GuiScrollContainer::executeScrollOnElement(glm::vec2 position, float
         if (element
             && element->isVisible()
             && element->isEnabled()
-            && element->getRect().contains(layout_pos)
+            && element->getRect().contains(position)
         )
         {
-            GuiElement* scrolled = callExecuteScrollOnElement(element, layout_pos, value);
+            GuiElement* scrolled = callExecuteScrollOnElement(element, position, value);
             if (scrolled) return scrolled;
-            if (element->onMouseWheelScroll(layout_pos, value)) return element;
+            if (element->onMouseWheelScroll(position, value)) return element;
         }
     }
 
@@ -375,8 +363,8 @@ bool GuiScrollContainer::onMouseWheelScroll(glm::vec2 /* position */, float valu
     const float max_scroll = std::max(0.0f, content_height - visible_height);
     scroll_offset = std::clamp(scroll_offset - value * step, 0.0f, max_scroll);
 
-    // Update the scrollbar if it exists.
-    if (scrollbar_v) scrollbar_v->setValue(static_cast<int>(scroll_offset));
+    // Update the scrollbar.
+    scrollbar_v->setValue(static_cast<int>(scroll_offset));
 
     return true;
 }
@@ -396,5 +384,5 @@ sp::Rect GuiScrollContainer::getContentRect() const
 float GuiScrollContainer::getEffectiveScrollbarWidth() const
 {
     // Save room for the scrollbar only if it's visible.
-    return (scrollbar_v && scrollbar_visible) ? scrollbar_width : 0.0f;
+    return scrollbar_v->isVisible() ? scrollbar_width : 0.0f;
 }
