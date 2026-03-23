@@ -442,8 +442,8 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
         end
         debris:allowPickup(true)
         debris:setCallSign(callsign):setFaction("Human Navy"):setRadarTraceColor(255,235,170)
-        debris.components.radar_trace.radius=120 // same scaling as asteroids
-        debris.components.radar_trace.min_size=4 // to look similar on the radar
+        debris.components.radar_trace.radius=120 -- same scaling as asteroids
+        debris.components.radar_trace.min_size=4 -- to look similar on the radar
         
         debris:onPickUp(function(art, player)  ;
             shieldfreq= 400+(player1:getShieldsFrequency())*20
