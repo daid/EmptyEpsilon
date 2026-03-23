@@ -201,7 +201,6 @@ void HotkeyMenu::setCategory(int cat)
     hotkey_list = sp::io::Keybinding::listAllByCategory(category);
 
     const sp::io::Keybinding::Type joystick_type = sp::io::Keybinding::Type::Joystick | sp::io::Keybinding::Type::Controller;
-    const sp::io::Keybinding::Type mouse_type = sp::io::Keybinding::Type::Pointer | sp::io::Keybinding::Type::MouseMovement | sp::io::Keybinding::Type::MouseWheel;
 
     // Begin rendering hotkey rebinding fields for this category.
     for (auto item : hotkey_list)
@@ -228,7 +227,7 @@ void HotkeyMenu::setCategory(int cat)
         text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
 
         // Mouse-only binder.
-        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_MS_" + item->getName(), item, mouse_type, mouse_type));
+        text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_MS_" + item->getName(), item, sp::io::Keybinding::Type::Mouse, sp::io::Keybinding::Type::Mouse));
         text_entries.back()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
     }
 }

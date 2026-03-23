@@ -60,8 +60,7 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 
     if (button == sp::io::Pointer::Button::Left || button == sp::io::Pointer::Button::Middle)
     {
-        const sp::io::Keybinding::Type mouse_types = sp::io::Keybinding::Type::Pointer | sp::io::Keybinding::Type::MouseMovement | sp::io::Keybinding::Type::MouseWheel;
-        if (capture_filter & mouse_types)
+        if (capture_filter & sp::io::Keybinding::Type::Mouse)
         {
             // Delay startUserRebind until onMouseUp so that the triggering
             // mouse click is not immediately captured as the new binding.
