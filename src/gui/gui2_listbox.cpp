@@ -8,8 +8,11 @@ GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center), mouse_scroll_steps(25)
 {
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
-    scroll->setPosition(0, 0, sp::Alignment::TopRight)->setSize(button_height, GuiSizeMax)->hide();
-    scroll->setClickChange(button_height);
+    scroll
+        ->setClickChange(button_height)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(button_height, GuiSizeMax)
+        ->hide();
 
     back_style = theme->getStyle("listbox.back");
     front_style = theme->getStyle("listbox.front");
@@ -26,8 +29,9 @@ GuiListbox* GuiListbox::setTextSize(float size)
 GuiListbox* GuiListbox::setButtonHeight(float height)
 {
     button_height = height;
-    scroll->setClickChange(button_height);
-    scroll->setSize(button_height, GuiSizeMax);
+    scroll
+        ->setClickChange(button_height)
+        ->setSize(button_height, GuiElement::GuiSizeMax);
     return this;
 }
 
@@ -47,15 +51,12 @@ void GuiListbox::onDraw(sp::RenderTarget& renderer)
     const auto& back_selected_hover = back_selected_style->get(State::Hover);
     const auto& front_selected = front_selected_style->get(getState());
 
-    scroll->setValueSize(rect.size.y);
-    scroll->setRange(0, entries.size() * button_height);
-
-    // Determine whether to show the scrollbar based on the total height of all
-    // items in the list.
-    if ((int)entries.size() <= rect.size.y / button_height)
-        scroll->hide();
-    else
-        scroll->show();
+    scroll
+        ->setValueSize(rect.size.y)
+        ->setRange(0, entries.size() * button_height)
+        // Determine whether to show the scrollbar based on the total height of
+        // all items in the list.
+        ->setVisible(static_cast<int>(entries.size()) > rect.size.y / button_height);
     
     // Draw the button. If the scrollbar is visible, make room.
     sp::Rect button_rect{rect.position, {rect.size.x, button_height}};
