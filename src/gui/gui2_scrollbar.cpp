@@ -75,31 +75,35 @@ void GuiScrollbar::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     }
 }
 
-void GuiScrollbar::setRange(int min_value, int max_value)
+GuiScrollbar* GuiScrollbar::setRange(int min_value, int max_value)
 {
     this->min_value = min_value;
     this->max_value = max_value;
+    return this;
 }
 
-void GuiScrollbar::setValueSize(int size)
+GuiScrollbar* GuiScrollbar::setValueSize(int size)
 {
     value_size = size;
+    return this;
 }
 
-void GuiScrollbar::setClickChange(int change)
+GuiScrollbar* GuiScrollbar::setClickChange(int change)
 {
     click_change = change;
+    return this;
 }
 
-void GuiScrollbar::setValue(int value)
+GuiScrollbar* GuiScrollbar::setValue(int value)
 {
     if (this->desired_value == value)
-        return;
+        return this;
 
     this->desired_value = value;
 
-    if (func)
-        func(getValue());
+    if (func) func(getValue());
+
+    return this;
 }
 
 int GuiScrollbar::getValue() const

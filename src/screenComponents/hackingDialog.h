@@ -1,5 +1,4 @@
-#ifndef HACKING_DIALOG_H
-#define HACKING_DIALOG_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
 #include "components/shipsystem.h"
@@ -11,6 +10,7 @@ class GuiListbox;
 class GuiButton;
 class GuiToggleButton;
 class GuiProgressbar;
+class GuiScrollText;
 class MiniGame;
 
 class GuiHackingDialog : public GuiOverlay
@@ -39,7 +39,7 @@ private:
     std::shared_ptr<MiniGame> game;
     GuiPanel* target_selection_box;
     GuiListbox* target_list;
+    GuiScrollText* target_help;
+
     void getNewGame();
 };
-
-#endif//HACKING_DIALOG_H

@@ -830,9 +830,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto beamweapons = ship.getComponent<BeamWeaponSys>();
-            if (beamweapons)
-                beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
+            if (auto beam_weapons = ship.getComponent<BeamWeaponSys>())
+                beam_weapons->setFrequency(new_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -939,6 +938,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
                 auto p = sp::ecs::Entity::create();
                 p.addComponent<sp::Transform>(*t);
+                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
                 p.addComponent<LifeTime>().lifetime = 60*10;
                 if (auto faction = ship.getComponent<Faction>())
                     p.addComponent<Faction>() = *faction;
