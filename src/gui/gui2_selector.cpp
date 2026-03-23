@@ -68,18 +68,17 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
     if (selection_index >= 0 && selection_index < static_cast<int>(entries.size()))
         renderer.drawText(text_rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color, sp::Font::FlagClip);
 
-    // rect.position is in layout space; the popup lives at the canvas level
-    // (no scroll translation), so convert to screen coordinates first.
-    glm::vec2 screen_pos = rect.position + renderer.getTranslation();
+    // rect.position is already in screen space (scroll offset applied during
+    // layout), so use it directly to position the popup.
     const float max_popup_height = button_height * 10.0f;
     float popup_height = std::min(static_cast<float>(entries.size()) * button_height, max_popup_height);
-    float top = screen_pos.y;
+    float top = rect.position.y;
     top = std::clamp(top, 0.0f, 900.0f - popup_height);
 
     // Size and position the popup, factoring its override width if set.
     setPopupWidth(popup_width);
     popup
-        ->setPosition(screen_pos.x, top, sp::Alignment::TopLeft)
+        ->setPosition(rect.position.x, top, sp::Alignment::TopLeft)
         ->setSize(rect.size.x, popup_height);
 }
 
