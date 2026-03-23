@@ -1,5 +1,4 @@
-#ifndef VIEWPORT_MAIN_SCREEN_H
-#define VIEWPORT_MAIN_SCREEN_H
+#pragma once
 
 #include "viewport3d.h"
 
@@ -15,6 +14,10 @@ public:
     constexpr static uint8_t flag_callsigns = 0x04;
     constexpr static uint8_t flag_headings  = 0x02;
     constexpr static uint8_t flag_spacedust = 0x01;
-};
 
-#endif//VIEWPORT_MAIN_SCREEN_H
+private:
+    glm::vec2 tot_coordinates{0.0f, 0.0f};
+    const float linger_period = 3.0f;
+    float linger_timer = 0.0f;
+    float previous_draw = 0.0f;
+};
