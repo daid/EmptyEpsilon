@@ -2,6 +2,8 @@
 
 #include "gui2_element.h"
 
+class GuiThemeStyle;
+
 // A GuiElement that renders multiline text within its bounds, and without
 // scrolling or clipping. To scroll or clip multiline text, instead use
 // GuiScrollText.
@@ -12,6 +14,8 @@ protected:
     string text;
     // Base font size, in virtual pixels.
     float text_size = 30.0f;
+    // Theme for text foreground properties.
+    const GuiThemeStyle* text_theme;
 
 public:
     GuiMultilineText(GuiContainer* owner, string id, string text);

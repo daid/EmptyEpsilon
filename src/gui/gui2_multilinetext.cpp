@@ -4,6 +4,7 @@
 GuiMultilineText::GuiMultilineText(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text)
 {
+    text_theme = theme->getStyle("textbox.front");
 }
 
 GuiMultilineText* GuiMultilineText::setText(string text)
@@ -19,12 +20,13 @@ string GuiMultilineText::getText() const
 
 void GuiMultilineText::onDraw(sp::RenderTarget& renderer)
 {
+    const auto& text_style = text_theme->get(getState());
     // Prepare the text in one batch.
     auto prepared = sp::RenderTarget::getDefaultFont()->prepare(
         this->text,
         32,
         text_size,
-        selectColor(colorConfig.textbox.forground),
+        text_style.color,
         rect.size,
         sp::Alignment::TopLeft,
         sp::Font::FlagLineWrap
@@ -48,7 +50,8 @@ GuiMultilineFormattedText::GuiMultilineFormattedText(GuiContainer* owner, string
 
 void GuiMultilineFormattedText::onDraw(sp::RenderTarget& renderer)
 {
-    auto main_color = selectColor(colorConfig.textbox.forground);
+    const auto& text_style = text_theme->get(getState());
+    auto main_color = text_style.color;
     auto current_color = main_color;
     // Each piece of tagged text needs formatting, so prepare incrementally
     // instead of all at once.
