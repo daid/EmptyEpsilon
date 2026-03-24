@@ -109,7 +109,7 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
 
     // Back button to return to the Options menu
     (new GuiScrollText(info_container, "INFO_LABEL",
-        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons and axes.")
+        tr("Left click: Assign input. Middle click: Add input. Right click: Remove last input.\nSupported inputs: Keyboard keys, joystick buttons and axes, mouse buttons (except left mouse button).")
     ))
         ->setPosition(10.0f, 0.0f, sp::Alignment::TopCenter)
         ->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT * 3)
