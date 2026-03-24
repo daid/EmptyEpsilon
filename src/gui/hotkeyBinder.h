@@ -17,6 +17,7 @@ private:
     const GuiThemeStyle* back_style;
 
     void clearFilteredKeys();
+    void startRebind();
 public:
     GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key, sp::io::Keybinding::Type display_filter = sp::io::Keybinding::Type::Default, sp::io::Keybinding::Type capture_filter = sp::io::Keybinding::Type::Default);
 

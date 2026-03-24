@@ -8,8 +8,7 @@
 static GuiHotkeyBinder* active_rebinder = nullptr;
 static sp::io::Keybinding* active_key = nullptr;
 
-GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key,
-    sp::io::Keybinding::Type display_filter, sp::io::Keybinding::Type capture_filter)
+GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key, sp::io::Keybinding::Type display_filter, sp::io::Keybinding::Type capture_filter)
 : GuiElement(owner, id), key(key), display_filter(display_filter), capture_filter(capture_filter)
 {
     // Use textentry theme styles for binder inputs.
@@ -24,6 +23,17 @@ bool GuiHotkeyBinder::isAnyRebinding()
     return active_rebinder != nullptr;
 }
 
+void GuiHotkeyBinder::startRebind()
+{
+    active_rebinder = this;
+    active_key = key;
+    // Strip globally prohibited types from the capture filter so they are
+    // skipped rather than ending the rebind when the user triggers them.
+    sp::io::Keybinding::Type effective_capture = static_cast<sp::io::Keybinding::Type>(
+        static_cast<int>(capture_filter) & ~static_cast<int>(sp::io::Keybinding::getGloballyProhibitedTypes()));
+    key->startUserRebind(effective_capture);
+}
+
 void GuiHotkeyBinder::clearFilteredKeys()
 {
     // Filter binds for this control by their type.
@@ -36,14 +46,13 @@ void GuiHotkeyBinder::clearFilteredKeys()
 bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
     // If this binder is already rebinding, just take the input and skip this.
-    // This should allow binding left/middle/right-click without also changing
-    // the binder's state at the same time.
+    // This should allow binding middle/right-click without also changing the
+    // binder's state at the same time.
     if (active_rebinder == this) return true;
 
     // Left click: Assign input. Middle click: Add input.
     // Right click: Remove last input. Ignore all other mouse buttons.
-    if (button == sp::io::Pointer::Button::Left)
-        clearFilteredKeys();
+    if (button == sp::io::Pointer::Button::Left) clearFilteredKeys();
     if (button == sp::io::Pointer::Button::Right)
     {
         int count = 0;
@@ -60,18 +69,12 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 
     if (button == sp::io::Pointer::Button::Left || button == sp::io::Pointer::Button::Middle)
     {
+        // Delay startUserRebind until onMouseUp so that the triggering
+        // mouse click is not immediately captured as the new binding.
         if (capture_filter & sp::io::Keybinding::Type::Mouse)
-        {
-            // Delay startUserRebind until onMouseUp so that the triggering
-            // mouse click is not immediately captured as the new binding.
             pending_rebind = true;
-        }
         else
-        {
-            active_rebinder = this;
-            active_key = key;
-            key->startUserRebind(capture_filter);
-        }
+            startRebind();
     }
 
     return true;
@@ -83,9 +86,7 @@ void GuiHotkeyBinder::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     if (pending_rebind)
     {
         pending_rebind = false;
-        active_rebinder = this;
-        active_key = key;
-        key->startUserRebind(capture_filter);
+        startRebind();
     }
 }
 
