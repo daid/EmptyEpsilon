@@ -28,6 +28,8 @@ private:
     GuiSlider* power_slider;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
+    GuiImage* system_health_icon;
+    GuiImage* heat_icon;
     GuiProgressbar* coolant_remaining_bar;
 
     class SystemRow
