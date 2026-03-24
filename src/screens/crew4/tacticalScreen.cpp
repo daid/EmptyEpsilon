@@ -74,7 +74,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         },
         [this](glm::vec2 position) {
             drag_rotate=false;
-        }
+        }, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 

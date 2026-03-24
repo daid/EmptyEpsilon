@@ -43,13 +43,13 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_player_info->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_player_info->commandSetTarget({});
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
 

@@ -81,7 +81,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         },
         [this](glm::vec2 position) {
            drag_rotate=false;
-        }
+        }, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
 
