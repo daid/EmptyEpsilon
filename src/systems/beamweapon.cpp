@@ -413,7 +413,7 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
 
     // Calculate target position.
     if (auto entity_transform = entity.getComponent<sp::Transform>())
-        target_position = screen_position + (beam_effect.target_location - entity_transform->getPosition()) * scale;
+        target_position = screen_position + rotateVec2(beam_effect.target_location - entity_transform->getPosition(), rotation - entity_transform->getRotation()) * scale;
 
     // Draw beam ray as a line that fades over lifetime.
     glm::u8vec4 beam_color(255, 200, 0, static_cast<int>(std::min(255.0f, beam_effect.lifetime * 255.0f)));
