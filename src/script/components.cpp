@@ -533,6 +533,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, hit_normal);
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
+    BIND_MEMBER(BeamEffect, beam_color);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
