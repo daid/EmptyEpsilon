@@ -116,6 +116,7 @@ void BeamWeaponSystem::update(float delta)
                             be.source_offset = mount.position;
                             be.target_location = hit_location;
                             be.beam_texture = mount.texture;
+                            be.beam_color = mount.arc_color_fire;
                             auto& sfx = e.addComponent<Sfx>();
                             sfx.sound = "sfx/laser_fire.wav";
                             auto beam_fire_sound_power = (mount.damage / 6.0f);
@@ -416,7 +417,8 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
         target_position = screen_position + rotateVec2(beam_effect.target_location - entity_transform->getPosition(), rotation - entity_transform->getRotation()) * scale;
 
     // Draw beam ray as a line that fades over lifetime.
-    glm::u8vec4 beam_color(255, 200, 0, static_cast<int>(std::min(255.0f, beam_effect.lifetime * 255.0f)));
+    glm::u8vec4 beam_color = beam_effect.beam_color;
+    beam_color.a = static_cast<int>(std::min(255.0f, beam_effect.lifetime * beam_color.a));
     renderer.drawLine(source_position, target_position, beam_color);
 
     // Draw impact circle at target location.
