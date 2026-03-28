@@ -426,7 +426,7 @@ static int luaGetObjectsInRadius(lua_State* L)
     glm::vec2 position(x, y);
     lua_newtable(L);
     int idx = 1;
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
         auto entity_transform = entity.getComponent<sp::Transform>();
         if (entity_transform) {
             if (glm::length2(entity_transform->getPosition() - position) < r*r) {
@@ -448,7 +448,7 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return 1;
     auto position = source_transform->getPosition();
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
         auto entity_transform = entity.getComponent<sp::Transform>();
         if (entity_transform) {
             if (glm::length2(entity_transform->getPosition() - position) < r*r) {
