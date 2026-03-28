@@ -297,11 +297,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(Orbit, time);
 
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
-    BIND_MEMBER(AvoidObject, range);
+    BIND_MEMBER_GS(AvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<DelayedAvoidObject>::name("delayed_avoid_object");
     BIND_MEMBER(DelayedAvoidObject, delay);
-    BIND_MEMBER(DelayedAvoidObject, range);
+    BIND_MEMBER_GS(DelayedAvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<ExplodeOnTouch>::name("explode_on_touch");
     BIND_MEMBER(ExplodeOnTouch, damage_at_center);
