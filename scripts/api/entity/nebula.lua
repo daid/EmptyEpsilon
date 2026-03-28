@@ -10,18 +10,32 @@ function Nebula()
     local e = createEntity()
     e.components.radar_signature = {gravity=0, electrical=0.8, biological=-1.0}
     e.components.transform = {rotation=random(0, 360)}
-    e.components.radar_trace = {icon="Nebula" .. irandom(1, 3) .. ".png", min_size=0, max_size = 2048, radius=radius*1.5, blend_add=true}
+    e.components.radar_trace = {icon="radar/nebula" .. irandom(1, 7), min_size=0, max_size = 9999999, radius=radius*1.15, blend_add=true, rotate=true}
     e.components.radar_block = {range=radius}
     e.components.never_radar_blocked = {}
+    
     local render_info = {}
-    local cloud_count = 32
+    local cloud_count = irandom(24, 48)
+    local golden_angle = 137.508 -- degrees, 360°/φ²
+    local min_size = 1024 -- size at outer edge
+    local max_size = min_size*5 -- size at center
+    
     for n=1,cloud_count do
-        local size = random(512, 1024 * 2)
-        local dist = random(size / 2.0, radius - size)
-        local angle = n * 360 / cloud_count
-        local ox, oy = math.cos(angle / 180 * math.pi) * dist, math.sin(angle / 180 * math.pi) * dist
+        -- Golden spiral arrangement
+        local angle = (n - 1) * golden_angle
+        local t = (n - 1) / (cloud_count - 1) -- progression from 0 (center) to 1 (edge)
+        local spiral_radius = math.sqrt(t) * (radius * 0.7)
+        
+        -- Size decreases from center to edge, ending at 512
+        local size = min_size + (max_size - min_size) * (1 - t)
+        
+        local ox = math.cos(angle / 180 * math.pi) * spiral_radius
+        local oy = math.sin(angle / 180 * math.pi) * spiral_radius
+        
         render_info[n] = {size=size, texture="Nebula" .. irandom(1, 3) .. ".png", offset={ox, oy}}
     end
+    
     e.components.nebula_renderer = render_info
+    e.components.nebula_renderer.render_range = 40000
     return e
 end
