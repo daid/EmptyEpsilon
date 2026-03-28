@@ -68,13 +68,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr,
         [this](float value, glm::vec2 position) { // wheel
-            float view_distance = std::clamp(
-                science_radar->getDistance() * (1.0f - value * 0.1f),
-                DEFAULT_MIN_ZOOM_DISTANCE,
-                DEFAULT_MAX_ZOOM_DISTANCE
-            );
-            science_radar->setDistance(view_distance);
-            zoom_slider->setValue(view_distance);
+            doRadarZoom(value);
         }
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
@@ -253,6 +247,17 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
+void ScienceScreen::doRadarZoom(float value)
+{
+    float view_distance = std::clamp(
+        science_radar->getDistance() * (1.0f - value * 0.1f),
+        previous_short_range_radar,
+        previous_long_range_radar
+    );
+    science_radar->setDistance(view_distance);
+    zoom_slider->setValue(view_distance);
+}
+
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
@@ -274,8 +279,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     view_distance = std::max(view_distance, lrr->short_range);
     if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
     {
-        previous_short_range_radar = lrr->long_range;
-        previous_long_range_radar = lrr->short_range;
+        previous_short_range_radar = lrr->short_range;
+        previous_long_range_radar = lrr->long_range;
         zoom_slider->setRange(lrr->long_range, lrr->short_range)->setValue(view_distance);
     }
 

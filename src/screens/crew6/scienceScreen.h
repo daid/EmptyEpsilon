@@ -64,6 +64,7 @@ public:
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
+    void doRadarZoom(float value);
 private:
     // Used to judge when to update the UI label and zoom
     float previous_long_range_radar = 0.0f;
