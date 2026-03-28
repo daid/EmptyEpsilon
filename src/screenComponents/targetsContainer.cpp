@@ -204,6 +204,7 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     case Selectable:
         if (entity.hasComponent<Hull>()) return true;
         if (entity.getComponent<ScanState>()) return true;
+        if (entity.getComponent<ScienceDescription>()) return true;
         if (entity.getComponent<ShareShortRangeRadar>()) return true;
         break;
     case Targetable:
