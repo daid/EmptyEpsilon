@@ -1,0 +1,42 @@
+#: scripts/comms_station.lua:73
+msgctxt "station-comms"
+msgid "We are under attack! No time for chatting!"
+msgstr "我们正在遭受攻击！没时间聊天了！"
+
+#: scripts/comms_station.lua:91
+#, lua-format
+msgctxt "station-comms"
+msgid """Good day, officer! Welcome to %s.
+What can we do for you today?"
+msgstr "指挥官，您好！欢迎来到 %s。\n今天有什么可以为您效劳的吗？"
+
+#: scripts/comms_station.lua:93
+#, lua-format
+msgctxt "station-comms"
+msgid "Welcome to our lovely station %s."
+msgstr "欢迎来到我们美丽的空间站 %s。"
+
+#: scripts/comms_station.lua:98
+msgctxt "ammo-comms"
+msgid "Do you have spare homing missiles for us?"
+msgstr "您能为我们提供备用的制导导弹吗？"
+
+#: scripts/comms_station.lua:99
+msgctxt "ammo-comms"
+msgid "Can you restock us with HVLI?"
+msgstr "您可以为我们补充HVLI弹药吗？"
+
+#: scripts/comms_station.lua:100
+msgctxt "ammo-comms"
+msgid "Please re-stock our mines."
+msgstr "请为我们重新补充水雷。"
+
+#: scripts/comms_station.lua:101
+msgctxt "ammo-comms"
+msgid "Can you supply us with some nukes?"
+msgstr "您能为我们提供一些核弹吗？"
+
+#: scripts/comms_station.lua:102
+msgctxt "ammo-comms"
+msgid "Please re-stock our EMP missiles."
+msgstr "请为我们重新补充EMP导弹。"
