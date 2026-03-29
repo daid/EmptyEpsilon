@@ -42,10 +42,12 @@ DatabaseViewComponent::DatabaseViewComponent(GuiContainer* owner)
         [this](int index, string value)
         {
             selected_entry = sp::ecs::Entity::fromString(value);
+            item_list->clearSearch();
             display();
         }
     );
     item_list->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    item_list->addSearch([this](string) { fillListBox(); });
     display();
 }
 
@@ -79,6 +81,29 @@ void DatabaseViewComponent::fillListBox()
 {
     item_list->setOptions({});
     item_list->setSelectionIndex(-1);
+
+    string search_text = item_list->getSearchText();
+    if (!search_text.empty())
+    {
+        back_button->hide();
+
+        std::vector<std::pair<sp::ecs::Entity, Database*>> matches;
+        for (auto [entity, database] : sp::ecs::Query<Database>())
+            if (database.name.lower().find(search_text) >= 0)
+                matches.push_back({entity, &database});
+
+        sort(matches.begin(), matches.end(), [](const auto& A, const auto& B) {
+            return A.second->name.lower() < B.second->name.lower();
+        });
+
+        for (auto [entity, database] : matches)
+        {
+            int idx = item_list->addEntry(database->name, entity.toString());
+            if (selected_entry && selected_entry.getComponent<Database>() == database)
+                item_list->setSelectionIndex(idx);
+        }
+        return;
+    }
 
     // indices of child or sibling pages in the science_databases vector
     std::vector<std::pair<sp::ecs::Entity, Database*>> children;
