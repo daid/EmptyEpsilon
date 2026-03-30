@@ -119,6 +119,7 @@ public:
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_scan_abort;
     sp::io::Keybinding science_select_next_scannable;
+    sp::io::Keybinding science_toggle_probe_view;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;

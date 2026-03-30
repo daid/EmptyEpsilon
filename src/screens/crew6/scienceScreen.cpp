@@ -537,6 +537,12 @@ void ScienceScreen::onUpdate()
 {
     if (my_spaceship)
     {
+        // Toggle probe view from the Science hotkey. 
+        auto rl = my_spaceship.getComponent<RadarLink>();
+        if (keys.science_toggle_probe_view.getDown() && rl && rl->linked_entity)
+        {
+            probe_view_button->setValue(!probe_view_button->getValue());
+        }
         // Initiate a scan on scannable objects.
         if (keys.science_scan_object.getDown() &&
             my_spaceship.hasComponent<ScienceScanner>() &&
