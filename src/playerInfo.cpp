@@ -151,7 +151,6 @@ int PlayerInfo::countTotalPlayerPositions()
     for (auto monitor : crew_positions)
         for (auto position : monitor) count++;
 
-    LOG(Info, "count: ", count);
     return count;
 }
 
@@ -163,7 +162,6 @@ int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
     int count = 0;
     for (auto position : crew_positions[monitor]) count++;
 
-    LOG(Info, "count: ", count);
     return count;
 }
 
@@ -938,6 +936,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
                 auto p = sp::ecs::Entity::create();
                 p.addComponent<sp::Transform>(*t);
+                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
                 p.addComponent<LifeTime>().lifetime = 60*10;
                 if (auto faction = ship.getComponent<Faction>())
                     p.addComponent<Faction>() = *faction;

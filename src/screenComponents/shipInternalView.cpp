@@ -80,7 +80,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
                     break;
                 }
             }
-            if (!found) {
+            if (!found && room_container) {
                 crew_list.push_back(new GuiShipCrew(room_container, "CREW", entity, selected_crew_member, [this](sp::ecs::Entity crew_member){
                     selected_crew_member = crew_member;
                 }));

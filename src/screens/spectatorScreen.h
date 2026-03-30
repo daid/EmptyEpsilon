@@ -8,6 +8,7 @@
 class GuiKeyValueDisplay;
 class GuiRadarView;
 class GuiLabel;
+class GuiRadarZoomSlider;
 class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
@@ -16,6 +17,10 @@ class GuiHotkeyHelpOverlay;
 class SpectatorScreen : public GuiCanvas, public Updatable
 {
 private:
+    const float MIN_ZOOM_DISTANCE = 5000.0f;
+    const float MAX_ZOOM_DISTANCE = 1000000.0f;
+    const float LONG_RANGE_DISTANCE = 50000.0f;
+    const float SHORT_RANGE_DISTANCE = 10000.0f;
     bool dragging = false;
 
     GuiRadarView* main_radar;
@@ -32,7 +37,7 @@ public:
     GuiToggleButton* ui_toggle;
     GuiElement* info_layout;
     GuiElement* info_coordinates;
-    GuiSlider* zoom_slider;
+    GuiRadarZoomSlider* zoom_slider;
     GuiLabel* zoom_label;
     GuiKeyValueDisplay* info_coordinates_x;
     GuiKeyValueDisplay* info_coordinates_y;
@@ -50,4 +55,5 @@ public:
     void onMouseDown(glm::vec2 position);
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
+    void onMouseWheel(float value, glm::vec2 position);
 };

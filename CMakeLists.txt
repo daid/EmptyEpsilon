@@ -297,6 +297,7 @@ set(MAIN_SOURCES
     src/screenComponents/shipInternalView.cpp
     src/screenComponents/beamFrequencySelector.cpp
     src/screenComponents/radarView.cpp
+    src/screenComponents/radarZoomSlider.cpp
     src/screenComponents/rawScannerDataRadarOverlay.cpp
     src/screenComponents/scanTargetButton.cpp
     src/screenComponents/snapSlider.cpp
@@ -595,6 +596,7 @@ set(MAIN_SOURCES
     src/screenComponents/openCommsButton.h
     src/screenComponents/powerDamageIndicator.h
     src/screenComponents/radarView.h
+    src/screenComponents/radarZoomSlider.h
     src/screenComponents/rawScannerDataRadarOverlay.h
     src/screenComponents/rotatingModelView.h
     src/screenComponents/scanningDialog.h
@@ -769,7 +771,7 @@ if(Python3_Interpreter_FOUND)
 endif()
 
 add_custom_target(update_locale
-    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --add-comments=TRANSLATORS --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
+    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trn:2c,3,4 --keyword=trn:2,3 --keyword=trMark:1c,2 --keyword=trMark:1 --add-comments=TRANSLATORS --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
     COMMAND python3 update_locale.py
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 

@@ -14,8 +14,8 @@ public:
         glm::u8vec4 color;
         float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
-        // TODO: float offset;
-        string sound; //Sound effect played by the widget on certain actions.
+        float font_offset = 0.0f;
+        string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
     const StateStyle& get(GuiElement::State state) const { return states[int(state)]; }
@@ -25,6 +25,7 @@ public:
 
     Themes are loaded from a text resource, and referenced from GuiElement classes.
     A single theme contains information on how to style different widget elements.
+
     A theme can inherit one or more parent themes. A child theme overrides only the
     styles it defines.
 
@@ -32,6 +33,7 @@ public:
     - texture
     - color
     - font
+    - offset
     - size
     - sound
 

@@ -1,6 +1,6 @@
 #include "singlePilotScreen.h"
 #include "main.h"
-#include "i18n.h"
+#include <i18n.h>
 #include "featureDefs.h"
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
@@ -15,33 +15,28 @@
 #include "components/target.h"
 #include "components/radar.h"
 
-#include "screenComponents/viewport3d.h"
-
-#include "screenComponents/alertOverlay.h"
-#include "screenComponents/combatManeuver.h"
-#include "screenComponents/radarView.h"
-#include "screenComponents/impulseControls.h"
-#include "screenComponents/warpControls.h"
-#include "screenComponents/jumpControls.h"
-#include "screenComponents/dockingButton.h"
-
-#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
-#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
-#include "screenComponents/powerDamageIndicator.h"
-#include "screenComponents/infoDisplay.h"
-
-#include "screenComponents/openCommsButton.h"
+#include "screenComponents/combatManeuver.h"
 #include "screenComponents/commsOverlay.h"
-
 #include "screenComponents/customShipFunctions.h"
+#include "screenComponents/dockingButton.h"
+#include "screenComponents/impulseControls.h"
+#include "screenComponents/infoDisplay.h"
+#include "screenComponents/jumpControls.h"
+#include "screenComponents/missileTubeControls.h"
+#include "screenComponents/openCommsButton.h"
+#include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/radarView.h"
+#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/viewport3d.h"
+#include "screenComponents/warpControls.h"
 
 #include "gui/theme.h"
-#include "gui/gui2_keyvaluedisplay.h"
-#include "gui/gui2_rotationdial.h"
 #include "gui/gui2_image.h"
+#include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 
 SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
@@ -81,7 +76,7 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
         },
         [this](glm::vec2 position) {
            drag_rotate=false;
-        }
+        }, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("single_pilot_radar_lock","0")=="1");
 

@@ -17,8 +17,10 @@ private:
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiHotkeyHelpOverlay* keyboard_help;
+    float pending_zoom = 0.0f;
 public:
     TopDownScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
+    virtual void onMouseWheelScroll(glm::vec2 position, float value) override;
 };

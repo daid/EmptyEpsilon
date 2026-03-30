@@ -13,7 +13,9 @@
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
+
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_panel.h"
@@ -24,13 +26,14 @@
 SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
-    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, nullptr);
+    main_radar = new GuiRadarView(this, "MAIN_RADAR", LONG_RANGE_DISTANCE, nullptr);
     main_radar->setStyle(GuiRadarView::Rectangular)->longRange()->gameMaster()->enableTargetProjections(nullptr)->setAutoCentering(false)->enableCallsigns();
     main_radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     main_radar->setCallbacks(
         [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(position); },
         [this](glm::vec2 position) { this->onMouseDrag(position); },
-        [this](glm::vec2 position) { this->onMouseUp(position); }
+        [this](glm::vec2 position) { this->onMouseUp(position); },
+        [this](float value, glm::vec2 position) { this->onMouseWheel(value, position); }
     );
 
     ui_toggle = new GuiToggleButton(this, "UI_TOGGLE", "", [this](bool value) {
@@ -89,14 +92,14 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
     });
     info_position_lock->setTextSize(16)->setSize(50, 27)->setPosition(0, 0, sp::Alignment::CenterRight);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 100000.0f, 5000.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 2.0f)}}));
-        main_radar->setDistance(value);
-    });
-    zoom_slider->setPosition(0, 0, sp::Alignment::BottomRight)->setSize(350, 50)->hide();
-    zoom_slider->setAttribute("margin", "20");
-    zoom_label = new GuiLabel(zoom_slider, "ZOOM_SLIDER_LABEL", "Zoom: 1.0x", 30);
-    zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
+    zoom_slider
+        ->setZoomReference(LONG_RANGE_DISTANCE)
+        ->setLabelPrecision(3)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::BottomRight)
+        ->setSize(350.0f, 50.0f)
+        ->hide()
+        ->setAttribute("margin", "20");
 
     new GuiIndicatorOverlays(this);
 
@@ -117,22 +120,18 @@ void SpectatorScreen::toggleUI()
 void SpectatorScreen::update(float delta)
 {
     auto view_position = main_radar->getViewPosition();
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta != 0.0f)
+    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (key_zoom_delta != 0.0f)
     {
-        float view_distance = main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 1000000)
-            view_distance = 1000000;
-        if (view_distance < 5000)
-            view_distance = 5000;
+        float view_distance = std::clamp(
+            main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)),
+            MIN_ZOOM_DISTANCE,
+            MAX_ZOOM_DISTANCE
+        );
         main_radar->setDistance(view_distance);
-        if (view_distance < 10000)
-            main_radar->shortRange();
-        else
-            main_radar->longRange();
-        // Keep the zoom slider in sync.
+        if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
+        else main_radar->longRange();
         zoom_slider->setValue(view_distance);
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / view_distance, 2.0f)}}));
     }
 
     if (keys.help.getDown())
@@ -328,7 +327,7 @@ void SpectatorScreen::onMouseUp(glm::vec2 position)
 
     glm::vec2 target_position;
 
-    for (auto entity : sp::CollisionSystem::queryArea(position - (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / 50000.0f), position + (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / 50000.0f)))
+    for (auto entity : sp::CollisionSystem::queryArea(position - (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE), position + (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE)))
     {
         if (auto transform = entity.getComponent<sp::Transform>())
         {
@@ -349,4 +348,25 @@ void SpectatorScreen::onMouseUp(glm::vec2 position)
         main_radar->setAutoCentering(false);
         info_position_lock->setValue(false);
     }
+}
+
+void SpectatorScreen::onMouseWheel(float value, glm::vec2 position)
+{
+    // Calculate the new zoom level.
+    const float view_distance = std::clamp(
+        main_radar->getDistance() * (1.0f - value * 0.1f),
+        MIN_ZOOM_DISTANCE,
+        MAX_ZOOM_DISTANCE
+    );
+
+    // Get the world coordinates under the pointer before zooming.
+    const glm::vec2 world_position_before_zoom = main_radar->screenToWorld(position);
+
+    // Set the new zoom level.
+    main_radar->setDistance(view_distance);
+    zoom_slider->setValue(view_distance);
+
+    // Adjust the radar's view position to keep the world coordinates
+    // under the pointer consistent.
+    main_radar->setViewPosition(main_radar->getViewPosition() + world_position_before_zoom - main_radar->screenToWorld(position));
 }

@@ -1,7 +1,7 @@
+#include "weaponsScreen.h"
 #include <i18n.h>
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
-#include "weaponsScreen.h"
 #include "preferenceManager.h"
 
 #include "components/reactor.h"
@@ -11,21 +11,21 @@
 #include "components/beamweapon.h"
 #include "components/collision.h"
 
-#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/customShipFunctions.h"
+#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/radarView.h"
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shieldsEnableButton.h"
-#include "screenComponents/alertOverlay.h"
-#include "screenComponents/customShipFunctions.h"
 
 #include "gui/theme.h"
-#include "gui/gui2_rotationdial.h"
-#include "gui/gui2_label.h"
 #include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_label.h"
 
 WeaponsScreen::WeaponsScreen(GuiContainer* owner)
 : GuiOverlay(owner, "WEAPONS_SCREEN", GuiTheme::getColor("background"))
@@ -43,13 +43,13 @@ WeaponsScreen::WeaponsScreen(GuiContainer* owner)
     radar->setPosition(0, 0, sp::Alignment::Center)->setSize(GuiElement::GuiSizeMatchHeight, 800);
     radar->setRangeIndicatorStepSize(1000.0)->shortRange()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular);
     radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             targets.setToClosestTo(position, 250, TargetsContainer::Targetable);
             if (my_spaceship && targets.get())
                 my_player_info->commandSetTarget(targets.get());
             else if (my_spaceship)
                 my_player_info->commandSetTarget({});
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("weapons_radar_lock","0")=="1");
 
