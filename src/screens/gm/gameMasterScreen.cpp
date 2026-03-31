@@ -341,7 +341,7 @@ void GameMasterScreen::update(float delta)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
-        if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
+        if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();
     }
 
@@ -877,6 +877,8 @@ void GameMasterScreen::onMouseWheel(float value, glm::vec2 position)
     // Set the new zoom level.
     main_radar->setDistance(view_distance);
     zoom_slider->setValue(view_distance);
+    if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
+    else main_radar->longRange();
 
     // Adjust the radar's view position to keep the world coordinates
     // under the pointer consistent.
