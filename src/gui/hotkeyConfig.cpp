@@ -231,7 +231,6 @@ Keys::Keys() :
     cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
     next_rebind_category("REBIND_NEXT_CATEGORY", "Tab"),
     prev_rebind_category("REBIND_PREV_CATEGORY", ""),
-    toggle_rebind_dialog("REBIND_TOGGLE_DIALOG", "Space"),
 
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
@@ -520,8 +519,6 @@ void Keys::init()
     next_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     prev_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Previous category"));
     prev_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
-    toggle_rebind_dialog.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Toggle advanced binding dialog"));
-    toggle_rebind_dialog.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));

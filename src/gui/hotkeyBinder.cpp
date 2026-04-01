@@ -457,8 +457,9 @@ GuiRebindDialog::GuiRebindDialog(GuiContainer* owner, string id)
                 input_label->setText(tr("hotkey_menu", "[Press any key or input...]"));
                 replace_btn->disable();
                 add_btn->disable();
-                invert_btn->setValue(false);
-                invert_btn->disable();
+                invert_btn
+                    ->setValue(false)
+                    ->disable();
 
                 // Restart capture for non-mouse filters.
                 if (!(capture_filter & sp::io::Keybinding::Type::Mouse))
@@ -620,11 +621,9 @@ void GuiRebindDialog::onDraw(sp::RenderTarget& renderer)
         input_label->setText(target_key->getPendingRebindKeyName());
         replace_btn->enable();
         add_btn->enable();
-        invert_btn->setValue(target_key->getPendingRebindInverted());
-        if (isAxisType(target_key->getPendingRebindKeyType()))
-            invert_btn->enable();
-        else
-            invert_btn->disable();
+        invert_btn
+            ->setValue(target_key->getPendingRebindInverted())
+            ->setEnable(isAxisType(target_key->getPendingRebindKeyType()));
     }
 }
 
@@ -647,10 +646,7 @@ void GuiRebindDialog::commitReplace()
         count++;
 
     for (int i = count - 1; i >= 0; --i)
-    {
-        if (target_key->getKeyType(i) & display_filter)
-            target_key->removeKey(i);
-    }
+        if (target_key->getKeyType(i) & display_filter) target_key->removeKey(i);
 
     target_key->commitPendingRebind();
     closeDialog();
