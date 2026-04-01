@@ -253,6 +253,8 @@ Keys::Keys() :
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     // Helms crew screen
+    helms_turn_left("HELMS_TURN_LEFT", "Left"),
+    helms_turn_right("HELMS_TURN_RIGHT", "Right"),
     helms_increase_impulse("HELMS_IMPULSE_INCREASE", "Up"),
     helms_increase_impulse_1("HELMS_IMPULSE_INCREASE_1"),
     helms_increase_impulse_10("HELMS_IMPULSE_INCREASE_10"),
@@ -263,15 +265,21 @@ Keys::Keys() :
     helms_zero_impulse("HELMS_IMPULSE_ZERO", "Space"),
     helms_max_impulse("HELMS_IMPULSE_MAX"),
     helms_min_impulse("HELMS_IMPULSE_MIN"),
+    helms_dock_action("HELMS_DOCK_ACTION", "D"),
+    helms_dock_request("HELMS_DOCK_REQUEST"),
+    helms_dock_abort("HELMS_DOCK_ABORT"),
+    helms_undock("HELMS_UNDOCK"),
+    helms_increase_jump_distance("HELMS_JUMP_INCREASE", "]"),
     helms_increase_jump_100("HELMS_JUMP_INCREASE_100"),
     helms_increase_jump_1k("HELMS_JUMP_INCREASE_1K"),
+    helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "["),
     helms_decrease_jump_100("HELMS_JUMP_DECREASE_100"),
     helms_decrease_jump_1k("HELMS_JUMP_DECREASE_1K"),
     helms_set_jump("HELMS_SET_JUMP"),
     helms_max_jump("HELMS_JUMP_MAX"),
     helms_min_jump("HELMS_JUMP_MIN"),
-    helms_turn_left("HELMS_TURN_LEFT", "Left"),
-    helms_turn_right("HELMS_TURN_RIGHT", "Right"),
+    helms_execute_jump("HELMS_JUMP_EXECUTE", "\\"),
+    helms_abort_jump("HELMS_JUMP_ABORT"),
     helms_warp0("HELMS_WARP0", "6"),
     helms_warp1("HELMS_WARP1", "7"),
     helms_warp2("HELMS_WARP2", "8"),
@@ -281,14 +289,6 @@ Keys::Keys() :
     helms_increase_warp("HELMS_WARP_INCREASE"),
     helms_decrease_warp("HELMS_WARP_DECREASE"),
     helms_set_warp("HELMS_SET_WARP"),
-    helms_dock_action("HELMS_DOCK_ACTION", "D"),
-    helms_dock_request("HELMS_DOCK_REQUEST"),
-    helms_dock_abort("HELMS_DOCK_ABORT"),
-    helms_undock("HELMS_UNDOCK"),
-    helms_increase_jump_distance("HELMS_JUMP_INCREASE", "]"),
-    helms_decrease_jump_distance("HELMS_JUMP_DECREASE", "["),
-    helms_execute_jump("HELMS_JUMP_EXECUTE", "\\"),
-    helms_abort_jump("HELMS_JUMP_ABORT"),
     helms_combat_left("HELMS_COMBAT_LEFT"),
     helms_combat_right("HELMS_COMBAT_RIGHT"),
     helms_combat_boost("HELMS_COMBAT_BOOST"),
@@ -605,13 +605,21 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1
     );
-    helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_increase_impulse.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_increase_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 1%"));
-    helms_increase_impulse_1.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_increase_impulse_1.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_increase_impulse_1.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_increase_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse 10%"));
-    helms_increase_impulse_10.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_increase_impulse_10.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_increase_impulse_10.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse"));
     helms_decrease_impulse.setSupportedInteractions(
         sp::io::Keybinding::Interaction::Discrete |
@@ -620,13 +628,21 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Axis0 |
         sp::io::Keybinding::Interaction::Axis1
     );
-    helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_decrease_impulse.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis1);
     helms_decrease_impulse_1.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 1%"));
-    helms_decrease_impulse_1.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_decrease_impulse_1.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_decrease_impulse_1.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_impulse_10.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease impulse 10%"));
-    helms_decrease_impulse_10.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_decrease_impulse_10.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_decrease_impulse_10.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_set_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set impulse (joystick)"));
     helms_set_impulse.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis1);
     helms_zero_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Zero impulse"));
@@ -681,7 +697,7 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0
     );
-    helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_increase_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_decrease_jump_distance.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance"));
@@ -691,17 +707,33 @@ void Keys::init()
         sp::io::Keybinding::Interaction::Continuous |
         sp::io::Keybinding::Interaction::Axis0
     );
-    helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Continuous);
+    helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::JoystickAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_decrease_jump_distance.setDefaultInteraction(sp::io::Keybinding::Type::ControllerAxis, sp::io::Keybinding::Interaction::Axis0);
     helms_increase_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 0.1U"));
-    helms_increase_jump_100.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_increase_jump_100.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_increase_jump_100.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_increase_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase jump distance 1U"));
-    helms_increase_jump_1k.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_increase_jump_1k.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_increase_jump_1k.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_jump_100.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 0.1U"));
-    helms_decrease_jump_100.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_decrease_jump_100.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_decrease_jump_100.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_decrease_jump_1k.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Decrease jump distance 1U"));
-    helms_decrease_jump_1k.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    helms_decrease_jump_1k.setSupportedInteractions(
+        sp::io::Keybinding::Interaction::Discrete |
+        sp::io::Keybinding::Interaction::Repeating
+    );
+    helms_decrease_jump_1k.setDefaultInteraction(sp::io::Keybinding::Interaction::Repeating);
     helms_set_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Set jump distance (joystick)"));
     helms_set_jump.setSupportedInteractions(sp::io::Keybinding::Interaction::Axis0);
     helms_max_jump.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Maximize jump distance"));

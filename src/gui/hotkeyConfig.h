@@ -54,6 +54,8 @@ public:
     sp::io::Keybinding mainscreen_first_person;
 
     // Helms screen binds
+    sp::io::Keybinding helms_turn_left;
+    sp::io::Keybinding helms_turn_right;
     sp::io::Keybinding helms_increase_impulse;
     sp::io::Keybinding helms_increase_impulse_1;
     sp::io::Keybinding helms_increase_impulse_10;
@@ -64,15 +66,21 @@ public:
     sp::io::Keybinding helms_zero_impulse;
     sp::io::Keybinding helms_max_impulse;
     sp::io::Keybinding helms_min_impulse;
+    sp::io::Keybinding helms_dock_action;
+    sp::io::Keybinding helms_dock_request;
+    sp::io::Keybinding helms_dock_abort;
+    sp::io::Keybinding helms_undock;
+    sp::io::Keybinding helms_increase_jump_distance;
     sp::io::Keybinding helms_increase_jump_100;
     sp::io::Keybinding helms_increase_jump_1k;
+    sp::io::Keybinding helms_decrease_jump_distance;
     sp::io::Keybinding helms_decrease_jump_100;
     sp::io::Keybinding helms_decrease_jump_1k;
     sp::io::Keybinding helms_set_jump;
     sp::io::Keybinding helms_max_jump;
     sp::io::Keybinding helms_min_jump;
-    sp::io::Keybinding helms_turn_left;
-    sp::io::Keybinding helms_turn_right;
+    sp::io::Keybinding helms_execute_jump;
+    sp::io::Keybinding helms_abort_jump;
     sp::io::Keybinding helms_warp0;
     sp::io::Keybinding helms_warp1;
     sp::io::Keybinding helms_warp2;
@@ -82,14 +90,6 @@ public:
     sp::io::Keybinding helms_increase_warp;
     sp::io::Keybinding helms_decrease_warp;
     sp::io::Keybinding helms_set_warp;
-    sp::io::Keybinding helms_dock_action;
-    sp::io::Keybinding helms_dock_request;
-    sp::io::Keybinding helms_dock_abort;
-    sp::io::Keybinding helms_undock;
-    sp::io::Keybinding helms_increase_jump_distance;
-    sp::io::Keybinding helms_decrease_jump_distance;
-    sp::io::Keybinding helms_execute_jump;
-    sp::io::Keybinding helms_abort_jump;
     sp::io::Keybinding helms_combat_left;
     sp::io::Keybinding helms_combat_right;
     sp::io::Keybinding helms_combat_boost;
