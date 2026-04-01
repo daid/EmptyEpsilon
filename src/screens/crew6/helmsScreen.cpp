@@ -132,11 +132,14 @@ void HelmsScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
+        auto angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
+        angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
+        angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
+        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
+        if (keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
         if (angle != 0.0f)
         {
-            auto transform = my_spaceship.getComponent<sp::Transform>();
-            if (transform)
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
                 my_player_info->commandTargetRotation(transform->getRotation() + angle);
         }
     }

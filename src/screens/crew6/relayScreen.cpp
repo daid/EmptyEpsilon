@@ -224,18 +224,27 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
-    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (key_zoom_delta != 0.0f)
+    // Handle zoom slider keybinds
+    float view_distance = radar->getDistance();
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() - keys.zoom_out.getContinuousValue()
+        + keys.zoom_in.getAxis0Value() - keys.zoom_out.getAxis0Value()
+        + keys.zoom_in.getAxis1Value() - keys.zoom_out.getAxis1Value();
+    if (mouse_wheel_delta != 0.0f)
+        view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+        view_distance = view_distance * 0.9f;
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+        view_distance = view_distance * 1.1f;
+    view_distance = std::clamp(view_distance, MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
+
+    // Keep the zoom slider in sync.
+    if (view_distance != radar->getDistance())
     {
-        float view_distance = std::clamp(
-            radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)),
-            MIN_ZOOM_DISTANCE,
-            MAX_ZOOM_DISTANCE
-        );
         radar->setDistance(view_distance);
         zoom_slider->setValue(view_distance);
     }
 
+    // Run overlay draw on bottom.
     GuiOverlay::onDraw(renderer);
 
     info_faction->setValue("-");

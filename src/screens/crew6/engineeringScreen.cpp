@@ -381,17 +381,25 @@ void EngineeringScreen::onUpdate()
     {
         auto coolant = my_spaceship.getComponent<Coolant>();
         for(unsigned int n=0; n<ShipSystem::COUNT; n++) {
-            if (keys.engineering_select_system[n].getDown()) selectSystem(static_cast<ShipSystem::Type>(n));
+            if (keys.engineering_select_system[n].isDiscreteStepDown()) selectSystem(static_cast<ShipSystem::Type>(n));
 
-            float set_value = keys.engineering_set_power_for_system[n].getValue() * 3.0f;
+            float set_value = keys.engineering_set_power_for_system[n].getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, static_cast<ShipSystem::Type>(n));
             if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[n]))
             {
                 my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), set_value);
                 set_power_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
+            float axis1_value = keys.engineering_set_power_for_system[n].getAxis1Value();
+            if (sys && (axis1_value != 0.0f || set_power_axis1_active[n]))
+            {
+                float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
+                if (axis1_set != sys->power_request)
+                    my_player_info->commandSetSystemPowerRequest(static_cast<ShipSystem::Type>(n), axis1_set);
+                set_power_axis1_active[n] = axis1_value != 0.0f;
+            }
             if (coolant) {
-                set_value = keys.engineering_set_coolant_for_system[n].getValue() * coolant->max_coolant_per_system;
+                set_value = keys.engineering_set_coolant_for_system[n].getAxis0Value() * coolant->max_coolant_per_system;
                 if (sys && set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[n]))
                 {
                     my_player_info->commandSetSystemCoolantRequest(static_cast<ShipSystem::Type>(n), set_value);
@@ -400,7 +408,10 @@ void EngineeringScreen::onUpdate()
             }
         }
 
-        int navigate_system = keys.engineering_select_system_next.getDown() - keys.engineering_select_system_prev.getDown(); // +1 or -1
+        int navigate_system = keys.engineering_select_system_next.isDiscreteStepDown() - keys.engineering_select_system_prev.isDiscreteStepDown(); // +1 or -1
+        select_system_accum += (keys.engineering_select_system_next.getContinuousValue() - keys.engineering_select_system_prev.getContinuousValue()) * 0.1f;
+        if (select_system_accum >= 1.0f) { navigate_system++; select_system_accum -= 1.0f; }
+        else if (select_system_accum <= -1.0f) { navigate_system--; select_system_accum += 1.0f; }
         if (navigate_system)
         {
             int n = static_cast<int>(selected_system);
@@ -417,48 +428,51 @@ void EngineeringScreen::onUpdate()
         if (selected_system != ShipSystem::Type::None)
         {
             // Note the code duplication with extra/powerManagement
-            if (keys.engineering_set_power_000.getDown())
+            if (keys.engineering_set_power_000.isDiscreteStepDown())
             {
                 power_slider->setValue(0.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_030.getDown())
+            if (keys.engineering_set_power_030.isDiscreteStepDown())
             {
                 power_slider->setValue(0.3f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_050.getDown())
+            if (keys.engineering_set_power_050.isDiscreteStepDown())
             {
                 power_slider->setValue(0.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_100.getDown())
+            if (keys.engineering_set_power_100.isDiscreteStepDown())
             {
                 power_slider->setValue(1.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_150.getDown())
+            if (keys.engineering_set_power_150.isDiscreteStepDown())
             {
                 power_slider->setValue(1.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_200.getDown())
+            if (keys.engineering_set_power_200.isDiscreteStepDown())
             {
                 power_slider->setValue(2.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_250.getDown())
+            if (keys.engineering_set_power_250.isDiscreteStepDown())
             {
                 power_slider->setValue(2.5f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
-            if (keys.engineering_set_power_300.getDown())
+            if (keys.engineering_set_power_300.isDiscreteStepDown())
             {
                 power_slider->setValue(3.0f);
                 my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
             }
 
-            auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
+            auto power_adjust = (keys.engineering_increase_power.getContinuousValue() + keys.engineering_increase_power.getAxis0Value() + keys.engineering_increase_power.getAxis1Value()
+                - keys.engineering_decrease_power.getContinuousValue() - keys.engineering_decrease_power.getAxis0Value() - keys.engineering_decrease_power.getAxis1Value()) * 0.1f;
+            if (keys.engineering_increase_power.isDiscreteStepDown() || keys.engineering_increase_power.isRepeatReady()) power_adjust += 0.1f;
+            if (keys.engineering_decrease_power.isDiscreteStepDown() || keys.engineering_decrease_power.isRepeatReady()) power_adjust -= 0.1f;
             if (power_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -467,7 +481,10 @@ void EngineeringScreen::onUpdate()
                     my_player_info->commandSetSystemPowerRequest(selected_system, power_slider->getValue());
                 }
             }
-            auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
+            auto coolant_adjust = (keys.engineering_increase_coolant.getContinuousValue() + keys.engineering_increase_coolant.getAxis0Value()
+                - keys.engineering_decrease_coolant.getContinuousValue() - keys.engineering_decrease_coolant.getAxis0Value()) * 0.5f;
+            if (keys.engineering_increase_coolant.isDiscreteStepDown() || keys.engineering_increase_coolant.isRepeatReady()) coolant_adjust += 0.5f;
+            if (keys.engineering_decrease_coolant.isDiscreteStepDown() || keys.engineering_decrease_coolant.isRepeatReady()) coolant_adjust -= 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -477,19 +494,35 @@ void EngineeringScreen::onUpdate()
                 }
             }
 
-            float set_value = keys.engineering_set_power.getValue() * 3.0f;
+            float set_value = keys.engineering_set_power.getAxis0Value() * 3.0f;
             auto sys = ShipSystem::get(my_spaceship, selected_system);
             if (sys && set_value != sys->power_request && (set_value != 0.0f || set_power_active[static_cast<int>(selected_system)]))
             {
                 my_player_info->commandSetSystemPowerRequest(selected_system, set_value);
                 set_power_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
+            float axis1_value = keys.engineering_set_power.getAxis1Value();
+            if (sys && (axis1_value != 0.0f || set_power_axis1_active[static_cast<int>(selected_system)]))
+            {
+                float axis1_set = (axis1_value + 1.0f) / 2.0f * 3.0f;
+                if (axis1_set != sys->power_request)
+                    my_player_info->commandSetSystemPowerRequest(selected_system, axis1_set);
+                set_power_axis1_active[static_cast<int>(selected_system)] = axis1_value != 0.0f;
+            }
             if (coolant && sys) {
-                set_value = keys.engineering_set_coolant.getValue() * coolant->max_coolant_per_system;
+                set_value = keys.engineering_set_coolant.getAxis0Value() * coolant->max_coolant_per_system;
                 if (set_value != sys->coolant_request && (set_value != 0.0f || set_coolant_active[static_cast<int>(selected_system)]))
                 {
                     my_player_info->commandSetSystemCoolantRequest(selected_system, set_value);
                     set_coolant_active[static_cast<int>(selected_system)] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+                }
+                float axis1_coolant_value = keys.engineering_set_coolant.getAxis1Value();
+                if (axis1_coolant_value != 0.0f || set_coolant_axis1_active)
+                {
+                    float axis1_coolant_set = (axis1_coolant_value + 1.0f) / 2.0f * coolant->max_coolant_per_system;
+                    if (axis1_coolant_set != sys->coolant_request)
+                        my_player_info->commandSetSystemCoolantRequest(selected_system, axis1_coolant_set);
+                    set_coolant_axis1_active = axis1_coolant_value != 0.0f;
                 }
             }
         }

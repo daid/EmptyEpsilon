@@ -47,27 +47,35 @@ void GuiImpulseControls::onUpdate()
     slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
     if (!slider->isEnabled()) return;
 
-    // Change impulse value by keybind.
-    float change = keys.helms_increase_impulse.getValue() - keys.helms_decrease_impulse.getValue();
+    // Set impulse request by continuous keybinds or two separate
+    // monodirectional (0-1) axes.
+    float change = keys.helms_increase_impulse.getContinuousValue() - keys.helms_decrease_impulse.getContinuousValue()
+        - keys.helms_increase_impulse.getAxis0Value() + keys.helms_decrease_impulse.getAxis0Value()
+        - keys.helms_increase_impulse.getAxis1Value() + keys.helms_decrease_impulse.getAxis1Value();
     if (change != 0.0f)
         my_player_info->commandImpulse(std::clamp(slider->getValue() + change * 0.01f, -1.0f, 1.0f));
-    if (keys.helms_increase_impulse_1.getDown())
-        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
-    if (keys.helms_decrease_impulse_1.getDown())
-        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.01f));
-    if (keys.helms_increase_impulse_10.getDown())
+    // If Discrete or Repeating, in/decrease_impulse behaves the same as
+    // in/decrease_impulse_10.
+    // TODO: Make in/decrease per-input value configurable in these modes.
+    if (keys.helms_increase_impulse.isDiscreteStepDown() || keys.helms_increase_impulse.isRepeatReady()
+        || keys.helms_increase_impulse_10.isDiscreteStepDown() || keys.helms_increase_impulse_10.isRepeatReady())
         my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.1f));
-    if (keys.helms_decrease_impulse_10.getDown())
-        my_player_info->commandImpulse(std::max(-1.0f, slider->getValue() - 0.1f));
-    if (keys.helms_zero_impulse.getDown())
+    if (keys.helms_increase_impulse_1.isDiscreteStepDown() || keys.helms_increase_impulse_1.isRepeatReady())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() + 0.01f));
+    if (keys.helms_decrease_impulse.isDiscreteStepDown() || keys.helms_decrease_impulse.isRepeatReady()
+        || keys.helms_decrease_impulse_10.isDiscreteStepDown() || keys.helms_decrease_impulse_10.isRepeatReady())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() - 0.1f));
+    if (keys.helms_decrease_impulse_1.isDiscreteStepDown() || keys.helms_decrease_impulse_1.isRepeatReady())
+        my_player_info->commandImpulse(std::min(1.0f, slider->getValue() - 0.01f));
+    if (keys.helms_zero_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(0.0f);
-    if (keys.helms_max_impulse.getDown())
+    if (keys.helms_max_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(1.0f);
-    if (keys.helms_min_impulse.getDown())
+    if (keys.helms_min_impulse.isDiscreteStepDown())
         my_player_info->commandImpulse(-1.0f);
 
-    // Change impulse value by axis.
-    float set_value = keys.helms_set_impulse.getValue();
+    // Set impulse request by bidirectional axis (-1 to 1).
+    float set_value = keys.helms_set_impulse.getAxis1Value();
     if (set_value != engine->request && (set_value != 0.0f || set_active))
     {
         my_player_info->commandImpulse(set_value);

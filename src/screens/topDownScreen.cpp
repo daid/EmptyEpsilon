@@ -77,14 +77,20 @@ void TopDownScreen::update(float delta)
         return;
     }
 
-    float zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue() + pending_zoom;
+    // Enable mouse wheel zoom.
+    float mouse_wheel_delta = keys.zoom_in.getContinuousValue() + keys.zoom_in.getAxis0Value() + keys.zoom_in.getAxis1Value()
+        - keys.zoom_out.getContinuousValue() - keys.zoom_out.getAxis0Value() - keys.zoom_out.getAxis1Value() + pending_zoom;
     pending_zoom = 0.0f;
-    if (zoom_delta != 0.0f)
+    if (mouse_wheel_delta != 0.0f)
     {
-        camera_position.z *= (1.0f - zoom_delta * 0.1f);
+        camera_position.z *= (1.0f - mouse_wheel_delta * 0.1f);
         if (camera_position.z > 10000) camera_position.z = 10000;
         if (camera_position.z < 1000) camera_position.z = 1000;
     }
+    if (keys.zoom_in.isDiscreteStepDown() || keys.zoom_in.isRepeatReady())
+        camera_position.z = std::max(1000.0f, camera_position.z * 0.9f);
+    if (keys.zoom_out.isDiscreteStepDown() || keys.zoom_out.isRepeatReady())
+        camera_position.z = std::min(10000.0f, camera_position.z * 1.1f);
 
     if (keys.help.getDown())
     {
@@ -115,7 +121,7 @@ void TopDownScreen::update(float delta)
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
     }
 
-    if (keys.topdown.previous_player_ship.getDown())
+    if (keys.topdown.previous_player_ship.isDiscreteStepDown() || keys.topdown.previous_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
@@ -123,7 +129,7 @@ void TopDownScreen::update(float delta)
         target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
-    if (keys.topdown.next_player_ship.getDown())
+    if (keys.topdown.next_player_ship.isDiscreteStepDown() || keys.topdown.next_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
@@ -131,28 +137,14 @@ void TopDownScreen::update(float delta)
         target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
-    if (keys.topdown.pan_up.get())
+    if (!camera_lock_toggle->getValue())
     {
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y - ((3 * delta * camera_position.z) / 10);
-    }
-
-    if (keys.topdown.pan_left.get())
-    {
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x - ((3 * delta * camera_position.z) / 10);
-    }
-
-    if (keys.topdown.pan_down.get())
-    {
-        if (!camera_lock_toggle->getValue())
-            camera_position.y = camera_position.y + ((3 * delta * camera_position.z) / 10);
-    }
-
-    if (keys.topdown.pan_right.get())
-    {
-        if (!camera_lock_toggle->getValue())
-            camera_position.x = camera_position.x + ((3 * delta * camera_position.z) / 10);
+        float pan_up = std::max(keys.topdown.pan_up.getContinuousValue() + keys.topdown.pan_up.getAxis0Value() + keys.topdown.pan_up.getAxis1Value(), (float)keys.topdown.pan_up.get());
+        float pan_dn = std::max(keys.topdown.pan_down.getContinuousValue() + keys.topdown.pan_down.getAxis0Value() + keys.topdown.pan_down.getAxis1Value(), (float)keys.topdown.pan_down.get());
+        float pan_lt = std::max(keys.topdown.pan_left.getContinuousValue() + keys.topdown.pan_left.getAxis0Value() + keys.topdown.pan_left.getAxis1Value(), (float)keys.topdown.pan_left.get());
+        float pan_rt = std::max(keys.topdown.pan_right.getContinuousValue() + keys.topdown.pan_right.getAxis0Value() + keys.topdown.pan_right.getAxis1Value(), (float)keys.topdown.pan_right.get());
+        camera_position.y += (pan_dn - pan_up) * (3 * delta * camera_position.z) / 10;
+        camera_position.x += (pan_rt - pan_lt) * (3 * delta * camera_position.z) / 10;
     }
 
     if (keys.escape.getDown())

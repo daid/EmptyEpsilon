@@ -41,8 +41,9 @@ void GuiCombatManeuver::onUpdate()
     slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);
     if (!slider->isEnabled()) return;
 
-    float strafe = keys.helms_combat_right.getValue() - keys.helms_combat_left.getValue();
-    float boost = std::max(0.0f, keys.helms_combat_boost.getValue());
+    float strafe = (keys.helms_combat_right.getContinuousValue() + keys.helms_combat_right.getAxis0Value() + keys.helms_combat_right.getAxis1Value())
+        - (keys.helms_combat_left.getContinuousValue() + keys.helms_combat_left.getAxis0Value() + keys.helms_combat_left.getAxis1Value());
+    float boost = std::max(0.0f, keys.helms_combat_boost.getContinuousValue() + keys.helms_combat_boost.getAxis0Value());
 
     if (strafe != 0.0f || hotkey_strafe_active)
         setStrafeValue(strafe);
