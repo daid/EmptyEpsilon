@@ -88,6 +88,12 @@ Keys::Keys() :
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
 #endif
 
+    // Rebinding binds
+    cancel_rebind("CANCEL_REBIND", {"Delete", "Backspace"}),
+    next_rebind_category("REBIND_NEXT_CATEGORY", "Tab"),
+    prev_rebind_category("REBIND_PREV_CATEGORY", ""),
+    toggle_rebind_dialog("REBIND_TOGGLE_DIALOG", "Space"),
+
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
@@ -336,6 +342,16 @@ void Keys::init()
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+
+    // Rebinding binds
+    cancel_rebind.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Cancel control binding"));
+    cancel_rebind.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    next_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Next category"));
+    next_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    prev_rebind_category.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Previous category"));
+    prev_rebind_category.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    toggle_rebind_dialog.setLabel(tr("hotkey_menu", "Control binding"), tr("hotkey_Rebind", "Toggle advanced binding dialog"));
+    toggle_rebind_dialog.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));

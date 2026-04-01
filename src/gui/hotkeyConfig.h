@@ -28,6 +28,12 @@ public:
     sp::io::Keybinding debug_show_colliders;
 #endif
 
+    // Rebinding binds
+    sp::io::Keybinding cancel_rebind;
+    sp::io::Keybinding next_rebind_category;
+    sp::io::Keybinding prev_rebind_category;
+    sp::io::Keybinding toggle_rebind_dialog;
+
     // Crew screen binds
     sp::io::Keybinding next_station;
     sp::io::Keybinding prev_station;

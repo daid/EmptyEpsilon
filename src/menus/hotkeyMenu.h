@@ -2,36 +2,39 @@
 
 #include "optionsMenu.h"
 #include "gui/gui2_arrowbutton.h"
-#include "gui/gui2_entrylist.h"
 #include "gui/gui2_canvas.h"
-#include "gui/gui2_scrollbar.h"
-#include "gui/gui2_scrolltext.h"
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
+#include <timer.h>
 
 class GuiArrowButton;
-class GuiOverlay;
-class GuiSlider;
+class GuiButton;
 class GuiLabel;
 class GuiCanvas;
 class GuiPanel;
 class GuiScrollText;
+class GuiSelector;
+class GuiToggleButton;
 class GuiHotkeyBinder;
 
 class HotkeyMenu : public GuiCanvas, public Updatable
 {
 private:
-    const int ROW_HEIGHT = 50;
-    const int FRAME_MARGIN = 50;
-    const int KEY_LABEL_WIDTH = 375;
-    const int KEY_FIELD_WIDTH = 150;
-    const int KEY_LABEL_MARGIN = 25;
-    const int KEY_COLUMN_TOP = ROW_HEIGHT * 1.5;
-    const int KEY_ROW_COUNT = 10;
-    const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
-    const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
-    const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
+    const float ROW_HEIGHT = 50.0f;
+    const float FRAME_MARGIN = 50.0f;
+    const float KEY_LABEL_WIDTH = 250.0f;
+    const float KEY_BINDER_WIDTH = 250.0f;
+    const float KEY_BINDER_MARGIN = 10.0f;
+    const float KEY_LABEL_MARGIN = 25.0f;
+    const int KEY_ROW_COUNT = 6;
     const float RESET_LABEL_TIMEOUT = 5.0f;
+
+    // Column width: label + 3 binders + margins between them
+    const float KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + 3.0f * KEY_BINDER_WIDTH + 4.0f * KEY_BINDER_MARGIN;
+    // Row height: binding display + add/remove/invert buttons
+    const float KEY_ROW_HEIGHT = ROW_HEIGHT + GuiHotkeyBinder::SELECTOR_HEIGHT;
+    const float KEY_COLUMN_HEIGHT = KEY_ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2.0f;
+    const float KEY_COLUMN_TOP = ROW_HEIGHT * 1.5f + ROW_HEIGHT * 0.5f; // top_row + header_row
 
     GuiScrollText* help_text;
     GuiElement* container;
@@ -50,11 +53,20 @@ private:
     GuiLabel* reset_label;
 
     string category = "";
-    int category_index = 1;
-    float reset_label_timer = 0.0f;
+    int category_index = 0;
+    sp::SystemTimer reset_label_timer;
     std::vector<string> category_list;
     std::vector<sp::io::Keybinding*> hotkey_list;
     OptionsMenu::ReturnTo return_to;
+
+    GuiSelector* category_selector;
+
+    // Dialog mode toggle
+    bool use_dialog_mode = true;
+    GuiToggleButton* dialog_mode_toggle;
+
+    // Rebind dialog
+    GuiRebindDialog* rebind_dialog = nullptr;
 
     void setCategory(int cat);
     void pageHotkeys(int direction);
