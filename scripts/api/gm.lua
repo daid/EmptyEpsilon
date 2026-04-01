@@ -42,7 +42,7 @@ function getEntityExportString(entity)
         -- Likely a player ship
         for k, v in pairs(__ship_templates) do
             if v.__type == "playership" and v.typename.type_name == entity.components.typename.type_name then
-                return "PlayerSpaceship():setTemplate('" .. k .. "')" .. __exportShipChanges(entity, v)
+                return "PlayerSpaceship():setTemplate('" .. k .. "')" .. __exportShipChanges(entity, v, "full")
             end
         end
     end
@@ -120,10 +120,15 @@ function getEntityExportString(entity)
     if entity.components.allow_radar_link then
         return "ScanProbe()" .. __exportScanProbe(entity)
     end
+
+    -- No matching API function
     return ""
 end
 
-function __exportBasics(entity)
+-- default_scan_state: the scan state the entity type has by default (before any explicit setScanState call).
+-- PlayerSpaceship() initialises all factions to "fullscan"; everything else defaults to "none".
+function __exportBasics(entity, default_scan_state)
+    default_scan_state = default_scan_state or "none"
     local x, y = entity:getPosition()
     local extras = string.format(":setPosition(%.0f, %.0f)", x, y)
     local rotation = entity:getRotation()
@@ -135,7 +140,8 @@ function __exportBasics(entity)
         extras = extras .. ":setFaction('" .. faction .. "')"
     end
     if entity.components.callsign then
-        extras = extras .. ":setCallSign('" .. entity.components.callsign.callsign .. "')"
+        local cs = entity.components.callsign.callsign:gsub("\\", "\\\\"):gsub("'", "\\'")
+        extras = extras .. ":setCallSign('" .. cs .. "')"
     end
     local ss = entity.components.scan_state
     if ss then
@@ -161,11 +167,11 @@ function __exportBasics(entity)
             end
         end
         if #states > 0 then
-            if all_same and first_state ~= "none" then
+            if all_same and first_state ~= default_scan_state then
                 extras = extras .. ":setScanState('" .. first_state .. "')"
             elseif not all_same then
                 for _, entry in ipairs(states) do
-                    if entry.state ~= "none" then
+                    if entry.state ~= default_scan_state then
                         extras = extras .. ":setScanStateByFaction('" .. entry.name .. "', '" .. entry.state .. "')"
                     end
                 end
@@ -175,8 +181,8 @@ function __exportBasics(entity)
     return extras
 end
 
-function __exportShipChanges(entity, template)
-    local extras = __exportBasics(entity)
+function __exportShipChanges(entity, template, default_scan_state)
+    local extras = __exportBasics(entity, default_scan_state)
 
     -- Hull: export max if changed from template, current if damaged, allow_destruction if changed
     local hull = entity.components.hull
@@ -252,7 +258,201 @@ function __exportShipChanges(entity, template)
         end
     end
 
+    -- Impulse engine
+    local ie = entity.components.impulse_engine
+    local t_ie = template.impulse_engine
+    if ie then
+        if not t_ie or ie.max_speed_forward ~= t_ie.max_speed_forward or ie.max_speed_reverse ~= t_ie.max_speed_reverse then
+            if ie.max_speed_forward == ie.max_speed_reverse then
+                extras = extras .. string.format(":setImpulseMaxSpeed(%.1f)", ie.max_speed_forward)
+            else
+                extras = extras .. string.format(":setImpulseMaxSpeed(%.1f, %.1f)", ie.max_speed_forward, ie.max_speed_reverse)
+            end
+        end
+        if not t_ie or ie.acceleration_forward ~= t_ie.acceleration_forward or ie.acceleration_reverse ~= t_ie.acceleration_reverse then
+            if ie.acceleration_forward == ie.acceleration_reverse then
+                extras = extras .. string.format(":setAcceleration(%.1f)", ie.acceleration_forward)
+            else
+                extras = extras .. string.format(":setAcceleration(%.1f, %.1f)", ie.acceleration_forward, ie.acceleration_reverse)
+            end
+        end
+        if ie.sound and ie.sound ~= "" and (not t_ie or ie.sound ~= t_ie.sound) then
+            extras = extras .. ":setImpulseSoundFile('" .. ie.sound .. "')"
+        end
+    end
+
+    -- Maneuvering thrusters
+    local man_thrusters = entity.components.maneuvering_thrusters
+    local t_man_thrusters = template.maneuvering_thrusters
+    if man_thrusters and (not t_man_thrusters or man_thrusters.speed ~= t_man_thrusters.speed) then
+        extras = extras .. string.format(":setRotationMaxSpeed(%.1f)", man_thrusters.speed)
+    end
+
+    -- Combat maneuvering thrusters
+    local cmt = entity.components.combat_maneuvering_thrusters
+    local t_cmt = template.combat_maneuvering_thrusters
+    if cmt and (not t_cmt or cmt.boost_speed ~= t_cmt.boost_speed or cmt.strafe_speed ~= t_cmt.strafe_speed) then
+        extras = extras .. string.format(":setCombatManeuver(%.0f, %.0f)", cmt.boost_speed, cmt.strafe_speed)
+    end
+
+    -- Warp drive (C++ default speed_per_level=1000; setWarpDrive(true) without setWarpSpeed leaves it nil in template)
+    local wd = entity.components.warp_drive
+    local t_wd = template.warp_drive
+    if wd then
+        if not t_wd then
+            extras = extras .. ":setWarpDrive(true)"
+        end
+        local t_warp_speed = (t_wd and t_wd.speed_per_level) or 1000
+        if wd.speed_per_level ~= t_warp_speed then
+            extras = extras .. string.format(":setWarpSpeed(%.0f)", wd.speed_per_level)
+        end
+    end
+
+    -- Jump drive (C++ defaults min=5000, max=50000; setJumpDrive(true) without setJumpDriveRange leaves them nil)
+    local jd = entity.components.jump_drive
+    local t_jd = template.jump_drive
+    if jd then
+        if not t_jd then
+            extras = extras .. ":setJumpDrive(true)"
+        end
+        local t_jd_min = (t_jd and t_jd.min_distance) or 5000
+        local t_jd_max = (t_jd and t_jd.max_distance) or 50000
+        if jd.min_distance ~= t_jd_min or jd.max_distance ~= t_jd_max then
+            extras = extras .. string.format(":setJumpDriveRange(%.0f, %.0f)", jd.min_distance, jd.max_distance)
+        end
+    end
+
+    -- Beam weapons (0-based index for setters, 1-based for ECS component array)
+    local bw = entity.components.beam_weapons
+    local t_bw = template.beam_weapons
+    if bw then
+        for i = 1, #bw do
+            local b = bw[i]
+            local tb = t_bw and t_bw[i]
+            local idx = i - 1
+            if not tb or b.arc ~= tb.arc or b.direction ~= tb.direction or b.range ~= tb.range
+                or b.cycle_time ~= tb.cycle_time or b.damage ~= tb.damage
+            then
+                extras = extras .. string.format(":setBeamWeapon(%d, %.1f, %.1f, %.0f, %.1f, %.1f)",
+                    idx, b.arc, b.direction, b.range, b.cycle_time, b.damage)
+            end
+            if b.turret_arc and b.turret_arc ~= 0 then
+                if not tb or b.turret_arc ~= tb.turret_arc or b.turret_direction ~= tb.turret_direction
+                    or b.turret_rotation_rate ~= tb.turret_rotation_rate
+                then
+                    extras = extras .. string.format(":setBeamWeaponTurret(%d, %.1f, %.1f, %.1f)",
+                        idx, b.turret_arc, b.turret_direction, b.turret_rotation_rate)
+                end
+            end
+            -- For properties not stored in the Lua template, fall back to C++ struct defaults
+            local tb_texture = (tb and tb.texture) or "texture/beam_orange.png"
+            if b.texture and b.texture ~= "" and b.texture ~= tb_texture then
+                extras = extras .. string.format(":setBeamWeaponTexture(%d, '%s')", idx, b.texture)
+            end
+            local tb_energy = (tb and tb.energy_per_beam_fire) or 3.0
+            if b.energy_per_beam_fire and b.energy_per_beam_fire ~= tb_energy then
+                extras = extras .. string.format(":setBeamWeaponEnergyPerFire(%d, %.2f)", idx, b.energy_per_beam_fire)
+            end
+            local tb_heat = (tb and tb.heat_per_beam_fire) or 0.02
+            if b.heat_per_beam_fire and math.abs(b.heat_per_beam_fire - tb_heat) > 1e-5 then
+                extras = extras .. string.format(":setBeamWeaponHeatPerFire(%d, %.3f)", idx, b.heat_per_beam_fire)
+            end
+            -- arc_color is u8vec4 {r,g,b,a} (0-255); setBeamWeaponArcColor takes floats 0-1.
+            -- ShipTemplate has no setBeamWeaponArcColor, so compare against C++ defaults:
+            -- arc_color default={255,0,0,128}, arc_color_fire default={255,255,0,128}
+            local ac = b.arc_color
+            local acf = b.arc_color_fire
+            if ac and (ac[1] ~= 255 or ac[2] ~= 0 or ac[3] ~= 0
+                or (acf and (acf[1] ~= 255 or acf[2] ~= 255 or acf[3] ~= 0)))
+            then
+                local fr = acf and acf[1] / 255.0 or 1.0
+                local fg = acf and acf[2] / 255.0 or 1.0
+                local fb = acf and acf[3] / 255.0 or 0.0
+                extras = extras .. string.format(":setBeamWeaponArcColor(%d, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f)",
+                    idx, ac[1] / 255.0, ac[2] / 255.0, ac[3] / 255.0, fr, fg, fb)
+            end
+            if b.damage_type and b.damage_type ~= "energy" and (not tb or b.damage_type ~= tb.damage_type) then
+                extras = extras .. string.format(":setBeamWeaponDamageType(%d, '%s')", idx, b.damage_type)
+            end
+        end
+    end
+
+    -- Docking bay: DockingBay uses a bitfield (default flags=0), so unset template fields are nil
+    -- while entity fields are false. Normalise both to boolean with == true before comparing.
+    local db = entity.components.docking_bay
+    local t_db = template.docking_bay
+    if db then
+        local e_share   = db.share_energy == true
+        local e_repair  = db.repair == true
+        local e_probes  = db.restock_probes == true
+        local e_missiles = db.restock_missiles == true
+        local t_share   = t_db and t_db.share_energy == true
+        local t_repair  = t_db and t_db.repair == true
+        local t_probes  = t_db and t_db.restock_probes == true
+        local t_missiles = t_db and t_db.restock_missiles == true
+        if e_share ~= t_share then
+            extras = extras .. ":setSharesEnergyWithDocked(" .. tostring(e_share) .. ")"
+        end
+        if e_repair ~= t_repair then
+            extras = extras .. ":setRepairDocked(" .. tostring(e_repair) .. ")"
+        end
+        if e_probes ~= t_probes then
+            extras = extras .. ":setRestocksScanProbes(" .. tostring(e_probes) .. ")"
+        end
+        if e_missiles ~= t_missiles then
+            extras = extras .. ":setRestocksMissilesDocked(" .. tostring(e_missiles) .. ")"
+        end
+    end
+
+    -- Repair crew: only export if we found actual crew entities and the count differs from template.
+    -- internal_crew entities are not always instantiated, so a count of 0 is not reliable.
+    local crew_count = __countShipCrew(entity)
+    local template_crew_count = template.__repair_crew_count or 0
+    if crew_count > 0 and crew_count ~= template_crew_count then
+        extras = extras .. string.format(":setRepairCrewCount(%d)", crew_count)
+    end
+
+    -- AI controller (CPU ships only): export AI name and non-entity-targeted orders
+    local ai = entity.components.ai_controller
+    local t_ai = template.ai_controller
+    if ai then
+        if ai.new_name and ai.new_name ~= "" and ai.new_name ~= "default" and ai.new_name ~= t_ai.new_name then
+            extras = extras .. ":setAI('" .. ai.new_name .. "')"
+        end
+        local orders = ai.orders
+        local loc = ai.order_target_location
+        if orders == "idle" then
+            extras = extras .. ":orderIdle()"
+        elseif orders == "roaming" then
+            if loc and (loc[1] ~= 0 or loc[2] ~= 0) then
+                extras = extras .. string.format(":orderRoamingAt(%.0f, %.0f)", loc[1], loc[2])
+            else
+                extras = extras .. ":orderRoaming()"
+            end
+        elseif orders == "stand_ground" then
+            extras = extras .. ":orderStandGround()"
+        elseif orders == "defend_location" and loc then
+            extras = extras .. string.format(":orderDefendLocation(%.0f, %.0f)", loc[1], loc[2])
+        elseif orders == "fly_towards" and loc then
+            extras = extras .. string.format(":orderFlyTowards(%.0f, %.0f)", loc[1], loc[2])
+        elseif orders == "fly_towards_blind" and loc then
+            extras = extras .. string.format(":orderFlyTowardsBlind(%.0f, %.0f)", loc[1], loc[2])
+        -- entity-targeted orders (defend_target, attack, dock, fly_formation) cannot be serialized
+        end
+    end
+
     return extras
+end
+
+-- Returns the number of internal repair crew belonging to `entity`.
+function __countShipCrew(entity)
+    local n = 0
+    for _, crew in ipairs(getEntitiesWithComponent("internal_crew")) do
+        if crew.components.internal_crew and crew.components.internal_crew.ship == entity then
+            n = n + 1
+        end
+    end
+    return n
 end
 
 function __exportPlanet(entity)
