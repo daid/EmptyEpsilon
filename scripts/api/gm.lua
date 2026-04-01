@@ -120,6 +120,10 @@ function getEntityExportString(entity)
     if entity.components.allow_radar_link then
         return "ScanProbe()" .. __exportScanProbe(entity)
     end
+    -- Zone has zone component
+    if entity.components.zone then
+        return "Zone()" .. __exportZone(entity)
+    end
 
     -- No matching API function
     return ""
@@ -557,6 +561,39 @@ function __exportScanProbe(entity)
     local mt = entity.components.move_to
     if mt and mt.speed then
         extras = extras .. string.format(":setSpeed(%.0f)", mt.speed)
+    end
+    return extras
+end
+
+function __exportZone(entity)
+    local extras = ""
+    local z = entity.components.zone
+    if not z then return extras end
+    -- Color: C++ default is {255,255,255,0} (white); setColor takes integers 0-255
+    if z.color and (z.color[1] ~= 255 or z.color[2] ~= 255 or z.color[3] ~= 255) then
+        extras = extras .. string.format(":setColor(%d, %d, %d)", z.color[1], z.color[2], z.color[3])
+    end
+    -- Label
+    if z.label and z.label ~= "" then
+        extras = extras .. ":setLabel('" .. z.label .. "')"
+    end
+    -- Local skybox
+    if z.skybox and z.skybox ~= "" then
+        local fade = z.skybox_fade_distance or 0
+        if fade ~= 0 then
+            extras = extras .. string.format(":setLocalSkybox('%s', %.0f)", z.skybox, fade)
+        else
+            extras = extras .. ":setLocalSkybox('" .. z.skybox .. "')"
+        end
+    end
+    -- Outline points: z.points is {{x1,y1},{x2,y2},...}; setPoints takes a flat coord list
+    if z.points and #z.points > 0 then
+        local coords = {}
+        for _, pt in ipairs(z.points) do
+            coords[#coords+1] = string.format("%.0f", pt[1])
+            coords[#coords+1] = string.format("%.0f", pt[2])
+        end
+        extras = extras .. ":setPoints(" .. table.concat(coords, ", ") .. ")"
     end
     return extras
 end
