@@ -106,6 +106,7 @@ private:
         { return GMCursorMode(unsigned(a) & unsigned(b)); }
 
     bool has_cpu_ship = false;
+    bool show_health_bars = true;
 
     GuiButton* create_button;
     GuiButton* cancel_action_button;
