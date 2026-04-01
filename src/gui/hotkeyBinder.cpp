@@ -63,19 +63,6 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
         [this]()
         {
             rebind_dialog->startRebind(this->key, this->capture_filter, this->display_filter, this->key->getLabel());
-            return;
-
-            // Delay startUserRebind until onMouseUp so that the triggering
-            // mouse click is not immediately captured as the new binding.
-            if (this->capture_filter & sp::io::Keybinding::Type::Mouse)
-                pending_rebind = true;
-            else
-            {
-                active_rebinder = this;
-                active_key = this->key;
-                sp::io::Keybinding::setUserRebindCancelKey(&keys.cancel_rebind);
-                this->key->startUserRebind(this->capture_filter, selected_interaction);
-            }
         }
     ))
         ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
@@ -253,7 +240,7 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
         else
         {
             invert_btn->setValue(false);
-            invert_btn->hide()-disable();
+            invert_btn->hide()->disable();
         }
     }
 
@@ -611,6 +598,8 @@ void GuiRebindDialog::populateInteractionSelector()
     legend_text->setVisible(has_interactions);
     if (has_interactions)
         panel->setSize(1000.0f, 600.0f);
+    else if (capture_filter & sp::io::Keybinding::Type::Mouse)
+        panel->setSize(700.0f, 270.0f);
     else
         panel->setSize(700.0f, 220.0f);
 }
