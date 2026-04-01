@@ -61,12 +61,8 @@ private:
 
     GuiSelector* category_selector;
 
-    // Dialog mode toggle
-    bool use_dialog_mode = true;
-    GuiToggleButton* dialog_mode_toggle;
-
     // Rebind dialog
-    GuiRebindDialog* rebind_dialog = nullptr;
+    GuiRebindDialog* rebind_dialog;
 
     void setCategory(int cat);
     void pageHotkeys(int direction);

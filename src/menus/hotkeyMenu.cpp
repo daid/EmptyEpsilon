@@ -77,20 +77,6 @@ HotkeyMenu::HotkeyMenu(OptionsMenu::ReturnTo return_to)
         ->setSize(300.0f, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopCenter);
 
-    // Advanced binding dialog toggle
-    dialog_mode_toggle = new GuiToggleButton(top_row, "DIALOG_MODE_TOGGLE", tr("hotkey_menu", "Advanced binding"),
-        [this](bool active)
-        {
-            use_dialog_mode = active;
-            info_container->setVisible(!active);
-            setCategory(category_index);
-        }
-    );
-    dialog_mode_toggle
-        ->setValue(use_dialog_mode)
-        ->setSize(300.0f, GuiElement::GuiSizeMax)
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight);
-
     // Page navigation
     previous_page = new GuiArrowButton(container, "PAGE_LEFT", 0, [this]()
     {
@@ -196,14 +182,6 @@ void HotkeyMenu::update(float delta)
     if (keys.prev_rebind_category.getDown()
         && !GuiHotkeyBinder::isAnyRebinding())
         setCategory(category_index - 1);
-    if (keys.toggle_rebind_dialog.getDown()
-        && !GuiHotkeyBinder::isAnyRebinding())
-    {
-        dialog_mode_toggle->setValue(!dialog_mode_toggle->getValue());
-        use_dialog_mode = dialog_mode_toggle->getValue();
-        info_container->setVisible(!dialog_mode_toggle->getValue());
-        setCategory(category_index);
-    }
 }
 
 // Display a list of hotkeys to bind from the given hotkey category.
@@ -214,7 +192,7 @@ void HotkeyMenu::setCategory(int cat)
     if (cat < 0) cat = static_cast<int>(category_list.size()) - 1;
 
     // Close the dialog if it was open for a binder that is about to be destroyed.
-    if (rebind_dialog) rebind_dialog->closeIfOpen();
+    rebind_dialog->closeIfOpen();
 
     // Remove any previous category's hotkey entries.
     for (GuiHotkeyBinder* text : text_entries) text->destroy();
@@ -271,8 +249,7 @@ void HotkeyMenu::setCategory(int cat)
         text_entries.back()
             ->setSize(KEY_BINDER_WIDTH, GuiElement::GuiSizeMax)
             ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-        if (use_dialog_mode && rebind_dialog)
-            text_entries.back()->setDialog(rebind_dialog);
+        text_entries.back()->setDialog(rebind_dialog);
 
         // Joystick/controller-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_JS_" + item->getName(), item,
@@ -280,8 +257,7 @@ void HotkeyMenu::setCategory(int cat)
         text_entries.back()
             ->setSize(KEY_BINDER_WIDTH, GuiElement::GuiSizeMax)
             ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-        if (use_dialog_mode && rebind_dialog)
-            text_entries.back()->setDialog(rebind_dialog);
+        text_entries.back()->setDialog(rebind_dialog);
 
         // Mouse-only binder.
         text_entries.push_back(new GuiHotkeyBinder(rebinding_rows.back(), "HOTKEY_MS_" + item->getName(), item,
@@ -289,8 +265,7 @@ void HotkeyMenu::setCategory(int cat)
         text_entries.back()
             ->setSize(KEY_BINDER_WIDTH, GuiElement::GuiSizeMax)
             ->setMargins(0.0f, 0.0f, KEY_BINDER_MARGIN, 0.0f);
-        if (use_dialog_mode && rebind_dialog)
-            text_entries.back()->setDialog(rebind_dialog);
+        text_entries.back()->setDialog(rebind_dialog);
     }
 
     // Resize the rendering UI panel based on the number of columns.

@@ -62,11 +62,9 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     (new GuiButton(row2, "ADD_BIND", "+",
         [this]()
         {
-            if (rebind_dialog)
-            {
-                rebind_dialog->startRebind(this->key, this->capture_filter, this->display_filter, this->key->getLabel());
-                return;
-            }
+            rebind_dialog->startRebind(this->key, this->capture_filter, this->display_filter, this->key->getLabel());
+            return;
+
             // Delay startUserRebind until onMouseUp so that the triggering
             // mouse click is not immediately captured as the new binding.
             if (this->capture_filter & sp::io::Keybinding::Type::Mouse)
@@ -163,27 +161,23 @@ bool GuiHotkeyBinder::onMouseDown(sp::io::Pointer::Button button, glm::vec2 posi
 
     // In dialog mode, left/middle click opens the dialog instead of rebinding.
     // Right click still removes the last matching bind directly.
-    if (rebind_dialog)
+    if (button == sp::io::Pointer::Button::Right)
     {
-        if (button == sp::io::Pointer::Button::Right)
+        int count = 0;
+        while (key->getKeyType(count) != sp::io::Keybinding::Type::None) count++;
+        for (int i = count - 1; i >= 0; --i)
         {
-            int count = 0;
-            while (key->getKeyType(count) != sp::io::Keybinding::Type::None) count++;
-            for (int i = count - 1; i >= 0; --i)
+            if (key->getKeyType(i) & display_filter)
             {
-                if (key->getKeyType(i) & display_filter)
-                {
-                    key->removeKey(i);
-                    break;
-                }
+                key->removeKey(i);
+                break;
             }
         }
-        else if (button == sp::io::Pointer::Button::Left || button == sp::io::Pointer::Button::Middle)
-        {
-            rebind_dialog->startRebind(key, capture_filter, display_filter, key->getLabel());
-        }
-        return true;
     }
+    else if (button == sp::io::Pointer::Button::Left || button == sp::io::Pointer::Button::Middle)
+        rebind_dialog->startRebind(key, capture_filter, display_filter, key->getLabel());
+
+    return true;
 
     // Left click: Assign input. Middle click: Add input.
     // Right click: Remove last input. Ignore all other mouse buttons.
@@ -253,13 +247,13 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
         }
         if (last_axis_idx >= 0)
         {
-            invert_btn->show();
+            invert_btn->show()->enable();
             invert_btn->setValue(key->getKeyInverted(last_axis_idx));
         }
         else
         {
             invert_btn->setValue(false);
-            invert_btn->hide();
+            invert_btn->hide()-disable();
         }
     }
 
@@ -616,9 +610,9 @@ void GuiRebindDialog::populateInteractionSelector()
     interaction_row->setVisible(has_interactions);
     legend_text->setVisible(has_interactions);
     if (has_interactions)
-        panel->setSize(1000.0f, 700.0f);
+        panel->setSize(1000.0f, 600.0f);
     else
-        panel->setSize(700.0f, 350.0f);
+        panel->setSize(700.0f, 220.0f);
 }
 
 bool GuiRebindDialog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
