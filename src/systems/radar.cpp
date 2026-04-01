@@ -68,5 +68,8 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
 {
     if (entity == my_spaceship || !(RadarRenderSystem::current_flags & RadarRenderSystem::FlagCallsigns)) return;
 
-    renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 15, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
+    float text_distance = 15.0f;
+    if (auto trace = entity.getComponent<RadarTrace>()) text_distance = std::clamp(trace->radius * 1.5f * scale, trace->min_size, trace->max_size) + 15.0f * 1.5f * scale;
+
+    renderer.drawText(sp::Rect(screen_position.x, screen_position.y - text_distance, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
 }
