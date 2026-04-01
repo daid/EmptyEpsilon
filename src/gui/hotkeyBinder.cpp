@@ -99,7 +99,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
     ))
         ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax);
 
-    invert_btn = new GuiToggleButton(row2, "INVERT_BIND", "~",
+    invert_btn = new GuiToggleButton(row2, "INVERT_BIND", tr("button", "Invert"),
         [this](bool active)
         {
             // Toggle the inverted flag on the last matching axis binding.
@@ -117,7 +117,7 @@ GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybind
         }
     );
     invert_btn
-        ->setSize(SELECTOR_HEIGHT, GuiElement::GuiSizeMax)
+        ->setSize(SELECTOR_HEIGHT * 2, GuiElement::GuiSizeMax)
         ->disable();
 }
 
@@ -253,13 +253,13 @@ void GuiHotkeyBinder::onDraw(sp::RenderTarget& renderer)
         }
         if (last_axis_idx >= 0)
         {
-            invert_btn->enable();
+            invert_btn->show();
             invert_btn->setValue(key->getKeyInverted(last_axis_idx));
         }
         else
         {
             invert_btn->setValue(false);
-            invert_btn->disable();
+            invert_btn->hide();
         }
     }
 
