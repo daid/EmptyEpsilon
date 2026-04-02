@@ -130,17 +130,36 @@ void HelmsScreen::onDraw(sp::RenderTarget& renderer)
 
 void HelmsScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+
+    // Impulse, jump, warp hotkeys are handled in their screen components.
+
+    // Handle rotational hotkeys.
+    auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+    const float turn_scale = thrusters ? thrusters->speed : 10.0f;
+    auto continuous_angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * turn_scale;
+    continuous_angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * turn_scale;
+    continuous_angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * turn_scale;
+    float discrete_angle = 0.0f;
+    if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) discrete_angle += turn_scale * 0.5f;
+    if (keys.helms_turn_left.isDiscreteStepDown() || keys.helms_turn_left.isRepeatReady()) discrete_angle -= turn_scale * 0.5f;
+
+    // Combine input angles and stop turning if key is up.
+    if (continuous_angle != 0.0f)
     {
-        auto angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
-        angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
-        angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
-        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
-        if (keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
-        if (angle != 0.0f)
-        {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
-        }
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            my_player_info->commandTargetRotation(transform->getRotation() + continuous_angle + discrete_angle);
+        continuous_turning = true;
+    }
+    else if (discrete_angle != 0.0f)
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            my_player_info->commandTargetRotation(transform->getRotation() + discrete_angle);
+        continuous_turning = false;
+    }
+    else if (continuous_turning)
+    {
+        my_player_info->commandTurnSpeed(0.0f);
+        continuous_turning = false;
     }
 }

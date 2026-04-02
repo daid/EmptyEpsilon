@@ -23,6 +23,7 @@ private:
     AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
     bool drag_rotate;
+    bool continuous_turning = false;
 public:
     TacticalScreen(GuiContainer* owner);
 

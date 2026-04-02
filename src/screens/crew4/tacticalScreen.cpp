@@ -9,6 +9,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/collision.h"
+#include "components/maneuveringthrusters.h"
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
@@ -142,15 +143,30 @@ void TacticalScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * 5.0f;
-        angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * 5.0f;
-        angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * 5.0f;
-        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) angle += 5.0f;
-        if (keys.helms_turn_left.isRepeatReady()) angle -= 5.0f;
-        if (angle != 0.0f)
+        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+        float turn_scale = thrusters ? thrusters->speed : 10.0f;
+        auto continuous_angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * turn_scale;
+        continuous_angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * turn_scale;
+        continuous_angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * turn_scale;
+        float discrete_angle = 0.0f;
+        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) discrete_angle += 5.0f;
+        if (keys.helms_turn_left.isRepeatReady()) discrete_angle -= 5.0f;
+        if (continuous_angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
+                my_player_info->commandTargetRotation(transform->getRotation() + continuous_angle + discrete_angle);
+            continuous_turning = true;
+        }
+        else if (discrete_angle != 0.0f)
+        {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                my_player_info->commandTargetRotation(transform->getRotation() + discrete_angle);
+            continuous_turning = false;
+        }
+        else if (continuous_turning)
+        {
+            my_player_info->commandTurnSpeed(0.0f);
+            continuous_turning = false;
         }
 
         if (keys.weapons_enemy_next_target.isDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())

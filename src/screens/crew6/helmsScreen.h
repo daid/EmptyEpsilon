@@ -16,6 +16,7 @@ private:
     GuiLabel* heading_hint;
     GuiCombatManeuver* combat_maneuver;
     GuiDockingButton* docking_button;
+    bool continuous_turning = false;
 public:
     HelmsScreen(GuiContainer* owner);
 
