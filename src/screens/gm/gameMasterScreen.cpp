@@ -689,7 +689,7 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             sp::ecs::Entity target;
             glm::vec2 target_position;
 
-            for (auto entity : sp::CollisionSystem::queryArea(position, position))
+            for (auto entity : sp::TransformQuery::queryArea(position, position))
             {
                 auto transform = entity.getComponent<sp::Transform>();
                 if (!transform) continue;
