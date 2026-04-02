@@ -424,6 +424,10 @@ set(MAIN_SOURCES
     src/systems/scanning.cpp
     src/systems/planet.h
     src/systems/planet.cpp
+    src/systems/player.h
+    src/systems/player.cpp
+    src/systems/postprocessor.h
+    src/systems/postprocessor.cpp
     src/systems/gm.h
     src/systems/gm.cpp
     src/systems/radar.h
@@ -452,6 +456,8 @@ set(MAIN_SOURCES
     src/multiplayer/radarblock.cpp
     src/multiplayer/player.h
     src/multiplayer/player.cpp
+    src/multiplayer/postprocessor.h
+    src/multiplayer/postprocessor.cpp
     src/multiplayer/name.h
     src/multiplayer/name.cpp
     src/multiplayer/impulse.h
