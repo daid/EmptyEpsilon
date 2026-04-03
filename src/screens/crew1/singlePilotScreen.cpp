@@ -11,6 +11,7 @@
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
+#include "components/beamweapon.h"
 #include "components/missiletubes.h"
 #include "components/shields.h"
 #include "components/target.h"
