@@ -93,5 +93,31 @@ void ManeuveringSystem::update(float delta)
             if (combat.charge > 1.0f)
                 combat.charge = 1.0f;
         }
+
+        // Without an impulse engine there is no per-frame velocity override to
+        // act as a natural speed cap, so enforce one here. Bleed velocity back
+        // to 0 at that same rate when not maneuvering.
+        if (!entity.hasComponent<ImpulseEngine>())
+        {
+            if (auto physics = entity.getComponent<sp::Physics>())
+            {
+                float cap_speed = std::max(combat.boost.speed, combat.strafe.speed);
+                if (cap_speed > 0.0f)
+                {
+                    auto velocity = physics->getVelocity();
+                    float speed = glm::length(velocity);
+                    if (combat.boost.active != 0.0f || combat.strafe.active != 0.0f)
+                    {
+                        if (speed > cap_speed)
+                            physics->setVelocity(velocity * (cap_speed / speed));
+                    }
+                    else if (speed > 0.0f)
+                    {
+                        float new_speed = std::max(0.0f, speed - cap_speed * delta * 2.0f);
+                        physics->setVelocity(velocity * (new_speed / speed));
+                    }
+                }
+            }
+        }
     }
 }
