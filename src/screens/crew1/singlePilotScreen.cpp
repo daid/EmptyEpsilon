@@ -11,6 +11,7 @@
 #include "components/jumpdrive.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
+#include "components/missiletubes.h"
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
@@ -106,11 +107,16 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
+    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box
+        ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
+        ->setSize(500.0f, 50.0f)
+        ->hide();
+
     // Beam controls beneath the radar.
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(500, 50);
+        beam_info_box->show();
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
         (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
@@ -143,14 +149,14 @@ void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
     {
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
+        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
 
-        missile_aim->setVisible(tube_controls->getManualAim());
+        const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
+        lock_aim->setVisible(has_tubes);
+        missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
 
         auto target = my_spaceship.getComponent<Target>();
-        if (target)
-            targets.set(target->entity);
-        else
-            targets.set(sp::ecs::Entity{});
+        targets.set(target ? target->entity : sp::ecs::Entity{});
     }
     GuiOverlay::onDraw(renderer);
 }

@@ -24,6 +24,7 @@ private:
     AimLock* missile_aim;
     AimLockButton* lock_aim;
     GuiMissileTubeControls* tube_controls;
+    GuiElement* beam_info_box;
     bool drag_rotate;
 public:
     SinglePilotScreen(GuiContainer* owner);
