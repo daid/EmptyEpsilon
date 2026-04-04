@@ -7,6 +7,7 @@
 #include "gui/gui2_progressbar.h"
 
 #include "components/docking.h"
+#include "components/impulse.h"
 #include "components/maneuveringthrusters.h"
 
 GuiCombatManeuver::GuiCombatManeuver(GuiContainer* owner, string id)
@@ -34,8 +35,23 @@ void GuiCombatManeuver::onUpdate()
 {
     if (!my_spaceship) return;
 
-    setVisible(my_spaceship.hasComponent<CombatManeuveringThrusters>());
-    if (!isVisible()) return;
+    setVisible(
+        my_spaceship.hasComponent<CombatManeuveringThrusters>()
+        && (my_spaceship.hasComponent<ManeuveringThrusters>() || my_spaceship.hasComponent<ImpulseEngine>())
+    );
+
+    // Reset boost, strafe if not visible.
+    if (!isVisible())
+    {
+        if (hotkey_boost_active || hotkey_strafe_active || slider->getValue() != glm::vec2(0.0f, 0.0f))
+        {
+            setBoostValue(0.0f);
+            setStrafeValue(0.0f);
+            hotkey_boost_active = false;
+            hotkey_strafe_active = false;
+        }
+        return;
+    }
 
     if (auto docking_port = my_spaceship.getComponent<DockingPort>())
     slider->setEnable(!docking_port || docking_port->state == DockingPort::State::NotDocking);

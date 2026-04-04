@@ -168,7 +168,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             my_player_info->commandClearScienceLink();
         }
     });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
+    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() {
@@ -328,7 +328,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         auto spl = my_spaceship.getComponent<ScanProbeLauncher>();
         launch_probe_button->setVisible(spl);
         launch_probe_button->setEnable(spl ? spl->stock > 0 : false);
-        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl);
+        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl && my_spaceship.hasComponent<RadarLink>());
         hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
 
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0));
