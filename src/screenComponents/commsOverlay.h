@@ -6,6 +6,7 @@
 class GuiPanel;
 class GuiProgressbar;
 class GuiButton;
+class GuiToggleButton;
 class GuiLabel;
 class GuiScrollText;
 class GuiListbox;
@@ -27,18 +28,19 @@ private:
     GuiPanel* broken_box;
     GuiPanel* closed_box;
 
-    GuiPanel* chat_comms_box;
+    GuiToggleButton* comms_restore_button;
+
+    GuiPanel* comms_dialog_box;
+    GuiLabel* comms_dialog_title_label;
+    GuiScrollText* comms_dialog_text;
     GuiTextEntry* chat_comms_message_entry;
-    GuiScrollText* chat_comms_text;
     GuiButton* chat_comms_send_button;
-    GuiButton* chat_comms_close_button;
-
-    GuiPanel* script_comms_box;
-    GuiScrollText* script_comms_text;
     GuiListbox* script_comms_options;
-    GuiButton* script_comms_close;
 
-    bool chat_open_last_update;
+    bool chat_open_last_update = false;
+    bool comms_minimized = false;
+    bool comms_has_unread = false;
+    string last_incoming_message;
 public:
     GuiCommsOverlay(GuiContainer* owner);
 
