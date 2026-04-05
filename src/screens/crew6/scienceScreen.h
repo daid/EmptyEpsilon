@@ -59,12 +59,12 @@ public:
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
     GuiListbox* view_mode_selection;
-
-    ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);
+    ScienceScreen(GuiContainer* owner, bool allow_scanning=true, CrewPosition crew_position=CrewPosition::scienceOfficer);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 private:
+    bool allow_scanning;
     // Used to judge when to update the UI label and zoom
     float previous_long_range_radar = 0.0f;
     float previous_short_range_radar = 0.0f;

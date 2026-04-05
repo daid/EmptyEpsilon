@@ -70,9 +70,9 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
         } // end if enemy_has_equipment
         else {
             if (frequency_is_beam)
-                renderer.drawText(rect, tr("scienceFrequencyGraph", "No enemy beams"), sp::Alignment::Center, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No beams"), sp::Alignment::Center, 35);
             else
-                renderer.drawText(rect, tr("scienceFrequencyGraph", "No enemy shields"), sp::Alignment::Center, 35);
+                renderer.drawText(rect, tr("scienceFrequencyGraph", "No shields"), sp::Alignment::Center, 35);
         }
     }else{
         renderer.drawText(rect, tr("scienceFrequencyGraph", "No data"), sp::Alignment::Center, 35);

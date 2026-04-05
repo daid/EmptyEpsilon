@@ -67,7 +67,9 @@ private:
     void disableAllExcept(GuiToggleButton* button);
     void unselectSingleOptions();
 
+    const float button_height = 45.0f;
     int window_index;
+
     GuiButton* ready_button;
     GuiToggleButton* main_screen_button;
     GuiToggleButton* crew_position_button[static_cast<int>(CrewPosition::MAX)];
