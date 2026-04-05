@@ -3,6 +3,7 @@
 #include "script/environment.h"
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <glm/gtc/type_precision.hpp>
 
 
@@ -50,6 +51,37 @@ template<> struct Convert<glm::vec3> {
         lua_pop(L, 1);
         lua_geti(L, idx, 3);
         result.z = lua_tonumber(L, -1);
+        lua_pop(L, 1);
+        return result;
+    }
+};
+template<> struct Convert<glm::vec4> {
+    static int toLua(lua_State* L, glm::vec4 value) {
+        lua_createtable(L, 4, 0);
+        lua_pushnumber(L, value.x);
+        lua_rawseti(L, -2, 1);
+        lua_pushnumber(L, value.y);
+        lua_rawseti(L, -2, 2);
+        lua_pushnumber(L, value.z);
+        lua_rawseti(L, -2, 3);
+        lua_pushnumber(L, value.w);
+        lua_rawseti(L, -2, 4);
+        return 1;
+    }
+    static glm::vec4 fromLua(lua_State* L, int idx) {
+        glm::vec4 result{1.0, 1.0, 1.0, 1.0};
+        luaL_checktype(L, idx, LUA_TTABLE);
+        lua_geti(L, idx, 1);
+        result.x = lua_tonumber(L, -1);
+        lua_pop(L, 1);
+        lua_geti(L, idx, 2);
+        result.y = lua_tonumber(L, -1);
+        lua_pop(L, 1);
+        lua_geti(L, idx, 3);
+        result.z = lua_tonumber(L, -1);
+        lua_pop(L, 1);
+        lua_geti(L, idx, 4);
+        result.w = lua_tonumber(L, -1);
         lua_pop(L, 1);
         return result;
     }
