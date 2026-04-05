@@ -1,20 +1,20 @@
 #include "customShipFunctions.h"
 #include "playerInfo.h"
+
 #include "gui/gui2_button.h"
 #include "gui/gui2_label.h"
+
 #include "components/customshipfunction.h"
 
-
 GuiCustomShipFunctions::GuiCustomShipFunctions(GuiContainer* owner, CrewPosition position, string id)
-: GuiElement(owner, id), position(position)
+: GuiScrollContainer(owner, id), position(position)
 {
     setAttribute("layout", "vertical");
 }
 
 void GuiCustomShipFunctions::onUpdate()
 {
-    if (!my_spaceship)
-        return;
+    if (!my_spaceship) return;
     checkEntries();
 }
 
@@ -28,7 +28,8 @@ void GuiCustomShipFunctions::checkEntries()
         createEntries();
         return;
     }
-    for(unsigned int n=0; n<entries.size(); n++)
+
+    for (size_t n = 0; n < entries.size(); n++)
     {
         string caption = csf->functions[n].caption;
         if (entries[n].name != csf->functions[n].name)
@@ -36,38 +37,32 @@ void GuiCustomShipFunctions::checkEntries()
             createEntries();
             return;
         }
+        // Entry is not assigned to this crew position, skip.
         else if (!entries[n].element)
-        {
-            // entry is not assigned to this crew position, skip
             continue;
-        }
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Button)
         {
             GuiButton* button = dynamic_cast<GuiButton*>(entries[n].element);
             if (!button)
             {
-                // ship data says this is a button but we have something else, rebuild the entries
+                // Ship data says this is a button but we have something else, rebuild the entries
                 createEntries();
                 return;
             }
-            else if(button->getText() != caption)
-            {
+            else if (button->getText() != caption)
                 button->setText(caption);
-            }
         }
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Info)
         {
             GuiLabel* label = dynamic_cast<GuiLabel*>(entries[n].element);
             if (!label)
             {
-                // ship data says this is a label but we have something else, rebuild the entries
+                // Ship data says this is a label but we have something else, rebuild the entries
                 createEntries();
                 return;
             }
             else if (label->getText() != caption)
-            {
                 label->setText(caption);
-            }
         }
     }
 }
@@ -75,47 +70,48 @@ void GuiCustomShipFunctions::checkEntries()
 bool GuiCustomShipFunctions::hasEntries()
 {
     checkEntries();
-    for(Entry& e : entries)
-    {
-        if (e.element)
-            return true;
-    }
+    for (Entry& e : entries)
+        if (e.element) return true;
+
     return false;
 }
 
 void GuiCustomShipFunctions::createEntries()
 {
-    for(Entry& e : entries)
-    {
-        if (e.element)
-            e.element->destroy();
-    }
+    for (Entry& e : entries)
+        if (e.element) e.element->destroy();
+
     entries.clear();
     auto csf = my_spaceship.getComponent<CustomShipFunctions>();
     if (!csf) return;
-    for(auto& f : csf->functions)
+
+    for (auto& f : csf->functions)
     {
         entries.emplace_back();
         Entry& e = entries.back();
         e.name = f.name;
         e.element = nullptr;
+
         if (f.crew_positions.has(position))
         {
             if (f.type == CustomShipFunctions::Function::Type::Button)
             {
                 string name = e.name;
-                e.element = new GuiButton(this, "", f.caption, [name]()
-                {
-                    if (my_spaceship)
-                        my_player_info->commandCustomFunction(name);
-                });
-                e.element->setSize(GuiElement::GuiSizeMax, 50);
+                e.element = new GuiButton(this, "", f.caption,
+                    [name]()
+                    {
+                        if (my_spaceship)
+                            my_player_info->commandCustomFunction(name);
+                    }
+                );
+                e.element->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
             }
+
             if (f.type == CustomShipFunctions::Function::Type::Info)
             {
                 string name = e.name;
-                e.element = (new GuiLabel(this, "", f.caption, 25))->addBackground();
-                e.element->setSize(GuiElement::GuiSizeMax, 50);
+                e.element = (new GuiLabel(this, "", f.caption, ROW_HEIGHT * 0.5f))->addBackground();
+                e.element->setSize(GuiElement::GuiSizeMax, ROW_HEIGHT);
             }
         }
     }

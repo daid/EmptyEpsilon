@@ -4,7 +4,7 @@
 
 GuiContainer::~GuiContainer()
 {
-    for(GuiElement* element : children)
+    for (GuiElement* element : children)
     {
         element->owner = nullptr;
         delete element;
@@ -13,15 +13,14 @@ GuiContainer::~GuiContainer()
 
 void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    for(auto it = children.begin(); it != children.end(); )
+    for (auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
         if (element->destroyed)
         {
             //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
             GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
-            if (canvas)
-                canvas->unfocusElementTree(element);
+            if (canvas) canvas->unfocusElementTree(element);
 
             //Delete it from our list.
             it = children.erase(it);
@@ -29,7 +28,9 @@ void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, 
             // Free up the memory used by the element.
             element->owner = nullptr;
             delete element;
-        }else{
+        }
+        else
+        {
             element->hover = element->rect.contains(mouse_position);
 
             if (element->visible)
@@ -61,49 +62,45 @@ void GuiContainer::drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& ren
 
 GuiElement* GuiContainer::getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
 {
-    for(auto it = children.rbegin(); it != children.rend(); it++)
+    for (auto it = children.rbegin(); it != children.rend(); it++)
     {
         GuiElement* element = *it;
 
         if (element->visible && element->enabled && element->rect.contains(position))
         {
             GuiElement* clicked = element->getClickElement(button, position, id);
-            if (clicked)
-                return clicked;
-            if (element->onMouseDown(button, position, id))
-            {
-                return element;
-            }
+            if (clicked) return clicked;
+            if (element->onMouseDown(button, position, id)) return element;
         }
     }
+
     return nullptr;
 }
 
 GuiElement* GuiContainer::executeScrollOnElement(glm::vec2 position, float value)
 {
-    for(auto it = children.rbegin(); it != children.rend(); it++)
+    for (auto it = children.rbegin(); it != children.rend(); it++)
     {
         GuiElement* element = *it;
 
         if (element->visible && element->enabled && element->rect.contains(position))
         {
             GuiElement* scrolled = element->executeScrollOnElement(position, value);
-            if (scrolled)
-                return scrolled;
-            if (element->onMouseWheelScroll(position, value))
-                return element;
+            if (scrolled) return scrolled;
+            if (element->onMouseWheelScroll(position, value)) return element;
         }
     }
+
     return nullptr;
 }
 
 void GuiContainer::updateLayout(const sp::Rect& rect)
 {
     this->rect = rect;
+
     if (layout_manager || !children.empty())
     {
-        if (!layout_manager)
-            layout_manager = std::make_unique<GuiLayout>();
+        if (!layout_manager) layout_manager = std::make_unique<GuiLayout>();
 
         glm::vec2 padding_size(layout.padding.left + layout.padding.right, layout.padding.top + layout.padding.bottom);
         layout_manager->updateLoop(*this, sp::Rect(rect.position + glm::vec2{layout.padding.left, layout.padding.top}, rect.size - padding_size));
@@ -111,7 +108,8 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
         {
             glm::vec2 content_size_min(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
             glm::vec2 content_size_max(std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
-            for(auto w : children)
+
+            for (auto w : children)
             {
                 if (w && w->isVisible())
                 {
@@ -123,6 +121,7 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
                     content_size_max.y = std::max(content_size_max.y, p1.y + w->layout.margin.bottom);
                 }
             }
+
             if (content_size_max.x != std::numeric_limits<float>::min())
             {
                 this->rect.size = (content_size_max - content_size_min) + padding_size;
@@ -130,6 +129,36 @@ void GuiContainer::updateLayout(const sp::Rect& rect)
             }
         }
     }
+}
+
+void GuiContainer::clearElementOwner(GuiElement* element)
+{
+    element->owner = nullptr;
+}
+
+void GuiContainer::setElementHover(GuiElement* element, bool has_hover)
+{
+    element->hover = has_hover;
+}
+
+void GuiContainer::setElementFocus(GuiElement* element, bool has_focus)
+{
+    element->focus = has_focus;
+}
+
+void GuiContainer::callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target)
+{
+    container->drawElements(mouse_pos, rect, render_target);
+}
+
+GuiElement* GuiContainer::callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id)
+{
+    return container->getClickElement(button, pos, id);
+}
+
+GuiElement* GuiContainer::callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value)
+{
+    return container->executeScrollOnElement(pos, value);
 }
 
 void GuiContainer::setAttribute(const string& key, const string& value)
@@ -187,9 +216,7 @@ void GuiContainer::setAttribute(const string& key, const string& value)
     {
         auto values = value.split(",", 3);
         if (values.size() == 1)
-        {
-            layout.padding.top = layout.padding.bottom = layout.padding.left = layout.padding.right = values[0].strip().toFloat();
-        }
+           layout.padding.top = layout.padding.bottom = layout.padding.left = layout.padding.right = values[0].strip().toFloat();
         else if (values.size() == 2)
         {
             layout.padding.left = layout.padding.right = values[0].strip().toFloat();
@@ -232,17 +259,14 @@ void GuiContainer::setAttribute(const string& key, const string& value)
     else if (key == "layout")
     {
         GuiLayoutClassRegistry* reg;
-        for(reg = GuiLayoutClassRegistry::first; reg != nullptr; reg = reg->next)
-        {
-            if (value == reg->name)
-                break;
-        }
+
+        for (reg = GuiLayoutClassRegistry::first; reg != nullptr; reg = reg->next)
+            if (value == reg->name) break;
+
         if (reg)
-        {
             layout_manager = reg->creation_function();
-        }else{
+        else
             LOG(Error, "Failed to find layout type:", value);
-        }
     }
     else if (key == "stretch")
     {
@@ -250,6 +274,7 @@ void GuiContainer::setAttribute(const string& key, const string& value)
             layout.fill_height = layout.fill_width = layout.lock_aspect_ratio = true;
         else
             layout.fill_height = layout.fill_width = value.toBool();
+
         layout.match_content_size = false;
     }
     else if (key == "fill_height")
@@ -263,7 +288,5 @@ void GuiContainer::setAttribute(const string& key, const string& value)
         layout.match_content_size = false;
     }
     else
-    {
         LOG(Warning, "Tried to set unknown widget attribute:", key, "to", value);
-    }
 }

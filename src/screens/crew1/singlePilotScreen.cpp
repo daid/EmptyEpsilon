@@ -141,7 +141,9 @@ SinglePilotScreen::SinglePilotScreen(GuiContainer* owner)
     lock_aim = new AimLockButton(this, "LOCK_AIM", tube_controls, missile_aim);
     lock_aim->setPosition(250, 70, sp::Alignment::TopCenter)->setSize(130, 50);
 
-    (new GuiCustomShipFunctions(this, CrewPosition::singlePilot, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::singlePilot, ""))
+        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 350.0f);
 }
 
 void SinglePilotScreen::onDraw(sp::RenderTarget& renderer)
