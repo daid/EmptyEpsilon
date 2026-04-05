@@ -366,6 +366,7 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<Waypoints>::name("waypoints");
     BIND_ARRAY_DIRTY_FLAG(Waypoints, waypoints, dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "id", id, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "set_id", set_id, dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "x", position.x, dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "y", position.y, dirty);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");

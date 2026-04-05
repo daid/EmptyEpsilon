@@ -58,6 +58,33 @@
             color: #000000D0
         }
     }
+    [ship_waypoint_set2] {
+        image: waypoint.png
+        [ship_waypoint_set2.background] {
+            color: #FF4040D0
+        }
+        [ship_waypoint_set2.text] {
+            color: #000000D0
+        }
+    }
+    [ship_waypoint_set3] {
+        image: waypoint.png
+        [ship_waypoint_set3.background] {
+            color: #40FF40D0
+        }
+        [ship_waypoint_set3.text] {
+            color: #000000D0
+        }
+    }
+    [ship_waypoint_set4] {
+        image: waypoint.png
+        [ship_waypoint_set4.background] {
+            color: #40FFFFD0
+        }
+        [ship_waypoint_set4.text] {
+            color: #000000D0
+        }
+    }
 
     [radar] {
         font: gui/fonts/BigShouldersDisplay-ExtraBold.ttf

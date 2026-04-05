@@ -1,14 +1,17 @@
 #pragma once
 
+#include <array>
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
 
 class GuiButton;
+class GuiElement;
 class GuiHackingDialog;
 class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiRadarView;
 class GuiRadarZoomSlider;
+class GuiSelector;
 class GuiSlider;
 class GuiToggleButton;
 
@@ -28,6 +31,9 @@ private:
 
     TargetsContainer targets;
     int drag_waypoint_index;
+    int drag_waypoint_set;
+    int active_waypoint_set = 1;
+
     GuiRadarView* radar;
 
     GuiKeyValueDisplay* info_callsign;
@@ -42,6 +48,8 @@ private:
     GuiButton* delete_waypoint_button;
     GuiButton* launch_probe_button;
     GuiToggleButton* center_button;
+    GuiSelector* waypoint_set_selector;
+    GuiToggleButton* route_toggle;
 
     GuiRadarZoomSlider* zoom_slider;
     GuiLabel* zoom_label;

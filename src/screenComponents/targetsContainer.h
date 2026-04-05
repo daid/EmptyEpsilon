@@ -25,7 +25,8 @@ public:
     std::vector<sp::ecs::Entity> getTargets();
     sp::ecs::Entity get();
     int getWaypointIndex();
-    void setWaypointIndex(int index);
+    int getWaypointSetId();
+    void setWaypointIndex(int index, int set_id = 1);
 
     void setToClosestTo(glm::vec2 position, float max_range, ESelectionType selection_type);
     void setNext(glm::vec2 position, float max_range, ESelectionType selection_type);
@@ -35,6 +36,7 @@ private:
     std::vector<sp::ecs::Entity> entries;
     bool allow_waypoint_selection;
     int waypoint_selection_index;
+    int waypoint_selection_set_id;
 
     void setNext(glm::vec2 position, float max_range, std::vector<sp::ecs::Entity>& entities);
     void sortByDistance(glm::vec2 position, std::vector<sp::ecs::Entity>& entities);

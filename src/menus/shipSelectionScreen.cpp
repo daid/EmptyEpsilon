@@ -338,7 +338,10 @@ ShipSelectionScreen::ShipSelectionScreen()
     if (game_server)
     {
         auto extra_settings_panel = new GuiPanel(this, "");
-        extra_settings_panel->setSize(600, 325)->setPosition(0, 0, sp::Alignment::Center)->hide();
+        extra_settings_panel
+            ->setSize(600.0f, 375.0f)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+            ->hide();
         auto extra_settings = new GuiElement(extra_settings_panel, "");
         extra_settings->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(25)->setAttribute("layout", "vertical");
         // Science scan complexity selector.
@@ -375,6 +378,30 @@ ShipSelectionScreen::ShipSelectionScreen()
         (new GuiToggleButton(row, "GAME_SYS_DAMAGE_TOGGLE", tr("Per-system damage"), [](bool value) {
             gameGlobalInfo->use_system_damage = value == 1;
         }))->setValue(gameGlobalInfo->use_system_damage)->setSize(275, GuiElement::GuiSizeMax)->setPosition(0, 0, sp::Alignment::CenterRight);
+
+        // Waypoint settings row.
+        row = new GuiElement(extra_settings, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 50.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiToggleButton(row, "GAME_MULTI_WP_SETS_TOGGLE", tr("Multiple waypoint sets"),
+            [](bool value)
+            {
+                gameGlobalInfo->enable_multiple_waypoint_sets = value == 1;
+            }
+        ))->setValue(gameGlobalInfo->enable_multiple_waypoint_sets)
+            ->setSize(275.0f, GuiElement::GuiSizeMax)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::CenterLeft);
+
+        (new GuiToggleButton(row, "GAME_WP_ROUTES_TOGGLE", tr("Waypoint routes"),
+            [](bool value)
+            {
+                gameGlobalInfo->enable_waypoint_routes = value == 1;
+            }
+        ))->setValue(gameGlobalInfo->enable_waypoint_routes)
+            ->setSize(275.0f, GuiElement::GuiSizeMax)
+            ->setPosition(0.0f, 0.0f, sp::Alignment::CenterRight);
 
         auto close_button = new GuiButton(extra_settings_panel, "", tr("Close"), [this, extra_settings_panel](){
             extra_settings_panel->hide();

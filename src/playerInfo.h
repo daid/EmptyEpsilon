@@ -66,9 +66,10 @@ public:
     void commandSetBeamFrequency(int32_t frequency);
     void commandSetBeamSystemTarget(ShipSystem::Type system);
     void commandSetShieldFrequency(int32_t frequency);
-    void commandAddWaypoint(glm::vec2 position);
-    void commandRemoveWaypoint(int32_t index);
-    void commandMoveWaypoint(int32_t index, glm::vec2 position);
+    void commandAddWaypoint(glm::vec2 position, int32_t set_id = 1);
+    void commandRemoveWaypoint(int32_t index, int32_t set_id = 1);
+    void commandMoveWaypoint(int32_t index, glm::vec2 position, int32_t set_id = 1);
+    void commandSetWaypointRoute(bool is_route, int32_t set_id);
     void commandActivateSelfDestruct();
     void commandCancelSelfDestruct();
     void commandConfirmDestructCode(int8_t index, uint32_t code);

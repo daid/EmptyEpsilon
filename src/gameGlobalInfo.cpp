@@ -31,6 +31,8 @@ GameGlobalInfo::GameGlobalInfo()
     hacking_games = HG_All;
     use_beam_shield_frequencies = true;
     use_system_damage = true;
+    enable_multiple_waypoint_sets = false;
+    enable_waypoint_routes = false;
     allow_main_screen_tactical_radar = true;
     allow_main_screen_long_range_radar = true;
     allow_main_screen_strategic_map = true;
@@ -48,6 +50,8 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&victory_faction);
     registerMemberReplication(&use_beam_shield_frequencies);
     registerMemberReplication(&use_system_damage);
+    registerMemberReplication(&enable_multiple_waypoint_sets);
+    registerMemberReplication(&enable_waypoint_routes);
     registerMemberReplication(&allow_main_screen_tactical_radar);
     registerMemberReplication(&allow_main_screen_long_range_radar);
     registerMemberReplication(&allow_main_screen_strategic_map);

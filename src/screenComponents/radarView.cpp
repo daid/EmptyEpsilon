@@ -28,6 +28,7 @@
 #include "radarView.h"
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
+#include "components/name.h"
 
 #include "gui/theme.h"
 
@@ -81,7 +82,16 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
     ship_waypoint_style(theme->getStyle("ship_waypoint")),
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
+    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text")),
+    ship_waypoint_set2_style(theme->getStyle("ship_waypoint_set2")),
+    ship_waypoint_set2_background_style(theme->getStyle("ship_waypoint_set2.background")),
+    ship_waypoint_set2_text_style(theme->getStyle("ship_waypoint_set2.text")),
+    ship_waypoint_set3_style(theme->getStyle("ship_waypoint_set3")),
+    ship_waypoint_set3_background_style(theme->getStyle("ship_waypoint_set3.background")),
+    ship_waypoint_set3_text_style(theme->getStyle("ship_waypoint_set3.text")),
+    ship_waypoint_set4_style(theme->getStyle("ship_waypoint_set4")),
+    ship_waypoint_set4_background_style(theme->getStyle("ship_waypoint_set4.background")),
+    ship_waypoint_set4_text_style(theme->getStyle("ship_waypoint_set4.text"))
 {
 }
 
@@ -117,7 +127,16 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
     ship_waypoint_style(theme->getStyle("ship_waypoint")),
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
+    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text")),
+    ship_waypoint_set2_style(theme->getStyle("ship_waypoint_set2")),
+    ship_waypoint_set2_background_style(theme->getStyle("ship_waypoint_set2.background")),
+    ship_waypoint_set2_text_style(theme->getStyle("ship_waypoint_set2.text")),
+    ship_waypoint_set3_style(theme->getStyle("ship_waypoint_set3")),
+    ship_waypoint_set3_background_style(theme->getStyle("ship_waypoint_set3.background")),
+    ship_waypoint_set3_text_style(theme->getStyle("ship_waypoint_set3.text")),
+    ship_waypoint_set4_style(theme->getStyle("ship_waypoint_set4")),
+    ship_waypoint_set4_background_style(theme->getStyle("ship_waypoint_set4.background")),
+    ship_waypoint_set4_text_style(theme->getStyle("ship_waypoint_set4.text"))
 {
 }
 
@@ -264,7 +283,11 @@ void GuiRadarView::onDraw(sp::RenderTarget& renderer)
     glStencilFunc(GL_EQUAL, as_mask(RadarStencil::RadarBounds), as_mask(RadarStencil::RadarBounds));
 
     // Always draw waypoints, if enabled.
-    if (show_waypoints) drawWaypoints(renderer);
+    if (show_waypoints)
+    {
+        if (show_game_master_data) drawAllPlayerWaypoints(renderer);
+        else drawWaypoints(renderer);
+    }
 
     // Always draw heading indicators, if enabled.
     if (show_heading_indicators) drawHeadingIndicators(renderer);
@@ -485,35 +508,124 @@ void GuiRadarView::drawGhostDots(sp::RenderTarget& renderer)
     }
 }
 
-void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
+void GuiRadarView::drawWaypointSetForShip(sp::RenderTarget& renderer, Waypoints* waypoints, int set_id,
+    const GuiThemeStyle* sprite_style, const GuiThemeStyle* bg_style, const GuiThemeStyle* text_style,
+    bool show_route, const string& owner_label, glm::u8vec4 owner_label_color)
 {
-    auto waypoints = my_spaceship.getComponent<Waypoints>();
-    if (!waypoints)
-        return;
+    const auto& waypoint_sprite = sprite_style->get(getState()).texture;
+    const auto& waypoint_color = bg_style->get(getState()).color;
+    const auto& waypoint_text_style = text_style->get(getState());
+    auto font = waypoint_text_style.font;
+    if (!font) font = bold_font;
 
     glm::vec2 radar_screen_center(rect.position.x + rect.size.x / 2.0f, rect.position.y + rect.size.y / 2.0f);
 
-    for(unsigned int n=0; n<waypoints->waypoints.size(); n++)
+    // Draw route line if enabled
+    if (show_route && waypoints->is_route[set_id - 1])
     {
-        auto screen_position = worldToScreen(waypoints->waypoints[n].position);
+        std::vector<Waypoints::Point*> set_points;
 
-        const auto& waypoint_sprite = ship_waypoint_style->get(getState()).texture;
-        const auto& waypoint_color = ship_waypoint_background_style->get(getState()).color;
-        const auto& waypoint_text_style = ship_waypoint_text_style->get(getState());
-        auto font = waypoint_text_style.font;
-        // Fallback to bold font
-        if (!font) font = bold_font;
+        for (auto& p : waypoints->waypoints)
+            if (p.set_id == set_id) set_points.push_back(&p);
 
+        std::sort(set_points.begin(), set_points.end(),
+            [](auto* a, auto* b)
+            {
+                return a->id < b->id;
+            }
+        );
+        glm::u8vec4 route_color(waypoint_color.r, waypoint_color.g, waypoint_color.b, waypoint_color.a / 2);
+        for (size_t i = 1; i < set_points.size(); i++)
+        {
+            auto p0 = worldToScreen(set_points[i - 1]->position);
+            auto p1 = worldToScreen(set_points[i]->position);
+            renderer.drawLine(p0, p1, route_color);
+        }
+    }
+
+    // Draw waypoint sprites
+    for (auto& wp : waypoints->waypoints)
+    {
+        if (wp.set_id != set_id) continue;
+        auto screen_position = worldToScreen(wp.position);
+
+        glm::u8vec4 label_color = (owner_label_color.a != 0) ? owner_label_color : waypoint_text_style.color;
         renderer.drawSprite(waypoint_sprite, screen_position - glm::vec2(0, 10), 20, waypoint_color);
-        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, font, waypoint_text_style.color);
+        renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 10, 0, 0), string(wp.id), sp::Alignment::Center, 14, font, waypoint_text_style.color);
+        if (!owner_label.empty())
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y + 4.0f, 0.0f, 0.0f), owner_label, sp::Alignment::Center, 14, font, label_color);
 
         if (style != Rectangular && glm::length(screen_position - radar_screen_center) > std::min(rect.size.x, rect.size.y) * 0.5f)
         {
             screen_position = radar_screen_center + ((screen_position - radar_screen_center) / glm::length(screen_position - radar_screen_center) * std::min(rect.size.x, rect.size.y) * 0.4f);
-
             renderer.drawRotatedSprite(waypoint_sprite, screen_position, 20, vec2ToAngle(screen_position - radar_screen_center) - 90, waypoint_color);
-            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(waypoints->waypoints[n].id), sp::Alignment::Center, 14, font, waypoint_text_style.color);
+            renderer.drawText(sp::Rect(screen_position.x, screen_position.y, 0, 0), string(wp.id), sp::Alignment::Center, 14, font, waypoint_text_style.color);
+            if (!owner_label.empty())
+                renderer.drawText(sp::Rect(screen_position.x, screen_position.y + 14.0f, 0.0f, 0.0f), owner_label, sp::Alignment::Center, 14, font, label_color);
         }
+    }
+}
+
+void GuiRadarView::drawWaypoints(sp::RenderTarget& renderer)
+{
+    auto waypoints = my_spaceship.getComponent<Waypoints>();
+    if (!waypoints) return;
+
+    bool show_route = gameGlobalInfo && gameGlobalInfo->enable_waypoint_routes;
+    int max_sets = (gameGlobalInfo && gameGlobalInfo->enable_multiple_waypoint_sets) ? Waypoints::MAX_SETS : 1;
+
+    const GuiThemeStyle* bg_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_background_style,
+        ship_waypoint_set2_background_style,
+        ship_waypoint_set3_background_style,
+        ship_waypoint_set4_background_style,
+    };
+    const GuiThemeStyle* sprite_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_style,
+        ship_waypoint_set2_style,
+        ship_waypoint_set3_style,
+        ship_waypoint_set4_style,
+    };
+    const GuiThemeStyle* text_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_text_style,
+        ship_waypoint_set2_text_style,
+        ship_waypoint_set3_text_style,
+        ship_waypoint_set4_text_style,
+    };
+
+    for (int s = 1; s <= max_sets; s++)
+        drawWaypointSetForShip(renderer, waypoints, s, sprite_styles[s - 1], bg_styles[s - 1], text_styles[s - 1], show_route, "");
+}
+
+void GuiRadarView::drawAllPlayerWaypoints(sp::RenderTarget& renderer)
+{
+    bool show_route = gameGlobalInfo && gameGlobalInfo->enable_waypoint_routes;
+    int max_sets = (gameGlobalInfo && gameGlobalInfo->enable_multiple_waypoint_sets) ? Waypoints::MAX_SETS : 1;
+
+    const GuiThemeStyle* bg_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_background_style,
+        ship_waypoint_set2_background_style,
+        ship_waypoint_set3_background_style,
+        ship_waypoint_set4_background_style,
+    };
+    const GuiThemeStyle* sprite_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_style,
+        ship_waypoint_set2_style,
+        ship_waypoint_set3_style,
+        ship_waypoint_set4_style,
+    };
+    const GuiThemeStyle* text_styles[Waypoints::MAX_SETS] = {
+        ship_waypoint_text_style,
+        ship_waypoint_set2_text_style,
+        ship_waypoint_set3_text_style,
+        ship_waypoint_set4_text_style,
+    };
+
+    constexpr glm::u8vec4 gm_owner_label_color{255, 255, 255, 208};
+    for (auto [entity, waypoints, cs] : sp::ecs::Query<Waypoints, CallSign>())
+    {
+        for (int s = 1; s <= max_sets; s++)
+            drawWaypointSetForShip(renderer, &waypoints, s, sprite_styles[s - 1], bg_styles[s - 1], text_styles[s - 1], show_route, cs.callsign, gm_owner_label_color);
     }
 }
 
@@ -782,7 +894,7 @@ void GuiRadarView::drawTargets(sp::RenderTarget& renderer)
     auto waypoints = my_spaceship.getComponent<Waypoints>();
     if (my_spaceship && waypoints && targets->getWaypointIndex() > -1)
     {
-        if (auto waypoint_position = waypoints->get(targets->getWaypointIndex())) {
+        if (auto waypoint_position = waypoints->get(targets->getWaypointIndex(), targets->getWaypointSetId())) {
             auto object_position_on_screen = worldToScreen(waypoint_position.value());
 
             renderer.drawSprite("redicule.png", object_position_on_screen - glm::vec2{0, 10}, 48);
