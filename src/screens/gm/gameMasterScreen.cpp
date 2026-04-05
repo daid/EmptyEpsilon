@@ -283,6 +283,125 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
     (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders:"), 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
 
+    // Player ship waypoint controls (shown when a player ship is selected)
+    gm_player_waypoint_layout = new GuiElement(this, "GM_WP_LAYOUT");
+    gm_player_waypoint_layout
+        ->setPosition(-20.0f, -240.0f, sp::Alignment::BottomRight)
+        ->setSize(300.0f, GuiElement::GuiSizeMax)
+        ->hide()
+        ->setAttribute("layout", "verticalbottom");
+
+    gm_delete_waypoint_button = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_DELETE", tr("button", "Delete waypoint"),
+        [this](bool value)
+        {
+            // Cancel add mode when entering delete mode.
+            gm_delete_waypoint_mode = value;
+            if (value && gm_add_waypoint_mode)
+            {
+                gm_add_waypoint_mode = false;
+                gm_waypoint_target_ship = {};
+                gm_add_waypoint_button->setValue(false);
+            }
+        }
+    );
+    gm_delete_waypoint_button
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    // Toggle button to enter/exit waypoint placement mode for the selected player ship.
+    gm_add_waypoint_button = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_ADD", tr("button", "Add waypoint"),
+        [this](bool value)
+        {
+            if (value)
+            {
+                // Enter waypoint placement mode for the selected player ship.
+                for (auto entity : targets.getTargets())
+                {
+                    if (entity.hasComponent<PlayerControl>())
+                    {
+                        gm_waypoint_target_ship = entity;
+                        gm_add_waypoint_mode = true;
+                        // Cancel delete mode if active.
+                        if (gm_delete_waypoint_mode)
+                        {
+                            gm_delete_waypoint_mode = false;
+                            gm_delete_waypoint_button->setValue(false);
+                        }
+                        return;
+                    }
+                }
+                // No player ship found; revert toggle.
+                gm_add_waypoint_button->setValue(false);
+            }
+            else
+            {
+                gm_add_waypoint_mode = false;
+                gm_waypoint_target_ship = {};
+            }
+        }
+    );
+    gm_add_waypoint_button
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    gm_route_toggle = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_ROUTE", tr("Draw route for this waypoint set"),
+        [this](bool value)
+        {
+            for (auto entity : targets.getTargets())
+            {
+                if (entity.hasComponent<PlayerControl>())
+                {
+                    if (auto wp = entity.getComponent<Waypoints>())
+                        wp->setRoute(value, gm_waypoint_set);
+                    break;
+                }
+            }
+        }
+    );
+    gm_route_toggle
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    gm_waypoint_set_selector = new GuiSelector(gm_player_waypoint_layout, "GM_WP_SET",
+        [this](int index, string value)
+        {
+            gm_waypoint_set = index + 1;
+            // Sync route toggle when set changes
+            for (auto entity : targets.getTargets())
+            {
+                if (entity.hasComponent<PlayerControl>())
+                {
+                    if (auto wp = entity.getComponent<Waypoints>())
+                        gm_route_toggle->setValue(wp->is_route[gm_waypoint_set - 1]);
+                    break;
+                }
+            }
+        }
+    );
+    gm_waypoint_set_selector
+        ->setTextSize(20.0f)
+        ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    // Toggle button to show waypoints.
+    gm_show_waypoints_button = new GuiToggleButton(gm_player_waypoint_layout, "GM_WP_SHOW", tr("button", "Show waypoints"),
+        [this](bool value)
+        {
+            if (value)
+                main_radar->enableWaypoints();
+            else
+                main_radar->disableWaypoints();
+        }
+    );
+    gm_show_waypoints_button
+        ->setTextSize(20.0f)
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+    (new GuiLabel(gm_player_waypoint_layout, "GM_WP_LABEL", tr("Waypoints"), 20.0f))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
@@ -370,9 +489,18 @@ void GameMasterScreen::update(float delta)
     if (keys.gm_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
 
+    // Toggle waypoint visibility.
+    if (keys.gm_show_waypoints.getDown())
+    {
+        if (main_radar->getWaypoints())
+            main_radar->disableWaypoints();
+        else
+            main_radar->enableWaypoints();
+    }
+
     bool has_object = false;
     has_cpu_ship = false;
-    bool has_player_ship = false;
+    has_player_ship = false;
 
     // Add and remove entries from the player ship list.
     for (auto [entity, pc] : sp::ecs::Query<PlayerControl>())
@@ -420,6 +548,32 @@ void GameMasterScreen::update(float delta)
 
     order_layout->setVisible(has_cpu_ship);
     player_comms_hail->setVisible(has_player_ship);
+
+    // Manage waypoint mode state.
+    if (!has_player_ship && gm_delete_waypoint_mode)
+    {
+        gm_delete_waypoint_mode = false;
+        gm_delete_waypoint_button->setValue(false);
+    }
+    gm_player_waypoint_layout->setVisible(has_player_ship);
+    gm_add_waypoint_button->setVisible(main_radar->getWaypoints());
+    gm_delete_waypoint_button->setVisible(main_radar->getWaypoints());
+    gm_route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes && main_radar->getWaypoints());
+    gm_waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets && main_radar->getWaypoints());
+
+    // Sync route toggle from the selected player ship.
+    if (has_player_ship)
+    {
+        for (auto entity : targets.getTargets())
+        {
+            if (entity.hasComponent<PlayerControl>())
+            {
+                if (auto wp = entity.getComponent<Waypoints>())
+                    gm_route_toggle->setValue(wp->is_route[gm_waypoint_set - 1]);
+                break;
+            }
+        }
+    }
 
     // Update mission clock
     info_clock->setValue(gameGlobalInfo->getMissionTime());
@@ -607,6 +761,45 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 {
     if (click_and_drag_state != ClickAndDragState::None) return;
 
+    if (button == sp::io::Pointer::Button::Left)
+    {
+        // Check if the click is near any player ship waypoint.
+        float min_drag_distance = main_radar->getDistance() / 450.0f * 10.0f;
+        glm::vec2 click_screen = main_radar->worldToScreen(position);
+        int max_sets = (gameGlobalInfo && gameGlobalInfo->enable_multiple_waypoint_sets) ? Waypoints::MAX_SETS : 1;
+        for (auto [entity, waypoints] : sp::ecs::Query<Waypoints>())
+        {
+            for (auto& wp : waypoints.waypoints)
+            {
+                if (wp.set_id < 1 || wp.set_id > max_sets) continue;
+                if (gm_delete_waypoint_mode)
+                {
+                    // Delete mode uses icon and label size for hitbox.
+                    glm::vec2 wp_screen = main_radar->worldToScreen(wp.position);
+                    glm::vec2 delta = click_screen - wp_screen;
+                    if (delta.x >= -30.0f && delta.x <= 30.0f && delta.y >= -22.0f && delta.y <= 18.0f)
+                    {
+                        waypoints.remove(wp.id, wp.set_id);
+                        return;
+                    }
+                }
+                else if (glm::length(wp.position - position) < min_drag_distance)
+                {
+                    gm_drag_waypoint_id  = wp.id;
+                    gm_drag_waypoint_set = wp.set_id;
+                    gm_drag_waypoint_ship = entity;
+                    drag_start_position = position;
+                    drag_previous_position = position;
+                    return;
+                }
+            }
+        }
+    }
+
+    // While placing or deleting waypoints, don't enter any other drag/select states.
+    if (gm_add_waypoint_mode || gm_delete_waypoint_mode)
+        return;
+
     if (button == sp::io::Pointer::Button::Right)
     {
         if (has_cpu_ship) click_and_drag_state = ClickAndDragState::DragViewOrOrder;
@@ -636,6 +829,15 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 
 void GameMasterScreen::onMouseDrag(glm::vec2 position)
 {
+    // Handle waypoint dragging.
+    if (gm_drag_waypoint_id >= 0)
+    {
+        if (auto wp = gm_drag_waypoint_ship.getComponent<Waypoints>())
+            wp->move(gm_drag_waypoint_id, position, gm_drag_waypoint_set);
+        drag_previous_position = position;
+        return;
+    }
+
     switch(click_and_drag_state)
     {
     case ClickAndDragState::DragViewOrOrder:
@@ -676,6 +878,32 @@ void GameMasterScreen::onMouseDrag(glm::vec2 position)
 
 void GameMasterScreen::onMouseUp(glm::vec2 position)
 {
+    // Finish waypoint drag.
+    if (gm_drag_waypoint_id >= 0)
+    {
+        if (auto wp = gm_drag_waypoint_ship.getComponent<Waypoints>())
+            wp->move(gm_drag_waypoint_id, position, gm_drag_waypoint_set);
+        gm_drag_waypoint_id  = -1;
+        gm_drag_waypoint_set = -1;
+        gm_drag_waypoint_ship = {};
+        return;
+    }
+
+    // GM waypoint placement for a selected player ship.
+    if (gm_add_waypoint_mode && gm_waypoint_target_ship)
+    {
+        bool set_full = false;
+        if (auto wp = gm_waypoint_target_ship.getComponent<Waypoints>())
+            set_full = (wp->addNew(position, gm_waypoint_set) < 0);
+        if (set_full)
+        {
+            gm_add_waypoint_mode = false;
+            gm_waypoint_target_ship = {};
+            gm_add_waypoint_button->setValue(false);
+        }
+        return;
+    }
+
     auto mods = SDL_GetModState();
     const bool shift_down = mods & KMOD_SHIFT;
     const bool ctrl_down = mods & KMOD_CTRL;

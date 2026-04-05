@@ -106,6 +106,24 @@ private:
         { return GMCursorMode(unsigned(a) & unsigned(b)); }
 
     bool has_cpu_ship = false;
+    bool has_player_ship = false;
+
+    // GM waypoint placement/deletion state
+    bool gm_add_waypoint_mode = false;
+    bool gm_delete_waypoint_mode = false;
+    int  gm_waypoint_set = 1;
+    sp::ecs::Entity gm_waypoint_target_ship;
+    int gm_drag_waypoint_id = -1;
+    int gm_drag_waypoint_set = -1;
+    sp::ecs::Entity gm_drag_waypoint_ship;
+
+    // GM player-waypoint controls
+    GuiElement* gm_player_waypoint_layout;
+    GuiSelector* gm_waypoint_set_selector;
+    GuiToggleButton* gm_show_waypoints_button;
+    GuiToggleButton* gm_add_waypoint_button;
+    GuiToggleButton* gm_route_toggle;
+    GuiToggleButton* gm_delete_waypoint_button;
 
     GuiButton* create_button;
     GuiButton* cancel_action_button;
