@@ -2,6 +2,8 @@
 
 #include "i18n.h"
 #include "playerInfo.h"
+
+#include "components/health.h"
 #include "components/hull.h"
 
 #include "gui/theme.h"
@@ -37,10 +39,15 @@ void DamageControlScreen::onDraw(sp::RenderTarget& renderer)
 
     if (my_spaceship)
     {
-        auto hull = my_spaceship.getComponent<Hull>();
-        if (hull) {
-            hull_display->setValue(string(int(100 * hull->current / hull->max)) + "%");
-            if (hull->current < hull->max / 4.0f)
+        auto health = my_spaceship.getComponent<Health>();
+        auto hull = my_spaceship.hasComponent<Hull>();
+        if (health && hull)
+        {
+            const float current = health->getHealth();
+            const float max = health->getHealthMax();
+
+            hull_display->setValue(string(static_cast<int>(100.0f * current / max)) + "%");
+            if (current < max / 4.0f)
                 hull_display->setBackColor(glm::u8vec4(255, 0, 0, 255));
             else
                 hull_display->setBackColor(glm::u8vec4{255,255,255,255});

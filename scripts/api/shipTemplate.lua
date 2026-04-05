@@ -368,7 +368,8 @@ end
 --- Sets the number of default hull points for entities created from this ShipTemplate.
 --- Example: template:setHull(100)
 function ShipTemplate:setHull(amount)
-    self.hull = {current=amount, max=amount}
+    self.hull = {max=amount}
+    self.hull.current = amount -- Avoid default max of 100 being enforced on current value upon init
     return self
 end
 --- Sets the maximum points per shield segment for entities created from this ShipTemplate.
