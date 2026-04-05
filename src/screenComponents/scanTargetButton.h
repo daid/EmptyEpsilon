@@ -1,5 +1,4 @@
-#ifndef SCAN_TARGET_BUTTON_H
-#define SCAN_TARGET_BUTTON_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -19,5 +18,3 @@ public:
     virtual void onUpdate() override;
     virtual void onDraw(sp::RenderTarget& target) override;
 };
-
-#endif//SCAN_TARGET_BUTTON_H
