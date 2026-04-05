@@ -86,6 +86,49 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setOverlayCallback(
             [this](sp::RenderTarget& renderer)
             {
+                const bool is_short_range = main_radar->getDistance() <= SHORT_RANGE_DISTANCE;
+                float bar_width = is_short_range ? 60.0f : 30.0f;
+                float bar_height = is_short_range ? 5.0f : 2.0f;
+                float bar_offset = bar_width * 0.5f;
+                float bar_distance = bar_height * 4.0f;
+
+                // Draw hull health bars
+                if (show_health_bars)
+                {
+                    for (auto [entity, hull, transform, trace] : sp::ecs::Query<Hull, sp::Transform, sp::ecs::optional<RadarTrace>>())
+                    {
+                        const float hull_norm = hull.current / hull.max;
+                        if (trace) bar_distance = std::clamp(trace->radius * main_radar->getScale() * 2.0f, trace->min_size, trace->max_size) * 0.75f;
+
+                        if (hull_norm < 0.9f || is_short_range)
+                        {
+                            glm::vec2 screen_pos = main_radar->worldToScreen(transform.getPosition());
+                            const float health_bar_width = bar_width * hull_norm;
+                            // Scale color from green to yellow to red with damage.
+                            uint8_t bar_r, bar_g;
+                            if (hull_norm >= 0.5f)
+                            {
+                                float t = (hull_norm - 0.5f) / 0.5f;
+                                bar_r = static_cast<uint8_t>(255.0f * (1.0f - t));
+                                bar_g = 255;
+                            }
+                            else if (hull_norm >= 0.2f)
+                            {
+                                float t = (hull_norm - 0.2f) / 0.3f;
+                                bar_r = 255;
+                                bar_g = static_cast<uint8_t>(255.0f * t);
+                            }
+                            else
+                            {
+                                bar_r = 255;
+                                bar_g = 0;
+                            }
+                            renderer.fillRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, health_bar_width, bar_height), glm::u8vec4(bar_r, bar_g, 0, 192));
+                            renderer.outlineRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, bar_width, bar_height), glm::u8vec4(255, 255, 255, 128));
+                        }
+                    }
+                }
+
                 if (gm_cursor_mode != GMCursorMode::CreateEntity && gm_cursor_mode != GMCursorMode::SetDirection) return;
                 if (!gameGlobalInfo->on_gm_preview_trace) return;
                 const RadarTrace& trace = *gameGlobalInfo->on_gm_preview_trace;
@@ -341,7 +384,7 @@ void GameMasterScreen::update(float delta)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
-        if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
+        if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();
     }
 
@@ -369,6 +412,10 @@ void GameMasterScreen::update(float delta)
     // Toggle callsigns.
     if (keys.gm_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
+
+    // Toggle health bars.
+    if (keys.gm_show_health_bars.getDown())
+        show_health_bars = !show_health_bars;
 
     bool has_object = false;
     has_cpu_ship = false;
@@ -877,6 +924,8 @@ void GameMasterScreen::onMouseWheel(float value, glm::vec2 position)
     // Set the new zoom level.
     main_radar->setDistance(view_distance);
     zoom_slider->setValue(view_distance);
+    if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
+    else main_radar->longRange();
 
     // Adjust the radar's view position to keep the world coordinates
     // under the pointer consistent.
