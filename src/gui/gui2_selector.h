@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gui2_entrylist.h"
+#include "gui2_scrollcontainer.h"
 
 
 class GuiArrowButton;
@@ -11,10 +12,13 @@ class GuiSelector : public GuiEntryList
 {
 protected:
     float text_size = 30.0f;
+    float popup_width = 0.0f;
+    float button_height = 50.0f;
     sp::Alignment text_alignment;
     GuiArrowButton* left;
     GuiArrowButton* right;
     GuiElement* popup;
+    GuiScrollContainer* popup_scroll;
     std::vector<GuiToggleButton*> popup_buttons;
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;
@@ -27,4 +31,7 @@ public:
     virtual void onFocusLost() override;
 
     GuiSelector* setTextSize(float size);
+    // Define a width for the popup, but only if it's larger than the
+    // GuiSelector's width,
+    GuiSelector* setPopupWidth(float width);
 };

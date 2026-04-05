@@ -120,7 +120,9 @@ HelmsScreen::HelmsScreen(GuiContainer* owner)
     docking_button = new GuiDockingButton(this, "DOCKING");
     docking_button->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(280, 50)->setVisible(my_spaceship.hasComponent<DockingPort>());
 
-    (new GuiCustomShipFunctions(this, CrewPosition::helmsOfficer, ""))->setPosition(-20, 120, sp::Alignment::TopRight)->setSize(250, GuiElement::GuiSizeMax);
+    (new GuiCustomShipFunctions(this, CrewPosition::helmsOfficer, ""))
+        ->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight)
+        ->setSize(250.0f, 500.0f);
 }
 
 void HelmsScreen::onDraw(sp::RenderTarget& renderer)
