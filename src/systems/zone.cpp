@@ -16,7 +16,7 @@ void ZoneSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, gl
     renderer.drawTriangles(outline_points, zone.triangles, glm::u8vec4(zone.color.r, zone.color.g, zone.color.b, 64));
     
     outline_points.push_back(screen_position + rotateVec2(zone.outline[0] * scale, -rotation));
-    renderer.drawLine(outline_points, glm::u8vec4(zone.color.r, zone.color.g, zone.color.b, 128));
+    renderer.drawLine(outline_points, 4.0f, glm::u8vec4(zone.color.r, zone.color.g, zone.color.b, 128));
 
     if (zone.label.length() > 0)
     {
