@@ -298,6 +298,7 @@ set(MAIN_SOURCES
     src/screenComponents/shipInternalView.cpp
     src/screenComponents/beamFrequencySelector.cpp
     src/screenComponents/radarView.cpp
+    src/screenComponents/radarZoomSlider.cpp
     src/screenComponents/rawScannerDataRadarOverlay.cpp
     src/screenComponents/scanTargetButton.cpp
     src/screenComponents/snapSlider.cpp
@@ -596,6 +597,7 @@ set(MAIN_SOURCES
     src/screenComponents/openCommsButton.h
     src/screenComponents/powerDamageIndicator.h
     src/screenComponents/radarView.h
+    src/screenComponents/radarZoomSlider.h
     src/screenComponents/rawScannerDataRadarOverlay.h
     src/screenComponents/rotatingModelView.h
     src/screenComponents/scanningDialog.h

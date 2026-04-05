@@ -325,8 +325,8 @@ end
 --- Example:
 --- -- Add a custom button to Engineering that prints the player ship's coolant max to the console or logging file when clicked
 --- ship:addCustomButton("engineering", "get_coolant_max", "Get Coolant Max", function() print("Coolant: " .. ship:getMaxCoolant()) end)
-function Entity:addCustomButton(station, key, label, callback)
-    setPlayerShipCustomFunction(self, "button", key, label, station, callback, 0)
+function Entity:addCustomButton(station, key, label, callback, order)
+    setPlayerShipCustomFunction(self, "button", key, label, station, callback, order or 0)
     return self
 end
 --- Adds a custom non-interactive info label with the given reference name to the given crew position screen.
@@ -337,7 +337,7 @@ end
 --- -- Displays the coolant max value on Engineering at or near the top of the custom button/info order
 --- ship:addCustomInfo("engineering", "show_coolant_max", "Coolant Max: " .. ship:getMaxCoolant(), 0)
 function Entity:addCustomInfo(station, key, label, order)
-    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order)
+    setPlayerShipCustomFunction(self, "info", key, label, station, nil, order or 0)
     return self
 end
 --- Displays a dismissable message with the given reference name on the given crew position screen.
@@ -698,26 +698,37 @@ function Entity:commandSetAlertLevel(level)
     return self
 end
 
---- Returns the number of repair crews on this player ship.
---- Example:
---- ship:getRepairCrewCount()
+--- Returns a 1-indexed table of internal_crew entities that are assigned to this entity.
+--- Example: local crew = entity:getRepairCrew()
+function Entity:getRepairCrew()
+    local crew = {}
+
+    for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        if e.components.internal_crew.ship == self then
+            table.insert(crew, e)
+        end
+    end
+
+    return crew
+end
+--- Returns the number of repair crews on this entity.
+--- Example: entity:getRepairCrewCount()
 function Entity:getRepairCrewCount()
     local count = 0
-    for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+    for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
         if e.components.internal_crew.ship == self then
             count = count + 1
         end
     end
     return count
 end
---- Sets the total number of repair crews on this player ship.
+--- Sets the total number of repair crews on this entity.
 --- If the value is less than the number of repair crews, this function removes repair crews.
---- If the value is greater, this function adds new repair crews into random rooms.
---- Example:
---- ship:setRepairCrewCount(5)
+--- If the value is greater, this function adds new repair crews to random rooms.
+--- Example: entity:setRepairCrewCount(5)
 function Entity:setRepairCrewCount(amount)
     if self.components.internal_rooms then
-        for idx, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
             if e.components.internal_crew.ship == self then
                 amount = amount - 1
                 if amount < 0 then
@@ -725,7 +736,7 @@ function Entity:setRepairCrewCount(amount)
                 end
             end
         end
-        for n=1,amount do
+        for n = 1, amount do
             local crew = createEntity()
             crew.components.internal_crew = {ship=self}
             crew.components.internal_repair_crew = {}
@@ -733,7 +744,99 @@ function Entity:setRepairCrewCount(amount)
     end
     return self
 end
---- Defines whether automatic coolant distribution is enabled on this player ship.
+--- Returns true if the given table of {x,y} coordinates is within one of this entity's internal rooms. or false otherwise.
+--- setRepairCrewPosition() uses this to validate target positions.
+--- Examples:
+--- entity:isValidCrewPosition({4,3}) -- returns false on default player Atlantis
+--- entity:isValidCrewPosition({3,2}) -- returns true on default player Atlantis
+function Entity:isValidCrewPosition(pos)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    for i = 1, #ir do
+        local rp = ir[i].position
+        local rs = ir[i].size
+        if pos[1] >= rp[1] and pos[1] < rp[1] + rs[1] and pos[2] >= rp[2] and pos[2] < rp[2] + rs[2] then
+            return true
+        end
+    end
+
+    return false
+end
+--- Returns the internal room that contains a given ship system.
+--- Returns nil if the system is invalid, if the ship lacks internal rooms, or if no room is assigned to this system.
+--- Example:
+--- entity:getInternalRoomForSystem("beamweapons")
+function Entity:getInternalRoomForSystem(system)
+    local ir = self.components.internal_rooms
+    if not ir then return nil end
+
+    for i = 1, #ir do
+        if system == ir[i].system then
+            return ir[i]
+        end
+    end
+
+    return nil
+end
+--- Returns a table containing tables of all valid {x,y} coordinates for a given internal room.
+--- Example:
+--- local room = entity:getInternalRoomForSystem("beamweapons")
+--- local coords = entity:getCoordinatesForInternalRoom(room)
+function Entity:getCoordinatesForInternalRoom(room)
+    if not room then return nil end
+
+    local coords = {}
+    for x = room.position[1], room.position[1] + room.size[1] - 1 do
+        for y = room.position[2], room.position[2] + room.size[2] - 1 do
+            table.insert(coords, {x, y})
+        end
+    end
+
+    return coords
+end
+--- Sets the target coordinates of a repair crew within this entity's internal rooms.
+--- Returns a Boolean value indicating success.
+--- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
+--- If the x,y coordinates are outside of any room, this returns false. Otherwise, this returns true.
+--- Using this function to assign multiple crews to the same coordinates will stack them on the same square, which players should not be able to do!
+--- Example:
+--- target_position = {3, 2} -- must be a table
+--- entity:moveRepairCrewToPosition(1, target_position)
+function Entity:moveRepairCrewToPosition(crew_index, pos)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    if not self:isValidCrewPosition(pos) then return false end
+
+    local crew = self:getRepairCrew()
+    if not crew[crew_index] then return false end
+
+    crew[crew_index].components.internal_crew.target_position = pos
+    return true
+end
+--- Sets the target room of a repair crew within this entity's internal rooms, selected by passing a room.
+--- Returns a Boolean value indicating success.
+--- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
+--- The crew is assigned a random set of coordinates within the room.
+--- Using this function to assign multiple crews to the same room can stack them on the same square, which players should not be able to do!
+--- Example:
+--- target_room = entity:getInternalRoomForSystem("beamweapons")
+--- entity:moveRepairCrewToRoom(1, target_room)
+function Entity:moveRepairCrewToRoom(crew_index, room)
+    local ir = self.components.internal_rooms
+    if not ir then return false end
+
+    local crew = self:getRepairCrew()
+    if not crew[crew_index] then return false end
+
+    local coordinates_list = self:getCoordinatesForInternalRoom(room)
+    if not coordinates_list or #coordinates_list == 0 then return false end
+    local coords = coordinates_list[math.random(#coordinates_list)]
+    crew[crew_index].components.internal_crew.target_position = coords
+    return true
+end
+--- Defines whether automatic coolant distribution is enabled on this entity.
 --- If true, coolant is automatically distributed proportionally to the amount of heat in that system.
 --- Use this command to reduce the need for player interaction in Engineering, especially when combined with commandSetAutoRepair/auto_repair_enabled.
 --- Example:

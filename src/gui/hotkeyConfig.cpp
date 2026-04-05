@@ -78,7 +78,7 @@ Keys::Keys() :
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
-    zoom_in("ZOOM_IN", {"wheel:y"}),
+    zoom_in("ZOOM_IN"),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
@@ -105,6 +105,7 @@ Keys::Keys() :
     mainscreen_target("MAINSCREEN_TARGET", "T"),
     mainscreen_tactical_radar("MAINSCREEN_TACTICAL", "Tab"),
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
+    mainscreen_strategic_map("MAINSCREEN_STRATEGIC", "W"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     // Helms crew screen

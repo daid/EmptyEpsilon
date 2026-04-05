@@ -65,7 +65,9 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
 {
     setShip(my_spaceship);
 
-    if (!viewing_ship && room_container)
+    if (!room_container) return;
+
+    if (!viewing_ship)
     {
         room_container->destroy();
         room_container = nullptr;
@@ -80,7 +82,7 @@ void GuiShipInternalView::onDraw(sp::RenderTarget& target)
                     break;
                 }
             }
-            if (!found) {
+            if (!found && room_container) {
                 crew_list.push_back(new GuiShipCrew(room_container, "CREW", entity, selected_crew_member, [this](sp::ecs::Entity crew_member){
                     selected_crew_member = crew_member;
                 }));

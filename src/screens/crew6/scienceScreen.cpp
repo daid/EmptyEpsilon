@@ -17,6 +17,7 @@
 #include "systems/radarblock.h"
 
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/rawScannerDataRadarOverlay.h"
 #include "screenComponents/scanTargetButton.h"
 #include "screenComponents/frequencyCurve.h"
@@ -55,23 +56,32 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
     radar_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     // Draw the science radar.
-    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : 30000.0f, &targets);
+    science_radar = new GuiRadarView(radar_view, "SCIENCE_RADAR", lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, &targets);
     science_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax);
-    science_radar->setRangeIndicatorStepSize(5000.0)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
+    science_radar->setRangeIndicatorStepSize(DEFAULT_MIN_ZOOM_DISTANCE)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NebulaFogOfWar);
     science_radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position) { // down
             if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
                 if (scanner->delay > 0.0f)
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
-        }, nullptr, nullptr
+        }, nullptr, nullptr,
+        [this](float value, glm::vec2 position) { // wheel
+            float view_distance = std::clamp(
+                science_radar->getDistance() * (1.0f - value * 0.1f),
+                DEFAULT_MIN_ZOOM_DISTANCE,
+                DEFAULT_MAX_ZOOM_DISTANCE
+            );
+            science_radar->setDistance(view_distance);
+            zoom_slider->setValue(view_distance);
+        }
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
     new RawScannerDataRadarOverlay(science_radar, "");
 
     // Draw and hide the probe radar.
-    probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", 5000, &targets);
+    probe_radar = new GuiRadarView(radar_view, "PROBE_RADAR", PROBE_ZOOM_DISTANCE, &targets);
     probe_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
@@ -81,7 +91,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
                     return;
 
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
-        }, nullptr, nullptr
+        }, nullptr, nullptr, nullptr
     );
     new RawScannerDataRadarOverlay(probe_radar, "");
 
@@ -207,15 +217,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, bool allow_scanning, CrewPosit
         ->setItemsPadding(120);
 
     // Draw the zoom slider.
-    zoom_slider = new GuiSlider(radar_view, "", lrr ? lrr->long_range : 30000.0f, lrr ? lrr->short_range : 5000.0f, lrr ? lrr->long_range : 30000.0f, [this](float value)
-    {
-        if (auto lrr = my_spaceship.getComponent<LongRangeRadar>())
-            zoom_label->setText(tr("scienceButton", "Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / value, 1)}}));
-        science_radar->setDistance(value);
-    });
-    zoom_slider->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
-    zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    float lrr_long = lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE;
+    float lrr_short = lrr ? lrr->short_range : DEFAULT_MIN_ZOOM_DISTANCE;
+    zoom_slider = new GuiRadarZoomSlider(radar_view, "RADAR_ZOOM", lrr_short, lrr_long, lrr_long, science_radar);
+    zoom_slider
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, 50.0f);
 
     // View controls.
     GuiElement* view_controls = new GuiElement(radar_view, "VIEW_CONTROLS");
@@ -280,21 +287,17 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     auto rl = my_spaceship.getComponent<RadarLink>();
 
     float view_distance = science_radar->getDistance();
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta!=0)
-    {
-        view_distance *= (1.0f - (mouse_wheel_delta * 0.1f));
-    }
+    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (key_zoom_delta != 0)
+        view_distance *= (1.0f - (key_zoom_delta * 0.1f));
+
     view_distance = std::min(view_distance, lrr->long_range);
     view_distance = std::max(view_distance, lrr->short_range);
     if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
     {
         previous_short_range_radar = lrr->long_range;
         previous_long_range_radar = lrr->short_range;
-        science_radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
-        zoom_slider->setValue(view_distance)->setRange(lrr->long_range, lrr->short_range);
-        zoom_label->setText(tr("scienceButton", "Zoom: {zoom}x").format({{"zoom", string(lrr->long_range / view_distance, 1)}}));
+        zoom_slider->setRange(lrr->long_range, lrr->short_range)->setValue(view_distance);
     }
 
     if (probe_view_button->getValue() && rl && rl->linked_entity)
@@ -347,6 +350,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
+    probe_view_button->setVisible(rl);
     if (rl && rl->linked_entity)
     {
         probe_view_button->enable();
@@ -578,7 +582,7 @@ void ScienceScreen::onUpdate()
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
             {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : 25000.0f, TargetsContainer::ESelectionType::Scannable);
+                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
             }
         }
     }

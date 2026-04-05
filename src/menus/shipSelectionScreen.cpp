@@ -290,8 +290,8 @@ ShipSelectionScreen::ShipSelectionScreen()
     cinematic_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Top-down 3D view button
-    auto topdown_button = new GuiToggleButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"),
-        [this](bool value)
+    auto topdown_button = new GuiButton(right_panel, "TOP_DOWN_3D_BUTTON", tr("Top-down 3D view"),
+        [this]()
         {
             if (gameGlobalInfo->gm_control_code.length() > 0)
             {
