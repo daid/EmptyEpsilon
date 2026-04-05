@@ -66,37 +66,28 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     {
         last_selection_index = -1;
         object_list->clear();
-        object_filter->setText("");
-        for(const auto& info : spawn_list) {
-            if (info.category == category_selector->getSelectionValue()) {
+        for (const auto& info : spawn_list)
+        {
+            if (info.category == category_selector->getSelectionValue())
+            {
                 object_list->addEntry(info.label, info.label);
                 object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
             }
         }
     });
     std::unordered_set<string> categories_added;
-    for(const auto& info : spawn_list) {
-        if (categories_added.find(info.category) == categories_added.end()) {
+    for (const auto& info : spawn_list)
+    {
+        if (categories_added.find(info.category) == categories_added.end())
+        {
             categories_added.insert(info.category);
             category_selector->addEntry(info.category, info.category);
         }
     }
-    category_selector->setSelectionIndex(0);
-    category_selector->setAttribute("stretch", "true");
+    category_selector
+        ->setSelectionIndex(0)
+        ->setAttribute("stretch", "true");
 
-    object_filter = new GuiTextEntry(col2, "OBJECT_FILTER", "");
-    object_filter->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("fill_width", "true");
-    object_filter->callback([this](string value) {
-        value = value.lower();
-        last_selection_index = -1;
-        object_list->clear();
-        for(const auto& info : spawn_list) {
-            if (info.category == category_selector->getSelectionValue() && info.label.lower().find(value) >= 0) {
-                object_list->addEntry(info.label, info.label);
-                object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
-            }
-        }
-    });
     object_list = new GuiListbox(col2, "OBJECT_LIST", [this](int index, string value) {
         for(auto& info : spawn_list) {
             if (info.category == category_selector->getSelectionValue() && info.label == value) {
@@ -153,14 +144,23 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
         last_selection_index = index;
     });
-    object_list->setTextSize(20)->setButtonHeight(30)->setAttribute("stretch", "true");
-    for(const auto& info : spawn_list) {
-        if (info.category == category_selector->getSelectionValue()) {
+    object_list
+        ->addSearch()
+        ->setTextSize(20.0f)
+        ->setButtonHeight(30.0f)
+        ->setAttribute("stretch", "true");
+
+    // Handle category navigation.
+    for (const auto& info : spawn_list)
+    {
+        if (info.category == category_selector->getSelectionValue())
+        {
             object_list->addEntry(info.label, info.label);
             object_list->setEntryIcon(object_list->indexByValue(info.label), info.icon);
         }
     }
 
+    // Display description.
     description = new GuiScrollText(col3, "DESCRIPTION", "");
     description->setAttribute("stretch", "true");
 
