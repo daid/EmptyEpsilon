@@ -4,6 +4,7 @@
 
 Keys keys;
 extern sp::io::Keybinding fullscreen_key;
+extern sp::io::Keybinding screenshot_key;
 
 // Cinematic view binds
 Keys::CinematicKeys::CinematicKeys() :
@@ -335,6 +336,7 @@ void Keys::init()
     voice_all.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to server"));
     voice_ship.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Broadcast voice chat to ship"));
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
+    screenshot_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Take screenshot"));
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
 
