@@ -308,18 +308,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     message_close_button->setTextSize(30)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(300, 30);
 
-    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
-    string keyboard_help_text = "";
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "GM screen")});
 
-    for (const auto& category : {tr("hotkey_menu", "General"), tr("hotkey_menu", "GM screen")})
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(category))
-        {
-            keyboard_help_text += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
-        }
-    }
-
-    keyboard_help->setText(keyboard_help_text);
     gameGlobalInfo->on_gm_click = nullptr;
 }
 
