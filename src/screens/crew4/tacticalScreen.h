@@ -24,6 +24,7 @@ private:
     GuiMissileTubeControls* tube_controls;
     GuiElement* beam_info_box;
     bool drag_rotate;
+    bool continuous_turning = false;
 public:
     TacticalScreen(GuiContainer* owner);
 

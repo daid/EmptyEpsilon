@@ -133,52 +133,60 @@ void GuiJumpControls::onUpdate()
     auto jump = my_spaceship.getComponent<JumpDrive>();
     setVisible(jump != nullptr);
     if (!isVisible()) return;
-    // keybindings that work when the slider is visible, but disabked
-    if (keys.helms_abort_jump.getDown())
+    // Binds that work when the slider is visible, but disabled
+    if (keys.helms_abort_jump.isDiscreteStepDown())
         my_player_info->commandAbortJump();
     // ---
+
     if (!slider->isEnabled()) return;
     float value = slider->getValue();
 
-    // Set jump distance by keybind.
-    float key_change = keys.helms_increase_jump_distance.getValue() - keys.helms_decrease_jump_distance.getValue();
+    // Set jump distance by continuous keybinds or two separate
+    // monodirectional (0-1) axes.
+    float key_change = keys.helms_increase_jump_distance.getContinuousValue() - keys.helms_decrease_jump_distance.getContinuousValue()
+        + keys.helms_increase_jump_distance.getAxis0Value() - keys.helms_decrease_jump_distance.getAxis0Value();
     if (key_change != 0.0f)
         value = std::clamp(value + 1000.0f * key_change, slider->getRangeMax(), slider->getRangeMin());
-    if (keys.helms_increase_jump_100.getDown())
+    // Set jump distance by discrete/repeating keybinds.
+    // If Discrete or Repeating, in/decrease_impulse behaves the same as
+    // in/decrease_impulse_10.
+    // TODO: Make in/decrease per-input value configurable in these modes.
+    if (keys.helms_increase_jump_100.isDiscreteStepDown() || keys.helms_increase_jump_100.isRepeatReady())
         value = std::min(value + 100.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_100.getDown())
-        value = std::max(value - 100.0f, slider->getRangeMax());
-    if (keys.helms_increase_jump_1k.getDown())
+    if (keys.helms_increase_jump_1k.isDiscreteStepDown() || keys.helms_increase_jump_1k.isRepeatReady()
+        || keys.helms_increase_jump_distance.isDiscreteStepDown() || keys.helms_increase_jump_distance.isRepeatReady())
         value = std::min(value + 1000.0f, slider->getRangeMin());
-    if (keys.helms_decrease_jump_1k.getDown())
+    if (keys.helms_decrease_jump_100.isDiscreteStepDown() || keys.helms_decrease_jump_100.isRepeatReady())
+        value = std::max(value - 100.0f, slider->getRangeMax());
+    if (keys.helms_decrease_jump_1k.isDiscreteStepDown() || keys.helms_decrease_jump_1k.isRepeatReady()
+        || keys.helms_decrease_jump_distance.isDiscreteStepDown() || keys.helms_decrease_jump_distance.isRepeatReady())
         value = std::max(value - 1000.0f, slider->getRangeMax());
-    if (keys.helms_min_jump.getDown())
+    if (keys.helms_min_jump.isDiscreteStepDown())
         value = slider->getRangeMax();
-    if (keys.helms_max_jump.getDown())
+    if (keys.helms_max_jump.isDiscreteStepDown())
         value = slider->getRangeMin();
 
-    // Set jump distance by axis.
-    // Get joystick axis map value (-1.0 to 1.0).
-    float axis_value = keys.helms_set_jump.getValue();
+    // Set jump distance by a single monodirectional axis (0-1).
+    float axis_value = keys.helms_set_jump.getAxis0Value();
     // The jump slider's min/max range values are inverted because the
     // gui2_slider is coded for max to be on the bottom.
     // getRangeMin returns the jump range's max value, and vice versa.
     const float slider_range = slider->getRangeMin() - slider->getRangeMax();
-    // Translate the slider's value on its min/max range to a value
-    // between -1.0 and 1.0.
-    float slider_axis_pos = ((slider->getValue() - slider->getRangeMax()) / slider_range) * 2.0f - 1.0f;
+    // Translate the slider's value on its min/max range to a value between
+    // 0.0 and 1.0.
+    float slider_axis_pos = (slider->getValue() - slider->getRangeMax()) / slider_range;
 
-    // Translate the axis position between -1.0 and 1.0 to a value in
-    // the slider's min/max range.
+    // Translate the axis position between 0.0 and 1.0 to a value in the
+    // slider's min/max range.
     if (axis_value != slider_axis_pos && (axis_value != 0.0f || set_active))
     {
-        value = (((axis_value + 1.0f) / 2.0f) * slider_range) + slider->getRangeMax();
+        value = axis_value * slider_range + slider->getRangeMax();
         // Ensure the next update is sent, even if it is back to zero.
         set_active = axis_value != 0.0f;
     }
 
     slider->setValue(value);
 
-    if (keys.helms_execute_jump.getDown())
+    if (keys.helms_execute_jump.isDiscreteStepDown())
         my_player_info->commandJump(slider->getValue());
 }

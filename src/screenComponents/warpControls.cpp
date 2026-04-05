@@ -80,26 +80,19 @@ void GuiWarpControls::onUpdate()
     const int current_request_value = warp->request;
     int command_value = current_request_value;
 
-    // Change warp request by keybind.
-    if (keys.helms_increase_warp.getDown())
-    {
-        if (current_request_value < warp->max_level)
-            command_value = current_request_value + 1;
-    }
-    else if (keys.helms_decrease_warp.getDown())
-    {
-        if (current_request_value > 0)
-            command_value = current_request_value - 1;
-    }
-    if (keys.helms_warp0.getDown())
+    if (keys.helms_increase_warp.isDiscreteStepDown() || keys.helms_increase_warp.isRepeatReady())
+        command_value = std::min(warp->max_level, current_request_value + 1);
+    if (keys.helms_decrease_warp.isDiscreteStepDown() || keys.helms_decrease_warp.isRepeatReady())
+        command_value = std::max(0, current_request_value - 1);
+    if (keys.helms_warp0.isDiscreteStepDown())
         command_value = 0;
-    if (keys.helms_warp1.getDown())
+    if (keys.helms_warp1.isDiscreteStepDown())
         command_value = 1;
-    if (keys.helms_warp2.getDown())
+    if (keys.helms_warp2.isDiscreteStepDown())
         command_value = 2;
-    if (keys.helms_warp3.getDown())
+    if (keys.helms_warp3.isDiscreteStepDown())
         command_value = 3;
-    if (keys.helms_warp4.getDown())
+    if (keys.helms_warp4.isDiscreteStepDown())
         command_value = 4;
 
     // The max warp keybind is redundant on default warp ships, but warp drives
@@ -107,29 +100,26 @@ void GuiWarpControls::onUpdate()
     if (keys.helms_warp_max.getDown())
         command_value = warp->max_level;
 
-    // Set warp request by axis.
-    // Get joystick axis map value (-1.0 to 1.0).
-    float axis_value = keys.helms_set_warp.getValue();
+    const float slider_max = slider->getRangeMax();
+    const float slider_min = slider->getRangeMin();
+    // Set warp request by monodirectional axis (0-1).
+    float axis_value = keys.helms_set_warp.getAxis0Value();
     // The warp slider's min/max range values are inverted because the
     // gui2_slider is coded for max to be on the bottom.
     // getRangeMin returns the warp range's max value, and vice versa.
-    const float slider_range = slider->getRangeMin() - slider->getRangeMax();
+    const float slider_range = slider_min - slider_max;
     // Translate the slider's value on its min/max range to a value between
     // -1.0 and 1.0.
-    float slider_axis_pos = ((slider->getValue() - slider->getRangeMax()) / slider_range) * 2.0f - 1.0f;
+    float slider_axis_pos = ((slider->getValue() - slider_max) / slider_range) * 2.0f - 1.0f;
 
-    // Translate the axis position between -1.0 and 1.0 to a value in the
+    // Translate the axis position between 0 and 1.0 to a value in the
     // slider's min/max range, with rounding to simulate detents.
     if (axis_value != slider_axis_pos && (axis_value != 0.0f || set_active))
     {
         // Round to nearest warp level to create detent behavior and clamp to
         // valid range.
         command_value = static_cast<int>(
-            std::clamp(
-                std::round((((axis_value + 1.0f) / 2.0f) * slider_range) + slider->getRangeMax()),
-                slider->getRangeMax(),
-                slider->getRangeMin()
-            )
+            std::clamp(std::round((axis_value * slider_range) + slider_max), slider_max, slider_min)
         );
         // Ensure the next update is sent, even if it's back to zero.
         set_active = axis_value != 0.0f;

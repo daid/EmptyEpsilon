@@ -90,22 +90,28 @@ void GuiScanningDialog::onUpdate()
     {
         for(int n=0; n<max_sliders; n++)
         {
-            float adjust = (keys.science_scan_param_increase[n].getValue() - keys.science_scan_param_decrease[n].getValue()) * 0.01f;
+            float adjust = ((keys.science_scan_param_increase[n].isDiscreteStepDown() || keys.science_scan_param_increase[n].isRepeatReady()) - (keys.science_scan_param_decrease[n].isDiscreteStepDown() || keys.science_scan_param_decrease[n].isRepeatReady())) * 0.01f;
+            adjust += (keys.science_scan_param_increase[n].getContinuousValue() + keys.science_scan_param_increase[n].getAxis0Value() + keys.science_scan_param_increase[n].getAxis1Value()
+                - keys.science_scan_param_decrease[n].getContinuousValue() - keys.science_scan_param_decrease[n].getAxis0Value() - keys.science_scan_param_decrease[n].getAxis1Value()) * 0.005f;
             if (adjust != 0.0f)
             {
                 sliders[n]->setValue(sliders[n]->getValue() + adjust);
                 updateSignal();
             }
 
-            float set_value = keys.science_scan_param_set[n].getValue();
-            if (set_value != sliders[n]->getValue() && (set_value != 0.0f || set_active[n]))
+            float axis1_value = keys.science_scan_param_set[n].getAxis1Value();
+            if (axis1_value != 0.0f || set_active[n])
             {
-                sliders[n]->setValue(set_value);
-                updateSignal();
-                set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
+                float set_value = (axis1_value + 1.0f) / 2.0f;
+                if (set_value != sliders[n]->getValue())
+                {
+                    sliders[n]->setValue(set_value);
+                    updateSignal();
+                }
+                set_active[n] = axis1_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
-        if (keys.science_scan_abort.getDown())
+        if (keys.science_scan_abort.isDiscreteStepDown())
             my_player_info->commandScanCancel();
     }
 }

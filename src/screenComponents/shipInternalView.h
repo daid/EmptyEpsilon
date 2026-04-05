@@ -16,6 +16,9 @@ private:
     GuiShipRoomContainer* room_container;
     sp::ecs::Entity selected_crew_member;
     std::vector<GuiShipCrew*> crew_list;
+    float next_crew_accum = 0.0f;
+    float crew_move_accum_x = 0.0f;
+    float crew_move_accum_y = 0.0f;
 public:
     GuiShipInternalView(GuiContainer* owner, string id, float room_size);
 

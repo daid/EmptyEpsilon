@@ -120,7 +120,7 @@ void CinematicViewScreen::update(float delta)
         camera_lock_cycle_toggle->setValue(!camera_lock_cycle_toggle->getValue());
     }
 
-    if (keys.cinematic.previous_player_ship.getDown())
+    if (keys.cinematic.previous_player_ship.isDiscreteStepDown() || keys.cinematic.previous_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() - 1);
         if (camera_lock_selector->getSelectionIndex() < 0)
@@ -128,7 +128,7 @@ void CinematicViewScreen::update(float delta)
         target = sp::ecs::Entity::fromString(camera_lock_selector->getEntryValue(camera_lock_selector->getSelectionIndex()));
     }
 
-    if (keys.cinematic.next_player_ship.getDown())
+    if (keys.cinematic.next_player_ship.isDiscreteStepDown() || keys.cinematic.next_player_ship.isRepeatReady())
     {
         camera_lock_selector->setSelectionIndex(camera_lock_selector->getSelectionIndex() + 1);
         if (camera_lock_selector->getSelectionIndex() >= camera_lock_selector->entryCount())
@@ -145,62 +145,34 @@ void CinematicViewScreen::update(float delta)
     if (keys.pause.getDown())
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
-    if (keys.cinematic.move_forward.get())
     {
-        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
+        float fwd = std::max(keys.cinematic.move_forward.getContinuousValue() + keys.cinematic.move_forward.getAxis0Value() + keys.cinematic.move_forward.getAxis1Value(), (float)keys.cinematic.move_forward.get());
+        float bwd = std::max(keys.cinematic.move_backward.getContinuousValue() + keys.cinematic.move_backward.getAxis0Value() + keys.cinematic.move_backward.getAxis1Value(), (float)keys.cinematic.move_backward.get());
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * (fwd - bwd) * delta * 100.0f;
         camera_position.x += xy_vector.x;
         camera_position.y += xy_vector.y;
     }
-
-    if (keys.cinematic.move_backward.get())
     {
-        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
-        camera_position.x -= xy_vector.x;
-        camera_position.y -= xy_vector.y;
-    }
-
-    if (keys.cinematic.strafe_left.get())
-    {
-        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
+        float sl = std::max(keys.cinematic.strafe_left.getContinuousValue() + keys.cinematic.strafe_left.getAxis0Value() + keys.cinematic.strafe_left.getAxis1Value(), (float)keys.cinematic.strafe_left.get());
+        float sr = std::max(keys.cinematic.strafe_right.getContinuousValue() + keys.cinematic.strafe_right.getAxis0Value() + keys.cinematic.strafe_right.getAxis1Value(), (float)keys.cinematic.strafe_right.get());
+        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * (sl - sr) * delta * 100.0f;
         camera_position.x += xy_vector.y;
         camera_position.y -= xy_vector.x;
     }
-
-    if (keys.cinematic.strafe_right.get())
     {
-        glm::vec2 xy_vector = vec2FromAngle(camera_yaw) * delta * 100.0f;
-        camera_position.x -= xy_vector.y;
-        camera_position.y += xy_vector.x;
+        float up = std::max(keys.cinematic.move_up.getContinuousValue() + keys.cinematic.move_up.getAxis0Value() + keys.cinematic.move_up.getAxis1Value(), (float)keys.cinematic.move_up.get());
+        float dn = std::max(keys.cinematic.move_down.getContinuousValue() + keys.cinematic.move_down.getAxis0Value() + keys.cinematic.move_down.getAxis1Value(), (float)keys.cinematic.move_down.get());
+        camera_position.z += (up - dn) * delta * 100.0f;
     }
-
-    if (keys.cinematic.move_up.get())
     {
-        camera_position.z += delta * 100.0f;
+        float rl = std::max(keys.cinematic.rotate_left.getContinuousValue() + keys.cinematic.rotate_left.getAxis0Value() + keys.cinematic.rotate_left.getAxis1Value(), (float)keys.cinematic.rotate_left.get());
+        float rr = std::max(keys.cinematic.rotate_right.getContinuousValue() + keys.cinematic.rotate_right.getAxis0Value() + keys.cinematic.rotate_right.getAxis1Value(), (float)keys.cinematic.rotate_right.get());
+        camera_yaw += (rr - rl) * delta * 50.0f;
     }
-
-    if (keys.cinematic.move_down.get())
     {
-        camera_position.z -= delta * 100.0f;
-    }
-
-    if (keys.cinematic.rotate_left.get())
-    {
-        camera_yaw -= delta * 50.0f;
-    }
-
-    if (keys.cinematic.rotate_right.get())
-    {
-        camera_yaw += delta * 50.0f;
-    }
-
-    if (keys.cinematic.tilt_up.get())
-    {
-        camera_pitch -= delta * 50.0f;
-    }
-
-    if (keys.cinematic.tilt_down.get())
-    {
-        camera_pitch += delta * 50.0f;
+        float tu = std::max(keys.cinematic.tilt_up.getContinuousValue() + keys.cinematic.tilt_up.getAxis0Value() + keys.cinematic.tilt_up.getAxis1Value(), (float)keys.cinematic.tilt_up.get());
+        float td = std::max(keys.cinematic.tilt_down.getContinuousValue() + keys.cinematic.tilt_down.getAxis0Value() + keys.cinematic.tilt_down.getAxis1Value(), (float)keys.cinematic.tilt_down.get());
+        camera_pitch += (td - tu) * delta * 50.0f;
     }
 
     // TODO: Add mouselook.

@@ -9,6 +9,7 @@
 #include "components/warpdrive.h"
 #include "components/jumpdrive.h"
 #include "components/collision.h"
+#include "components/maneuveringthrusters.h"
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
@@ -154,14 +155,33 @@ void TacticalScreen::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        auto angle = (keys.helms_turn_right.getValue() - keys.helms_turn_left.getValue()) * 5.0f;
-        if (angle != 0.0f)
+        auto thrusters = my_spaceship.getComponent<ManeuveringThrusters>();
+        float turn_scale = thrusters ? thrusters->speed : 10.0f;
+        auto continuous_angle = (keys.helms_turn_right.getContinuousValue() - keys.helms_turn_left.getContinuousValue()) * turn_scale;
+        continuous_angle += (keys.helms_turn_right.getAxis0Value() - keys.helms_turn_left.getAxis0Value()) * turn_scale;
+        continuous_angle += (keys.helms_turn_right.getAxis1Value() - keys.helms_turn_left.getAxis1Value()) * turn_scale;
+        float discrete_angle = 0.0f;
+        if (keys.helms_turn_right.isDiscreteStepDown() || keys.helms_turn_right.isRepeatReady()) discrete_angle += 5.0f;
+        if (keys.helms_turn_left.isRepeatReady()) discrete_angle -= 5.0f;
+        if (continuous_angle != 0.0f)
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>())
-                my_player_info->commandTargetRotation(transform->getRotation() + angle);
+                my_player_info->commandTargetRotation(transform->getRotation() + continuous_angle + discrete_angle);
+            continuous_turning = true;
+        }
+        else if (discrete_angle != 0.0f)
+        {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+                my_player_info->commandTargetRotation(transform->getRotation() + discrete_angle);
+            continuous_turning = false;
+        }
+        else if (continuous_turning)
+        {
+            my_player_info->commandTurnSpeed(0.0f);
+            continuous_turning = false;
         }
 
-        if (keys.weapons_enemy_next_target.getDown())
+        if (keys.weapons_enemy_next_target.isDiscreteStepDown() || keys.weapons_enemy_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -169,7 +189,7 @@ void TacticalScreen::onUpdate()
                 my_player_info->commandSetTarget(targets.get());
             }
         }
-        if (keys.weapons_next_target.getDown())
+        if (keys.weapons_next_target.isDiscreteStepDown() || keys.weapons_next_target.isRepeatReady())
         {
             if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
@@ -178,10 +198,21 @@ void TacticalScreen::onUpdate()
             }
         }
 
-        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+        auto aim_adjust = (keys.weapons_aim_left.getContinuousValue() + keys.weapons_aim_left.getAxis0Value() + keys.weapons_aim_left.getAxis1Value())
+            - (keys.weapons_aim_right.getContinuousValue() + keys.weapons_aim_right.getAxis0Value() + keys.weapons_aim_right.getAxis1Value());
         if (aim_adjust != 0.0f)
         {
             missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_left.isDiscreteStepDown() || keys.weapons_aim_left.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() - 5.0f);
+            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+        }
+        if (keys.weapons_aim_right.isDiscreteStepDown() || keys.weapons_aim_right.isRepeatReady())
+        {
+            missile_aim->setValue(missile_aim->getValue() + 5.0f);
             tube_controls->setMissileTargetAngle(missile_aim->getValue());
         }
     }

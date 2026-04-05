@@ -103,7 +103,10 @@ void GuiShipInternalView::onUpdate()
 {
     if (my_spaceship && isVisible())
     {
-        if (keys.engineering_next_repair_crew.getDown())
+        next_crew_accum += keys.engineering_next_repair_crew.getContinuousValue() * 0.1f;
+        bool step_crew = keys.engineering_next_repair_crew.isDiscreteStepDown();
+        if (next_crew_accum >= 1.0f) { step_crew = true; next_crew_accum -= 1.0f; }
+        if (step_crew)
         {
             bool found = false;
             sp::ecs::Entity first;
@@ -122,14 +125,31 @@ void GuiShipInternalView::onUpdate()
         }
         if (auto ic = selected_crew_member.getComponent<InternalCrew>())
         {
-            if (keys.engineering_repair_crew_up.getDown())
-                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, -1));
-            if (keys.engineering_repair_crew_down.getDown())
-                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(0, 1));
-            if (keys.engineering_repair_crew_left.getDown())
-                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(-1, 0));
-            if (keys.engineering_repair_crew_right.getDown())
-                my_player_info->commandCrewSetTargetPosition(selected_crew_member, glm::ivec2(ic->position + glm::vec2(0.5, 0.5)) + glm::ivec2(1, 0));
+            crew_move_accum_x += (keys.engineering_repair_crew_right.getContinuousValue() + keys.engineering_repair_crew_right.getAxis0Value() + keys.engineering_repair_crew_right.getAxis1Value()
+                - keys.engineering_repair_crew_left.getContinuousValue() - keys.engineering_repair_crew_left.getAxis0Value() - keys.engineering_repair_crew_left.getAxis1Value()) * 0.1f;
+            crew_move_accum_y += (keys.engineering_repair_crew_down.getContinuousValue() + keys.engineering_repair_crew_down.getAxis0Value() + keys.engineering_repair_crew_down.getAxis1Value()
+                - keys.engineering_repair_crew_up.getContinuousValue() - keys.engineering_repair_crew_up.getAxis0Value() - keys.engineering_repair_crew_up.getAxis1Value()) * 0.1f;
+            glm::ivec2 base = glm::ivec2(ic->position + glm::vec2(0.5, 0.5));
+            if (keys.engineering_repair_crew_up.isDiscreteStepDown() || crew_move_accum_y <= -1.0f)
+            {
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, base + glm::ivec2(0, -1));
+                if (crew_move_accum_y <= -1.0f) crew_move_accum_y += 1.0f;
+            }
+            if (keys.engineering_repair_crew_down.isDiscreteStepDown() || crew_move_accum_y >= 1.0f)
+            {
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, base + glm::ivec2(0, 1));
+                if (crew_move_accum_y >= 1.0f) crew_move_accum_y -= 1.0f;
+            }
+            if (keys.engineering_repair_crew_left.isDiscreteStepDown() || crew_move_accum_x <= -1.0f)
+            {
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, base + glm::ivec2(-1, 0));
+                if (crew_move_accum_x <= -1.0f) crew_move_accum_x += 1.0f;
+            }
+            if (keys.engineering_repair_crew_right.isDiscreteStepDown() || crew_move_accum_x >= 1.0f)
+            {
+                my_player_info->commandCrewSetTargetPosition(selected_crew_member, base + glm::ivec2(1, 0));
+                if (crew_move_accum_x >= 1.0f) crew_move_accum_x -= 1.0f;
+            }
         }
     }
 }
