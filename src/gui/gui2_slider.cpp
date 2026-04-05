@@ -77,17 +77,10 @@ void GuiBasicSlider::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 GuiBasicSlider* GuiBasicSlider::setValue(float value)
 {
     if (min_value < max_value)
-    {
-        if (value < min_value)
-            value = min_value;
-        if (value > max_value)
-            value = max_value;
-    }else{
-        if (value > min_value)
-            value = min_value;
-        if (value < max_value)
-            value = max_value;
-    }
+        this->value = std::clamp(value, min_value, max_value);
+    else
+        this->value = std::clamp(value, max_value, min_value);
+
     this->value = value;
     return this;
 }
