@@ -223,17 +223,6 @@ bool GuiElement::isDestroyed()
     return destroyed;
 }
 
-glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
-{
-    if (!enabled)
-        return color_set.disabled;
-    if (hover)
-        return color_set.hover;
-    if (focus)
-        return color_set.focus;
-    return color_set.normal;
-}
-
 GuiElement::State GuiElement::getState() const
 {
     if (!enabled)

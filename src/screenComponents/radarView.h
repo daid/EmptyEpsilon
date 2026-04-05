@@ -5,6 +5,7 @@
 
 class GuiMissileTubeControls;
 class TargetsContainer;
+class GuiThemeStyle;
 
 class GuiRadarView : public GuiElement
 {
@@ -24,7 +25,7 @@ public:
 
     typedef std::function<void(sp::io::Pointer::Button button, glm::vec2 position)> bpfunc_t;
     typedef std::function<void(glm::vec2 position)> pfunc_t;
-    typedef std::function<void(float position)>     ffunc_t;
+    typedef std::function<void(float value, glm::vec2 position)> fpfunc_t;
 private:
     class GhostDot
     {
@@ -64,8 +65,17 @@ private:
     bpfunc_t mouse_down_func;
     pfunc_t mouse_drag_func;
     pfunc_t mouse_up_func;
+    fpfunc_t mouse_wheel_func;
     // Overlay callback
     std::function<void(sp::RenderTarget&)> overlay_func;
+
+    const GuiThemeStyle* radar_style;
+    const GuiThemeStyle* radar_outline_style;
+    const GuiThemeStyle* radar_range_indicators_style;
+    const GuiThemeStyle* radar_sector_grid_style;
+    const GuiThemeStyle* ship_waypoint_style;
+    const GuiThemeStyle* ship_waypoint_background_style;
+    const GuiThemeStyle* ship_waypoint_text_style;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -101,7 +111,7 @@ public:
     GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
     bool getAutoRotating() { return auto_rotate_on_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
-    GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; return this; }
+    GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func, fpfunc_t mouse_wheel_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; this->mouse_wheel_func = mouse_wheel_func; return this; }
     // Define the overlay callback function. This passes the onDraw()
     // RenderTarget and runs near the end of the frame.
     GuiRadarView* setOverlayCallback(std::function<void(sp::RenderTarget&)> f) { overlay_func = f; return this; }
@@ -117,6 +127,7 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
 private:
     void updateGhostDots();
 

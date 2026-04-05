@@ -1,4 +1,5 @@
 #include "systems/maneuvering.h"
+#include "multiplayer_server.h"
 #include "components/collision.h"
 #include "components/maneuveringthrusters.h"
 #include "components/impulse.h"
@@ -74,10 +75,10 @@ void ManeuveringSystem::update(float delta)
                 }
                 // Add heat to systems consuming combat maneuver boost.
                 auto thrusters = entity.getComponent<ManeuveringThrusters>();
-                if (thrusters && entity.hasComponent<Coolant>())
+                if (game_server && thrusters && entity.hasComponent<Coolant>())
                     thrusters->addHeat(std::abs(combat.strafe.active) * delta * combat.strafe.heat_per_second);
                 auto impulse = entity.getComponent<ImpulseEngine>();
-                if (impulse && entity.hasComponent<Coolant>())
+                if (game_server && impulse && entity.hasComponent<Coolant>())
                     impulse->addHeat(std::abs(combat.boost.active) * delta * combat.boost.heat_per_second);
             }
         }else if (combat.charge < 1.0f)

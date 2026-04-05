@@ -24,6 +24,7 @@
 #include "systems/collision.h"
 
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/helpOverlay.h"
 
 #include "gui/mouseRenderer.h"
@@ -70,7 +71,7 @@ static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
 GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
 : GuiCanvas(render_layer)
 {
-    main_radar = new GuiRadarView(this, "MAIN_RADAR", 50000.0f, &targets);
+    main_radar = new GuiRadarView(this, "MAIN_RADAR", LONG_RANGE_DISTANCE, &targets);
     main_radar
         ->setStyle(GuiRadarView::Rectangular)
         ->longRange()
@@ -80,7 +81,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setCallbacks(
             [this](sp::io::Pointer::Button button, glm::vec2 position) { this->onMouseDown(button, position); },
             [this](glm::vec2 position) { this->onMouseDrag(position); },
-            [this](glm::vec2 position) { this->onMouseUp(position); }
+            [this](glm::vec2 position) { this->onMouseUp(position); },
+            [this](float value, glm::vec2 position) { this->onMouseWheel(value, position); }
         )
         ->setOverlayCallback(
             [this](sp::RenderTarget& renderer)
@@ -173,15 +175,28 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     create_button->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
 
+    zoom_slider = new GuiRadarZoomSlider(this, "ZOOM_SLIDER", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, LONG_RANGE_DISTANCE, main_radar);
+    zoom_slider
+        ->setZoomReference(LONG_RANGE_DISTANCE)
+        ->setLabelPrecision(3)
+        ->setPosition(-20.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(250.0f, 50.0f);
+
     copy_scenario_button = new GuiButton(this, "COPY_SCENARIO_BUTTON", tr("button", "Copy scenario"), [this]() {
         Clipboard::setClipboard(getScriptExport(false));
     });
-    copy_scenario_button->setTextSize(20)->setPosition(-20, -20, sp::Alignment::BottomRight)->setSize(125, 25);
+    copy_scenario_button
+        ->setTextSize(20.0f)
+        ->setPosition(-20.0f, -70.0f, sp::Alignment::BottomRight)
+        ->setSize(125.0f, 25.0f);
 
     copy_selected_button = new GuiButton(this, "COPY_SELECTED_BUTTON", tr("button", "Copy selected"), [this]() {
         Clipboard::setClipboard(getScriptExport(true));
     });
-    copy_selected_button->setTextSize(20)->setPosition(-20, -45, sp::Alignment::BottomRight)->setSize(125, 25);
+    copy_selected_button
+        ->setTextSize(20.0f)
+        ->setPosition(-20.0f, -95.0f, sp::Alignment::BottomRight)
+        ->setSize(125.0f, 25.0f);
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
         gameGlobalInfo->on_gm_click = nullptr;
@@ -297,7 +312,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_help_text = "";
 
-    for (const auto& category : {tr("hotkey_menu", "Console"), tr("hotkey_menu", "Basic"), tr("hotkey_menu", "GM")})
+    for (const auto& category : {tr("hotkey_menu", "General"), tr("hotkey_menu", "GM screen")})
     {
         for (auto binding : sp::io::Keybinding::listAllByCategory(category))
         {
@@ -322,12 +337,12 @@ GameMasterScreen::~GameMasterScreen()
 
 void GameMasterScreen::update(float delta)
 {
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta != 0.0f)
+    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (key_zoom_delta != 0.0f)
     {
-        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f)), 5000.0f, 1000000.0f);
+        float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
-        if (view_distance < 10000) main_radar->shortRange();
+        if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();
     }
 
@@ -846,6 +861,27 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
     // the box.
     click_and_drag_state = ClickAndDragState::None;
     box_selection_overlay->hide();
+}
+
+void GameMasterScreen::onMouseWheel(float value, glm::vec2 position)
+{
+    // Calculate the new zoom level.
+    const float view_distance = std::clamp(
+        main_radar->getDistance() * (1.0f - value * 0.1f),
+        MIN_ZOOM_DISTANCE,
+        MAX_ZOOM_DISTANCE
+    );
+
+    // Get the world coordinates under the pointer before zooming.
+    const glm::vec2 world_position_before_zoom = main_radar->screenToWorld(position);
+
+    // Set the new zoom level.
+    main_radar->setDistance(view_distance);
+    zoom_slider->setValue(view_distance);
+
+    // Adjust the radar's view position to keep the world coordinates
+    // under the pointer consistent.
+    main_radar->setViewPosition(main_radar->getViewPosition() + world_position_before_zoom - main_radar->screenToWorld(position));
 }
 
 std::vector<sp::ecs::Entity> GameMasterScreen::getSelection()

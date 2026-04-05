@@ -95,6 +95,17 @@ static int luaRequire(lua_State* L)
 
 static int luaTranslate(lua_State* L)
 {
+    if (lua_type(L, 1) == LUA_TNUMBER) {
+        auto n = luaL_checkinteger(L, 1);
+        auto str_1 = luaL_checkstring(L, 2);
+        auto str_2 = luaL_checkstring(L, 3);
+        auto str_3 = luaL_optstring(L, 4, nullptr);
+        if (str_3)
+            lua_pushstring(L, trn(n, str_1, str_2, str_3).c_str());
+        else
+            lua_pushstring(L, trn(n, str_1, str_2).c_str());
+        return 1;
+    }
     auto str_1 = luaL_checkstring(L, 1);
     auto str_2 = luaL_optstring(L, 2, nullptr);
     if (str_2)
@@ -231,11 +242,6 @@ static string luaGetScenarioVariation()
     if (gameGlobalInfo->scenario_settings.find("variation") != gameGlobalInfo->scenario_settings.end())
         return gameGlobalInfo->scenario_settings["variation"];
     return "None";
-}
-
-static void luaOnNewPlayerShip(sp::script::Callback callback)
-{
-    gameGlobalInfo->on_new_player_ship = callback;
 }
 
 static void luaGlobalMessage(string message, std::optional<float> timeout)
@@ -858,6 +864,11 @@ static bool luaIsLongRangeRadarAllowed()
     return gameGlobalInfo->allow_main_screen_long_range_radar;
 }
 
+static bool luaIsStrategicMapAllowed()
+{
+    return gameGlobalInfo->allow_main_screen_strategic_map;
+}
+
 void luaCommandTargetRotation(sp::ecs::Entity ship, float rotation) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandTargetRotation(rotation); return; }
     auto thrusters = ship.getComponent<ManeuveringThrusters>();
@@ -1032,7 +1043,7 @@ void luaCommandSetAutoRepair(sp::ecs::Entity ship, bool enabled) {
 void luaCommandSetBeamFrequency(sp::ecs::Entity ship, int frequency) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetBeamFrequency(frequency); return; }
     if (auto beamweapons = ship.getComponent<BeamWeaponSys>())
-        beamweapons->frequency = std::clamp(frequency, 0, BeamWeaponSys::max_frequency);
+        beamweapons->setFrequency(frequency);
 }
 
 void luaCommandSetBeamSystemTarget(sp::ecs::Entity ship, ShipSystem::Type type) {
@@ -1168,7 +1179,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// [DEPRECATED]
     /// As getScenarioSetting("variation").
     env.setGlobal("getScenarioVariation", &luaGetScenarioVariation);
-    env.setGlobal("onNewPlayerShip", &luaOnNewPlayerShip);
     /// void globalMessage(string message, std::optional<float> timeout)
     /// Displays a message on the main screens of all active player ships.
     /// The message appears for 5 seconds, but new messages immediately replace any displayed message.
@@ -1363,6 +1373,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns whether the "Long Range Radar" setting for main screens is enabled in the running scenario.
     /// Example: isLongRangeRadarAllowed() -- returns true by default
     env.setGlobal("isLongRangeRadarAllowed", &luaIsLongRangeRadarAllowed);
+    /// bool isStrategicMapAllowed()
+    /// Returns whether the "Strategic Map" setting for main screens is enabled in the running scenario.
+    /// Example: isStrategicMapAllowed() -- returns true by default
+    env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
 
 
     env.setGlobal("addGMFunction", &luaAddGMFunction);

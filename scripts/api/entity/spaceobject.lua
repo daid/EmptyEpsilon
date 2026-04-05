@@ -505,7 +505,6 @@ end
 --- -- Prints to the console window or logging file when this entity is destroyed
 --- entity:onDestroyed(function() print("Object destroyed!") end)
 function Entity:onDestroyed(callback)
-    --TODO: Cases where we do not have health
-    if self.components.health then self.components.health.on_destruction = callback end
+    self.components.on_destroyed = { callback = callback }
     return self
 end

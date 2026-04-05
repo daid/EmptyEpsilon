@@ -98,9 +98,10 @@ HullInfoDisplay::HullInfoDisplay(GuiContainer* owner, const string& id, float di
 
 void HullInfoDisplay::onUpdate()
 {
-    // Show Health as Hull, and only if the entity also has Hull.
     auto health = my_spaceship.getComponent<Health>();
-    if (health && my_spaceship.hasComponent<Hull>())
+    const bool hull = my_spaceship.hasComponent<Hull>();
+    setVisible(health && hull);
+    if (health && hull)
     {
         float current = health->getHealth();
         float max = health->getHealthMax();

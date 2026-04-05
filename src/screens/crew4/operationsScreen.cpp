@@ -12,14 +12,14 @@
 
 #include "screens/crew6/scienceScreen.h"
 
+#include "gui/theme.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
 
-
 OperationScreen::OperationScreen(GuiContainer* owner)
-: GuiOverlay(owner, "", colorConfig.background)
+: GuiOverlay(owner, "", GuiTheme::getColor("background"))
 {
     science = new ScienceScreen(this, CrewPosition::operationsOfficer);
     science->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->setMargins(0, 0, 0, 50);
@@ -70,6 +70,15 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 science->targets.setWaypointIndex(drag_waypoint_index);
                 break;
             }
+        },
+        [this](float value, glm::vec2 position) { // Wheel
+            float view_distance = std::clamp(
+                science->science_radar->getDistance() * (1.0f - value * 0.1f),
+                science->DEFAULT_MIN_ZOOM_DISTANCE,
+                science->DEFAULT_MAX_ZOOM_DISTANCE
+            );
+            science->science_radar->setDistance(view_distance);
+            // zoom_slider->setValue(view_distance);
         }
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
