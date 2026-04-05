@@ -1,142 +1,85 @@
 #include "gui2_listbox.h"
-#include "soundManager.h"
-#include "theme.h"
-
-#include "gui2_scrollbar.h"
+#include "gui2_scrollcontainer.h"
+#include "gui2_togglebutton.h"
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center), mouse_scroll_steps(25)
+: GuiEntryList(owner, id, func)
 {
-    scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
-    scroll
-        ->setClickChange(button_height)
-        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
-        ->setSize(button_height, GuiSizeMax)
-        ->hide();
+    // Wrap the Listbox in a scrolling container.
+    scroll_container = new GuiScrollContainer(this, id + "_SCROLL");
+    scroll_container
+        ->setScrollbarWidth(button_height)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
 
-    back_style = theme->getStyle("listbox.back");
-    front_style = theme->getStyle("listbox.front");
-    back_selected_style = theme->getStyle("listbox.selected.back");
-    front_selected_style = theme->getStyle("listbox.selected.front");
+    // Listbox theme isn't declared here because it's applied by
+    // button->setStyle in entriesChanged().
 }
 
 GuiListbox* GuiListbox::setTextSize(float size)
 {
-    text_size = size;
+    text_size = std::max(0.0f, size);
+    for (auto* button : buttons) button->setTextSize(size);
+    return this;
+}
+
+GuiListbox* GuiListbox::setIconSize(float size)
+{
+    icon_size = std::max(0.0f, size);
+    for (auto* button : buttons) button->setIconSize(size);
     return this;
 }
 
 GuiListbox* GuiListbox::setButtonHeight(float height)
 {
-    button_height = height;
-    scroll
-        ->setClickChange(button_height)
-        ->setSize(button_height, GuiElement::GuiSizeMax);
+    button_height = std::max(0.0f, height);
+    scroll_container->setScrollbarWidth(height);
+    for (auto* button : buttons) button->setSize(GuiElement::GuiSizeMax, height);
     return this;
 }
 
 GuiListbox* GuiListbox::scrollTo(int index)
 {
-    scroll->setValue(index * button_height);
+    scroll_container->scrollToOffset(static_cast<float>(index) * button_height);
     return this;
 }
 
-void GuiListbox::onDraw(sp::RenderTarget& renderer)
+void GuiListbox::entriesChanged()
 {
-    hover = false;
-    const auto& back = back_style->get(getState());
-    const auto& back_hover = back_style->get(State::Hover);
-    const auto& front = front_style->get(getState());
-    const auto& back_selected = back_selected_style->get(getState());
-    const auto& back_selected_hover = back_selected_style->get(State::Hover);
-    const auto& front_selected = front_selected_style->get(getState());
+    // Create new buttons for entries that don't have one yet.
+    for (auto n = buttons.size(); n < entries.size(); n++)
+    {
+        auto* btn = new GuiToggleButton(scroll_container, id + "_ENTRY_" + string(static_cast<int>(n)), entries[n].name,
+            [this, n](bool)
+            {
+                setSelectionIndex(n);
+                callback();
+            }
+        );
+        btn
+            ->setStyle("listbox") // Use listbox-specific theme styles.
+            ->setTextSize(text_size)
+            ->setIconSize(icon_size)
+            ->setSize(GuiElement::GuiSizeMax, button_height);
+        buttons.push_back(btn);
+    }
 
-    scroll
-        ->setValueSize(rect.size.y)
-        ->setRange(0, entries.size() * button_height)
-        // Determine whether to show the scrollbar based on the total height of
-        // all items in the list.
-        ->setVisible(static_cast<int>(entries.size()) > rect.size.y / button_height);
-    
-    // Draw the button. If the scrollbar is visible, make room.
-    sp::Rect button_rect{rect.position, {rect.size.x, button_height}};
+    updateButtonStates();
+}
 
-    if (scroll->isVisible())
-        button_rect.size.x -= scroll->getRect().size.x;
-
-    button_rect.position.y -= scroll->getValue();
-
-    // For each entry, draw a button.
-    int index = 0;
-
-    for(auto& e : entries) {
-        // Draw the button only if it will visible within the container.
-        if (button_rect.position.y + button_rect.size.y >= rect.position.y
-            && button_rect.position.y <= rect.position.y + rect.size.y)
+void GuiListbox::updateButtonStates()
+{
+    // Select only one button in the list.
+    for (size_t n = 0; n < buttons.size(); n++)
+    {
+        if (n < entries.size())
         {
-            auto* b = button_rect.contains(hover_coordinates) ? &back_hover : &back;
-            auto* f = &front;
-
-            // If this is the selected button, change the back and foreground.
-            if (index == selection_index)
-            {
-                b = button_rect.contains(hover_coordinates) ? &back_selected_hover : &back_selected;
-                f = &front_selected;
-            }
-
-            // Draw the background texture.
-            renderer.drawStretchedHVClipped(button_rect, rect, button_height * 0.5f, b->texture, b->color);
-
-            // Draw the icon, if one's defined.
-            // 60% button height and aligned left.
-            if (e.icon_name != "")
-            {
-                renderer.drawSpriteClipped(
-                    e.icon_name,               // icon
-                    glm::vec2(                 // center position
-                        button_rect.position.x + button_rect.size.y * 0.8f,
-                        button_rect.position.y + button_rect.size.y * 0.5f
-                    ),
-                    button_rect.size.y * 0.6f, // size
-                    rect,                      // clipping rectangle
-                    f->color                   // color
-                );
-            }
-
-            // Prepare the foreground text style.
-            auto prepared = f->font->prepare(e.name, 32, text_size, f->color, button_rect.size, sp::Alignment::Center, sp::Font::FlagClip);
-            for(auto& c : prepared.data)
-                c.position.y -= rect.position.y - button_rect.position.y;
-
-            // Draw the text.
-            renderer.drawText(rect, prepared, sp::Font::FlagClip);
+            buttons[n]
+                ->setValue(static_cast<int>(n) == selection_index)
+                ->setText(entries[n].name)
+                ->setIcon(entries[n].icon_name)
+                ->show();
         }
-
-        // Prepare to draw the next button below this one.
-        button_rect.position.y += button_height;
-        index += 1;
+        else buttons[n]->hide();
     }
-}
-
-bool GuiListbox::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
-{
-    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
-    return offset >= 0 && offset < int(entries.size());
-}
-
-void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
-{
-    int offset = (position.y - rect.position.y + scroll->getValue()) / button_height;
-    if (offset >= 0 && offset < int(entries.size())) {
-        soundManager->playSound("sfx/button.wav");
-        setSelectionIndex(offset);
-        callback();
-    }
-}
-
-bool GuiListbox::onMouseWheelScroll(glm::vec2 position, float value)
-{
-    float range = scroll->getCorrectedMax() - scroll->getMin();
-    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
-    return true;
 }

@@ -1,5 +1,4 @@
-#ifndef GUI2_CONTAINER_H
-#define GUI2_CONTAINER_H
+#pragma once
 
 #include <list>
 #include <memory>
@@ -17,25 +16,26 @@ namespace sp {
 class GuiElement;
 class GuiLayout;
 class GuiTheme;
+
 class GuiContainer : sp::NonCopyable
 {
 public:
-public:
+    // Nested type to capture layout attributes
     class LayoutInfo
     {
     public:
         class Sides
         {
         public:
-            float left = 0;
-            float right = 0;
-            float top = 0;
-            float bottom = 0;
+            float left = 0.0f;
+            float right = 0.0f;
+            float top = 0.0f;
+            float bottom = 0.0f;
         };
         
-        glm::vec2 position{0, 0};
+        glm::vec2 position{0.0f, 0.0f};
         sp::Alignment alignment = sp::Alignment::TopLeft;
-        glm::vec2 size{1, 1};
+        glm::vec2 size{1.0f, 1.0f};
         glm::ivec2 span{1, 1};
         Sides margin;
         Sides padding;
@@ -45,30 +45,39 @@ public:
         bool match_content_size = true;
     };
 
-    LayoutInfo layout;    
-    std::list<GuiElement*> children;
-protected:
-    GuiTheme* theme;
-public:
     GuiContainer() = default;
     virtual ~GuiContainer();
 
+    // Public data
+    LayoutInfo layout;
+    std::list<GuiElement*> children;
+
+    // Public interfaces
     template<typename T> void setLayout() { layout_manager = std::make_unique<T>(); }
-    void updateLayout(const sp::Rect& rect);
+    virtual void updateLayout(const sp::Rect& rect);
+    virtual void setAttribute(const string& key, const string& value);
     const sp::Rect& getRect() const { return rect; }
 
-    virtual void setAttribute(const string& key, const string& value);
 protected:
+    GuiTheme* theme;
+
+    // Protected data
+    sp::Rect rect{0,0,0,0};
+    std::unique_ptr<GuiLayout> layout_manager = nullptr;
+
+    // Protected interfaces
     virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
-    GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
-    GuiElement* executeScrollOnElement(glm::vec2 position, float value);
+    virtual GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
+    virtual GuiElement* executeScrollOnElement(glm::vec2 position, float value);
+
+    // Access GuiElement/GuiContainer protected members in subclass
+    static void clearElementOwner(GuiElement* element);
+    static void setElementHover(GuiElement* element, bool has_hover);
+    static void setElementFocus(GuiElement* element, bool has_focus);
+    static void callDrawElements(GuiContainer* container, glm::vec2 mouse_pos, sp::Rect rect, sp::RenderTarget& render_target);
+    static GuiElement* callGetClickElement(GuiContainer* container, sp::io::Pointer::Button button, glm::vec2 pos, sp::io::Pointer::ID id);
+    static GuiElement* callExecuteScrollOnElement(GuiContainer* container, glm::vec2 pos, float value);
 
     friend class GuiElement;
-
-    sp::Rect rect{0,0,0,0};
-private:
-    std::unique_ptr<GuiLayout> layout_manager = nullptr;
 };
-
-#endif//GUI2_CONTAINER_H

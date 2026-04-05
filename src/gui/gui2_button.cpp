@@ -40,7 +40,7 @@ void GuiButton::onDraw(sp::RenderTarget& renderer)
             text_rect.size.x = rect.size.x - rect.size.y;
             text_align = sp::Alignment::CenterRight;
         }
-        renderer.drawRotatedSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * 0.8f, icon_rotation, front.color);
+        renderer.drawRotatedSprite(icon_name, glm::vec2(icon_x, rect.position.y + rect.size.y * 0.5f), rect.size.y * icon_size, icon_rotation, front.color);
         renderer.drawText(text_rect, text, text_align, text_size > 0 ? text_size : front.size, front.font, front.color);
     }else{
         renderer.drawText(rect, text, sp::Alignment::Center, text_size > 0 ? text_size : front.size, front.font, front.color);
@@ -87,6 +87,12 @@ GuiButton* GuiButton::setIcon(string icon_name, sp::Alignment icon_alignment, fl
     this->icon_name = icon_name;
     this->icon_alignment = icon_alignment;
     this->icon_rotation = rotation;
+    return this;
+}
+
+GuiButton* GuiButton::setIconSize(float size)
+{
+    icon_size = size;
     return this;
 }
 
