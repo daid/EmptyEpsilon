@@ -361,6 +361,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
         trace.icon = mwd.radar_trace;
         trace.radius = 32.0f;
         trace.max_size = trace.min_size = 32 * (0.25f + 0.25f * category_modifier);
+        // LongRange intentionally omitted for gameplay
         trace.flags = RadarTrace::Rotate;
         // Exempt mines from LongRange restriction.
         if (tube.type_loaded == MW_Mine) trace.flags |= RadarTrace::LongRange;
