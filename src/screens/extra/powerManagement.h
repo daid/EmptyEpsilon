@@ -1,9 +1,9 @@
-#ifndef POWER_MANAGEMENT_H
-#define POWER_MANAGEMENT_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
 #include "components/shipsystem.h"
 
+class GuiLabel;
 class GuiPanel;
 class GuiSlider;
 class GuiProgressbar;
@@ -27,8 +27,10 @@ private:
         GuiSlider* power_slider;
         GuiSlider* coolant_slider;
         GuiProgressbar* heat_bar;
+        GuiLabel* heat_label;
         GuiProgressbar* power_bar;
         GuiProgressbar* coolant_bar;
+        GuiLabel* coolant_label;
     };
     SystemRow systems[ShipSystem::COUNT];
     bool set_power_active[ShipSystem::COUNT] = {false};
@@ -39,5 +41,3 @@ public:
     void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//POWER_MANAGEMENT_H
