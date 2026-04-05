@@ -142,6 +142,29 @@ void PlayerInfo::reset()
     crew_positions.clear();
 }
 
+// Return the total number of positions populated by this player.
+int PlayerInfo::countTotalPlayerPositions()
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for (auto monitor : crew_positions)
+        for (auto position : monitor) count++;
+
+    return count;
+}
+
+// Return the total number of positions populated by this player.
+int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for (auto position : crew_positions[monitor]) count++;
+
+    return count;
+}
+
 bool PlayerInfo::hasPosition(CrewPosition cp)
 {
     for(auto cps : crew_positions) {
@@ -729,9 +752,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            auto sys = ShipSystem::get(ship, system);
-            if (sys && request >= 0.0f && request <= 3.0f)
-                sys->power_request = request;
+
+            if (auto sys = ShipSystem::get(ship, system))
+                sys->power_request = std::clamp(request, 0.0f, 3.0f);
         }
         break;
     case CMD_SET_SYSTEM_COOLANT_REQUEST:
@@ -740,12 +763,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request;
             packet >> system >> request;
 
-            auto coolant = ship.getComponent<Coolant>();
-            if (coolant) {
-                request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
-                auto sys = ShipSystem::get(ship, system);
-                if (sys)
-                    sys->coolant_request = request;
+            if (auto coolant = ship.getComponent<Coolant>())
+            {
+                if (auto sys = ShipSystem::get(ship, system))
+                    sys->coolant_request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
             }
         }
         break;
@@ -807,9 +828,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto beamweapons = ship.getComponent<BeamWeaponSys>();
-            if (beamweapons)
-                beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
+            if (auto beam_weapons = ship.getComponent<BeamWeaponSys>())
+                beam_weapons->setFrequency(new_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -842,33 +862,28 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             glm::vec2 position{};
             packet >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && lrr->waypoints.size() < 9) {
-                lrr->waypoints.push_back(position);
-                lrr->waypoints_dirty = true;
+            auto wp = ship.getComponent<Waypoints>();
+            if (wp) {
+                wp->addNew(position);
             }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
-            int32_t index;
-            packet >> index;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints.erase(lrr->waypoints.begin() + index);
-                lrr->waypoints_dirty = true;
+            int32_t id;
+            packet >> id;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->remove(id);
             }
         }
         break;
     case CMD_MOVE_WAYPOINT:
         {
-            int32_t index;
+            int32_t id;
             glm::vec2 position{};
-            packet >> index >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints[index] = position;
-                lrr->waypoints_dirty = true;
+            packet >> id >> position;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->move(id, position);
             }
         }
         break;
@@ -921,6 +936,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
                 auto p = sp::ecs::Entity::create();
                 p.addComponent<sp::Transform>(*t);
+                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
                 p.addComponent<LifeTime>().lifetime = 60*10;
                 if (auto faction = ship.getComponent<Faction>())
                     p.addComponent<Faction>() = *faction;
@@ -968,13 +984,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> target;
 
             // TODO: Check if this probe is ours
-            if (auto lrr = ship.getComponent<LongRangeRadar>()) {
-                auto old = lrr->radar_view_linked_entity;
-                if (lrr->on_probe_link && target)
-                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(ship, target));
-                lrr->radar_view_linked_entity = target;
-                if (lrr->on_probe_unlink && old)
-                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(ship, old));
+            if (auto rl = ship.getComponent<RadarLink>()) {
+                auto old = rl->linked_entity;
+                if (rl->on_link && target)
+                    LuaConsole::checkResult(rl->on_link.call<void>(ship, target));
+                rl->linked_entity = target;
+                if (rl->on_unlink && old)
+                    LuaConsole::checkResult(rl->on_unlink.call<void>(ship, old));
             }
         }
         break;
@@ -1009,6 +1025,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                             auto cb = f.callback;
                             cb.call<void>();
                             csf->functions.erase(std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) { return f.name == name; }), csf->functions.end());
+                            csf->functions_dirty = true;
                         }
                         break;
                     }

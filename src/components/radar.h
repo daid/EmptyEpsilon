@@ -61,23 +61,24 @@ public:
     float biological = 0.0f;
 };
 
-//TODO: This is currently a bit of a catch all components, and should be split up.
 class LongRangeRadar
 {
 public:
     float short_range = 5000.0f;
     float long_range = 30000.0f;
-
-    bool waypoints_dirty = true;
-    std::vector<glm::vec2> waypoints;
-    sp::ecs::Entity radar_view_linked_entity;
-
-    sp::script::Callback on_probe_link;
-    sp::script::Callback on_probe_unlink;
 };
 
 class ShareShortRangeRadar
 {
+};
+
+class RadarLink
+{
+public:
+    sp::ecs::Entity linked_entity;
+
+    sp::script::Callback on_link;
+    sp::script::Callback on_unlink;
 };
 
 class AllowRadarLink

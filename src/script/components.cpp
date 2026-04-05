@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/destroy.h"
 
 
 #define STRINGIFY(n) #n
@@ -68,6 +69,8 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Bind a member using getter and setter functions for validation.
+// The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -263,6 +266,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MeshRenderComponent, texture.name, "texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, specular_texture.name, "specular_texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
+    BIND_MEMBER_NAMED(MeshRenderComponent, normal_texture.name, "normal_texture");
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
     sp::script::ComponentHandler<BillboardRenderer>::name("billboard_render");
@@ -293,11 +297,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(Orbit, time);
 
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
-    BIND_MEMBER(AvoidObject, range);
+    BIND_MEMBER_GS(AvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<DelayedAvoidObject>::name("delayed_avoid_object");
     BIND_MEMBER(DelayedAvoidObject, delay);
-    BIND_MEMBER(DelayedAvoidObject, range);
+    BIND_MEMBER_GS(DelayedAvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<ExplodeOnTouch>::name("explode_on_touch");
     BIND_MEMBER(ExplodeOnTouch, damage_at_center);
@@ -317,15 +321,37 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
+
+    sp::script::ComponentHandler<MissileHoming>::name("missile_homing");
+    BIND_MEMBER(MissileHoming, turn_rate);
+    BIND_MEMBER(MissileHoming, range);
+    BIND_MEMBER(MissileHoming, target);
+    BIND_MEMBER(MissileHoming, target_angle);
+
+    sp::script::ComponentHandler<ExplodeOnTimeout>::name("explode_on_timeout");
+
     sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
     BIND_MEMBER(ExplosionEffect, size);
     BIND_MEMBER(ExplosionEffect, radar);
     BIND_MEMBER(ExplosionEffect, electrical);
 
     sp::script::ComponentHandler<Sfx>::name("sfx");
+    sp::script::ComponentHandler<Sfx>::members["sound"] = {
+        [](lua_State* L, const void* ptr) {
+            auto p = reinterpret_cast<const Sfx*>(ptr);
+            return sp::script::Convert<string>::toLua(L, p->sound);
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<Sfx*>(ptr);
+            p->sound = sp::script::Convert<string>::fromLua(L, -1);
+            p->played = false;
+        }
+    };
     BIND_MEMBER(Sfx, sound);
-    BIND_MEMBER(Sfx, power);
-    // BIND_MEMBER(Sfx, played);
+    BIND_MEMBER(Sfx, volume);
+    BIND_MEMBER(Sfx, pitch);
 
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
@@ -336,13 +362,18 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
-    BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
-    BIND_ARRAY_DIRTY_FLAG(LongRangeRadar, waypoints, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, x, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, y, waypoints_dirty);
-    BIND_MEMBER(LongRangeRadar, on_probe_link);
-    BIND_MEMBER(LongRangeRadar, on_probe_unlink);
+
+    sp::script::ComponentHandler<Waypoints>::name("waypoints");
+    BIND_ARRAY_DIRTY_FLAG(Waypoints, waypoints, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "id", id, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "x", position.x, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "y", position.y, dirty);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
+
+    sp::script::ComponentHandler<RadarLink>::name("radar_link");
+    BIND_MEMBER(RadarLink, linked_entity);
+    BIND_MEMBER(RadarLink, on_link);
+    BIND_MEMBER(RadarLink, on_unlink);
     sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
     BIND_MEMBER(AllowRadarLink, owner);
 
@@ -470,9 +501,10 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
-    BIND_MEMBER(BeamWeaponSys, frequency);
+    BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
@@ -487,6 +519,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cooldown);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
     sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
@@ -500,6 +533,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, hit_normal);
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
+    BIND_MEMBER(BeamEffect, beam_color);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
@@ -557,7 +591,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
-    
+    BIND_MEMBER(JumpDrive, just_jumped);
+
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");
@@ -793,4 +828,7 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
+    BIND_MEMBER(OnDestroyed, callback);
 }

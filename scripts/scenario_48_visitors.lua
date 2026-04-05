@@ -7355,7 +7355,7 @@ function checkTargetIntelEvents(delta)
 			p.intel_message = "sent"
 			if p:getWaypointCount() < 9 and p.intel_waypoint == nil then
 				p:commandAddWaypoint(iwpx,iwpy)
-				p:addToShipLog(string.format(_("targetInt-shipLog","Added waypoint %i to your navigation system for %s"),p:getWaypointCount(),target_station:getCallSign()),"Magenta")
+				p:addToShipLog(string.format(_("targetInt-shipLog","Added waypoint %i to your navigation system for %s"),p:getWaypointID(p:getWaypointCount()),target_station:getCallSign()),"Magenta")
 				playVoice("Tracy08")
 				p.intel_waypoint = "added"
 			end

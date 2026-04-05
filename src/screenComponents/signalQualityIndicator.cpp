@@ -1,21 +1,27 @@
 #include "signalQualityIndicator.h"
 #include "engine.h"
 #include "random.h"
+#include "gui/theme.h"
 
 GuiSignalQualityIndicator::GuiSignalQualityIndicator(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
-    target_period = random(2.0, 5.0);
-    error_noise = 0.0;
-    error_phase = 0.0;
-    error_period = 0.0;
+    signalquality_style = theme->getStyle("signalquality");
+    electrical_band_style = theme->getStyle("signal_bands.electrical");
+    biological_band_style = theme->getStyle("signal_bands.biological");
+    gravitational_band_style = theme->getStyle("signal_bands.gravitational");
+    target_period = random(2.0f, 5.0f);
 }
 
 void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawStretchedHV(rect, 25.0f, "gui/widget/PanelBackground.png");
-
     int point_count = rect.size.x / 4 - 1;
+    // Bail if there's not enough space to draw the signal.
+    if (point_count < 2) return;
+
+    const auto& signalquality = signalquality_style->get(getState());
+    renderer.drawStretchedHV(rect, signalquality.size, signalquality.texture);
+
     std::vector<glm::vec2> r;
     std::vector<glm::vec2> g;
     std::vector<glm::vec2> b;
@@ -45,7 +51,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         f = (1.0f - noise[2]) * f + noise[2] * random(-1.0, 1.0);
         b.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
     }
-    renderer.drawLineBlendAdd(r, glm::u8vec4(255, 45, 84, 255)); // red
-    renderer.drawLineBlendAdd(g, glm::u8vec4(65, 255, 81, 255)); // green
-    renderer.drawLineBlendAdd(b, glm::u8vec4(70, 120, 255, 255)); // blue
+    renderer.drawLineBlendAdd(r, electrical_band_style->get(getState()).color);    // red
+    renderer.drawLineBlendAdd(g, biological_band_style->get(getState()).color);    // green
+    renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color); // blue
 }

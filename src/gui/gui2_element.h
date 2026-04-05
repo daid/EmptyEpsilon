@@ -3,7 +3,6 @@
 
 #include <functional>
 #include "stringImproved.h"
-#include "colorConfig.h"
 #include "hotkeyConfig.h"
 #include "gui2_container.h"
 #include "gui/layout/layout.h"
@@ -93,7 +92,6 @@ public:
     friend class GuiCanvas;
 
 protected:
-    glm::u8vec4 selectColor(const ColorSet& color_set) const;
     State getState() const;
 };
 

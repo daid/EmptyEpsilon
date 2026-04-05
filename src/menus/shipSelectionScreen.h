@@ -1,5 +1,4 @@
-#ifndef SHIP_SELECTION_SCREEN_H
-#define SHIP_SELECTION_SCREEN_H
+#pragma once
 
 #include "playerInfo.h"
 #include "gameGlobalInfo.h"
@@ -76,7 +75,6 @@ private:
     GuiToggleButton* window_button;
     GuiTextEntry* window_angle;
     GuiLabel* window_angle_label;
-    GuiToggleButton* topdown_button;
     GuiScrollText* station_players;
 };
 
@@ -91,4 +89,3 @@ private:
     CrewPositionSelection* crew_position_selection = nullptr;
 };
 
-#endif//SHIP_SELECTION_SCREEN_H

@@ -4,17 +4,17 @@
 require("utils.lua")
 
 function init()
-	interaction_threshold=5 -- number of required interaction with debris, successful or not
-	reputation_threshold=30 -- when both thresholds are reached, the second game phase will begin
-	debris_interactions=0
-	probe_amount=20
+    interaction_threshold=5 -- number of required interaction with debris, successful or not
+    reputation_threshold=30 -- when both thresholds are reached, the second game phase will begin
+    debris_interactions=0
+    probe_amount=20
 
     player1 = PlayerSpaceship():setFaction("Human Navy"):setTemplate("Atlantis"):setWeaponTubeCount(0):setCallSign("Tidy-1"):setPosition(-5500,0)
     player1:setWeaponStorageMax("Nuke",0):setWeaponStorageMax("Homing",0):setWeaponStorageMax("HVLI",0):setWeaponStorageMax("Mine",0):setWeaponStorageMax("Emp",0)
     player1:onDestroyed(function()
-		if player2==nil then
-			victory("Ghosts")
-		end
+        if player2==nil then
+            victory("Ghosts")
+        end
     end)
 
     orbit=35000
@@ -77,12 +77,12 @@ function no_reply()
 end
 
 function mission_start_state(delta)
-	if player1:getReputationPoints() >= reputation_threshold and debris_interactions>=interaction_threshold then
+    if player1:getReputationPoints() >= reputation_threshold and debris_interactions>=interaction_threshold then
         mission_state=unusual_readings
-	end
-	if not areBeamShieldFrequenciesUsed() then
-		globalMessage(_("Shield frequencies are required for this scenario. Please enable frequencies in extra settings."))
-	end
+    end
+    if not areBeamShieldFrequenciesUsed() then
+        globalMessage(_("Shield frequencies are required for this scenario. Please enable frequencies in extra settings."))
+    end
 
 end
 
@@ -97,9 +97,9 @@ function unusual_readings(delta)
     spyprobe = CpuShip():setFaction("Ghosts"):setTemplate("ANT 615"):setCallSign("NC3"):setHullMax(100):setHull(100):setPosition(48885, -45317):orderIdle()
     spyprobe:setDescriptions(_("An abandoned satellite"),_("An old military satellite. Capturing frequency is blocked. Behaviour unknown. Recommendation: Jump not closer than 10U, then advance using the impulse drive."))
     spyprobe:onDestruction(function(art, player)  ;
-		mission_state=order_dock
-		globalMessage(_("Additional debris created!"))
-	end)
+        mission_state=order_dock
+        globalMessage(_("Additional debris created!"))
+    end)
 
     mission_state=spyprobe_spawned
 end
@@ -181,8 +181,8 @@ After that, you will receive further orders.]]))
     end
     
     if player1:isDocked(geo_1) and dock_message_sent==1 and player1:isCommsInactive() then
-		player2:commandDock(geo_1)
-		initSatNetwork()
+        player2:commandDock(geo_1)
+        initSatNetwork()
         message_sat_network=geo_1:sendCommsMessage(player1, _([[Bad news: The satellite woke up a whole group of military satellites that should have been out of service for ages. If we don't do anything against them, they will slowly but surely destroy all objects they can find. The debris will spread all over the orbit, destroying all our communications satellites.
 Not only would that be a disaster for science and spaceflight, but everyday things like Internet are in serious danger as well!
 We are currently making a plan to stop this. Please stay docked until you get new orders.
@@ -190,10 +190,10 @@ We are currently making a plan to stop this. Please stay docked until you get ne
         dock_message_sent=dock_message_sent+1
     end
     if dock_message_sent==2 and player1:getEnergyLevel() > player1:getEnergyLevelMax()-2 and player1:isCommsInactive() then
-		if player1:hasPlayerAtPosition("Weapons") then  
-			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your weapons officer can change the ship at the touch of a button.]]))
+        if player1:hasPlayerAtPosition("Weapons") then
+            message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your weapons officer can change the ship at the touch of a button.]]))
         else
-			message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your tactical officer can change the ship at the touch of a button.]]))
+            message_sat_deactivate=geo_1:sendCommsMessage(player1, _([[New orders: We have to shut down the rogue satellites somehow. Therefore, you need to get as close as possible to the control node that is commanding the other satellites. Luckily, the satellites are in some kind of sleep mode right now, to recharge their batteries. You need another ship however, to get to them unnoticed. As soon you are getting closer, you should also turn off every system and device that is not necessary. When you are ready, your tactical officer can change the ship at the touch of a button.]]))
         end
         player1:addCustomButton("Weapons","change_ship_btn",_("change ship"),change_ship)
         player1:addCustomButton("Tactical","change_ship_btn_tac",_("change ship"),change_ship)
@@ -214,15 +214,15 @@ We detected the control node at a heading of about 125 degrees from our position
 end
 
 function towards_commandnode(delta)
-	if distance(player2, geo_1) > 10000 and not cloud_hint and player2:hasPlayerAtPosition("Operations") then
-		geo_1:sendCommsMessage(player2 ,_([[The dust cloud is causing large electromagnetic interferences. Which means that as soon you are far enough away from the station, you can guess it's direction by looking at the red line at the edge of your radar screen.]]))
-		cloud_hint=true
-	end
-	
-	if distance(player2, command_node) < 1001 then
-		for n=1,10 do
-			probe[n]:orderStandGround():setSystemHealth("Maneuvering",0.5)
-		end
+    if distance(player2, geo_1) > 10000 and not cloud_hint and player2:hasPlayerAtPosition("Operations") then
+        geo_1:sendCommsMessage(player2 ,_([[The dust cloud is causing large electromagnetic interferences. Which means that as soon you are far enough away from the station, you can guess it's direction by looking at the red line at the edge of your radar screen.]]))
+        cloud_hint=true
+    end
+
+    if distance(player2, command_node) < 1001 then
+        for n=1,10 do
+            probe[n]:orderStandGround():setSystemHealth("Maneuvering",0.5)
+        end
         player2:addCustomButton("Engineering","activate_transmitter_btn",_("Activate transmitter"),activate_transmitter)
         player2:addCustomButton("Engineering+","activate_transmitter_btn_plus",_("Activate transmitter"),activate_transmitter)
         player2:removeCustom("out_of_reach_info")
@@ -237,9 +237,9 @@ function activate_transmitter()
     transmitter_txt=0
     transmitter_step = 10
     if player2:hasPlayerAtPosition("Relay") then
-		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Relay will have to send the signal. (There will be a button for this as well.) Good luck!]]))
+        geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Relay will have to send the signal. (There will be a button for this as well.) Good luck!]]))
     else
-		geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Operations will have to send the signal. (You will have to change your sidebar from 'Scanning' to 'Other' by pressing the 'Scanning' headline or the arrows next to it.) Good luck!]]))
+        geo_1:sendCommsMessage(player2, _([[As soon as your transmitter is fully charged, the weapons officer has to sync the shields with the transmitter (a Button will appear on the console). Then, you yourself on Operations will have to send the signal. (You will have to change your sidebar from 'Scanning' to 'Other' by pressing the 'Scanning' headline or the arrows next to it.) Good luck!]]))
     end
     mission_state=boot_transmitter
     player2:removeCustom("activate_transmitter_btn")
@@ -258,10 +258,10 @@ function boot_transmitter(delta)
     transmitter_charge=charge_timer+10
     
     if charge_timer>20 and transmitter_charge > (transmitter_txt + transmitter_step) then 
-		transmitter_txt = math.floor(transmitter_txt + transmitter_step)
-		player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter charging")..": "..transmitter_txt.."%")
-		player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter charging")..": "..transmitter_txt.."%")
-	end
+        transmitter_txt = math.floor(transmitter_txt + transmitter_step)
+        player2:addCustomInfo("Engineering","activate_transmitter_info",_("Transmitter charging")..": "..transmitter_txt.."%")
+        player2:addCustomInfo("Engineering+","activate_transmitter_info_plus",_("Transmitter charging")..": "..transmitter_txt.."%")
+    end
     if charge_timer>20 and escalation==20 then
         for n=1,10 do
             probe[n]:setImpulseMaxSpeed(100):setSystemHealth("Impulse",0.1)
@@ -338,16 +338,16 @@ end
 function sending_signal(delta)
     sending_timer=sending_timer+delta
     if sending_timer>3 then
-		globalMessage(_("Rogue satellites shut down"))
+        globalMessage(_("Rogue satellites shut down"))
         geo_1:sendCommsMessage(player2, _([[Congratulations! You saved the global satellite network from destruction. I call this a successful test run and we're gonna initiate the production of our fleet of tidying ships immediately. So eventually, we will get rid of this space junk problem once and for all. You and the rest of your crew did a great job!]]))
         mission_state=mission_victory
     end       
 end
 
 function mission_victory(delta)
-	if player2:isCommsInactive() then -- wait for the call to be finished
-		victory("Human Navy")
-	end
+    if player2:isCommsInactive() then -- wait for the call to be finished
+        victory("Human Navy")
+    end
 end
 
 -- -------------------------------- --
@@ -363,9 +363,9 @@ end
 --------  GM functions
 
 function triggerPhase2()
-	player1:setReputationPoints(reputation_threshold)
-	debris_interactions=interaction_threshold
-	removeGMFunction(GMPhase2)
+    player1:setReputationPoints(reputation_threshold)
+    debris_interactions=interaction_threshold
+    removeGMFunction(GMPhase2)
 end
 
 function triggerPhase3()
@@ -377,12 +377,12 @@ function triggerPhase3()
 end
 
 function triggerPhase4()
-	if not(player2) then
-		init_player2()
-	end
+    if not(player2) then
+        init_player2()
+    end
     player2:setCallSign("Tidy-2")
-	initSatNetwork()
-	player2:setPosition(80000, -20000)
+    initSatNetwork()
+    player2:setPosition(80000, -20000)
     mission_state = towards_commandnode
     removeGMFunction(GMPhase2)
     removeGMFunction(GMPhase3)
@@ -400,21 +400,21 @@ function init_player2()
         player2:addCustomInfo("Engineering+","out_of_reach_info_plus",_("Out of reach"))
         player2:addCustomInfo("Operations","transmitter_unlinked_info",_("Transmitter is not linked yet"))
         player2:onDestroyed(function()
-			victory("Ghosts")
+            victory("Ghosts")
         end)
 end
 
 function initSatNetwork()
         Nebula():setPosition(86578, -12988)
-		Nebula():setPosition(92935, -15086)
-		Nebula():setPosition(91476, -8925)
+        Nebula():setPosition(92935, -15086)
+        Nebula():setPosition(91476, -8925)
           
         placeProbesAroundPoint(probe_amount,2000,5000,90000,-12000)
         placeRandomAroundPoint(VisualAsteroid,50,1,5000,90000,-12000)
         command_node= WarpJammer():setPosition(90000,-12000):setRange(2500):setCallSign("Control"):setDescription(_("This is the command node that controls the rogue satellites. We have to shut it down!"))
         command_node:onDestruction(function()  -- fallback in case the command node somehow gets destroyed, so the scenario is still winnable
-			command_node=Artifact():setPosition(90000,-12000):setCallSign("Control"):setModel("shield_generator"):setDescription(_("This is the command node that controls the rogue satellites. We have to shut it down!"))
-	end)
+            command_node=Artifact():setPosition(90000,-12000):setCallSign("Control"):setModel("shield_generator"):setDescription(_("This is the command node that controls the rogue satellites. We have to shut it down!"))
+    end)
 end
 
 function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
@@ -442,6 +442,8 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
         end
         debris:allowPickup(true)
         debris:setCallSign(callsign):setFaction("Human Navy"):setRadarTraceColor(255,235,170)
+        debris.components.radar_trace.radius=120 -- same scaling as asteroids
+        debris.components.radar_trace.min_size=4 -- to look similar on the radar
         
         debris:onPickUp(function(art, player)  ;
             shieldfreq= 400+(player1:getShieldsFrequency())*20
@@ -452,8 +454,8 @@ function placeRandomFreq(amount, x1, y1, x2, y2, random_amount)
                 player:takeDamage(1, "kinetic",ax,ay );
                 player:setReputationPoints((player:getReputationPoints()+10))
                 if player:getReputationPoints() == 20 then
-					geo_1:sendCommsMessage(player1, _([[Very good so far! Don't worry, you don't have to clean up all of the marked space junk in your first test run, but we still need quite a few of them before we call it a day.]]))
-					player:setReputationPoints(25)
+                    geo_1:sendCommsMessage(player1, _([[Very good so far! Don't worry, you don't have to clean up all of the marked space junk in your first test run, but we still need quite a few of them before we call it a day.]]))
+                    player:setReputationPoints(25)
                 end
             else
                 ExplosionEffect():setPosition(ax,ay):setSize(200)

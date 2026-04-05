@@ -1,10 +1,8 @@
-#ifndef GUI_THEME_H
-#define GUI_THEME_H
+#pragma once
 
 #include <stringImproved.h>
 #include "gui2_element.h"
 #include <unordered_map>
-
 
 class GuiThemeStyle
 {
@@ -14,8 +12,9 @@ public:
     public:
         string texture;
         glm::u8vec4 color;
-        float size; //general size parameter, depends on the widget type what it means.
+        float size; // General size parameter, depends on the widget type what it means.
         sp::Font* font;
+        float font_offset = 0.0f;
         string sound;   //Sound effect played by the widget on certain actions.
     };
     StateStyle states[int(GuiElement::State::COUNT)];
@@ -23,17 +22,21 @@ public:
 };
 
 /** The Theme class is used by the GuiElement classes to style themselves.
-    
+
     Themes are loaded from a text resource, and referenced from GuiElement classes.
     A single theme contains information on how to style different widget elements.
-    
+
+    A theme can inherit one or more parent themes. A child theme overrides only the
+    styles it defines.
+
     Each element describes the following properties:
     - texture
     - color
     - font
+    - offset
     - size
     - sound
-   
+
     With the possibility to distingish with the following states:
     - normal: Default state
     - disabled: When enabled is false
@@ -52,15 +55,25 @@ public:
     static bool loadTheme(const string& name, const string& resource_name);
 
     static glm::u8vec4 toColor(const string& s);
+
+    // Returns the path to the element's theme texture (image), with optionally defined state.
+    static string getImage(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the element's theme color, with optionally defined state.
+    static glm::u8vec4 getColor(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the element's theme font, with optionally defined state.
+    static sp::Font* getFont(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the element's theme size, with optionally defined state.
+    static float getSize(const string& element, GuiElement::State state = GuiElement::State::Normal);
+    // Returns the path to the element's theme sound, with optionally defined state.
+    static string getSound(const string& element, GuiElement::State state = GuiElement::State::Normal);
 private:
     GuiTheme(const string& name);
     virtual ~GuiTheme();
 
     string name;
     std::unordered_map<string, GuiThemeStyle> styles;
+    std::vector<string> parent_themes;
 
     static std::unordered_map<string, GuiTheme*> themes;
     static string current_theme;
 };
-
-#endif//GUI_THEME_H

@@ -1,5 +1,4 @@
-#ifndef SCIENCE_SCREEN_H
-#define SCIENCE_SCREEN_H
+#pragma once
 
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
@@ -14,8 +13,7 @@ class GuiButton;
 class GuiScanTargetButton;
 class GuiToggleButton;
 class GuiSelector;
-class GuiSlider;
-class GuiLabel;
+class GuiRadarZoomSlider;
 class GuiImage;
 class DatabaseViewComponent;
 class GuiCustomShipFunctions;
@@ -23,6 +21,10 @@ class GuiCustomShipFunctions;
 class ScienceScreen : public GuiOverlay
 {
 public:
+    const float PROBE_ZOOM_DISTANCE = 5000.0f;
+    const float DEFAULT_MIN_ZOOM_DISTANCE = 5000.0f;
+    const float DEFAULT_MAX_ZOOM_DISTANCE = 30000.0f;
+
     GuiImage* background_gradient;
     GuiOverlay* background_crosses;
 
@@ -32,8 +34,7 @@ public:
     TargetsContainer targets;
     GuiRadarView* science_radar;
     GuiRadarView* probe_radar;
-    GuiSlider* zoom_slider;
-    GuiLabel* zoom_label;
+    GuiRadarZoomSlider* zoom_slider;
 
     GuiSelector* sidebar_selector;
     GuiElement* info_sidebar;
@@ -58,15 +59,13 @@ public:
     GuiToggleButton* probe_view_button;
     sp::ecs::Entity observation_point;
     GuiListbox* view_mode_selection;
-public:
+
     ScienceScreen(GuiContainer* owner, CrewPosition crew_position=CrewPosition::scienceOfficer);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 private:
-    //used to judge when to update the UI label and zoom
-    float previous_long_range_radar=0;
-    float previous_short_range_radar=0;
+    // Used to judge when to update the UI label and zoom
+    float previous_long_range_radar = 0.0f;
+    float previous_short_range_radar = 0.0f;
 };
-
-#endif//SCIENCE_SCREEN_H

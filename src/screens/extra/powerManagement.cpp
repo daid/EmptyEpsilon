@@ -1,13 +1,12 @@
 #include "powerManagement.h"
 #include "i18n.h"
+#include "playerInfo.h"
+#include "engine.h"
 #include "missileWeaponData.h"
 #include "components/reactor.h"
 #include "components/coolant.h"
 
-#include "playerInfo.h"
-#include "screenComponents/customShipFunctions.h"
-#include "engine.h"
-
+#include "gui/theme.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_arrow.h"
@@ -15,9 +14,10 @@
 #include "gui/gui2_slider.h"
 #include "gui/gui2_progressbar.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "screenComponents/customShipFunctions.h"
 
 PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
-: GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", colorConfig.background), active_system_count(0), panel_size({290.0f, 380.0f}), previous_energy_level(0.0f), average_energy_delta(0.0f), previous_energy_measurement(0.0f), selected_system(ShipSystem::Type::None)
+: GuiOverlay(owner, "POWER_MANAGEMENT_SCREEN", GuiTheme::getColor("background"))
 {
     // Initialize layout containers
     GuiElement* layout = new GuiElement(this, "PWR_LAYOUT");

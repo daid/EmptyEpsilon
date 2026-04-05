@@ -4,9 +4,11 @@ GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
 : GuiElement(owner, id), text_size(30.0f), rect_width(rect.size.x), max_prefix_width(0.0f), mouse_scroll_steps(25)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
-    scrollbar->setPosition(0, 0, sp::Alignment::TopRight)->setSize(50, GuiElement::GuiSizeMax);
     // Calculate scrolling a one-line entry by scrollbar arrow buttons.
-    scrollbar->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y);
+    scrollbar
+        ->setClickChange(sp::RenderTarget::getDefaultFont()->prepare("1", 32, text_size, {255, 255, 255, 255}, rect.size, sp::Alignment::TopLeft).getUsedAreaSize().y)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopRight)
+        ->setSize(50.0f, GuiElement::GuiSizeMax);
 }
 
 GuiAdvancedScrollText* GuiAdvancedScrollText::addEntry(string prefix, string text, glm::u8vec4 color, unsigned int seq)
@@ -132,8 +134,9 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     if (scrollbar->getMax() != line_count)
     {
         const int diff = line_count - scrollbar->getMax();
-        scrollbar->setRange(0, line_count);
-        scrollbar->setValueSize(rect.size.y);
+        scrollbar
+            ->setRange(0, line_count)
+            ->setValueSize(rect.size.y);
         if (auto_scroll_down)
             scrollbar->setValue(scrollbar->getValue() + diff);
     }

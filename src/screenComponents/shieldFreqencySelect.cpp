@@ -6,6 +6,7 @@
 
 #include "screenComponents/shieldsEnableButton.h"
 
+#include "gui/gui2_button.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_progressbar.h"

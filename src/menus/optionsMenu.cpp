@@ -18,7 +18,6 @@
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_keyvaluedisplay.h"
 
-
 void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 {
     if (return_to == OptionsMenu::ReturnTo::Main)
@@ -31,8 +30,8 @@ void exitOptionsMenu(OptionsMenu::ReturnTo return_to, RenderLayer* render_layer)
 OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
 : return_to(return_to)
 {
-    new GuiOverlay(this, "", colorConfig.background);
-    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiled("gui/background/crosses.png");
+    new GuiOverlay(this, "", GuiTheme::getColor("background"));
+    (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
 
     // Initialize autolayout columns.
     auto main_panel = new GuiPanel(this, "");
@@ -76,127 +75,12 @@ OptionsMenu::OptionsMenu(OptionsMenu::ReturnTo return_to)
     audio_page = new GuiElement(container, "OPTIONS_AUDIO");
     audio_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
     interface_page = new GuiElement(container, "OPTIONS_INTERFACE");
-    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "vertical");
+    interface_page->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide()->setAttribute("layout", "horizontal");
 
+    setupInterfaceOptions(return_to);
     setupGraphicsOptions();
     setupAudioOptions();
 
-    // Interface options
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Radar Rotation"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50);
-    // Helms rotation lock.
-    (new GuiToggleButton(interface_page, "HEMS_RADAR_LOCK", tr("Helms Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("helms_radar_lock", value ? "1" : "");
-        PreferencesManager::set("tactical_radar_lock", value ? "1" : "");
-        PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Weapons rotation lock.
-    (new GuiToggleButton(interface_page, "WEAPONS_RADAR_LOCK", tr("Weapons Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Science rotation lock.
-    (new GuiToggleButton(interface_page, "SCIENCE_RADAR_LOCK", tr("Science Radar Lock"), [](bool value)
-    {
-        PreferencesManager::set("science_radar_lock", value ? "1" : "");
-        PreferencesManager::set("operations_radar_lock", value ? "1" : "");
-    }))->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")->setSize(GuiElement::GuiSizeMax, 50);
-
-    // Control configuration
-    (new GuiLabel(interface_page, "CONTROL_OPTIONS_LABEL", tr("Control Options"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-
-    // Keyboard config (hotkeys/keybindings)
-    (new GuiButton(interface_page, "CONFIGURE_KEYBOARD", tr("Configure Keyboard/Joystick"), [this, return_to]()
-    {
-        new HotkeyMenu(return_to);
-        destroy();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    //Select the language
-    {
-        (new GuiLabel(interface_page, "LANGUAGE_OPTIONS_LABEL", tr("Language (applies on back)"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-        
-        std::vector<string> languages = findResources("locale/main.*.po");
-        
-        for(string &language : languages) 
-        {
-            //strip extension
-            language = language.substr(language.find(".") + 1, language.rfind("."));
-        }
-        std::sort(languages.begin(), languages.end());
-
-        int default_index = 0;
-        auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
-        if(default_elem != languages.end())
-        {
-            default_index =  static_cast<int>(default_elem - languages.begin());
-        }
-
-        (new GuiSelector(interface_page, "LANGUAGE_SELECTOR", [](int index, string value)
-        {
-            i18n::reset();
-            i18n::load("locale/main." + value + ".po");
-            PreferencesManager::set("language", value);
-            keys.init(); // Reinit keyboard shortcut labels
-        }))->setOptions(languages)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
-    }
-    
-    //Gui theme selection
-    {
-        std::vector<string> themes = findResources("gui/*.theme.txt");
-        
-        auto iter = themes.begin();
-        while(iter != themes.end()) 
-        {
-            //strip extension
-            *iter = iter->substr(iter->find("/")+1, iter->find("."));
-            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter +".theme.txt"))
-            {
-                LOG(ERROR, "Failed to load theme : ", *iter);
-                iter = themes.erase(iter);
-            }
-            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
-             || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
-            {
-                LOG(ERROR, "Missing base font or bold font for theme : ", *iter);
-                iter = themes.erase(iter);
-            }
-            else
-            {
-                ++iter;
-            }
-        }
-        
-        std::sort(themes.begin(), themes.end());
-        if(0 == themes.size())
-        {
-            LOG(ERROR, "Failed to load any theme, exiting");
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing ? Should be gui/*.theme.txt. and not contain errors.", nullptr);
-            exit(1);
-        }
-
-        int default_index = 0;
-        auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
-        if(default_elem != themes.end())
-        {
-            default_index =  static_cast<int>(default_elem - themes.begin());
-        }
-
-        if (themes.size() > 1) {
-            (new GuiLabel(interface_page, "GUI_THEME_OPTIONS_LABEL", tr("Interface Theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
-            (new GuiSelector(interface_page, "GUI_THEME_SELECTOR", [](int index, string theme_name)
-            {
-                GuiTheme::setCurrentTheme(theme_name);
-                main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
-                bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
-                //Render default font is applied on back only
-                PreferencesManager::set("guitheme", theme_name);
-            }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
-        }
-    }
-    
     // Bottom GUI.
     // Back button.
     (new GuiButton(this, "BACK", tr("button", "Back"), [this, return_to]()
@@ -231,6 +115,218 @@ void OptionsMenu::update(float delta)
     }
 }
 
+void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
+{
+    // Interface options
+    GuiElement* interface_left_column = new GuiElement(interface_page, "");
+    interface_left_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+    interface_left_column
+        ->setAttribute("margin", "0, 20, 0, 0");
+    GuiElement* interface_right_column = new GuiElement(interface_page, "");
+    interface_right_column
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setAttribute("layout", "vertical");
+
+    // Interface page, left column
+
+    // Select language
+    {
+        (new GuiLabel(interface_left_column, "LANGUAGE_OPTIONS_LABEL", tr("Interface language"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        std::vector<string> languages = findResources("locale/main.*.po");
+        // Strip extension
+        for (string &language : languages)
+        {
+            language = language.substr(language.find(".") + 1, language.rfind("."));
+        }
+        std::sort(languages.begin(), languages.end());
+
+        int default_index = 0;
+        auto default_elem = std::find(languages.begin(), languages.end(), PreferencesManager::get("language", "en"));
+        if(default_elem != languages.end())
+            default_index = static_cast<int>(default_elem - languages.begin());
+
+        (new GuiSelector(interface_left_column, "LANGUAGE_SELECTOR", [](int index, string value)
+        {
+            i18n::reset();
+            i18n::load("locale/main." + value + ".po");
+            PreferencesManager::set("language", value);
+            keys.init(); // Reinit keyboard shortcut labels
+        }))
+            ->setOptions(languages)
+            ->setSelectionIndex(default_index)
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        (new GuiLabel(interface_left_column, "LANGUAGE_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+    }
+    
+    // GUI theme selection
+    {
+        std::vector<string> themes = findResources("gui/*.theme.txt");
+        
+        auto iter = themes.begin();
+        while(iter != themes.end()) 
+        {
+            //strip extension
+            *iter = iter->substr(iter->find("/") + 1, iter->find("."));
+            if (!GuiTheme::loadTheme(*iter, "gui/" + *iter + ".theme.txt"))
+            {
+                LOG(Error, "Failed to load theme ", *iter);
+                iter = themes.erase(iter);
+            }
+            else if (!GuiTheme::getTheme(*iter)->getStyle("base")->states[0].font 
+                     || !GuiTheme::getTheme(*iter)->getStyle("bold")->states[0].font)
+            {
+                LOG(Error, "Missing base font or bold font for theme ", *iter);
+                iter = themes.erase(iter);
+            }
+            else
+            {
+                ++iter;
+            }
+        }
+        
+        std::sort(themes.begin(), themes.end());
+        if (themes.size() == 0)
+        {
+            LOG(Error, "Failed to load any theme, exiting");
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load any theme, resources missing? Should be gui/*.theme.txt and not contain errors.", nullptr);
+            exit(1);
+        }
+
+        int default_index = 0;
+        auto default_elem = std::find(themes.begin(), themes.end(), PreferencesManager::get("guitheme", "default"));
+        if(default_elem != themes.end())
+        {
+            default_index = static_cast<int>(default_elem - themes.begin());
+        }
+
+        if (themes.size() > 1) {
+            (new GuiLabel(interface_left_column, "GUI_THEME_OPTIONS_LABEL", tr("Interface theme"), 30))->addBackground()->setSize(GuiElement::GuiSizeMax, 50)->layout.margin.top = 20;
+            (new GuiSelector(interface_left_column, "GUI_THEME_SELECTOR", [](int index, string theme_name)
+            {
+                GuiTheme::setCurrentTheme(theme_name);
+                main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
+                bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+                //Render default font is applied on back only
+                PreferencesManager::set("guitheme", theme_name);
+            }))->setOptions(themes)->setSelectionIndex(default_index)->setSize(GuiElement::GuiSizeMax, 50);
+            (new GuiLabel(interface_left_column, "THEME_APPLICATION_LABEL", tr("Click Back to apply change"), 20.0f))
+                ->setSize(GuiElement::GuiSizeMax, 30.0f);
+        }
+    }
+
+    // Interface page, right column
+
+    // Control configuration
+    (new GuiLabel(interface_right_column, "CONTROL_OPTIONS_LABEL", tr("Control options"), 30))
+        ->addBackground()
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Keyboard config (hotkeys/keybindings)
+    (new GuiButton(interface_right_column, "CONFIGURE_KEYBOARD", tr("Configure keyboard/joystick"), [this, return_to]()
+    {
+        new HotkeyMenu(return_to);
+        destroy();
+    }))
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Radar rotation lock options.
+    {
+        GuiElement* radar_rotation_lock = new GuiElement(interface_right_column, "RADAR_ROTATION_LOCK");
+        radar_rotation_lock
+            ->setSize(GuiElement::GuiSizeMax, 310.0f)
+            ->setAttribute("layout", "vertical");
+        radar_rotation_lock
+            ->setAttribute("margin", "0, 20");
+
+        (new GuiLabel(radar_rotation_lock, "CONTROL_OPTIONS_LABEL", tr("Radar rotation lock"), 30.0f))
+            ->addBackground()
+            ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+        // Helms/Tactical/Single Pilot rotation lock.
+        const float row_height = 50.0f;
+        GuiElement* lock_row = new GuiElement(radar_rotation_lock, "HELMS_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 20, 10");
+
+        (new GuiLabel(lock_row, "HELMS_LOCK_DETAILS", tr("radar_locks", "Helms, Tactical,\nSingle Pilot"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        helms_radar_lock_toggle = new GuiToggleButton(lock_row, "HELMS_RADAR_LOCK", tr("radar_locks", "Lock to 0"),
+        [this](bool value)
+        {
+            PreferencesManager::set(       "helms_radar_lock", value ? "1" : "");
+            PreferencesManager::set(    "tactical_radar_lock", value ? "1" : "");
+            PreferencesManager::set("single_pilot_radar_lock", value ? "1" : "");
+
+            helms_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        helms_radar_lock_toggle
+            ->setValue(PreferencesManager::get("helms_radar_lock", "0") == "1")
+            ->setText(helms_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
+
+        // Weapons rotation lock.
+        lock_row = new GuiElement(radar_rotation_lock, "WEAPONS_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        (new GuiLabel(lock_row, "WEAPONS_LOCK_DETAILS", tr("radar_locks", "Weapons"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        weapons_radar_lock_toggle = new GuiToggleButton(lock_row, "WEAPONS_RADAR_LOCK", tr("radar_locks", "Lock"),
+        [this](bool value)
+        {
+            PreferencesManager::set("weapons_radar_lock", value ? "1" : "");
+
+            weapons_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        weapons_radar_lock_toggle
+            ->setValue(PreferencesManager::get("weapons_radar_lock", "0") == "1")
+            ->setText(weapons_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
+
+        // Science/Ops rotation lock.
+        lock_row = new GuiElement(radar_rotation_lock, "SCIENCE_RADAR_LOCK_ROW");
+        lock_row
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("layout", "horizontal");
+        lock_row
+            ->setAttribute("margin", "0, 0, 0, 10");
+
+        (new GuiLabel(lock_row, "SCIENCE_LOCK_DETAILS", tr("radar_locks", "Science,\nOperations"), 25.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, row_height)
+            ->setAttribute("margin", "0, 10, 0, 0");
+        science_radar_lock_toggle = new GuiToggleButton(lock_row, "SCIENCE_RADAR_LOCK", tr("radar_locks", "Lock"),
+        [this](bool value)
+        {
+            PreferencesManager::set("science_radar_lock", value ? "1" : "");
+            PreferencesManager::set("operations_radar_lock", value ? "1" : "");
+
+            science_radar_lock_toggle->setText(value ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"));
+        });
+        science_radar_lock_toggle
+            ->setValue(PreferencesManager::get("science_radar_lock", "0") == "1")
+            ->setText(science_radar_lock_toggle->getValue() ? tr("radar_locks", "Radar rotates") : tr("radar_locks", "Ship rotates"))
+            ->setSize(200.0f, 50.0f);
+    }
+}
+
 void OptionsMenu::setupGraphicsOptions()
 {
     // Fullscreen toggle.
@@ -259,7 +355,13 @@ void OptionsMenu::setupGraphicsOptions()
         foreach(Window, window, windows) {
             window->setFSAA(fsaa[index]);
         }
-    }))->setOptions({ "FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x" })->setSelectionIndex(fsaa_index)->setSize(GuiElement::GuiSizeMax, 50);
+    }))
+        ->setOptions({"FSAA: off", "FSAA: 2x", "FSAA: 4x", "FSAA: 8x"})
+        ->setSelectionIndex(fsaa_index)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    (new GuiLabel(graphics_page, "THEME_APPLICATION_LABEL", tr("Restart EmptyEpsilon to apply FSAA change"), 20.0f))
+        ->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     // FoV slider.
     auto initial_fov = PreferencesManager::get("main_screen_camera_fov", "60").toFloat();

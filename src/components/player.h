@@ -12,7 +12,8 @@ enum class MainScreenSetting
     Right,
     Target,
     Tactical,
-    LongRange
+    LongRange,
+    Strategic
 };
 
 enum class MainScreenOverlay
@@ -44,6 +45,22 @@ public:
     string control_code;
 
     CrewPositions allowed_positions = CrewPositions::all();
+};
+
+class Waypoints
+{
+public:
+    bool dirty = true;
+    struct Point {
+        int id;
+        glm::vec2 position;
+    };
+    std::vector<Point> waypoints;
+
+    int addNew(glm::vec2 position);
+    void move(int id, glm::vec2 position);
+    void remove(int id);
+    std::optional<glm::vec2> get(int id);
 };
 
 string alertLevelToString(AlertLevel level);

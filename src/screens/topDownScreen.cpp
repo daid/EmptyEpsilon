@@ -46,7 +46,7 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_topdown = "";
 
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down View"))
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down view"))
         keyboard_topdown += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
 
     keyboard_help->setText(keyboard_topdown);
@@ -60,6 +60,12 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     }
 }
 
+void TopDownScreen::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    if (!executeScrollOnElement(position, value))
+        pending_zoom += value;
+}
+
 void TopDownScreen::update(float delta)
 {
     // If this is a client and it is disconnected, exit.
@@ -71,15 +77,13 @@ void TopDownScreen::update(float delta)
         return;
     }
 
-    // Enable mouse wheel zoom.
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta != 0.0f)
+    float zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue() + pending_zoom;
+    pending_zoom = 0.0f;
+    if (zoom_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
-        if (camera_position.z > 10000)
-            camera_position.z = 10000;
-        if (camera_position.z < 1000)
-            camera_position.z = 1000;
+        camera_position.z *= (1.0f - zoom_delta * 0.1f);
+        if (camera_position.z > 10000) camera_position.z = 10000;
+        if (camera_position.z < 1000) camera_position.z = 1000;
     }
 
     if (keys.help.getDown())
@@ -156,11 +160,9 @@ void TopDownScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     // Add and remove entries from the player ship list.
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())
