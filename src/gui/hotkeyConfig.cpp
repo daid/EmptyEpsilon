@@ -326,6 +326,15 @@ Keys::Keys() :
 
 void Keys::init()
 {
+    // Global keybinding prohibitions:
+    // - Mouse movement axes
+    // - Mouse wheel
+    // - Left mouse button (pointer:1)
+    // Features using these inputs are implemented outside of binds, and any
+    // binds that used them would conflict.
+    sp::io::Keybinding::addGloballyProhibitedTypes(sp::io::Keybinding::Type::MouseMovement | sp::io::Keybinding::Type::MouseWheel);
+    sp::io::Keybinding::addGloballyProhibitedKey("pointer:1");
+
     // Common binds game-wide
     pause.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Pause game"));
     help.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show in-game help"));
@@ -347,15 +356,32 @@ void Keys::init()
     station_science.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to science screen"));
     station_relay.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to relay screen"));
 
-    // Main screen
+    // Main screen (prohibit right/middle mouse muttons, which are hardcoded to
+    // cycle views)
     mainscreen_forward.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View forward"));
+    mainscreen_forward.addProhibitedKey("pointer:2");
+    mainscreen_forward.addProhibitedKey("pointer:3");
     mainscreen_left.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View left"));
+    mainscreen_left.addProhibitedKey("pointer:2");
+    mainscreen_left.addProhibitedKey("pointer:3");
     mainscreen_right.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View right"));
+    mainscreen_right.addProhibitedKey("pointer:2");
+    mainscreen_right.addProhibitedKey("pointer:3");
     mainscreen_back.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View backward"));
+    mainscreen_back.addProhibitedKey("pointer:2");
+    mainscreen_back.addProhibitedKey("pointer:3");
     mainscreen_target.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
+    mainscreen_target.addProhibitedKey("pointer:2");
+    mainscreen_target.addProhibitedKey("pointer:3");
     mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View tactical radar"));
+    mainscreen_tactical_radar.addProhibitedKey("pointer:2");
+    mainscreen_tactical_radar.addProhibitedKey("pointer:3");
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_long_range_radar.addProhibitedKey("pointer:2");
+    mainscreen_long_range_radar.addProhibitedKey("pointer:3");
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
+    mainscreen_first_person.addProhibitedKey("pointer:2");
+    mainscreen_first_person.addProhibitedKey("pointer:3");
 
     // Helms
     helms_increase_impulse.setLabel(tr("hotkey_menu", "Helms"), tr("hotkey_Helms", "Increase impulse"));
@@ -494,10 +520,13 @@ void Keys::init()
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::FrontShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set front shields coolant (joystick)"));
     engineering_set_coolant_for_system[static_cast<int>(ShipSystem::Type::RearShield)].setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set rear shields coolant (joystick)"));
 
-    // Relay
+    // Relay (prohibit right click, hardcoded in hacking minigames)
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
+    relay_alert_level_none.addProhibitedKey("pointer:3");
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
+    relay_alert_level_yellow.addProhibitedKey("pointer:3");
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+    relay_alert_level_red.addProhibitedKey("pointer:3");
 
     // Cinematic view
     cinematic.init();
@@ -505,10 +534,17 @@ void Keys::init()
     // Top-down view
     topdown.init();
 
-    // GM screen
+    // GM screen (prohibit middle and right mouse buttons pointer:2 and :3
+    // until/unless their GM screen functions are made rebindable)
     gm_delete.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Delete"));
+    gm_delete.addProhibitedKey("pointer:2");
+    gm_delete.addProhibitedKey("pointer:3");
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
+    gm_clipboardcopy.addProhibitedKey("pointer:2");
+    gm_clipboardcopy.addProhibitedKey("pointer:3");
     gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
+    gm_show_callsigns.addProhibitedKey("pointer:2");
+    gm_show_callsigns.addProhibitedKey("pointer:3");
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));

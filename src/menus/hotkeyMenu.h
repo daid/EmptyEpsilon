@@ -1,36 +1,25 @@
 #pragma once
 
 #include "optionsMenu.h"
-#include "gui/gui2_arrowbutton.h"
-#include "gui/gui2_entrylist.h"
-#include "gui/gui2_canvas.h"
-#include "gui/gui2_scrollbar.h"
-#include "gui/gui2_scrolltext.h"
 #include "gui/hotkeyBinder.h"
 #include "Updatable.h"
 
-class GuiArrowButton;
-class GuiOverlay;
-class GuiSlider;
-class GuiLabel;
 class GuiCanvas;
-class GuiPanel;
-class GuiScrollText;
 class GuiHotkeyBinder;
+class GuiLabel;
+class GuiOverlay;
+class GuiPanel;
+class GuiScrollContainer;
+class GuiScrollText;
+class GuiSlider;
 
 class HotkeyMenu : public GuiCanvas, public Updatable
 {
 private:
-    const int ROW_HEIGHT = 50;
-    const int FRAME_MARGIN = 50;
-    const int KEY_LABEL_WIDTH = 375;
-    const int KEY_FIELD_WIDTH = 150;
-    const int KEY_LABEL_MARGIN = 25;
-    const int KEY_COLUMN_TOP = ROW_HEIGHT * 1.5;
-    const int KEY_ROW_COUNT = 10;
-    const int KEY_COLUMN_WIDTH = KEY_LABEL_WIDTH + KEY_LABEL_MARGIN + KEY_FIELD_WIDTH;
-    const int KEY_COLUMN_HEIGHT = ROW_HEIGHT * KEY_ROW_COUNT + FRAME_MARGIN * 2;
-    const int PAGER_BREAKPOINT = KEY_COLUMN_WIDTH * 2 + FRAME_MARGIN * 2;
+    const float ROW_HEIGHT = 50.0f;
+    const float FRAME_MARGIN = 50.0f;
+    const float KEY_LABEL_WIDTH = 400.0f;
+    const float KEY_BINDER_MARGIN = 12.5f;
     const float RESET_LABEL_TIMEOUT = 5.0f;
 
     GuiScrollText* help_text;
@@ -39,14 +28,11 @@ private:
     GuiPanel* rebinding_ui;
     GuiElement* bottom_row;
 
-    GuiElement* rebinding_container;
+    GuiScrollContainer* scroll_container;
     GuiElement* info_container;
-    std::vector<GuiElement*> rebinding_columns;
     std::vector<GuiElement*> rebinding_rows;
     std::vector<GuiHotkeyBinder*> text_entries;
     std::vector<GuiLabel*> label_entries;
-    GuiArrowButton* previous_page;
-    GuiArrowButton* next_page;
     GuiLabel* reset_label;
 
     string category = "";
@@ -57,7 +43,6 @@ private:
     OptionsMenu::ReturnTo return_to;
 
     void setCategory(int cat);
-    void pageHotkeys(int direction);
 public:
     HotkeyMenu(OptionsMenu::ReturnTo return_to=OptionsMenu::ReturnTo::Main);
 
