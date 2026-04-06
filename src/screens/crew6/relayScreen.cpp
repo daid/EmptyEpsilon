@@ -217,7 +217,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
         ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Route toggle, shown only when server allows routes.
-    route_toggle = new GuiToggleButton(option_buttons, "WAYPOINT_ROUTE_TOGGLE", tr("Route"),
+    route_toggle = new GuiToggleButton(option_buttons, "WAYPOINT_ROUTE_TOGGLE", tr("Show as route"),
         [this](bool value)
         {
             if (my_spaceship) my_player_info->commandSetWaypointRoute(value, active_waypoint_set);

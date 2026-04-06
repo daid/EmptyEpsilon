@@ -86,7 +86,35 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
 
-    // Limited relay functions: comms and waypoints.
+    // Left column: waypoint set selector and route toggle.
+    auto waypoint_set_controls = new GuiElement(science->radar_view, "WAYPOINT_SET_CONTROLS");
+    waypoint_set_controls
+        ->setPosition(-480.0f, -20.0f, sp::Alignment::BottomRight)
+        ->setSize(200.0f, 100.0f)
+        ->setAttribute("layout", "verticalbottom");
+
+    // Waypoint set selector, shown only when multiple sets are enabled.
+    waypoint_set_selector = new GuiSelector(waypoint_set_controls, "WAYPOINT_SET_SELECTOR",
+        [this](int index, string value)
+        {
+            active_waypoint_set = index + 1;
+        }
+    );
+    waypoint_set_selector
+        ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Route toggle, shown only when waypoint routes are enabled.
+    route_toggle = new GuiToggleButton(waypoint_set_controls, "WAYPOINT_ROUTE_TOGGLE", tr("Show as route"),
+        [this](bool value)
+        {
+            if (my_spaceship) my_player_info->commandSetWaypointRoute(value, active_waypoint_set);
+        }
+    );
+    route_toggle->setSize(200.0f, 50.0f);
+
+    // Right column: comms and waypoint placement/deletion.
     GuiElement* relay_functions = new GuiElement(science->radar_view, "RELAY_FUNCTIONS");
     relay_functions
         ->setPosition(-270.0f, -20.0f, sp::Alignment::BottomRight)
@@ -111,27 +139,6 @@ OperationScreen::OperationScreen(GuiContainer* owner)
         }
     );
     delete_waypoint_button->setSize(200.0f, 50.0f);
-
-    // Waypoint set selector, shown only when multiple sets are enabled.
-    waypoint_set_selector = new GuiSelector(relay_functions, "WAYPOINT_SET_SELECTOR",
-        [this](int index, string value)
-        {
-            active_waypoint_set = index + 1;
-        }
-    );
-    waypoint_set_selector
-        ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
-        ->setSelectionIndex(0)
-        ->setSize(GuiElement::GuiSizeMax, 50.0f);
-
-    // Route toggle.
-    route_toggle = new GuiToggleButton(relay_functions, "WAYPOINT_ROUTE_TOGGLE", tr("Route"),
-        [this](bool value)
-        {
-            if (my_spaceship) my_player_info->commandSetWaypointRoute(value, active_waypoint_set);
-        }
-    );
-    route_toggle->setSize(200.0f, 50.0f);
 
     auto stats = new GuiElement(this, "OPERATIONS_STATS");
     stats->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(240, 80)->setAttribute("layout", "vertical");
