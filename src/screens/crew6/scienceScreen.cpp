@@ -329,6 +329,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     for(int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
+    probe_view_button->setVisible(rl);
     if (rl && rl->linked_entity)
     {
         probe_view_button->enable();
