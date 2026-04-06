@@ -34,33 +34,54 @@ function PlayerSpaceship()
 end
 
 --- Returns the coordinates of a waypoint with the given index that's been set by this player ship.
---- Waypoints are 1-indexed.
---- Example: 
---- x, y = ship:getWaypoint(1)
-function Entity:getWaypoint(index)
-    if self.components.waypoints and index > 0 and index <= #self.components.waypoints then
-        local wp = self.components.waypoints[index]
-        return wp.x, wp.y
+--- Waypoints are 1-indexed. Optional set_id (1-4, default 1) selects the waypoint set.
+--- Example:
+--- x, y = ship:getWaypoint(1) -- wp 1 from set 1
+--- x, y = ship:getWaypoint(1, 2) -- wp 1 from set 2
+function Entity:getWaypoint(index, set_id)
+    set_id = set_id or 1
+    if self.components.waypoints then
+        local n = 0
+        for _, wp in ipairs(self.components.waypoints) do
+            if wp.set_id == set_id then
+                n = n + 1
+                if n == index then return wp.x, wp.y end
+            end
+        end
     end
     return 0, 0
 end
 --- Returns the numeric label for the given waypoint index.
---- Waypoints are 1-indexed.
+--- Waypoints are 1-indexed. Optional set_id (1-4, default 1) selects the waypoint set.
 --- Example:
---- id = ship:getWaypointID(1)
-function Entity:getWaypointID(index)
-    if self.components.waypoints and index > 0 and index <= #self.components.waypoints then
-        local wp = self.components.waypoints[index]
-        return wp.id
+--- id = ship:getWaypointID(1) -- wp 1 from set 1
+--- id = ship:getWaypointID(1, 2) -- wp 1 from set 2
+function Entity:getWaypointID(index, set_id)
+    set_id = set_id or 1
+    if self.components.waypoints then
+        local n = 0
+        for _, wp in ipairs(self.components.waypoints) do
+            if wp.set_id == set_id then
+                n = n + 1
+                if n == index then return wp.id end
+            end
+        end
     end
     return 0
 end
 --- Returns the total number of active waypoints owned by this player ship.
+--- Optional set_id (1-4, default 1) selects the waypoint set.
 --- Example:
---- ship:getWaypointCount()
-function Entity:getWaypointCount()
-    if self.components.waypoints then return #self.components.waypoints end
-    return 0
+--- ship:getWaypointCount() -- count in set 1
+--- ship:getWaypointCount(2) -- count in set 2
+function Entity:getWaypointCount(set_id)
+    set_id = set_id or 1
+    if not self.components.waypoints then return 0 end
+    local count = 0
+    for _, wp in ipairs(self.components.waypoints) do
+        if wp.set_id == set_id then count = count + 1 end
+    end
+    return count
 end
 --- Returns this player ship's EAlertLevel.
 --- Returns "Normal", "YELLOW ALERT", "RED ALERT", which differ from the valid values for commandSetAlertLevel().
@@ -610,27 +631,40 @@ function Entity:commandSetShieldFrequency(index)
     return self
 end
 --- Commands this player ship to add a waypoint at the given coordinates.
---- This respects the 9-waypoint limit and won't add more waypoints if 9 already exist.
+--- This respects the 9-waypoint limit per set and won't add more waypoints if 9 already exist.
+--- Optional set_id (1-4, default 1) selects the waypoint set.
 --- Example:
---- ship:commandAddWaypoint(1000, 2000)
-function Entity:commandAddWaypoint(x, y)
-    commandAddWaypoint(self, x, y)
+--- ship:commandAddWaypoint(1000, 2000) -- add wp to set 1
+--- ship:commandAddWaypoint(1000, 2000, 2) -- add wp to set 2
+function Entity:commandAddWaypoint(x, y, set_id)
+    commandAddWaypoint(self, x, y, set_id or 1)
     return self
 end
---- Commands this player ship to remove the waypoint with the given index.
---- This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
+--- Commands this player ship to remove the waypoint with the given ID.
+--- Optional set_id (1-4, default 1) selects the waypoint set.
 --- Example:
---- ship:commandRemoveWaypoint(0) -- removes waypoint 1
-function Entity:commandRemoveWaypoint(index)
-    commandRemoveWaypoint(self, index)
+--- ship:commandRemoveWaypoint(1) -- remove wp 1 from set 1
+--- ship:commandRemoveWaypoint(1, 2) -- remove wp 1 from set 2
+function Entity:commandRemoveWaypoint(index, set_id)
+    commandRemoveWaypoint(self, index, set_id or 1)
     return self
 end
---- Commands this player ship to move the waypoint with the given index to the given coordinates.
---- This uses a 0-index, while waypoints are numbered on player screens with a 1-index.
+--- Commands this player ship to move the waypoint with the given ID to the given coordinates.
+--- Optional set_id (1-4, default 1) selects the waypoint set.
 --- Example:
---- ship:commandMoveWaypoint(0,-1000,-2000) -- moves waypoint 1 to -1000,-2000
-function Entity:commandMoveWaypoint(index, x, y)
-    commandMoveWaypoint(self, index, x, y)
+--- ship:commandMoveWaypoint(1, -1000, -2000) -- move wp 1 from set 1
+--- ship:commandMoveWaypoint(1, -1000, -2000, 2) -- move wp 1 from set 2
+function Entity:commandMoveWaypoint(index, x, y, set_id)
+    commandMoveWaypoint(self, index, x, y, set_id or 1)
+    return self
+end
+--- Commands this player ship to set or clear the route flag for a waypoint set.
+--- Optional set_id (1-4, default 1) selects the waypoint set.
+--- Example:
+--- ship:commandSetWaypointRoute(true) -- make set 1 a route
+--- ship:commandSetWaypointRoute(false, 2) -- remove routes from set 2
+function Entity:commandSetWaypointRoute(is_route, set_id)
+    commandSetWaypointRoute(self, is_route, set_id or 1)
     return self
 end
 --- Commands this player ship to activate its self-destruct sequence.

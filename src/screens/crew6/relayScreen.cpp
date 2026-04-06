@@ -43,75 +43,88 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", MAX_ZOOM_DISTANCE, &targets);
-    radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
-    radar->setAutoCentering(false);
-    radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
-    radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) { //down
-            if (mode == TargetSelection && targets.getWaypointIndex() > -1) {
-                if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
-                    if (auto waypoint_position = waypoints->get(targets.getWaypointIndex())) {
-                        if (glm::length(waypoint_position.value() - position) < 1000.0f) {
-                            mode = MoveWaypoint;
-                            drag_waypoint_index = targets.getWaypointIndex();
+    radar
+        ->longRange()
+        ->enableWaypoints()
+        ->enableCallsigns()
+        ->setStyle(GuiRadarView::Rectangular)
+        ->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar)
+        ->setAutoCentering(false)
+        ->setCallbacks(
+            [this](sp::io::Pointer::Button button, glm::vec2 position)
+            { // Down
+                if (mode == TargetSelection && targets.getWaypointIndex() > -1)
+                {
+                    if (auto waypoints = my_spaceship.getComponent<Waypoints>())
+                    {
+                        if (auto waypoint_position = waypoints->get(targets.getWaypointIndex(), targets.getWaypointSetId()))
+                        {
+                            if (glm::length(waypoint_position.value() - position) < 1000.0f)
+                            {
+                                mode = MoveWaypoint;
+                                drag_waypoint_index = targets.getWaypointIndex();
+                                drag_waypoint_set = targets.getWaypointSetId();
+                            }
                         }
                     }
                 }
+                mouse_down_position = position;
+            },
+            [this](glm::vec2 position)
+            { // Drag
+                if (mode == TargetSelection)
+                    radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
+                if (mode == MoveWaypoint && my_spaceship)
+                    my_player_info->commandMoveWaypoint(drag_waypoint_index, position, drag_waypoint_set);
+            },
+            [this](glm::vec2 position)
+            { // Up
+                switch(mode)
+                {
+                case TargetSelection:
+                    targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
+                    break;
+                case WaypointPlacement:
+                    if (my_spaceship) my_player_info->commandAddWaypoint(position, active_waypoint_set);
+                    mode = TargetSelection;
+                    option_buttons->show();
+                    cancel_button->hide();
+                    break;
+                case MoveWaypoint:
+                    mode = TargetSelection;
+                    targets.setWaypointIndex(drag_waypoint_index, drag_waypoint_set);
+                    break;
+                case LaunchProbe:
+                    if (my_spaceship) my_player_info->commandLaunchProbe(position);
+                    mode = TargetSelection;
+                    option_buttons->show();
+                    cancel_button->hide();
+                    break;
+                }
+            },
+            [this](float value, glm::vec2 position)
+            { // Wheel
+                // Calculate the new zoom level.
+                const float view_distance = std::clamp(
+                    radar->getDistance() * (1.0f - value * 0.1f),
+                    MIN_ZOOM_DISTANCE,
+                    MAX_ZOOM_DISTANCE
+                );
+
+                // Get the world coordinates under the pointer before zooming.
+                const glm::vec2 world_position_before_zoom = radar->screenToWorld(position);
+
+                // Set the new zoom level.
+                radar->setDistance(view_distance);
+                zoom_slider->setValue(view_distance);
+
+                // Adjust the radar's view position to keep the world coordinates
+                // under the pointer consistent.
+                radar->setViewPosition(radar->getViewPosition() + world_position_before_zoom - radar->screenToWorld(position));
             }
-            mouse_down_position = position;
-        },
-        [this](glm::vec2 position) { //drag
-            if (mode == TargetSelection)
-                radar->setViewPosition(radar->getViewPosition() - (position - mouse_down_position));
-            if (mode == MoveWaypoint && my_spaceship)
-                my_player_info->commandMoveWaypoint(drag_waypoint_index, position);
-        },
-        [this](glm::vec2 position) { //up
-            switch(mode)
-            {
-            case TargetSelection:
-                targets.setToClosestTo(position, 1000, TargetsContainer::Targetable);
-                break;
-            case WaypointPlacement:
-                if (my_spaceship)
-                    my_player_info->commandAddWaypoint(position);
-                mode = TargetSelection;
-                option_buttons->show();
-                cancel_button->hide();
-                break;
-            case MoveWaypoint:
-                mode = TargetSelection;
-                targets.setWaypointIndex(drag_waypoint_index);
-                break;
-            case LaunchProbe:
-                if (my_spaceship)
-                    my_player_info->commandLaunchProbe(position);
-                mode = TargetSelection;
-                option_buttons->show();
-                cancel_button->hide();
-                break;
-            }
-        },
-        [this](float value, glm::vec2 position) { // wheel
-            // Calculate the new zoom level.
-            const float view_distance = std::clamp(
-                radar->getDistance() * (1.0f - value * 0.1f),
-                MIN_ZOOM_DISTANCE,
-                MAX_ZOOM_DISTANCE
-            );
-
-            // Get the world coordinates under the pointer before zooming.
-            const glm::vec2 world_position_before_zoom = radar->screenToWorld(position);
-
-            // Set the new zoom level.
-            radar->setDistance(view_distance);
-            zoom_slider->setValue(view_distance);
-
-            // Adjust the radar's view position to keep the world coordinates
-            // under the pointer consistent.
-            radar->setViewPosition(radar->getViewPosition() + world_position_before_zoom - radar->screenToWorld(position));
-        }
-    );
+        )
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
         radar->setViewPosition(transform->getPosition());
@@ -171,19 +184,46 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() {
-        mode = WaypointPlacement;
-        option_buttons->hide();
-        cancel_button->setText(tr("Cancel waypoint"))->show();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"), [this]() {
-        if (my_spaceship && targets.getWaypointIndex() >= 0)
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"),
+        [this]()
         {
-            my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
+            mode = WaypointPlacement;
+            option_buttons->hide();
+            cancel_button
+                ->setText(tr("Cancel waypoint"))
+                ->show();
         }
-    });
-    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
+    ))->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
+        [this]()
+        {
+            if (my_spaceship && targets.getWaypointIndex() >= 0)
+                my_player_info->commandRemoveWaypoint(targets.getWaypointIndex(), targets.getWaypointSetId());
+        }
+    );
+    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Waypoint set selector, shown only when multiple sets are enabled.
+    waypoint_set_selector = new GuiSelector(option_buttons, "WAYPOINT_SET_SELECTOR",
+        [this](int index, string value)
+        {
+            active_waypoint_set = index + 1;
+        }
+    );
+    waypoint_set_selector
+        ->setOptions({tr("Waypoint set 1"), tr("Waypoint set 2"), tr("Waypoint set 3"), tr("Waypoint set 4")})
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    // Route toggle, shown only when server allows routes.
+    route_toggle = new GuiToggleButton(option_buttons, "WAYPOINT_ROUTE_TOGGLE", tr("Show as route"),
+        [this](bool value)
+        {
+            if (my_spaceship) my_player_info->commandSetWaypointRoute(value, active_waypoint_set);
+        }
+    );
+    route_toggle->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Launch probe button.
     launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"), [this]() {
@@ -341,4 +381,15 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     delete_waypoint_button->setEnable(targets.getWaypointIndex() >= 0);
+
+    // Show/hide waypoint set selector and route toggle based on global settings
+    waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets);
+    route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes);
+
+    // Sync route toggle from current ship state
+    if (my_spaceship && gameGlobalInfo->enable_waypoint_routes)
+    {
+        if (auto wp = my_spaceship.getComponent<Waypoints>())
+            route_toggle->setValue(wp->is_route[active_waypoint_set - 1]);
+    }
 }

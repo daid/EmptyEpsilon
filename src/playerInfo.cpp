@@ -104,6 +104,7 @@ static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
 static const uint16_t CMD_ABORT_JUMP = 0x002C;
+static const uint16_t CMD_SET_WAYPOINT_ROUTE = 0x002D;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -406,24 +407,31 @@ void PlayerInfo::commandSetShieldFrequency(int32_t frequency)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandAddWaypoint(glm::vec2 position)
+void PlayerInfo::commandAddWaypoint(glm::vec2 position, int32_t set_id)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_ADD_WAYPOINT << position;
+    packet << CMD_ADD_WAYPOINT << position << set_id;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandRemoveWaypoint(int32_t index)
+void PlayerInfo::commandRemoveWaypoint(int32_t index, int32_t set_id)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_REMOVE_WAYPOINT << index;
+    packet << CMD_REMOVE_WAYPOINT << index << set_id;
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandMoveWaypoint(int32_t index, glm::vec2 position)
+void PlayerInfo::commandMoveWaypoint(int32_t index, glm::vec2 position, int32_t set_id)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_MOVE_WAYPOINT << index << position;
+    packet << CMD_MOVE_WAYPOINT << index << position << set_id;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandSetWaypointRoute(bool is_route, int32_t set_id)
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_SET_WAYPOINT_ROUTE << is_route << set_id;
     sendClientCommand(packet);
 }
 
@@ -861,19 +869,21 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_ADD_WAYPOINT:
         {
             glm::vec2 position{};
-            packet >> position;
+            int32_t set_id = 1;
+            packet >> position >> set_id;
             auto wp = ship.getComponent<Waypoints>();
             if (wp) {
-                wp->addNew(position);
+                wp->addNew(position, set_id);
             }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
             int32_t id;
-            packet >> id;
+            int32_t set_id = 1;
+            packet >> id >> set_id;
             if (auto wp = ship.getComponent<Waypoints>()) {
-                wp->remove(id);
+                wp->remove(id, set_id);
             }
         }
         break;
@@ -881,9 +891,20 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t id;
             glm::vec2 position{};
-            packet >> id >> position;
+            int32_t set_id = 1;
+            packet >> id >> position >> set_id;
             if (auto wp = ship.getComponent<Waypoints>()) {
-                wp->move(id, position);
+                wp->move(id, position, set_id);
+            }
+        }
+        break;
+    case CMD_SET_WAYPOINT_ROUTE:
+        {
+            bool is_route;
+            int32_t set_id = 1;
+            packet >> is_route >> set_id;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->setRoute(is_route, set_id);
             }
         }
         break;

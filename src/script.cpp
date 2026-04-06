@@ -1067,26 +1067,26 @@ void luaCommandSetShieldFrequency(sp::ecs::Entity ship, int frequency) {
     }
 }
 
-static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}); return; }
-    if (auto wp = ship.getComponent<Waypoints>()) {
-        wp->addNew({x, y});
-    }
+static void luaCommandAddWaypoint(sp::ecs::Entity ship, float x, float y, int set_id = 1) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandAddWaypoint({x, y}, set_id); return; }
+    if (auto wp = ship.getComponent<Waypoints>())
+        wp->addNew({x, y}, set_id);
 }
 
-static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index); return; }
-    auto wp = ship.getComponent<Waypoints>();
-    if (wp && index >= 0 && index < int(wp->waypoints.size())) {
-        wp->waypoints.erase(wp->waypoints.begin() + index);
-        wp->dirty = true;
-    }
+static void luaCommandRemoveWaypoint(sp::ecs::Entity ship, int index, int set_id = 1) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandRemoveWaypoint(index, set_id); return; }
+    if (auto wp = ship.getComponent<Waypoints>())
+        wp->remove(index, set_id);
 }
-static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}); return; }
-    if (auto wp = ship.getComponent<Waypoints>()) {
-        wp->move(index, {x, y});
-    }
+static void luaCommandMoveWaypoint(sp::ecs::Entity ship, int index, float x, float y, int set_id = 1) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandMoveWaypoint(index, {x, y}, set_id); return; }
+    if (auto wp = ship.getComponent<Waypoints>())
+        wp->move(index, {x, y}, set_id);
+}
+static void luaCommandSetWaypointRoute(sp::ecs::Entity ship, bool is_route, int set_id = 1) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetWaypointRoute(is_route, set_id); return; }
+    if (auto wp = ship.getComponent<Waypoints>())
+        wp->setRoute(is_route, set_id);
 }
 static void luaCommandActivateSelfDestruct(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandActivateSelfDestruct(); return; }
@@ -1321,6 +1321,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
     env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
+    env.setGlobal("commandSetWaypointRoute", &luaCommandSetWaypointRoute);
     env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
