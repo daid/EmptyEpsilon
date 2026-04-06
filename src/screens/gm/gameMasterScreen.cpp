@@ -761,7 +761,7 @@ void GameMasterScreen::onMouseDown(sp::io::Pointer::Button button, glm::vec2 pos
 {
     if (click_and_drag_state != ClickAndDragState::None) return;
 
-    if (button == sp::io::Pointer::Button::Left)
+    if (button == sp::io::Pointer::Button::Left && main_radar->getWaypoints())
     {
         // Check if the click is near any player ship waypoint.
         float min_drag_distance = main_radar->getDistance() / 450.0f * 10.0f;
