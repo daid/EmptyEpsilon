@@ -387,6 +387,70 @@ function Entity:scanningChannelDepth()
     if self.components.scan_state then return self.components.scan_state.depth end
     return 0
 end
+--- Sets a per-entity hacking difficulty override for this entity, replacing the global hacking difficulty for this target.
+--- Valid values are between 0 (easiest) and 3 (hardest), matching the global setting range.
+--- Pass -1 to clear the override and use the global hacking difficulty instead.
+--- Example: entity:setHackingDifficulty(3)
+function Entity:setHackingDifficulty(difficulty)
+    if difficulty < 0 then
+        local games = self.components.hacking_target and self.components.hacking_target.games or -1
+        -- If neither difficulty nor game type is customized, remove the HackingTarget component.
+        if games < 0 then
+            self.components.hacking_target = nil
+        else
+            self.components.hacking_target = {difficulty=-1}
+        end
+    else
+        self.components.hacking_target = {difficulty=difficulty}
+    end
+    return self
+end
+--- Returns the per-entity hacking difficulty override for this entity.
+--- Returns a number between 0 (easiest) and 3 (hardest), or -1 if no override is set and the global hacking difficulty applies.
+--- Example:
+--- entity:setHackingDifficulty(3)
+--- entity:getHackingDifficulty() -- returns 3
+function Entity:getHackingDifficulty()
+    if self.components.hacking_target then return self.components.hacking_target.difficulty end
+    return -1
+end
+--- Sets a per-entity hacking game override for this entity, replacing the global hacking game setting for this target.
+--- Valid values are "mines", "lights", or "all". Pass nil to clear the override.
+--- Example: entity:setHackingGame("mines")
+function Entity:setHackingGame(game)
+    local games = -1
+    if game == "mines" then games = 0
+    elseif game == "lights" then games = 1
+    elseif game == "all" then games = 2
+    end
+    -- If neither difficulty nor game type is customized, remove the HackingTarget component.
+    if games < 0 then
+        local difficulty = self.components.hacking_target and self.components.hacking_target.difficulty or -1
+        if difficulty < 0 then
+            self.components.hacking_target = nil
+        else
+            self.components.hacking_target = {games=-1}
+        end
+    else
+        self.components.hacking_target = {games=games}
+    end
+    return self
+end
+--- Returns the per-entity hacking game override for this entity.
+--- Returns "mines", "lights", or "all", or nil if no override is set.
+--- Example:
+--- entity:setHackingGame("mines")
+--- entity:getHackingGame() -- returns "mines"
+function Entity:getHackingGame()
+    if self.components.hacking_target then
+        local g = self.components.hacking_target.games
+        if g == 0 then return "mines"
+        elseif g == 1 then return "lights"
+        elseif g == 2 then return "all"
+        end
+    end
+    return nil
+end
 --- Defines whether all factions consider this entity as having been scanned.
 --- Only ship entities are created in an unscanned state. Other entities are created as fully scanned.
 --- If false, all factions treat this entity as unscanned.
