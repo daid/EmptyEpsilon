@@ -1,19 +1,25 @@
-#ifndef DOCKING_BUTTON_H
-#define DOCKING_BUTTON_H
+#pragma once
 
-#include "gui/gui2_button.h"
+#include "gui/gui2_panel.h"
+#include "ecs/entity.h"
 
-class GuiDockingButton : public GuiButton
+class GuiButton;
+class GuiListbox;
+
+// Button/listbox combo to manage docking state and select a docking target.
+class GuiDockingButton : public GuiPanel
 {
 public:
     GuiDockingButton(GuiContainer* owner, string id);
 
     virtual void onUpdate() override;
-    virtual void onDraw(sp::RenderTarget& target) override;
 private:
-    void click();
+    static constexpr float item_height = 50.0f;
 
-    sp::ecs::Entity findDockingTarget();
+    GuiButton* action_button;
+    GuiListbox* target_list;
+    std::vector<sp::ecs::Entity> dock_targets;
+    bool expanded = false;
+
+    std::vector<sp::ecs::Entity> findDockingTargets();
 };
-
-#endif//DOCKING_BUTTON_H
