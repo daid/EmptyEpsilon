@@ -511,6 +511,63 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_PAGE(tr("tweak-tab", "Hacking"), HackingDevice);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Effectiveness:"), HackingDevice, effectiveness);
 
+    ADD_PAGE(tr("tweak-tab", "Hacking target"), HackingTarget);
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-text", "Difficulty:"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+        auto ui = new GuiSelectorTweak(row, "",
+            [this](int index, string value)
+            {
+                if (auto v = entity.getComponent<HackingTarget>())
+                    v->difficulty = index - 1;
+            }
+        );
+        ui->addEntry(tr("hacking", "Global default"), "");
+        ui->addEntry(tr("hacking", "Simple"), "");
+        ui->addEntry(tr("hacking", "Normal"), "");
+        ui->addEntry(tr("hacking", "Difficult"), "");
+        ui->addEntry(tr("hacking", "Fiendish"), "");
+        ui->update_func = [this]() -> int {
+            if (auto v = entity.getComponent<HackingTarget>())
+                return v->difficulty + 1;
+            return 0;
+        };
+    }
+    {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->setAttribute("layout", "horizontal");
+
+        (new GuiLabel(row, "", tr("tweak-text", "Game:"), 20.0f))
+            ->setAlignment(sp::Alignment::CenterRight)
+            ->setSize(GuiElement::GuiSizeMax, 30.0f);
+
+        auto ui = new GuiSelectorTweak(row, "",
+            [this](int index, string value)
+            {
+                if (auto v = entity.getComponent<HackingTarget>())
+                    v->games = index - 1;
+            }
+        );
+        ui->addEntry(tr("hacking", "Global default"), "");
+        ui->addEntry(tr("hacking", "Mine"), "");
+        ui->addEntry(tr("hacking", "Lights"), "");
+        ui->addEntry(tr("hacking", "All"), "");
+        ui->update_func = [this]() -> int {
+            if (auto v = entity.getComponent<HackingTarget>())
+                return v->games + 1;
+            return 0;
+        };
+    }
+
     ADD_PAGE(tr("tweak-tab", "Self-destruct"), SelfDestruct);
     ADD_BOOL_TWEAK(tr("tweak-text", "Active:"), SelfDestruct, active);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Countdown:"), SelfDestruct, countdown);
