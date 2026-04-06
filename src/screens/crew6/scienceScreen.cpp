@@ -125,8 +125,30 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_heading->setSize(GuiElement::GuiSizeMax, 30);
     info_relspeed = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_REL_SPEED", 0.4, tr("science", "Rel. Speed"), "");
     info_relspeed->setSize(GuiElement::GuiSizeMax, 30);
-    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4, tr("science", "Faction"), "");
-    info_faction->setSize(GuiElement::GuiSizeMax, 30);
+    info_faction = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_FACTION", 0.4f, tr("science", "Faction"), "");
+    info_faction->setSize(GuiElement::GuiSizeMax, 30.0f);
+    info_faction_button = new GuiButton(info_faction, "SCIENCE_FACTION_BUTTON", tr("scienceButton", "DB"),
+        [this]()
+        {
+            auto ship = targets.get();
+            auto faction = Faction::getInfo(ship);
+
+            if (!faction.locale_name.empty())
+            {
+                if (database_view->findAndDisplayEntry(faction.locale_name))
+                {
+                    view_mode_selection->setSelectionIndex(1);
+                    radar_view->hide();
+                    background_gradient->hide();
+                    database_view->show();
+                }
+            }
+        }
+    );
+    info_faction_button
+        ->setTextSize(20.0f)
+        ->setPosition(0.0f, 1.0f, sp::Alignment::TopLeft)
+        ->setSize(50.0f, 28.0f);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
     info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this]() {
@@ -323,6 +345,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_shield_frequency->setFrequency(-1)->hide();
     info_beam_frequency->setFrequency(-1)->hide();
     info_description->hide();
+    info_faction_button->hide();
     info_type_button->hide();
     sidebar_pager->hide();
 
@@ -412,6 +435,7 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         {
             auto faction = Faction::getInfo(target);
             info_faction->setValue(faction.locale_name);
+            info_faction_button->show();
             if (auto tn = target.getComponent<TypeName>())
                 info_type->setValue(tn->localized);
             info_type_button->show();
