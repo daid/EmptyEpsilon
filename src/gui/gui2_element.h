@@ -69,6 +69,7 @@ public:
     GuiElement* enable();
     GuiElement* disable();
     bool isEnabled() const;
+    bool hasFocus() const { return focus; }
 
     void moveToFront();
     void moveToBack();
