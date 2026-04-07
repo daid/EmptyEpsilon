@@ -559,7 +559,11 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (probe_view_button->getValue() && rl && rl->linked_entity) {
+                if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                    targets.setNext(probe_transform->getPosition(), PROBE_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
+            } else if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
             }
