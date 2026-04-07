@@ -536,34 +536,50 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
 void ScienceScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (!my_spaceship || !isVisible()) return;
+
+    // Initiate a scan on scannable objects.
+    if (keys.science_scan_object.getDown() &&
+        my_spaceship.hasComponent<ScienceScanner>() &&
+        my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
     {
-        // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
+        auto obj = targets.get();
+
+        // Allow scanning only if the object is scannable, and if the player
+        // isn't already scanning something.
+        auto scanstate = obj.getComponent<ScanState>();
+        if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
+        {
+            my_player_info->commandScan(obj);
+            return;
+        }
+    }
+
+    // Cycle selectable entities.
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    {
+        const float view_range = science_radar->getDistance();
+
+        // Select previous/next scannable entity.
+        if (my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            auto obj = targets.get();
-
-            // Allow scanning only if the object is scannable, and if the player
-            // isn't already scanning something.
-            auto scanstate = obj.getComponent<ScanState>();
-            if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
-            {
-                my_player_info->commandScan(obj);
-                return;
-            }
+            if (keys.science_select_next_scannable.getDown())
+                targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Scannable);
+            if (keys.science_select_prev_scannable.getDown())
+                targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Scannable);
         }
 
-        // Cycle selection through scannable objects.
-        if (keys.science_select_next_scannable.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
-        {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
-            }
-        }
+        // Select previous/next hostile entity.
+        if (keys.science_enemy_next_target.getDown())
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+        if (keys.science_enemy_prev_target.getDown())
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+
+        // Select previous/next selectable entity.
+        if (keys.science_next_target.getDown())
+            targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable);
+        if (keys.science_prev_target.getDown())
+            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable);
     }
 }

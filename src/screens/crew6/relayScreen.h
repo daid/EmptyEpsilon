@@ -53,4 +53,5 @@ public:
     RelayScreen(GuiContainer* owner, bool allow_comms);
 
     virtual void onDraw(sp::RenderTarget& target) override;
+    virtual void onUpdate() override;
 };
