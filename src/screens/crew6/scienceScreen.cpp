@@ -558,28 +558,41 @@ void ScienceScreen::onUpdate()
     // Cycle selectable entities.
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
     {
-        const float view_range = science_radar->getDistance();
+        auto scanner = my_spaceship.getComponent<ScienceScanner>();
+        glm::vec2 scanner_position = transform->getPosition();
+        float scanner_range = science_radar->getDistance();
+
+        if (auto rl = my_spaceship.getComponent<RadarLink>())
+        {
+            if (probe_view_button->getValue() && rl && rl->linked_entity)
+            {
+                if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    scanner_position = probe_transform->getPosition();
+                    scanner_range = PROBE_ZOOM_DISTANCE;
+                }
+            }
+        }
 
         // Select previous/next scannable entity.
-        if (my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+        if (scanner && scanner->delay == 0.0f)
         {
             if (keys.science_select_next_scannable.getDown())
-                targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
             if (keys.science_select_prev_scannable.getDown())
-                targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
         }
 
         // Select previous/next hostile entity.
         if (keys.science_enemy_next_target.getDown())
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
         if (keys.science_enemy_prev_target.getDown())
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
 
         // Select previous/next selectable entity.
         if (keys.science_next_target.getDown())
-            targets.setNext(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable);
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
         if (keys.science_prev_target.getDown())
-            targets.setPrev(transform->getPosition(), view_range, TargetsContainer::ESelectionType::Selectable);
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
     }
 }
