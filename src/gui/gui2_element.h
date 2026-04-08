@@ -1,5 +1,4 @@
-#ifndef GUI2_ELEMENT_H
-#define GUI2_ELEMENT_H
+#pragma once
 
 #include <functional>
 #include "stringImproved.h"
@@ -91,5 +90,3 @@ public:
 protected:
     State getState() const;
 };
-
-#endif//GUI2_ELEMENT_H
