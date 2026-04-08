@@ -120,6 +120,13 @@ public:
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_scan_abort;
     sp::io::Keybinding science_select_next_scannable;
+    sp::io::Keybinding science_open_radar;
+    sp::io::Keybinding science_open_database;
+    sp::io::Keybinding science_open_database_target;
+    sp::io::Keybinding science_sidebar_prev;
+    sp::io::Keybinding science_sidebar_next;
+    sp::io::Keybinding science_sidebar_pager_prev;
+    sp::io::Keybinding science_sidebar_pager_next;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;

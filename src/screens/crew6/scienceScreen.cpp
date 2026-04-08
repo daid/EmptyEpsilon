@@ -129,19 +129,22 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
     info_type = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_TYPE", 0.4, tr("science", "Type"), "");
     info_type->setSize(GuiElement::GuiSizeMax, 30);
-    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"), [this]() {
-        auto ship = targets.get();
-        if (auto tn = ship.getComponent<TypeName>())
+    info_type_button = new GuiButton(info_type, "SCIENCE_TYPE_BUTTON", tr("scienceButton", "DB"),
+        [this]()
         {
-            if (database_view->findAndDisplayEntry(tn->type_name) || database_view->findAndDisplayEntry(tn->localized))
+            auto ship = targets.get();
+            if (auto tn = ship.getComponent<TypeName>())
             {
-                view_mode_selection->setSelectionIndex(1);
-                radar_view->hide();
-                background_gradient->hide();
-                database_view->show();
+                if (database_view->findAndDisplayEntry(tn->type_name) || database_view->findAndDisplayEntry(tn->localized))
+                {
+                    view_mode_selection->setSelectionIndex(1);
+                    radar_view->hide();
+                    background_gradient->hide();
+                    database_view->show();
+                }
             }
         }
-    });
+    );
     info_type_button->setTextSize(20)->setPosition(0, 1, sp::Alignment::TopLeft)->setSize(50, 28);
     info_shields = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SHIELDS", 0.4, tr("science", "Shields"), "");
     info_shields->setSize(GuiElement::GuiSizeMax, 30);
@@ -564,6 +567,71 @@ void ScienceScreen::onUpdate()
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
             }
+        }
+
+        // Open radar view.
+        if (keys.science_open_radar.getDown())
+        {
+            view_mode_selection->setSelectionIndex(0);
+            radar_view->show();
+            background_gradient->show();
+            database_view->hide();
+        }
+
+        // Open database view.
+        if (keys.science_open_database.getDown())
+        {
+            view_mode_selection->setSelectionIndex(1);
+            radar_view->hide();
+            background_gradient->hide();
+            database_view->show();
+        }
+
+        // Open database entry for the selected target.
+        if (keys.science_open_database_target.getDown())
+        {
+            auto target = targets.get();
+            auto scanstate_component = target.getComponent<ScanState>();
+            auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
+            if (auto tn = target.getComponent<TypeName>())
+            {
+                if (scanstate >= ScanState::State::SimpleScan
+                    && (database_view->findAndDisplayEntry(tn->type_name) || database_view->findAndDisplayEntry(tn->localized)))
+                {
+                    view_mode_selection->setSelectionIndex(1);
+                    radar_view->hide();
+                    background_gradient->hide();
+                    database_view->show();
+                }
+            }
+        }
+
+        // Navigate the sidebar tab selector (Scanning / Other).
+        if (keys.science_sidebar_next.getDown() && sidebar_selector->isVisible())
+        {
+            int count = sidebar_selector->entryCount();
+            if (count > 0)
+                sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + 1) % count);
+        }
+        if (keys.science_sidebar_prev.getDown() && sidebar_selector->isVisible())
+        {
+            int count = sidebar_selector->entryCount();
+            if (count > 0)
+                sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + count - 1) % count);
+        }
+
+        // Navigate the sidebar pager (Tactical / Systems / Description).
+        if (keys.science_sidebar_pager_next.getDown() && sidebar_pager->isVisible())
+        {
+            int count = sidebar_pager->entryCount();
+            if (count > 0)
+                sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + 1) % count);
+        }
+        if (keys.science_sidebar_pager_prev.getDown() && sidebar_pager->isVisible())
+        {
+            int count = sidebar_pager->entryCount();
+            if (count > 0)
+                sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + count - 1) % count);
         }
     }
 }
