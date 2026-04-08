@@ -213,7 +213,6 @@ GuiCommsOverlay::GuiCommsOverlay(GuiContainer* owner)
     // Text area shared by both chat and scripted comms.
     comms_dialog_text = new GuiScrollFormattedText(comms_dialog_box, "COMMS_DIALOG_TEXT", "");
     comms_dialog_text
-        ->enableAutoScrollDown()
         ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setMargins(20.0f);
 
@@ -305,6 +304,10 @@ void GuiCommsOverlay::onUpdate()
         comms_dialog_box->setVisible((is_open || is_script) && !comms_minimized);
         chat_comms_message_entry->setVisible(is_open);
         chat_comms_send_button->setVisible(is_open);
+        if (is_open)
+            comms_dialog_text->enableAutoScrollDown();
+        else
+            comms_dialog_text->disableAutoScrollDown();
 
         string restore_text;
         if (is_opening)
