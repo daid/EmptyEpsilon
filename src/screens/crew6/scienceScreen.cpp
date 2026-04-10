@@ -151,26 +151,12 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     info_hull = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_HULL", 0.4, tr("science", "Hull"), "");
     info_hull->setSize(GuiElement::GuiSizeMax, 30);
 
-    // Full scan data
-
-    // Draw and hide the sidebar pager.
+    // Full scan data sidebar.
+    // Draw and hide the sidebar pager. Tabs are populated dynamically in onDraw.
     sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
-    sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
-
-    // If the server uses frequencies, add the Tactical sidebar page.
-    if (gameGlobalInfo->use_beam_shield_frequencies)
-    {
-        sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
-    }
-
-    // Add sidebar page for systems.
-    sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
-
-    // Add sidebar page for a description.
-    sidebar_pager->addEntry(tr("scienceTab", "Description"), "Description");
-
-    // Default the pager to the first item.
-    sidebar_pager->setSelectionIndex(0);
+    sidebar_pager
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->hide();
 
     // Prep and hide the frequency graphs.
     info_shield_frequency = new GuiFrequencyCurve(info_sidebar, "SCIENCE_SHIELD_FREQUENCY", false, true);
@@ -186,16 +172,21 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     }
 
     // List each system's status.
-    for(int n = 0; n < ShipSystem::COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
-        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75, getLocaleSystemName(ShipSystem::Type(n)), "-");
-        info_system[n]->setSize(GuiElement::GuiSizeMax, 30);
-        info_system[n]->hide();
+        info_system[n] = new GuiKeyValueDisplay(info_sidebar, "SCIENCE_SYSTEM_" + string(n), 0.75f, getLocaleSystemName(ShipSystem::Type(n)), "-");
+        info_system[n]
+            ->setSize(GuiElement::GuiSizeMax, 30.0f)
+            ->hide();
     }
 
     // Prep and hide the description text area.
     info_description = new GuiScrollFormattedText(info_sidebar, "SCIENCE_DESC", "");
-    info_description->setTextSize(28)->setMargins(20, 0, 0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)->hide();
+    info_description
+        ->setTextSize(28.0f)
+        ->setMargins(20.0f, 0.0f, 0.0f, 0.0f)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->hide();
 
     // Prep and hide the database view.
     database_view = new DatabaseViewComponent(this);
@@ -218,23 +209,32 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setItemsPadding(120);
 
     // Probe view button
-    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe View"), [this](bool value){
-        auto rl = my_spaceship.getComponent<RadarLink>();
-        if (value && rl && rl->linked_entity)
+    probe_view_button = new GuiToggleButton(radar_view, "PROBE_VIEW", tr("scienceButton", "Probe view"),
+        [this](bool value)
         {
-            auto transform = rl->linked_entity.getComponent<sp::Transform>();
-            if (transform) {
-                science_radar->hide();
-                probe_radar->show();
-                probe_radar->setViewPosition(transform->getPosition())->show();
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (value && rl && rl->linked_entity)
+            {
+                auto transform = rl->linked_entity.getComponent<sp::Transform>();
+                if (transform)
+                {
+                    science_radar->hide();
+                    probe_radar
+                        ->setViewPosition(transform->getPosition())
+                        ->show();
+                }
             }
-        }else{
-            probe_view_button->setValue(false);
-            science_radar->show();
-            probe_radar->hide();
-        }
+            else
+            {
+                probe_view_button->setValue(false);
+                science_radar->show();
+                probe_radar->hide();
+            }
     });
-    probe_view_button->setPosition(20, -120, sp::Alignment::BottomLeft)->setSize(200, 50)->disable();
+    probe_view_button
+        ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, 50.0f)
+        ->disable();
 
     // Draw the zoom slider.
     float lrr_long = lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE;
@@ -245,12 +245,19 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
         ->setSize(250.0f, 50.0f);
 
     // Radar/database view toggle.
-    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION", [this](int index, string value) {
-        radar_view->setVisible(index == 0);
-        background_gradient->setVisible(index == 0);
-        database_view->setVisible(index == 1);
-    });
-    view_mode_selection->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})->setSelectionIndex(0)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(200, 100);
+    view_mode_selection = new GuiListbox(this, "VIEW_SELECTION",
+        [this](int index, string value)
+        {
+            radar_view->setVisible(index == 0);
+            background_gradient->setVisible(index == 0);
+            database_view->setVisible(index == 1);
+        }
+    );
+    view_mode_selection
+        ->setOptions({tr("scienceButton", "Radar"), tr("scienceButton", "Database")})
+        ->setSelectionIndex(0)
+        ->setPosition(20.0f, -20.0f, sp::Alignment::BottomLeft)
+        ->setSize(200.0f, 100.0f);
 
     // Scanning dialog.
     new GuiScanningDialog(this, "SCANNING_DIALOG");
@@ -259,62 +266,74 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
-    if (!isVisible())
-        return;
+    if (!isVisible()) return;
 
     auto lrr = my_spaceship.getComponent<LongRangeRadar>();
     science_radar->setVisible(lrr != nullptr);
-    if (!lrr)
-        return;
-    auto rl = my_spaceship.getComponent<RadarLink>();
+    if (!lrr) return;
 
+    auto rl = my_spaceship.getComponent<RadarLink>();
     float view_distance = science_radar->getDistance();
     float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (key_zoom_delta != 0)
-        view_distance *= (1.0f - (key_zoom_delta * 0.1f));
 
+    if (key_zoom_delta != 0) view_distance *= (1.0f - (key_zoom_delta * 0.1f));
+
+    // No std::clamp in case short_range > long_range.
     view_distance = std::min(view_distance, lrr->long_range);
     view_distance = std::max(view_distance, lrr->short_range);
-    if (view_distance!=science_radar->getDistance() || previous_long_range_radar != lrr->long_range || previous_short_range_radar != lrr->short_range)
+
+    // Update radar view distances and zoom range if changed.
+    if (view_distance != science_radar->getDistance()
+        || previous_long_range_radar != lrr->long_range
+        || previous_short_range_radar != lrr->short_range)
     {
         previous_short_range_radar = lrr->long_range;
         previous_long_range_radar = lrr->short_range;
-        zoom_slider->setRange(lrr->long_range, lrr->short_range)->setValue(view_distance);
+        zoom_slider
+            ->setRange(lrr->long_range, lrr->short_range)
+            ->setValue(view_distance);
     }
 
+    // If in probe view to a radar-linked entity, clear target selection if
+    // target is out of probe view range.
     if (probe_view_button->getValue() && rl && rl->linked_entity)
     {
         auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
         auto target_transform = targets.get().getComponent<sp::Transform>();
         if (!probe_transform || !target_transform || glm::length2(probe_transform->getPosition() - target_transform->getPosition()) > 5000.0f * 5000.0f)
             targets.clear();
-    }else{
+    }
+    // Otherwise, clear target if target is radar blocked/out of range or if we
+    // don't have a transform (exploded or internally docked).
+    else
+    {
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         if (!my_transform || RadarBlockSystem::isRadarBlockedFrom(my_transform->getPosition(), targets.get(), lrr->short_range))
             targets.clear();
     }
 
-    // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10, so this would roughly be the threshold.
-
-    int current_width = getRect().size.x;
+    // Responsive layout for custom button sidebar. 1440x900 vpixels is 16:10,
+    // so this would roughly be the threshold.
+    const int current_width = getRect().size.x;
     sidebar_selector->setVisible(current_width < 1435 && (sidebar_selector->getSelectionIndex() > 0 || custom_function_sidebar->hasEntries()));
     if (current_width < 1435 || !custom_function_sidebar->hasEntries())
     {
-        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
-        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight);
         custom_function_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 1);
-        custom_function_sidebar->setPosition(-20, 210, sp::Alignment::TopRight);
+        custom_function_sidebar->setPosition(-20.0f, 210.0f, sp::Alignment::TopRight);
         info_sidebar->setVisible(sidebar_selector->getSelectionIndex() == 0);
     }
     else
     {
-        info_sidebar->setPosition(-20, 170, sp::Alignment::TopRight);
-        sidebar_selector->setPosition(-20, 120, sp::Alignment::TopRight);
-        custom_function_sidebar->setPosition(-280, 170, sp::Alignment::TopRight);
+        info_sidebar->setPosition(-20.0f, 170.0f, sp::Alignment::TopRight);
+        sidebar_selector->setPosition(-20.0f, 120.0f, sp::Alignment::TopRight);
+        custom_function_sidebar->setPosition(-280.0f, 170.0f, sp::Alignment::TopRight);
         custom_function_sidebar->show();
         info_sidebar->show();
     }
 
+    // Reset scan info.
     info_callsign->setValue("-");
     info_distance->setValue("-");
     info_heading->setValue("-");
@@ -329,15 +348,15 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     info_type_button->hide();
     sidebar_pager->hide();
 
-    for(int n = 0; n < ShipSystem::COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
         info_system[n]->setValue("-")->hide();
 
+    // Manage probe view button state.
     probe_view_button->setVisible(rl);
     if (rl && rl->linked_entity)
     {
         probe_view_button->enable();
-        auto probe_transform = rl->linked_entity.getComponent<sp::Transform>();
-        if (probe_transform)
+        if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
             probe_radar->setViewPosition(probe_transform->getPosition());
     }
     else
@@ -348,26 +367,26 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         probe_radar->hide();
     }
 
-    if (targets.get())
+    auto target = targets.get();
+    if (target)
     {
-        auto target = targets.get();
-
         auto my_transform = my_spaceship.getComponent<sp::Transform>();
         auto target_transform = target.getComponent<sp::Transform>();
 
-        if (my_transform && target_transform) {
+        if (my_transform && target_transform)
+        {
             auto position_diff = target_transform->getPosition() - my_transform->getPosition();
             float distance = glm::length(position_diff);
-            float heading = vec2ToAngle(position_diff) - 270;
+            float heading = vec2ToAngle(position_diff) - 270.0f;
 
-            while(heading < 0) heading += 360;
+            while (heading < 0) heading += 360;
 
             info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
             info_heading->setValue(string(int(heading)));
 
             auto my_physics = my_spaceship.getComponent<sp::Physics>();
             auto target_physics = target.getComponent<sp::Physics>();
-            if (my_physics && target_physics) {
+            if (my_physics && target_physics && distance > 0.0f) {
                 float rel_velocity = dot(target_physics->getVelocity(), position_diff / distance) - dot(my_physics->getVelocity(), position_diff / distance);
 
                 if (std::abs(rel_velocity) < 0.01f)
@@ -375,39 +394,26 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
             }
         }
+
         if (auto cs = target.getComponent<CallSign>())
             info_callsign->setValue(cs->callsign);
 
         auto scanstate_component = target.getComponent<ScanState>();
         auto scanstate = scanstate_component ? scanstate_component->getStateFor(my_spaceship) : ScanState::State::FullScan;
 
-        auto sd = target.getComponent<ScienceDescription>();
         string description = "";
-        if (sd)
+        if (auto sd = target.getComponent<ScienceDescription>())
         {
-            switch(scanstate) {
+            switch (scanstate)
+            {
             case ScanState::State::NotScanned: description = sd->not_scanned; break;
             case ScanState::State::FriendOrFoeIdentified: description = sd->friend_or_foe_identified; break;
             case ScanState::State::SimpleScan: description = sd->simple_scan; break;
             case ScanState::State::FullScan: description = sd->full_scan; break;
             }
         }
-        if (!description.empty()) {
+        if (!description.empty())
             info_description->setText(description)->show();
-
-            if (sidebar_pager->indexByValue("Description") < 0)
-            {
-                sidebar_pager->addEntry("Description", "Description");
-            }
-        }
-        else
-        {
-            sidebar_pager->removeEntry(sidebar_pager->indexByValue("Description"));
-            if (sidebar_pager->getSelectionIndex() < 0)
-                sidebar_pager->setSelectionIndex(0);
-        }
-
-        string sidebar_pager_selection = sidebar_pager->getSelectionValue();
 
         // On a simple scan or deeper, show the faction, ship type, shields,
         // hull integrity, and database reference button.
@@ -415,18 +421,23 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         {
             auto faction = Faction::getInfo(target);
             info_faction->setValue(faction.locale_name);
+
             if (auto tn = target.getComponent<TypeName>())
                 info_type->setValue(tn->localized);
+
             info_type_button->show();
-            if (auto shields = target.getComponent<Shields>()) {
+
+            if (auto shields = target.getComponent<Shields>())
+            {
                 string str = "";
-                for(size_t n=0; n<shields->entries.size(); n++) {
-                    if (n > 0)
-                        str += ":";
+                for (size_t n = 0; n < shields->entries.size(); n++)
+                {
+                    if (n > 0) str += ":";
                     str += string(int(shields->entries[n].level));
                 }
                 info_shields->setValue(str);
             }
+
             if (auto hull = target.getComponent<Hull>())
                 info_hull->setValue(int(ceil(hull->current)));
         }
@@ -435,6 +446,53 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         // description (if one is set).
         if (scanstate >= ScanState::State::FullScan)
         {
+            auto shields_system = target.getComponent<Shields>();
+            auto beam_system = target.getComponent<BeamWeaponSys>();
+
+            // Rebuild pager tabs in order based on what the target actually has.
+            // Preserve the current tab when the same target is re-drawn; reset on
+            // a new target so the first relevant tab is shown instead.
+            bool target_changed = (target != previous_target);
+            previous_target = target;
+            string prev_selection = target_changed ? "" : sidebar_pager->getSelectionValue();
+            sidebar_pager->clear();
+
+            // Tactical: only if server uses frequencies and at least one of shields
+            // (with a valid frequency) or beams is present.
+            if (gameGlobalInfo->use_beam_shield_frequencies
+                && ((shields_system && shields_system->frequency != -1) || beam_system))
+                sidebar_pager->addEntry(tr("scienceTab", "Tactical"), "Tactical");
+
+            // Systems: only if target has any ship systems.
+            bool has_systems = false;
+            for (int n = 0; n < ShipSystem::COUNT; n++)
+            {
+                if (ShipSystem::get(target, ShipSystem::Type(n)))
+                {
+                    has_systems = true;
+                    break;
+                }
+            }
+            if (has_systems)
+                sidebar_pager->addEntry(tr("scienceTab", "Systems"), "Systems");
+
+            // Description: only if there is description text.
+            if (!description.empty())
+                sidebar_pager->addEntry(tr("scienceTab", "Description"), "Description");
+
+            // Restore the previous tab if it still exists; otherwise prefer
+            // Description if available, then fall back to the first tab.
+            int prev_idx = sidebar_pager->indexByValue(prev_selection);
+            if (prev_idx >= 0)
+                sidebar_pager->setSelectionIndex(prev_idx);
+            else if (sidebar_pager->entryCount() > 0)
+            {
+                int desc_idx = sidebar_pager->indexByValue("Description");
+                sidebar_pager->setSelectionIndex(desc_idx >= 0 ? desc_idx : 0);
+            }
+
+            string sidebar_pager_selection = sidebar_pager->getSelectionValue();
+
             sidebar_pager->setVisible(sidebar_pager->entryCount() > 1);
 
             // Check sidebar pager state.
@@ -443,10 +501,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 info_shield_frequency->show();
                 info_beam_frequency->show();
 
-                for(int n = 0; n < ShipSystem::COUNT; n++)
-                {
+                for (int n = 0; n < ShipSystem::COUNT; n++)
                     info_system[n]->hide();
-                }
 
                 info_description->hide();
             }
@@ -455,10 +511,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 info_shield_frequency->hide();
                 info_beam_frequency->hide();
 
-                for(int n = 0; n < ShipSystem::COUNT; n++)
-                {
+                for (int n = 0; n < ShipSystem::COUNT; n++)
                     info_system[n]->show();
-                }
 
                 info_description->hide();
             }
@@ -467,41 +521,36 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
                 info_shield_frequency->hide();
                 info_beam_frequency->hide();
 
-                for(int n = 0; n < ShipSystem::COUNT; n++)
-                {
+                for (int n = 0; n < ShipSystem::COUNT; n++)
                     info_system[n]->hide();
-                }
 
                 info_description->show();
             }
-            else
-            {
-                LOG(WARNING) << "Invalid pager state: " << sidebar_pager_selection;
-            }
+            else if (!sidebar_pager_selection.empty())
+                LOG(Warning, "Invalid pager state: ", sidebar_pager_selection);
 
             // If beam and shield frequencies are enabled on the server,
             // populate their graphs.
             if (gameGlobalInfo->use_beam_shield_frequencies)
             {
-                auto shieldsystem = target.getComponent<Shields>();
-                info_shield_frequency->setFrequency(shieldsystem ? shieldsystem->frequency : -1);
-                auto beamsystem = target.getComponent<BeamWeaponSys>();
-                info_beam_frequency->setFrequency(beamsystem ? beamsystem->frequency : -1);
+                info_shield_frequency
+                    ->setFrequency(shields_system ? shields_system->frequency : -1)
+                    ->setEnemyHasEquipment(shields_system);
 
-                // Show on graph information that target has no shields instead of frequencies. 
-                info_shield_frequency->setEnemyHasEquipment(shieldsystem);
-
-                // Show on graph information that target has no beams instad of frequencies. 
-                info_beam_frequency->setEnemyHasEquipment(beamsystem);
+                info_beam_frequency
+                    ->setFrequency(beam_system ? beam_system->frequency : -1)
+                    ->setEnemyHasEquipment(beam_system);
             }
 
             // Show the status of each subsystem.
-            for(int n = 0; n < ShipSystem::COUNT; n++)
+            for (int n = 0; n < ShipSystem::COUNT; n++)
             {
-                auto sys = ShipSystem::get(target, ShipSystem::Type(n));
-                if (sys) {
-                    float system_health = sys->health;
-                    info_system[n]->setValue(string(int(system_health * 100.0f)) + "%")->setBackColor(glm::u8vec4(255, 127.5f * (system_health + 1), 127.5f * (system_health + 1), 255));
+                if (auto sys = ShipSystem::get(target, ShipSystem::Type(n)))
+                {
+                    const float system_health = sys->health;
+                    info_system[n]
+                        ->setValue(string(static_cast<int>(system_health * 100.0f)) + "%")
+                        ->setBackColor(glm::u8vec4(255, static_cast<int>(127.5f * (system_health + 1)), static_cast<int>(127.5f * (system_health + 1)), 255));
                 }
             }
         }
@@ -512,25 +561,30 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
     else if (targets.getWaypointIndex() >= 0)
     {
         sidebar_pager->hide();
-        if (auto waypoints = my_spaceship.getComponent<Waypoints>()) {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                if (auto waypoint_position = waypoints->get(targets.getWaypointIndex())) {
+        if (auto waypoints = my_spaceship.getComponent<Waypoints>())
+        {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
+                if (auto waypoint_position = waypoints->get(targets.getWaypointIndex()))
+                {
                     auto position_diff = waypoint_position.value() - transform->getPosition();
                     float distance = glm::length(position_diff);
-                    float heading = vec2ToAngle(position_diff) - 270;
+                    float heading = vec2ToAngle(position_diff) - 270.0f;
 
-                    while(heading < 0) heading += 360;
-
-                    float rel_velocity = 0.0;
-                    if (auto physics = my_spaceship.getComponent<sp::Physics>())
-                        rel_velocity = -dot(physics->getVelocity(), position_diff / distance);
-
-                    if (std::abs(rel_velocity) < 0.01f)
-                        rel_velocity = 0.0;
+                    while (heading < 0.0f) heading += 360.0f;
 
                     info_distance->setValue(string(distance / 1000.0f, 1) + DISTANCE_UNIT_1K);
-                    info_heading->setValue(string(int(heading)));
-                    info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                    info_heading->setValue(string(static_cast<int>(heading)));
+
+                    if (distance > 0.0f)
+                    {
+                        float rel_velocity = 0.0f;
+                        if (auto physics = my_spaceship.getComponent<sp::Physics>())
+                            rel_velocity = -dot(physics->getVelocity(), position_diff / distance);
+
+                        if (std::abs(rel_velocity) < 0.01f) rel_velocity = 0.0f;
+                        info_relspeed->setValue(string(rel_velocity / 1000.0f * 60.0f, 1) + DISTANCE_UNIT_1K + "/min");
+                    }
                 }
             }
         }
@@ -563,7 +617,8 @@ void ScienceScreen::onUpdate()
             my_spaceship.hasComponent<ScienceScanner>() &&
             my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
+            if (auto transform = my_spaceship.getComponent<sp::Transform>())
+            {
                 auto lrr = my_spaceship.getComponent<LongRangeRadar>();
                 targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
             }
@@ -606,30 +661,30 @@ void ScienceScreen::onUpdate()
             }
         }
 
-        // Navigate the sidebar tab selector (Scanning / Other).
+        // Navigate the sidebar tab selector. (scanning, custom functions)
         if (keys.science_sidebar_next.getDown() && sidebar_selector->isVisible())
         {
-            int count = sidebar_selector->entryCount();
+            const int count = sidebar_selector->entryCount();
             if (count > 0)
                 sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + 1) % count);
         }
         if (keys.science_sidebar_prev.getDown() && sidebar_selector->isVisible())
         {
-            int count = sidebar_selector->entryCount();
+            const int count = sidebar_selector->entryCount();
             if (count > 0)
                 sidebar_selector->setSelectionIndex((sidebar_selector->getSelectionIndex() + count - 1) % count);
         }
 
-        // Navigate the sidebar pager (Tactical / Systems / Description).
+        // Navigate the sidebar pager. (tactical, systems, description)
         if (keys.science_sidebar_pager_next.getDown() && sidebar_pager->isVisible())
         {
-            int count = sidebar_pager->entryCount();
+            const int count = sidebar_pager->entryCount();
             if (count > 0)
                 sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + 1) % count);
         }
         if (keys.science_sidebar_pager_prev.getDown() && sidebar_pager->isVisible())
         {
-            int count = sidebar_pager->entryCount();
+            const int count = sidebar_pager->entryCount();
             if (count > 0)
                 sidebar_pager->setSelectionIndex((sidebar_pager->getSelectionIndex() + count - 1) % count);
         }
