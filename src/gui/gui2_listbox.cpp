@@ -5,7 +5,7 @@
 #include "gui2_scrollbar.h"
 
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
-: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center), mouse_scroll_steps(25)
+: GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center)
 {
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [this](int value) {});
     scroll
@@ -136,7 +136,6 @@ void GuiListbox::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 
 bool GuiListbox::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scroll->getCorrectedMax() - scroll->getMin();
-    scroll->setValue((scroll->getValue() - value * range / mouse_scroll_steps) );
+    scroll->setValue(scroll->getValue() - value * button_height);
     return true;
 }
