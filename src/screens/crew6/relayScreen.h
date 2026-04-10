@@ -3,13 +3,14 @@
 #include "screenComponents/targetsContainer.h"
 #include "gui/gui2_overlay.h"
 
-class GuiRadarView;
-class GuiKeyValueDisplay;
 class GuiButton;
-class GuiToggleButton;
-class GuiSlider;
-class GuiLabel;
 class GuiHackingDialog;
+class GuiKeyValueDisplay;
+class GuiLabel;
+class GuiRadarView;
+class GuiRadarZoomSlider;
+class GuiSlider;
+class GuiToggleButton;
 
 class RelayScreen : public GuiOverlay
 {
@@ -21,6 +22,9 @@ private:
         LaunchProbe,
         MoveWaypoint
     } mode = TargetSelection;
+
+    const float MIN_ZOOM_DISTANCE = 6250.0f;
+    const float MAX_ZOOM_DISTANCE = 50000.0f;
 
     TargetsContainer targets;
     int drag_waypoint_index;
@@ -39,7 +43,7 @@ private:
     GuiButton* launch_probe_button;
     GuiToggleButton* center_button;
 
-    GuiSlider* zoom_slider;
+    GuiRadarZoomSlider* zoom_slider;
     GuiLabel* zoom_label;
 
     GuiHackingDialog* hacking_dialog;

@@ -21,6 +21,7 @@ protected:
     // The multiline text element. GuiScrollFormattedText overwrites this with a
     // GuiMultilineFormattedText element.
     GuiMultilineText* text_element;
+    const GuiThemeStyle* text_theme;
 
 public:
     GuiScrollText(GuiContainer* owner, string id, string text);
