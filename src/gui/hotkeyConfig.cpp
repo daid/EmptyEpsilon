@@ -249,6 +249,7 @@ Keys::Keys() :
     mainscreen_target("MAINSCREEN_TARGET", "T"),
     mainscreen_tactical_radar("MAINSCREEN_TACTICAL", "Tab"),
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
+    mainscreen_strategic_map("MAINSCREEN_STRATEGIC", "W"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     // Helms crew screen
@@ -509,6 +510,7 @@ void Keys::init()
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
     debug_show_timing.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #ifdef DEBUG
+    debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
     debug_show_colliders.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 #endif
 
@@ -551,6 +553,8 @@ void Keys::init()
     mainscreen_tactical_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
     mainscreen_long_range_radar.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
+    mainscreen_strategic_map.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View strategic map"));
+    mainscreen_strategic_map.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
     mainscreen_first_person.setSupportedInteractions(sp::io::Keybinding::Interaction::Discrete);
 

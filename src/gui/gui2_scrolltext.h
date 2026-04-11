@@ -13,7 +13,6 @@ protected:
     string text;
     float text_size = 30.0f;
     bool auto_scroll_down = false;
-    int mouse_scroll_steps = 25;
     const GuiThemeStyle* text_theme;
 
 public:
