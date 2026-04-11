@@ -1,6 +1,6 @@
 #include "tacticalScreen.h"
+#include <i18n.h>
 #include "playerInfo.h"
-#include "i18n.h"
 #include "featureDefs.h"
 #include "gameGlobalInfo.h"
 #include "preferenceManager.h"
@@ -12,29 +12,29 @@
 #include "components/shields.h"
 #include "components/target.h"
 #include "components/radar.h"
+#include "components/beamweapon.h"
+#include "components/missiletubes.h"
 
-#include "screenComponents/combatManeuver.h"
-#include "screenComponents/radarView.h"
-#include "screenComponents/impulseControls.h"
-#include "screenComponents/warpControls.h"
-#include "screenComponents/jumpControls.h"
-#include "screenComponents/dockingButton.h"
-#include "screenComponents/alertOverlay.h"
-#include "screenComponents/customShipFunctions.h"
-#include "screenComponents/infoDisplay.h"
-
-#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/aimLock.h"
-#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/alertOverlay.h"
 #include "screenComponents/beamFrequencySelector.h"
 #include "screenComponents/beamTargetSelector.h"
+#include "screenComponents/combatManeuver.h"
+#include "screenComponents/customShipFunctions.h"
+#include "screenComponents/dockingButton.h"
+#include "screenComponents/impulseControls.h"
+#include "screenComponents/infoDisplay.h"
+#include "screenComponents/jumpControls.h"
+#include "screenComponents/missileTubeControls.h"
 #include "screenComponents/powerDamageIndicator.h"
+#include "screenComponents/radarView.h"
+#include "screenComponents/shieldsEnableButton.h"
+#include "screenComponents/warpControls.h"
 
 #include "gui/theme.h"
+#include "gui/gui2_image.h"
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_label.h"
-#include "gui/gui2_image.h"
-#include "gui/gui2_rotationdial.h"
 
 TacticalScreen::TacticalScreen(GuiContainer* owner)
 : GuiOverlay(owner, "TACTICAL_SCREEN", GuiTheme::getColor("background"))
@@ -74,7 +74,7 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
         },
         [this](glm::vec2 position) {
             drag_rotate=false;
-        }
+        }, nullptr
     );
     radar->setAutoRotating(PreferencesManager::get("tactical_radar_lock","0")=="1");
 
@@ -96,11 +96,16 @@ TacticalScreen::TacticalScreen(GuiContainer* owner)
     tube_controls->setPosition(20, -20, sp::Alignment::BottomLeft);
     radar->enableTargetProjections(tube_controls);
 
+    beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
+    beam_info_box
+        ->setPosition(0.0f, -20.0f, sp::Alignment::BottomCenter)
+        ->setSize(500.0f, 50.0f)
+        ->hide();
+
     // Beam controls beneath the radar.
     if (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage)
     {
-        GuiElement* beam_info_box = new GuiElement(this, "BEAM_INFO_BOX");
-        beam_info_box->setPosition(0, -20, sp::Alignment::BottomCenter)->setSize(500, 50);
+        beam_info_box->show();
         (new GuiLabel(beam_info_box, "BEAM_INFO_LABEL", tr("Beams"), 30))->addBackground()->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(80, 50);
         (new GuiBeamFrequencySelector(beam_info_box, "BEAM_FREQUENCY_SELECTOR"))->setPosition(80, 0, sp::Alignment::BottomLeft)->setSize(132, 50);
         (new GuiPowerDamageIndicator(beam_info_box, "", ShipSystem::Type::BeamWeapons, sp::Alignment::CenterLeft))->setPosition(0, 0, sp::Alignment::BottomLeft)->setSize(212, 50);
@@ -133,6 +138,11 @@ void TacticalScreen::onDraw(sp::RenderTarget& renderer)
     {
         warp_controls->setVisible(my_spaceship.hasComponent<WarpDrive>());
         jump_controls->setVisible(my_spaceship.hasComponent<JumpDrive>());
+        beam_info_box->setVisible(my_spaceship.hasComponent<BeamWeaponSys>() && (gameGlobalInfo->use_beam_shield_frequencies || gameGlobalInfo->use_system_damage));
+
+        const bool has_tubes = my_spaceship.hasComponent<MissileTubes>();
+        lock_aim->setVisible(has_tubes);
+        missile_aim->setVisible(has_tubes && tube_controls->getManualAim());
 
         auto target = my_spaceship.getComponent<Target>();
         targets.set(target ? target->entity : sp::ecs::Entity{});

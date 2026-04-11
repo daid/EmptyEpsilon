@@ -886,3 +886,14 @@ void GuiRadarView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     if (mouse_up_func)
         mouse_up_func(screenToWorld(position));
 }
+
+bool GuiRadarView::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    if (mouse_wheel_func)
+    {
+        mouse_wheel_func(value, position);
+        return true;
+    }
+
+    return false;
+}

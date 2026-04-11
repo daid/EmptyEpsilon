@@ -22,6 +22,7 @@ private:
     GuiRadarView* main_screen_radar;
     GuiRadarView* tactical_radar;
     GuiRadarView* long_range_radar;
+    GuiRadarView* strategic_map;
     GuiCommsOverlay* onscreen_comms;
     std::unique_ptr<ImpulseSound> impulse_sound;
 public:
