@@ -97,7 +97,9 @@ HullInfoDisplay::HullInfoDisplay(GuiContainer* owner, const string& id, float di
 
 void HullInfoDisplay::onUpdate()
 {
-    if (auto hull = my_spaceship.getComponent<Hull>())
+    auto hull = my_spaceship.getComponent<Hull>();
+    setVisible(hull);
+    if (hull)
     {
         setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
         if (hull->current < hull->max / 4.0f)

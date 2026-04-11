@@ -78,7 +78,7 @@ Keys::Keys() :
     pause("PAUSE", "P"),
     help("HELP", "F1"),
     escape("ESCAPE", {"Escape", "Home", "Keypad 7", "AC Back"}),
-    zoom_in("ZOOM_IN", {"wheel:y"}),
+    zoom_in("ZOOM_IN"),
     zoom_out("ZOOM_OUT"),
     voice_all("VOICE_ALL", "Backspace"),
     voice_ship("VOICE_SHIP"),
@@ -105,6 +105,7 @@ Keys::Keys() :
     mainscreen_target("MAINSCREEN_TARGET", "T"),
     mainscreen_tactical_radar("MAINSCREEN_TACTICAL", "Tab"),
     mainscreen_long_range_radar("MAINSCREEN_LONG_RANGE", "Q"),
+    mainscreen_strategic_map("MAINSCREEN_STRATEGIC", "W"),
     mainscreen_first_person("MAINSCREEN_FIRST_PERSON", "F"),
 
     // Helms crew screen
@@ -345,6 +346,9 @@ void Keys::init()
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+#ifdef DEBUG
+    debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
+#endif
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -378,6 +382,9 @@ void Keys::init()
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
     mainscreen_long_range_radar.addProhibitedKey("pointer:2");
     mainscreen_long_range_radar.addProhibitedKey("pointer:3");
+    mainscreen_strategic_map.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View strategic map"));
+    mainscreen_strategic_map.addProhibitedKey("pointer:2");
+    mainscreen_strategic_map.addProhibitedKey("pointer:3");
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
     mainscreen_first_person.addProhibitedKey("pointer:2");
     mainscreen_first_person.addProhibitedKey("pointer:3");
