@@ -151,7 +151,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     // Full scan data
 
     // Draw and hide the sidebar pager.
-    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
+    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [](int index, string value) {});
     sidebar_pager->setSize(GuiElement::GuiSizeMax, 50)->hide();
 
     // If the server uses frequencies, add the Tactical sidebar page.

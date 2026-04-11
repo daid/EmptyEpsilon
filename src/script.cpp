@@ -531,7 +531,7 @@ void luaRemovePlayerShipCustomFunction(sp::ecs::Entity entity, string name)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;
-    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [csf, name](const CustomShipFunctions::Function& f) {
+    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) {
         return f.name == name;
     });
     if (it != csf->functions.end()) {
