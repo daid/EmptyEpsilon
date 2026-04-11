@@ -90,7 +90,6 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 float bar_width = is_short_range ? 60.0f : 30.0f;
                 float bar_height = is_short_range ? 5.0f : 2.0f;
                 float bar_offset = bar_width * 0.5f;
-                float bar_distance = bar_height * 4.0f;
 
                 // Draw hull health bars
                 if (show_health_bars)
@@ -98,6 +97,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                     for (auto [entity, hull, transform, trace] : sp::ecs::Query<Hull, sp::Transform, sp::ecs::optional<RadarTrace>>())
                     {
                         const float hull_norm = hull.current / hull.max;
+                        float bar_distance = bar_height * 4.0f;
                         if (trace) bar_distance = std::clamp(trace->radius * main_radar->getScale() * 2.0f, trace->min_size, trace->max_size) * 0.75f;
 
                         if (hull_norm < 0.9f || is_short_range)
