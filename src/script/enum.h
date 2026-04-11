@@ -1,7 +1,7 @@
 #pragma once
 
 #include "script/environment.h"
-#include "components/hull.h"
+#include "components/health.h"
 #include "components/collision.h"
 #include "components/faction.h"
 #include "components/ai.h"

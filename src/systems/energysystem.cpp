@@ -2,6 +2,7 @@
 #include "ecs/query.h"
 #include "components/coolant.h"
 #include "components/reactor.h"
+#include "components/health.h"
 #include "components/hull.h"
 #include "components/collision.h"
 #include "components/rendering.h"
@@ -55,8 +56,8 @@ void EnergySystem::update(float delta)
         // destroying the ship and damaging a 0.5U radius.
         if (reactor.health < -0.9f && reactor.heat_level == 1.0f && reactor.overload_explode && game_server)
         {
-            auto hull = entity.getComponent<Hull>();
-            if (hull && hull->allow_destruction) {
+            auto health = entity.getComponent<Health>();
+            if (health && health->allow_destruction) {
                 auto transform = entity.getComponent<sp::Transform>();
                 if (transform) {
                     auto e = sp::ecs::Entity::create();

@@ -2,8 +2,5 @@
 #include "multiplayer.h"
 
 
-BASIC_REPLICATION_IMPL(HullReplication, Hull)
-    BASIC_REPLICATION_FIELD(current);
-    BASIC_REPLICATION_FIELD(max);
-    BASIC_REPLICATION_FIELD(damage_indicator);
-}
+// Hull is now a marker component with no fields to replicate
+EMPTY_REPLICATION_IMPL(HullReplication, Hull)
