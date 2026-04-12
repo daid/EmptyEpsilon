@@ -419,7 +419,7 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
     // Draw beam ray as a line that fades over lifetime.
     glm::u8vec4 beam_color = beam_effect.beam_color;
     beam_color.a = static_cast<int>(std::min(255.0f, beam_effect.lifetime * beam_color.a));
-    renderer.drawLine(source_position, 1.0f, target_position, beam_color);
+    renderer.drawLine(source_position, target_position, 1.0f, beam_color);
 
     // Draw impact circle at target location.
     float impact_radius = 15.0f * scale;
