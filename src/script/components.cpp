@@ -666,6 +666,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(MoveTo, on_arrival);
     sp::script::ComponentHandler<LifeTime>::name("lifetime");
     BIND_MEMBER(LifeTime, lifetime);
+    BIND_MEMBER(LifeTime, initial_lifetime);
     BIND_MEMBER(LifeTime, on_expire);
 
     sp::script::ComponentHandler<Faction>::name("faction");
