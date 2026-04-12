@@ -389,6 +389,7 @@ template<> struct Convert<MainScreenSetting> {
         case MainScreenSetting::Target: lua_pushstring(L, "target"); break;
         case MainScreenSetting::Tactical: lua_pushstring(L, "tactical"); break;
         case MainScreenSetting::LongRange: lua_pushstring(L, "longrange"); break;
+        case MainScreenSetting::Strategic: lua_pushstring(L, "strategic"); break;
         default: lua_pushstring(L, "none"); break;
         }
         return 1;
@@ -409,6 +410,8 @@ template<> struct Convert<MainScreenSetting> {
             return MainScreenSetting::Tactical;
         else if (str == "longrange")
             return MainScreenSetting::LongRange;
+        else if (str == "strategic")
+            return MainScreenSetting::Strategic;
         luaL_error(L, "Unknown MainScreenSetting: %s", str.c_str());
         return MainScreenSetting::Front;
     }

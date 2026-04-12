@@ -56,6 +56,7 @@ public:
 
     bool fire_ring = true;
     string beam_texture;
+    glm::u8vec4 beam_color{255, 200, 0, 255};
 };
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency);

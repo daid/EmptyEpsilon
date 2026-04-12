@@ -14,7 +14,7 @@ static int lua_rngRandom(lua_State* L)
     std::mt19937_64* rng = reinterpret_cast<std::mt19937_64*>(luaL_checkudata(L, 1, "RandomGenerator"));
     auto fmin = luaL_checknumber(L, 2);
     auto fmax = luaL_checknumber(L, 3);
-    lua_pushnumber(L, std::uniform_real_distribution<float>(fmin, fmax)(*rng));
+    lua_pushnumber(L, static_cast<lua_Number>(std::uniform_real_distribution<float>(fmin, fmax)(*rng)));
     return 1;
 }
 
@@ -57,7 +57,7 @@ int lua_random(lua_State* L) {
     auto b = luaL_checknumber(L, -1);
     if (a > b)
         return luaL_error(L, "bad call random(%f, %f): lower bound is greater than upper bound", a, b);
-    lua_pushnumber(L, random(a, b));
+    lua_pushnumber(L, static_cast<lua_Number>(random(a, b)));
     return 1;
 }
 

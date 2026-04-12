@@ -205,10 +205,10 @@ void PlanetTransparentRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& t
             glm::vec2 texcoords;
         };
         static std::array<VertexAndTexCoords, 4> quad{
-            glm::vec3(), {0.f, 1.f},
-            glm::vec3(), {1.f, 1.f},
-            glm::vec3(), {1.f, 0.f},
-            glm::vec3(), {0.f, 0.f}
+            VertexAndTexCoords{glm::vec3(), {0.f, 1.f}},
+            VertexAndTexCoords{glm::vec3(), {1.f, 1.f}},
+            VertexAndTexCoords{glm::vec3(), {1.f, 0.f}},
+            VertexAndTexCoords{glm::vec3(), {0.f, 0.f}}
         };
 
         ShaderRegistry::ScopedShader shader(ShaderRegistry::Shaders::Billboard);

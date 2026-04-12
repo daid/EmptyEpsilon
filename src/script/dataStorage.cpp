@@ -73,7 +73,7 @@ static void luaPushJson(lua_State* L, const nlohmann::json& json)
         lua_pushnumber(L, static_cast<int>(json));
         break;
     case nlohmann::json::value_t::number_float:
-        lua_pushnumber(L, static_cast<float>(json));
+        lua_pushnumber(L, static_cast<lua_Number>(json));
         break;
     case nlohmann::json::value_t::binary:
         lua_pushnil(L);

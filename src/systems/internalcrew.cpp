@@ -92,7 +92,7 @@ void InternalCrewSystem::update(float delta)
                         if (system->hacked_level < 0.0f)
                             system->hacked_level = 0.0;
                     }
-                    if (ir->auto_repair_enabled && pos == ic.target_position && (!system || system->health == system->health_max))
+                    if (ir->auto_repair_enabled && pos == ic.target_position && (!system || system->health >= system->health_max))
                     {
                         int n=irandom(0, ShipSystem::COUNT - 1);
 

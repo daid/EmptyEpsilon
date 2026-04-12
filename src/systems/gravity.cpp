@@ -21,6 +21,7 @@ void GravitySystem::update(float delta)
         for(auto target : sp::CollisionSystem::queryArea(source_transform.getPosition() - glm::vec2(grav.range, grav.range), source_transform.getPosition() + glm::vec2(grav.range, grav.range))) {
             if (target == source) continue;
             auto tt = target.getComponent<sp::Transform>();
+            if (!tt) continue;
             auto diff = source_transform.getPosition() - tt->getPosition();
             float dist2 = std::max(1.0f, glm::length2(diff));
             if (dist2 > grav.range*grav.range)
