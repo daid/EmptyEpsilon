@@ -149,7 +149,7 @@ int PlayerInfo::countTotalPlayerPositions()
 
     int count = 0;
     for (auto monitor : crew_positions)
-        for (auto position : monitor) count++;
+        for ([[maybe_unused]] auto position : monitor) count++;
 
     return count;
 }
@@ -160,7 +160,7 @@ int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
     if (crew_positions.empty()) return 0;
 
     int count = 0;
-    for (auto position : crew_positions[monitor]) count++;
+    for ([[maybe_unused]] auto position : crew_positions[monitor]) count++;
 
     return count;
 }

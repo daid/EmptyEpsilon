@@ -6,7 +6,7 @@
 
 
 GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key)
-: GuiElement(owner, id), has_focus(false), key(key)
+: GuiElement(owner, id), key(key)
 {
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");

@@ -804,8 +804,8 @@ void initComponentScriptBindings()
             lua_newtable(L);
             for(size_t n=0; n<zone->outline.size(); n++) {
                 lua_newtable(L);
-                lua_pushnumber(L, zone->outline[n].x); lua_seti(L, -2, 1);
-                lua_pushnumber(L, zone->outline[n].y); lua_seti(L, -2, 2);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].x)); lua_seti(L, -2, 1);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].y)); lua_seti(L, -2, 2);
                 lua_seti(L, -2, n+1);
             }
             return 1;
