@@ -302,7 +302,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 10.0f * category_modifier;
             mc.blast_range = 20.0f * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
-            mc.full_damage_after = 2000.0f / (mwd.speed / category_modifier); // Full damage after 2U
+            mc.full_damage_after = 1000.0f / (mwd.speed / category_modifier); // Full damage after 1U
             missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
