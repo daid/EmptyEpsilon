@@ -1,16 +1,17 @@
 #include "objectCreationView.h"
 #include "GMActions.h"
-#include "components/faction.h"
+#include "i18n.h"
+#include "gameGlobalInfo.h"
 #include "ecs/query.h"
+#include "components/collision.h"
+#include "components/faction.h"
+#include "gui/gui2_button.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_textentry.h"
 #include "menus/luaConsole.h"
-#include "i18n.h"
-#include "gameGlobalInfo.h"
-#include "components/collision.h"
 #include <unordered_set>
 
 
@@ -38,11 +39,28 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
     col3->setAttribute("stretch", "true");
     col3->setAttribute("layout", "vertical");
 
-    faction_selector = new GuiSelector(col1, "FACTION_SELECTOR", nullptr);
-    for(auto [entity, info] : sp::ecs::Query<FactionInfo>())
+    faction_selector = new GuiSelector(col1, "FACTION_SELECTOR",
+        [this](int, string)
+        {
+            for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
+            {
+                if (info.name == faction_selector->getSelectionValue())
+                    gameGlobalInfo->on_gm_preview_faction_color = info.gm_color;
+            }
+        }
+    );
+
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
         faction_selector->addEntry(info.locale_name, info.name);
-    faction_selector->setSelectionIndex(0);
-    faction_selector->setSize(GuiElement::GuiSizeMax, 50);
+
+    // Seed the initial faction color.
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        if (info.name == faction_selector->getSelectionValue())
+            gameGlobalInfo->on_gm_preview_faction_color = info.gm_color;
+
+    faction_selector
+        ->setSelectionIndex(0)
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     category_selector = new GuiListbox(col1, "CATEGORY_SELECTOR", [this](int index, string)
     {
@@ -87,15 +105,38 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                         gameGlobalInfo->on_gm_click_cursor = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR;
                     else
                         gameGlobalInfo->on_gm_click_cursor = info.icon;
-                    gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position)
+
+                    // Create a temporary entity to read its RadarTrace for the
+                    // hover preview, then immediately destroy it.
+                    {
+                        auto temp_res = info.create_callback.call<sp::ecs::Entity>();
+                        if (temp_res.isOk())
+                        {
+                            auto temp_e = temp_res.value();
+                            if (auto trace = temp_e.getComponent<RadarTrace>())
+                                gameGlobalInfo->on_gm_preview_trace = *trace;
+                            else
+                                gameGlobalInfo->on_gm_preview_trace = std::nullopt;
+                            temp_e.destroy();
+                        }
+                        else
+                        {
+                            gameGlobalInfo->on_gm_preview_trace = std::nullopt;
+                        }
+                    }
+
+                    gameGlobalInfo->on_gm_click = [&info, this] (glm::vec2 position, std::optional<float> rotation)
                     {
                         auto res = info.create_callback.call<sp::ecs::Entity>();
                         LuaConsole::checkResult(res);
                         if (res.isOk()) {
                             auto e = res.value();
-                            auto transform = e.getComponent<sp::Transform>();
-                            if (transform)
+                            if (auto transform = e.getComponent<sp::Transform>())
+                            {
                                 transform->setPosition(position);
+                                if (rotation)
+                                    transform->setRotation(*rotation);
+                            }
                             if (auto faction = e.getComponent<Faction>()) {
                                 for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
                                     if (info.name == faction_selector->getSelectionValue())

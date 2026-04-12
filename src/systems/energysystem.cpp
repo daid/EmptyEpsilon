@@ -60,7 +60,9 @@ void EnergySystem::update(float delta)
                 auto transform = entity.getComponent<sp::Transform>();
                 if (transform) {
                     auto e = sp::ecs::Entity::create();
-                    e.addComponent<ExplosionEffect>().size = 1000.0;
+                    auto& ee = e.addComponent<ExplosionEffect>();
+                    ee.size = 1000.0;
+                    ee.radar = true;
                     e.addComponent<sp::Transform>(*transform);
                     e.addComponent<RawRadarSignatureInfo>(0.0f, 0.4f, 0.4f);
 

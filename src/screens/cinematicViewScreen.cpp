@@ -51,10 +51,10 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
     camera_lock_toggle->setValue(true)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
-    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
+    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [](bool value) {});
     camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
 
-    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
+    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [](bool value) {});
     camera_lock_cycle_toggle->setValue(false)->setPosition(670, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
     cycle_time = 0.0f;
 
@@ -65,7 +65,7 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
     string keyboard_cinematic = "";
 
-    for (auto binding : sp::io::Keybinding::listAllByCategory("Cinematic View"))
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Cinematic view"))
         keyboard_cinematic += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
 
     keyboard_help->setText(keyboard_cinematic);
@@ -105,6 +105,11 @@ void CinematicViewScreen::update(float delta)
         }
     }
 
+    if (keys.cinematic.toggle_callsigns.getDown())
+    {
+        viewport->toggleCallsigns();
+    }
+
     if (keys.cinematic.lock_camera.getDown())
     {
         camera_lock_toggle->setValue(!camera_lock_toggle->getValue());
@@ -136,11 +141,9 @@ void CinematicViewScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.cinematic.move_forward.get())
     {

@@ -1,6 +1,10 @@
 #include "gui2_canvas.h"
 #include "gui2_element.h"
 #include "theme.h"
+#ifdef DEBUG
+#include "engine.h"
+#include "gui/mouseRenderer.h"
+#endif
 
 GuiCanvas::GuiCanvas(RenderLayer* renderLayer)
 : Renderable(renderLayer), click_element(nullptr), focus_element(nullptr)
@@ -106,8 +110,17 @@ void GuiCanvas::onTextInput(sp::TextInputEvent e)
         fclose(f);
     }
 
-    if (e == sp::TextInputEvent::Copy) {
+    if (e == sp::TextInputEvent::Copy)
+    {
+        // Toggle UI debug rendering rects and labels.
         enable_debug_rendering = !enable_debug_rendering;
+        // Link debug rendering behavior to MouseRenderer show_bounds.
+        // This isn't a toggle because multiple GuiCanvases can fire at once.
+        P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
+        if (mouse_renderer)
+            mouse_renderer->show_bounds = enable_debug_rendering;
+        else
+            LOG(Debug, "No mouse renderer found on copy event");
     }
 #endif
     if (focus_element)

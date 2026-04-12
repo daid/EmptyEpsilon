@@ -283,9 +283,9 @@ template<> struct Convert<DockingPort::State> {
         string str = string(luaL_checkstring(L, idx)).lower();
         if (str == "not_docking")
             return DockingPort::State::NotDocking;
-        else if (str == "opening")
+        else if (str == "docking")
             return DockingPort::State::Docking;
-        else if (str == "hailed")
+        else if (str == "docked")
             return DockingPort::State::Docked;
         luaL_error(L, "Unknown DockingPort::State: %s", str.c_str());
         return DockingPort::State::NotDocking;
@@ -378,21 +378,6 @@ template<> struct Convert<CustomShipFunctions::Function::Type> {
         return CustomShipFunctions::Function::Type::Info;
     }
 };
-template<> struct Convert<CrewPosition> {
-    static int toLua(lua_State* L, CrewPosition value) {
-        lua_pushstring(L, crewPositionToString(value).c_str());
-        return 1;
-    }
-    static CrewPosition fromLua(lua_State* L, int idx) {
-        string str = string(luaL_checkstring(L, idx)).lower();
-
-        auto result = tryParseCrewPosition(str);
-        if (!result.has_value()) {
-            luaL_error(L, "Unknown CrewPosition: %s", str.c_str());
-        }
-        return result.value_or(CrewPosition::helmsOfficer);
-    }
-};
 
 template<> struct Convert<MainScreenSetting> {
     static int toLua(lua_State* L, MainScreenSetting value) {
@@ -404,6 +389,7 @@ template<> struct Convert<MainScreenSetting> {
         case MainScreenSetting::Target: lua_pushstring(L, "target"); break;
         case MainScreenSetting::Tactical: lua_pushstring(L, "tactical"); break;
         case MainScreenSetting::LongRange: lua_pushstring(L, "longrange"); break;
+        case MainScreenSetting::Strategic: lua_pushstring(L, "strategic"); break;
         default: lua_pushstring(L, "none"); break;
         }
         return 1;
@@ -424,6 +410,8 @@ template<> struct Convert<MainScreenSetting> {
             return MainScreenSetting::Tactical;
         else if (str == "longrange")
             return MainScreenSetting::LongRange;
+        else if (str == "strategic")
+            return MainScreenSetting::Strategic;
         luaL_error(L, "Unknown MainScreenSetting: %s", str.c_str());
         return MainScreenSetting::Front;
     }

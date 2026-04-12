@@ -1,5 +1,4 @@
-#ifndef JUMP_CONTROLS_H
-#define JUMP_CONTROLS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -22,5 +21,3 @@ public:
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//JUMP_CONTROLS_H

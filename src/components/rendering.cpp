@@ -30,3 +30,10 @@ sp::Texture* MeshRenderComponent::getIlluminationTexture()
     return illumination_texture.ptr;
 }
 
+sp::Texture* MeshRenderComponent::getNormalTexture()
+{
+    if (!normal_texture.ptr && !normal_texture.name.empty())
+        normal_texture.ptr = textureManager.getTexture(normal_texture.name);
+    return normal_texture.ptr;
+}
+

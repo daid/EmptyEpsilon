@@ -1,4 +1,5 @@
 #include "systems/jumpsystem.h"
+#include "multiplayer_server.h"
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -43,9 +44,9 @@ void JumpSystem::update(float delta)
 
                 auto distance = (jump.distance * f) + (jump.distance * (1.0f - f) * random(0.5, 1.5));
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;
-                target_position = WarpSystem::getFirstNoneJammedPosition(position.getPosition(), target_position);
+                target_position = WarpSystem::getFirstNonJammedPosition(position.getPosition(), target_position);
                 position.setPosition(target_position);
-                if (entity.hasComponent<Coolant>())
+                if (game_server && entity.hasComponent<Coolant>())
                     jump.addHeat(jump.heat_per_jump);
 
                 jump.charge -= jump.distance;

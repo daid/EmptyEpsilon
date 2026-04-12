@@ -12,16 +12,16 @@ void main()
 
 [fragment]
 uniform sampler2D u_texture;
-uniform float magtitude;
-uniform float delta;
+uniform float u_magtitude;
+uniform float u_delta;
 
 varying vec2 v_texcoords;
 
 void main(void) {
 	vec2 coord = v_texcoords;
-	float rx = 1.0/1024.0 * magtitude * sin(coord.y * 10.0 + delta) * clamp(tan(coord.y * 12.0 + delta), -2.0, 2.0) * sin(coord.y * 50.0 + delta);
-	float gx = 1.0/1024.0 * magtitude * sin(coord.y * 1.0 + delta) * clamp(tan(coord.y * 30.0 + delta), -2.0, 2.0) * sin(coord.y * 23.0 + delta);
-	float bx = 1.0/1024.0 * magtitude * sin(coord.y * 4.0 + delta) * clamp(tan(coord.y * 14.0 + delta), -2.0, 2.0) * sin(coord.y * 42.0 + delta);
+	float rx = 1.0/1024.0 * u_magtitude * sin(coord.y * 10.0 + u_delta) * clamp(tan(coord.y * 12.0 + u_delta), -2.0, 2.0) * sin(coord.y * 50.0 + u_delta);
+	float gx = 1.0/1024.0 * u_magtitude * sin(coord.y * 1.0 + u_delta) * clamp(tan(coord.y * 30.0 + u_delta), -2.0, 2.0) * sin(coord.y * 23.0 + u_delta);
+	float bx = 1.0/1024.0 * u_magtitude * sin(coord.y * 4.0 + u_delta) * clamp(tan(coord.y * 14.0 + u_delta), -2.0, 2.0) * sin(coord.y * 42.0 + u_delta);
 	
 	gl_FragColor.r = texture2D(u_texture, coord + vec2(rx, 0)).r;
 	gl_FragColor.g = texture2D(u_texture, coord + vec2(gx, 0)).g;

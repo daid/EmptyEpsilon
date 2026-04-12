@@ -29,6 +29,5 @@ public:
     static int luaSetCommsMessage(lua_State* L);
     static int luaAddCommsReply(lua_State* L);
     static int luaCommsSwitchToGM(lua_State* L);
-private:
     static bool openChannel(sp::ecs::Entity player, sp::ecs::Entity target);
 };

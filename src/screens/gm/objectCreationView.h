@@ -1,8 +1,6 @@
-#ifndef OBJECT_CREATION_VIEW_H
-#define OBJECT_CREATION_VIEW_H
+#pragma once
 
 #include "gui/gui2_overlay.h"
-#include "gui/gui2_listbox.h"
 #include "gameGlobalInfo.h"
 
 
@@ -27,5 +25,3 @@ public:
 
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
 };
-
-#endif//OBJECT_CREATION_VIEW_H

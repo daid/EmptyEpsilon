@@ -1,10 +1,10 @@
-#ifndef GUI2_RESIZABLEDIALOG_H
-#define GUI2_RESIZABLEDIALOG_H
+#pragma once
 
 #include "gui2_panel.h"
 
-class GuiLabel;
+class GuiAutoSizeLabel;
 class GuiButton;
+class GuiThemeStyle;
 class GuiToggleButton;
 
 class GuiResizableDialog : public GuiPanel
@@ -24,7 +24,7 @@ private:
     static constexpr float resize_icon_size = 25.0f;
     static constexpr float title_bar_height = 30.0f;
 
-    GuiLabel* title_bar;
+    GuiAutoSizeLabel* title_bar;
     GuiToggleButton* minimize_button;
     GuiButton* close_button;
     bool minimized;
@@ -47,6 +47,5 @@ private:
 protected:
     glm::vec2 min_size;
     GuiElement* contents;
+    const GuiThemeStyle* resize_corner_style;
 };
-
-#endif//GUI2_RESIZABLEDIALOG_H

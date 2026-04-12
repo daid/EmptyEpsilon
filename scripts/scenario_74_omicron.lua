@@ -5107,9 +5107,9 @@ function friendlyComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), comms_source:getWaypointID(n)), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
@@ -6017,9 +6017,9 @@ function friendlyServiceJonqueComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms","Which waypoint should we defend?"))
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms","Defend WP %i"),n), function()
+				addCommsReply(string.format(_("shipAssist-comms","Defend WP %i"),comms_source:getWaypointID(n)), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms","We are heading to assist at WP %i."),n))
+					setCommsMessage(string.format(_("shipAssist-comms","We are heading to assist at WP %i."),comms_source:getWaypointID(n)))
 					addCommsReply(_("Back"), commsServiceJonque)
 				end)
 			end

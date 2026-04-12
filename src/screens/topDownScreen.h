@@ -1,5 +1,4 @@
-#ifndef TOP_DOWN_SCREEN_H
-#define TOP_DOWN_SCREEN_H
+#pragma once
 
 #include "engine.h"
 #include "gui/gui2_canvas.h"
@@ -18,10 +17,10 @@ private:
     GuiSelector* camera_lock_selector;
     GuiToggleButton* camera_lock_toggle;
     GuiHelpOverlay* keyboard_help;
+    float pending_zoom = 0.0f;
 public:
     TopDownScreen(RenderLayer* render_layer);
 
     virtual void update(float delta) override;
+    virtual void onMouseWheelScroll(glm::vec2 position, float value) override;
 };
-
-#endif//TOP_DOWN_SCREEN_H

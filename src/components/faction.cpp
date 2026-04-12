@@ -7,10 +7,10 @@ static FactionInfo default_faction_info;
 
 sp::ecs::Entity Faction::find(const string& name)
 {
-    for(auto [entity, info] : sp::ecs::Query<FactionInfo>()) {
-        if (info.name == name)
-            return entity;
-    }
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        if (info.name == name) return entity;
+
+    LOG(Warning, "Attempted to find faction named ", name, ", but no faction name matched.");
     return {};
 }
 

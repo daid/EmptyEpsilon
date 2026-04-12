@@ -49,9 +49,9 @@ void EnergyInfoDisplay::onUpdate()
             setValue(toNearbyIntString(reactor->energy));
         }
         if (reactor->energy < 100.0f)
-            setColor(glm::u8vec4(255, 0, 0, 255));
+            setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
-            setColor(glm::u8vec4{255,255,255,255});
+            setBackColor(glm::u8vec4{255,255,255,255});
     }
 }
 
@@ -98,12 +98,14 @@ HullInfoDisplay::HullInfoDisplay(GuiContainer* owner, const string& id, float di
 void HullInfoDisplay::onUpdate()
 {
     auto hull = my_spaceship.getComponent<Hull>();
-    if (hull) {
+    setVisible(hull);
+    if (hull)
+    {
         setValue(toNearbyIntString(100.0f * hull->current / hull->max) + "%");
         if (hull->current < hull->max / 4.0f)
-            setColor(glm::u8vec4(255, 0, 0, 255));
+            setBackColor(glm::u8vec4(255, 0, 0, 255));
         else
-            setColor(glm::u8vec4{255,255,255,255});
+            setBackColor(glm::u8vec4{255,255,255,255});
     }
 }
 

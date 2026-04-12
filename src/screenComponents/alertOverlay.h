@@ -9,6 +9,7 @@ class GuiLabel;
 class AlertLevelOverlay : public GuiElement
 {
 private:
+    string alert_sprite;
 public:
     AlertLevelOverlay(GuiContainer* owner);
 

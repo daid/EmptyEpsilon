@@ -1,4 +1,5 @@
 #include "shipsystemssystem.h"
+#include "multiplayer_server.h"
 #include "components/reactor.h"
 #include "components/beamweapon.h"
 #include "components/missiletubes.h"
@@ -12,6 +13,7 @@
 
 void ShipSystemsSystem::update(float delta)
 {
+    if (!game_server) return;
     for(auto [entity, system] : sp::ecs::Query<Reactor>())
         updateSystem(system, delta, entity.hasComponent<Coolant>());
     for(auto [entity, system] : sp::ecs::Query<BeamWeaponSys>())

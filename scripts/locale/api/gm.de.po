@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: scripts/api/gm.lua:3
+msgctxt "create"
+msgid "Artifact"
+msgstr "Artefakt"
+
+#: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
+#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
+#: scripts/api/gm.lua:9 scripts/api/gm.lua:10 scripts/api/gm.lua:11
+#: scripts/api/gm.lua:12 scripts/api/gm.lua:13
+msgctxt "create"
+msgid "Various"
+msgstr "Sonstige"
+
+#: scripts/api/gm.lua:4
+msgctxt "create"
+msgid "Warp jammer"
+msgstr "Störsender"
+
+#: scripts/api/gm.lua:5
+msgctxt "create"
+msgid "Mine"
+msgstr "Mine"
+
+#: scripts/api/gm.lua:6
+msgctxt "create"
+msgid "Supply drop"
+msgstr "Lieferung"
+
+#: scripts/api/gm.lua:7
+msgctxt "create"
+msgid "Scan probe"
+msgstr "Sonde"
+
+#: scripts/api/gm.lua:8
+msgctxt "create"
+msgid "Asteroid"
+msgstr "Asteroid"
+
+#: scripts/api/gm.lua:9
+msgctxt "create"
+msgid "Visual asteroid"
+msgstr "Sichtbarer Asteroid"
+
+#: scripts/api/gm.lua:10
+msgctxt "create"
+msgid "Planet"
+msgstr "Planet"
+
+#: scripts/api/gm.lua:11
+msgctxt "create"
+msgid "Black hole"
+msgstr "Schwarzes Loch"
+
+#: scripts/api/gm.lua:12
+msgctxt "create"
+msgid "Nebula"
+msgstr "Nebel"
+
+#: scripts/api/gm.lua:13
+msgctxt "create"
+msgid "Worm hole"
+msgstr "Wurmloch"
+
+#: scripts/api/gm.lua:18
+msgctxt "create"
+msgid "Player ship"
+msgstr "Spielbares Schiff"
+
+#: scripts/api/gm.lua:20
+msgctxt "create"
+msgid "Station"
+msgstr "Station"
+
+#: scripts/api/gm.lua:22
+msgctxt "create"
+msgid "CPU ship"
+msgstr "CPU-Schiff"

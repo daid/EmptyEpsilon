@@ -65,14 +65,6 @@ function placeStation(x,y,name,faction,size,diagnostic)
 			faction = "Independent"
 		end
 	end
-	if station_template_chance == nil then
-		station_template_chance = {
-			["Small Station"] = 0,
-			["Medium Station"] = 20,
-			["Large Station"] = 30,
-			["Huge Station"] = 40,
-		}
-	end
 	if faction_station_service_chance == nil then
 		faction_station_service_chance = {
 			["Human Navy"] = 0,
@@ -86,15 +78,6 @@ function placeStation(x,y,name,faction,size,diagnostic)
 			["USN"] = 0,
 			["CUF"] = 0,
 		}
-	end
-	if size == nil then
-		station:setTemplate(szt())
-	else
-		if station_template_chance[size] ~= nil then
-			station:setTemplate(size)
-		else
-			station:setTemplate(szt())
-		end
 	end
 	if diagnostic == nil then
 		diagnostic = false
@@ -149,9 +132,28 @@ function placeStation(x,y,name,faction,size,diagnostic)
 	end
 	return station
 end
+function setStationTemplate(station)
+	if size == nil then
+		station:setTemplate(szt())
+	else
+		if station_template_chance[size] ~= nil then
+			station:setTemplate(size)
+		else
+			station:setTemplate(szt())
+		end
+	end
+end
 function pickStation(name)
 	if station_pool == nil then
 		populateStationPool()
+	end
+	if station_template_chance == nil then
+		station_template_chance = {
+			["Small Station"] = 0,
+			["Medium Station"] = 20,
+			["Large Station"] = 30,
+			["Huge Station"] = 40,
+		}
 	end
 	local selected_station_name = nil
 	local station_selection_list = {}
@@ -167,7 +169,9 @@ function pickStation(name)
 				if #station_selection_list > 0 then
 					if selected_station_name == nil then
 						selected_station_name = station_selection_list[math.random(1,#station_selection_list)]
-						station = SpaceStation():setCommsScript(""):setCommsFunction(commsStation):setCallSign(selected_station_name):setDescription(station_pool[group][selected_station_name].description)
+						station = SpaceStation()
+						setStationTemplate(station)
+						station:setCommsScript(""):setCommsFunction(commsStation):setCallSign(selected_station_name):setDescription(station_pool[group][selected_station_name].description)
 						station.comms_data = station_pool[group][selected_station_name]
 						station_pool[group][selected_station_name] = nil
 						if diagnostic then
@@ -192,6 +196,7 @@ function pickStation(name)
 			if #station_selection_list > 0 then
 				selected_station = station_selection_list[math.random(1,#station_selection_list)]
 				station = SpaceStation():setCallSign(selected_station.station_name):setDescription(selected_station.station_details.description)
+				setStationTemplate(station)
 				if commsStation ~= nil then
 					station:setCommsScript(""):setCommsFunction(commsStation)
 				end
@@ -216,6 +221,7 @@ function pickStation(name)
 			if #station_selection_list > 0 then
 				selected_station = station_selection_list[math.random(1,#station_selection_list)]
 				station = SpaceStation():setCallSign(selected_station.station_name):setDescription(selected_station.station_details.description)
+				setStationTemplate(station)
 				if commsStation ~= nil then
 					station:setCommsScript(""):setCommsFunction(commsStation)
 				end
@@ -240,6 +246,7 @@ function pickStation(name)
 			if #station_selection_list > 0 then
 				selected_station = station_selection_list[math.random(1,#station_selection_list)]
 				station = SpaceStation():setCallSign(selected_station.station_name):setDescription(selected_station.station_details.description)
+				setStationTemplate(station)
 				if commsStation ~= nil then
 					station:setCommsScript(""):setCommsFunction(commsStation)
 				end
@@ -261,6 +268,7 @@ function pickStation(name)
 				if #station_selection_list > 0 then
 					selected_station = station_selection_list[math.random(1,#station_selection_list)]
 					station = SpaceStation():setCallSign(selected_station.station_name):setDescription(selected_station.station_details.description)
+					setStationTemplate(station)
 					if commsStation ~= nil then
 						station:setCommsScript(""):setCommsFunction(commsStation)
 					end
@@ -278,6 +286,7 @@ function pickStation(name)
 				for group, list in pairs(station_pool) do
 					if station_pool[group][name] ~= nil then
 						station = SpaceStation():setCallSign(name):setDescription(station_pool[group][name].description)
+						setStationTemplate(station)
 						if commsStation ~= nil then
 							station:setCommsScript(""):setCommsFunction(commsStation)
 						end
