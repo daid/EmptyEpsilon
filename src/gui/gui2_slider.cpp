@@ -81,7 +81,6 @@ GuiBasicSlider* GuiBasicSlider::setValue(float value)
     else
         this->value = std::clamp(value, max_value, min_value);
 
-    this->value = value;
     return this;
 }
 
