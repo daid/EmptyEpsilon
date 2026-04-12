@@ -145,6 +145,9 @@ void GuiScrollContainer::drawElements(glm::vec2 mouse_position, sp::Rect /* pare
 
         if (element->isDestroyed())
         {
+            if (pressed_element == element) pressed_element = nullptr;
+            if (focused_element == element) focused_element = nullptr;
+
             GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
             if (canvas) canvas->unfocusElementTree(element);
 
