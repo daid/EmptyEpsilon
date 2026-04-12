@@ -33,8 +33,10 @@ private:
     constexpr static glm::u8vec4 coolant_color_background{coolant_color, 255};
     constexpr static glm::u8vec3 energy_color{192, 192, 32};
     constexpr static glm::u8vec4 energy_color_background{energy_color, 255};
+    constexpr static float panel_width_with_coolant = 300.0f;
+    constexpr static float panel_width_without_coolant = 200.0f;
 
-    glm::vec2 panel_size;
+    glm::vec2 panel_size{panel_width_with_coolant, 380.0f};
     float previous_energy_level;
     float average_energy_delta;
     float previous_energy_measurement;
@@ -48,6 +50,7 @@ private:
         {}
         GuiPanel* container;
         GuiKeyValueDisplay* system_label;
+        string icon_file;
         GuiElement* system_container_sliders;
         GuiLabel* power_label;
         GuiElement* power_control;

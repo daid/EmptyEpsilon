@@ -92,7 +92,10 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
 
     // If a container already exists for this system, reparent it to the new row instead of recreating widgets.
     if (auto this_container = systems[system_index].container)
+    {
         this_container->setParent(systems_row);
+        this_container->setSize(panel_size.x, GuiElement::GuiSizeMax);
+    }
     else
     {
         // Create the container and its child widgets if they don't exist yet.
@@ -136,6 +139,7 @@ bool PowerManagementScreen::populateSystemPanel(int system_index, GuiElement* sy
         }
 
         // Panel labels use GuiKeyValueDisplay for their icon support.
+        systems[system_index].icon_file = icon_file;
         systems[system_index].system_label = new GuiKeyValueDisplay(systems[system_index].container, "PWR_SYSTEM_" + string(system_index) + "_NAME_LABEL", 0.15f, "", getLocaleSystemName(ShipSystem::Type(system_index)));
         systems[system_index].system_label->setIcon(icon_file)->setTextSize(20.0f)->setSize(GuiElement::GuiSizeMax, 50.0f);
         systems[system_index].system_label->setAttribute("margin", "0, 0, -12, 0");
@@ -267,10 +271,13 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     for (int n = 0; n < ShipSystem::COUNT; n++)
         active_system_count += ShipSystem::get(my_spaceship, ShipSystem::Type(n)) ? 1 : 0;
 
-    // If the view size or active systems count have changed, update the
-    // systems grid.
-    if (old_size != view_size || old_system_count != active_system_count)
+    // If the view size, active systems count, or panel width have changed, update
+    // the systems grid.
+    const float desired_panel_width = coolant ? panel_width_with_coolant : panel_width_without_coolant;
+    if (old_size != view_size || old_system_count != active_system_count || panel_size.x != desired_panel_width)
     {
+        panel_size.x = desired_panel_width;
+
         // Determine number of panels per row by available width / panel width.
         // Ensure at least one panel per row.
         const int panels_per_row = std::max(1, int((view_size.x - 40.0f) / panel_size.x));
@@ -309,10 +316,12 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
             if (populateSystemPanel(n, systems_rows[std::clamp(row_index / panels_per_row, 0, int(systems_rows.size()) - 1)]))
                 row_index++;
         }
+
     }
 
     // Update reactor-related properties of energy and heat.
-    if (auto reactor = my_spaceship.getComponent<Reactor>())
+    auto* reactor = my_spaceship.getComponent<Reactor>();
+    if (reactor)
     {
         // Update energy usage.
         if (previous_energy_measurement == 0.0f)
@@ -357,6 +366,9 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
         unused_coolant = coolant->max;
     }
 
+    // Limit power to 100% when neither a reactor nor coolant is present.
+    const float power_max = (reactor || coolant) ? 3.0f : 1.0f;
+
     // Update system properties.
     for (int n = 0; n < ShipSystem::COUNT; n++)
     {
@@ -366,12 +378,18 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
 
             // Update the system's power request label, slider, and bar.
             systems[n].power_label->setText(tr("Power: {value}%").format({{"value", static_cast<int>(nearbyint(sys->power_level * 100.0f))}}));
-            systems[n].power_slider->setValue(sys->power_request);
-            systems[n].power_bar->setValue(sys->power_level);
+            systems[n].power_slider->setRange(power_max, 0.0f)->setValue(sys->power_request);
+            systems[n].power_bar->setRange(0.0f, power_max)->setValue(sys->power_level);
 
             // Update the system's coolant request slider and actual allocation.
             if (coolant)
             {
+                systems[n].system_label->setIcon(systems[n].icon_file);
+                systems[n].coolant_label->show();
+                systems[n].coolant_control->show();
+                systems[n].heat_label->show();
+                systems[n].heat_bar->show();
+
                 const float coolant_level = sys->coolant_level;
                 unused_coolant -= coolant_level;
 
@@ -385,7 +403,14 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
                     ->setColor(coolant->auto_levels ? coolant_color_foreground : coolant_color_background)
                     ->setAttribute("margin", coolant->auto_levels ? "0, 20" : "3, 20");
             }
-            else systems[n].coolant_slider->hide();
+            else
+            {
+                systems[n].system_label->setIcon("");
+                systems[n].coolant_label->hide();
+                systems[n].coolant_control->hide();
+                systems[n].heat_label->hide();
+                systems[n].heat_bar->hide();
+            }
 
             // Update the system's heat level.
             // The bar turns redder as the heat level increases.
