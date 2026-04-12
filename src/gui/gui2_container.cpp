@@ -185,7 +185,7 @@ void GuiContainer::setAttribute(const string& key, const string& value)
     {
         auto p = value.partition(",");
         layout.position.x = p.first.strip().toFloat();
-        layout.position.y = p.first.strip().toFloat();
+        layout.position.y = p.second.strip().toFloat();
     }
     else if (key == "margin")
     {

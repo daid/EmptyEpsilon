@@ -46,7 +46,7 @@ bool DMX512SerialDevice::configure(std::unordered_map<string, string> settings)
     if (port)
     {
         run_thread = true;
-        update_thread = std::move(std::thread(&DMX512SerialDevice::updateLoop, this));
+        update_thread = std::thread(&DMX512SerialDevice::updateLoop, this);
         return true;
     }
     return false;
