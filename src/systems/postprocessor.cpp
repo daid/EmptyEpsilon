@@ -1,3 +1,4 @@
+#include "ecs/query.h"
 #include "systems/postprocessor.h"
 #include "components/postprocessor.h"
 #include "components/collision.h"

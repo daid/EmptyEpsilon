@@ -1,10 +1,9 @@
 #pragma once
 
 #include "ecs/system.h"
-#include "ecs/query.h"
+#include "ecs/entity.h"
 #include "components/postprocessor.h"
 #include "components/collision.h"
-#include "systems/collision.h"
 
 enum class EffectType
 {

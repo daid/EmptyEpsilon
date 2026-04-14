@@ -1,11 +1,11 @@
 #include "postprocessor.h"
 
-string getPostProcessorType(PostProcessor::Type postprocessor)
+string getPostProcessorType(PostProcessorComponent::Type postprocessor)
 {
     switch(postprocessor)
     {
-        case PostProcessor::Type::Glitch: return "glitch";
-        case PostProcessor::Type::Warp: return "warp";
+        case PostProcessorComponent::Type::Glitch: return "glitch";
+        case PostProcessorComponent::Type::Warp: return "warp";
         default:
             return "UNKNOWN";
     }

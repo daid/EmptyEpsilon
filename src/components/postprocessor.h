@@ -1,4 +1,5 @@
 #pragma once
+#include "stringImproved.h"
 
 // Base class for Postproccessor components, never created directtly
 
