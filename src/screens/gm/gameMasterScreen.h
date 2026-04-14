@@ -11,6 +11,7 @@ class GuiGlobalMessageEntry;
 class GuiObjectCreationScreen;
 class GuiEntityTweak;
 class GuiRadarView;
+class GuiRadarZoomSlider;
 class GuiOverlay;
 class GuiSelector;
 class GuiKeyValueDisplay;
@@ -27,6 +28,11 @@ class GuiPanel;
 class GameMasterScreen : public GuiCanvas, public Updatable
 {
 private:
+    const float MIN_ZOOM_DISTANCE = 5000.0f;
+    const float MAX_ZOOM_DISTANCE = 1000000.0f;
+    const float LONG_RANGE_DISTANCE = 50000.0f;
+    const float SHORT_RANGE_DISTANCE = 10000.0f;
+
     TargetsContainer targets;
     sp::ecs::Entity target;
     GuiRadarView* main_radar;
@@ -49,6 +55,7 @@ private:
     GuiToggleButton* pause_button;
     GuiToggleButton* intercept_comms_button;
     GuiButton* tweak_button;
+    GuiRadarZoomSlider* zoom_slider;
     GuiButton* copy_scenario_button;
     GuiButton* copy_selected_button;
     GuiSelector* player_ship_selector;
@@ -114,6 +121,7 @@ public:
     void onMouseDown(sp::io::Pointer::Button button, glm::vec2 position);
     void onMouseDrag(glm::vec2 position);
     void onMouseUp(glm::vec2 position);
+    void onMouseWheel(float value, glm::vec2 position);
 
     std::vector<sp::ecs::Entity> getSelection();
 

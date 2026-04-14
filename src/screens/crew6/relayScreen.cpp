@@ -12,6 +12,7 @@
 #include "components/name.h"
 
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
@@ -22,9 +23,9 @@
 #include "gui/mouseRenderer.h"
 #include "gui/theme.h"
 #include "gui/gui2_keyvaluedisplay.h"
+#include "gui/gui2_label.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_slider.h"
-#include "gui/gui2_label.h"
 #include "gui/gui2_togglebutton.h"
 
 //TODO: This function does not belong here.
@@ -41,7 +42,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 : GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection)
 {
     targets.setAllowWaypointSelection();
-    radar = new GuiRadarView(this, "RELAY_RADAR", 50000.0f, &targets);
+    radar = new GuiRadarView(this, "RELAY_RADAR", MAX_ZOOM_DISTANCE, &targets);
     radar->longRange()->enableWaypoints()->enableCallsigns()->setStyle(GuiRadarView::Rectangular)->setFogOfWarStyle(GuiRadarView::FriendlysShortRangeFogOfWar);
     radar->setAutoCentering(false);
     radar->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -90,6 +91,25 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
                 cancel_button->hide();
                 break;
             }
+        },
+        [this](float value, glm::vec2 position) { // wheel
+            // Calculate the new zoom level.
+            const float view_distance = std::clamp(
+                radar->getDistance() * (1.0f - value * 0.1f),
+                MIN_ZOOM_DISTANCE,
+                MAX_ZOOM_DISTANCE
+            );
+
+            // Get the world coordinates under the pointer before zooming.
+            const glm::vec2 world_position_before_zoom = radar->screenToWorld(position);
+
+            // Set the new zoom level.
+            radar->setDistance(view_distance);
+            zoom_slider->setValue(view_distance);
+
+            // Adjust the radar's view position to keep the world coordinates
+            // under the pointer consistent.
+            radar->setViewPosition(radar->getViewPosition() + world_position_before_zoom - radar->screenToWorld(position));
         }
     );
 
@@ -105,13 +125,10 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     info_faction = new GuiKeyValueDisplay(sidebar, "SCIENCE_FACTION", 0.4, tr("Faction"), "");
     info_faction->setSize(GuiElement::GuiSizeMax, 30);
 
-    zoom_slider = new GuiSlider(this, "ZOOM_SLIDER", 50000.0f, 6250.0f, 50000.0f, [this](float value) {
-        zoom_label->setText(tr("Zoom: {zoom}x").format({{"zoom", string(50000.0f / value, 1.0f)}}));
-        radar->setDistance(value);
-    });
-    zoom_slider->setPosition(20, -70, sp::Alignment::BottomLeft)->setSize(250, 50);
-    zoom_label = new GuiLabel(zoom_slider, "", "Zoom: 1.0x", 30);
-    zoom_label->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    zoom_slider = new GuiRadarZoomSlider(this, "", MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE, radar);
+    zoom_slider
+        ->setPosition(20.0f, -70.0f, sp::Alignment::BottomLeft)
+        ->setSize(250.0f, 50.0f);
 
     // Option buttons for comms, waypoints, and probes.
     option_buttons = new GuiElement(this, "BUTTONS");
@@ -151,7 +168,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             my_player_info->commandClearScienceLink();
         }
     });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>());
+    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
     (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() {
@@ -207,21 +224,17 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
 void RelayScreen::onDraw(sp::RenderTarget& renderer)
 {
-    ///Handle mouse wheel
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta != 0.0f)
+    float key_zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
+    if (key_zoom_delta != 0.0f)
     {
-        float view_distance = radar->getDistance() * (1.0f - (mouse_wheel_delta * 0.1f));
-        if (view_distance > 50000.0f)
-            view_distance = 50000.0f;
-        if (view_distance < 6250.0f)
-            view_distance = 6250.0f;
+        float view_distance = std::clamp(
+            radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)),
+            MIN_ZOOM_DISTANCE,
+            MAX_ZOOM_DISTANCE
+        );
         radar->setDistance(view_distance);
-        // Keep the zoom slider in sync.
         zoom_slider->setValue(view_distance);
-        zoom_label->setText("Zoom: " + string(50000.0f / view_distance, 1.0f) + "x");
     }
-    ///!
 
     GuiOverlay::onDraw(renderer);
 
@@ -315,7 +328,7 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         auto spl = my_spaceship.getComponent<ScanProbeLauncher>();
         launch_probe_button->setVisible(spl);
         launch_probe_button->setEnable(spl ? spl->stock > 0 : false);
-        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl);
+        link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl && my_spaceship.hasComponent<RadarLink>());
         hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
 
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0));

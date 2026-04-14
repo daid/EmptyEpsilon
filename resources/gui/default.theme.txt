@@ -402,13 +402,37 @@
 
     # GuiRotationDial
     [rotationdial] {
+        # Thickness of both the dial and handle, as a percentile of the dial's radius.
+        # If omitted, defaults to the global size property default of 30. You probably want 10 to 12.5 for radar dials.
+        size: 10
+
         [rotationdial.back] {
-            image: gui/widget/dial_background.png
+            # Optional ring texture, drawn as a rectangular sprite across the dial's radius.
+            # If omitted, defaults to drawing a flat-colored outline using the dial thickness value.
+            image: gui/widget/RotationDialBackground.png
+            color: #404040
         }
+
         [rotationdial.front] {
-            image: gui/widget/dial_button.png
-            color.hover: #CCCCCC
+            color: #FFFFFF
             color.disabled: #808080
+
+            [rotationdial.front.texture] {
+                # Optional 9-segment texture stretched across the dial handle's arc width and thickness.
+                # The default image is a 49 x 49 square sprite with 24-pixel corners. The center row and column of pixels are stretched between them.
+                # If omitted, defaults to drawing a flat-colored handle.
+                image: gui/widget/RotationDialHandle.png
+                image.hover: gui/widget/RotationDialHandle.png
+                image.disabled: gui/widget/RotationDialHandle.png
+                # Size of the drawn handle's corners, in pixels. Capped to half the handle's size in each dimension.
+                size: 12.0
+            }
+
+            [rotationdial.front.handle] {
+                # Arc width of the handle, in degrees. Might be overridden by certain dial controls.
+                # If omitted, defaults to the global size property default of 30.
+                size: 20.0
+            }
         }
     }
 

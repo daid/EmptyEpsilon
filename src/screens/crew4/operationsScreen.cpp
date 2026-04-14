@@ -14,6 +14,7 @@
 
 #include "gui/theme.h"
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
@@ -70,6 +71,9 @@ OperationScreen::OperationScreen(GuiContainer* owner)
                 science->targets.setWaypointIndex(drag_waypoint_index);
                 break;
             }
+        },
+        [this](float value, glm::vec2 position) { // Wheel
+            science->doRadarZoom(value);
         }
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");

@@ -58,22 +58,26 @@ void ImpulseSound::update(float delta)
     // Update only if an impulse sound is defined.
     if (impulse_sound_id > -1)
     {
-        if (!my_spaceship) return;
-        auto engine = my_spaceship.getComponent<ImpulseEngine>();
-        // Get whether the ship's impulse engines are functional.
-        float impulse_ability = std::max(0.0f, std::min(engine->getSystemEffectiveness(), engine->power_level));
-
-        // If so, update their pitch and volume.
-        if (impulse_ability > 0.0f && engine)
+        if (my_spaceship)
         {
-            soundManager->setSoundVolume(impulse_sound_id, (std::max(10.0f * impulse_ability, fabsf(engine->actual) * 10.0f * std::max(0.1f, impulse_ability))) * (impulse_sound_volume / 100.0f));
-            soundManager->setSoundPitch(impulse_sound_id, std::max(0.7f * impulse_ability, fabsf(engine->actual) + 0.2f * std::max(0.1f, impulse_ability)));
-        } else {
-            // If not, silence the impulse sound.
-            // TODO: Play an engine failure sound.
-            soundManager->setSoundVolume(impulse_sound_id, 0.0f);
-            soundManager->setSoundPitch(impulse_sound_id, 0.0f);
+            if (auto engine = my_spaceship.getComponent<ImpulseEngine>())
+            {
+                // Get whether the ship's impulse engines are functional.
+                float impulse_ability = std::max(0.0f, std::min(engine->getSystemEffectiveness(), engine->power_level));
+                // If so, update their pitch and volume.
+                if (impulse_ability > 0.0f)
+                {
+                    soundManager->setSoundVolume(impulse_sound_id, (std::max(10.0f * impulse_ability, fabsf(engine->actual) * 10.0f * std::max(0.1f, impulse_ability))) * (impulse_sound_volume / 100.0f));
+                    soundManager->setSoundPitch(impulse_sound_id, std::max(0.7f * impulse_ability, fabsf(engine->actual) + 0.2f * std::max(0.1f, impulse_ability)));
+                    return;
+                }
+            }
         }
+
+        // No ship, no engines, or broken engines; silence the impulse sound.
+        // TODO: Play an engine failure sound.
+        soundManager->setSoundVolume(impulse_sound_id, 0.0f);
+        soundManager->setSoundPitch(impulse_sound_id, 0.0f);
     }
 #endif
 }
