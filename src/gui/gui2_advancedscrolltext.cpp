@@ -1,7 +1,7 @@
 #include "gui2_advancedscrolltext.h"
 
 GuiAdvancedScrollText::GuiAdvancedScrollText(GuiContainer* owner, string id)
-: GuiElement(owner, id), text_size(30.0f), rect_width(rect.size.x), max_prefix_width(0.0f), mouse_scroll_steps(25)
+: GuiElement(owner, id), text_size(30.0f), rect_width(rect.size.x), max_prefix_width(0.0f)
 {
     scrollbar = new GuiScrollbar(this, id + "_SCROLL", 0, 1, 0, nullptr);
     // Calculate scrolling a one-line entry by scrollbar arrow buttons.
@@ -146,7 +146,6 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
 
 bool GuiAdvancedScrollText::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    float range = scrollbar->getCorrectedMax() - scrollbar->getMin();
-    scrollbar->setValue((scrollbar->getValue() - value * range / mouse_scroll_steps) );
+    scrollbar->setValue(scrollbar->getValue() - value * text_size * 3.0f);
     return true;
 }

@@ -68,13 +68,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             targets.setToClosestTo(position, 1000, TargetsContainer::Selectable);
         }, nullptr, nullptr,
         [this](float value, glm::vec2 position) { // wheel
-            float view_distance = std::clamp(
-                science_radar->getDistance() * (1.0f - value * 0.1f),
-                DEFAULT_MIN_ZOOM_DISTANCE,
-                DEFAULT_MAX_ZOOM_DISTANCE
-            );
-            science_radar->setDistance(view_distance);
-            zoom_slider->setValue(view_distance);
+            doRadarZoom(value);
         }
     );
     science_radar->setAutoRotating(PreferencesManager::get("science_radar_lock","0")=="1");
@@ -153,7 +147,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
 
     // Full scan data sidebar.
     // Draw and hide the sidebar pager. Tabs are populated dynamically in onDraw.
-    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [this](int index, string value) {});
+    sidebar_pager = new GuiSelector(info_sidebar, "SIDEBAR_PAGER", [](int index, string value) {});
     sidebar_pager
         ->setSize(GuiElement::GuiSizeMax, 50.0f)
         ->hide();
@@ -263,6 +257,17 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     new GuiScanningDialog(this, "SCANNING_DIALOG");
 }
 
+void ScienceScreen::doRadarZoom(float value)
+{
+    float view_distance = std::clamp(
+        science_radar->getDistance() * (1.0f - value * 0.1f),
+        previous_short_range_radar,
+        previous_long_range_radar
+    );
+    science_radar->setDistance(view_distance);
+    zoom_slider->setValue(view_distance);
+}
+
 void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 {
     GuiOverlay::onDraw(renderer);
@@ -287,8 +292,8 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
         || previous_long_range_radar != lrr->long_range
         || previous_short_range_radar != lrr->short_range)
     {
-        previous_short_range_radar = lrr->long_range;
-        previous_long_range_radar = lrr->short_range;
+        previous_short_range_radar = lrr->short_range;
+        previous_long_range_radar = lrr->long_range;
         zoom_slider
             ->setRange(lrr->long_range, lrr->short_range)
             ->setValue(view_distance);
