@@ -17,7 +17,6 @@ class GuiThemeStyle;
 class EngineeringScreen : public GuiOverlay
 {
 private:
-    const GuiThemeStyle* background_style;
     const GuiThemeStyle* slider_tick_style;
     const GuiThemeStyle* overlay_damaged_style;
     const GuiThemeStyle* overlay_overheating_style;

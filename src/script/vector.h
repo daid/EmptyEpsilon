@@ -10,9 +10,9 @@ namespace sp::script {
 template<> struct Convert<glm::vec2> {
     static int toLua(lua_State* L, glm::vec2 value) {
         lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
+        lua_pushnumber(L, static_cast<lua_Number>(value.x));
         lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
+        lua_pushnumber(L, static_cast<lua_Number>(value.y));
         lua_rawseti(L, -2, 2);
         return 1;
     }
@@ -31,11 +31,11 @@ template<> struct Convert<glm::vec2> {
 template<> struct Convert<glm::vec3> {
     static int toLua(lua_State* L, glm::vec3 value) {
         lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
+        lua_pushnumber(L, static_cast<lua_Number>(value.x));
         lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
+        lua_pushnumber(L, static_cast<lua_Number>(value.y));
         lua_rawseti(L, -2, 2);
-        lua_pushnumber(L, value.z);
+        lua_pushnumber(L, static_cast<lua_Number>(value.z));
         lua_rawseti(L, -2, 3);
         return 1;
     }

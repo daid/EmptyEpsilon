@@ -14,18 +14,16 @@
 static bool isAxisType(sp::io::Keybinding::Type type)
 {
     return bool(type & (sp::io::Keybinding::Type::JoystickAxis
-                      | sp::io::Keybinding::Type::ControllerAxis
-                      | sp::io::Keybinding::Type::MouseMovement
-                      | sp::io::Keybinding::Type::MouseWheel));
+        | sp::io::Keybinding::Type::ControllerAxis
+        | sp::io::Keybinding::Type::MouseMovement
+        | sp::io::Keybinding::Type::MouseWheel));
 }
 
 // Track which binder and which key are actively performing a rebind.
 static GuiHotkeyBinder* active_rebinder = nullptr;
 static sp::io::Keybinding* active_key = nullptr;
 
-
-GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key,
-    sp::io::Keybinding::Type display_filter, sp::io::Keybinding::Type capture_filter)
+GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key, sp::io::Keybinding::Type display_filter, sp::io::Keybinding::Type capture_filter)
 : GuiElement(owner, id), key(key), display_filter(display_filter), capture_filter(capture_filter)
 {
     front_style = theme->getStyle("textentry.front");

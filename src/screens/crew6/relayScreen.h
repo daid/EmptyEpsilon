@@ -44,7 +44,6 @@ private:
     GuiToggleButton* center_button;
 
     GuiRadarZoomSlider* zoom_slider;
-    GuiLabel* zoom_label;
 
     GuiHackingDialog* hacking_dialog;
 
