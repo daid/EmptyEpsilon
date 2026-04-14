@@ -39,7 +39,6 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool interceptsPointer() const override { return true; }
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
     virtual void onFocusGained() override;

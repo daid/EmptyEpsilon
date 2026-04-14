@@ -29,5 +29,4 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual bool onMouseWheelScroll(glm::vec2 position, float value) override;
-    virtual bool interceptsPointer() const override { return true; }
 };

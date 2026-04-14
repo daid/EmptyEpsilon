@@ -16,5 +16,4 @@ public:
 
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onDraw(sp::RenderTarget& renderer) override;
-    virtual bool interceptsPointer() const override { return true; }
 };

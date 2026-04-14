@@ -5,6 +5,7 @@
 GuiProgressSlider::GuiProgressSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiProgressbar(owner, id, min_value, max_value, start_value), callback(func)
 {
+    intercepts_pointer = true;
 }
 
 bool GuiProgressSlider::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)

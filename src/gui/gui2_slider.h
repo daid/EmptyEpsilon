@@ -24,7 +24,6 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool interceptsPointer() const override { return true; }
 
     GuiBasicSlider* setValue(float value);
     GuiBasicSlider* setRange(float min, float max);
@@ -87,7 +86,6 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
-    virtual bool interceptsPointer() const override { return true; }
 
     GuiSlider2D* clearSnapValues();
     GuiSlider2D* addSnapValue(glm::vec2 value, glm::vec2 range);
