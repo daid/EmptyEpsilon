@@ -25,6 +25,13 @@ void GuiCanvas::render(sp::RenderTarget& renderer)
 
     runUpdates(this);
     updateLayout(window_rect);
+    clearHover();
+    GuiElement* hovered = getHoverElement(mouse_position);
+    if (hovered)
+    {
+        hovered->hover = true;
+        hovered->hover_coordinates = mouse_position;
+    }
     drawElements(mouse_position, window_rect, renderer);
 
     if (enable_debug_rendering)
@@ -172,9 +179,6 @@ void GuiCanvas::runUpdates(GuiContainer* parent)
             element->owner = nullptr;
             delete element;
         }else{
-            element->hover = element->rect.contains(mouse_position);
-            element->hover_coordinates = mouse_position;
-
             element->onUpdate();
             if (element->isVisible())
                 runUpdates(element);
