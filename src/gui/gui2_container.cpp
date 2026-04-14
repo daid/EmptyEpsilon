@@ -30,8 +30,6 @@ void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, 
             element->owner = nullptr;
             delete element;
         }else{
-            element->hover = element->rect.contains(mouse_position);
-
             if (element->visible)
             {
                 element->onDraw(renderer);
@@ -95,6 +93,33 @@ GuiElement* GuiContainer::executeScrollOnElement(glm::vec2 position, float value
         }
     }
     return nullptr;
+}
+
+GuiElement* GuiContainer::getHoverElement(glm::vec2 mouse_position)
+{
+    for (auto it = children.rbegin(); it != children.rend(); it++)
+    {
+        GuiElement* element = *it;
+
+        if (element->visible && element->enabled && element->rect.contains(mouse_position))
+        {
+            GuiElement* hovered = element->getHoverElement(mouse_position);
+            if (hovered) return hovered;
+            if (element->interceptsPointer()) return element;
+        }
+    }
+
+    return nullptr;
+}
+
+void GuiContainer::clearHover()
+{
+    for (GuiElement* element : children)
+    {
+        element->hover = false;
+        element->hover_coordinates = {-100, -100};
+        element->clearHover();
+    }
 }
 
 void GuiContainer::updateLayout(const sp::Rect& rect)
