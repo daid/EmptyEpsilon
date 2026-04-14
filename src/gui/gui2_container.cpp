@@ -11,29 +11,36 @@ GuiContainer::~GuiContainer()
     }
 }
 
-void GuiContainer::drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& renderer)
+void GuiContainer::drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& renderer)
 {
-    for(auto it = children.begin(); it != children.end(); )
+    for (auto it = children.begin(); it != children.end(); )
     {
         GuiElement* element = *it;
         if (element->destroyed)
         {
-            //Find the owning cancas, as we need to remove ourselves if we are the focus or click element.
+            // Find the owning canvas, as we need to remove ourselves if we are
+            // the focus or click element.
             GuiCanvas* canvas = dynamic_cast<GuiCanvas*>(element->getTopLevelContainer());
-            if (canvas)
-                canvas->unfocusElementTree(element);
+            if (canvas) canvas->unfocusElementTree(element);
 
-            //Delete it from our list.
+            // Delete it from our list.
             it = children.erase(it);
 
             // Free up the memory used by the element.
             element->owner = nullptr;
             delete element;
-        }else{
+        }
+        else
+        {
+            // Manage this element's hover state.
+            element->hover = (element == hovered_element);
+            element->hover_coordinates = (element == hovered_element) ? mouse_position : glm::vec2{-100, -100};
+
+            // Draw the element.
             if (element->visible)
             {
                 element->onDraw(renderer);
-                element->drawElements(mouse_position, element->rect, renderer);
+                element->drawElements(mouse_position, hovered_element, element->rect, renderer);
             }
 
             it++;
@@ -105,21 +112,11 @@ GuiElement* GuiContainer::getHoverElement(glm::vec2 mouse_position)
         {
             GuiElement* hovered = element->getHoverElement(mouse_position);
             if (hovered) return hovered;
-            if (element->interceptsPointer()) return element;
+            if (element->intercepts_pointer) return element;
         }
     }
 
     return nullptr;
-}
-
-void GuiContainer::clearHover()
-{
-    for (GuiElement* element : children)
-    {
-        element->hover = false;
-        element->hover_coordinates = {-100, -100};
-        element->clearHover();
-    }
 }
 
 void GuiContainer::updateLayout(const sp::Rect& rect)
