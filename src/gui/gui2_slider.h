@@ -1,10 +1,10 @@
-#ifndef GUI2_SLIDER_H
-#define GUI2_SLIDER_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_label.h"
 
 class GuiThemeStyle;
+
 class GuiBasicSlider : public GuiElement
 {
 public:
@@ -24,6 +24,7 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool interceptsPointer() const override { return true; }
 
     GuiBasicSlider* setValue(float value);
     GuiBasicSlider* setRange(float min, float max);
@@ -86,11 +87,10 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool interceptsPointer() const override { return true; }
 
     GuiSlider2D* clearSnapValues();
     GuiSlider2D* addSnapValue(glm::vec2 value, glm::vec2 range);
     GuiSlider2D* setValue(glm::vec2 value);
     glm::vec2 getValue();
 };
-
-#endif//GUI2_SLIDER_H

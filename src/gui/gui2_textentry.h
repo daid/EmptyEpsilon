@@ -1,11 +1,10 @@
-#ifndef GUI2_TEXTENTRY_H
-#define GUI2_TEXTENTRY_H
+#pragma once
 
 #include "gui2_element.h"
 #include "timer.h"
 
-
 class GuiThemeStyle;
+
 class GuiTextEntry : public GuiElement
 {
 public:
@@ -40,6 +39,7 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool interceptsPointer() const override { return true; }
     virtual void onTextInput(const string& text) override;
     virtual void onTextInput(sp::TextInputEvent e) override;
     virtual void onFocusGained() override;
@@ -64,5 +64,3 @@ protected:
     int getTextOffsetForPosition(glm::vec2 position);
     void runChangeCallback();
 };
-
-#endif//GUI2_TEXTENTRY_H

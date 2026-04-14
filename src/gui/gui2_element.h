@@ -1,5 +1,4 @@
-#ifndef GUI2_ELEMENT_H
-#define GUI2_ELEMENT_H
+#pragma once
 
 #include <functional>
 #include "stringImproved.h"
@@ -51,6 +50,9 @@ public:
     virtual void onTextInput(sp::TextInputEvent e);
     virtual void onFocusGained() {}
     virtual void onFocusLost() {}
+    // Return true if this element is allowed to intercept the pointer,
+    // i.e. for determining hover state.
+    virtual bool interceptsPointer() const { return false; }
 
     virtual void setAttribute(const string& key, const string& value) override;
     GuiElement* setSize(glm::vec2 size);
@@ -91,5 +93,3 @@ public:
 protected:
     State getState() const;
 };
-
-#endif//GUI2_ELEMENT_H

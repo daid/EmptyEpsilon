@@ -1,5 +1,4 @@
-#ifndef GUI2_BUTTON_H
-#define GUI2_BUTTON_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -25,6 +24,7 @@ public:
     virtual void onDraw(sp::RenderTarget& renderer) override;
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
+    virtual bool interceptsPointer() const override { return true; }
 
     GuiButton* setText(string text);
     GuiButton* setTextSize(float size);
@@ -33,5 +33,3 @@ public:
     string getText() const;
     string getIcon() const;
 };
-
-#endif//GUI2_BUTTON_H

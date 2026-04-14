@@ -2,7 +2,6 @@
 
 #include "gui2_entrylist.h"
 
-
 class GuiArrowButton;
 class GuiThemeStyle;
 class GuiToggleButton;
@@ -25,6 +24,7 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onFocusLost() override;
+    virtual bool interceptsPointer() const override { return true; }
 
     GuiSelector* setTextSize(float size);
 };
