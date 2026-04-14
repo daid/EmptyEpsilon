@@ -1,5 +1,4 @@
-#ifndef FREQUENCY_CURVE_H
-#define FREQUENCY_CURVE_H
+#pragma once
 
 #include "gui/gui2_panel.h"
 
@@ -21,5 +20,3 @@ public:
 
     void setEnemyHasEquipment(bool state) { this->enemy_has_equipment = state; }
 };
-
-#endif//FREQUENCY_CURVE_H
