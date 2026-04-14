@@ -1,4 +1,5 @@
 #include "systems/warpsystem.h"
+#include "multiplayer_server.h"
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -63,7 +64,7 @@ void WarpSystem::update(float delta)
         }
 
         // Add heat based on warp factor.
-        if (entity.hasComponent<Coolant>())
+        if (game_server && entity.hasComponent<Coolant>())
             warp.addHeat(warp.current * delta * warp.heat_per_warp * warp.getSystemEffectiveness());
 
         // Determine forward direction and velocity.

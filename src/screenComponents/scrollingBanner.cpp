@@ -1,10 +1,12 @@
 #include "scrollingBanner.h"
 #include "gameGlobalInfo.h"
 #include "main.h"
+#include "gui/theme.h"
 
 GuiScrollingBanner::GuiScrollingBanner(GuiContainer* owner)
 : GuiElement(owner, "")
 {
+    banner_style = theme->getStyle("scrollingbanner");
 }
 
 void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
@@ -15,16 +17,18 @@ void GuiScrollingBanner::onDraw(sp::RenderTarget& renderer)
         draw_offset = 0.0f;
         return;
     }
-
-    // Draw the banner background.
-    renderer.drawStretched(rect, "gui/widget/LabelBackground.png");
+    auto banner = banner_style->get(getState());
+    renderer.drawStretchedHV(rect, banner.size, banner.texture);
 
     // Scroll the text left by incrementing the draw_offset.
     draw_offset += update_clock.restart() * scroll_speed_per_second;
 
     {
-        // Prepare scrolling text.
-        auto prepared = bold_font->prepare(gameGlobalInfo->banner_string, 32, rect.size.y * 0.67f, {255, 255, 255, 255}, rect.size, sp::Alignment::CenterLeft);
+        auto font = banner.font;
+        // Fall back to bold_font if theme font is invalid.
+        if (!font) font = bold_font;
+
+        auto prepared = font->prepare(gameGlobalInfo->banner_string, 32, rect.size.y, banner.color, rect.size, sp::Alignment::CenterLeft);
         auto threshold = std::max(prepared.getUsedAreaSize().x, rect.size.x);
 
         // Start text partially visible on first run.

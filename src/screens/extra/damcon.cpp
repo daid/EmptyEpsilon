@@ -1,17 +1,18 @@
 #include "damcon.h"
 
+#include "i18n.h"
 #include "playerInfo.h"
+#include "components/hull.h"
+
+#include "gui/theme.h"
+#include "gui/gui2_keyvaluedisplay.h"
 #include "screenComponents/shieldFreqencySelect.h"
 #include "screenComponents/shipInternalView.h"
 #include "screenComponents/customShipFunctions.h"
-#include "components/hull.h"
-#include "i18n.h"
-
-#include "gui/gui2_keyvaluedisplay.h"
 
 
 DamageControlScreen::DamageControlScreen(GuiContainer* owner)
-: GuiOverlay(owner, "DAMCON_SCREEN", colorConfig.background)
+: GuiOverlay(owner, "DAMCON_SCREEN", GuiTheme::getColor("background"))
 {
     (new GuiShipInternalView(this, "SHIP_INTERNAL_VIEW", 48.0f * 1.5f))->setShip(my_spaceship)->setPosition(300, 0, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 

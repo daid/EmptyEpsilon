@@ -2,16 +2,18 @@
 #define GUI_SCROLLTEXT_H
 
 #include "gui2_element.h"
-#include "gui2_scrollbar.h"
+
+class GuiScrollbar;
+class GuiThemeStyle;
 
 class GuiScrollText : public GuiElement
 {
 protected:
     GuiScrollbar* scrollbar;
     string text;
-    float text_size;
-    bool auto_scroll_down;
-    int mouse_scroll_steps;
+    float text_size = 30.0f;
+    bool auto_scroll_down = false;
+    const GuiThemeStyle* text_theme;
 
 public:
     GuiScrollText(GuiContainer* owner, string id, string text);

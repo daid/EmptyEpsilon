@@ -4,7 +4,7 @@
 #include "tween.h"
 #include "components/beamweapon.h"
 #include "components/shields.h"
-
+#include "gui/theme.h"
 
 GuiFrequencyCurve::GuiFrequencyCurve(GuiContainer* owner, string id, bool frequency_is_beam, bool more_damage_is_positive)
 : GuiPanel(owner, id), frequency_is_beam(frequency_is_beam), more_damage_is_positive(more_damage_is_positive)
@@ -48,7 +48,7 @@ void GuiFrequencyCurve::onDraw(sp::RenderTarget& renderer)
                     renderer.fillRect(bar_rect, glm::u8vec4(255 * f, 255 * (1.0f - f), 0, 255));
 
                 if (n == arrow_index)
-                    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", glm::vec2(x + w * 0.5f, rect.position.y + rect.size.y - 20 - h), w, -90);
+                    renderer.drawRotatedSprite(theme->getStyle("frequencycurve.indicator")->get(getState()).texture, glm::vec2(x + w * 0.5f, rect.position.y + rect.size.y - 20 - h), w, -90);
             }
 
             int mouse_freq_nr = int((mouse_position.x - rect.position.x - 20) / w);

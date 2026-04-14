@@ -6,10 +6,21 @@
 #include "components/docking.h"
 #include "components/shipsystem.h"
 #include "main.h"
+#include "gui/theme.h"
 
 GuiPowerDamageIndicator::GuiPowerDamageIndicator(GuiContainer* owner, string name, ShipSystem::Type system, sp::Alignment icon_align)
-: GuiElement(owner, name), system(system), text_size(30), icon_align(icon_align)
+: GuiElement(owner, name), system(system), icon_align(icon_align)
 {
+    // TODO: Also define icons in GuiThemeStyle
+    overlay_style = theme->getStyle("overlay");
+    overlay_damaged_style = theme->getStyle("overlay.damaged");
+    overlay_docked_style = theme->getStyle("overlay.docked");
+    overlay_jammed_style = theme->getStyle("overlay.jammed");
+    overlay_hacked_style = theme->getStyle("overlay.hacked");
+    overlay_no_power_style = theme->getStyle("overlay.no_power");
+    overlay_low_energy_style = theme->getStyle("overlay.low_energy");
+    overlay_low_power_style = theme->getStyle("overlay.low_power");
+    overlay_overheating_style = theme->getStyle("overlay.overheating");
 }
 
 void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
@@ -38,47 +49,60 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
             hacked_level = std::max(hacked_level, rear->hacked_level);
         }
     }
+
     if (health <= 0.0f)
     {
-        color = colorConfig.overlay_damaged;
+        color = overlay_damaged_style->get(getState()).color;
         display_text = tr("systems", "DAMAGED");
-    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
-    {
-        color = colorConfig.overlay_docked;
-        display_text = port->state == DockingPort::State::Docking ? tr("systems", "DOCKING") :  tr("systems", "DOCKED");
-    }else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
-    {
-        color = colorConfig.overlay_jammed;
-        display_text = tr("systems", "JAMMED");
-    }else if (power == 0.0f)
-    {
-        color = colorConfig.overlay_no_power;
-        display_text = tr("systems", "NO POWER");
-    }else if (reactor && reactor->energy < 10.0f)
-    {
-        color = colorConfig.overlay_low_energy;
-        display_text = tr("systems", "LOW ENERGY");
-    }else if (power < 0.3f)
-    {
-        color = colorConfig.overlay_low_power;
-        display_text = tr("systems", "LOW POWER");
-    }else if (heat > 0.90f)
-    {
-        color = colorConfig.overlay_overheating;
-        display_text = tr("systems", "OVERHEATING");
-    }else if (hacked_level > 0.1f)
-    {
-        color = colorConfig.overlay_hacked;
-        display_text = tr("systems", "HACKED");
-    }else{
-        return;
     }
-    renderer.drawStretched(rect, "gui/widget/damagePowerOverlay.png", color);
+    else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
+    {
+        color = overlay_docked_style->get(getState()).color;
+        display_text = port->state == DockingPort::State::Docking ? tr("systems", "DOCKING") :  tr("systems", "DOCKED");
+    }
+    else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
+    {
+        color = overlay_jammed_style->get(getState()).color;
+        display_text = tr("systems", "JAMMED");
+    }
+    else if (power == 0.0f)
+    {
+        color = overlay_no_power_style->get(getState()).color;
+        display_text = tr("systems", "NO POWER");
+    }
+    else if (reactor && reactor->energy < 10.0f)
+    {
+        color = overlay_low_energy_style->get(getState()).color;
+        display_text = tr("systems", "LOW ENERGY");
+    }
+    else if (power < 0.3f)
+    {
+        color = overlay_low_power_style->get(getState()).color;
+        display_text = tr("systems", "LOW POWER");
+    }
+    else if (heat > 0.90f)
+    {
+        color = overlay_overheating_style->get(getState()).color;
+        display_text = tr("systems", "OVERHEATING");
+    }
+    else if (hacked_level > 0.1f)
+    {
+        color = overlay_hacked_style->get(getState()).color;
+        display_text = tr("systems", "HACKED");
+    }
+    else return;
+
+    auto overlay = overlay_style->get(getState());
+    renderer.drawStretched(rect, overlay.texture, color);
+
+    auto font = overlay.font;
+    // Fall back to bold_font if theme font is invalid.
+    if (!font) font = bold_font;
 
     if (rect.size.y > rect.size.x)
-        renderer.drawText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color, sp::Font::FlagVertical);
+        renderer.drawText(rect, display_text, sp::Alignment::Center, overlay.size, font, color, sp::Font::FlagVertical);
     else
-        renderer.drawText(rect, display_text, sp::Alignment::Center, text_size, bold_font, color);
+        renderer.drawText(rect, display_text, sp::Alignment::Center, overlay.size, font, color);
 
     icon_size = std::min(rect.size.x, rect.size.y) * 0.8f;
 
@@ -123,37 +147,23 @@ void GuiPowerDamageIndicator::onDraw(sp::RenderTarget& renderer)
     }
 
     if (health <= 0.0f)
-    {
-        drawIcon(renderer, "gui/icons/status_damaged", colorConfig.overlay_damaged);
-    }
+        drawIcon(renderer, overlay_damaged_style->get(getState()).texture, overlay_damaged_style->get(getState()).color);
 
     if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive || system == ShipSystem::Type::Impulse) && (port && port->state != DockingPort::State::NotDocking))
-    {
-        drawIcon(renderer, "gui/icons/docking", colorConfig.overlay_docked);
-    }
+        drawIcon(renderer, overlay_docked_style->get(getState()).texture, overlay_docked_style->get(getState()).color);
     else if ((system == ShipSystem::Type::Warp || system == ShipSystem::Type::JumpDrive) && WarpSystem::isWarpJammed(my_spaceship))
-    {
-        drawIcon(renderer, "gui/icons/status_jammed", colorConfig.overlay_jammed);
-    }
+        drawIcon(renderer, overlay_jammed_style->get(getState()).texture, overlay_jammed_style->get(getState()).color);
 
     if (power == 0.0f)
-    {
-        drawIcon(renderer, "gui/icons/status_no_power", colorConfig.overlay_no_power);
-    }
+        drawIcon(renderer, overlay_no_power_style->get(getState()).texture, overlay_no_power_style->get(getState()).color);
     else if (power < 0.3f)
-    {
-        drawIcon(renderer, "gui/icons/status_low_power", colorConfig.overlay_low_power);
-    }
+        drawIcon(renderer, overlay_low_power_style->get(getState()).texture, overlay_low_power_style->get(getState()).color);
 
     if (reactor && reactor->energy < 10.0f)
-    {
-        drawIcon(renderer, "gui/icons/status_low_energy", colorConfig.overlay_low_energy);
-    }
+        drawIcon(renderer, overlay_low_energy_style->get(getState()).texture, overlay_low_energy_style->get(getState()).color);
 
     if (heat > 0.90f)
-    {
-        drawIcon(renderer, "gui/icons/status_overheat", colorConfig.overlay_overheating);
-    }
+        drawIcon(renderer, overlay_overheating_style->get(getState()).texture, overlay_overheating_style->get(getState()).color);
 }
 
 void GuiPowerDamageIndicator::drawIcon(sp::RenderTarget& renderer, string icon_name, glm::u8vec4 color)

@@ -5,12 +5,15 @@
 #include "components/collision.h"
 #include "components/radar.h"
 #include "ecs/query.h"
-
+#include "gui/theme.h"
 
 RawScannerDataRadarOverlay::RawScannerDataRadarOverlay(GuiRadarView* owner, string id)
 : GuiElement(owner, id), radar(owner)
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    electrical_band_style = theme->getStyle("signal_bands.electrical");
+    biological_band_style = theme->getStyle("signal_bands.biological");
+    gravitational_band_style = theme->getStyle("signal_bands.gravitational");
 }
 
 void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
@@ -166,7 +169,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    renderer.drawLineBlendAdd(a_r, glm::u8vec4(255, 45, 84, 255)); // red
-    renderer.drawLineBlendAdd(a_g, glm::u8vec4(65, 255, 81, 255)); // green
-    renderer.drawLineBlendAdd(a_b, glm::u8vec4(70, 120, 255, 255)); // blue
+    renderer.drawLineBlendAdd(a_r, electrical_band_style->get(getState()).color);    // red
+    renderer.drawLineBlendAdd(a_g, biological_band_style->get(getState()).color);    // green
+    renderer.drawLineBlendAdd(a_b, gravitational_band_style->get(getState()).color); // blue
 }

@@ -19,6 +19,7 @@ function Entity:setTemplate(template_name)
     if template == nil then
         error("Failed to find template: " .. tostring(template_name), 2)
     end
+    local isNewPlayerShip = comp.player_control and not comp.physics
     -- print("Setting template:" .. template_name)
     for key, value in next, template, nil do
         if string.sub(key, 1, 2) ~= "__" then
@@ -55,6 +56,9 @@ function Entity:setTemplate(template_name)
     if comp.shields and template.__type ~= "station" then
         comp.shields.frequency = irandom(0, 20)
     end
+    if comp.beam_weapons then
+        comp.beam_weapons.frequency = irandom(0, 20)
+    end
     if comp.internal_rooms == nil then -- No internal rooms, so auto-repair
         if comp.beam_weapons then comp.beam_weapons.auto_repair_per_second = 0.005; end
         if comp.missile_tubes then comp.missile_tubes.auto_repair_per_second = 0.005 end
@@ -67,6 +71,12 @@ function Entity:setTemplate(template_name)
             comp.shields.rear_auto_repair_per_second = 0.005
         end
         if comp.reactor then comp.reactor.auto_repair_per_second = 0.005 end
+    end
+    if isNewPlayerShip then
+        local res = {pcall(__on_new_player_ship, self)}
+        if not res[1] then
+            print("onNewPlayerShip callback function error:", table.unpack(res, 2))
+        end
     end
     return self
 end
@@ -108,14 +118,19 @@ end
 --- Note that setting this value to 0 doesn't immediately destroy the entity.
 --- Example: stbo:setHull(100) -- sets the hull point limit to either 100, or the limit if less than 100
 function Entity:setHull(amount)
-    if self.components.hull then self.components.hull.current = amount end
+    if self.components.hull then self.components.hull.current = math.min(math.max(0, amount), self.components.hull.max) end
     return self
 end
 --- Sets this entity's maximum limit of hull points.
---- Note that stations can't repair their own hull, so this only changes the percentage of remaining hull.
+--- If its current hull is greater than the new limit, reduce the hull to the limit.
 --- Example: stbo:setHullMax(100) -- sets the hull point limit to 100
 function Entity:setHullMax(amount)
-    if self.components.hull then self.components.hull.max = amount end
+    if self.components.hull then
+        self.components.hull.max = math.max(0, amount)
+        if self.components.hull.current > self.components.hull.max then
+            self.components.hull.current = self.components.hull.max
+        end
+    end
     return self
 end
 --- Defines whether this entity can be destroyed by damage.
