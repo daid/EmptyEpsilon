@@ -1149,11 +1149,44 @@ void setupSubEnvironment(sp::script::Environment& env)
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
+    /// void print(..)
+    /// Print values to the Lua console. Also writes them to EmptyEpsilon.log or STDOUT, depending on your configuration.
+    /// Accepts one or more values of any parseable type, such as strings, numbers, tables, entities, etc.
+    /// The log lines are severity INFO, and the log text is prefixed with "LUA:"
+    /// This is the same as log(...) and also prints the value on the Lua console.
+    /// Examples:
+    /// print("This is a message") -- prints "This is a message" to the Lua console and logs it
+    /// print("This", "is", "a", "message") -- prints "This is a message" to the Lua console and logs it
+    /// print(getPlayerShip(-1)) -- prints "entity: 00000000000000CE" to the Lua console and logs it
+    /// print(getGMSelection()) -- prints all selected entities as "{1=entity: 00000000000002ED,2=entity: 00000000000002EE, ...}"
     env.setGlobal("print", &luaPrint);
+    /// void log(...)
+    /// Log values to EmptyEpsilon.log or STDOUT, depending on your configuration.
+    /// This is the same as print(...) but doesn't print the value on the Lua console.
+    /// Examples:
+    /// log("This is a log line") -- logs "[INFO    ]: LUA:This is a log line"
+    /// See print(...) for more examples.
     env.setGlobal("log", &luaLog);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
+    /// void _(...)
+    /// Define a string for internationalization. The string is added to the lists of those that can be translated for a given language.
+    /// The function takes up to four arguments, and its behavior depends on the number and type of arguments.
+    /// - If only one argument is passed, the string is defined without context.
+    /// - If only two arguments are passed and the first is a string, the first argument defines a context for the string, and the second argument defines the string being translated.
+    /// - If the first value is a number, the number defines the number of subjects in the translatable string for variable pluralization translations. For example, 1 is singular and 2+ is typically plural.
+    ///   This is necessary only for strings that change depending on a numeric value interpolated into the string, especially for languages that have different pluralization forms for different quantities.
+    ///   The remaining arguments define an optional context, followed by the singular and plural forms of the translatable string.
+    /// Examples:
+    /// comms = _("Atlantis, you are cleared for launch.") -- defines the string for translation
+    /// comms = _("comms", "Atlantis, you are cleared for launch.") -- defines the string with the context of "comms"
+    /// -- Defines strings for singular and plural forms, depending on the value of the minutes variable:
+    /// minutes = 5; comms = string.format(_(minutes, "comms-timer", [[Atlantis, you have 1 minute remaining.]], [[Atlantis, you have %d minutes remaining.]]), minutes))
     env.setGlobal("_", &luaTranslate);
     
+    /// entity createEntity()
+    /// Creates an entity with no components.
+    /// Example:
+    /// new_entity = createEntity()
     env.setGlobal("createEntity", &luaCreateEntity);
     /// table getEntitiesWithComponent(string component_name)
     /// Returns a table of entities that have the given component type.
@@ -1163,10 +1196,26 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
     ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
+    /// table getLuaEntityFunctionTable()
+    /// Returns a table containing Lua entity functions.
+    /// Example:
+    /// functions = getLuaEntityFunctionTable() -- returns {getSystemHeatRate=function: 0000020464069A10,setCommsFunction=function: ...}
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
+    // TODO: Add threading examples
+    /// void startThread(function callback)
+    /// Starts a background thread and runs the given callback function in it.
+    /// See also yield().
     env.setGlobal("startThread", &luaStartThread);
     env.setGlobal("yield", &luaYield);
-    
+    /// table createClass()
+    /// Returns a class table onto which you can define methods. The table can be called as a function to instantiate a new object of that class.
+    /// Used by ShipTemplate and ModelData to define themselves as Lua-native classes.
+    /// If you define an optional member function named __init__(), that function is run upon instantiation of a new object with this class. The __init__() function is passed only self and should define default values for this instance.
+    /// Examples:
+    /// NewClass = createClass() -- define a class named NewClass
+    /// function NewClass:__init__() ... end -- define an initialization method for NewClass
+    /// function NewClass:setName(name) ... end -- define a NewClass method named setName
+    /// new_object = NewClass():setName("Rookie") -- creates a NewClass-type object with name "Rookie"
     env.setGlobal("createClass", &luaCreateClass);
 
     /// string getScenarioSetting(string key)
