@@ -754,7 +754,8 @@ if(Python3_Interpreter_FOUND)
     set(SCRIPT_REFERENCE_HTML "${PROJECT_BINARY_DIR}/script_reference.html")
     file(GLOB_RECURSE SCRIPT_REFERENCE_SOURCES
         "${CMAKE_SOURCE_DIR}/scripts/api/*.lua"
-        "${CMAKE_SOURCE_DIR}/script_docs/*.py")
+        "${CMAKE_SOURCE_DIR}/script_docs/*.py"
+        "${CMAKE_SOURCE_DIR}/script_docs/template.html")
     add_custom_command(
         OUTPUT "${SCRIPT_REFERENCE_HTML}"
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/script_docs/main.py "${SCRIPT_REFERENCE_HTML}"
