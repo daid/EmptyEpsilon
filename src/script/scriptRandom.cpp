@@ -85,11 +85,11 @@ void registerScriptRandomFunctions(sp::script::Environment& env)
     /// local n = irandom(1, 6) -- equivalent to rolling a six-sided die
     env.setGlobal("irandom", &lua_irandom);
 
+    // TODO: Note bounds error as in random/irandom, if implemented
     /// RandomGenerator RandomGenerator([integer seed])
     /// Creates a new independently seeded Mersenne Twister random generator to generate deterministic random values from the same seed.
     /// The generator's values are consistent in value and order if invoked or reinitialized multiple times with the same seed.
     /// If a seed is omitted, the current time is used as the seed.
-    /// Outputs a "lower bound is greater than upper bound" error if the min value is greater than the max value.
     /// Use this to generate random values that remain consistent between runs, such as when replaying a scenario or reusing a function.
     /// The returned object has three methods:
     /// - :seed(seed) re-seeds the generator with the given integer
