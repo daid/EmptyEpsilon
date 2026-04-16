@@ -1109,23 +1109,23 @@ static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int c
 }
 static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 
 static void luaStartThread(sp::script::Callback callback)
@@ -1337,6 +1337,17 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: playSoundFile("sfx/laser.wav")
     env.setGlobal("playSoundFile", &luaPlaySoundFile);
 
+    /// void applyDamageToEntity(entity target, number amount, table damage_info)
+    /// Applies amount of damage to the target entity using the parameters in damage_info.
+    /// damage_info is a table with optional fields:
+    /// - instigator (entity; no default)
+    /// - type (string "energy", "kinetic", or "emp"; no default)
+    /// - x and y (world position of the hit; 0, 0 default)
+    /// - frequency (integer energy beam frequency for shield matching, with 0 to 20 representing 400THz up at 20THz increments; no default)
+    /// - system_target (string ESystem ship system name, no default)
+    /// Example:
+    /// -- Apply 50 energy damage at frequency 460THz to target's beam_weapons system, caused by player, at coordinates 1000,-500
+    /// applyDamageToEntity(target, 50, {instigator = player, type = "energy", x = 1000, y = -500, frequency = 3, system_target = "beam_weapons"})
     env.setGlobal("applyDamageToEntity", &luaApplyDamageToEntity);
 
     /// void commandTargetRotation(entity ship, number rotation)
@@ -1693,9 +1704,27 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
 
 
+    /// void addGMFunction(string label, function callback)
+    /// Adds a button with the given label to the GM screen. Clicking it calls the callback function.
+    /// Example:
+    /// addGMFunction("Spawn enemy", function() CpuShip():setFaction("Kraylor"):... end) -- adds a GM screen button to spawn a Kraylor-faction ship
     env.setGlobal("addGMFunction", &luaAddGMFunction);
+    /// void clearGMFunctions()
+    /// Removes all buttons previously added to the GM screen via addGMFunction().
+    /// Example:
+    /// clearGMFunctions()
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
+    /// ScriptObject Script()
+    /// Creates a new independent Lua script environment as a child of the current one.
+    /// The returned ScriptObject has two methods:
+    /// - run(filename) loads and executes the given script file, then calls its init() function if it exists.
+    /// - setVariable(name, value) sets a global in that environment. Value can be a string, number, or entity.
+    /// Example:
+    /// -- Run my_subscript.lua, assigning and passing the first player ship to the subscript's variable player
+    /// local sub = Script()
+    /// sub:setVariable("player", getPlayerShip(-1))
+    /// sub:run("my_subscript.lua")
     env.setGlobal("Script", &luaCreateAdditionalScript);
 
     /// void setCommsMessage(string message)
@@ -1749,6 +1778,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns a table/value converted from a json string
     env.setGlobal("fromJSON", &luaFromJSON);
 
+    /// integer getEEVersion()
+    /// Returns the running EmptyEpsilon build version as an integer.
+    /// Example:
+    /// local ver = getEEVersion() -- returns 20241208 if the EmptyEpsilon version is 2024.12.08
     env.setGlobal("getEEVersion", &luaGetEEVersion);
     registerScriptDataStorageFunctions(env);
     registerScriptGMFunctions(env);
