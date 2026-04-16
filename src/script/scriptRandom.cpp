@@ -26,7 +26,7 @@ static int lua_rngIRandom(lua_State* L)
     auto imin = luaL_checkinteger(L, 2);
     auto imax = luaL_checkinteger(L, 3);
     if (imin > imax)
-        return luaL_error(L, "bad call irandom(%f, %f): lower bound is greater than upper bound", imin, imax);
+        return luaL_error(L, "bad call irandom(%d, %d): lower bound is greater than upper bound", imin, imax);
     lua_pushinteger(L, std::uniform_int_distribution<>(imin, imax)(*rng));
     return 1;
 }
