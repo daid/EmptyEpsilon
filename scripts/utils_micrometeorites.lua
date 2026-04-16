@@ -116,6 +116,7 @@ function MicroMeteorites:fired(button_direction,player_ship)
 		end
 		xx, yy = vectorFromAngle(beam_angle, 200*player_ship.micrometeorite_impact_time+100)
 		debris=Artifact():setPosition(x+xx, y+yy):setRadarTraceColor(255,200,100);
+        debris.components.lifetime = {lifetime=.01}
 		if player_ship.micrometeorite_direction==button_direction then
 			player_ship.micrometeorite_impact_time=5
 			player_ship.micrometeorite_impact_countdown=5
@@ -134,7 +135,6 @@ function MicroMeteorites:fired(button_direction,player_ship)
 			BeamEffect():setSource(player_ship, 0, 0, 0):setTarget(debris, 0, 0):setDuration(0.5):setRing(false):setTexture("texture/beam_blue.png"):setBeamFireSoundPower(0.1)
 			player_ship:setSystemHeat("beamweapons", player_ship:getSystemHeat("beamweapons")+0.1) -- some heat to prevent button spamming
 		end
-		debris:destroy()
 	end
 end
 
