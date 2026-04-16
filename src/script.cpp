@@ -1582,14 +1582,14 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting a probe on the Relay screen and then clicking the link to science button.
     /// Example:
-    /// commandSetScienceLink(getPlayerShip(-1), launched_probe)
+    /// commandSetScienceLink(getPlayerShip(-1), launched_probe) -- link the probe assigned to launched_probe
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     /// void commandClearScienceLink(entity ship)
     /// Clears the science station's link to a scan probe for the given ship.
     /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting the linked probe on the Relay screen and then clicking the link to science button.
     /// Example:
-    /// commandClearScienceLink(getPlayerShip(-1))
+    /// commandClearScienceLink(getPlayerShip(-1)) -- clear any science link on this ship
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
     /// void commandSetAlertLevel(entity ship, string level)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
@@ -1599,14 +1599,59 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
 
+    /// void transferPlayersFromShipToShip(entity source, entity target [, string station])
+    /// Moves all connected player clients from source to target entities.
+    /// If station is given, transfers only players at that crew position. See ECrewPosition for valid values.
+    /// Has no effect if target is not a player-controlled ship.
+    /// Example:
+    /// transferPlayersFromShipToShip(old_ship, new_ship) -- move all crew to new_ship
+    /// transferPlayersFromShipToShip(old_ship, new_ship, "helms") -- move only Helms players to new_ship's Helms
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
+    /// boolean hasPlayerCrewAtPosition(entity source, string station)
+    /// Returns true if any connected player client is currently manning the given crew position on source.
+    /// See ECrewPosition for valid station values.
+    /// Example:
+    /// if hasPlayerCrewAtPosition(getPlayerShip(-1), "weapons") then ... end
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
+    /// table getPlayersInfo(entity source)
+    /// Returns a table of connected player clients for source. Each entry has a "name" string and a
+    /// "positions" table (an array of crew position strings). See ECrewPosition for position values.
+    /// Example:
+    /// for _, p in ipairs(getPlayersInfo(getPlayerShip(-1))) do print(p.name) end -- print the name of each player
     env.setGlobal("getPlayersInfo", &luaGetPlayersInfo);
+    /// void setPlayerShipCustomFunction(entity ship, string type, string name, string caption, string|table positions, function callback, integer order)
+    /// Adds or updates a custom function visible on crew screens for ship.
+    /// type is "info", "button", or "message".
+    /// name is a unique identifier. If a function with the same name exists, it's updated in place.
+    /// positions is an ECrewPosition string or table of those strings.
+    /// callback is called when the crew interacts with the function. Functions are displayed in ascending order.
+    /// Example:
+    /// setPlayerShipCustomFunction(ship, "button", "mine_asteroid", _("Mine asteroid"), "science", function() ... end, 1)
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
+    /// void removePlayerShipCustomFunction(entity ship, string name)
+    /// Removes the custom function with the given name from ship's crew screens. Has no effect if a function with the given name doesn't exist.
+    /// Example:
+    /// removePlayerShipCustomFunction(getPlayerShip(-1), "mine_asteroid") -- removes the mine asteroid button
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
+    /// void addEntryToShipsLog(entity ship, string entry, table color)
+    /// Appends an entry to ship's relay log with the given color, which is an RGBA table {r, g, b, a} with component values from 0 to 255.
+    /// Example:
+    /// addEntryToShipsLog(getPlayerShip(-1), "Docking complete.", {0, 255, 0, 255}) -- adds the message with an opaque green color
     env.setGlobal("addEntryToShipsLog", &luaAddEntryToShipsLog);
 
+    /// boolean isRadarBlockedFrom(table source, entity target, number short_range)
+    /// Returns true if target is hidden from radar at the source coordinates due to the effect of a radar-blocking entity, such as a nebula.
+    /// source is a world-position table {x, y}. Targets within short_range of source are never blocked.
+    /// Targets with the NeverRadarBlocked component always return false.
+    /// Example:
+    /// -- Returns true if enemy can't be seen on a radar with 5U short range from coordinates px, py
+    /// if isRadarBlockedFrom({px, py}, enemy, 5000) then ... end
     env.setGlobal("isRadarBlockedFrom", &RadarBlockSystem::isRadarBlockedFrom);
+    /// number beamVsShieldFrequencyDamageFactor(integer beam_frequency, integer shield_frequency)
+    /// Returns a damage multiplier for a beam at beam_frequency striking a shield at shield_frequency.
+    /// The result ranges from about 0.5 to 1.5. Returns 1.0 if either frequency is unexpectedly negative.
+    /// Example:
+    /// local factor = beamVsShieldFrequencyDamageFactor(3, 5) -- 0.551..., the factor for beam freq 3 (460THz) vs. shield freq 5 (500THz)
     env.setGlobal("beamVsShieldFrequencyDamageFactor", &frequencyVsFrequencyDamageFactor);
 
     /// EScanningComplexity getScanningComplexity()
