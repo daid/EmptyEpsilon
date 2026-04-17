@@ -32,6 +32,8 @@
 #include "components/zone.h"
 #include "components/shiplog.h"
 #include "components/selfdestruct.h"
+#include "components/radar.h"
+#include "systems/probe.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
@@ -1109,23 +1111,49 @@ static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int c
 }
 static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
-    //TODO
+    if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
+        combat->boost.request = amount;
+}
+static void luaCommandCombatManeuverStrafe(sp::ecs::Entity ship, float amount) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
+    if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
+        combat->strafe.request = amount;
 }
 static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
-    //TODO
+    ProbeSystem::launch(ship, {x, y});
 }
 static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
-    //TODO
+    if (auto radar_link = ship.getComponent<RadarLink>())
+    {
+        auto existing_link = radar_link->linked_entity;
+        // Run on_link callback if present.
+        if (radar_link->on_link && probe)
+            LuaConsole::checkResult(radar_link->on_link.call<void>(ship, probe));
+        // Update radar link.
+        radar_link->linked_entity = probe;
+        // Run on_unlink callback if this caused an existing link to be broken.
+        if (radar_link->on_unlink && existing_link)
+            LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
+    }
 }
 static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
-    //TODO
+    if (auto radar_link = ship.getComponent<RadarLink>())
+    {
+        auto existing_link = radar_link->linked_entity;
+        // Clear radar link.
+        radar_link->linked_entity = {};
+        // Run on_unlink callback if this caused an existing link to be broken.
+        if (radar_link->on_unlink && existing_link)
+            LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
+    }
 }
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    //TODO
+    if (auto player_control = ship.getComponent<PlayerControl>())
+        player_control->alert_level = level;
 }
 
 static void luaStartThread(sp::script::Callback callback)
@@ -1325,6 +1353,7 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
+    env.setGlobal("commandCombatManeuverStrafe", &luaCommandCombatManeuverStrafe);
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
