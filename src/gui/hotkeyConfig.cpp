@@ -338,6 +338,9 @@ void Keys::init()
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+#ifdef DEBUG
+    debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
+#endif
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -356,6 +359,7 @@ void Keys::init()
     mainscreen_target.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
     mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View tactical radar"));
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_strategic_map.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View strategic map"));
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
 
     // Helms

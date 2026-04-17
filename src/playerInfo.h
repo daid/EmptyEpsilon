@@ -51,7 +51,7 @@ public:
     void commandSetShields(bool enabled);
     void commandMainScreenSetting(MainScreenSetting mainScreen);
     void commandMainScreenOverlay(MainScreenOverlay mainScreen);
-    void commandScan(sp::ecs::Entity object);
+    void commandScan(sp::ecs::Entity object, sp::ecs::Entity link_source = sp::ecs::Entity());
     void commandSetSystemPowerRequest(ShipSystem::Type system, float power_level);
     void commandSetSystemCoolantRequest(ShipSystem::Type system, float coolant_level);
     void commandDock(sp::ecs::Entity station);

@@ -426,7 +426,7 @@ static int luaGetObjectsInRadius(lua_State* L)
     glm::vec2 position(x, y);
     lua_newtable(L);
     int idx = 1;
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
         auto entity_transform = entity.getComponent<sp::Transform>();
         if (entity_transform) {
             if (glm::length2(entity_transform->getPosition() - position) < r*r) {
@@ -448,7 +448,7 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
     auto source_transform = source.getComponent<sp::Transform>();
     if (!source_transform) return 1;
     auto position = source_transform->getPosition();
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
+    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r))) {
         auto entity_transform = entity.getComponent<sp::Transform>();
         if (entity_transform) {
             if (glm::length2(entity_transform->getPosition() - position) < r*r) {
@@ -531,7 +531,7 @@ void luaRemovePlayerShipCustomFunction(sp::ecs::Entity entity, string name)
 {
     auto csf = entity.getComponent<CustomShipFunctions>();
     if (!csf) return;
-    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [csf, name](const CustomShipFunctions::Function& f) {
+    auto it = std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) {
         return f.name == name;
     });
     if (it != csf->functions.end()) {
@@ -1109,23 +1109,23 @@ static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int c
 }
 static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    //TODO
+    // TODO; update the script docs when fully implemented
 }
 
 static void luaStartThread(sp::script::Callback callback)
@@ -1149,11 +1149,44 @@ void setupSubEnvironment(sp::script::Environment& env)
 bool setupScriptEnvironment(sp::script::Environment& env)
 {
     // Load core global functions
+    /// void print(..)
+    /// Print values to the Lua console. Also writes them to EmptyEpsilon.log or STDOUT, depending on your configuration.
+    /// Accepts one or more values of any parseable type, such as strings, numbers, tables, entities, etc.
+    /// The log lines are severity INFO, and the log text is prefixed with "LUA:"
+    /// This is the same as log(...) and also prints the value on the Lua console.
+    /// Examples:
+    /// print("This is a message") -- prints "This is a message" to the Lua console and logs it
+    /// print("This", "is", "a", "message") -- prints "This is a message" to the Lua console and logs it
+    /// print(getPlayerShip(-1)) -- prints "entity: 00000000000000CE" to the Lua console and logs it
+    /// print(getGMSelection()) -- prints all selected entities as "{1=entity: 00000000000002ED,2=entity: 00000000000002EE, ...}"
     env.setGlobal("print", &luaPrint);
+    /// void log(...)
+    /// Log values to EmptyEpsilon.log or STDOUT, depending on your configuration.
+    /// This is the same as print(...) but doesn't print the value on the Lua console.
+    /// Examples:
+    /// log("This is a log line") -- logs "[INFO    ]: LUA:This is a log line"
+    /// See print(...) for more examples.
     env.setGlobal("log", &luaLog);
     env.setGlobalFuncWithEnvUpvalue("require", &luaRequire);
+    /// void _(...)
+    /// Define a string for internationalization. The string is added to the lists of those that can be translated for a given language.
+    /// The function takes up to four arguments, and its behavior depends on the number and type of arguments.
+    /// - If only one argument is passed, the string is defined without context.
+    /// - If only two arguments are passed and the first is a string, the first argument defines a context for the string, and the second argument defines the string being translated.
+    /// - If the first value is a number, the number defines the number of subjects in the translatable string for variable pluralization translations. For example, 1 is singular and 2+ is typically plural.
+    ///   This is necessary only for strings that change depending on a numeric value interpolated into the string, especially for languages that have different pluralization forms for different quantities.
+    ///   The remaining arguments define an optional context, followed by the singular and plural forms of the translatable string.
+    /// Examples:
+    /// comms = _("Atlantis, you are cleared for launch.") -- defines the string for translation
+    /// comms = _("comms", "Atlantis, you are cleared for launch.") -- defines the string with the context of "comms"
+    /// -- Defines strings for singular and plural forms, depending on the value of the minutes variable:
+    /// minutes = 5; comms = string.format(_(minutes, "comms-timer", [[Atlantis, you have 1 minute remaining.]], [[Atlantis, you have %d minutes remaining.]]), minutes))
     env.setGlobal("_", &luaTranslate);
     
+    /// entity createEntity()
+    /// Creates an entity with no components.
+    /// Example:
+    /// new_entity = createEntity()
     env.setGlobal("createEntity", &luaCreateEntity);
     /// table getEntitiesWithComponent(string component_name)
     /// Returns a table of entities that have the given component type.
@@ -1163,10 +1196,26 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     ///   getEntitiesWithComponent("beam_weapons") -- returns a table of all entities with the BeamWeapons component.
     ///   getEntitiesWithComponent("beam_weapons")[1]:getCallSign() -- returns the callsign of the first identified entity with beam weapons
     env.setGlobal("getEntitiesWithComponent", &luaQueryEntities);
+    /// table getLuaEntityFunctionTable()
+    /// Returns a table containing Lua entity functions.
+    /// Example:
+    /// functions = getLuaEntityFunctionTable() -- returns {getSystemHeatRate=function: 0000020464069A10,setCommsFunction=function: ...}
     env.setGlobal("getLuaEntityFunctionTable", &luaGetEntityFunctionTable);
+    // TODO: Add threading examples
+    /// void startThread(function callback)
+    /// Starts a background thread and runs the given callback function in it.
+    /// See also yield().
     env.setGlobal("startThread", &luaStartThread);
     env.setGlobal("yield", &luaYield);
-    
+    /// table createClass()
+    /// Returns a class table onto which you can define methods. The table can be called as a function to instantiate a new object of that class.
+    /// Used by ShipTemplate and ModelData to define themselves as Lua-native classes.
+    /// If you define an optional member function named __init__(), that function is run upon instantiation of a new object with this class. The __init__() function is passed only self and should define default values for this instance.
+    /// Examples:
+    /// NewClass = createClass() -- define a class named NewClass
+    /// function NewClass:__init__() ... end -- define an initialization method for NewClass
+    /// function NewClass:setName(name) ... end -- define a NewClass method named setName
+    /// new_object = NewClass():setName("Rookie") -- creates a NewClass-type object with name "Rookie"
     env.setGlobal("createClass", &luaCreateClass);
 
     /// string getScenarioSetting(string key)
@@ -1288,57 +1337,339 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Example: playSoundFile("sfx/laser.wav")
     env.setGlobal("playSoundFile", &luaPlaySoundFile);
 
+    /// void applyDamageToEntity(entity target, number amount, table damage_info)
+    /// Applies amount of damage to the target entity using the parameters in damage_info.
+    /// damage_info is a table with optional fields:
+    /// - instigator (entity; no default)
+    /// - type (string "energy", "kinetic", or "emp"; no default)
+    /// - x and y (world position of the hit; 0, 0 default)
+    /// - frequency (integer energy beam frequency for shield matching, with 0 to 20 representing 400THz up at 20THz increments; no default)
+    /// - system_target (string ESystem ship system name, no default)
+    /// Example:
+    /// -- Apply 50 energy damage at frequency 460THz to target's beam_weapons system, caused by player, at coordinates 1000,-500
+    /// applyDamageToEntity(target, 50, {instigator = player, type = "energy", x = 1000, y = -500, frequency = 3, system_target = "beam_weapons"})
     env.setGlobal("applyDamageToEntity", &luaApplyDamageToEntity);
 
+    /// void commandTargetRotation(entity ship, number rotation)
+    /// Sets the target heading for the given ship's maneuvering thrusters, in degrees of rotation. (Rotation is heading + 90; 0 is east.)
+    /// This is equivalent to clicking on the Helms screen's radar.
+    /// Example:
+    /// commandTargetRotation(getPlayerShip(-1), 90) -- turn the ship to face south (90 degrees clockwise from 0 rotation)
     env.setGlobal("commandTargetRotation", &luaCommandTargetRotation);
+    /// void commandImpulse(entity ship, number request)
+    /// Sets the impulse engine throttle for the given ship.
+    /// Target is clamped to -1.0 (full reverse) to 1.0 (full ahead), with 0.0 stopping the engines.
+    /// This is equivalent to clicking on the Helms screen's impulse control slider.
+    /// Example:
+    /// commandImpulse(getPlayerShip(-1), 1.0) -- set impulse to full ahead
     env.setGlobal("commandImpulse", &luaCommandImpulse);
+    /// void commandWarp(entity ship, integer request)
+    /// Sets the warp drive level for the given ship.
+    /// Target is an integer from 0 (stopped) to the ship's maximum warp level (default 4).
+    /// This is equivalent to clicking on the Helms screen's warp control slider.
+    /// Example:
+    /// commandWarp(getPlayerShip(-1), 2) -- engage warp factor 2
     env.setGlobal("commandWarp", &luaCommandWarp);
+    /// void commandJump(entity ship, number distance)
+    /// Initiates a jump drive jump of the given distance in world units (1000 = 1U).
+    /// This is equivalent to setting a value on the Helms screen's jump control slider and clicking the Jump button.
+    /// Example:
+    /// commandJump(getPlayerShip(-1), 25000) -- initiate a 25U jump
     env.setGlobal("commandJump", &luaCommandJump);
+    /// void commandAbortJump(entity ship)
+    /// Aborts an active jump.
+    /// This is equivalent to clicking the Helms screen's jump control Abort button.
+    /// Example:
+    /// commandAbortJump(getPlayerShip(-1))
     env.setGlobal("commandAbortJump", &luaCommandAbortJump);
+    /// void commandSetTarget(entity ship, entity target)
+    /// Sets the combat target for the given ship.
+    /// This is equivalent to clicking a target on the Weapons screen's radar.
+    /// Example:
+    /// commandSetTarget(getPlayerShip(-1), enemy_ship)
     env.setGlobal("commandSetTarget", &luaCommandSetTarget);
+    /// void commandLoadTube(entity ship, integer tube_index, string missile_type)
+    /// Loads a missile of the given type into the given tube.
+    /// tube_index is 0-based. See EMissileWeapons for valid missle type values.
+    /// This is equivalent to clicking a missile type on the Weapons screen's missile tubes control, and then click an empty tube.
+    /// Example:
+    /// commandLoadTube(getPlayerShip(-1), 0, "homing") -- load a homing missile into tube 0
     env.setGlobal("commandLoadTube", &luaCommandLoadTube);
+    /// void commandUnloadTube(entity ship, integer tube_index)
+    /// Unloads the missile from the given tube.
+    /// tube_index is 0-based.
+    /// This is equivalent to clicking the Unload button for a loaded tube on the Weapons screen's missile tubes control.
+    /// Example:
+    /// commandUnloadTube(getPlayerShip(-1), 0) -- unload tube 0
     env.setGlobal("commandUnloadTube", &luaCommandUnloadTube);
+    /// void commandFireTube(entity ship, integer tube_index, number missile_target_angle)
+    /// Fires the missile loaded in the given tube at the given angle, in degrees.
+    /// tube_index is 0-based.
+    /// If the ship has a combat target set, missiles with homing properties can acquire it.
+    /// This is equivalent to disabling missile aim lock, selecting an angle, and then clicking a loaded tube on the Weapons screen's missile tubes control.
+    /// Example:
+    /// commandFireTube(getPlayerShip(-1), 0, 45.0) -- fire tube 0 toward 45 degrees
     env.setGlobal("commandFireTube", &luaCommandFireTube);
+    /// void commandFireTubeAtTarget(entity ship, integer tube_index, entity target)
+    /// Fires the missile loaded in the given tube, calculating the optimal intercept angle for the given target.
+    /// tube_index is 0-based.
+    /// If no intercept solution is found, fires in the tube's default direction instead.
+    /// This is equivalent to clicking a loaded tube on the Weapons screen's missile tubes control.
+    /// Example:
+    /// commandFireTubeAtTarget(getPlayerShip(-1), 0, enemy_ship) -- fire tube 0 at enemy_ship
     env.setGlobal("commandFireTubeAtTarget", &luaCommandFireTubeAtTarget);
+    /// void commandSetShields(entity ship, boolean active)
+    /// Activates or deactivates the shields on the given ship.
+    /// Has no effect if the shields are currently calibrating.
+    /// This is equivalent to clicking the Weapons screen's Shields button.
+    /// Example:
+    /// commandSetShields(getPlayerShip(-1), true) -- raise shields
     env.setGlobal("commandSetShields", &luaCommandSetShields);
+    /// void commandMainScreenSetting(entity ship, string setting)
+    /// Sets the main screen view mode for the given ship.
+    /// See EMainScreenSetting for valid setting values.
+    /// This is equivalent to clicking a setting in the main screen controls selector.
+    /// Example:
+    /// commandMainScreenSetting(getPlayerShip(-1), "tactical") -- switch to tactical radar view
     env.setGlobal("commandMainScreenSetting", &luaCommandMainScreenSetting);
+    /// void commandMainScreenOverlay(entity ship, string overlay)
+    /// Sets the overlay displayed on top of the main screen view for the given ship.
+    /// See EMainScreenOverlay for valid setting values.
+    /// This is equivalent to clicking an overlay in the main screen controls selector.
+    /// Example:
+    /// commandMainScreenOverlay(getPlayerShip(-1), "showcomms") -- show comms overlay on main screen
     env.setGlobal("commandMainScreenOverlay", &luaCommandMainScreenOverlay);
+    /// void commandScan(entity ship, entity target)
+    /// Initiates a science scan of the given target by the given ship and resets the scanning delay timer to maximum.
+    /// This is equivalent to clicking the Scan button on the Science screen.
+    /// Example:
+    /// commandScan(getPlayerShip(-1), unknown_station) -- begin scanning an entity assigned to unknown_station
     env.setGlobal("commandScan", &luaCommandScan);
+    /// void commandSetSystemPowerRequest(entity ship, string system, number power_level)
+    /// Sets the requested power level for the given system on the given ship.
+    /// power_level is typically clamped to 0.0 to 3.0, where 1.0 is nominal. See ESystem for valid system values.
+    /// This is equivalent to selecting a system on the Engineering screen and then clicking its power slider.
+    /// Example:
+    /// commandSetSystemPowerRequest(getPlayerShip(-1), "impulse", 1.5) -- overpower impulse engines to 150%
     env.setGlobal("commandSetSystemPowerRequest", &luaCommandSetSystemPowerRequest);
+    /// void commandSetSystemCoolantRequest(entity ship, string system, number coolant_level)
+    /// Sets the requested coolant level for the given system on the given ship.
+    /// coolant_level is clamped to 0.0 and the ship's maximum coolant per system (typically 10.0). See ESystem for valid system values.
+    /// Example:
+    /// commandSetSystemCoolantRequest(getPlayerShip(-1), "reactor", 10.0) -- direct max coolant to reactor
     env.setGlobal("commandSetSystemCoolantRequest", &luaCommandSetSystemCoolantRequest);
+    /// void commandDock(entity ship, entity station)
+    /// Initiates docking the given ship with the given target, if the ship is within docking range.
+    /// This is equivalent to clicking the Helms screen's request dock button.
+    /// Example:
+    /// commandDock(getPlayerShip(-1), friendly_station) -- docks with the entity assigned to friendly-station
     env.setGlobal("commandDock", &luaCommandDock);
+    /// void commandUndock(entity ship)
+    /// Requests the given ship to undock from its current docking target.
+    /// This is equivalent to clicking the Helms screen's undock button.
+    /// Example:
+    /// commandUndock(getPlayerShip(-1))
     env.setGlobal("commandUndock", &luaCommandUndock);
+    /// void commandAbortDock(entity ship)
+    /// Aborts an in-progress docking approach for the given ship.
+    /// This is equivalent to clicking the Helms screen's cancel docking button.
+    /// Example:
+    /// commandAbortDock(getPlayerShip(-1))
     env.setGlobal("commandAbortDock", &luaCommandAbortDock);
+    /// void commandOpenTextComm(entity ship, entity target)
+    /// Opens text communications from the given ship to the given entity.
+    /// This is equivalent to selecting a target on the Relay screen and then clicking the open comms button.
+    /// Example:
+    /// commandOpenTextComm(getPlayerShip(-1), nearby_station)
     env.setGlobal("commandOpenTextComm", &luaCommandOpenTextComm);
+    /// void commandCloseTextComm(entity ship)
+    /// Closes any active text communications for the given ship.
+    /// This is equivalent to clicking the close button on a comms panel on the Relay screen.
+    /// Example:
+    /// commandCloseTextComm(getPlayerShip(-1))
     env.setGlobal("commandCloseTextComm", &luaCommandCloseTextComm);
+    /// void commandAnswerCommHail(entity ship, boolean answer)
+    /// Accepts or declines an incoming communications hail for the given ship.
+    /// Pass true to accept the hail, false to ignore it.
+    /// This is equivalent to clicking the equivalent buttons in an incoming communications panel on the Relay screen.
+    /// Example:
+    /// commandAnswerCommHail(getPlayerShip(-1), true) -- accept the incoming hail
     env.setGlobal("commandAnswerCommHail", &luaCommandAnswerCommHail);
+    /// void commandSendComm(entity ship, integer index)
+    /// Selects a reply option by index in an active script-based communications dialogue for the given ship. If the ship has no active scripted comms, this does nothing.
+    /// The index corresponds to the order in which reply options were added with addCommsReply(). 
+    /// This is equivalent to clicking the equivalent buttons in a scripted comms panel on the Relay screen.
+    /// Example:
+    /// commandSendComm(getPlayerShip(-1), 0) -- select the first comms reply option
     env.setGlobal("commandSendComm", &luaCommandSendComm);
+    /// void commandSendCommPlayer(entity ship, string message)
+    /// Sends a free-form text message in an active player-to-player communications dialogue for the given ship. If the ship has no active chat comms, this does nothing.
+    /// This is equivalent to entering a message into an active chat comms window on the Relay screen.
+    /// Example:
+    /// commandSendCommPlayer(getPlayerShip(-1), "Requesting permission to dock.")
     env.setGlobal("commandSendCommPlayer", &luaCommandSendCommPlayer);
+    /// void commandSetAutoRepair(entity ship, boolean enabled)
+    /// Enables or disables automatic repair crew assignment for the given ship.
+    /// When enabled, repair crew are automatically sent to damaged systems.
+    /// Example:
+    /// commandSetAutoRepair(getPlayerShip(-1), true) -- enable auto-repair
     env.setGlobal("commandSetAutoRepair", &luaCommandSetAutoRepair);
+    /// void commandSetBeamFrequency(entity ship, integer frequency)
+    /// Sets the beam weapon frequency for the given ship.
+    /// frequency is clamped to a value from 0 to 20.
+    /// This is equivalent to selecting a frequency on the Weapons screen.
+    /// Example:
+    /// commandSetBeamFrequency(getPlayerShip(-1), 10) -- set beam frequency to 10
     env.setGlobal("commandSetBeamFrequency", &luaCommandSetBeamFrequency);
+    /// void commandSetBeamSystemTarget(entity ship, string system)
+    /// Sets the enemy ship system that beam weapons will preferentially target for the given ship. See ESystem for valid system values.
+    /// This is equivalent to selecting a target ship system on the Weapons screen.
+    /// Example:
+    /// commandSetBeamSystemTarget(getPlayerShip(-1), "impulse") -- target enemy impulse engines with beams
     env.setGlobal("commandSetBeamSystemTarget", &luaCommandSetBeamSystemTarget);
+    /// void commandSetShieldFrequency(entity ship, integer frequency)
+    /// Sets the shield frequency for the given ship and begins shield recalibration.
+    /// frequency is clamped to a value from 0 to 20. Shields are deactivated and cannot be raised until calibration completes. This has no effect if shields are already calibrating.
+    /// This is equivalent to selecting a shield frequency on the Weapons screen and then clicking the calibrate button.
+    /// Example:
+    /// commandSetShieldFrequency(getPlayerShip(-1), 10) -- recalibrate shields to frequency 10
     env.setGlobal("commandSetShieldFrequency", &luaCommandSetShieldFrequency);
+    /// void commandAddWaypoint(entity ship, number x, number y)
+    /// Adds a new navigation waypoint at the given coordinates for the given ship.
+    /// This has no effect if the ship already has a maximum number of waypoints defined (default 9).
+    /// This is equivalent to clicking the Relay screen's create waypoint button and then clicking a location.
+    /// Example:
+    /// commandAddWaypoint(getPlayerShip(-1), 10000, -5000)
     env.setGlobal("commandAddWaypoint", &luaCommandAddWaypoint);
+    /// void commandRemoveWaypoint(entity ship, integer index)
+    /// Removes the waypoint at the given 0-based index (waypoint 1 = index 0) for the given ship.
+    /// This is equivalent to selecting a waypoint on the Relay screen and then clicking the delete waypoint button.
+    /// Example:
+    /// commandRemoveWaypoint(getPlayerShip(-1), 0) -- remove the first waypoint
     env.setGlobal("commandRemoveWaypoint", &luaCommandRemoveWaypoint);
+    /// void commandMoveWaypoint(entity ship, integer index, number x, number y)
+    /// Moves the waypoint at the given 0-based index (waypoint 1 = index 0) to the given coordinates for the given ship.
+    /// This is equivalent to clicking a waypoint on the Relay screen and dragging it to a new location.
+    /// Example:
+    /// commandMoveWaypoint(getPlayerShip(-1), 0, 15000, -5000) -- move the first waypoint to 15000, -5000
     env.setGlobal("commandMoveWaypoint", &luaCommandMoveWaypoint);
+    /// void commandSetWaypointRoute(entity ship, bool is_route, integer set_id = 1)
+    /// Sets or clears the route flag for a waypoint set on this entity.
+    /// Optional set_id (1-4, default 1) selects the waypoint set.
+    /// Examples:
+    /// commandSetWaypointRoute(getPlayerShip(-1), true) -- make set 1 a route
+    /// commandSetWaypointRoute(getPlayerShip(-1), false, 2) -- remove routes from set 2
     env.setGlobal("commandSetWaypointRoute", &luaCommandSetWaypointRoute);
+    /// void commandActivateSelfDestruct(entity ship)
+    /// Activates the self-destruct sequence for the given ship.
+    /// Crew members must confirm the sequence with commandConfirmDestructCode() before it proceeds.
+    /// This is equivalent to activating the self-destruction control on the Engineering screen.
+    /// Example:
+    /// commandActivateSelfDestruct(getPlayerShip(-1))
     env.setGlobal("commandActivateSelfDestruct", &luaCommandActivateSelfDestruct);
+    /// void commandCancelSelfDestruct(entity ship)
+    /// Cancels an active self-destruct sequence for the given ship before the countdown begins. Has no effect once the countdown has started.
+    /// This is equivalent to cancelling the self-destruction control on the Engineering screen.
+    /// Example:
+    /// commandCancelSelfDestruct(getPlayerShip(-1))
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
+    /// void commandConfirmDestructCode(entity ship, integer code_index, integer code)
+    /// Submits a confirmation code for the self-destruct sequence on the given ship.
+    /// code_index is 0-based (0 to 2). Has no effect if the code is incorrect or the sequence is not active.
+    /// This is equivalent to entering the code on one of the crew screens.
+    /// Example:
+    /// commandConfirmDestructCode(getPlayerShip(-1), 0, 1234) -- submit code 1234 for confirmation slot 0
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
+    /// void commandCombatManeuverBoost(entity ship, number amount)
+    /// Triggers a combat maneuver boost for the given ship.
+    /// amount is a value from 0.0 to 1.0.
+    /// This command is implemented only for the local player ship and has no effect on other ships.
+    /// This is equivalent to pushing the Helms screen's combat maneuver control forward.
+    /// Example:
+    /// commandCombatManeuverBoost(getPlayerShip(-1), 1.0) -- full combat boost forward
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
+    /// void commandLaunchProbe(entity ship, number x, number y)
+    /// Launches a scan probe from the given ship toward the given coordinates.
+    /// This command is only implemented for the local player ship and has no effect on other ships.
+    /// This is equivalent to clicking the Relay screen's launch probe button and then clicking a location.
+    /// Example:
+    /// commandLaunchProbe(getPlayerShip(-1), 30000, 10000)
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
+    /// void commandSetScienceLink(entity ship, entity probe)
+    /// Links the science station of the given ship to the given scan probe for extended radar range.
+    /// This command is only implemented for the local player ship and has no effect on other ships.
+    /// This is equivalent to selecting a probe on the Relay screen and then clicking the link to science button.
+    /// Example:
+    /// commandSetScienceLink(getPlayerShip(-1), launched_probe) -- link the probe assigned to launched_probe
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
+    /// void commandClearScienceLink(entity ship)
+    /// Clears the science station's link to a scan probe for the given ship.
+    /// This command is only implemented for the local player ship and has no effect on other ships.
+    /// This is equivalent to selecting the linked probe on the Relay screen and then clicking the link to science button.
+    /// Example:
+    /// commandClearScienceLink(getPlayerShip(-1)) -- clear any science link on this ship
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
+    /// void commandSetAlertLevel(entity ship, string level)
+    /// Sets the alert level for the given ship. See EAlertLevel for valid values.
+    /// This command is only implemented for the local player ship and has no effect on other ships.
+    /// This is equivalent to clicking the Relay screen's alert level button and then selecting a level.
+    /// Example:
+    /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert
     env.setGlobal("commandSetAlertLevel", &luaCommandSetAlertLevel);
 
+    /// void transferPlayersFromShipToShip(entity source, entity target [, string station])
+    /// Moves all connected player clients from source to target entities.
+    /// If station is given, transfers only players at that crew position. See ECrewPosition for valid values.
+    /// Has no effect if target is not a player-controlled ship.
+    /// Example:
+    /// transferPlayersFromShipToShip(old_ship, new_ship) -- move all crew to new_ship
+    /// transferPlayersFromShipToShip(old_ship, new_ship, "helms") -- move only Helms players to new_ship's Helms
     env.setGlobal("transferPlayersFromShipToShip", &luaTransferPlayers);
+    /// boolean hasPlayerCrewAtPosition(entity source, string station)
+    /// Returns true if any connected player client is currently manning the given crew position on source.
+    /// See ECrewPosition for valid station values.
+    /// Example:
+    /// if hasPlayerCrewAtPosition(getPlayerShip(-1), "weapons") then ... end
     env.setGlobal("hasPlayerCrewAtPosition", &luaHasPlayerAtPosition);
+    /// table getPlayersInfo(entity source)
+    /// Returns a table of connected player clients for source. Each entry has a "name" string and a
+    /// "positions" table (an array of crew position strings). See ECrewPosition for position values.
+    /// Example:
+    /// for _, p in ipairs(getPlayersInfo(getPlayerShip(-1))) do print(p.name) end -- print the name of each player
     env.setGlobal("getPlayersInfo", &luaGetPlayersInfo);
+    /// void setPlayerShipCustomFunction(entity ship, string type, string name, string caption, string|table positions, function callback, integer order)
+    /// Adds or updates a custom function visible on crew screens for ship.
+    /// type is "info", "button", or "message".
+    /// name is a unique identifier. If a function with the same name exists, it's updated in place.
+    /// positions is an ECrewPosition string or table of those strings.
+    /// callback is called when the crew interacts with the function. Functions are displayed in ascending order.
+    /// Example:
+    /// setPlayerShipCustomFunction(ship, "button", "mine_asteroid", _("Mine asteroid"), "science", function() ... end, 1)
     env.setGlobal("setPlayerShipCustomFunction", &luaSetPlayerShipCustomFunction);
+    /// void removePlayerShipCustomFunction(entity ship, string name)
+    /// Removes the custom function with the given name from ship's crew screens. Has no effect if a function with the given name doesn't exist.
+    /// Example:
+    /// removePlayerShipCustomFunction(getPlayerShip(-1), "mine_asteroid") -- removes the mine asteroid button
     env.setGlobal("removePlayerShipCustomFunction", &luaRemovePlayerShipCustomFunction);
+    /// void addEntryToShipsLog(entity ship, string entry, table color)
+    /// Appends an entry to ship's relay log with the given color, which is an RGBA table {r, g, b, a} with component values from 0 to 255.
+    /// Example:
+    /// addEntryToShipsLog(getPlayerShip(-1), "Docking complete.", {0, 255, 0, 255}) -- adds the message with an opaque green color
     env.setGlobal("addEntryToShipsLog", &luaAddEntryToShipsLog);
 
+    /// boolean isRadarBlockedFrom(table source, entity target, number short_range)
+    /// Returns true if target is hidden from radar at the source coordinates due to the effect of a radar-blocking entity, such as a nebula.
+    /// source is a world-position table {x, y}. Targets within short_range of source are never blocked.
+    /// Targets with the NeverRadarBlocked component always return false.
+    /// Example:
+    /// -- Returns true if enemy can't be seen on a radar with 5U short range from coordinates px, py
+    /// if isRadarBlockedFrom({px, py}, enemy, 5000) then ... end
     env.setGlobal("isRadarBlockedFrom", &RadarBlockSystem::isRadarBlockedFrom);
+    /// number beamVsShieldFrequencyDamageFactor(integer beam_frequency, integer shield_frequency)
+    /// Returns a damage multiplier for a beam at beam_frequency striking a shield at shield_frequency.
+    /// The result ranges from about 0.5 to 1.5. Returns 1.0 if either frequency is unexpectedly negative.
+    /// Example:
+    /// local factor = beamVsShieldFrequencyDamageFactor(3, 5) -- 0.551..., the factor for beam freq 3 (460THz) vs. shield freq 5 (500THz)
     env.setGlobal("beamVsShieldFrequencyDamageFactor", &frequencyVsFrequencyDamageFactor);
 
     /// EScanningComplexity getScanningComplexity()
@@ -1380,9 +1711,27 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("isStrategicMapAllowed", &luaIsStrategicMapAllowed);
 
 
+    /// void addGMFunction(string label, function callback)
+    /// Adds a button with the given label to the GM screen. Clicking it calls the callback function.
+    /// Example:
+    /// addGMFunction("Spawn enemy", function() CpuShip():setFaction("Kraylor"):... end) -- adds a GM screen button to spawn a Kraylor-faction ship
     env.setGlobal("addGMFunction", &luaAddGMFunction);
+    /// void clearGMFunctions()
+    /// Removes all buttons previously added to the GM screen via addGMFunction().
+    /// Example:
+    /// clearGMFunctions()
     env.setGlobal("clearGMFunctions", &luaClearGMFunctions);
 
+    /// ScriptObject Script()
+    /// Creates a new independent Lua script environment as a child of the current one.
+    /// The returned ScriptObject has two methods:
+    /// - run(filename) loads and executes the given script file, then calls its init() function if it exists.
+    /// - setVariable(name, value) sets a global in that environment. Value can be a string, number, or entity.
+    /// Example:
+    /// -- Run my_subscript.lua, assigning and passing the first player ship to the subscript's variable player
+    /// local sub = Script()
+    /// sub:setVariable("player", getPlayerShip(-1))
+    /// sub:run("my_subscript.lua")
     env.setGlobal("Script", &luaCreateAdditionalScript);
 
     /// void setCommsMessage(string message)
@@ -1436,6 +1785,10 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns a table/value converted from a json string
     env.setGlobal("fromJSON", &luaFromJSON);
 
+    /// integer getEEVersion()
+    /// Returns the running EmptyEpsilon build version as an integer.
+    /// Example:
+    /// local ver = getEEVersion() -- returns 20241208 if the EmptyEpsilon version is 2024.12.08
     env.setGlobal("getEEVersion", &luaGetEEVersion);
     registerScriptDataStorageFunctions(env);
     registerScriptGMFunctions(env);

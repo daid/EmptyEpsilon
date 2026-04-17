@@ -12,7 +12,6 @@ protected:
     sp::Alignment text_alignment;
     GuiScrollbar* scroll;
     sp::Rect last_rect;
-    int mouse_scroll_steps;
 
     const GuiThemeStyle* back_style;
     const GuiThemeStyle* front_style;

@@ -52,7 +52,6 @@ private:
     GuiToggleButton* route_toggle;
 
     GuiRadarZoomSlider* zoom_slider;
-    GuiLabel* zoom_label;
 
     GuiHackingDialog* hacking_dialog;
 
