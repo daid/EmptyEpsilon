@@ -404,6 +404,8 @@ set(MAIN_SOURCES
     src/systems/damage.cpp
     src/systems/selfdestruct.h
     src/systems/selfdestruct.cpp
+    src/systems/probe.h
+    src/systems/probe.cpp
     src/systems/pickup.h
     src/systems/pickup.cpp
     src/systems/basicmovement.h
