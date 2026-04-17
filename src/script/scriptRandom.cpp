@@ -72,8 +72,43 @@ int lua_irandom(lua_State* L) {
 
 void registerScriptRandomFunctions(sp::script::Environment& env)
 {
+    /// number random(number min, number max)
+    /// Returns a random floating-point number in the inclusive range of min, max.
+    /// Outputs a "lower bound is greater than upper bound" error if the min value is greater than the max value.
+    /// Example:
+    /// local x = random(-20000, 20000) -- returns a random value, such as -931.0.69952392578
     env.setGlobal("random", &lua_random);
+    /// integer irandom(integer min, integer max)
+    /// Returns a random integer in the inclusive range of min, max.
+    /// Outputs a "lower bound is greater than upper bound" error if the min value is greater than the max value.
+    /// Example:
+    /// local n = irandom(1, 6) -- equivalent to rolling a six-sided die
     env.setGlobal("irandom", &lua_irandom);
 
+    // TODO: Note bounds error as in random/irandom, if implemented
+    /// RandomGenerator RandomGenerator([integer seed])
+    /// Creates a new independently seeded Mersenne Twister random generator to generate deterministic random values from the same seed.
+    /// The generator's values are consistent in value and order if invoked or reinitialized multiple times with the same seed.
+    /// If a seed is omitted, the current time is used as the seed.
+    /// Use this to generate random values that remain consistent between runs, such as when replaying a scenario or reusing a function.
+    /// The returned object has three methods:
+    /// - :seed(seed) re-seeds the generator with the given integer
+    /// - :random(min, max) returns a random floating-point value in the inclusive range of min, max
+    /// - :irandom(min, max) returns a random integer value in the inclusive range of min, max
+    /// Examples:
+    /// local gen = RandomGenerator(42) -- initialize a random generator with seed 42
+    /// gen:irandom(-10000, 10000) -- randomly selects and returns 5103 based on seed 42
+    /// gen:irandom(-10000, 10000) -- randomly selects and returns 2781 based on seed 42
+    /// -- Reseeding or reinitializing the generator deterministically resets the behavior for both random and irandom
+    /// gen:seed(42) -- reseed the random generator with the same seed 42
+    /// gen:irandom(-10000, 10000) -- returns 5103 based on seed 42, the same value as the first run last time
+    /// gen:irandom(-10000, 10000) -- returns 2781 again
+    /// gen = RandomGenerator(42) -- reinitialize the random generator with seed 42
+    /// gen:random(-10000, 10000) -- returns 5103.11035..., the float version of the first value, because the reinitialized seed and range are the same
+    /// -- Directly invoking RandomGenerator's initializer always returns the first random result, and the result is always at the same value proportional to the range's extents
+    /// RandomGenerator(43):irandom(-10000, 10000) -- randomly selects and returns -9439 based on seed 43
+    /// RandomGenerator(43):irandom(-1000, 1000) -- returns -944 (min + 56) based on the new range
+    /// RandomGenerator(43):random(-1, 1) -- returns -0.943848... (min + 0.0561...)
+    /// RandomGenerator(43):irandom(0, 2000) -- returns 56 (min + 56)
     env.setGlobal("RandomGenerator", &lua_createRandomGenerator);
 }
