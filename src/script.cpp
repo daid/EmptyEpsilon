@@ -1115,7 +1115,7 @@ static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
         combat->boost.request = amount;
 }
 static void luaCommandCombatManeuverStrafe(sp::ecs::Entity ship, float amount) {
-    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverStrafe(amount); return; }
     if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
         combat->strafe.request = amount;
 }
