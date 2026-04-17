@@ -1353,6 +1353,12 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     env.setGlobal("commandCancelSelfDestruct", &luaCommandCancelSelfDestruct);
     env.setGlobal("commandConfirmDestructCode", &luaCommandConfirmDestructCode);
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
+    /// void commandCombatManeuverStrafe(entity ship, number amount)
+    /// Triggers a combat maneuver strafe for the given ship.
+    /// amount is a value from 0.0 to 1.0.
+    /// This is equivalent to pushing the Helms screen's combat maneuver control left (-1.0) or right (1.0).
+    /// Example:
+    /// commandCombatManeuverStrafe(getPlayerShip(-1), 1.0) -- full combat boost right
     env.setGlobal("commandCombatManeuverStrafe", &luaCommandCombatManeuverStrafe);
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
