@@ -38,6 +38,9 @@ void ManeuveringSystem::update(float delta)
             if (combat.boost.active > combat.boost.request)
                 combat.boost.active = combat.boost.request;
         }
+        // Clamp boost to 0-1.
+        combat.boost.active = std::clamp(combat.boost.active, 0.0f, 1.0f);
+
         if (combat.strafe.active > combat.strafe.request)
         {
             combat.strafe.active -= delta;
@@ -50,9 +53,11 @@ void ManeuveringSystem::update(float delta)
             if (combat.strafe.active > combat.strafe.request)
                 combat.strafe.active = combat.strafe.request;
         }
+        // Clamp strafe to -1 to 1.
+        combat.strafe.active = std::clamp(combat.strafe.active, -1.0f, 1.0f);
 
         // If the ship is making a combat maneuver ...
-        if (combat.boost.active != 0.0f || combat.strafe.active != 0.0f)
+        if (combat.boost.active > 0.0f || combat.strafe.active != 0.0f)
         {
             // ... consume its combat maneuver boost.
             combat.charge -= fabs(combat.boost.active) * delta / combat.boost.max_time;
