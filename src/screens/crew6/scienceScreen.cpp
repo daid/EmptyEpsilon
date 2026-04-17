@@ -79,7 +79,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
     probe_radar->setPosition(120, 0, sp::Alignment::CenterLeft)->setSize(900,GuiElement::GuiSizeMax)->hide();
     probe_radar->setAutoCentering(false)->longRange()->enableWaypoints()->enableCallsigns()->enableHeadingIndicators()->setStyle(GuiRadarView::Circular)->setFogOfWarStyle(GuiRadarView::NoFogOfWar);
     probe_radar->setCallbacks(
-        [this](sp::io::Pointer::Button button, glm::vec2 position) {
+        [this](sp::io::Pointer::Button button, glm::vec2 position)
+        {
             if (auto scanner = my_spaceship.getComponent<ScienceScanner>())
                 if (scanner->delay > 0.0f)
                     return;
@@ -209,8 +210,7 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
             auto rl = my_spaceship.getComponent<RadarLink>();
             if (value && rl && rl->linked_entity)
             {
-                auto transform = rl->linked_entity.getComponent<sp::Transform>();
-                if (transform)
+                if (auto transform = rl->linked_entity.getComponent<sp::Transform>())
                 {
                     science_radar->hide();
                     probe_radar
@@ -224,7 +224,8 @@ ScienceScreen::ScienceScreen(GuiContainer* owner, CrewPosition crew_position)
                 science_radar->show();
                 probe_radar->hide();
             }
-    });
+        }
+    );
     probe_view_button
         ->setPosition(20.0f, -120.0f, sp::Alignment::BottomLeft)
         ->setSize(200.0f, 50.0f)
@@ -612,7 +613,12 @@ void ScienceScreen::onUpdate()
             auto scanstate = obj.getComponent<ScanState>();
             if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
             {
-                my_player_info->commandScan(obj);
+                // Check for active radar link and validate the linked entity
+                auto rl = my_spaceship.getComponent<RadarLink>();
+                if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
+                    my_player_info->commandScan(obj, rl->linked_entity);
+                else
+                    my_player_info->commandScan(obj);
                 return;
             }
         }
