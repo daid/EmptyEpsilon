@@ -174,6 +174,12 @@ void OperationScreen::onDraw(sp::RenderTarget& target)
     waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets);
     route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes);
 
+    if (!gameGlobalInfo->enable_multiple_waypoint_sets && active_waypoint_set != 1)
+    {
+        active_waypoint_set = 1;
+        waypoint_set_selector->setSelectionIndex(0);
+    }
+
     // Sync route toggle
     if (gameGlobalInfo->enable_waypoint_routes)
     {

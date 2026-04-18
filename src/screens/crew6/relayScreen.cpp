@@ -386,6 +386,12 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets);
     route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes);
 
+    if (!gameGlobalInfo->enable_multiple_waypoint_sets && active_waypoint_set != 1)
+    {
+        active_waypoint_set = 1;
+        waypoint_set_selector->setSelectionIndex(0);
+    }
+
     // Sync route toggle from current ship state
     if (my_spaceship && gameGlobalInfo->enable_waypoint_routes)
     {

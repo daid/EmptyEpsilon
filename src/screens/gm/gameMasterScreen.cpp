@@ -561,6 +561,12 @@ void GameMasterScreen::update(float delta)
     gm_route_toggle->setVisible(gameGlobalInfo->enable_waypoint_routes && main_radar->getWaypoints());
     gm_waypoint_set_selector->setVisible(gameGlobalInfo->enable_multiple_waypoint_sets && main_radar->getWaypoints());
 
+    if (!gameGlobalInfo->enable_multiple_waypoint_sets && gm_waypoint_set != 1)
+    {
+        gm_waypoint_set = 1;
+        gm_waypoint_set_selector->setSelectionIndex(0);
+    }
+
     // Sync route toggle from the selected player ship.
     if (has_player_ship)
     {
