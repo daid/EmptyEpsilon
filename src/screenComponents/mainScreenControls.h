@@ -19,6 +19,7 @@ private:
     GuiToggleButton* target_lock_button;
     GuiToggleButton* tactical_button;
     GuiToggleButton* long_range_button;
+    GuiToggleButton* strategic_map_button;
     GuiToggleButton* show_comms_button;
     bool onscreen_comms_active;
 
