@@ -2,6 +2,7 @@
 #include <stringImproved.h>
 #include <io/keybinding.h>
 #include <preferenceManager.h>
+#include <graphics/renderTarget.h>
 #include "gui/hotkeyConfig.h"
 #include <cstring>
 
@@ -49,5 +50,6 @@ string initConfiguration(int argc, char** argv)
     }
 
     sp::io::Keybinding::loadKeybindings(configuration_path + "/keybindings.json");
+
     return configuration_path;
 }

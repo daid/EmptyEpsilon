@@ -169,7 +169,7 @@ void RawScannerDataRadarOverlay::onDraw(sp::RenderTarget& renderer)
     a_b.push_back(a_b.front());
 
     // Draw each band as a line.
-    renderer.drawLineBlendAdd(a_r, electrical_band_style->get(getState()).color);    // red
-    renderer.drawLineBlendAdd(a_g, biological_band_style->get(getState()).color);    // green
-    renderer.drawLineBlendAdd(a_b, gravitational_band_style->get(getState()).color); // blue
+    renderer.drawLineBlendAdd(a_r, 1.0f, electrical_band_style->get(getState()).color);    // red
+    renderer.drawLineBlendAdd(a_g, 1.0f, biological_band_style->get(getState()).color);    // green
+    renderer.drawLineBlendAdd(a_b, 1.0f, gravitational_band_style->get(getState()).color); // blue
 }

@@ -51,7 +51,7 @@ void GuiSignalQualityIndicator::onDraw(sp::RenderTarget& renderer)
         f = (1.0f - noise[2]) * f + noise[2] * random(-1.0, 1.0);
         b.emplace_back(rect.position.x + 4.0f + n * 4, rect.position.y + rect.size.y / 2.0f + f * amp);
     }
-    renderer.drawLineBlendAdd(r, electrical_band_style->get(getState()).color);    // red
-    renderer.drawLineBlendAdd(g, biological_band_style->get(getState()).color);    // green
-    renderer.drawLineBlendAdd(b, gravitational_band_style->get(getState()).color); // blue
+    renderer.drawLineBlendAdd(r, 1.0f, electrical_band_style->get(getState()).color);    // red
+    renderer.drawLineBlendAdd(g, 1.0f, biological_band_style->get(getState()).color);    // green
+    renderer.drawLineBlendAdd(b, 1.0f, gravitational_band_style->get(getState()).color); // blue
 }
