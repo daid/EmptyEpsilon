@@ -26,7 +26,8 @@ public:
     TextureRef illumination_texture;
     TextureRef normal_texture;
     glm::vec3 mesh_offset{};
-    float scale = 1.0;
+    float scale = 1.0f;
+    float bank_angle = 0.0f;
 
     Mesh* getMesh();
     sp::Texture* getTexture();
