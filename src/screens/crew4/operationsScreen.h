@@ -1,6 +1,5 @@
 #pragma once
 
-#include <array>
 #include "gui/gui2_overlay.h"
 
 class GuiElement;
@@ -34,7 +33,6 @@ private:
     GuiToggleButton* place_waypoint_button;
     GuiButton* delete_waypoint_button;
     GuiSelector* waypoint_set_selector;
-    std::array<GuiToggleButton*, 4> waypoint_set_buttons{};
     GuiToggleButton* route_toggle;
 
     glm::vec2 mouse_down_position{0, 0};
