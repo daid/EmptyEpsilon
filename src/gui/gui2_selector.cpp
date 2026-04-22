@@ -45,7 +45,7 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 
     renderer.drawStretched(rect, back.texture, back.color);
     if (selection_index >= 0 && selection_index < (int)entries.size())
-        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, nullptr, front.color);
+        renderer.drawText(rect, entries[selection_index].name, sp::Alignment::Center, text_size, front.font, front.color);
 
     if (!focus)
         popup->hide();

@@ -45,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/destroy.h"
 
 
 #define STRINGIFY(n) #n
@@ -68,6 +69,8 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Bind a member using getter and setter functions for validation.
+// The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -294,11 +297,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(Orbit, time);
 
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
-    BIND_MEMBER(AvoidObject, range);
+    BIND_MEMBER_GS(AvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<DelayedAvoidObject>::name("delayed_avoid_object");
     BIND_MEMBER(DelayedAvoidObject, delay);
-    BIND_MEMBER(DelayedAvoidObject, range);
+    BIND_MEMBER_GS(DelayedAvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<ExplodeOnTouch>::name("explode_on_touch");
     BIND_MEMBER(ExplodeOnTouch, damage_at_center);
@@ -498,7 +501,7 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
-    BIND_MEMBER(BeamWeaponSys, frequency);
+    BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
@@ -530,6 +533,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, hit_normal);
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
+    BIND_MEMBER(BeamEffect, beam_color);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
@@ -638,6 +642,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanState, allow_simple_scan);
     BIND_MEMBER(ScanState, complexity);
     BIND_MEMBER(ScanState, depth);
+    BIND_MEMBER(ScanState, on_scan_initiated);
+    BIND_MEMBER(ScanState, on_scan_completed);
+    BIND_MEMBER(ScanState, on_scan_cancelled);
     BIND_ARRAY_DIRTY_FLAG(ScanState, per_faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, state, per_faction_dirty);
@@ -800,8 +807,8 @@ void initComponentScriptBindings()
             lua_newtable(L);
             for(size_t n=0; n<zone->outline.size(); n++) {
                 lua_newtable(L);
-                lua_pushnumber(L, zone->outline[n].x); lua_seti(L, -2, 1);
-                lua_pushnumber(L, zone->outline[n].y); lua_seti(L, -2, 2);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].x)); lua_seti(L, -2, 1);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].y)); lua_seti(L, -2, 2);
                 lua_seti(L, -2, n+1);
             }
             return 1;
@@ -824,4 +831,7 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
+    BIND_MEMBER(OnDestroyed, callback);
 }

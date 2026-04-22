@@ -1,5 +1,5 @@
 
---- A WarpJammer restricts the ability of any SpaceShips to use warp or jump drives within its radius.
+--- A WarpJammer restricts the ability of any ships to use warp or jump drives within its radius.
 --- WarpJammers can be targeted, damaged, and destroyed.
 --- Example: jammer = WarpJammer():setPosition(1000,1000):setRange(10000):setHull(20)
 --- @type creation

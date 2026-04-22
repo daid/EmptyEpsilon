@@ -92,7 +92,7 @@ void BeamWeaponSystem::update(float delta)
                         if (distance < mount.range && mount.cooldown <= 0.0f && fabsf(angle_diff) < mount.arc / 2.0f && (!reactor || reactor->useEnergy(mount.energy_per_beam_fire)))
                         {
                             // ... add heat to the beam and zap the target.
-                            if (entity.hasComponent<Coolant>())
+                            if (game_server && entity.hasComponent<Coolant>())
                                 beamsys.addHeat(mount.heat_per_beam_fire);
 
                             //When we fire a beam, and we hit an enemy, check if we are not scanned yet, if we are not, and we hit something that we know is an enemy or friendly,
@@ -116,6 +116,7 @@ void BeamWeaponSystem::update(float delta)
                             be.source_offset = mount.position;
                             be.target_location = hit_location;
                             be.beam_texture = mount.texture;
+                            be.beam_color = mount.arc_color_fire;
                             auto& sfx = e.addComponent<Sfx>();
                             sfx.sound = "sfx/laser_fire.wav";
                             auto beam_fire_sound_power = (mount.damage / 6.0f);
@@ -396,4 +397,31 @@ void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
 
         drawArc(renderer, arc_center, rotation + (turret_direction - turret_arc / 2.0f), turret_arc, beam_range * scale, color);
     }
+}
+
+void BeamWeaponSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, BeamEffect& beam_effect)
+{
+    // Initialize beam origin and impact positions.
+    glm::vec2 source_position = screen_position;
+    glm::vec2 target_position = screen_position;
+
+    // Calculate source position with offset.
+    if (beam_effect.source)
+    {
+        if (auto source_transform = beam_effect.source.getComponent<sp::Transform>())
+            source_position = screen_position + (rotateVec2(glm::vec2(beam_effect.source_offset.x, beam_effect.source_offset.y), source_transform->getRotation())) * scale;
+    }
+
+    // Calculate target position.
+    if (auto entity_transform = entity.getComponent<sp::Transform>())
+        target_position = screen_position + rotateVec2(beam_effect.target_location - entity_transform->getPosition(), rotation - entity_transform->getRotation()) * scale;
+
+    // Draw beam ray as a line that fades over lifetime.
+    glm::u8vec4 beam_color = beam_effect.beam_color;
+    beam_color.a = static_cast<int>(std::min(255.0f, beam_effect.lifetime * beam_color.a));
+    renderer.drawLine(source_position, target_position, beam_color);
+
+    // Draw impact circle at target location.
+    float impact_radius = 15.0f * scale;
+    renderer.fillCircle(target_position, impact_radius, beam_color);
 }

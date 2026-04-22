@@ -32,7 +32,7 @@ void PathFindingSystem::update(float delta)
     for(auto [entity, dao] : sp::ecs::Query<DelayedAvoidObject>()) {
         dao.delay -= delta;
         if (dao.delay <= 0.0f) {
-            entity.addComponent<AvoidObject>().range = dao.range;
+            entity.addComponent<AvoidObject>().setRange(dao.getRange());
             entity.removeComponent<DelayedAvoidObject>();
         }
     }
@@ -41,7 +41,7 @@ void PathFindingSystem::update(float delta)
     for(auto [entity, ao, transform] : sp::ecs::Query<AvoidObject, sp::Transform>()) {
         switch(ao.state) {
         case AvoidObject::InternalState::New:
-            if (ao.range > small_object_max_size) {
+            if (ao.getRange() > small_object_max_size) {
                 big_entities.push_back(entity);
                 ao.state = AvoidObject::InternalState::BigEntity;
             } else {
@@ -167,11 +167,12 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
         if (ao && transform)
         {
             auto position = transform->getPosition();
+            const float range = ao->getRange();
             float f = glm::dot(startEndDiff, position - start) / startEndLength;
-            if (f > 0 && f < startEndLength - ao->range)
+            if (f > 0 && f < startEndLength)
             {
                 glm::vec2 q = start + startEndDiff / startEndLength * f;
-                if (glm::length2(q - position) < (ao->range + my_size) * (ao->range + my_size))
+                if (glm::length2(q - position) < (range + my_size) * (range + my_size))
                 {
                     if (f < firstAvoidF)
                     {
@@ -230,11 +231,12 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
                 if (ao && transform)
                 {
                     glm::vec2 position = transform->getPosition();
+                    const float range = ao->getRange();
                     float f = glm::dot(startEndDiff, position - start) / startEndLength;
-                    if (f > 0 && f < startEndLength - ao->range)
+                    if (f > 0 && f < startEndLength)
                     {
                         glm::vec2 q = start + startEndDiff / startEndLength * f;
-                        if (glm::length2(q - position) < (ao->range + my_size) * (ao->range + my_size))
+                        if (glm::length2(q - position) < (range + my_size) * (range + my_size))
                         {
                             if (f < firstAvoidF)
                             {
@@ -262,11 +264,12 @@ bool PathPlanner::checkToAvoid(glm::vec2 start, glm::vec2 end, glm::vec2& new_po
         auto transform = avoidObject.getComponent<sp::Transform>();
 
         glm::vec2 position = transform->getPosition();
+        const float range = ao->getRange();
         if (firstAvoidQ.x == position.x && firstAvoidQ.y == position.y)
             firstAvoidQ.x += 0.1f;
-        new_point = position + glm::normalize(firstAvoidQ - position) * (ao->range * 1.1f + my_size);
+        new_point = position + glm::normalize(firstAvoidQ - position) * (range * 1.1f + my_size);
         if (alt_point)
-            *alt_point = position - glm::normalize(firstAvoidQ - position) * (ao->range * 1.1f + my_size);
+            *alt_point = position - glm::normalize(firstAvoidQ - position) * (range * 1.1f + my_size);
         return true;
     }
     return false;

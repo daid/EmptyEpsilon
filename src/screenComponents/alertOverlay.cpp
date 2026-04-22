@@ -1,11 +1,13 @@
 #include "alertOverlay.h"
 #include "playerInfo.h"
+#include "gui/theme.h"
 
 
 AlertLevelOverlay::AlertLevelOverlay(GuiContainer* owner)
 : GuiElement(owner, "")
 {
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    alert_sprite = GuiTheme::getCurrentTheme()->getStyle("alert_overlay")->get(GuiElement::State::Normal).texture;
 }
 
 void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
@@ -37,6 +39,6 @@ void AlertLevelOverlay::onDraw(sp::RenderTarget& renderer)
         return;
     }
 
-    renderer.drawSprite("gui/alertOverlay.png", getCenterPoint(), 772, color);
+    renderer.drawSprite(alert_sprite, getCenterPoint(), 772, color);
     //renderer.drawText(sp::Rect(getCenterPoint() - glm::vec2(0, 300), glm::vec2(0, 0)), text, sp::Alignment::Center, text_size, main_font, color);
 }

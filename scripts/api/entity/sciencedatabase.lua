@@ -36,22 +36,49 @@ function ScienceDatabase()
     return e
 end
 
+--- table getScienceDatabases()
+--- Returns a 1-indexed table of all parentless (top-level) ScienceDatabase entries.
+--- Returns nil if there are no parentless ScienceDatabases.
+--- Examples:
+---   sdb = getScienceDatabases() -- returns a table of top-level entries
+---   sdb[1]:getName() -- returns "Natural" in the default science database
+function getScienceDatabases()
+    local sdb = {}
+    local entities = getEntitiesWithComponent("science_database") or {}
+
+    for idx, e in ipairs(entities) do
+        -- Only return valid, parentless entries
+        if e:isValid() and e:getParentId() == nil then
+            table.insert(sdb, e)
+        end
+    end
+
+    return #sdb > 0 and sdb or nil
+end
+
 --- Returns this ScienceDatabase entry's displayed name.
 --- Example: entry:getName()
 function Entity:getName()
     if self.components.science_database then return self.components.science_database.name end
     return ""
 end
---- Returns this ScienceDatabase entry's unique multiplayer_id.
---- Examples: entry:getId() -- returns the entry's ID
+--- Returns this ScienceDatabase entry's unique entity.
+--- Examples: entry:getId() -- returns the entry's entity
 function Entity:getId()
     return self
 end
---- Return this ScienceDatabase entry's parent entry's unique multiplayer_id.
---- Returns 0 if the entry has no parent.
---- Example: entry:getParentId() -- returns the parent entry's ID
+--- Return this ScienceDatabase entry's parent entry's entity.
+--- Returns nil if the entry has no parent.
+--- Example: entry:getParentId() -- returns the parent entry's entity
 function Entity:getParentId()
-    if self.components.science_database then return self.components.science_database.parent end
+    if self.components.science_database then
+        -- Entries without valid parents are top-level entries.
+        if self.components.science_database.parent and self.components.science_database.parent:isValid() then
+            return self.components.science_database.parent
+        end
+    end
+
+    return nil
 end
 --- Creates a ScienceDatabase entry with the given name as a child of this ScienceDatabase entry.
 --- Returns the newly created entry. Chaining addEntry() creates a child of the new child entry.
@@ -108,9 +135,9 @@ function Entity:addKeyValue(key, value)
     self.components.science_database[#self.components.science_database+1] = {key=key, value=value}
     return self
 end
---- Sets the value of all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
---- If the key already exists, this changes its value.
---- If duplicate matching keys exist, this changes all of their values.
+--- Sets the value of the first key/value pair matching the given key in this ScienceDatabase entry's key/value data.
+--- Key matching is case-sensitive.
+--- If the key already exists, this changes the first matching entry's value.
 --- If the key doesn't exist, this acts as addKeyValue().
 --- Examples:
 --- -- Assuming entry already has "Legs","4" as a key/value
@@ -126,7 +153,7 @@ function Entity:setKeyValue(key, value)
     end
     return self:addKeyValue(key, value)
 end
---- Returns the value of the first matching case-insensitive key found in this ScienceDatabase entry's key/value data.
+--- Returns the value of the first matching key found in this ScienceDatabase entry's key/value data. Key matching is case-sensitive.
 --- Returns an empty string if the key doesn't exist.
 --- Example: entry:getKeyValue("Legs") -- returns the value if found or "" if not
 function Entity:getKeyValue(key)
@@ -151,7 +178,7 @@ function Entity:getKeyValues()
     end
     return result
 end
---- Removes all key/value pairs matching the given case-insensitive key in this ScienceDatabase entry's key/value data.
+--- Removes all key/value pairs matching the given key in this ScienceDatabase entry's key/value data. Key matching is case-sensitive.
 --- If duplicate matching keys exist, this removes all of them.
 --- Example: entry:removeKey("Legs") -- removes all key/value data with the key "Legs"
 function Entity:removeKey(key)

@@ -149,9 +149,8 @@ int PlayerInfo::countTotalPlayerPositions()
 
     int count = 0;
     for (auto monitor : crew_positions)
-        for (auto position : monitor) count++;
+        for ([[maybe_unused]] auto position : monitor) count++;
 
-    LOG(Info, "count: ", count);
     return count;
 }
 
@@ -161,9 +160,8 @@ int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
     if (crew_positions.empty()) return 0;
 
     int count = 0;
-    for (auto position : crew_positions[monitor]) count++;
+    for ([[maybe_unused]] auto position : crew_positions[monitor]) count++;
 
-    LOG(Info, "count: ", count);
     return count;
 }
 
@@ -297,10 +295,10 @@ void PlayerInfo::commandMainScreenOverlay(MainScreenOverlay mainScreen)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandScan(sp::ecs::Entity object)
+void PlayerInfo::commandScan(sp::ecs::Entity object, sp::ecs::Entity scan_source)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_SCAN_OBJECT << object;
+    packet << CMD_SCAN_OBJECT << object << scan_source;
     sendClientCommand(packet);
 }
 
@@ -727,17 +725,27 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         packet >> mso;
         if (auto pc = ship.getComponent<PlayerControl>())
             pc->main_screen_overlay = mso;
-        }break;
+        }
         break;
     case CMD_SCAN_OBJECT:
         {
             sp::ecs::Entity e;
-            packet >> e;
+            sp::ecs::Entity source;
+            packet >> e >> source;
 
             if (auto scanner = ship.getComponent<ScienceScanner>())
             {
                 scanner->delay = scanner->max_scanning_delay;
                 scanner->target = e;
+                if (source) scanner->source = source;
+                else scanner->source = ship;
+
+                // Fire onScanInitiated callback
+                if (auto ss = e.getComponent<ScanState>())
+                {
+                    if (ss->on_scan_initiated)
+                        LuaConsole::checkResult(ss->on_scan_initiated.call<void>(e, ship, scanner->source));
+                }
             }
         }
         break;
@@ -745,8 +753,18 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         ScanningSystem::scanningFinished(ship);
         break;
     case CMD_SCAN_CANCEL:
-        if (auto ss = ship.getComponent<ScienceScanner>()) {
-            ss->target = {};
+        if (auto scanner = ship.getComponent<ScienceScanner>()) {
+            // Fire onScanCancelled callback
+            if (scanner->target)
+            {
+                if (auto ss = scanner->target.getComponent<ScanState>())
+                {
+                    if (ss->on_scan_cancelled)
+                        LuaConsole::checkResult(ss->on_scan_cancelled.call<void>(scanner->target, ship, scanner->source));
+                }
+            }
+            scanner->target = {};
+            scanner->source = {};
         }
         break;
     case CMD_SET_SYSTEM_POWER_REQUEST:
@@ -830,9 +848,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto beamweapons = ship.getComponent<BeamWeaponSys>();
-            if (beamweapons)
-                beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
+            if (auto beam_weapons = ship.getComponent<BeamWeaponSys>())
+                beam_weapons->setFrequency(new_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -939,6 +956,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
 
                 auto p = sp::ecs::Entity::create();
                 p.addComponent<sp::Transform>(*t);
+                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
                 p.addComponent<LifeTime>().lifetime = 60*10;
                 if (auto faction = ship.getComponent<Faction>())
                     p.addComponent<Faction>() = *faction;

@@ -1,7 +1,7 @@
 --- An Asteroid is an inert piece of space terrain.
---- Upon collision with another SpaceObject, it deals damage and is destroyed.
---- It has a default rotation speed, random z-offset, and model, and AI behaviors attempt to avoid hitting them.
---- To create a customizable object with more complex actions upon collisions, use an Artifact or SupplyDrop.
+--- Upon colliding with another entity, it deals damage and is destroyed.
+--- It has a default rotation speed, random z-offset, and model. AI-controlled entities attempt to avoid hitting them.
+--- To create a customizable collidable object, use an Artifact or SupplyDrop.
 --- For a purely decorative asteroid positioned outside of the movement plane, use a VisualAsteroid.
 --- Example: asteroid = Asteroid():setSize(150):setPosition(1000,2000)
 --- @type creation
@@ -37,6 +37,11 @@ function Asteroid()
     return e
 end
 
+--- A VisualAsteroid is a cosmetic asteroid rendered above or below the movement plane.
+--- Unlike Asteroid, it has no collision, physics, or radar trace, and does not interact with other entities.
+--- Use VisualAsteroids to add depth to asteroid fields without affecting gameplay.
+--- Example: visual_asteroid = VisualAsteroid():setPosition(1000,2000)
+--- @type creation
 function VisualAsteroid()
     local z = random(300, 800);
     if random(0, 100) < 50 then z = -z end
