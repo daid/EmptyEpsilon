@@ -3,6 +3,7 @@
 #include "dockingButton.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_listbox.h"
+#include "gui/gui2_panel.h"
 #include "systems/collision.h"
 #include "systems/docking.h"
 #include "components/collision.h"
@@ -12,8 +13,14 @@
 #include "ecs/query.h"
 
 GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
-: GuiPanel(owner, id)
+: GuiElement(owner, id)
 {
+    background_panel = new GuiPanel(this, id + "_BG");
+    background_panel
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->hide();
+
     action_button = new GuiButton(this, id + "_BTN", tr("Request dock"),
         [this]()
         {
@@ -42,9 +49,8 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
     );
     action_button
         ->setIcon("gui/icons/docking")
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft);
-    action_button->setAttribute("fill_width", "true");
-    action_button->setAttribute("fill_height", "true");
 
     target_list = new GuiListbox(this, id + "_LIST",
         [this](int index, string value)
@@ -60,14 +66,17 @@ GuiDockingButton::GuiDockingButton(GuiContainer* owner, string id)
     );
     target_list
         ->setPosition(0.0f, 0.0f, sp::Alignment::TopLeft)
+        ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax)
         ->hide();
-    target_list->setAttribute("fill_width", "true");
-    target_list->setAttribute("fill_height", "true");
 }
 
 void GuiDockingButton::onUpdate()
 {
-    if (!my_spaceship) { hide(); return; }
+    if (!my_spaceship)
+    {
+        hide();
+        return;
+    }
     auto port = my_spaceship.getComponent<DockingPort>();
     setVisible(port != nullptr);
     if (!port) return;
@@ -129,6 +138,7 @@ void GuiDockingButton::onUpdate()
 
             // Expand height to fit all entries.
             layout.size.y = (dock_targets.size() + 1) * item_height;
+            background_panel->show();
             action_button->hide();
             target_list->show();
             return;
@@ -137,6 +147,7 @@ void GuiDockingButton::onUpdate()
 
     // If collapsed, just show the action button.
     layout.size.y = item_height;
+    background_panel->hide();
     target_list->hide();
     action_button->show();
 
