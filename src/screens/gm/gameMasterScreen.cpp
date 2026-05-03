@@ -194,7 +194,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     copy_selected_button
         ->setTextSize(20.0f)
-        ->setPosition(-20.0f, -95.0f, sp::Alignment::BottomRight)
+        ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
@@ -249,8 +249,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     gm_script_options->setPosition(20, 130, sp::Alignment::TopLeft)->setSize(250, 500);
 
     order_layout = new GuiElement(this, "ORDER_LAYOUT");
-    order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    order_layout->setPosition(-20.0f, -110.0f, sp::Alignment::BottomRight)->setSize(300.0f, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
+    (new GuiLabel(order_layout, "ORDERS_HELP", tr("Right click to issue movement/target orders"), 20.0f))->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
         for(auto target : targets.getTargets()) {
             if (auto ai = target.getComponent<AIController>()) {
@@ -281,7 +282,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 ai->orders = AIOrder::Idle;
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders:"), 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders"), 20.0f))->addBackground()->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -918,7 +919,7 @@ string GameMasterScreen::getScriptExport(bool selected_only)
     {
         string line = gameGlobalInfo->getEntityExportString(entity);
         if (line == "") continue;
-        output += "    " + line + "\n";
+        output += line + "\n";
     }
 
     return output;
