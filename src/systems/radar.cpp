@@ -15,7 +15,11 @@ std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
 
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
-    if ((RadarRenderSystem::current_flags & RadarRenderSystem::FlagLongRange) && !(trace.flags & RadarTrace::LongRange))
+    // Exit early if the trace is flagged for LongRange and this is non-GM
+    // LongRange radar.
+    if ((RadarRenderSystem::current_flags & RadarRenderSystem::FlagLongRange)
+        && !(RadarRenderSystem::current_flags & RadarRenderSystem::FlagGM)
+        && !(trace.flags & RadarTrace::LongRange))
         return;
 
     auto scanstate = entity.getComponent<ScanState>();
