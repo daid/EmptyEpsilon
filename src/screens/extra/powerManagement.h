@@ -37,9 +37,9 @@ private:
     constexpr static float panel_width_without_coolant = 200.0f;
 
     glm::vec2 panel_size{panel_width_with_coolant, 380.0f};
-    float previous_energy_level;
-    float average_energy_delta;
-    float previous_energy_measurement;
+    float previous_energy_level = 0.0f;
+    float average_energy_delta = 0.0f;
+    float previous_energy_measurement = 0.0f;
     ShipSystem::Type selected_system;
 
     class SystemPanel
