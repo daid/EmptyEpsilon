@@ -4,3 +4,4 @@
 #include "components/hacking.h"
 
 BASIC_REPLICATION_CLASS(HackingDeviceReplication, HackingDevice);
+BASIC_REPLICATION_CLASS(HackingTargetReplication, HackingTarget);

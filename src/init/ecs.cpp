@@ -85,6 +85,7 @@ void initSystemsAndComponents()
     sp::ecs::MultiplayerReplication::registerComponentReplication<FactionInfoReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<GravityReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HackingDeviceReplication>();
+    sp::ecs::MultiplayerReplication::registerComponentReplication<HackingTargetReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<HullReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<ImpulseEngineReplication>();
     sp::ecs::MultiplayerReplication::registerComponentReplication<InternalRoomsReplication>();

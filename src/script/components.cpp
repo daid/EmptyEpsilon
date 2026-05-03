@@ -661,6 +661,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(PlayerControl, allowed_positions);
     sp::script::ComponentHandler<HackingDevice>::name("hacking_device");
     BIND_MEMBER(HackingDevice, effectiveness);
+    sp::script::ComponentHandler<HackingTarget>::name("hacking_target");
+    BIND_MEMBER(HackingTarget, difficulty);
+    BIND_MEMBER(HackingTarget, games);
     sp::script::ComponentHandler<ShipLog>::name("ship_log");
 
     sp::script::ComponentHandler<MoveTo>::name("move_to");

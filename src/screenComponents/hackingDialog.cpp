@@ -10,6 +10,8 @@
 #include <memory>
 #include <algorithm>
 
+#include "components/hacking.h"
+
 #include "gui/gui2_panel.h"
 #include "gui/gui2_label.h"
 #include "gui/gui2_listbox.h"
@@ -158,12 +160,25 @@ void GuiHackingDialog::onMiniGameComplete(bool success)
     status_label->setText(success ? tr("Hacking SUCCESS!") : tr("Hacking FAILURE!"));
 }
 
-void GuiHackingDialog::getNewGame() {
+void GuiHackingDialog::getNewGame()
+{
+    // Apply difficulty and game type settings in this priority order:
+    // - Per-entity overrides via HackingTarget component
+    // - If none, use GameGlobalInfo settings
+    // - If none, use global defaults
     int difficulty = 2;
     EHackingGames games = HG_All;
-    if (gameGlobalInfo) {
+
+    if (gameGlobalInfo)
+    {
       difficulty = gameGlobalInfo->hacking_difficulty;
       games = gameGlobalInfo->hacking_games;
+    }
+
+    if (auto ht = target.getComponent<HackingTarget>())
+    {
+        if (ht->difficulty >= 0) difficulty = ht->difficulty;
+        if (ht->games >= 0) games = EHackingGames(ht->games);
     }
 
     const string lights_help = tr("To successfully hack this system, you must fully illuminate all binary countermeasure nodes.\n\nSelect a node in the grid to toggle its state between off and on. Doing so also toggles the state of adjacent nodes immediately above, below, and to the selected node's sides. Continue toggling nodes until every node is illuminated.\n\nYou can make an unlimited number of moves, but seek efficient solutions to best aid your crewmates. Inexperienced hackers might chase dark nodes from top row to the bottom row by selecting the node immediately below each dark node. More experienced intrusion specialists might identify more efficient solutions.\n\nClick the Reset button to reset the field, or select a system to attempt a different intrusion method.");
