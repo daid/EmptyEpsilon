@@ -47,6 +47,7 @@ public:
     GuiKeyValueDisplay* info_relspeed;
 
     GuiKeyValueDisplay* info_faction;
+    GuiButton* info_faction_button;
     GuiKeyValueDisplay* info_type;
     GuiButton* info_type_button;
     GuiKeyValueDisplay* info_shields;
