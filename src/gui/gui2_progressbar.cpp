@@ -43,7 +43,7 @@ void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
         fill_rect.position.y = rect.position.y + rect.size.y - fill_rect.size.y;
         renderer.drawStretchedHVClipped(rect, fill_rect, front.size, front.texture, color);
     }
-    renderer.drawText(rect, text, sp::Alignment::Center);
+    renderer.drawText(rect, text, sp::Alignment::Center, fill_rect.size.y * 0.9f);
 }
 
 GuiProgressbar* GuiProgressbar::setValue(float value)
