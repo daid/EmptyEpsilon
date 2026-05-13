@@ -288,9 +288,13 @@ Keys::Keys() :
     engineering_set_power_300("ENGINEERING_POWER_300"),
     engineering_increase_power("ENGINEERING_POWER_INCREASE", "]"),
     engineering_decrease_power("ENGINEERING_POWER_DECREASE", "["),
+    engineering_increase_power_stepped("ENGINEERING_POWER_INCREASE_STEPPED"),
+    engineering_decrease_power_stepped("ENGINEERING_POWER_DECREASE_STEPPED"),
     engineering_set_power("ENGINEERING_POWER_SET"),
     engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "="),
     engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "-"),
+    engineering_increase_coolant_stepped("ENGINEERING_COOLANT_INCREASE_STEPPED"),
+    engineering_decrease_coolant_stepped("ENGINEERING_COOLANT_DECREASE_STEPPED"),
     engineering_set_coolant("ENGINEERING_COOLANT_SET"),
     engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "C"),
     engineering_repair_crew_up("ENGINEERING_REPAIR_CREW_UP", "Up"),
@@ -483,9 +487,13 @@ void Keys::init()
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
+    engineering_increase_power_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power stepwise"));
+    engineering_decrease_power_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power stepwise"));
     engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (joystick)"));
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
+    engineering_increase_coolant_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant stepwise"));
+    engineering_decrease_coolant_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant stepwise"));
     engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (joystick)"));
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));

@@ -142,9 +142,13 @@ public:
     sp::io::Keybinding engineering_set_power_300;
     sp::io::Keybinding engineering_increase_power;
     sp::io::Keybinding engineering_decrease_power;
+    sp::io::Keybinding engineering_increase_power_stepped;
+    sp::io::Keybinding engineering_decrease_power_stepped;
     sp::io::Keybinding engineering_set_power;
     sp::io::Keybinding engineering_increase_coolant;
     sp::io::Keybinding engineering_decrease_coolant;
+    sp::io::Keybinding engineering_increase_coolant_stepped;
+    sp::io::Keybinding engineering_decrease_coolant_stepped;
     sp::io::Keybinding engineering_set_coolant;
     sp::io::Keybinding engineering_next_repair_crew;
     sp::io::Keybinding engineering_repair_crew_up;
