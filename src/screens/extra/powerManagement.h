@@ -3,41 +3,75 @@
 #include "gui/gui2_overlay.h"
 #include "components/shipsystem.h"
 
+class GuiArrow;
+class GuiCustomShipFunctions;
+class GuiKeyValueDisplay;
 class GuiLabel;
 class GuiPanel;
-class GuiSlider;
 class GuiProgressbar;
-class GuiKeyValueDisplay;
+class GuiSlider;
 
 class PowerManagementScreen : public GuiOverlay
 {
 private:
+    glm::vec2 view_size;
+    int active_system_count;
+    GuiElement* status_bar;
     GuiKeyValueDisplay* energy_display;
+    GuiProgressbar* energy_capacity_gauge;
+    GuiArrow* energy_delta_arrow;
     GuiKeyValueDisplay* coolant_display;
+    GuiProgressbar* coolant_distribution_gauge;
+    GuiElement* systems_grid;
+    GuiCustomShipFunctions* custom_functions;
 
-    float previous_energy_measurement;
-    float previous_energy_level;
-    float average_energy_delta;
-    ShipSystem::Type selected_system = ShipSystem::Type::None;
+    constexpr static int layout_margin = 20;
+    constexpr static float status_bar_height = 100.0f;
+    constexpr static float custom_functions_width = 250.0f;
+    constexpr static glm::u8vec3 coolant_color{32, 128, 128};
+    constexpr static glm::u8vec4 coolant_color_foreground{coolant_color, 128};
+    constexpr static glm::u8vec4 coolant_color_background{coolant_color, 255};
+    constexpr static glm::u8vec3 energy_color{192, 192, 32};
+    constexpr static glm::u8vec4 energy_color_background{energy_color, 255};
+    constexpr static float panel_width_with_coolant = 300.0f;
+    constexpr static float panel_width_without_coolant = 200.0f;
 
-    class SystemRow
+    glm::vec2 panel_size{panel_width_with_coolant, 380.0f};
+    float previous_energy_level = 0.0f;
+    float average_energy_delta = 0.0f;
+    float previous_energy_measurement = 0.0f;
+    ShipSystem::Type selected_system;
+
+    class SystemPanel
     {
     public:
-        GuiPanel* box;
+        SystemPanel()
+        : container(nullptr), system_label(nullptr), system_container_sliders(nullptr), power_control(nullptr), power_slider(nullptr), power_bar(nullptr), coolant_control(nullptr), coolant_slider(nullptr), coolant_bar(nullptr), heat_bar(nullptr)
+        {}
+        GuiPanel* container;
+        GuiKeyValueDisplay* system_label;
+        string icon_file;
+        GuiElement* system_container_sliders;
+        GuiLabel* power_label;
+        GuiElement* power_control;
         GuiSlider* power_slider;
-        GuiSlider* coolant_slider;
-        GuiProgressbar* heat_bar;
-        GuiLabel* heat_label;
         GuiProgressbar* power_bar;
-        GuiProgressbar* coolant_bar;
         GuiLabel* coolant_label;
+        GuiElement* coolant_control;
+        GuiSlider* coolant_slider;
+        GuiProgressbar* coolant_bar;
+        GuiLabel* heat_label;
+        GuiArrow* heat_arrow;
+        GuiProgressbar* heat_bar;
     };
-    SystemRow systems[ShipSystem::COUNT];
+    SystemPanel systems[ShipSystem::COUNT];
+    std::vector<GuiElement*> systems_rows;
     bool set_power_active[ShipSystem::COUNT] = {false};
     bool set_coolant_active[ShipSystem::COUNT] = {false};
 public:
     PowerManagementScreen(GuiContainer* owner);
 
     void onDraw(sp::RenderTarget& target) override;
+    bool populateSystemPanel(int system_index, GuiElement* systems_row);
     virtual void onUpdate() override;
 };

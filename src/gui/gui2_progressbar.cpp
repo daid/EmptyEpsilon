@@ -15,13 +15,18 @@ void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
     const auto& front = front_style->get(getState());
 
     float f = (value - min_value) / (max_value - min_value);
+    sp::Rect fill_rect = rect;
 
     if (drawBackground)
         renderer.drawStretched(rect, back.texture, back.color);
 
-    sp::Rect fill_rect = rect;
     if (rect.size.x >= rect.size.y)
     {
+        if (drawBackground)
+        {
+            fill_rect.position.y += fill_rect.size.y * 0.125f;
+            fill_rect.size.y *= 0.75f;
+        }
         fill_rect.size.x *= f;
         if (max_value < min_value)
             fill_rect.position.x = rect.position.x + rect.size.x - fill_rect.size.x;
@@ -29,6 +34,11 @@ void GuiProgressbar::onDraw(sp::RenderTarget& renderer)
     }
     else
     {
+        if (drawBackground)
+        {
+            fill_rect.position.x += fill_rect.size.x * 0.125f;
+            fill_rect.size.x *= 0.75f;
+        }
         fill_rect.size.y *= f;
         fill_rect.position.y = rect.position.y + rect.size.y - fill_rect.size.y;
         renderer.drawStretchedHVClipped(rect, fill_rect, front.size, front.texture, color);
