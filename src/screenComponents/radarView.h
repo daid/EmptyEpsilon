@@ -46,6 +46,7 @@ private:
     glm::vec2 view_position{0, 0};
     float view_rotation;
     sp::ecs::Entity auto_center_target;
+    bool track_my_spaceship;
     bool auto_center_on_ship;
     bool auto_rotate_on_ship;
     bool auto_distance = false;
@@ -108,7 +109,7 @@ public:
     bool getAutoCentering() { return auto_center_on_ship; }
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_ship = value; return this; }
     sp::ecs::Entity getAutoCenterTarget() { return auto_center_target; }
-    GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
+    GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; this->track_my_spaceship = false; return this; }
     bool getAutoRotating() { return auto_rotate_on_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func, fpfunc_t mouse_wheel_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; this->mouse_wheel_func = mouse_wheel_func; return this; }
