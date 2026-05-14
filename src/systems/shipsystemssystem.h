@@ -2,6 +2,7 @@
 
 #include "ecs/system.h"
 #include "ecs/query.h"
+#include "ecs/entity.h"
 #include "components/shipsystem.h"
 
 
@@ -12,5 +13,5 @@ public:
 
     void update(float delta) override;
 private:
-    void updateSystem(ShipSystem& system, float delta, bool has_coolant);
+    void updateSystem(sp::ecs::Entity entity, ShipSystem& system, float delta);
 };
