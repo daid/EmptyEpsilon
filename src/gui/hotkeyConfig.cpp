@@ -313,6 +313,14 @@ Keys::Keys() :
     relay_alert_level_none("RELAY_ALERT_NONE"),
     relay_alert_level_yellow("RELAY_ALERT_YELLOW"),
     relay_alert_level_red("RELAY_ALERT_RED"),
+    relay_open_comms("RELAY_OPEN_COMMS", "M"),
+    relay_start_hacking("RELAY_START_HACKING", "H"),
+    relay_link_to_science("RELAY_LINK_TO_SCIENCE", "K"),
+    relay_toggle_waypoint("RELAY_TOGGLE_WAYPOINT", "W"),
+    relay_delete_waypoint("RELAY_DELETE_WAYPOINT", "Delete"),
+    relay_launch_probe("RELAY_LAUNCH_PROBE", "L"),
+    relay_center_on_ship("RELAY_CENTER_ON_SHIP", "F"),
+    relay_toggle_ships_log("RELAY_TOGGLE_SHIPS_LOG", "V"),
 
     // GM screen
     gm_delete("GM_DELETE", "Delete"),
@@ -502,6 +510,14 @@ void Keys::init()
     relay_alert_level_none.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Normal"));
     relay_alert_level_yellow.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Yellow"));
     relay_alert_level_red.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Alert level: Red"));
+    relay_open_comms.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Open comms with target"));
+    relay_start_hacking.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Start hacking target"));
+    relay_link_to_science.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Link to Science"));
+    relay_toggle_waypoint.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Toggle waypoint placement"));
+    relay_delete_waypoint.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Delete selected waypoint"));
+    relay_launch_probe.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Toggle probe launch"));
+    relay_center_on_ship.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Center view on ship"));
+    relay_toggle_ships_log.setLabel(tr("hotkey_menu", "Relay"), tr("hotkey_Relay", "Toggle ships log"));
 
     // Cinematic view
     cinematic.init();
