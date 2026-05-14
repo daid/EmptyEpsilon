@@ -115,6 +115,8 @@ public:
     sp::io::Keybinding weapons_disable_aim_lock;
     sp::io::Keybinding weapons_aim_left;
     sp::io::Keybinding weapons_aim_right;
+    sp::io::Keybinding weapons_aim_left_step;
+    sp::io::Keybinding weapons_aim_right_step;
 
     // Science screen binds
     sp::io::Keybinding science_scan_object;
@@ -123,6 +125,8 @@ public:
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
+    std::array<sp::io::Keybinding, 4> science_scan_param_increase_step;
+    std::array<sp::io::Keybinding, 4> science_scan_param_decrease_step;
 
     // Engineering screen binds
     sp::io::Keybinding engineering_select_system[ShipSystem::COUNT];
@@ -138,9 +142,13 @@ public:
     sp::io::Keybinding engineering_set_power_300;
     sp::io::Keybinding engineering_increase_power;
     sp::io::Keybinding engineering_decrease_power;
+    sp::io::Keybinding engineering_increase_power_stepped;
+    sp::io::Keybinding engineering_decrease_power_stepped;
     sp::io::Keybinding engineering_set_power;
     sp::io::Keybinding engineering_increase_coolant;
     sp::io::Keybinding engineering_decrease_coolant;
+    sp::io::Keybinding engineering_increase_coolant_stepped;
+    sp::io::Keybinding engineering_decrease_coolant_stepped;
     sp::io::Keybinding engineering_set_coolant;
     sp::io::Keybinding engineering_next_repair_crew;
     sp::io::Keybinding engineering_repair_crew_up;
