@@ -6,6 +6,7 @@
 GuiScrollbar::GuiScrollbar(GuiContainer* owner, string id, int min_value, int max_value, int start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), desired_value(start_value), value_size(1), func(func)
 {
+    intercepts_pointer = true;
     back_style = theme->getStyle("scrollbar.back");
     front_style = theme->getStyle("scrollbar.front");
 
