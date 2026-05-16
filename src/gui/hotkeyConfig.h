@@ -200,6 +200,7 @@ public:
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
     sp::io::Keybinding gm_show_callsigns;
+    sp::io::Keybinding gm_show_waypoints;
 
     // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;

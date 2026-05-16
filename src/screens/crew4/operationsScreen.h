@@ -2,9 +2,11 @@
 
 #include "gui/gui2_overlay.h"
 
+class GuiElement;
 class GuiOverlay;
 class GuiKeyValueDisplay;
 class GuiButton;
+class GuiSelector;
 class GuiToggleButton;
 class ScienceScreen;
 
@@ -20,6 +22,8 @@ private:
 
     EMode mode;
     int drag_waypoint_index;
+    int drag_waypoint_set;
+    int active_waypoint_set = 1;
 
     ScienceScreen* science;
 
@@ -28,6 +32,8 @@ private:
 
     GuiToggleButton* place_waypoint_button;
     GuiButton* delete_waypoint_button;
+    GuiSelector* waypoint_set_selector;
+    GuiToggleButton* route_toggle;
 
     glm::vec2 mouse_down_position{0, 0};
 public:

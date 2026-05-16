@@ -6,6 +6,7 @@
 class GuiMissileTubeControls;
 class TargetsContainer;
 class GuiThemeStyle;
+class Waypoints;
 
 class GuiRadarView : public GuiElement
 {
@@ -76,6 +77,15 @@ private:
     const GuiThemeStyle* ship_waypoint_style;
     const GuiThemeStyle* ship_waypoint_background_style;
     const GuiThemeStyle* ship_waypoint_text_style;
+    const GuiThemeStyle* ship_waypoint_set2_style;
+    const GuiThemeStyle* ship_waypoint_set2_background_style;
+    const GuiThemeStyle* ship_waypoint_set2_text_style;
+    const GuiThemeStyle* ship_waypoint_set3_style;
+    const GuiThemeStyle* ship_waypoint_set3_background_style;
+    const GuiThemeStyle* ship_waypoint_set3_text_style;
+    const GuiThemeStyle* ship_waypoint_set4_style;
+    const GuiThemeStyle* ship_waypoint_set4_background_style;
+    const GuiThemeStyle* ship_waypoint_set4_text_style;
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -91,6 +101,7 @@ public:
     GuiRadarView* disableGhostDots() { show_ghost_dots = false; return this; }
     GuiRadarView* enableWaypoints() { show_waypoints = true; return this; }
     GuiRadarView* disableWaypoints() { show_waypoints = false; return this; }
+    bool getWaypoints() { return show_waypoints; }
     GuiRadarView* enableTargetProjections(GuiMissileTubeControls* missile_tube_controls) { show_target_projection = true; this->missile_tube_controls = missile_tube_controls; return this; }
     GuiRadarView* disableTargetProjections() { show_target_projection = false; return this; }
     GuiRadarView* enableMissileTubeIndicators() { show_missile_tubes = true; return this; }
@@ -138,6 +149,8 @@ private:
     void drawFriendlyNotVisibleAreas(sp::RenderTarget& target);
     void drawGhostDots(sp::RenderTarget& target);
     void drawWaypoints(sp::RenderTarget& target);
+    void drawAllPlayerWaypoints(sp::RenderTarget& target);
+    void drawWaypointSetForShip(sp::RenderTarget& renderer, Waypoints* waypoints, int set_id, const GuiThemeStyle* sprite_style, const GuiThemeStyle* bg_style, const GuiThemeStyle* text_style, bool show_route, const string& owner_label = "", glm::u8vec4 owner_label_color = {0,0,0,0});
     void drawRangeIndicators(sp::RenderTarget& target);
     void drawTargetProjections(sp::RenderTarget& target);
     void drawMissileTubes(sp::RenderTarget& target);

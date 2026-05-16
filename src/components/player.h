@@ -1,5 +1,6 @@
 #pragma once
 
+#include <array>
 #include "stringImproved.h"
 #include "crewPosition.h"
 
@@ -50,17 +51,22 @@ public:
 class Waypoints
 {
 public:
+    static constexpr int MAX_SETS = 4;
     bool dirty = true;
+    // IDs are 1-9 within sets 1-4
     struct Point {
         int id;
+        int set_id;
         glm::vec2 position;
     };
     std::vector<Point> waypoints;
+    std::array<bool, MAX_SETS> is_route{};
 
-    int addNew(glm::vec2 position);
-    void move(int id, glm::vec2 position);
-    void remove(int id);
-    std::optional<glm::vec2> get(int id);
+    int addNew(glm::vec2 position, int set_id = 1);
+    void move(int id, glm::vec2 position, int set_id = 1);
+    void remove(int id, int set_id = 1);
+    std::optional<glm::vec2> get(int id, int set_id = 1);
+    void setRoute(bool value, int set_id = 1);
 };
 
 string alertLevelToString(AlertLevel level);

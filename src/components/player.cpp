@@ -28,17 +28,22 @@ string alertLevelToLocaleString(AlertLevel level)
     }
 }
 
-int Waypoints::addNew(glm::vec2 position)
+int Waypoints::addNew(glm::vec2 position, int set_id)
 {
-    if (waypoints.size() == 9)
+    if (set_id < 1 || set_id > MAX_SETS) return -1;
+    int count = 0;
+    for (auto& p : waypoints)
+        if (p.set_id == set_id) count++;
+    if (count >= 9)
         return -1;
-    for(int id=1; id<10; id++) {
+    for (int id = 1; id < 10; id++)
+    {
         bool used = false;
-        for(auto& p : waypoints)
-            if (p.id == id)
-                used = true;
-        if (!used) {
-            waypoints.push_back({id, position});
+        for (auto& p : waypoints)
+            if (p.id == id && p.set_id == set_id) used = true;
+        if (!used)
+        {
+            waypoints.push_back({id, set_id, position});
             dirty = true;
             return id;
         }
@@ -46,10 +51,12 @@ int Waypoints::addNew(glm::vec2 position)
     return -1;
 }
 
-void Waypoints::move(int id, glm::vec2 position)
+void Waypoints::move(int id, glm::vec2 position, int set_id)
 {
-    for(auto& p : waypoints) {
-        if (p.id == id) {
+    for (auto& p : waypoints)
+    {
+        if (p.id == id && p.set_id == set_id)
+        {
             p.position = position;
             dirty = true;
             return;
@@ -57,16 +64,22 @@ void Waypoints::move(int id, glm::vec2 position)
     }
 }
 
-void Waypoints::remove(int id)
+void Waypoints::remove(int id, int set_id)
 {
-    waypoints.erase(std::remove_if(waypoints.begin(), waypoints.end(), [id](auto& p) { return p.id == id; }), waypoints.end());
+    waypoints.erase(std::remove_if(waypoints.begin(), waypoints.end(), [id, set_id](auto& p) { return p.id == id && p.set_id == set_id; }), waypoints.end());
     dirty = true;
 }
 
-std::optional<glm::vec2> Waypoints::get(int id)
+std::optional<glm::vec2> Waypoints::get(int id, int set_id)
 {
-    for(auto& p : waypoints)
-        if (p.id == id)
-            return p.position;
+    for (auto& p : waypoints)
+        if (p.id == id && p.set_id == set_id) return p.position;
     return {};
+}
+
+void Waypoints::setRoute(bool value, int set_id)
+{
+    if (set_id < 1 || set_id > MAX_SETS) return;
+    is_route[set_id - 1] = value;
+    dirty = true;
 }

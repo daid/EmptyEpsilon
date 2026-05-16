@@ -11,12 +11,14 @@
 TargetsContainer::TargetsContainer()
 {
     waypoint_selection_index = -1;
+    waypoint_selection_set_id = 1;
     allow_waypoint_selection = false;
 }
 
 void TargetsContainer::clear()
 {
     waypoint_selection_index = -1;
+    waypoint_selection_set_id = 1;
     entries.clear();
 }
 
@@ -41,11 +43,13 @@ void TargetsContainer::set(sp::ecs::Entity obj)
         clear();
     }
     waypoint_selection_index = -1;
+    waypoint_selection_set_id = 1;
 }
 
 void TargetsContainer::set(const std::vector<sp::ecs::Entity>& objs)
 {
     waypoint_selection_index = -1;
+    waypoint_selection_set_id = 1;
     entries = objs;
 }
 
@@ -89,6 +93,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
                     {
                         clear();
                         waypoint_selection_index = waypoints->waypoints[n].id;
+                        waypoint_selection_set_id = waypoints->waypoints[n].set_id;
                         return;
                     }
                 }
@@ -101,16 +106,24 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
 int TargetsContainer::getWaypointIndex()
 {
     auto waypoints = my_spaceship.getComponent<Waypoints>();
-    if (!waypoints || waypoint_selection_index < 0 || !waypoints->get(waypoint_selection_index))
+    if (!waypoints || waypoint_selection_index < 0 || !waypoints->get(waypoint_selection_index, waypoint_selection_set_id))
         waypoint_selection_index = -1;
     return waypoint_selection_index;
 }
 
-void TargetsContainer::setWaypointIndex(int index)
+int TargetsContainer::getWaypointSetId()
+{
+    return waypoint_selection_set_id;
+}
+
+void TargetsContainer::setWaypointIndex(int index, int set_id)
 {
     auto waypoints = my_spaceship.getComponent<Waypoints>();
-    if (waypoints && waypoints->get(index))
+    if (waypoints && waypoints->get(index, set_id))
+    {
         waypoint_selection_index = index;
+        waypoint_selection_set_id = set_id;
+    }
 }
 
 void TargetsContainer::setNext(glm::vec2 position, float max_range, ESelectionType selection_type)
