@@ -119,7 +119,9 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     if (username != "")
     {
         sp::io::http::Request http(ip_address,port);
-        auto response = http.get(string{ "/api/" } + username + "/lights");
+        string lightsListAPI = "/api/" + username + "/lights";
+        auto response = http.get(lightsListAPI);
+                
         if (response.status != 200) // !OK
         {
             LOG(WARNING) << "Failed to validate username on philips hue bridge: " << response.status;
@@ -146,7 +148,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
                 for (const auto& entry : hue_json.items())
                 {
                     auto currentInt = string(entry.key()).toInt();
-                    LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                    LOG(INFO) << "Got key from Hue API " << currentInt;
                     if (currentInt >= light_count) light_count = currentInt;
                 }
 
@@ -201,37 +203,49 @@ int PhilipsHueDevice::getChannelCount()
 
 void PhilipsHueDevice::updateLoop()
 {
-    sp::io::http::Request http(ip_address,port);
-
     while(run_thread)
     {
         for(int n=0; n<light_count; n++)
         {
+            LightInfo info = lights[n];
+            // Hue API can only handle about 10 requests per second
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            if (info.laststate != "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime))
+            {
+                    lights[n].laststate = "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime);
+                    lights[n].dirty = true;
+			}
+            
             if (lights[n].dirty)
             {
-                LightInfo info;
-                {
-                    std::lock_guard<std::mutex> lock(mutex);
-                    lights[n].dirty = false;
-                    info = lights[n];
-                }
-                string post_data;
-                if (info.laststate != "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime))
-                {
-                    lights[n].laststate = "sat-" + string(info.saturation) + "-bri-" + string(info.brightness) + "-hue-" + string(info.hue) + "-transition-" + string(info.transitiontime);
-                    if (info.brightness > 0)
-                        post_data = "{\"on\":true, \"sat\":"+string(info.saturation)+", \"bri\":"+string(info.brightness)+",\"hue\":"+string(info.hue)+", \"transitiontime\": "+string(info.transitiontime)+"}";
-                    else
-                        post_data = "{\"on\":false, \"transitiontime\": "+string(info.transitiontime)+"}";
-                    auto response = http.request("put", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
-                    if (response.status != 200) // !OK
-                    {
-                        LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue bridge: " << response.status;
-                        LOG(WARNING) << response.body;
-                    }
-                }
-            }
-        }
-        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+				sp::io::http::Request setLights(ip_address, port);
+				string APIEndpoint = "/api/" + username + "/lights/" + string(n+1) + "/state";
+				LightInfo currentLight = lights[n];
+				string postData;
+				if (currentLight.brightness > 0) //light is on
+				{
+					postData = "{\"on\":true, \"sat\":" + string(currentLight.saturation) + ", \"bri\":" + string(currentLight.brightness) + ", \"hue\":" + string(currentLight.hue) + ", \"transitiontime\":" + string(currentLight.transitiontime) + "}";
+				}
+				else
+				{
+					postData = "{\"on\":false}";
+				}
+				
+				// call the API
+				auto resp = setLights.request("PUT", APIEndpoint, postData);
+				if (resp.status == 200) // OK
+				{
+					lights[n].dirty = false;
+				}
+				else
+				{
+					// Do nothing but keep the light flagged for future try
+				}
+			}
+			else 
+			{
+				// Do nothing, the light is correct already
+			}
+		}
     }
 }
