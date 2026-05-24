@@ -21,6 +21,7 @@ void GuiCustomShipFunctions::onUpdate()
 void GuiCustomShipFunctions::checkEntries()
 {
     auto csf = my_spaceship.getComponent<CustomShipFunctions>();
+    int slot_count=0;
     if (!csf) return;
 
     if (csf->functions.size() != entries.size())
@@ -43,6 +44,10 @@ void GuiCustomShipFunctions::checkEntries()
         }
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Button)
         {
+            if (keys.trigger_custom_button[slot_count].getDown()) {
+                my_player_info->commandCustomFunction(entries[n].name);
+            }
+            slot_count++;
             GuiButton* button = dynamic_cast<GuiButton*>(entries[n].element);
             if (!button)
             {
@@ -58,6 +63,7 @@ void GuiCustomShipFunctions::checkEntries()
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Info)
         {
             GuiLabel* label = dynamic_cast<GuiLabel*>(entries[n].element);
+            slot_count++;
             if (!label)
             {
                 // ship data says this is a label but we have something else, rebuild the entries
