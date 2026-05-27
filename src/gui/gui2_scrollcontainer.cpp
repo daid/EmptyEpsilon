@@ -364,6 +364,10 @@ bool GuiScrollContainer::onMouseWheelScroll(glm::vec2 /* position */, float valu
     // paged mode.
     const float step = (mode == ScrollMode::Page) ? visible_height : 50.0f;
     const float max_scroll = std::max(0.0f, content_height - visible_height);
+
+    // If there's no overflow, let mousewheel pass through.
+    if (max_scroll < 0.5f) return false;
+
     scroll_offset = std::clamp(scroll_offset - value * step, 0.0f, max_scroll);
 
     // Update the scrollbar.
