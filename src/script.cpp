@@ -225,11 +225,6 @@ static void luaVictory(string faction)
     engine->setGameSpeed(0.0);
 }
 
-static string luaGetSectorName(float x, float y)
-{
-    return getSectorName({x, y});
-}
-
 static string luaGetScenarioSetting(string key)
 {
     if (gameGlobalInfo->scenario_settings.find(key) != gameGlobalInfo->scenario_settings.end())
@@ -326,60 +321,6 @@ static int luaCreateAdditionalScript(lua_State* L)
 
     gameGlobalInfo->additional_scripts.push_back(std::move(env));
     return 1;
-}
-
-static int luaSectorToXY(lua_State* L)
-{
-    string sector = luaL_checkstring(L, 1);
-    constexpr float sector_size = 20000;
-    int x, y, intpart;
-
-    if(sector.length() < 2){
-        lua_pushnumber(L, 0);
-        lua_pushnumber(L, 0);
-        lua_pushboolean(L, false);
-        return 3;
-    }
-
-    // Y axis is complicated
-    if(sector[0] >= char('A') && sector[1] >= char('A')) {
-        // Case with two letters
-        char a1 = sector[0];
-        char a2 = sector[1];
-        try{
-            intpart = stoi(sector.substr(2));
-        } catch(const std::exception& e) {
-            lua_pushnumber(L, 0);
-            lua_pushnumber(L, 0);
-            lua_pushboolean(L, false);
-            return 3;
-        }
-        if(a1 > char('a')){
-            // Case with two lowercase letters (zz10) counting down towards the North
-            y = (((char('z') - a1) * 26) + (char('z') - a2 + 6)) * -sector_size; // 6 is the offset from F5 to zz5
-        }else{
-            // Case with two uppercase letters (AB20) counting up towards the South
-            y = (((a1 - char('A')) * 26) + (a2 - char('A') + 21)) * sector_size; // 21 is the offset from F5 to AA5
-        }
-    }else{
-        //Case with just one letter (A9/a9 - these are the same sector, as case only matters in the two-letter sectors)
-        char alphaPart = toupper(sector[0]);
-        try{
-            intpart = stoi(sector.substr(1));
-        }catch(const std::exception& e){
-            lua_pushnumber(L, 0);
-            lua_pushnumber(L, 0);
-            lua_pushboolean(L, false);
-            return 3;
-        }
-        y = (alphaPart - char('F')) * sector_size;
-    }
-    // X axis is simple
-    x = (intpart - 5) * sector_size; // 5 is the numeric component of the F5 origin
-    lua_pushnumber(L, x);
-    lua_pushnumber(L, y);
-    lua_pushboolean(L, true);
-    return 3;
 }
 
 static bool luaIsInsideZone(float x, float y, sp::ecs::Entity e)
@@ -1238,22 +1179,6 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// (The GM can unpause the game, but the scenario with its update function is destroyed.)
     /// Example: victory("Exuari") -- ends the scenario, Exuari win
     env.setGlobal("victory", &luaVictory);
-    /// string getSectorName(float x, float y)
-    /// Returns the name of the sector containing the given x/y coordinates.
-    /// Coordinates 0,0 are the top-left ("northwest") point of sector F5.
-    /// See also SpaceObject:getSectorName().
-    /// Example: getSectorName(20000,-40000) -- returns "D6"
-    env.setGlobal("getSectorName", &luaGetSectorName);
-    /// glm::vec2 sectorToXY(string sector_name)
-    /// Returns the top-left ("northwest") x/y coordinates for the given sector mame.
-    /// If the sector name is invalid, this returns coordinates 0, 0. This function also returns a third optional Boolean value that indicates whether the sector name was valid.
-    /// Examples:
-    /// x, y = sectorToXY("F5") -- x = 0, y = 0
-    /// x, y = sectorToXY("A0") -- x = -100000, y = -100000
-    /// x, y = sectorToXY("zz-23") -- x = -560000, y = -120000
-    /// x, y, valid = sectorToXY("BA12") -- x = 140000, y = 940000, valid = true
-    /// x, y, valid = sectorToXY("FOOBAR9000") -- x = 0, y = 0, valid = false
-    env.setGlobal("sectorToXY", &luaSectorToXY);
     /// bool isInsideZone(x, y, zone_entity)
     /// Checks whether the given x/y coordinates are within the specified zone.
     /// Example:

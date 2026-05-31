@@ -132,4 +132,3 @@ private:
 };
 
 string getSectorName(glm::vec2 position);
-glm::vec2 sectorToXY(string sectorName);

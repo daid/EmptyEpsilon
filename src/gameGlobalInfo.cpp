@@ -416,18 +416,21 @@ string GameGlobalInfo::getMissionTime() {
 
 string getSectorName(glm::vec2 position)
 {
-    constexpr float sector_size = 20000;
-    int sector_x = floorf(position.x / sector_size) + 5;
-    int sector_y = floorf(position.y / sector_size) + 5;
-    string y;
-    string x;
-    if (sector_y >= 0)
-        if (sector_y < 26)
-            y = string(char('A' + (sector_y)));
-        else
-            y = string(char('A' - 1 + (sector_y / 26))) + string(char('A' + (sector_y % 26)));
-    else
-        y = string(char('z' + ((sector_y + 1) / 26))) + ((sector_y  % 26) == 0 ? "a" : string(char('z' + 1 + (sector_y  % 26))));
-    x = string(sector_x);
-    return y + x;
+    if (gameGlobalInfo)
+    {
+        if (gameGlobalInfo->main_scenario_script)
+        {
+            auto res = gameGlobalInfo->main_scenario_script->call<string>("getSectorName", position.x, position.y);
+            if (res.isOk())
+                return res.value();
+        }
+        if (gameGlobalInfo->script_environment_base)
+        {
+            auto res = gameGlobalInfo->script_environment_base->call<string>("getSectorName", position.x, position.y);
+            if (res.isOk())
+                return res.value();
+        }
+        LOG(Warning, "Failed to call Lua getSectorName");
+    }
+    return "??";
 }
