@@ -281,6 +281,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.blast_range = 1000.0f * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
             missile.addComponent<RawRadarSignatureInfo>(0.0f, 0.05f, 0.0f);
+            missile.addComponent<DelayedAvoidObject>(mwd.lifetime, 1000.0f * category_modifier);
         }
         break;
     case MW_HVLI:
