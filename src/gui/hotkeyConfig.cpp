@@ -88,6 +88,24 @@ Keys::Keys() :
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
 #endif
 
+    trigger_custom_button{{
+        {"TRIGGER_CUSTOM_BUTTON1"},
+        {"TRIGGER_CUSTOM_BUTTON2"},
+        {"TRIGGER_CUSTOM_BUTTON3"},
+        {"TRIGGER_CUSTOM_BUTTON4"},
+        {"TRIGGER_CUSTOM_BUTTON5"},
+        {"TRIGGER_CUSTOM_BUTTON6"},
+        {"TRIGGER_CUSTOM_BUTTON7"},
+        {"TRIGGER_CUSTOM_BUTTON8"},
+        {"TRIGGER_CUSTOM_BUTTON9"},
+        {"TRIGGER_CUSTOM_BUTTON10"},
+        {"TRIGGER_CUSTOM_BUTTON11"},
+        {"TRIGGER_CUSTOM_BUTTON12"},
+        {"TRIGGER_CUSTOM_BUTTON13"},
+        {"TRIGGER_CUSTOM_BUTTON14"},
+        {"TRIGGER_CUSTOM_BUTTON15"}
+    }},
+
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
@@ -337,6 +355,14 @@ void Keys::init()
     fullscreen_key.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Fullscreen toggle"));
     debug_show_fps.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show FPS"));
     debug_show_timing.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug timing"));
+#ifdef DEBUG
+    debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
+#endif
+
+    for (auto n = 0u; n < trigger_custom_button.size(); n++)
+    {
+        trigger_custom_button[n].setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Custom button slot {number}").format({{"number", string(n + 1)}}));
+    }
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -355,6 +381,7 @@ void Keys::init()
     mainscreen_target.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Lock view on weapons target"));
     mainscreen_tactical_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View tactical radar"));
     mainscreen_long_range_radar.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View long-range radar"));
+    mainscreen_strategic_map.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "View strategic map"));
     mainscreen_first_person.setLabel(tr("hotkey_menu", "Main screen"), tr("hotkey_MainScreen", "Toggle first-person view"));
 
     // Helms
