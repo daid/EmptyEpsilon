@@ -27,6 +27,7 @@ public:
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
 #endif
+    std::array<sp::io::Keybinding, 15> trigger_custom_button;
 
     // Crew screen binds
     sp::io::Keybinding next_station;
