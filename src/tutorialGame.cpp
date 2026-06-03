@@ -96,7 +96,7 @@ void TutorialGame::createScreens()
 
     if (repeated_tutorial)
     {
-        (new GuiButton(this, "", tr("Reset"), [this]()
+        (new GuiButton(this, "", tr("Reset"), []()
         {
             finish();
         }))->setPosition(-20, 20, sp::Alignment::TopRight)->setSize(120, 50);

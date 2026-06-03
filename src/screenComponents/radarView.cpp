@@ -78,8 +78,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* tar
     mouse_up_func(nullptr),
     radar_style(theme->getStyle("radar")),
     radar_outline_style(theme->getStyle("radar.outline")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
     radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
+    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
     ship_waypoint_style(theme->getStyle("ship_waypoint")),
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
     ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
@@ -115,8 +115,8 @@ GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, Targe
     mouse_up_func(nullptr),
     radar_style(theme->getStyle("radar")),
     radar_outline_style(theme->getStyle("radar.outline")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
     radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
+    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
     ship_waypoint_style(theme->getStyle("ship_waypoint")),
     ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
     ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
@@ -720,7 +720,7 @@ void GuiRadarView::drawObjects(sp::RenderTarget& renderer)
 
             // For each of those objects, check if it is at least partially
             // inside the revealed radius. If so, reveal the object on the map.
-            for(auto entity2 : sp::CollisionSystem::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
+            for(auto entity2 : sp::TransformQuery::queryArea(position - glm::vec2(r, r), position + glm::vec2(r, r)))
             {
                 //TODO: This isn't great, as not everything will collision attached...
                 auto trace = entity2.getComponent<RadarTrace>();

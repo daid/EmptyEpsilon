@@ -30,4 +30,5 @@ BASIC_REPLICATION_IMPL(ScienceScannerReplication, ScienceScanner)
     BASIC_REPLICATION_FIELD(delay);
     BASIC_REPLICATION_FIELD(max_scanning_delay);
     BASIC_REPLICATION_FIELD(target);
+    BASIC_REPLICATION_FIELD(source);
 }
