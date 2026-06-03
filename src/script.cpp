@@ -465,13 +465,12 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
 static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<CrewPosition> station)
 {
     // Relevant only to player-controlled entities.
-    auto target_pc = target.getOrAddComponent<PlayerControl>();
-    if (target.hasComponent<AIController>()) target.removeComponent<AIController>();
+    auto target_pc = target.getComponent<PlayerControl>();
 
-    if (!target_pc.allowed_positions.mask)
+    if (!target_pc || (target_pc && !target_pc.allowed_positions.mask))
     {
-        LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions. Resetting to Any.");
-        target_pc.allowed_positions = CrewPositions::all();
+        LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions.");
+        return;
     }
 
     // For each matching player, reassign their ship, filter crew positions
