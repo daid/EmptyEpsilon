@@ -469,7 +469,13 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
     // Relevant only to player-controlled entities.
     auto target_pc = target.getComponent<PlayerControl>();
 
-    if (!target_pc || (target_pc && !target_pc.allowed_positions.mask))
+    if (!target_pc)
+    {
+        LOG(Error, "transferPlayersToShip: destination ship has no PlayerControl component.");
+        return;
+    }
+
+    if (!target_pc->allowed_positions.mask)
     {
         LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions.");
         return;
@@ -491,7 +497,7 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
         // scenario author and drop the player into the next allowed position.
         for (auto& cps : i->crew_positions)
         {
-            CrewPositions lost{cps.mask & ~target_pc.allowed_positions.mask};
+            CrewPositions lost{cps.mask & ~target_pc->allowed_positions.mask};
             if (lost.mask)
             {
                 // This is probably not what the script user intended, so log
@@ -503,14 +509,14 @@ static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, s
                 for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
                 {
                     auto cp = static_cast<CrewPosition>(n);
-                    if (target_pc.allowed_positions.has(cp) && !cps.has(cp))
+                    if (target_pc->allowed_positions.has(cp) && !cps.has(cp))
                     {
                         cps.add(cp);
                         break;
                     }
                 }
             }
-            cps.mask &= target_pc.allowed_positions.mask;
+            cps.mask &= target_pc->allowed_positions.mask;
         }
 
         // Clear last ship password.
