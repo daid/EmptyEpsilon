@@ -16,6 +16,7 @@
 #include "components/collision.h"
 #include "components/gravity.h"
 #include "components/hull.h"
+#include "components/shields.h"
 #include "components/comms.h"
 #include "components/player.h"
 #include "components/name.h"
@@ -35,20 +36,20 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_textentry.h"
 
-static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
+static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
 {
-    std::unordered_map<string, string> result;
+    std::vector<std::pair<string, string>> result;
     if (auto cs = entity.getComponent<CallSign>())
-        result[trMark("gm_info", "CallSign")] = cs->callsign;
+        result.emplace_back(trMark("gm_info", "Callsign"), cs->callsign);
+    if (entity.hasComponent<Faction>())
+        result.emplace_back(trMark("gm_info", "Faction"), Faction::getInfo(entity).locale_name);
     if (auto tn = entity.getComponent<TypeName>())
-        result[trMark("gm_info", "Type")] = tn->localized;
+        result.emplace_back(trMark("gm_info", "Type"), tn->localized);
+    if (auto shields = entity.getComponent<Shields>())
+        for (size_t n = 0; n < shields->entries.size(); n++)
+            result.emplace_back(trMark("gm_info", "Shield {n}").format({{"n", string(static_cast<int>(n) + 1)}}), string(shields->entries[n].level) + "/" + string(shields->entries[n].max));
     if (auto hull = entity.getComponent<Hull>())
-        result[trMark("gm_info", "Hull")] = string(hull->current) + "/" + string(hull->max);
-    //for(int n=0; n<shield_count; n++) {
-        // Note, translators: this is a compromise.
-        // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.
-    //    ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
-    //}
+        result.emplace_back(trMark("gm_info", "Hull"), string(hull->current) + "/" + string(hull->max));
     /* from missile weapons
     if (owner)
     {
@@ -424,39 +425,59 @@ void GameMasterScreen::update(float delta)
     // Update mission clock
     info_clock->setValue(gameGlobalInfo->getMissionTime());
 
-    std::unordered_map<string, string> selection_info;
+    // Store k/vs in order.
+    std::vector<std::pair<string, string>> selection_info;
+    // Track selection indices to determine "*mixed*" state.
+    std::unordered_map<string, size_t> selection_info_index;
+
+    // List position if only one entity is selected.
+    if (targets.getTargets().size() == 1)
+    {
+        if (auto t = targets.get().getComponent<sp::Transform>())
+        {
+            string pos_key = trMark("gm_info", "Position");
+            string pos_val = string(t->getPosition().x, 0) + "," + string(t->getPosition().y, 0);
+            auto it = selection_info_index.find(pos_key);
+            if (it == selection_info_index.end())
+            {
+                selection_info_index[pos_key] = selection_info.size();
+                selection_info.emplace_back(pos_key, pos_val);
+            }
+            else
+                selection_info[it->second].second = pos_val;
+        }
+    }
 
     // For each selected object, determine and report their type.
     for (auto entity : targets.getTargets())
     {
-        auto info = getGMInfo(entity);
-        for (auto i = info.begin(); i != info.end(); i++)
+        for (auto& [key, value] : getGMInfo(entity))
         {
-            if (selection_info.find(i->first) == selection_info.end())
-                selection_info[i->first] = i->second;
-            else if (selection_info[i->first] != i->second)
-                selection_info[i->first] = tr("*mixed*");
+            auto it = selection_info_index.find(key);
+            if (it == selection_info_index.end())
+            {
+                selection_info_index[key] = selection_info.size();
+                selection_info.emplace_back(key, value);
+            }
+            else if (selection_info[it->second].second != value)
+                selection_info[it->second].second = tr("*mixed*");
         }
     }
 
-    if (targets.getTargets().size() == 1)
-    {
-        if (auto t = targets.get().getComponent<sp::Transform>())
-            selection_info[trMark("gm_info", "Position")] = string(t->getPosition().x, 0) + "," + string(t->getPosition().y, 0);
-    }
-
+    // List GM info items for selection, if any.
     unsigned int cnt = 0;
-    for (std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
+    for (auto& [key, value] : selection_info)
     {
         if (cnt == info_items.size())
         {
-            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5, i->first, i->second));
-            info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30);
+            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5f, key, value));
+            info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30.0f);
         }
         else
         {
-            info_items[cnt]->show();
-            info_items[cnt]->setKey(tr("gm_info", i->first))->setValue(i->second);
+            info_items[cnt]
+                ->setKey(tr("gm_info", key))->setValue(value)
+                ->show();
         }
         cnt++;
     }
