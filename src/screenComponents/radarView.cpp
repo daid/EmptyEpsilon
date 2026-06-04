@@ -29,8 +29,6 @@
 #include "missileTubeControls.h"
 #include "targetsContainer.h"
 
-#include "gui/theme.h"
-
 namespace
 {
     enum class RadarStencil : uint8_t
@@ -50,76 +48,15 @@ namespace
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id),
-    next_ghost_dot_update(0.0),
     targets(targets),
-    missile_tube_controls(nullptr),
-    view_position(0.0f,0.0f),
-    view_rotation(0),
-    auto_center_target(my_spaceship),
-    track_my_spaceship(true),
-    auto_center_on_ship(true),
-    auto_rotate_on_ship(false),
-    auto_distance(true),
-    distance(5000.0f),
-    long_range(false),
-    show_ghost_dots(false),
-    show_waypoints(false),
-    show_target_projection(false),
-    show_missile_tubes(false),
-    show_callsigns(false),
-    show_heading_indicators(false),
-    show_game_master_data(false),
-    range_indicator_step_size(0.0f),
-    background_alpha(255),
-    style(Circular),
-    fog_style(NoFogOfWar),
-    mouse_down_func(nullptr),
-    mouse_drag_func(nullptr),
-    mouse_up_func(nullptr),
-    radar_style(theme->getStyle("radar")),
-    radar_outline_style(theme->getStyle("radar.outline")),
-    radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
-    ship_waypoint_style(theme->getStyle("ship_waypoint")),
-    ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
+    auto_distance(true)
 {
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
 : GuiElement(owner, id),
-    next_ghost_dot_update(0.0),
     targets(targets),
-    missile_tube_controls(nullptr),
-    view_position(0.0f, 0.0f),
-    view_rotation(0),
-    auto_center_target(my_spaceship),
-    track_my_spaceship(true),
-    auto_center_on_ship(true),
-    auto_rotate_on_ship(false),
-    distance(distance),
-    long_range(false),
-    show_ghost_dots(false),
-    show_waypoints(false),
-    show_target_projection(false),
-    show_missile_tubes(false),
-    show_callsigns(false),
-    show_heading_indicators(false),
-    show_game_master_data(false),
-    range_indicator_step_size(0.0f),
-    background_alpha(255),
-    style(Circular),
-    fog_style(NoFogOfWar),
-    mouse_down_func(nullptr),
-    mouse_drag_func(nullptr),
-    mouse_up_func(nullptr),
-    radar_style(theme->getStyle("radar")),
-    radar_outline_style(theme->getStyle("radar.outline")),
-    radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
-    ship_waypoint_style(theme->getStyle("ship_waypoint")),
-    ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text"))
+    distance(distance)
 {
 }
 
