@@ -88,6 +88,24 @@ Keys::Keys() :
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
 #endif
 
+    trigger_custom_button{{
+        {"TRIGGER_CUSTOM_BUTTON1"},
+        {"TRIGGER_CUSTOM_BUTTON2"},
+        {"TRIGGER_CUSTOM_BUTTON3"},
+        {"TRIGGER_CUSTOM_BUTTON4"},
+        {"TRIGGER_CUSTOM_BUTTON5"},
+        {"TRIGGER_CUSTOM_BUTTON6"},
+        {"TRIGGER_CUSTOM_BUTTON7"},
+        {"TRIGGER_CUSTOM_BUTTON8"},
+        {"TRIGGER_CUSTOM_BUTTON9"},
+        {"TRIGGER_CUSTOM_BUTTON10"},
+        {"TRIGGER_CUSTOM_BUTTON11"},
+        {"TRIGGER_CUSTOM_BUTTON12"},
+        {"TRIGGER_CUSTOM_BUTTON13"},
+        {"TRIGGER_CUSTOM_BUTTON14"},
+        {"TRIGGER_CUSTOM_BUTTON15"}
+    }},
+
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
@@ -319,6 +337,7 @@ Keys::Keys() :
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
     gm_show_waypoints("GM_SHOW_WAYPOINTS", "W"),
+    gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
 
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
@@ -341,6 +360,11 @@ void Keys::init()
 #ifdef DEBUG
     debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
 #endif
+
+    for (auto n = 0u; n < trigger_custom_button.size(); n++)
+    {
+        trigger_custom_button[n].setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Custom button slot {number}").format({{"number", string(n + 1)}}));
+    }
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -515,6 +539,7 @@ void Keys::init()
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
     gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
     gm_show_waypoints.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show waypoints (GM)"));
+    gm_show_health_bars.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show health bars (GM)"));
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));

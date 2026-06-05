@@ -1,6 +1,7 @@
 #pragma once
 
 #include "gui/gui2_element.h"
+#include "gui/theme.h"
 #include "engine.h"
 
 class GuiMissileTubeControls;
@@ -39,53 +40,54 @@ private:
         GhostDot(glm::vec2 pos) : position(pos), end_of_life(engine->getElapsedTime() + total_lifetime) {}
     };
     std::vector<GhostDot> ghost_dots;
-    float next_ghost_dot_update;
+    float next_ghost_dot_update = 0.0f;
 
-    TargetsContainer* targets;
-    GuiMissileTubeControls* missile_tube_controls;
+    TargetsContainer* targets = nullptr;
+    GuiMissileTubeControls* missile_tube_controls = nullptr;
 
-    glm::vec2 view_position{0, 0};
-    float view_rotation;
+    glm::vec2 view_position{0.0f, 0.0f};
+    float view_rotation = 0.0f;
     sp::ecs::Entity auto_center_target;
-    bool auto_center_on_ship;
-    bool auto_rotate_on_ship;
+    bool track_my_spaceship = true;
+    bool auto_center_on_ship = true;
+    bool auto_rotate_on_ship = false;
     bool auto_distance = false;
-    float distance;
-    bool long_range;
-    bool show_ghost_dots;
-    bool show_waypoints;
-    bool show_target_projection;
-    bool show_missile_tubes;
-    bool show_callsigns;
-    bool show_heading_indicators;
-    bool show_game_master_data;
-    float range_indicator_step_size;
-    uint8_t background_alpha;
-    ERadarStyle style;
-    EFogOfWarStyle fog_style;
-    bpfunc_t mouse_down_func;
-    pfunc_t mouse_drag_func;
-    pfunc_t mouse_up_func;
+    float distance = 5000.0f;
+    bool long_range = false;
+    bool show_ghost_dots = false;
+    bool show_waypoints = false;
+    bool show_target_projection = false;
+    bool show_missile_tubes = false;
+    bool show_callsigns = false;
+    bool show_heading_indicators = false;
+    bool show_game_master_data = false;
+    float range_indicator_step_size = 0.0f;
+    uint8_t background_alpha = 255;
+    ERadarStyle style = Circular;
+    EFogOfWarStyle fog_style = NoFogOfWar;
+    bpfunc_t mouse_down_func = nullptr;
+    pfunc_t mouse_drag_func = nullptr;
+    pfunc_t mouse_up_func = nullptr;
     fpfunc_t mouse_wheel_func;
     // Overlay callback
     std::function<void(sp::RenderTarget&)> overlay_func;
 
-    const GuiThemeStyle* radar_style;
-    const GuiThemeStyle* radar_outline_style;
-    const GuiThemeStyle* radar_range_indicators_style;
-    const GuiThemeStyle* radar_sector_grid_style;
-    const GuiThemeStyle* ship_waypoint_style;
-    const GuiThemeStyle* ship_waypoint_background_style;
-    const GuiThemeStyle* ship_waypoint_text_style;
-    const GuiThemeStyle* ship_waypoint_set2_style;
-    const GuiThemeStyle* ship_waypoint_set2_background_style;
-    const GuiThemeStyle* ship_waypoint_set2_text_style;
-    const GuiThemeStyle* ship_waypoint_set3_style;
-    const GuiThemeStyle* ship_waypoint_set3_background_style;
-    const GuiThemeStyle* ship_waypoint_set3_text_style;
-    const GuiThemeStyle* ship_waypoint_set4_style;
-    const GuiThemeStyle* ship_waypoint_set4_background_style;
-    const GuiThemeStyle* ship_waypoint_set4_text_style;
+    const GuiThemeStyle* radar_style = theme->getStyle("radar");
+    const GuiThemeStyle* radar_outline_style = theme->getStyle("radar.outline");
+    const GuiThemeStyle* radar_range_indicators_style = theme->getStyle("radar.range_indicators");
+    const GuiThemeStyle* radar_sector_grid_style = theme->getStyle("radar.sector_grid");
+    const GuiThemeStyle* ship_waypoint_style = theme->getStyle("ship_waypoint");
+    const GuiThemeStyle* ship_waypoint_background_style = theme->getStyle("ship_waypoint.background");
+    const GuiThemeStyle* ship_waypoint_text_style = theme->getStyle("ship_waypoint.text");
+    const GuiThemeStyle* ship_waypoint_set2_style = theme->getStyle("ship_waypoint_set2");
+    const GuiThemeStyle* ship_waypoint_set2_background_style = theme->getStyle("ship_waypoint_set2.background");
+    const GuiThemeStyle* ship_waypoint_set2_text_style = theme->getStyle("ship_waypoint_set2.text");
+    const GuiThemeStyle* ship_waypoint_set3_style = theme->getStyle("ship_waypoint_set3");
+    const GuiThemeStyle* ship_waypoint_set3_background_style = theme->getStyle("ship_waypoint_set3.background");
+    const GuiThemeStyle* ship_waypoint_set3_text_style = theme->getStyle("ship_waypoint_set3.text");
+    const GuiThemeStyle* ship_waypoint_set4_style = theme->getStyle("ship_waypoint_set4");
+    const GuiThemeStyle* ship_waypoint_set4_background_style = theme->getStyle("ship_waypoint_set4.background");
+    const GuiThemeStyle* ship_waypoint_set4_text_style = theme->getStyle("ship_waypoint_set4.text");
 public:
     GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets);
     GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets);
@@ -119,7 +121,7 @@ public:
     bool getAutoCentering() { return auto_center_on_ship; }
     GuiRadarView* setAutoCentering(bool value) { this->auto_center_on_ship = value; return this; }
     sp::ecs::Entity getAutoCenterTarget() { return auto_center_target; }
-    GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; return this; }
+    GuiRadarView* setAutoCenterTarget(sp::ecs::Entity target) { this->auto_center_target = target; this->track_my_spaceship = false; return this; }
     bool getAutoRotating() { return auto_rotate_on_ship; }
     GuiRadarView* setAutoRotating(bool value) { this->auto_rotate_on_ship = value; return this; }
     GuiRadarView* setCallbacks(bpfunc_t mouse_down_func, pfunc_t mouse_drag_func, pfunc_t mouse_up_func, fpfunc_t mouse_wheel_func) { this->mouse_down_func = mouse_down_func; this->mouse_drag_func = mouse_drag_func; this->mouse_up_func = mouse_up_func; this->mouse_wheel_func = mouse_wheel_func; return this; }

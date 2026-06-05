@@ -107,6 +107,7 @@ private:
 
     bool has_cpu_ship = false;
     bool has_player_ship = false;
+    bool show_health_bars = true;
 
     // GM waypoint placement/deletion state
     bool gm_add_waypoint_mode = false;

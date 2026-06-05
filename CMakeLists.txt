@@ -11,6 +11,9 @@ endif()
 
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
+# Force C++17 across all compilers
+set(CMAKE_CXX_STANDARD 17)
+
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 # Set a default version.
@@ -404,6 +407,8 @@ set(MAIN_SOURCES
     src/systems/damage.cpp
     src/systems/selfdestruct.h
     src/systems/selfdestruct.cpp
+    src/systems/probe.h
+    src/systems/probe.cpp
     src/systems/pickup.h
     src/systems/pickup.cpp
     src/systems/basicmovement.h

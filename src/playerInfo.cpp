@@ -56,6 +56,7 @@
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
+#include "systems/probe.h"
 #include "systems/comms.h"
 #include "systems/scanning.h"
 
@@ -968,48 +969,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_LAUNCH_PROBE:
-        if (auto spl = ship.getComponent<ScanProbeLauncher>())
         {
-            auto t = ship.getComponent<sp::Transform>();
-            if (t && spl->stock > 0) {
-                glm::vec2 target{};
-                packet >> target;
-
-                auto p = sp::ecs::Entity::create();
-                p.addComponent<sp::Transform>(*t);
-                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
-                p.addComponent<LifeTime>().lifetime = 60*10;
-                if (auto faction = ship.getComponent<Faction>())
-                    p.addComponent<Faction>() = *faction;
-                auto& mt = p.addComponent<MoveTo>();
-                mt.target = target;
-                mt.speed = 1000;
-                p.addComponent<AllowRadarLink>().owner = ship;
-                //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
-                auto& trace = p.addComponent<RadarTrace>();
-                trace.icon = "radar/probe.png";
-                trace.min_size = 10.0;
-                trace.max_size = 10.0;
-                trace.color = {96, 192, 128, 255};
-                trace.flags = RadarTrace::LongRange;
-                auto& hull = p.addComponent<Hull>();
-                hull.current = hull.max = 1;
-                p.addComponent<ShareShortRangeRadar>();
-                auto model = "SensorBuoy/SensorBuoyMKI.model";
-                auto idx = irandom(1, 3);
-                if (idx == 2) model = "SensorBuoy/SensorBuoyMKII.model";
-                if (idx == 3) model = "SensorBuoy/SensorBuoyMKIII.model";
-                auto& mrc = p.addComponent<MeshRenderComponent>();
-                mrc.mesh.name = model;
-                mrc.texture.name = "SensorBuoy/SensorBuoyAlbedoAO.png";
-                mrc.specular_texture.name = "SensorBuoy/SensorBuoyPBRSpecular.png";
-                mrc.scale = 300;
-                auto& phy = p.addComponent<sp::Physics>();
-                phy.setCircle(sp::Physics::Type::Sensor, 15);
-                if (spl->on_launch)
-                    LuaConsole::checkResult(spl->on_launch.call<void>(ship, p));
-                spl->stock--;
-            }
+            glm::vec2 target{};
+            packet >> target;
+            ProbeSystem::launch(ship, target);
         }
         break;
     case CMD_SET_ALERT_LEVEL:{

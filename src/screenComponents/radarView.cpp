@@ -30,8 +30,6 @@
 #include "targetsContainer.h"
 #include "components/name.h"
 
-#include "gui/theme.h"
-
 namespace
 {
     enum class RadarStencil : uint8_t
@@ -51,97 +49,24 @@ namespace
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, TargetsContainer* targets)
 : GuiElement(owner, id),
-    next_ghost_dot_update(0.0),
     targets(targets),
-    missile_tube_controls(nullptr),
-    view_position(0.0f,0.0f),
-    view_rotation(0),
-    auto_center_target(my_spaceship),
-    auto_center_on_ship(true),
-    auto_rotate_on_ship(false),
-    auto_distance(true),
-    distance(5000.0f),
-    long_range(false),
-    show_ghost_dots(false),
-    show_waypoints(false),
-    show_target_projection(false),
-    show_missile_tubes(false),
-    show_callsigns(false),
-    show_heading_indicators(false),
-    show_game_master_data(false),
-    range_indicator_step_size(0.0f),
-    background_alpha(255),
-    style(Circular),
-    fog_style(NoFogOfWar),
-    mouse_down_func(nullptr),
-    mouse_drag_func(nullptr),
-    mouse_up_func(nullptr),
-    radar_style(theme->getStyle("radar")),
-    radar_outline_style(theme->getStyle("radar.outline")),
-    radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
-    ship_waypoint_style(theme->getStyle("ship_waypoint")),
-    ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text")),
-    ship_waypoint_set2_style(theme->getStyle("ship_waypoint_set2")),
-    ship_waypoint_set2_background_style(theme->getStyle("ship_waypoint_set2.background")),
-    ship_waypoint_set2_text_style(theme->getStyle("ship_waypoint_set2.text")),
-    ship_waypoint_set3_style(theme->getStyle("ship_waypoint_set3")),
-    ship_waypoint_set3_background_style(theme->getStyle("ship_waypoint_set3.background")),
-    ship_waypoint_set3_text_style(theme->getStyle("ship_waypoint_set3.text")),
-    ship_waypoint_set4_style(theme->getStyle("ship_waypoint_set4")),
-    ship_waypoint_set4_background_style(theme->getStyle("ship_waypoint_set4.background")),
-    ship_waypoint_set4_text_style(theme->getStyle("ship_waypoint_set4.text"))
+    auto_distance(true)
 {
 }
 
 GuiRadarView::GuiRadarView(GuiContainer* owner, string id, float distance, TargetsContainer* targets)
 : GuiElement(owner, id),
-    next_ghost_dot_update(0.0),
     targets(targets),
-    missile_tube_controls(nullptr),
-    view_position(0.0f, 0.0f),
-    view_rotation(0),
-    auto_center_target(my_spaceship),
-    auto_center_on_ship(true),
-    auto_rotate_on_ship(false),
-    distance(distance),
-    long_range(false),
-    show_ghost_dots(false),
-    show_waypoints(false),
-    show_target_projection(false),
-    show_missile_tubes(false),
-    show_callsigns(false),
-    show_heading_indicators(false),
-    show_game_master_data(false),
-    range_indicator_step_size(0.0f),
-    background_alpha(255),
-    style(Circular),
-    fog_style(NoFogOfWar),
-    mouse_down_func(nullptr),
-    mouse_drag_func(nullptr),
-    mouse_up_func(nullptr),
-    radar_style(theme->getStyle("radar")),
-    radar_outline_style(theme->getStyle("radar.outline")),
-    radar_range_indicators_style(theme->getStyle("radar.range_indicators")),
-    radar_sector_grid_style(theme->getStyle("radar.sector_grid")),
-    ship_waypoint_style(theme->getStyle("ship_waypoint")),
-    ship_waypoint_background_style(theme->getStyle("ship_waypoint.background")),
-    ship_waypoint_text_style(theme->getStyle("ship_waypoint.text")),
-    ship_waypoint_set2_style(theme->getStyle("ship_waypoint_set2")),
-    ship_waypoint_set2_background_style(theme->getStyle("ship_waypoint_set2.background")),
-    ship_waypoint_set2_text_style(theme->getStyle("ship_waypoint_set2.text")),
-    ship_waypoint_set3_style(theme->getStyle("ship_waypoint_set3")),
-    ship_waypoint_set3_background_style(theme->getStyle("ship_waypoint_set3.background")),
-    ship_waypoint_set3_text_style(theme->getStyle("ship_waypoint_set3.text")),
-    ship_waypoint_set4_style(theme->getStyle("ship_waypoint_set4")),
-    ship_waypoint_set4_background_style(theme->getStyle("ship_waypoint_set4.background")),
-    ship_waypoint_set4_text_style(theme->getStyle("ship_waypoint_set4.text"))
+    distance(distance)
 {
 }
 
 void GuiRadarView::onDraw(sp::RenderTarget& renderer)
 {
+    // Keep centered on my_spaceship when the player's assigned ship changes.
+    if (track_my_spaceship && my_spaceship)
+        auto_center_target = my_spaceship;
+
     // Auto-center on the target, defaulting to my_spaceship on creation.
     auto transform = auto_center_target.getComponent<sp::Transform>();
 

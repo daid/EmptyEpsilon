@@ -32,6 +32,8 @@
 #include "components/zone.h"
 #include "components/shiplog.h"
 #include "components/selfdestruct.h"
+#include "components/radar.h"
+#include "systems/probe.h"
 #include "systems/jumpsystem.h"
 #include "systems/missilesystem.h"
 #include "systems/docking.h"
@@ -464,18 +466,68 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
 
 static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<CrewPosition> station)
 {
-    if (!target.getComponent<PlayerControl>()) return;
-    // For each player, move them to the same station on the target.
-    for(auto i : player_info_list)
-        if (i->ship == source && (!station.has_value() || i->hasPosition(station.value())))
-            i->ship = target;
+    // Relevant only to player-controlled entities.
+    auto target_pc = target.getComponent<PlayerControl>();
+
+    if (!target_pc)
+    {
+        LOG(Error, "transferPlayersToShip: destination ship has no PlayerControl component.");
+        return;
+    }
+
+    if (!target_pc->allowed_positions.mask)
+    {
+        LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions.");
+        return;
+    }
+
+    // For each matching player, reassign their ship, filter crew positions
+    // against the new ship's allowed positions, and clear their cached ship
+    // password.
+    for (auto i : player_info_list)
+    {
+        if (i->ship != source || (station.has_value() && !i->hasPosition(station.value())))
+            continue;
+
+        // Move player to new ship.
+        i->ship = target;
+
+        // Check against the destination's allowed crew positions. If a player's
+        // in a position prohibited by the new ship, log a warning for the
+        // scenario author and drop the player into the next allowed position.
+        for (auto& cps : i->crew_positions)
+        {
+            CrewPositions lost{cps.mask & ~target_pc->allowed_positions.mask};
+            if (lost.mask)
+            {
+                // This is probably not what the script user intended, so log
+                // it.
+                for (auto cp : lost)
+                    LOG(Warning, "transferPlayersToShip: player ", i->name, " held the ", crewPositionToString(cp), " crew position, which is prohibited on the destination ship. Reassigning to next allowed position.");
+                // Assign the first allowed position not already held on this
+                // monitor.
+                for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
+                {
+                    auto cp = static_cast<CrewPosition>(n);
+                    if (target_pc->allowed_positions.has(cp) && !cps.has(cp))
+                    {
+                        cps.add(cp);
+                        break;
+                    }
+                }
+            }
+            cps.mask &= target_pc->allowed_positions.mask;
+        }
+
+        // Clear last ship password.
+        i->last_ship_password = "";
+    }
 }
 
 static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
 {
-    for(auto i : player_info_list)
-        if (i->ship == source && i->hasPosition(station))
-            return true;
+    for (auto i : player_info_list)
+        if (i->ship == source && i->hasPosition(station)) return true;
     return false;
 }
 
@@ -484,16 +536,14 @@ static int luaGetPlayersInfo(lua_State* L)
     auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
     lua_newtable(L);
     int index = 1;
-    for(auto i : player_info_list) {
-        if (i->ship != source)
-            continue;
+    for (auto i : player_info_list)
+    {
+        if (i->ship != source) continue;
         lua_newtable(L);
         lua_pushstring(L, i->name.c_str());
         lua_setfield(L, -2, "name");
         CrewPositions positions;
-        for(auto cp : i->crew_positions) {
-            positions.mask |= cp.mask;
-        }
+        for (auto cp : i->crew_positions) positions.mask |= cp.mask;
         sp::script::Convert<CrewPositions>::toLua(L, positions);
         lua_setfield(L, -2, "positions");
         lua_seti(L, -2, index);
@@ -1109,23 +1159,49 @@ static void luaCommandConfirmDestructCode(sp::ecs::Entity ship, int index, int c
 }
 static void luaCommandCombatManeuverBoost(sp::ecs::Entity ship, float amount) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverBoost(amount); return; }
-    // TODO; update the script docs when fully implemented
+    if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
+        combat->boost.request = amount;
+}
+static void luaCommandCombatManeuverStrafe(sp::ecs::Entity ship, float amount) {
+    if (my_player_info && my_player_info->ship == ship) { my_player_info->commandCombatManeuverStrafe(amount); return; }
+    if (auto combat = ship.getComponent<CombatManeuveringThrusters>())
+        combat->strafe.request = amount;
 }
 static void luaCommandLaunchProbe(sp::ecs::Entity ship, float x, float y) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandLaunchProbe({x, y}); return; }
-    // TODO; update the script docs when fully implemented
+    ProbeSystem::launch(ship, {x, y});
 }
 static void luaCommandSetScienceLink(sp::ecs::Entity ship, sp::ecs::Entity probe) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetScienceLink(probe); return; }
-    // TODO; update the script docs when fully implemented
+    if (auto radar_link = ship.getComponent<RadarLink>())
+    {
+        auto existing_link = radar_link->linked_entity;
+        // Run on_link callback if present.
+        if (radar_link->on_link && probe)
+            LuaConsole::checkResult(radar_link->on_link.call<void>(ship, probe));
+        // Update radar link.
+        radar_link->linked_entity = probe;
+        // Run on_unlink callback if this caused an existing link to be broken.
+        if (radar_link->on_unlink && existing_link)
+            LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
+    }
 }
 static void luaCommandClearScienceLink(sp::ecs::Entity ship) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandClearScienceLink(); return; }
-    // TODO; update the script docs when fully implemented
+    if (auto radar_link = ship.getComponent<RadarLink>())
+    {
+        auto existing_link = radar_link->linked_entity;
+        // Clear radar link.
+        radar_link->linked_entity = {};
+        // Run on_unlink callback if this caused an existing link to be broken.
+        if (radar_link->on_unlink && existing_link)
+            LuaConsole::checkResult(radar_link->on_unlink.call<void>(ship, existing_link));
+    }
 }
 static void luaCommandSetAlertLevel(sp::ecs::Entity ship, AlertLevel level) {
     if (my_player_info && my_player_info->ship == ship) { my_player_info->commandSetAlertLevel(level); return; }
-    // TODO; update the script docs when fully implemented
+    if (auto player_control = ship.getComponent<PlayerControl>())
+        player_control->alert_level = level;
 }
 
 static void luaStartThread(sp::script::Callback callback)
@@ -1583,35 +1659,37 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// void commandCombatManeuverBoost(entity ship, number amount)
     /// Triggers a combat maneuver boost for the given ship.
     /// amount is a value from 0.0 to 1.0.
-    /// This command is implemented only for the local player ship and has no effect on other ships.
     /// This is equivalent to pushing the Helms screen's combat maneuver control forward.
     /// Example:
     /// commandCombatManeuverBoost(getPlayerShip(-1), 1.0) -- full combat boost forward
     env.setGlobal("commandCombatManeuverBoost", &luaCommandCombatManeuverBoost);
+    /// void commandCombatManeuverStrafe(entity ship, number amount)
+    /// Triggers a combat maneuver strafe for the given ship.
+    /// amount is a value from 0.0 to 1.0.
+    /// This is equivalent to pushing the Helms screen's combat maneuver control left (-1.0) or right (1.0).
+    /// Example:
+    /// commandCombatManeuverStrafe(getPlayerShip(-1), 1.0) -- full combat boost right
+    env.setGlobal("commandCombatManeuverStrafe", &luaCommandCombatManeuverStrafe);
     /// void commandLaunchProbe(entity ship, number x, number y)
     /// Launches a scan probe from the given ship toward the given coordinates.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to clicking the Relay screen's launch probe button and then clicking a location.
     /// Example:
     /// commandLaunchProbe(getPlayerShip(-1), 30000, 10000)
     env.setGlobal("commandLaunchProbe", &luaCommandLaunchProbe);
     /// void commandSetScienceLink(entity ship, entity probe)
     /// Links the science station of the given ship to the given scan probe for extended radar range.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting a probe on the Relay screen and then clicking the link to science button.
     /// Example:
     /// commandSetScienceLink(getPlayerShip(-1), launched_probe) -- link the probe assigned to launched_probe
     env.setGlobal("commandSetScienceLink", &luaCommandSetScienceLink);
     /// void commandClearScienceLink(entity ship)
     /// Clears the science station's link to a scan probe for the given ship.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to selecting the linked probe on the Relay screen and then clicking the link to science button.
     /// Example:
     /// commandClearScienceLink(getPlayerShip(-1)) -- clear any science link on this ship
     env.setGlobal("commandClearScienceLink", &luaCommandClearScienceLink);
     /// void commandSetAlertLevel(entity ship, string level)
     /// Sets the alert level for the given ship. See EAlertLevel for valid values.
-    /// This command is only implemented for the local player ship and has no effect on other ships.
     /// This is equivalent to clicking the Relay screen's alert level button and then selecting a level.
     /// Example:
     /// commandSetAlertLevel(getPlayerShip(-1), "RED ALERT") -- set red alert

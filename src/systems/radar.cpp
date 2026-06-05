@@ -15,7 +15,11 @@ std::vector<RadarRenderSystem::Handler> RadarRenderSystem::handlers;
 
 void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, RadarTrace& trace)
 {
-    if ((RadarRenderSystem::current_flags & RadarRenderSystem::FlagLongRange) && !(trace.flags & RadarTrace::LongRange))
+    // Exit early if the trace is flagged for LongRange and this is non-GM
+    // LongRange radar.
+    if ((RadarRenderSystem::current_flags & RadarRenderSystem::FlagLongRange)
+        && !(RadarRenderSystem::current_flags & RadarRenderSystem::FlagGM)
+        && !(trace.flags & RadarTrace::LongRange))
         return;
 
     auto scanstate = entity.getComponent<ScanState>();
@@ -68,5 +72,8 @@ void BasicRadarRendering::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Ent
 {
     if (entity == my_spaceship || !(RadarRenderSystem::current_flags & RadarRenderSystem::FlagCallsigns)) return;
 
-    renderer.drawText(sp::Rect(screen_position.x, screen_position.y - 15, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
+    float text_distance = 15.0f;
+    if (auto trace = entity.getComponent<RadarTrace>()) text_distance = std::clamp(trace->radius * 1.5f * scale, trace->min_size, trace->max_size) + 15.0f * 1.5f * scale;
+
+    renderer.drawText(sp::Rect(screen_position.x, screen_position.y - text_distance, 0, 0), callsign.callsign, sp::Alignment::Center, 15, bold_font);
 }
