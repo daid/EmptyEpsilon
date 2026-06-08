@@ -19,15 +19,30 @@ end
 local Entity = getLuaEntityFunctionTable()
 --- Sets the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
 --- Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
+--- This also moves the Zone's Transform coordinates to the new centroid via setPosition().
 --- Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
 function Entity:setPoints(...)
     if self.components.zone then
         local coords = {...}
         local points = {}
-        for n=1,#coords,2 do
-            table.insert(points, {coords[n], coords[n+1]})
+        local sum_x, sum_y, count = 0, 0, 0
+        for n = 1, #coords, 2 do
+            local x, y = coords[n], coords[n+1]
+            table.insert(points, {x, y})
+            sum_x = sum_x + x
+            sum_y = sum_y + y
+            count = count + 1
         end
-        self.components.zone.points = points
+        if count > 0 then
+            local center_x = sum_x / count
+            local center_y = sum_y / count
+            self:setPosition(center_x, center_y)
+            local relative_points = {}
+            for _, pt in ipairs(points) do
+                table.insert(relative_points, {pt[1] - center_x, pt[2] - center_y})
+            end
+            self.components.zone.points = relative_points
+        end
     end
     return self
 end

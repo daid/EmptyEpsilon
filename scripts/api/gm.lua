@@ -586,12 +586,17 @@ function __exportZone(entity)
             extras = extras .. ":setLocalSkybox('" .. z.skybox .. "')"
         end
     end
-    -- Outline points: z.points is {{x1,y1},{x2,y2},...}; setPoints takes a flat coord list
+    -- Outline points: z.points is {{x1,y1},{x2,y2},...} (relative to center); setPoints takes absolute coords
     if z.points and #z.points > 0 then
         local coords = {}
+        local tx, ty = 0, 0
+        if entity.components.transform and entity.components.transform.position then
+            tx = entity.components.transform.position[1] or 0
+            ty = entity.components.transform.position[2] or 0
+        end
         for _, pt in ipairs(z.points) do
-            coords[#coords+1] = string.format("%.0f", pt[1])
-            coords[#coords+1] = string.format("%.0f", pt[2])
+            coords[#coords+1] = string.format("%.0f", pt[1] + tx)
+            coords[#coords+1] = string.format("%.0f", pt[2] + ty)
         end
         extras = extras .. ":setPoints(" .. table.concat(coords, ", ") .. ")"
     end
