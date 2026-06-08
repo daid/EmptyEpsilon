@@ -16,6 +16,7 @@
 #include "components/collision.h"
 #include "components/gravity.h"
 #include "components/hull.h"
+#include "components/shields.h"
 #include "components/comms.h"
 #include "components/player.h"
 #include "components/name.h"
@@ -35,20 +36,20 @@
 #include "gui/gui2_keyvaluedisplay.h"
 #include "gui/gui2_textentry.h"
 
-static std::unordered_map<string, string> getGMInfo(sp::ecs::Entity entity)
+static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
 {
-    std::unordered_map<string, string> result;
+    std::vector<std::pair<string, string>> result;
     if (auto cs = entity.getComponent<CallSign>())
-        result[trMark("gm_info", "CallSign")] = cs->callsign;
+        result.emplace_back(trMark("gm_info", "Callsign"), cs->callsign);
+    if (entity.hasComponent<Faction>())
+        result.emplace_back(trMark("gm_info", "Faction"), Faction::getInfo(entity).locale_name);
     if (auto tn = entity.getComponent<TypeName>())
-        result[trMark("gm_info", "Type")] = tn->localized;
+        result.emplace_back(trMark("gm_info", "Type"), tn->localized);
+    if (auto shields = entity.getComponent<Shields>())
+        for (size_t n = 0; n < shields->entries.size(); n++)
+            result.emplace_back(trMark("gm_info", "Shield {n}").format({{"n", string(static_cast<int>(n) + 1)}}), string(shields->entries[n].level) + "/" + string(shields->entries[n].max));
     if (auto hull = entity.getComponent<Hull>())
-        result[trMark("gm_info", "Hull")] = string(hull->current) + "/" + string(hull->max);
-    //for(int n=0; n<shield_count; n++) {
-        // Note, translators: this is a compromise.
-        // Because of the deferred translation the variable parameter can't be forwarded, so it'll always be a suffix.
-    //    ret[trMark("gm_info", "Shield") + string(n + 1)] = string(shield_level[n]) + "/" + string(shield_max[n]);
-    //}
+        result.emplace_back(trMark("gm_info", "Hull"), string(hull->current) + "/" + string(hull->max));
     /* from missile weapons
     if (owner)
     {
@@ -86,6 +87,49 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         ->setOverlayCallback(
             [this](sp::RenderTarget& renderer)
             {
+                const bool is_short_range = main_radar->getDistance() <= SHORT_RANGE_DISTANCE;
+                float bar_width = is_short_range ? 60.0f : 30.0f;
+                float bar_height = is_short_range ? 5.0f : 2.0f;
+                float bar_offset = bar_width * 0.5f;
+
+                // Draw hull health bars
+                if (show_health_bars)
+                {
+                    for (auto [entity, hull, transform, trace] : sp::ecs::Query<Hull, sp::Transform, sp::ecs::optional<RadarTrace>>())
+                    {
+                        const float hull_norm = hull.current / hull.max;
+                        float bar_distance = bar_height * 4.0f;
+                        if (trace) bar_distance = std::clamp(trace->radius * main_radar->getScale() * 2.0f, trace->min_size, trace->max_size) * 0.75f;
+
+                        if (hull_norm < 0.9f || is_short_range)
+                        {
+                            glm::vec2 screen_pos = main_radar->worldToScreen(transform.getPosition());
+                            const float health_bar_width = bar_width * hull_norm;
+                            // Scale color from green to yellow to red with damage.
+                            uint8_t bar_r, bar_g;
+                            if (hull_norm >= 0.5f)
+                            {
+                                float t = (hull_norm - 0.5f) / 0.5f;
+                                bar_r = static_cast<uint8_t>(255.0f * (1.0f - t));
+                                bar_g = 255;
+                            }
+                            else if (hull_norm >= 0.2f)
+                            {
+                                float t = (hull_norm - 0.2f) / 0.3f;
+                                bar_r = 255;
+                                bar_g = static_cast<uint8_t>(255.0f * t);
+                            }
+                            else
+                            {
+                                bar_r = 255;
+                                bar_g = 0;
+                            }
+                            renderer.fillRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, health_bar_width, bar_height), glm::u8vec4(bar_r, bar_g, 0, 192));
+                            renderer.outlineRect(sp::Rect(screen_pos.x - bar_offset, screen_pos.y + bar_distance, bar_width, bar_height), glm::u8vec4(255, 255, 255, 128));
+                        }
+                    }
+                }
+
                 if (gm_cursor_mode != GMCursorMode::CreateEntity && gm_cursor_mode != GMCursorMode::SetDirection) return;
                 if (!gameGlobalInfo->on_gm_preview_trace) return;
                 const RadarTrace& trace = *gameGlobalInfo->on_gm_preview_trace;
@@ -194,7 +238,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     });
     copy_selected_button
         ->setTextSize(20.0f)
-        ->setPosition(-20.0f, -95.0f, sp::Alignment::BottomRight)
+        ->setPosition(-145.0f, -70.0f, sp::Alignment::BottomRight)
         ->setSize(125.0f, 25.0f);
 
     cancel_action_button = new GuiButton(this, "CANCEL_CREATE_BUTTON", tr("button", "Cancel"), []() {
@@ -249,8 +293,9 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     gm_script_options->setPosition(20, 130, sp::Alignment::TopLeft)->setSize(250, 500);
 
     order_layout = new GuiElement(this, "ORDER_LAYOUT");
-    order_layout->setPosition(-20, -90, sp::Alignment::BottomRight)->setSize(300, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
+    order_layout->setPosition(-20.0f, -110.0f, sp::Alignment::BottomRight)->setSize(300.0f, GuiElement::GuiSizeMax)->setAttribute("layout", "verticalbottom");
 
+    (new GuiLabel(order_layout, "ORDERS_HELP", tr("Right click to issue movement/target orders"), 20.0f))->setSize(GuiElement::GuiSizeMax, 30.0f);
     (new GuiButton(order_layout, "ORDER_DEFEND_LOCATION", tr("Defend location"), [this]() {
         for(auto target : targets.getTargets()) {
             if (auto ai = target.getComponent<AIController>()) {
@@ -281,7 +326,7 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
                 ai->orders = AIOrder::Idle;
         }
     }))->setTextSize(20)->setSize(GuiElement::GuiSizeMax, 30);
-    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders:"), 20))->addBackground()->setSize(GuiElement::GuiSizeMax, 30);
+    (new GuiLabel(order_layout, "ORDERS_LABEL", tr("Orders"), 20.0f))->addBackground()->setSize(GuiElement::GuiSizeMax, 30.0f);
 
     chat_layer = new GuiElement(this, "");
     chat_layer->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
@@ -341,7 +386,7 @@ void GameMasterScreen::update(float delta)
     {
         float view_distance = std::clamp(main_radar->getDistance() * (1.0f - (key_zoom_delta * 0.1f)), MIN_ZOOM_DISTANCE, MAX_ZOOM_DISTANCE);
         main_radar->setDistance(view_distance);
-        if (view_distance < SHORT_RANGE_DISTANCE) main_radar->shortRange();
+        if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
         else main_radar->longRange();
     }
 
@@ -369,6 +414,10 @@ void GameMasterScreen::update(float delta)
     // Toggle callsigns.
     if (keys.gm_show_callsigns.getDown())
         main_radar->showCallsigns(!main_radar->getCallsigns());
+
+    // Toggle health bars.
+    if (keys.gm_show_health_bars.getDown())
+        show_health_bars = !show_health_bars;
 
     bool has_object = false;
     has_cpu_ship = false;
@@ -424,39 +473,59 @@ void GameMasterScreen::update(float delta)
     // Update mission clock
     info_clock->setValue(gameGlobalInfo->getMissionTime());
 
-    std::unordered_map<string, string> selection_info;
+    // Store k/vs in order.
+    std::vector<std::pair<string, string>> selection_info;
+    // Track selection indices to determine "*mixed*" state.
+    std::unordered_map<string, size_t> selection_info_index;
+
+    // List position if only one entity is selected.
+    if (targets.getTargets().size() == 1)
+    {
+        if (auto t = targets.get().getComponent<sp::Transform>())
+        {
+            string pos_key = trMark("gm_info", "Position");
+            string pos_val = string(t->getPosition().x, 0) + "," + string(t->getPosition().y, 0);
+            auto it = selection_info_index.find(pos_key);
+            if (it == selection_info_index.end())
+            {
+                selection_info_index[pos_key] = selection_info.size();
+                selection_info.emplace_back(pos_key, pos_val);
+            }
+            else
+                selection_info[it->second].second = pos_val;
+        }
+    }
 
     // For each selected object, determine and report their type.
     for (auto entity : targets.getTargets())
     {
-        auto info = getGMInfo(entity);
-        for (auto i = info.begin(); i != info.end(); i++)
+        for (auto& [key, value] : getGMInfo(entity))
         {
-            if (selection_info.find(i->first) == selection_info.end())
-                selection_info[i->first] = i->second;
-            else if (selection_info[i->first] != i->second)
-                selection_info[i->first] = tr("*mixed*");
+            auto it = selection_info_index.find(key);
+            if (it == selection_info_index.end())
+            {
+                selection_info_index[key] = selection_info.size();
+                selection_info.emplace_back(key, value);
+            }
+            else if (selection_info[it->second].second != value)
+                selection_info[it->second].second = tr("*mixed*");
         }
     }
 
-    if (targets.getTargets().size() == 1)
-    {
-        if (auto t = targets.get().getComponent<sp::Transform>())
-            selection_info[trMark("gm_info", "Position")] = string(t->getPosition().x, 0) + "," + string(t->getPosition().y, 0);
-    }
-
+    // List GM info items for selection, if any.
     unsigned int cnt = 0;
-    for (std::unordered_map<string, string>::iterator i = selection_info.begin(); i != selection_info.end(); i++)
+    for (auto& [key, value] : selection_info)
     {
         if (cnt == info_items.size())
         {
-            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5, i->first, i->second));
-            info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30);
+            info_items.push_back(new GuiKeyValueDisplay(info_layout, "INFO_" + string(cnt), 0.5f, key, value));
+            info_items[cnt]->setSize(GuiElement::GuiSizeMax, 30.0f);
         }
         else
         {
-            info_items[cnt]->show();
-            info_items[cnt]->setKey(tr("gm_info", i->first))->setValue(i->second);
+            info_items[cnt]
+                ->setKey(tr("gm_info", key))->setValue(value)
+                ->show();
         }
         cnt++;
     }
@@ -877,6 +946,8 @@ void GameMasterScreen::onMouseWheel(float value, glm::vec2 position)
     // Set the new zoom level.
     main_radar->setDistance(view_distance);
     zoom_slider->setValue(view_distance);
+    if (view_distance <= SHORT_RANGE_DISTANCE) main_radar->shortRange();
+    else main_radar->longRange();
 
     // Adjust the radar's view position to keep the world coordinates
     // under the pointer consistent.
@@ -918,7 +989,7 @@ string GameMasterScreen::getScriptExport(bool selected_only)
     {
         string line = gameGlobalInfo->getEntityExportString(entity);
         if (line == "") continue;
-        output += "    " + line + "\n";
+        output += line + "\n";
     }
 
     return output;

@@ -466,18 +466,68 @@ static int luaGetEnemiesInRadiusFor(lua_State* L)
 
 static void luaTransferPlayers(sp::ecs::Entity source, sp::ecs::Entity target, std::optional<CrewPosition> station)
 {
-    if (!target.getComponent<PlayerControl>()) return;
-    // For each player, move them to the same station on the target.
-    for(auto i : player_info_list)
-        if (i->ship == source && (!station.has_value() || i->hasPosition(station.value())))
-            i->ship = target;
+    // Relevant only to player-controlled entities.
+    auto target_pc = target.getComponent<PlayerControl>();
+
+    if (!target_pc)
+    {
+        LOG(Error, "transferPlayersToShip: destination ship has no PlayerControl component.");
+        return;
+    }
+
+    if (!target_pc->allowed_positions.mask)
+    {
+        LOG(Error, "transferPlayersToShip: destination ship has no allowed crew positions.");
+        return;
+    }
+
+    // For each matching player, reassign their ship, filter crew positions
+    // against the new ship's allowed positions, and clear their cached ship
+    // password.
+    for (auto i : player_info_list)
+    {
+        if (i->ship != source || (station.has_value() && !i->hasPosition(station.value())))
+            continue;
+
+        // Move player to new ship.
+        i->ship = target;
+
+        // Check against the destination's allowed crew positions. If a player's
+        // in a position prohibited by the new ship, log a warning for the
+        // scenario author and drop the player into the next allowed position.
+        for (auto& cps : i->crew_positions)
+        {
+            CrewPositions lost{cps.mask & ~target_pc->allowed_positions.mask};
+            if (lost.mask)
+            {
+                // This is probably not what the script user intended, so log
+                // it.
+                for (auto cp : lost)
+                    LOG(Warning, "transferPlayersToShip: player ", i->name, " held the ", crewPositionToString(cp), " crew position, which is prohibited on the destination ship. Reassigning to next allowed position.");
+                // Assign the first allowed position not already held on this
+                // monitor.
+                for (int n = 0; n < static_cast<int>(CrewPosition::MAX); n++)
+                {
+                    auto cp = static_cast<CrewPosition>(n);
+                    if (target_pc->allowed_positions.has(cp) && !cps.has(cp))
+                    {
+                        cps.add(cp);
+                        break;
+                    }
+                }
+            }
+            cps.mask &= target_pc->allowed_positions.mask;
+        }
+
+        // Clear last ship password.
+        i->last_ship_password = "";
+    }
 }
 
 static bool luaHasPlayerAtPosition(sp::ecs::Entity source, CrewPosition station)
 {
-    for(auto i : player_info_list)
-        if (i->ship == source && i->hasPosition(station))
-            return true;
+    for (auto i : player_info_list)
+        if (i->ship == source && i->hasPosition(station)) return true;
     return false;
 }
 
@@ -486,16 +536,14 @@ static int luaGetPlayersInfo(lua_State* L)
     auto source = sp::script::Convert<sp::ecs::Entity>::fromLua(L, 1);
     lua_newtable(L);
     int index = 1;
-    for(auto i : player_info_list) {
-        if (i->ship != source)
-            continue;
+    for (auto i : player_info_list)
+    {
+        if (i->ship != source) continue;
         lua_newtable(L);
         lua_pushstring(L, i->name.c_str());
         lua_setfield(L, -2, "name");
         CrewPositions positions;
-        for(auto cp : i->crew_positions) {
-            positions.mask |= cp.mask;
-        }
+        for (auto cp : i->crew_positions) positions.mask |= cp.mask;
         sp::script::Convert<CrewPositions>::toLua(L, positions);
         lua_setfield(L, -2, "positions");
         lua_seti(L, -2, index);
