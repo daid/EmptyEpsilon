@@ -37,6 +37,15 @@ GuiScrollContainer* GuiScrollContainer::setScrollbarWidth(float width)
     return this;
 }
 
+void GuiScrollContainer::cleanTree()
+{
+    if (focused_element && focused_element->isDestroyed())
+        focused_element = nullptr;
+    if (pressed_element && pressed_element->isDestroyed())
+        pressed_element = nullptr;
+    GuiContainer::cleanTree();
+}
+
 void GuiScrollContainer::scrollToFraction(float fraction)
 {
     const float max_scroll = std::max(0.0f, content_height - visible_height);

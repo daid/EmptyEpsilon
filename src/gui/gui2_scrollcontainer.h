@@ -32,6 +32,11 @@ public:
     // Scroll element to this pixel offset from the top (clamped to valid range).
     void scrollToOffset(float pixel_offset);
 
+    // Clean up the scroll container's tree: clear internal focus/click
+    // pointers before the base class removes destroyed children via
+    // swap-and-pop. Call this explicitly instead of relying on the
+    // canvas's cleanTree() since the base method is not virtual.
+    void cleanTree();
     // Override layout updates to update child elements and juggle scrollbar
     // visibility.
     virtual void updateLayout(const sp::Rect& rect) override;
