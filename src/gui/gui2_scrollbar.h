@@ -1,10 +1,9 @@
-#ifndef GUI2_SCROLLBAR_H
-#define GUI2_SCROLLBAR_H
+#pragma once
 
 #include "gui2_element.h"
 
-
 class GuiThemeStyle;
+
 class GuiScrollbar : public GuiElement
 {
     typedef std::function<void(int value)> func_t;
@@ -51,5 +50,3 @@ public:
     int getCorrectedMax() const;
     int getMin() const;
 };
-
-#endif//GUI2_SCROLLBAR_H

@@ -1,5 +1,4 @@
-#ifndef GUI2_ELEMENT_H
-#define GUI2_ELEMENT_H
+#pragma once
 
 #include <functional>
 #include "stringImproved.h"
@@ -10,24 +9,25 @@
 #include "graphics/renderTarget.h"
 #include "io/textinput.h"
 
-
 class Layout;
+
 class GuiElement : public GuiContainer
 {
 private:
     bool destroyed;
 protected:
     GuiContainer* owner;
-    bool visible;
-    bool enabled;
-    bool hover;
+    bool visible = true;
+    bool enabled = true;
+    bool hover = false;
     glm::vec2 hover_coordinates;
-    bool focus;
+    bool focus = false;
+    bool intercepts_pointer = false;
     string id;
 public:
-    constexpr static float GuiSizeMatchHeight = -1.0;
-    constexpr static float GuiSizeMatchWidth = -1.0;
-    constexpr static float GuiSizeMax = -2.0;
+    constexpr static float GuiSizeMatchHeight = -1.0f;
+    constexpr static float GuiSizeMatchWidth = -1.0f;
+    constexpr static float GuiSizeMax = -2.0f;
 
     enum class State
     {
@@ -91,5 +91,3 @@ public:
 protected:
     State getState() const;
 };
-
-#endif//GUI2_ELEMENT_H
