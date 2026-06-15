@@ -100,7 +100,9 @@ public:
     std::array<sp::io::Keybinding, 16> weapons_unload_tube;
     std::array<sp::io::Keybinding, 16> weapons_fire_tube;
     sp::io::Keybinding weapons_enemy_next_target;
+    sp::io::Keybinding weapons_enemy_prev_target;
     sp::io::Keybinding weapons_next_target;
+    sp::io::Keybinding weapons_prev_target;
     sp::io::Keybinding weapons_toggle_shields;
     sp::io::Keybinding weapons_enable_shields;
     sp::io::Keybinding weapons_disable_shields;
@@ -121,6 +123,11 @@ public:
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_scan_abort;
     sp::io::Keybinding science_select_next_scannable;
+    sp::io::Keybinding science_select_prev_scannable;
+    sp::io::Keybinding science_next_target;
+    sp::io::Keybinding science_prev_target;
+    sp::io::Keybinding science_enemy_next_target;
+    sp::io::Keybinding science_enemy_prev_target;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
@@ -159,6 +166,14 @@ public:
     sp::io::Keybinding relay_alert_level_none;
     sp::io::Keybinding relay_alert_level_yellow;
     sp::io::Keybinding relay_alert_level_red;
+    sp::io::Keybinding relay_next_target;
+    sp::io::Keybinding relay_prev_target;
+    sp::io::Keybinding relay_enemy_next_target;
+    sp::io::Keybinding relay_enemy_prev_target;
+    sp::io::Keybinding relay_next_hackable;
+    sp::io::Keybinding relay_prev_hackable;
+    sp::io::Keybinding relay_next_probe;
+    sp::io::Keybinding relay_prev_probe;
 
     // Cinematic view binds
     struct CinematicKeys {

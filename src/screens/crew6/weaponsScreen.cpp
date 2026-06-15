@@ -142,29 +142,74 @@ void WeaponsScreen::onDraw(sp::RenderTarget& renderer)
 
 void WeaponsScreen::onUpdate()
 {
-    if (my_spaceship && isVisible())
+    if (!my_spaceship || !isVisible()) return;
+
+    // Target selection cycle keybinds.
+    // Select hostile targets.
+    if (keys.weapons_enemy_next_target.getDown())
     {
-        if (keys.weapons_enemy_next_target.getDown())
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable, FactionRelation::Enemy);
-                my_player_info->commandSetTarget(targets.get());
-            }
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setNext(
+                transform->getPosition(),
+                lrr ? lrr->short_range : 5000.0f,
+                TargetsContainer::ESelectionType::Targetable,
+                TargetsContainer::KnownFriendOrFoe::KnownHostile
+            );
+            my_player_info->commandSetTarget(targets.get());
         }
-        if (keys.weapons_next_target.getDown())
+    }
+    if (keys.weapons_enemy_prev_target.getDown())
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->short_range : 5000.0f, TargetsContainer::Targetable);
-                my_player_info->commandSetTarget(targets.get());
-            }
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setPrev(
+                transform->getPosition(),
+                lrr ? lrr->short_range : 5000.0f,
+                TargetsContainer::ESelectionType::Targetable,
+                TargetsContainer::KnownFriendOrFoe::KnownHostile
+            );
+            my_player_info->commandSetTarget(targets.get());
         }
-        auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
-        if (aim_adjust != 0.0f)
+    }
+
+    // Select any non-friendly target.
+    if (keys.weapons_next_target.getDown())
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
         {
-            missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
-            tube_controls->setMissileTargetAngle(missile_aim->getValue());
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setNext(
+                transform->getPosition(),
+                lrr ? lrr->short_range : 5000.0f,
+                TargetsContainer::ESelectionType::Targetable,
+                TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
+            );
+            my_player_info->commandSetTarget(targets.get());
         }
+    }
+    if (keys.weapons_prev_target.getDown())
+    {
+        if (auto transform = my_spaceship.getComponent<sp::Transform>())
+        {
+            auto lrr = my_spaceship.getComponent<LongRangeRadar>();
+            targets.setPrev(
+                transform->getPosition(),
+                lrr ? lrr->short_range : 5000.0f,
+                TargetsContainer::ESelectionType::Targetable,
+                TargetsContainer::KnownFriendOrFoe::NotKnownFriendly
+            );
+            my_player_info->commandSetTarget(targets.get());
+        }
+    }
+
+    // Manual missile aiming keybinds.
+    auto aim_adjust = keys.weapons_aim_left.getValue() - keys.weapons_aim_right.getValue();
+    if (aim_adjust != 0.0f)
+    {
+        missile_aim->setValue(missile_aim->getValue() - 5.0f * aim_adjust);
+        tube_controls->setMissileTargetAngle(missile_aim->getValue());
     }
 }
