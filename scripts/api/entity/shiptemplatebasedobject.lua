@@ -1,9 +1,9 @@
 local Entity = getLuaEntityFunctionTable()
 
------ Template-based entity functions -----
+-- Template-based entity functions --
 
---- These functions apply to entities created from a ShipTemplate, such as those created by CpuShip(), PlayerSpaceship(), and SpaceStation().
---- Use setTemplate() to apply a ShipTemplate's properties to an entity.
+-- These functions apply to entities created from a ShipTemplate, such as those created by CpuShip(), PlayerSpaceship(), and SpaceStation().
+-- Use setTemplate() to apply a ShipTemplate's properties to an entity.
 
 --- Sets this ShipTemplate that defines this entity's traits, and then applies them to this entity.
 --- ShipTemplates define the entity's class, weapons, hull and shield strength, 3D appearance, and more.
