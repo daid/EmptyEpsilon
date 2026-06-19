@@ -31,6 +31,7 @@ public:
     sp::ecs::Entity owner;
     DamageType damage_type = DamageType::Kinetic;
     string explosion_sfx;
+    float full_damage_after = 0.0f;
 };
 class ExplodeOnTimeout
 {

@@ -230,7 +230,7 @@ item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
 populateMissileStats(item, missile_stat_keys, hvli_stats)
 item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
-Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
+Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 1u.]]))
 
 local function angleDifference(angle_a, angle_b)
     local ret = (angle_b or 0) - (angle_a or 0)
