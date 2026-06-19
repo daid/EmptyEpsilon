@@ -621,6 +621,10 @@ void EngineeringScreen::onUpdate()
             }
 
             auto power_adjust = (keys.engineering_increase_power.getValue() - keys.engineering_decrease_power.getValue()) * 0.1f;
+            if (keys.engineering_decrease_power_stepped.getDown())
+                power_adjust =-0.1f;
+            if (keys.engineering_increase_power_stepped.getDown())
+                power_adjust = 0.1f;
             if (power_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
@@ -630,6 +634,10 @@ void EngineeringScreen::onUpdate()
                 }
             }
             auto coolant_adjust = (keys.engineering_increase_coolant.getValue() - keys.engineering_decrease_coolant.getValue()) * 0.5f;
+            if (keys.engineering_decrease_coolant_stepped.getDown())
+                coolant_adjust =-0.5f;
+            if (keys.engineering_increase_coolant_stepped.getDown())
+                coolant_adjust = 0.5f;
             if (coolant_adjust != 0.0f)
             {
                 auto sys = ShipSystem::get(my_spaceship, selected_system);
