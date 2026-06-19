@@ -547,45 +547,75 @@ void ScienceScreen::onDraw(sp::RenderTarget& renderer)
 
 void ScienceScreen::onUpdate()
 {
-    if (my_spaceship)
+    if (!my_spaceship || !isVisible()) return;
+
+    // Toggle probe view from the Science hotkey.
+    auto rl = my_spaceship.getComponent<RadarLink>();
+    if (keys.science_toggle_probe_view.getDown() && rl && rl->linked_entity)
     {
-        // Toggle probe view from the Science hotkey. 
-        auto rl = my_spaceship.getComponent<RadarLink>();
-        if (keys.science_toggle_probe_view.getDown() && rl && rl->linked_entity)
-        {
-            probe_view_button->toggle();
-        }
-        // Initiate a scan on scannable objects.
-        if (keys.science_scan_object.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
-        {
-            auto obj = targets.get();
+        probe_view_button->toggle();
+    }
 
-            // Allow scanning only if the object is scannable, and if the player
-            // isn't already scanning something.
-            auto scanstate = obj.getComponent<ScanState>();
-            if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
+    // Initiate a scan on scannable objects.
+    if (keys.science_scan_object.getDown() &&
+        my_spaceship.hasComponent<ScienceScanner>() &&
+        my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+    {
+        auto obj = targets.get();
+
+        // Allow scanning only if the object is scannable, and if the player
+        // isn't already scanning something.
+        auto scanstate = obj.getComponent<ScanState>();
+        if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
+        {
+            // Check for active radar link and validate the linked entity.
+            auto rl = my_spaceship.getComponent<RadarLink>();
+            if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
+                my_player_info->commandScan(obj, rl->linked_entity);
+            else
+                my_player_info->commandScan(obj);
+            return;
+        }
+    }
+
+    // Cycle selectable entities.
+    if (auto transform = my_spaceship.getComponent<sp::Transform>())
+    {
+        auto scanner = my_spaceship.getComponent<ScienceScanner>();
+        glm::vec2 scanner_position = transform->getPosition();
+        float scanner_range = science_radar->getDistance();
+
+        if (auto rl = my_spaceship.getComponent<RadarLink>())
+        {
+            if (probe_view_button->getValue() && rl && rl->linked_entity)
             {
-                // Check for active radar link and validate the linked entity
-                auto rl = my_spaceship.getComponent<RadarLink>();
-                if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
-                    my_player_info->commandScan(obj, rl->linked_entity);
-                else
-                    my_player_info->commandScan(obj);
-                return;
+                if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
+                {
+                    scanner_position = probe_transform->getPosition();
+                    scanner_range = PROBE_ZOOM_DISTANCE;
+                }
             }
         }
 
-        // Cycle selection through scannable objects.
-        if (keys.science_select_next_scannable.getDown() &&
-            my_spaceship.hasComponent<ScienceScanner>() &&
-            my_spaceship.getComponent<ScienceScanner>()->delay == 0.0f)
+        // Select previous/next scannable entity.
+        if (scanner && scanner->delay == 0.0f)
         {
-            if (auto transform = my_spaceship.getComponent<sp::Transform>()) {
-                auto lrr = my_spaceship.getComponent<LongRangeRadar>();
-                targets.setNext(transform->getPosition(), lrr ? lrr->long_range : DEFAULT_MAX_ZOOM_DISTANCE, TargetsContainer::ESelectionType::Scannable);
-            }
+            if (keys.science_select_next_scannable.getDown())
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+            if (keys.science_select_prev_scannable.getDown())
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
         }
+
+        // Select previous/next hostile entity.
+        if (keys.science_enemy_next_target.getDown())
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+        if (keys.science_enemy_prev_target.getDown())
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+
+        // Select previous/next selectable entity.
+        if (keys.science_next_target.getDown())
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+        if (keys.science_prev_target.getDown())
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
     }
 }
