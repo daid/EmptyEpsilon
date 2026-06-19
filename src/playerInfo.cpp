@@ -1173,16 +1173,16 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::engineering: return "gui/icons/station-engineering";
     case CrewPosition::scienceOfficer: return "gui/icons/station-science";
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
-    case CrewPosition::tacticalOfficer: return "";
-    case CrewPosition::engineeringAdvanced: return "";
-    case CrewPosition::operationsOfficer: return "";
-    case CrewPosition::singlePilot: return "";
-    case CrewPosition::damageControl: return "";
-    case CrewPosition::powerManagement: return "";
-    case CrewPosition::databaseView: return "";
-    case CrewPosition::altRelay: return "";
-    case CrewPosition::commsOnly: return "";
-    case CrewPosition::shipLog: return "";
+    case CrewPosition::tacticalOfficer: return "gui/icons/station-tactical";
+    case CrewPosition::engineeringAdvanced: return "gui/icons/station-engineering-plus";
+    case CrewPosition::operationsOfficer: return "gui/icons/station-operations";
+    case CrewPosition::singlePilot: return "gui/icons/station-single-pilot";
+    case CrewPosition::damageControl: return "gui/icons/status_damaged";
+    case CrewPosition::powerManagement: return "gui/icons/status_low_energy";
+    case CrewPosition::databaseView: return "gui/icons/station-database";
+    case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
+    case CrewPosition::commsOnly: return "gui/icons/station-comms";
+    case CrewPosition::shipLog: return "gui/icons/station-ship-log";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

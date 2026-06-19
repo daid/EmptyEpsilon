@@ -18,10 +18,12 @@ function Entity:setName(name)
     return self
 end
 
---- Sets this faction's longform description as shown in its Factions ScienceDatabase child entry.
+--- For factions, sets this faction's longform description as shown in its ScienceDatabase child entry.
 --- Wrap the string in the _() function to make it available for translation.
---- Example: faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
---- As setDescriptions, but sets the same description for both unscanned and scanned states.
+--- For other entities, this works as setDescriptions, but sets the same description for both unscanned and scanned states.
+--- For ship templates, see ShipTemplate:setDescription().
+--- Examples:
+--- faction:setDescription(_("The United Stellar Navy, or USN...")) -- sets a translatable description for this faction
 --- Example: obj:setDescription("A refitted Atlantis X23 for more ...")
 function Entity:setDescription(description)
     if self.components.faction_info then
