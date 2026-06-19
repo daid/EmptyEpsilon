@@ -55,25 +55,7 @@ ScreenMainScreen::ScreenMainScreen(RenderLayer* render_layer)
     new GuiGlobalMessage(this);
     (new GuiIndicatorOverlays(this))->hasGlobalMessage();
 
-    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
-    bool show_additional_shortcuts_string = false;
-    string keyboard_help_text = "";
-
-    for (const auto& category : {tr("hotkey_menu", "General"), tr("hotkey_menu", "Main screen")})
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
-        {
-            if(binding->isBound())
-                keyboard_help_text += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            else
-                show_additional_shortcuts_string = true;
-        }
-    }
-
-    if (show_additional_shortcuts_string)
-        keyboard_help_text += "\n" + tr("More shortcuts available in settings") + "\n";
-
-    keyboard_help->setText(keyboard_help_text);
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "Main screen")});
 
     // Music playback
     if (PreferencesManager::get("music_enabled") != "0")
@@ -108,11 +90,9 @@ void ScreenMainScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
-    if (keys.help.getDown())
-    {
-        // Toggle keyboard help.
-        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
-    }
+
+    // Toggle keyboard help.
+    if (keys.help.getDown()) keyboard_help->toggle();
 
     if (keys.pause.getDown())
         if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
