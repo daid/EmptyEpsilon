@@ -9,6 +9,7 @@
 #include "components/jumpdrive.h"
 #include "components/shields.h"
 #include "components/hull.h"
+#include "components/player.h"
 #include "multiplayer_server.h"
 #include "i18n.h"
 
@@ -92,23 +93,41 @@ void GuiIndicatorOverlays::onDraw(sp::RenderTarget& renderer)
     {
         auto jump = my_spaceship.getComponent<JumpDrive>();
         auto warp = my_spaceship.getComponent<WarpDrive>();
+        auto player = my_spaceship.getComponent<PlayerControl>();
+        float glitchMagnitude = 0.0f;
+        float warpAmount = 0.0f;
+
         if (jump && jump->just_jumped > 0.0f)
+            glitchMagnitude = jump->just_jumped * 10.0f;
+
+        if (player && player->glitch_alpha > 0.0f)
+            glitchMagnitude = std::max(glitchMagnitude, player->glitch_alpha);
+        
+        if (player && player->just_teleported > 0.0f)
+            glitchMagnitude = std::max(glitchMagnitude, player->just_teleported * 10.0f);
+
+        if (glitchMagnitude > 0.0f)
         {
             glitchPostProcessor->enabled = true;
-            glitchPostProcessor->setUniform("u_magtitude", jump->just_jumped * 10.0f);
+            glitchPostProcessor->setUniform("u_magtitude", glitchMagnitude);
             glitchPostProcessor->setUniform("u_delta", random(0, 360));
-        }else{
+        } else {
             glitchPostProcessor->enabled = false;
         }
+
         if (warp && warp->current > 0.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpAmount = warp->current * 0.01f;
+        else if (jump && jump->delay > 0.0f && jump->delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
+            warpAmount = (2.0f - jump->delay) * 0.1f;
+
+        if(player && player->warp_alpha > 0.0f)
+            warpAmount = std::max(warpAmount, player->warp_alpha);
+
+        if (warpAmount > 0.0f)
         {
             warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("u_amount", warp->current * 0.01f);
-        }else if (jump && jump->delay > 0.0f && jump->delay < 2.0f && PreferencesManager::get("warp_post_processor_disable").toInt() != 1)
-        {
-            warpPostProcessor->enabled = true;
-            warpPostProcessor->setUniform("u_amount", (2.0f - jump->delay) * 0.1f);
-        }else{
+            warpPostProcessor->setUniform("u_amount", warpAmount);
+        } else {
             warpPostProcessor->enabled = false;
         }
     }else{
