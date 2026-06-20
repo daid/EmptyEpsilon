@@ -122,6 +122,7 @@ public:
     // Science screen binds
     sp::io::Keybinding science_scan_object;
     sp::io::Keybinding science_scan_abort;
+    sp::io::Keybinding science_scan_toggle;
     sp::io::Keybinding science_select_next_scannable;
     sp::io::Keybinding science_toggle_probe_view;
     sp::io::Keybinding science_select_prev_scannable;

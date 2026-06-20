@@ -578,6 +578,30 @@ void ScienceScreen::onUpdate()
         }
     }
 
+    // Scan/Abort toggle: abort if scanning, otherwise start a scan.
+    if (keys.science_scan_toggle.getDown() && my_spaceship.hasComponent<ScienceScanner>())
+    {
+        auto scanner = my_spaceship.getComponent<ScienceScanner>();
+        if (scanner->delay > 0.0f)
+        {
+            my_player_info->commandScanCancel();
+        }
+        else
+        {
+            auto obj = targets.get();
+            auto scanstate = obj.getComponent<ScanState>();
+            if (scanstate && scanstate->getStateFor(my_spaceship) != ScanState::State::FullScan)
+            {
+                auto rl = my_spaceship.getComponent<RadarLink>();
+                if (rl && rl->linked_entity && rl->linked_entity.hasComponent<AllowRadarLink>() && probe_radar->isVisible())
+                    my_player_info->commandScan(obj, rl->linked_entity);
+                else
+                    my_player_info->commandScan(obj);
+                return;
+            }
+        }
+    }
+
     // Cycle selectable entities.
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
     {
