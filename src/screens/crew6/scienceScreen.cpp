@@ -606,40 +606,55 @@ void ScienceScreen::onUpdate()
     if (auto transform = my_spaceship.getComponent<sp::Transform>())
     {
         auto scanner = my_spaceship.getComponent<ScienceScanner>();
+        auto lrr = my_spaceship.getComponent<LongRangeRadar>();
         glm::vec2 scanner_position = transform->getPosition();
         float scanner_range = science_radar->getDistance();
+        bool in_probe_view = false;
 
-        if (auto rl = my_spaceship.getComponent<RadarLink>())
+        if (rl && probe_view_button->getValue() && rl->linked_entity)
         {
-            if (probe_view_button->getValue() && rl && rl->linked_entity)
+            if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
             {
-                if (auto probe_transform = rl->linked_entity.getComponent<sp::Transform>())
-                {
-                    scanner_position = probe_transform->getPosition();
-                    scanner_range = PROBE_ZOOM_DISTANCE;
-                }
+                scanner_position = probe_transform->getPosition();
+                scanner_range = PROBE_ZOOM_DISTANCE;
+                in_probe_view = true;
             }
         }
+
+        float short_range = lrr ? lrr->short_range : 5000.0f;
+        auto visibility_filter = [scanner_position, in_probe_view, short_range](sp::ecs::Entity entity) {
+            if (in_probe_view)
+                return true;
+            return !RadarBlockSystem::isRadarBlockedFrom(scanner_position, entity, short_range);
+        };
 
         // Select previous/next scannable entity.
         if (scanner && scanner->delay == 0.0f)
         {
             if (keys.science_select_next_scannable.getDown())
-                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable, visibility_filter);
             if (keys.science_select_prev_scannable.getDown())
-                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable);
+                targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Scannable, visibility_filter);
         }
 
         // Select previous/next hostile entity.
+        auto hostile_filter = [visibility_filter](sp::ecs::Entity entity) {
+            if (!visibility_filter(entity))
+                return false;
+            auto ss = entity.getComponent<ScanState>();
+            if (ss && ss->getStateFor(my_spaceship) < ScanState::State::FriendOrFoeIdentified)
+                return false;
+            return Faction::getRelation(my_spaceship, entity) == FactionRelation::Enemy;
+        };
         if (keys.science_enemy_next_target.getDown())
-            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, hostile_filter);
         if (keys.science_enemy_prev_target.getDown())
-            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, TargetsContainer::KnownFriendOrFoe::KnownHostile);
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, hostile_filter);
 
         // Select previous/next selectable entity.
         if (keys.science_next_target.getDown())
-            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+            targets.setNext(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, visibility_filter);
         if (keys.science_prev_target.getDown())
-            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable);
+            targets.setPrev(scanner_position, scanner_range, TargetsContainer::ESelectionType::Selectable, visibility_filter);
     }
 }
