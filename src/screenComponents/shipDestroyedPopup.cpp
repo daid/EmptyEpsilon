@@ -3,6 +3,7 @@
 #include "playerInfo.h"
 #include "soundManager.h"
 #include "main.h"
+#include "preferenceManager.h"
 
 #include "gui/gui2_overlay.h"
 #include "gui/gui2_canvas.h"
@@ -33,8 +34,22 @@ void GuiShipDestroyedPopup::onDraw(sp::RenderTarget& target)
     {
         ship_destroyed_overlay->hide();
         show_timeout.start(5.0);
+        return_timeout = {};
     }else{
         if (show_timeout.isExpired())
+        {
             ship_destroyed_overlay->show();
+            if (!PreferencesManager::get("autoconnect").empty())
+            {
+                if (!return_timeout.isRunning())
+                    return_timeout.start(15.0);
+                if (return_timeout.isExpired())
+                {
+                    soundManager->stopMusic();
+                    returnToShipSelection(this->owner->getRenderLayer());
+                    this->owner->destroy();
+                }
+            }
+        }
     }
 }
