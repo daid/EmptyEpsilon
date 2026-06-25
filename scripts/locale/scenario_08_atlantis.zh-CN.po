@@ -1,0 +1,24 @@
+# Scenario name
+msgid "Birth of the Atlantis"
+msgstr "亚特兰蒂斯的诞生"
+
+# Scenario description
+msgid """You are the first crew of a new and improved version of the Atlantis space \nexplorer.\n\nYou must check out ship systems and complete an initial mission.\n\nThis scenario is limited to one player ship: the Atlantis Atlantis-1."""
+msgstr """你是一艘全新升级版亚特兰蒂斯号太空探索舰的第一批船员。\n\n你需要检查飞船系统并完成一项初步任务。\n\n此场景限定为一艘玩家控制的飞船：亚特兰蒂斯·亚特兰蒂斯-1号。"""
+
+#: scripts/scenario_08_atlantis.lua:158 scripts/scenario_08_atlantis.lua:174
+#: scripts/scenario_08_atlantis.lua:178
+msgctxt "scienceDescription-artifact"
+msgid "An odd object floating in space."
+msgstr "一个漂浮在太空中的奇怪物体。"
+
+#: scripts/scenario_08_atlantis.lua:160
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid """This object is giving off strange readings.\nSensor readings:\nBeta radiation: %i\nGravity disruption: %i\nIonic phase shift: %i\nDoppler instability: %i"""
+msgstr """该物体正在释放出异常读数。\n传感器数据：\nβ辐射：%i\n重力扰动：%i\n离子相位偏移：%i\n多普勒不稳定度：%i"""
+
+#: scripts/scenario_08_atlantis.lua:174 scripts/scenario_08_atlantis.lua:178
+msgctxt "scienceDescription-artifact"
+msgid """This object seems to be inert, and not giving any interesting readings on \nyour sensors. The actual object must be somewhere else."""
+msgstr """这个物体似乎处于惰性状态，在你的传感器上没有任何有趣的读数。\n真正的物体一定在别的地方。"""

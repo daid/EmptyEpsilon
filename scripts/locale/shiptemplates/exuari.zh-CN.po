@@ -1,0 +1,36 @@
+#: scripts/shiptemplates/exuari.lua:77 scripts/shiptemplates/exuari.lua:90
+#: scripts/shiptemplates/exuari.lua:97 scripts/shiptemplates/exuari.lua:112
+#: scripts/shiptemplates/exuari.lua:118 scripts/shiptemplates/exuari.lua:124
+#: scripts/shiptemplates/exuari.lua:166 scripts/shiptemplates/exuari.lua:185
+#: scripts/shiptemplates/exuari.lua:201 scripts/shiptemplates/exuari.lua:221
+#: scripts/shiptemplates/exuari.lua:250 scripts/shiptemplates/exuari.lua:270
+msgctxt "class"
+msgid "Exuari"
+msgstr "艾苏瑞战机"
+
+#: scripts/shiptemplates/exuari.lua:77
+msgctxt "subclass"
+msgid "Starfighter - Fighter"
+msgstr "星际战斗机 - 战斗机"
+
+#: scripts/shiptemplates/exuari.lua:80
+msgid """The Exuari fighter 'Dagger' is a single-seated spacecraft, very quick and \nagile, that does not do a lot of damage, but usually comes in larger groups. \nThey are able to dodge most missiles and attack undefended areas of their \nenemies ships. However most of the Exuari fighter pilots expect their own \ndeath and do not care much about the enemies weapons ranges. Fighters are \neasy to take out, but should not be underestimated."""
+msgstr """艾苏瑞‘匕首’战斗机是一种单座航天器，速度非常快且机动性强，虽然单次攻击伤害不高，但通常以大规模编队形式出现。它们能够躲避大多数导弹，并攻击敌方飞船的未设防区域。然而，大多数艾苏瑞飞行员早已将生死置之度外，对敌人的武器射程也毫不在意。这种战机容易被击落，但绝不可低估其威胁。"""
+
+#: scripts/shiptemplates/exuari.lua:90
+msgctxt "subclass"
+msgid "Starfighter - Interceptor"
+msgstr "星际战斗机 - 截击机"
+
+#: scripts/shiptemplates/exuari.lua:92
+msgid """The Exuari interceptor 'Blade' is a improved fighter, originaly designed to \nhunt down rougue fighters. Nowadays Blades are often seen as the first \nattack wave of a larger assault, closely followed by Daggers. Blade pilots \nare often considered as fearless, but most of them are just consumed by \ntheir instinct for hunting."""
+msgstr """艾苏瑞‘刀锋’截击机是一种改良型战机，最初设计用于追猎敌方小型战机。如今，刀锋战机常作为大型攻势的第一波攻击部队，紧随其后的是匕首战机群。刀锋飞行员通常被认为无所畏惧，但实际上他们只是沉溺于狩猎的本能之中。"""
+
+#: scripts/shiptemplates/exuari.lua:97
+msgctxt "subclass"
+msgid "Starfighter - Light Bomber"
+msgstr "星际战斗机 - 轻型轰炸机"
+
+#: scripts/shiptemplates/exuari.lua:100
+msgid """The Exuari light bomber 'Gunner' is a single-seated spacecraft, designed to \ncircumvent their enemies defense lines and bring its deadly load to slow \nmoving targets. Gunners are not as agile as other fighters, but still faster \nthan most capitol ships. A group of Gunners can do a lot of damage to a \nsingle stationary target if not destroyed before their target is inside \nrange."""
+msgstr """艾苏瑞‘炮手’轻型轰炸机是一架单座航天器，专为绕过敌人防线并对缓慢移动的目标投送致命打击而设计。炮手战机不如其他战机灵活，但仍比大多数主力舰更快。一组炮手战机若能在目标进入射程前不被摧毁，便能对单一静止目标造成巨大破坏。"""

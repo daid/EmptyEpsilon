@@ -1,0 +1,40 @@
+# Scenario name
+msgid "Waves"
+msgstr "波次进攻"
+
+# Scenario description
+msgid """Waves of increasingly difficult enemies attack friendly stations. There is \nno victory. How many waves can you destroy?\n\nSpawn the player ships you want. The strength of enemy ships is independent \nof the number and type of player ships."""
+msgstr """一波接一波越来越强的敌人攻击友方空间站。没有真正的胜利条件。你能击退多少波攻击？\n\n生成你想要的玩家飞船。敌方飞船的强度与玩家飞船的数量和类型无关。"""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "敌人设置"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "配置场景中生成的敌人数量。"
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "简单"
+
+msgctxt "Enemies"
+msgid """Decreases the number of ships in each wave. Good for new players, but takes \nlonger for the players to be overwhelmed."""
+msgstr """减少每波次中的飞船数量。适合新手玩家，但玩家会被更慢地压倒。"""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "普通"
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "正常数量的敌人。适合常规船员使用。"
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr "困难"
+
+msgctxt "Enemies"
+msgid """Difficulty starts at wave 5 and increases by 1.5 after the players defeat \neach wave. Players are overwhelmed more quickly, leading to shorter games."""
+msgstr """难度从第5波开始提升，每次击败一关后难度增加1.5倍。玩家会更快被压倒，导致游戏时间更短。"""

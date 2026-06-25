@@ -1,0 +1,23 @@
+#: scripts/factionInfo.lua:4
+msgid "Independent"
+msgstr "独立派"
+
+#: scripts/factionInfo.lua:6
+msgid """Despite appearing as a faction, independents are distinguished primarily by \nhaving no strong affiliation with any faction at all. Most traders consider \nthemselves independent, though certain voices have started to speak up about \ncreating a merchant faction."""
+msgstr """尽管表面上像一个派系，但独立派最主要的特点是完全不隶属于任何特定派系。大多数商人自认为是独立派，不过已有部分声音开始呼吁建立一个商旅派系。"""
+
+#: scripts/factionInfo.lua:8
+msgid "Human Navy"
+msgstr "人类海军"
+
+#: scripts/factionInfo.lua:10
+msgid """The remnants of the human navy.\n\nWhile all other races were driven to the stars out of greed or scientific \nresearch, humans where the only race to start exploring the galaxy because \ntheir homeworld could no longer sustain their population. Some other races \nview humans as a sort of virus or plague due to the rate at which they can \nbreed and spread.\n\nDue to human regulations on spaceships, naval ships are the only ones \npermitted in deep space. However, this hasn't completely prevented humans \noutside of the navy from spacefaring, as quite a few humans sign up on alien \ntrading vessels or pirate raiders."""
+msgstr """人类海军的残余力量。\n\n当其他种族因贪婪或科学研究而进入星空时，人类却是唯一一个因为母星无法承载其人口而开始探索银河的种族。一些其他种族认为人类是一种病毒或瘟疫，因为人类繁殖和扩张的速度实在太快。\n\n由于人类对飞船的严格管控，只有海军舰船被允许在深空航行。然而，这并没有完全阻止民间人类的太空活动，许多人类仍然登上了外星商船甚至加入了海盗集团。"""
+
+#: scripts/factionInfo.lua:16
+msgid "Kraylor"
+msgstr "克雷洛尔人"
+
+#: scripts/factionInfo.lua:19
+msgid """The reptilian Kraylor are a race of warriors with a strong religious dogma.\n\nAs soon as the Kraylor obtained reliable space flight, they immediately set \nout to conquer and subjugate unbelievers. Their hierarchy is based solely on \nphysical might; a Kraylor kills anything it can kill, and owns anything it \ncan take by force.\n\nKraylor can live for weeks without air, food, or gravity, and consider \nhumans to be weak creatures for dying within minutes of exposure to space. \nBecause of their fortitude and cultural pressures against retreat, Kraylor \nships do not contain escape pods."""
+msgstr """克雷洛尔人是一支信奉强烈宗教教义的爬行类战士种族。\n\n一旦掌握了可靠的航天技术，他们便立即踏上征服与奴役异教徒的道路。他们的等级制度完全基于身体力量；克雷洛尔人会杀死一切能杀死的对象，并夺取一切能以武力夺走的东西。\n\n他们可以在没有空气、食物或重力的情况下生存数周，并且由于暴露于太空中几分钟就会死亡，他们视人类为脆弱的生物。\n由于坚韧的性格以及文化中对撤退的排斥，克雷洛尔人的飞船上从不配备逃生舱。"""

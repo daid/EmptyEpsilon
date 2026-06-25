@@ -1,0 +1,42 @@
+#: scripts/api/gm.lua:3
+msgctxt "create"
+msgid "Artifact"
+msgstr "人工物品"
+
+#: scripts/api/gm.lua:3 scripts/api/gm.lua:4 scripts/api/gm.lua:5
+#: scripts/api/gm.lua:6 scripts/api/gm.lua:7 scripts/api/gm.lua:8
+#: scripts/api/gm.lua:9 scripts/api/gm.lua:10 scripts/api/gm.lua:11
+#: scripts/api/gm.lua:12 scripts/api/gm.lua:13
+msgctxt "create"
+msgid "Various"
+msgstr "各类物品"
+
+#: scripts/api/gm.lua:4
+msgctxt "create"
+msgid "Warp Jammer"
+msgstr "跃迁干扰器"
+
+#: scripts/api/gm.lua:5 scripts/api/gm.lua:7
+msgctxt "create"
+msgid "Mine"
+msgstr "水雷"
+
+#: scripts/api/gm.lua:6
+msgctxt "create"
+msgid "Supply Drop"
+msgstr "补给舱"
+
+#: scripts/api/gm.lua:8
+msgctxt "create"
+msgid "Asteroid"
+msgstr "小行星"
+
+#: scripts/api/gm.lua:9
+msgctxt "create"
+msgid "Visual Asteroid"
+msgstr "可视化小行星"
+
+#: scripts/api/gm.lua:10
+msgctxt "create"
+msgid "Planet"
+msgstr "行星"

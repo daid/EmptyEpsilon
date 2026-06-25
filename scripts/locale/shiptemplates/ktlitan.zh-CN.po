@@ -1,0 +1,39 @@
+#: scripts/shiptemplates/ktlitan.lua:2
+msgctxt "ship"
+msgid "Ktlitan Fighter"
+msgstr "克特利坦战斗机"
+
+#: scripts/shiptemplates/ktlitan.lua:9
+msgctxt "ship"
+msgid "Ktlitan Breaker"
+msgstr "克特利坦突击舰"
+
+#: scripts/shiptemplates/ktlitan.lua:19
+msgctxt "ship"
+msgid "Ktlitan Worker"
+msgstr "克特利坦工蜂舰"
+
+#: scripts/shiptemplates/ktlitan.lua:26
+msgctxt "ship"
+msgid "Ktlitan Drone"
+msgstr "克特利坦无人机"
+
+#: scripts/shiptemplates/ktlitan.lua:32
+msgctxt "ship"
+msgid "Ktlitan Feeder"
+msgstr "克特利坦补给舰"
+
+#: scripts/shiptemplates/ktlitan.lua:42
+msgctxt "ship"
+msgid "Ktlitan Scout"
+msgstr "克特利坦侦察舰"
+
+#: scripts/shiptemplates/ktlitan.lua:48
+msgctxt "ship"
+msgid "Ktlitan Destroyer"
+msgstr "克特利坦驱逐舰"
+
+#: scripts/shiptemplates/ktlitan.lua:59
+msgctxt "ship"
+msgid "Ktlitan Queen"
+msgstr "克特利坦母舰"

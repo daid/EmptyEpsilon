@@ -1,0 +1,40 @@
+# Scenario name
+msgid "Basic Battle"
+msgstr "基础战斗"
+
+# Scenario description
+msgid """A few random stations are under attack by enemies, with random terrain \naround them. Destroy all enemies to win.\n\n\nThe scenario provides a single player-controlled Atlantis, which is \nsufficient to win even in the \"Extreme\" variant.\n\nOther player ships can be spawned, but the strength of enemy ships is \nindependent of the number and types of player ships."""
+msgstr """一些随机空间站正受到敌人的攻击，周围地形也随机生成。摧毁所有敌人即可获胜。\n\n该场景提供一艘玩家控制的亚特兰蒂斯号飞船，即使在“极限”模式下也足以获胜。\n\n可以生成其他玩家飞船，但敌方飞船的强度与玩家飞船的数量和类型无关。"""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr "敌人设置"
+
+msgctxt "setting"
+msgid "Configures the amount of enemies spawned in the scenario."
+msgstr "配置场景中生成的敌人数量。"
+
+msgctxt "Enemies"
+msgid "Empty"
+msgstr "无敌人"
+
+msgctxt "Enemies"
+msgid """No enemies. Recommended for GM-controlled scenarios and rookie crew \norientation. The scenario continues until the GM declares victory or all \nHuman Navy ships are destroyed."""
+msgstr """没有敌人。推荐用于由游戏主持人（GM）控制的场景或新手船员训练。\n该场景将持续到GM宣布胜利或所有人类海军飞船被摧毁为止。"""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr "简单"
+
+msgctxt "Enemies"
+msgid "Fewer enemies. Recommended for inexperienced crews."
+msgstr "敌人较少。推荐给经验不足的船员使用。"
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr "普通"
+
+msgctxt "Enemies"
+msgid "Normal amount of enemies. Recommended for a normal crew."
+msgstr "正常数量的敌人。适合常规船员使用。"
