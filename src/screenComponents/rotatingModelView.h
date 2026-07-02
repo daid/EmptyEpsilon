@@ -36,3 +36,11 @@ public:
     GuiRotatingModelView* setZoom(float zoom);
     GuiRotatingModelView* setManualRotationAllowed(bool allowed);
 };
+
+#ifdef DEBUG
+class GuiRotatingModelDebugView : public GuiRotatingModelView
+{
+public:
+    GuiRotatingModelDebugView(GuiContainer* owner, string id, sp::ecs::Entity& entity);
+};
+#endif

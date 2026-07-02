@@ -224,3 +224,10 @@ void GuiRotatingModelView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     mouse_down = false;
     is_dragging = false;
 }
+
+#ifdef DEBUG
+GuiRotatingModelDebugView::GuiRotatingModelDebugView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
+: GuiRotatingModelView(owner, id, entity)
+{
+}
+#endif

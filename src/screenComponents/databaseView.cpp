@@ -180,8 +180,13 @@ void DatabaseViewComponent::display()
 
         if (mrc)
         {
+#ifdef DEBUG
+            (new GuiRotatingModelDebugView(visual, "DB_MODEL_VIEW", selected_entry))
+                ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+#else
             (new GuiRotatingModelView(visual, "DB_MODEL_VIEW", selected_entry))
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+#endif
 
             if (database->image != "")
             {
