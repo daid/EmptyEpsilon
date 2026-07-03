@@ -2,8 +2,10 @@
 
 #include "gui/gui2_overlay.h"
 #include "gameGlobalInfo.h"
+#include "ecs/entity.h"
 
-
+class GuiElement;
+class GuiRotatingModelView;
 class GuiSelector;
 class GuiListbox;
 class GuiContainer;
@@ -18,6 +20,9 @@ private:
     GuiTextEntry* object_filter = nullptr;
     GuiListbox* object_list = nullptr;
     GuiScrollText* description = nullptr;
+    GuiElement* model_area = nullptr;
+    GuiRotatingModelView* model_view = nullptr;
+    sp::ecs::Entity preview_entity;
     std::vector<GameGlobalInfo::ObjectSpawnInfo> spawn_list;
     int last_selection_index = -1;
 public:
