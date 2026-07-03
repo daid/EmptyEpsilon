@@ -183,11 +183,7 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
 
     model_area = new GuiElement(col3, "MODEL_PREVIEW_AREA");
     model_area->setSize(GuiElement::GuiSizeMax, 250.f);
-#ifdef DEBUG
-    model_view = new GuiRotatingModelDebugView(model_area, "MODEL_PREVIEW", preview_entity);
-#else
     model_view = new GuiRotatingModelView(model_area, "MODEL_PREVIEW", preview_entity);
-#endif
     model_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     description = new GuiScrollText(col3, "DESCRIPTION", "");
