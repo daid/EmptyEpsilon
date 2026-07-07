@@ -139,7 +139,6 @@ void PlayerInfo::reset()
     ship = {};
     main_screen_control = 0;
     last_ship_password = "";
-    crew_positions.clear();
 }
 
 bool PlayerInfo::hasPosition(CrewPosition cp)
