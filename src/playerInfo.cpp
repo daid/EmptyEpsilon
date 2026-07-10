@@ -140,7 +140,6 @@ void PlayerInfo::reset()
     ship = {};
     main_screen_control = 0;
     last_ship_password = "";
-    crew_positions.clear();
 }
 
 // Return the total number of positions populated by this player.
