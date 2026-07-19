@@ -56,11 +56,13 @@ private:
     std::vector<HardwareMappingState> states;
     std::vector<HardwareMappingEvent> events;
     std::vector<float> channels;
+    bool shutting_down = false;
 public:
     HardwareController() = default;
     ~HardwareController();
 
     void loadConfiguration(string filename);
+    void shutdown();
 
     virtual void update(float delta) override;
 

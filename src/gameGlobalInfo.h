@@ -58,6 +58,7 @@ public:
     string default_skybox = "default";
     string gm_control_code;
     float elapsed_time;
+    bool scenario_running;
     string scenario;
     std::unordered_map<string, string> scenario_settings;
 

@@ -29,6 +29,9 @@
 
 #include "hardwareMappingEffects.h"
 
+#include <chrono>
+#include <thread>
+
 HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)
@@ -268,6 +271,13 @@ void HardwareController::update(float delta)
     }
 }
 
+void HardwareController::shutdown()
+{
+    shutting_down = true;
+    update(0.0f);
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+}
+
 void HardwareController::createNewHardwareMappingState(int channel_number, std::unordered_map<string, string>& settings)
 {
     string condition = settings["condition"];
@@ -375,6 +385,16 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
     if (variable_name == "HasShip")
     {
         value = bool(ship) ? 1.0f : 0.0f;
+        return true;
+    }
+    if (variable_name == "RunningScenario")
+    {
+        value = gameGlobalInfo && gameGlobalInfo->scenario_running ? 1.0f : 0.0f;
+        return true;
+    }
+    if (variable_name == "ShuttingDown")
+    {
+        value = shutting_down ? 1.0f : 0.0f;
         return true;
     }
     SHIP_VARIABLE("Hull", Hull, 100.0f * c->current / c->max);

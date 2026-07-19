@@ -36,6 +36,7 @@ GameGlobalInfo::GameGlobalInfo()
     allow_main_screen_strategic_map = true;
     gm_control_code = "";
     elapsed_time = 0.0f;
+    scenario_running = false;
 
     intercept_all_comms_to_gm = false;
 
@@ -53,6 +54,7 @@ GameGlobalInfo::GameGlobalInfo()
     registerMemberReplication(&allow_main_screen_strategic_map);
     registerMemberReplication(&gm_control_code);
     registerMemberReplication(&elapsed_time, 0.1);
+    registerMemberReplication(&scenario_running);
     registerMemberReplication(&default_skybox);
 }
 
@@ -281,6 +283,7 @@ void GameGlobalInfo::reset()
     script_environment_base = nullptr;
 
     elapsed_time = 0.0f;
+    scenario_running = false;
     callsign_counter = 0;
     global_message = "";
     global_message_timeout = 0.0f;
@@ -373,6 +376,8 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     auto res = main_scenario_script->runFile<void>(filename);
     LuaConsole::checkResult(res);
+    if (res.isOk())
+        scenario_running = true;
     if (res.isOk() && main_scenario_script->isFunction("init"))
     {
         bool is_headless = !PreferencesManager::get("headless").empty();

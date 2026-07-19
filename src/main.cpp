@@ -275,6 +275,7 @@ int main(int argc, char** argv)
     }
 
     engine->runMainLoop();
+    hardware_controller->shutdown();
 
     // Set FSAA and fullscreen defaults from windowManager.
     if (windows.size() > 0)
