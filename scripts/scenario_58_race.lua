@@ -30,8 +30,9 @@ require("place_station_scenario_utility.lua")
 --	Initialization  --
 ----------------------
 function init()
-	scenario_version = "2.2.2"
-	print(string.format("     -----     Scenario: Fermi 500     -----     Version %s     -----",scenario_version))
+	scenario_version = "2.2.3"
+	ee_version = "2024.12.08"
+	print(string.format("    ----    Scenario: Fermi 500    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
 	end
@@ -946,7 +947,7 @@ function setStations()
 	table.insert(stationList,stationOutpost33)
 	stationOutpost33.comms_data.goods.luxury = {cost = 75, quantity = 5}
 	--Lando
-	stationLando = placeStation(random(-60000,-30000),random(612500,70000),"Lando","Independent","Small Station")
+	stationLando = placeStation(random(-60000,-30000),random(61250,70000),"Lando","Independent","Small Station")
 	table.insert(stationList,stationLando)
 	--Komov
 	stationKomov = placeStation(random(-55000,-30000),random(70000,80000),"Komov","Independent","Small Station")
@@ -1034,7 +1035,7 @@ function setStations()
 	art3 = Artifact():setModel("artifact6"):allowPickup(false):setScanningParameters(3,2):setRadarSignatureInfo(random(7,13),random(4,20), random(2,12))
 	art1:setPosition(random(-50000,50000),random(-80000,-70000))
 	art2:setPosition(random(-90000,-75000),random(-40000,-20000))
-	art3:setPosition(random(50000,75000),random(625000,80000))
+	art3:setPosition(random(50000,75000),random(62500,80000))
 	artChoice = math.random(6)
 	if artChoice == 1 then
 		art1:setDescriptions(_("scienceDescription-artifact", "Unusual object"),_("scienceDescription-artifact", "Artifact with quantum biometric characteristics"))
@@ -1697,9 +1698,40 @@ function handleDockedState()
 			end
 		end
 		local out = _("cartographyOffice-comms","Without looking at you, the clerk tells you that the cartographers are out of the office for the race. They left this list of stations that provide upgrades for any racer that dropped by:")
-		for i,station_info in ipairs(station_upgrade_list) do
-			if station_info.station:isValid() then
-				out = string.format(_("upgrade-comms","%s\nSector:%s Station:%s Upgrade:%s"),out,station_info.station:getSectorName(),station_info.station:getCallSign(),station_info.upgrade)
+		if comms_target:isFriendly(comms_source) then
+			for i,station_info in ipairs(station_upgrade_list) do
+				if station_info.station:isValid() then
+					out = string.format(_("upgrade-comms","%s\nSector:%s Station:%s Upgrade:%s"),out,station_info.station:getSectorName(),station_info.station:getCallSign(),station_info.upgrade)
+				end
+			end
+		else
+			out = _("cartographyOffice-comms","Without looking at you, the clerk tells you that the cartographers are out of the office for the race. They left this list of neutral station locations in the area and what goods they might sell for any racer that dropped by:")
+			for i,station in ipairs(stationList) do
+				if station:isValid() and not station:isFriendly(comms_source) and not station:isEnemy(comms_source) then
+					out = string.format(_("cartographyOffice-comms","%s\n%s %s"),out,station:getSectorName(),station:getCallSign())
+					if station.comms_data == nil then
+						out = string.format(_("cartographyOffice-comms","%s: none"),out)
+					else
+						if station.comms_data.goods == nil then
+							out = string.format(_("cartographyOffice-comms","%s: none"),out)
+						else
+							local good_present = false
+							for good, good_data in pairs(station.comms_data.goods) do
+								if good_data.quantity > 0 then
+									if good_present then
+										out = string.format(_("cartographyOffice-comms","%s, %s"),out,good)
+									else
+										out = string.format(_("cartographyOffice-comms","%s: %s"),out,good)
+									end
+									good_present = true
+								end
+							end
+							if not good_present then
+								out = string.format(_("cartographyOffice-comms","%s: none"),out)
+							end
+						end
+					end
+				end
 			end
 		end
 		setCommsMessage(string.format(_("cartographyOffice-comms", "%s %s"),comms_target.cartographer_description,out))
@@ -1864,7 +1896,7 @@ function handleDockedState()
 						local objects = getObjectsInRadius(sx,sy,10000)
 						local asteroids = {}
 						for i,obj in ipairs(objects) do
-							if obj.typeName == "Asteroid" then
+							if isObjectType(obj,"Asteroid") then
 								local ax, ay = obj:getPosition()
 								local sx, sy = comms_target:getPosition()
 								table.insert(asteroids,{a = obj, dist = distance(ax, ay, sx, sy)})
@@ -2458,7 +2490,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = comms_source:getWaypoint(n)
@@ -2466,7 +2498,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -2484,10 +2516,10 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),comms_source:getWaypointID(n)))
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -2554,9 +2586,9 @@ function friendlyComms()
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), comms_source:getWaypointID(n)), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
@@ -2592,7 +2624,7 @@ function friendlyComms()
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for i, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)

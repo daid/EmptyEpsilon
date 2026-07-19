@@ -11,6 +11,8 @@
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
+#include "screenComponents/helpOverlay.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -34,12 +36,21 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
     camera_lock_selector->setSelectionIndex(0)->setPosition(20, -80, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     // Toggle whether to lock onto a player ship.
-    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [this](bool value) {});
+    camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
     camera_lock_toggle->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
     new GuiIndicatorOverlays(this);
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
+
+    keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
+    string keyboard_topdown = "";
+
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Top-down view"))
+        keyboard_topdown += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+
+    keyboard_help->setText(keyboard_topdown);
+    keyboard_help->moveToFront();
 
     // Lock onto the first player ship to start.
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>()) {
@@ -47,6 +58,12 @@ TopDownScreen::TopDownScreen(RenderLayer* render_layer)
         camera_lock_toggle->setValue(true);
         break;
     }
+}
+
+void TopDownScreen::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    if (!executeScrollOnElement(position, value))
+        pending_zoom += value;
 }
 
 void TopDownScreen::update(float delta)
@@ -60,15 +77,19 @@ void TopDownScreen::update(float delta)
         return;
     }
 
-    // Enable mouse wheel zoom.
-    float mouse_wheel_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue();
-    if (mouse_wheel_delta != 0.0f)
+    float zoom_delta = keys.zoom_in.getValue() - keys.zoom_out.getValue() + pending_zoom;
+    pending_zoom = 0.0f;
+    if (zoom_delta != 0.0f)
     {
-        camera_position.z = camera_position.z * (1.0f - (mouse_wheel_delta) * 4 * delta);
-        if (camera_position.z > 10000)
-            camera_position.z = 10000;
-        if (camera_position.z < 1000)
-            camera_position.z = 1000;
+        camera_position.z *= (1.0f - zoom_delta * 0.1f);
+        if (camera_position.z > 10000) camera_position.z = 10000;
+        if (camera_position.z < 1000) camera_position.z = 1000;
+    }
+
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
 
     if (keys.topdown.toggle_ui.getDown())
@@ -82,6 +103,11 @@ void TopDownScreen::update(float delta)
             camera_lock_toggle->show();
             camera_lock_selector->show();
         }
+    }
+
+    if (keys.topdown.toggle_callsigns.getDown())
+    {
+        viewport->toggleCallsigns();
     }
 
     if (keys.topdown.lock_camera.getDown())
@@ -134,11 +160,9 @@ void TopDownScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     // Add and remove entries from the player ship list.
     for(auto [entity, pc] : sp::ecs::Query<PlayerControl>())

@@ -70,6 +70,9 @@ void GuiMissileTubeControls::onUpdate()
             row.layout->hide();
         return;
     }
+    auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type::MissileSystem);
+    float health = sys->health;
+    float power_level = sys->power_level;
     for (int n = 0; n < MW_Count; n++)
     {
         load_type_rows[n].button->setText(getLocaleMissileWeaponName(EMissileWeapons(n)) + " [" + string(tubes->storage[n]) + "/" + string(tubes->storage_max[n]) + "]");
@@ -90,14 +93,21 @@ void GuiMissileTubeControls::onUpdate()
         case MissileTubes::MountPoint::State::Empty:
             rows[n].load_button->setEnable(tube.canLoad(load_type));
             rows[n].load_button->setText(tr("missile","Load"));
+            if (health <= 0)
+                rows[n].load_button->disable();
             rows[n].fire_button->disable()->show();
             rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + tr("missile","Empty"));
             rows[n].loading_bar->hide();
             break;
         case MissileTubes::MountPoint::State::Loaded:
-            rows[n].load_button->enable();
             rows[n].load_button->setText(tr("missile","Unload"));
-            rows[n].fire_button->enable()->show();
+            if ((health <= 0) || (power_level <=0)) {
+                rows[n].fire_button->disable()->show();
+                rows[n].load_button->disable()->show();
+            } else {
+                rows[n].fire_button->enable()->show();
+                rows[n].load_button->enable()->show();
+            }
             rows[n].fire_button->setText(getTubeName(tube.direction) + ": " + getLocaleMissileWeaponName(tube.type_loaded));
             rows[n].loading_bar->hide();
             break;
@@ -233,7 +243,7 @@ void GuiMissileTubeControls::createTubeRow()
         }
     });
     row.fire_button->setSize(200, 50);
-    (new GuiPowerDamageIndicator(row.fire_button, id + "_" + string(n) + "_PDI", ShipSystem::Type::MissileSystem, sp::Alignment::CenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    (new GuiPowerDamageIndicator(row.load_button, id + "_" + string(n) + "_PDI", ShipSystem::Type::MissileSystem, sp::Alignment::CenterRight))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     row.loading_bar = new GuiProgressbar(row.layout, id + "_" + string(n) + "_PROGRESS", 0, 1.0, 0);
     row.loading_bar->setColor(glm::u8vec4(128, 128, 128, 255))->setSize(200, 50);
     row.loading_label = new GuiLabel(row.loading_bar, id + "_" + string(n) + "_PROGRESS_LABEL", "Loading", 35);

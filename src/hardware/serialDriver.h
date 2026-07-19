@@ -1,9 +1,6 @@
 #ifndef SERIAL_DRIVER_H
 #define SERIAL_DRIVER_H
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
 #include "stringImproved.h"
 
 //Class to interact with serial ports. Abstracts the difference between UNIX and Windows API.
@@ -12,7 +9,7 @@ class SerialPort
 {
 private:
 #ifdef _WIN32
-    HANDLE handle;
+    void* handle;
 #endif
 #if defined(__gnu_linux__) || (defined(__APPLE__) && defined(__MACH__))
     int handle;

@@ -1,11 +1,10 @@
-#ifndef MAIN_H
-#define MAIN_H
+#pragma once
 
 #include <glm/vec3.hpp>
 #include "graphics/font.h"
 #include "Renderable.h"
 #include "postProcessManager.h"
-
+#include "menus/optionsMenu.h"
 
 extern glm::vec3 camera_position;
 extern float camera_yaw;
@@ -21,7 +20,5 @@ extern std::vector<RenderLayer*> window_render_layers;
 
 void returnToMainMenu(RenderLayer*);
 void returnToShipSelection(RenderLayer*);
-void returnToOptionMenu();
+void returnToOptionMenu(OptionsMenu::ReturnTo return_to=OptionsMenu::ReturnTo::Main);
 std::unordered_map<string, string> loadScenarioSettingsFromPrefs();
-
-#endif//MAIN_H

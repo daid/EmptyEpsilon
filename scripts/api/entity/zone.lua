@@ -1,6 +1,6 @@
 --- A Zone is a polygonal area of space defined by a series of coordinates.
---- Although a Zone is a SpaceObject, it isn't affected by physics and isn't rendered in 3D.
---- Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether a SpaceObject is within their bounds.
+--- Although a Zone is an entity, it isn't affected by physics and isn't rendered in 3D.
+--- Zones are drawn on GM, comms, and long-range radar screens, can have a text label, and can return whether an entity is within their bounds.
 --- New Zones can't be created via the exec.lua HTTP API.
 --- Example:
 --- -- Defines a blue rectangular 200sqU zone labeled "Home" around 0,0
@@ -11,6 +11,7 @@ function Zone()
     e.components = {
         transform = {},
         zone = {},
+        never_radar_blocked = {},
     }
     return e
 end
@@ -18,15 +19,30 @@ end
 local Entity = getLuaEntityFunctionTable()
 --- Sets the corners of this Zone n-gon to x_1, y_1, x_2, y_2, ... x_n, y_n.
 --- Positive x coordinates are right/"east" of the origin, and positive y coordinates are down/"south" of the origin in space.
+--- This also moves the Zone's Transform coordinates to the new centroid via setPosition().
 --- Example: zone:setPoints(2000,0, 0,3000, -2000,0) -- defines a triangular zone
 function Entity:setPoints(...)
-    if self.components.zone then 
+    if self.components.zone then
         local coords = {...}
         local points = {}
-        for n=1,#coords,2 do
-            table.insert(points, {coords[n], coords[n+1]})
+        local sum_x, sum_y, count = 0, 0, 0
+        for n = 1, #coords, 2 do
+            local x, y = coords[n], coords[n+1]
+            table.insert(points, {x, y})
+            sum_x = sum_x + x
+            sum_y = sum_y + y
+            count = count + 1
         end
-        self.components.zone.points = points
+        if count > 0 then
+            local center_x = sum_x / count
+            local center_y = sum_y / count
+            self:setPosition(center_x, center_y)
+            local relative_points = {}
+            for _, pt in ipairs(points) do
+                table.insert(relative_points, {pt[1] - center_x, pt[2] - center_y})
+            end
+            self.components.zone.points = relative_points
+        end
     end
     return self
 end
@@ -49,7 +65,25 @@ function Entity:getLabel()
     if self.components.zone then return self.components.zone.label end
     return ""
 end
---- Returns whether the given SpaceObject is inside this Zone.
+--- Sets this Zone's local skybox. Optionally also sets this zone's skybox fade transition distance, which defaults to 0.
+--- Examples:
+---   zone:setLocalSkybox("purple", 250) -- sets this zone's local skybox to "purple" with a 0.25U transition distance
+---   zone:setLocalSkybox("purple") -- sets the local skybox but doesn't modify the fade distance
+function Entity:setLocalSkybox(skybox, transition)
+    if self.components.zone then
+        -- Values without corresponding image sets result in pink skyboxes!
+        if skybox ~= "" then
+            self.components.zone.skybox = skybox
+        end
+
+        transition = transition or self.components.zone.skybox_fade_distance
+        if transition >= 0 then
+            self.components.zone.skybox_fade_distance = transition
+        end
+    end
+    return self
+end
+--- Returns whether the given entity is inside this Zone.
 --- Example: zone:isInside(obj) -- returns true if `obj` is within the zone's bounds
 function Entity:isInside(obj)
     local x, y = obj:getPosition()

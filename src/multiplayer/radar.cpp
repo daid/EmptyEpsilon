@@ -19,8 +19,9 @@ BASIC_REPLICATION_IMPL(RawRadarSignatureInfoReplication, RawRadarSignatureInfo)
 BASIC_REPLICATION_IMPL(LongRangeRadarReplication, LongRangeRadar)
     BASIC_REPLICATION_FIELD(short_range);
     BASIC_REPLICATION_FIELD(long_range);
-    REPLICATE_VECTOR_IF_DIRTY(waypoints, waypoints_dirty);
-    BASIC_REPLICATION_FIELD(radar_view_linked_entity);
+}
+BASIC_REPLICATION_IMPL(RadarLinkReplication, RadarLink)
+    BASIC_REPLICATION_FIELD(linked_entity);
 }
 EMPTY_REPLICATION_IMPL(ShareShortRangeRadarReplication, ShareShortRangeRadar);
 BASIC_REPLICATION_IMPL(AllowRadarLinkReplication, AllowRadarLink)

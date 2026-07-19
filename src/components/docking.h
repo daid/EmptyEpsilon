@@ -44,7 +44,7 @@ public:
 
     bool auto_reload_missiles = false;
     float auto_reload_missile_delay = 0.0f;
-    static constexpr float auto_reload_missile_time = 10.0f;
+    float auto_reload_missile_time = 10.0f;
 
     DockingStyle canDockOn(DockingBay& bay) {
         if (bay.external_dock_classes.empty() && bay.internal_dock_classes.empty()) return DockingStyle::External;

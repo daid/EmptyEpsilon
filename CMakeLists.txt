@@ -11,6 +11,9 @@ endif()
 
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
+# Force C++17 across all compilers
+set(CMAKE_CXX_STANDARD 17)
+
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 # Set a default version.
@@ -107,7 +110,7 @@ if(WITH_DISCORD)
 endif()
 
 # Meshoptimizer
-set(MESHOPTIMIZER_VERSION 0.16)
+set(MESHOPTIMIZER_VERSION 0.23)
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.11)
   include(FetchContent)
   FetchContent_Declare(
@@ -140,7 +143,6 @@ if(NOT meshoptimizer_POPULATED)
 endif()
 
 set(GUI_LIB_SOURCES
-    src/gui/colorConfig.cpp
     src/gui/hotkeyBinder.cpp
     src/gui/hotkeyConfig.cpp
     src/gui/joystickConfig.cpp
@@ -175,7 +177,6 @@ set(GUI_LIB_SOURCES
     src/gui/layout/horizontal.cpp
     src/gui/layout/vertical.cpp
 
-    src/gui/colorConfig.h
     src/gui/debugRenderer.h
     src/gui/gui2_advancedscrolltext.h
     src/gui/gui2_arrowbutton.h
@@ -231,8 +232,8 @@ set(MAIN_SOURCES
     src/gameGlobalInfo.cpp
     src/GMActions.cpp
     src/script.cpp
+    src/crewPosition.cpp
     src/playerInfo.cpp
-    src/gameStateLogger.cpp
     src/missileWeaponData.cpp
     src/mesh.cpp
     src/scenarioInfo.cpp
@@ -299,6 +300,7 @@ set(MAIN_SOURCES
     src/screenComponents/shipInternalView.cpp
     src/screenComponents/beamFrequencySelector.cpp
     src/screenComponents/radarView.cpp
+    src/screenComponents/radarZoomSlider.cpp
     src/screenComponents/rawScannerDataRadarOverlay.cpp
     src/screenComponents/scanTargetButton.cpp
     src/screenComponents/snapSlider.cpp
@@ -374,6 +376,7 @@ set(MAIN_SOURCES
     src/components/zone.cpp
     src/components/moveto.h
     src/components/lifetime.h
+    src/components/destroy.h
     src/systems/ai.h
     src/systems/ai.cpp
     src/systems/docking.h
@@ -396,12 +399,16 @@ set(MAIN_SOURCES
     src/systems/warpsystem.cpp
     src/systems/jumpsystem.h
     src/systems/jumpsystem.cpp
+    src/systems/sfx.h
+    src/systems/sfx.cpp
     src/systems/shieldsystem.h
     src/systems/shieldsystem.cpp
     src/systems/damage.h
     src/systems/damage.cpp
     src/systems/selfdestruct.h
     src/systems/selfdestruct.cpp
+    src/systems/probe.h
+    src/systems/probe.cpp
     src/systems/pickup.h
     src/systems/pickup.cpp
     src/systems/basicmovement.h
@@ -422,12 +429,16 @@ set(MAIN_SOURCES
     src/systems/scanning.cpp
     src/systems/planet.h
     src/systems/planet.cpp
-    src/systems/player.h
-    src/systems/player.cpp
+    src/systems/gm.h
+    src/systems/gm.cpp
     src/systems/radar.h
     src/systems/radar.cpp
     src/systems/zone.h
     src/systems/zone.cpp
+    src/systems/debugrender.h
+    src/systems/debugrender.cpp
+    src/systems/destroy.h
+    src/systems/destroy.cpp
     src/multiplayer/beamweapon.h
     src/multiplayer/beamweapon.cpp
     src/multiplayer/shields.h
@@ -484,6 +495,8 @@ set(MAIN_SOURCES
     src/multiplayer/missile.cpp
     src/multiplayer/missiletubes.h
     src/multiplayer/missiletubes.cpp
+    src/multiplayer/sfx.h
+    src/multiplayer/sfx.cpp
     src/multiplayer/spin.h
     src/multiplayer/spin.cpp
     src/multiplayer/moveto.h
@@ -524,7 +537,6 @@ set(MAIN_SOURCES
     src/epsilonServer.h
     src/featureDefs.h
     src/gameGlobalInfo.h
-    src/gameStateLogger.h
     src/glObjects.h
     src/GMActions.h
     src/hardware/devices/dmx512SerialDevice.h
@@ -589,6 +601,7 @@ set(MAIN_SOURCES
     src/screenComponents/openCommsButton.h
     src/screenComponents/powerDamageIndicator.h
     src/screenComponents/radarView.h
+    src/screenComponents/radarZoomSlider.h
     src/screenComponents/rawScannerDataRadarOverlay.h
     src/screenComponents/rotatingModelView.h
     src/screenComponents/scanningDialog.h
@@ -696,6 +709,11 @@ if(WIN32)
     endif()
 endif()
 
+if(MSVC)
+    # tweak.cpp exceeds the default COFF section limit
+    set_source_files_properties(src/screens/gm/tweak.cpp PROPERTIES COMPILE_FLAGS "/bigobj")
+endif()
+
 set_target_properties(${PROJECT_NAME}
     PROPERTIES
         MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/osx/MacOSXBundleInfo.plist.in
@@ -739,10 +757,17 @@ endif()
 find_package(Python3 COMPONENTS Interpreter)
 if(Python3_Interpreter_FOUND)
     set(SCRIPT_REFERENCE_HTML "${PROJECT_BINARY_DIR}/script_reference.html")
+    file(GLOB_RECURSE SCRIPT_REFERENCE_SOURCES
+        "${CMAKE_SOURCE_DIR}/src/script.cpp"
+        "${CMAKE_SOURCE_DIR}/src/script/*.cpp"
+        "${CMAKE_SOURCE_DIR}/scripts/api/*.lua"
+        "${CMAKE_SOURCE_DIR}/script_docs/*.py"
+        "${CMAKE_SOURCE_DIR}/script_docs/template.html")
     add_custom_command(
         OUTPUT "${SCRIPT_REFERENCE_HTML}"
         COMMAND ${Python3_EXECUTABLE} ${CMAKE_SOURCE_DIR}/script_docs/main.py "${SCRIPT_REFERENCE_HTML}"
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+        DEPENDS ${SCRIPT_REFERENCE_SOURCES}
         COMMENT "Building script reference documentation.")
     add_custom_target(script_reference ALL DEPENDS "${SCRIPT_REFERENCE_HTML}")
   
@@ -758,7 +783,7 @@ if(Python3_Interpreter_FOUND)
 endif()
 
 add_custom_target(update_locale
-    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trMark:1c,2 --keyword=trMark:1 --add-comments=TRANSLATORS --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
+    COMMAND xgettext --keyword=tr:1c,2 --keyword=tr:1 --keyword=trn:2c,3,4 --keyword=trn:2,3 --keyword=trMark:1c,2 --keyword=trMark:1 --add-comments=TRANSLATORS --omit-header -d resources/locale/main.en ${MAIN_SOURCES} ${GUI_LIB_SOURCES}
     COMMAND python3 update_locale.py
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 
@@ -867,6 +892,6 @@ configure_file(io.github.daid.EmptyEpsilon.metainfo.xml.in io.github.daid.EmptyE
 
 if(UNIX AND NOT APPLE AND NOT STEAMSDK)
   install(FILES io.github.daid.EmptyEpsilon.desktop DESTINATION "share/applications")
-  install(FILES logo512.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
+  install(FILES resources/logo_icon.png DESTINATION "share/icons/hicolor/512x512/apps" RENAME "io.github.daid.EmptyEpsilon.png")
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/io.github.daid.EmptyEpsilon.metainfo.xml DESTINATION "share/metainfo")
 endif()

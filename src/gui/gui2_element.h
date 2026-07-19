@@ -3,7 +3,6 @@
 
 #include <functional>
 #include "stringImproved.h"
-#include "colorConfig.h"
 #include "hotkeyConfig.h"
 #include "gui2_container.h"
 #include "gui/layout/layout.h"
@@ -47,6 +46,7 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id);
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id);
+    virtual bool onMouseWheelScroll(glm::vec2 position, float value);
     virtual void onTextInput(const string& text);
     virtual void onTextInput(sp::TextInputEvent e);
     virtual void onFocusGained() {}
@@ -89,7 +89,6 @@ public:
     friend class GuiCanvas;
 
 protected:
-    glm::u8vec4 selectColor(const ColorSet& color_set) const;
     State getState() const;
 };
 

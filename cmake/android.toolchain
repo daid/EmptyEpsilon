@@ -15,8 +15,8 @@
 # - a signing key
 # This toolchain file is designed to setup everything if it's not supplied by the user, with the exception of the java JDK
 set(ANDROID_SDK_PATH "" CACHE PATH "Location of the android SDK installation.")
-set(ANDROID_API_MIN "16" CACHE STRING "Minimal API version for android build, any device below this version is not supported.")
-set(ANDROID_API_TARGET "26" CACHE STRING "Targeting API version for android, any features above this version cannot be used.")
+set(ANDROID_API_MIN "26" CACHE STRING "Minimal API version for android build, any device below this version is not supported.")
+set(ANDROID_API_TARGET "34" CACHE STRING "Targeting API version for android, any features above this version cannot be used.")
 set(ANDROID_NDK_VERSION "23.2.8568313" CACHE STRING "NDK version to use. Be mindful, this is brittle across SDL2/CMake/NDK configurations.")
 set(ANDROID_ABI "armeabi-v7a" CACHE STRING "Target ABI")
 
@@ -88,9 +88,9 @@ set(SDL_BASE_PATH "${CMAKE_CURRENT_LIST_DIR}/android/SDL/${ANDROID_ABI}")
 set(SDL_SRC_PATH "${SDL_BASE_PATH}/source")
 set(SDL_INSTALL_PATH "${SDL_BASE_PATH}/install")
 if(NOT EXISTS "${SDL_SRC_PATH}")
-    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.0.16.zip "${SDL_BASE_PATH}/SDL2_src.zip" SHOW_PROGRESS)
+    file(DOWNLOAD https://www.libsdl.org/release/SDL2-2.32.8.zip "${SDL_BASE_PATH}/SDL2_src.zip" SHOW_PROGRESS)
     execute_process(COMMAND ${CMAKE_COMMAND} -E tar -xf SDL2_src.zip WORKING_DIRECTORY "${SDL_BASE_PATH}")
-    file(RENAME "${SDL_BASE_PATH}/SDL2-2.0.16" "${SDL_SRC_PATH}")
+    file(RENAME "${SDL_BASE_PATH}/SDL2-2.32.8" "${SDL_SRC_PATH}")
 endif()
 if(NOT EXISTS "${SDL_INSTALL_PATH}")
     file(MAKE_DIRECTORY "${SDL_BASE_PATH}/build")
@@ -138,12 +138,12 @@ macro(android_apk NAME APK_WITH_PACKS)
     # Convert sources into dex file
     add_custom_command(
         OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex"
-        COMMAND "${DX}" ARGS "--dex" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
+        COMMAND "${DX}" ARGS "--dex" "--min-sdk-version=26" "--output=${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/java_compiled/"
         DEPENDS "java_compiled/eu/daid/${NAME}/R.class"
     )
     
     file(COPY "${SDL_INSTALL_PATH}/lib/libSDL2.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
-    file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
+    #file(COPY "${SDL_INSTALL_PATH}/lib/libhidapi.so" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/")
     
     set(MAINLIB_FILENAME lib${MAINLIB_NAME}.so)
     add_custom_command(
@@ -168,7 +168,7 @@ macro(android_apk NAME APK_WITH_PACKS)
         OUTPUT "${APK}"
         COMMAND "${AAPT}" ARGS package -f -M "${CMAKE_CURRENT_BINARY_DIR}/AndroidManifest.xml" -S "${CMAKE_CURRENT_SOURCE_DIR}/android/res" -I "${ANDROID_PLATFORM_JAR}" -F "${APK}"
         COMMAND "${AAPT}" ARGS add "${APK}" classes.dex
-        COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
+        # COMMAND "${AAPT}" ARGS add "${APK}" lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}> lib/${ANDROID_ABI}/libSDL2.so lib/${ANDROID_ABI}/libhidapi.so
         COMMAND "${AAPT}" ARGS add "${APK}" ${ASSETS}
         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/"
         DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/classes.dex" "${CMAKE_CURRENT_BINARY_DIR}/apk_contents/lib/${ANDROID_ABI}/$<TARGET_FILE_NAME:${NAME}>"

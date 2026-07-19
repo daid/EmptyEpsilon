@@ -27,6 +27,7 @@ void ScanState::setStateForFaction(sp::ecs::Entity faction_entity, ScanState::St
     for(auto& it : per_faction) {
         if (it.faction == faction_entity) {
             it.state = state;
+            per_faction_dirty = true;
             return;
         }
     }

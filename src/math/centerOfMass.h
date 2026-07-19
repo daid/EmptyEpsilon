@@ -1,6 +1,8 @@
 #ifndef MATH_CENTER_OF_MASS_H
 #define MATH_CENTER_OF_MASS_H
 
+#include <glm/gtx/norm.hpp>
+
 static inline float polygonArea(const std::vector<glm::vec2>& path)
 {
     int size = path.size();
@@ -23,16 +25,23 @@ static inline glm::vec2 centerOfMass(const std::vector<glm::vec2>& path)
     for(unsigned int n=0; n<path.size(); n++)
     {
         auto p1 = path[n];
-        float second_factor = (p0.x * p1.y) - (p1.x * p0.y);
 
-        x += (p0.x + p1.x) * second_factor;
-        y += (p0.y + p1.y) * second_factor;
+        auto p0x = p0.x - path[0].x;
+        auto p0y = p0.y - path[0].y;
+        auto p1x = p1.x - path[0].x;
+        auto p1y = p1.y - path[0].y;
+
+        float second_factor = ((p0x * p1y) - (p1x * p0y));
+
+        x += (p0x + p1x) * second_factor;
+        y += (p0y + p1y) * second_factor;
         p0 = p1;
     }
 
     float area = polygonArea(path);
-    x = x / 6 / area;
-    y = y / 6 / area;
+    x = x / 6 / area + path[0].x;
+    y = y / 6 / area + path[0].y;
+
     return glm::vec2(x, y);
 }
 
@@ -59,6 +68,36 @@ static inline bool insidePolygon(const std::vector<glm::vec2>& path, glm::vec2 p
         p0 = p1;
     }
     return (crossings % 2) == 1;
+}
+
+// Find the distance from a point to the closest position on the edge of a polygon.
+static inline float distanceToEdge(const std::vector<glm::vec2>& path, glm::vec2 point) {
+    if (path.size() < 1)
+        return 0.0f;
+
+    auto p0 = path[path.size()-1];
+
+    float min_dist2 = std::numeric_limits<float>::infinity();
+
+    for (unsigned int n=0; n<path.size(); n++)
+    {
+        auto p1 = path[n];
+
+        auto len2 = glm::length2(p1 - p0);
+        if (len2 <= 0)
+            continue;
+
+        float t = std::clamp(glm::dot(point-p0, p1-p0) / len2, 0.0f, 1.0f);
+
+        auto closest_pos = p0 + t * (p1 - p0);
+        auto dist2 = glm::length2(closest_pos - point);
+        if (dist2 < min_dist2)
+            min_dist2 = dist2;
+
+        p0 = p1;
+    }
+
+    return std::sqrt(min_dist2);
 }
 
 #endif//MATH_CENTER_OF_MASS_H

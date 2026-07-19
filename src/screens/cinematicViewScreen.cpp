@@ -13,6 +13,8 @@
 
 #include "screenComponents/indicatorOverlays.h"
 #include "screenComponents/scrollingBanner.h"
+#include "screenComponents/helpOverlay.h"
+#include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_togglebutton.h"
 
@@ -49,16 +51,25 @@ CinematicViewScreen::CinematicViewScreen(RenderLayer* render_layer)
     camera_lock_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOGGLE", tr("button", "Lock camera on ship"), [](bool value) {});
     camera_lock_toggle->setValue(true)->setPosition(20, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
 
-    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [this](bool value) {});
+    camera_lock_tot_toggle = new GuiToggleButton(this, "CAMERA_LOCK_TOT_TOGGLE", tr("button", "Lock camera on ship's target"), [](bool value) {});
     camera_lock_tot_toggle->setValue(true)->setPosition(320, -20, sp::Alignment::BottomLeft)->setSize(350, 50)->hide();
 
-    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [this](bool value) {});
+    camera_lock_cycle_toggle = new GuiToggleButton(this, "CAMERA_LOCK_CYCLE_TOGGLE", tr("button", "Cycle through ships"), [](bool value) {});
     camera_lock_cycle_toggle->setValue(false)->setPosition(670, -20, sp::Alignment::BottomLeft)->setSize(300, 50)->hide();
     cycle_time = 0.0f;
 
     new GuiIndicatorOverlays(this);
 
     (new GuiScrollingBanner(this))->setPosition(0, 0)->setSize(GuiElement::GuiSizeMax, 100);
+
+    keyboard_help = new GuiHelpOverlay(viewport, tr("hotkey_F1", "Keyboard Shortcuts"));
+    string keyboard_cinematic = "";
+
+    for (auto binding : sp::io::Keybinding::listAllByCategory("Cinematic view"))
+        keyboard_cinematic += tr("hotkey_F1", "{label}: {button}\n").format({{"label", binding->getLabel()}, {"button", binding->getHumanReadableKeyName(0)}});
+
+    keyboard_help->setText(keyboard_cinematic);
+    keyboard_help->moveToFront();
 }
 
 void CinematicViewScreen::update(float delta)
@@ -70,6 +81,12 @@ void CinematicViewScreen::update(float delta)
         disconnectFromServer();
         returnToMainMenu(getRenderLayer());
         return;
+    }
+
+    if (keys.help.getDown())
+    {
+        // Toggle keyboard help.
+        keyboard_help->frame->setVisible(!keyboard_help->frame->isVisible());
     }
 
     if (keys.cinematic.toggle_ui.getDown())
@@ -86,6 +103,11 @@ void CinematicViewScreen::update(float delta)
             camera_lock_selector->show();
             camera_lock_tot_toggle->show();
         }
+    }
+
+    if (keys.cinematic.toggle_callsigns.getDown())
+    {
+        viewport->toggleCallsigns();
     }
 
     if (keys.cinematic.lock_camera.getDown())
@@ -119,11 +141,9 @@ void CinematicViewScreen::update(float delta)
         destroy();
         returnToShipSelection(getRenderLayer());
     }
+
     if (keys.pause.getDown())
-    {
-        if (game_server)
-            engine->setGameSpeed(0.0);
-    }
+        if (game_server && !gameGlobalInfo->getVictoryFaction()) engine->setGameSpeed(engine->getGameSpeed() > 0.0f ? 0.0f : 1.0f);
 
     if (keys.cinematic.move_forward.get())
     {

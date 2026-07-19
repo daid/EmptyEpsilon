@@ -31,6 +31,7 @@ void ShipLogReplication::update(sp::io::DataBuffer& packet)
                 const auto& e = log.get(n);
                 packet << e.prefix << e.text << e.color;
             }
+            log.new_entry_count = 0;
         }
         info.set(entity.getIndex(), {entity.getVersion()});
     }

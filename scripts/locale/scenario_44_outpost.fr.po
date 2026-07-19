@@ -1759,7 +1759,7 @@ msgid "Docking services status"
 msgstr "État des services d'accueil"
 
 #: scripts/scenario_44_outpost.lua:3768
-#, fuzzy, lua-format
+#, lua-format
 msgctxt "stationServices-comms"
 msgid "Station %s docking services status:"
 msgstr "État des services d'accueil de la station %s :\n"
@@ -3652,7 +3652,6 @@ msgid "beam"
 msgstr "Les faisceaux laser"
 
 #: scripts/scenario_44_outpost.lua:5406
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Beam upgrades refer to the beam weapons systems. They might include "
@@ -3684,7 +3683,6 @@ msgid "missiles"
 msgstr "Les missiles"
 
 #: scripts/scenario_44_outpost.lua:5411
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Missile upgrades refer to aspects of the missile weapons systems. They might "
@@ -3692,7 +3690,9 @@ msgid ""
 "additional missile types or additional missile storage capacity."
 msgstr ""
 "Les mises à niveau de missiles font référence aux différents aspects des "
-"systèmes d'armes à missiles. Elles peuvent inclure :\n"
+"systèmes d'armes à missiles.\n"
+"\n"
+"Elles peuvent inclure :\n"
 "- Des tubes supplémentaires.\n"
 "- Des temps de chargement plus rapides.\n"
 "- Une taille de tube accrue.\n"
@@ -3706,7 +3706,6 @@ msgid "shield"
 msgstr "Les boucliers"
 
 #: scripts/scenario_44_outpost.lua:5416
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Shield upgrades refer to the protective energy shields around your ship. "
@@ -3714,7 +3713,9 @@ msgid ""
 "front, rear or both shield arcs or the addition of a shield arc."
 msgstr ""
 "Les mises à niveau de boucliers font référence aux boucliers énergétiques "
-"protecteurs entourant votre vaisseau. Elles peuvent inclure :\n"
+"protecteurs entourant votre vaisseau.\n"
+"\n"
+"Elles peuvent inclure :\n"
 "- Une puissance accrue (résistance globale) pour les arcs de bouclier avant, "
 "arrière ou les deux.\n"
 "- L'ajout d'un arc de bouclier."
@@ -3726,7 +3727,6 @@ msgid "hull"
 msgstr "La coque"
 
 #: scripts/scenario_44_outpost.lua:5421
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Hull upgrades refer to strengthening the ship hull to withstand more damage "
@@ -3743,7 +3743,6 @@ msgid "impulse"
 msgstr "Les moteurs à impulsion"
 
 #: scripts/scenario_44_outpost.lua:5426
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "Impulse upgrades refer to changes related to the impulse engines. They might "
@@ -3752,7 +3751,9 @@ msgid ""
 "strafe, which is sideways motion or both)."
 msgstr ""
 "Les mises à niveau d'impulsion font référence aux modifications liées aux "
-"moteurs à impulsion. Elles peuvent inclure :\n"
+"moteurs à impulsion.\n"
+"\n"
+"Elles peuvent inclure :\n"
 "- L'augmentation de la vitesse de pointe (avant, arrière ou les deux).\n"
 "- L'augmentation de la vitesse d'accélération (avant, arrière ou les deux).\n"
 "- L'augmentation de la vitesse de la manœuvre.\n"
@@ -3763,10 +3764,9 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "ftl"
-msgstr "FTL"
+msgstr "FTL : téléportation, vitesse lumière"
 
 #: scripts/scenario_44_outpost.lua:5431
-#, fuzzy
 msgctxt "upgrade-comms"
 msgid ""
 "FTL (short for faster than light) upgrades refer to warp drive or jump drive "
@@ -3775,7 +3775,9 @@ msgid ""
 msgstr ""
 "Les mises à niveau FTL : abréviation de \"plus rapide que la lumière\" "
 "(Faster Than Light), font référence aux améliorations des moteurs de "
-"téléportation et vitesse lumière. Elles peuvent inclure :\n"
+"téléportation et vitesse lumière.\n"
+"\n"
+"Elles peuvent inclure :\n"
 "- L'ajout d'un moteur FTL.\n"
 "- La modification de la plage de saut de la téléportation.\n"
 "- Une augmentation de la vitesse maximale de la vitesse lumière."
@@ -3784,7 +3786,7 @@ msgstr ""
 #, fuzzy
 msgctxt "upgrade-comms"
 msgid "sensors"
-msgstr "Les capteurs"
+msgstr "Les capteurs radar"
 
 #: scripts/scenario_44_outpost.lua:5436
 #, fuzzy
@@ -3795,9 +3797,12 @@ msgid ""
 "automated proximity scanners for ships or improved range for automated "
 "proximity scanners."
 msgstr ""
-"Les capteurs d'un vaisseau permettent de détecter des objets dans l'espace. "
-"Les mises à niveau des capteurs peuvent inclure :\n"
-"- Une portée de detection accrue des capteurs à courte et à longue portée.\n"
+"Les capteurs des consoles radar d'un vaisseau permettent de détecter des "
+"objets dans l'espace.\n"
+"\n"
+"Les mises à niveau de capteurs peuvent inclure :\n"
+"- Une portée de detection accrue des capteurs radar courte et longue "
+"portée.\n"
 "- Une installation de scanners de proximité automatisés de 1er niveau.\n"
 "- Une portée améliorée pour ces scanners de proximité automatisés."
 

@@ -10,9 +10,9 @@ namespace sp::script {
 template<> struct Convert<glm::vec2> {
     static int toLua(lua_State* L, glm::vec2 value) {
         lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
+        lua_pushnumber(L, static_cast<lua_Number>(value.x));
         lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
+        lua_pushnumber(L, static_cast<lua_Number>(value.y));
         lua_rawseti(L, -2, 2);
         return 1;
     }
@@ -31,11 +31,11 @@ template<> struct Convert<glm::vec2> {
 template<> struct Convert<glm::vec3> {
     static int toLua(lua_State* L, glm::vec3 value) {
         lua_createtable(L, 3, 0);
-        lua_pushnumber(L, value.x);
+        lua_pushnumber(L, static_cast<lua_Number>(value.x));
         lua_rawseti(L, -2, 1);
-        lua_pushnumber(L, value.y);
+        lua_pushnumber(L, static_cast<lua_Number>(value.y));
         lua_rawseti(L, -2, 2);
-        lua_pushnumber(L, value.z);
+        lua_pushnumber(L, static_cast<lua_Number>(value.z));
         lua_rawseti(L, -2, 3);
         return 1;
     }
@@ -83,10 +83,12 @@ template<> struct Convert<glm::u8vec4> {
 
             if (str.startswith("#") && str.length() == 7)
             {
-                result.r = static_cast<uint8_t>(str.substr(1, 2).toInt(16));
-                result.g = static_cast<uint8_t>(str.substr(3, 2).toInt(16));
-                result.b = static_cast<uint8_t>(str.substr(5, 2).toInt(16));
-            } else {
+                result.r = static_cast<uint8_t>(str.substr(1, 3).toInt(16));
+                result.g = static_cast<uint8_t>(str.substr(3, 5).toInt(16));
+                result.b = static_cast<uint8_t>(str.substr(5, 7).toInt(16));
+            }
+            else
+            {
                 std::vector<string> parts = str.split(",");
                 if (parts.size() == 3)
                 {

@@ -6,6 +6,7 @@
 #include "components/collision.h"
 #include "components/rendering.h"
 #include "main.h"
+#include "systems/radar.h"
 #include <glm/geometric.hpp>
 
 template<typename COMPONENT, bool TRANSPARENT> class Render3DInterface {
@@ -90,11 +91,12 @@ public:
     void render3D(sp::ecs::Entity e, sp::Transform& transform, NebulaRenderer& nr) override;
 };
 
-class ExplosionRenderSystem : public sp::ecs::System, public Render3DInterface<ExplosionEffect, true>
+class ExplosionRenderSystem : public sp::ecs::System, public Render3DInterface<ExplosionEffect, true>, public RenderRadarInterface<ExplosionEffect, 15, RadarRenderSystem::FlagNone>
 {
 public:
     void update(float delta) override;
     void render3D(sp::ecs::Entity e, sp::Transform& transform, ExplosionEffect& ee) override;
+    void renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity entity, glm::vec2 screen_position, float scale, float rotation, ExplosionEffect& explosion) override;
 };
 
 class BillboardRenderSystem : public sp::ecs::System, public Render3DInterface<BillboardRenderer, true>

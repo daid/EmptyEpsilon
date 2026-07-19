@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <stdint.h>
 #include <io/dataBuffer.h>
 
@@ -28,6 +29,9 @@ enum class CrewPosition
 
     MAX
 };
+
+string crewPositionToString(CrewPosition value);
+std::optional<CrewPosition> tryParseCrewPosition(string value);
 
 static_assert(static_cast<int>(CrewPosition::MAX) <= 64);
 class CrewPositions

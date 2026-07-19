@@ -1,11 +1,14 @@
 #include "gui2_arrow.h"
+#include "theme.h"
 
 GuiArrow::GuiArrow(GuiContainer* owner, string id, float angle)
-: GuiElement(owner, id), color(glm::u8vec4{255,255,255,255}), angle(angle)
+: GuiElement(owner, id), angle(angle)
 {
+    arrow_style = theme->getStyle("arrow");
 }
 
 void GuiArrow::onDraw(sp::RenderTarget& renderer)
 {
-    renderer.drawRotatedSprite("gui/widget/IndicatorArrow.png", getCenterPoint(), std::min(rect.size.x, rect.size.y), angle, color);
+    const auto& arrow = arrow_style->get(getState());
+    renderer.drawRotatedSprite(arrow.texture, getCenterPoint(), std::min(rect.size.x, rect.size.y), angle, color);
 }

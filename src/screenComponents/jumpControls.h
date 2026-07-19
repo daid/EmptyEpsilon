@@ -1,5 +1,4 @@
-#ifndef JUMP_CONTROLS_H
-#define JUMP_CONTROLS_H
+#pragma once
 
 #include "gui/gui2_element.h"
 
@@ -15,11 +14,10 @@ private:
     GuiSlider* slider;
     GuiButton* button;
     GuiProgressbar* charge_bar;
+    bool set_active = false;
 public:
     GuiJumpControls(GuiContainer* owner, string id);
 
     virtual void onDraw(sp::RenderTarget& target) override;
     virtual void onUpdate() override;
 };
-
-#endif//JUMP_CONTROLS_H

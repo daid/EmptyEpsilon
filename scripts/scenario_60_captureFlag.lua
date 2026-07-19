@@ -44,9 +44,11 @@ require("place_station_scenario_utility.lua")
 require("generate_call_sign_scenario_utility.lua")
 
 function init()
-	scenario_version = "2.0.1"
+	scenario_version = "2.0.2"
 	print(string.format("     -----     Scenario: Capture the Flag     -----     Version %s     -----",scenario_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	presetOptionVariables()	--set up any preset team data
 	setConstants()			--things that don't change
 	setGlobals()			--things that don't change often
@@ -3978,9 +3980,8 @@ function downTheRabbitHole()
 			local vx, vy = vectorFromAngle(random(0,360),3000)
 			worm:setTargetPosition(worm_hole_coordinates[i].x + vx,worm_hole_coordinates[i].y + vy)
 			worm:onTeleportation(function(self,teleportee)
-				local teleportee_type = teleportee.typeName
 				if gameTimeLimit < (maxGameTime - hideFlagTime - 1) then
-					if teleportee_type == "PlayerSpaceship" then
+					if isObjectType(teleportee,"PlayerSpaceship") then
 						if teleportee:hasSystem("warp") then
 							teleportee:setSystemHealth("warp",teleportee:getSystemHealth("warp")*.9)
 						end
@@ -3992,7 +3993,7 @@ function downTheRabbitHole()
 					local wx, wy = self:getPosition()
 					local vx, vy = vectorFromAngle(random(0,360),3000)
 					self:setTargetPosition(wx + vx, wy + vy)
-					if teleportee_type == "PlayerSpaceship" then
+					if isObjectType(teleportee,"PlayerSpaceship") then
 						if teleportee:hasPlayerAtPosition("Helms") then
 							teleportee.worm_hole_target_message = "worm_hole_target_message"
 							teleportee:addCustomMessage("Helms",teleportee.worm_hole_target_message,_("wormhole-msgHelms", "Worm hole teleportation destination will change after the flag hiding time expires"))
@@ -5890,7 +5891,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = comms_source:getWaypoint(n)
@@ -5898,7 +5899,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -5916,10 +5917,10 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,comms_source:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"),comms_source:getWaypointID(n)), function()
                         if comms_source:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),n))
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d"),ship:getCallSign(),comms_source:getWaypointID(n)))
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -6521,9 +6522,9 @@ function friendlyComms(comms_data)
 		else
 			setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), n), function()
+				addCommsReply(string.format(_("shipAssist-comms", "Defend WP %d"), comms_source:getWaypointID(n)), function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
-					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), n));
+					setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP %d."), comms_source:getWaypointID(n)));
 					addCommsReply(_("Back"), commsShip)
 				end)
 			end
@@ -6561,7 +6562,7 @@ function friendlyComms(comms_data)
 		addCommsReply(_("Back"), commsShip)
 	end)
 	for idx, obj in ipairs(comms_target:getObjectsInRange(5000)) do
-		if obj.typeName == "SpaceStation" and not comms_target:isEnemy(obj) then
+		if isObjectType(obj,"SpaceStation") and not comms_target:isEnemy(obj) then
 			addCommsReply(string.format(_("shipAssist-comms", "Dock at %s"), obj:getCallSign()), function()
 				setCommsMessage(string.format(_("shipAssist-comms", "Docking at %s."), obj:getCallSign()));
 				comms_target:orderDock(obj)
@@ -6586,9 +6587,9 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),comms_source:getWaypointID(n)), function()
 							comms_target:orderFlyTowards(comms_source:getWaypoint(n))
-							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), n));
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), comms_source:getWaypointID(n)));
 							addCommsReply(_("Back"), commsShip)
 						end)
 					end
@@ -6601,9 +6602,9 @@ function friendlyComms(comms_data)
 				else
 					setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 					for n=1,comms_source:getWaypointCount() do
-						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
+						addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),comms_source:getWaypointID(n)), function()
 							comms_target:orderFlyTowardsBlind(comms_source:getWaypoint(n))
-							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), n));
+							setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), comms_source:getWaypointID(n)));
 							addCommsReply(_("Back"), commsShip)
 						end)
 					end
@@ -6671,13 +6672,13 @@ function friendlyComms(comms_data)
 					else
 						setCommsMessage(_("shipAssist-comms", "Which waypoint should we defend?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply(string.format(_("shipAssist-comms", "Defend WP%d"),n), function()
+							addCommsReply(string.format(_("shipAssist-comms", "Defend WP%d"),comms_source:getWaypointID(n)), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderDefendLocation(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP%d."),n));
+								setCommsMessage(string.format(_("shipAssist-comms", "We are heading to assist at WP%d."),comms_source:getWaypointID(n)));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
@@ -6691,13 +6692,13 @@ function friendlyComms(comms_data)
 					else
 						setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
+							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),comms_source:getWaypointID(n)), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderFlyTowards(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), n));
+								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, watching for enemies en route"), comms_source:getWaypointID(n)));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
@@ -6711,13 +6712,13 @@ function friendlyComms(comms_data)
 					else
 						setCommsMessage(_("shipAssist-comms", "Which waypoint?"));
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),n), function()
+							addCommsReply(string.format(_("shipAssist-comms", "Go to WP%d"),comms_source:getWaypointID(n)), function()
 								for _, drone in pairs(comms_source.droneSquads[squadName]) do
 									if drone ~= nil and drone:isValid() then
 										drone:orderFlyTowardsBlind(comms_source:getWaypoint(n))
 									end
 								end
-								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), n));
+								setCommsMessage(string.format(_("shipAssist-comms", "Going to WP%d, ignoring enemies"), comms_source:getWaypointID(n)));
 								addCommsReply(_("Back"), commsShip)
 							end)
 						end
@@ -7802,7 +7803,7 @@ function droneDetectFlagCheck(delta)
 			local flag = human_flags[hfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(drone_scan_range_for_flags)) do
-					if obj.components.ai_controller then
+					if isObjectType(obj,"CpuShip") then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then	--science officers get messages from all drones
@@ -7878,7 +7879,7 @@ function droneDetectFlagCheck(delta)
 			local flag = kraylor_flags[kfi]
 			if flag ~= nil and flag:isValid() then
 				for idx, obj in ipairs(flag:getObjectsInRange(5000)) do
-					if obj.components.ai_controller then
+					if isObjectType(obj,"CpuShip") then
 						if obj.drone then
 							if obj.drone_message == nil then
 								if difficulty < 1 then

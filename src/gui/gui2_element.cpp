@@ -32,6 +32,11 @@ void GuiElement::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
 {
 }
 
+bool GuiElement::onMouseWheelScroll(glm::vec2 position, float value)
+{
+    return false;
+}
+
 void GuiElement::onTextInput(const string& text)
 {
 }
@@ -216,17 +221,6 @@ void GuiElement::destroy()
 bool GuiElement::isDestroyed()
 {
     return destroyed;
-}
-
-glm::u8vec4 GuiElement::selectColor(const ColorSet& color_set) const
-{
-    if (!enabled)
-        return color_set.disabled;
-    if (hover)
-        return color_set.hover;
-    if (focus)
-        return color_set.focus;
-    return color_set.normal;
 }
 
 GuiElement::State GuiElement::getState() const

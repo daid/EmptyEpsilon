@@ -19,7 +19,10 @@ GuiScanningDialog::GuiScanningDialog(GuiContainer* owner, string id)
     setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 
     box = new GuiPanel(this, id + "_BOX");
-    box->setSize(500, 545)->setPosition(0, 0, sp::Alignment::Center);
+    box
+        ->setSize(500.0f, 545.0f)
+        ->setPosition(0.0f, 0.0f, sp::Alignment::Center)
+        ->hide();
 
     signal_label = new GuiLabel(box, id + "_LABEL", tr("scanning", "Electric signature"), 30);
     signal_label->addBackground()->setPosition(0, 20, sp::Alignment::TopCenter)->setSize(450, 50);
@@ -102,12 +105,18 @@ void GuiScanningDialog::onUpdate()
                 set_active[n] = set_value != 0.0f; //Make sure the next update is send, even if it is back to zero.
             }
         }
+        if (keys.science_scan_abort.getDown())
+            my_player_info->commandScanCancel();
     }
 }
 
 void GuiScanningDialog::setupParameters()
 {
     auto [complexity, depth] = getScanComplexityDepth();
+
+    // Reset lock state when setting up new scan parameters
+    locked = false;
+    lock_start_time = 0.0f;
 
     for(int n=0; n<max_sliders; n++)
     {
@@ -118,12 +127,13 @@ void GuiScanningDialog::setupParameters()
     }
     box->setSize(500, 265 + 70 * complexity);
 
-    for(int n=0; n<max_sliders; n++)
+    for (int n = 0; n < max_sliders; n++)
     {
-        target[n] = random(0.0, 1.0);
-        sliders[n]->setValue(random(0.0, 1.0));
-        while(fabsf(target[n] - sliders[n]->getValue()) < 0.2f)
-            sliders[n]->setValue(random(0.0, 1.0));
+        target[n] = random(0.0f, 1.0f);
+        float slider_value = random(0.0f, 1.0f);
+        while(fabsf(target[n] - slider_value) < 0.2f)
+            slider_value = random(0.0f, 1.0f);
+        sliders[n]->setValue(slider_value);
     }
     updateSignal();
 
@@ -131,17 +141,17 @@ void GuiScanningDialog::setupParameters()
     switch(irandom(0, 10))
     {
     default:
-    case 0: label += "Electric signature"; break;
-    case 1: label += "Biomass frequency"; break;
-    case 2: label += "Gravity well signature"; break;
-    case 3: label += "Radiation halftime"; break;
-    case 4: label += "Radio profile"; break;
-    case 5: label += "Ionic phase shift"; break;
-    case 6: label += "Infra-red color shift"; break;
-    case 7: label += "Doppler stability"; break;
-    case 8: label += "Raspberry jam prevention"; break;
-    case 9: label += "Infinity impropability"; break;
-    case 10: label += "Zerospace audio frequency"; break;
+    case 0: label += tr("scanning", "Electric signature"); break;
+    case 1: label += tr("scanning", "Biomass frequency"); break;
+    case 2: label += tr("scanning", "Gravity well signature"); break;
+    case 3: label += tr("scanning", "Radiation halftime"); break;
+    case 4: label += tr("scanning", "Radio profile"); break;
+    case 5: label += tr("scanning", "Ionic phase shift"); break;
+    case 6: label += tr("scanning", "Infra-red color shift"); break;
+    case 7: label += tr("scanning", "Doppler stability"); break;
+    case 8: label += tr("scanning", "Raspberry jam prevention"); break;
+    case 9: label += tr("scanning", "Infinity impropability"); break;
+    case 10: label += tr("scanning", "Zerospace audio frequency"); break;
     }
     signal_label->setText(label);
 }
@@ -151,6 +161,7 @@ void GuiScanningDialog::updateSignal()
     float noise = 0.0;
     float period = 0.0;
     float phase = 0.0;
+    int visible_slider_count = 0;
 
     for(int n=0; n<max_sliders; n++)
     {
@@ -159,9 +170,11 @@ void GuiScanningDialog::updateSignal()
             noise += fabsf(target[n] - sliders[n]->getValue());
             period += fabsf(target[n] - sliders[n]->getValue());
             phase += fabsf(target[n] - sliders[n]->getValue());
+            visible_slider_count++;
         }
     }
-    if (noise < 0.05f && period < 0.05f && phase < 0.05f)
+    // Only check for lock if there are visible sliders (i.e., scan is active)
+    if (visible_slider_count > 0 && noise < 0.05f && period < 0.05f && phase < 0.05f)
     {
         if (!locked)
         {
@@ -201,6 +214,8 @@ std::pair<int, int> GuiScanningDialog::getScanComplexityDepth()
     if (complexity < 0) {
         switch(gameGlobalInfo->scanning_complexity) {
         case SC_None:
+            complexity = 0;
+            break;
         case SC_Simple:
             complexity = 1;
             break;

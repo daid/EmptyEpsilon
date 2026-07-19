@@ -35,14 +35,20 @@ public:
     virtual void onMouseDrag(glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onMouseUp(glm::vec2 position, sp::io::Pointer::ID id) override;
 
-    void setRange(int min_value, int max_value);
-    void setValueSize(int size);
-    void setClickChange(int change);
+    GuiScrollbar* setRange(int min_value, int max_value);
+    GuiScrollbar* setValueSize(int size);
+    GuiScrollbar* setClickChange(int change);
 
-    void setValue(int value);
+    GuiScrollbar* setValue(int value);
     int getValue() const;
 
+    /// @brief For some reason this returns max when the values are between min and (max - value_size)
+    /// @return 
     int getMax() const;
+
+    /// @brief Returns the proper max considering value_size
+    /// @return 
+    int getCorrectedMax() const;
     int getMin() const;
 };
 

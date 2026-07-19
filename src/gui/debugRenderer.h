@@ -1,5 +1,4 @@
-#ifndef DEBUG_RENDERER_H
-#define DEBUG_RENDERER_H
+#pragma once
 
 #include "Renderable.h"
 #include "timer.h"
@@ -17,11 +16,9 @@ private:
     bool show_datarate;
     bool show_timing_graph;
 
-    std::vector<Engine::EngineTiming> timing_graph_points;
+    std::map<string, std::vector<float>> timing_graph_points;
 public:
     DebugRenderer(RenderLayer* renderLayer);
 
     virtual void render(sp::RenderTarget& target) override;
 };
-
-#endif//DEBUG_RENDERER_H

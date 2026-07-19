@@ -7,7 +7,6 @@
 #include "graphics/opengl.h"
 #include "menus/shipSelectionScreen.h"
 #include "shaderRegistry.h"
-#include "gui/mouseRenderer.h"
 #include "gui/debugRenderer.h"
 #include "glObjects.h"
 
@@ -41,6 +40,7 @@ bool createDisplayWindows()
     if (PreferencesManager::get("touchscreen").toInt() == 0)
     {
         engine->registerObject("mouseRenderer", new MouseRenderer(mouseLayer));
+        P<MouseRenderer> mouse_renderer = engine->getObject("mouseRenderer");
     }
 #endif
 
@@ -49,7 +49,10 @@ bool createDisplayWindows()
 
     if (PreferencesManager::get("multimonitor", "0").toInt() != 0)
     {
-        while(int(windows.size()) < SDL_GetNumVideoDisplays())
+        auto n = PreferencesManager::get("multimonitor", "0").toInt();
+        if (n < 2)
+            n = SDL_GetNumVideoDisplays();
+        while(int(windows.size()) < n)
         {
             auto wrl = new RenderLayer();
             auto ml = new RenderLayer(wrl);
@@ -86,6 +89,7 @@ bool createDisplayWindows()
             window->setTitle("EmptyEpsilon - " + PreferencesManager::get("instance_name") + postfix);
         else
             window->setTitle("EmptyEpsilon" + postfix);
+        window->setIcon("logo_icon.png");
     }
 
     if (gl::isAvailable())

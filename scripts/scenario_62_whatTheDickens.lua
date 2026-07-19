@@ -14,10 +14,12 @@
 require("utils.lua")
 --	Initialization functions
 function init()
-	scenario_version = "2.0.0"
-	ee_version = "2023.06.17"
+	scenario_version = "2.0.1"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: What the Dickens    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
-	print(_VERSION)
+	if _VERSION ~= nil then
+		print("Lua version:",_VERSION)
+	end
 	diagnostic = false
 	setSettings()
 	stationFaction = "Human Navy"
@@ -279,7 +281,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
@@ -291,7 +293,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
@@ -304,7 +306,7 @@ function createRandomAlongArc(object_type, amount, x, y, distance, startArc, end
 			local ax = x + math.cos(radialPoint / 180 * math.pi) * pointDist
 			local ay = y + math.sin(radialPoint / 180 * math.pi) * pointDist
 			local obj = object_type():setPosition(ax,ay)
-			if obj.typeName == "Asteroid" then
+			if isObjectType(obj,"Asteroid") then
 				obj:setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
 				VisualAsteroid():setPosition(ax + random(-500,500),ay + random(-500,500)):setSize(random(10,800))
@@ -481,8 +483,10 @@ function handleDockedState()
 	end
     if comms_target == stationCamden then
     	addCommsReply(_("station-comms","What do you know about unusual readings around here?"),function()
-    		setCommsMessage(_("station-comms","The unusual readings happen in A2. They are sporadic, illogical, and creepy."))
+    		local reference_visual_asteroid = VisualAsteroid():setPosition(-51273, -88975):setSize(115)
+    		setCommsMessage(string.format(_("station-comms","The unusual readings happen in %s. They are sporadic, illogical, and creepy."),reference_visual_asteroid:getSectorName()))
     		addCommsReply(_("Back"), commsStation)
+    		reference_visual_asteroid:destroy()
     	end)
     end
 end
@@ -566,7 +570,7 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we deliver your supplies?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), comms_source:getWaypointID(n)), function()
                         if player:takeReputationPoints(getServiceCost("supplydrop")) then
                             local position_x, position_y = comms_target:getPosition()
                             local target_x, target_y = player:getWaypoint(n)
@@ -574,7 +578,7 @@ function handleUndockedState()
                             script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                             script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                             script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched a supply ship toward WP %d"), comms_source:getWaypointID(n)));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -592,10 +596,10 @@ function handleUndockedState()
             else
                 setCommsMessage(_("stationAssist-comms", "To which waypoint should we dispatch the reinforcements?"));
                 for n=1,player:getWaypointCount() do
-                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), n), function()
+                    addCommsReply(string.format(_("stationAssist-comms", "WP %d"), comms_source:getWaypointID(n)), function()
                         if player:takeReputationPoints(getServiceCost("reinforcements")) then
                             ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate("Adder MK5"):setScanned(true):orderDefendLocation(player:getWaypoint(n))
-                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), n));
+                            setCommsMessage(string.format(_("stationAssist-comms", "We have dispatched %s to assist at WP %d "), ship:getCallSign(), comms_source:getWaypointID(n)));
                         else
                             setCommsMessage(_("needRep-comms", "Not enough reputation!"));
                         end
@@ -608,8 +612,10 @@ function handleUndockedState()
     end
     if comms_target == stationCamden then
     	addCommsReply(_("station-comms","What do you know about unusual readings around here?"),function()
-    		setCommsMessage(_("station-comms","The unusual readings happen in A2. They are sporadic, illogical, and creepy."))
+    		local reference_visual_asteroid = VisualAsteroid():setPosition(-51273, -88975):setSize(115)
+    		setCommsMessage(string.format(_("station-comms","The unusual readings happen in %s. They are sporadic, illogical, and creepy."),reference_visual_asteroid:getSectorName()))
     		addCommsReply(_("Back"), commsStation)
+    		reference_visual_asteroid:destroy()
     	end)
     end
 end
@@ -647,15 +653,19 @@ function missionMessage(delta)
 end
 function camdenSensorReading(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(_("ordersAudio-shipLog", "Investigate unusual sensor readings near station Camden in A2"),"Magenta")
+		local reference_visual_asteroid = VisualAsteroid():setPosition(-51273, -88975):setSize(115)
+		player:addToShipLog(string.format(_("ordersAudio-shipLog", "Investigate unusual sensor readings near station Camden in %s"),reference_visual_asteroid:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London1.ogg")
-		secondaryOrders = _("orders-comms", "Investigate near station Camden in A2")
+		secondaryOrders = string.format(_("orders-comms", "Investigate near station Camden in %s"),reference_visual_asteroid:getSectorName())
 		plot1 = arriveA2
 		plot1name = "arriveA2"
+		reference_visual_asteroid:destroy()
 	end
 end
 function arriveA2(delta)
-	if player:getSectorName() == "A2" then
+	local px, py = player:getPosition()
+	if px > -60000 and px < -40000 and py > -100000 and py < -80000 then
+--	if player:getSectorName() == "A2" then
 		px, py = player:getPosition()
 		vx, vy = vectorFromAngle(315,random(10000,12000))
 		marleyArt = Artifact():setPosition(px+vx,py+vy):setModel("artifact2"):allowPickup(false):setDescriptions(_("scienceDescription-artifact", "Rusty Chain Link"),_("scienceDescription-artifact", "Translucent but glowing rusty chain link")):setRadarSignatureInfo(0,0,.9):setScanningParameters(1,1)
@@ -744,11 +754,13 @@ end
 --	plot1 Christmas past functions
 function startChristmasPast(delta)
 	if player:isDocked(stationSomerset) then
-		player:addToShipLog(string.format(_("ordersAudio-shipLog", "I'm guessing you handled whatever was in A2. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),stationMillbank:getSectorName()),"Magenta")
+		local reference_visual_asteroid = VisualAsteroid():setPosition(-51273, -88975):setSize(115)
+		player:addToShipLog(string.format(_("ordersAudio-shipLog", "I'm guessing you handled whatever was in %s. Those unusual readings have disappeared. However, we show an unusually high level of chroniton particles near station Millbank in %s. Recommend you investigate."),reference_visual_asteroid:getSectorName(),stationMillbank:getSectorName()),"Magenta")
 		playSoundFile("audio/scenario/62/sa_62_London2.ogg")
 		secondaryOrders = string.format(_("orders-comms", "Investigate chroniton particles near station Millbank in %s"),stationMillbank:getSectorName())
 		plot1 = arriveNearMillbank
 		plot1name = "arriveNearMillbank"
+		reference_visual_asteroid:destroy()
 	end
 end
 function arriveNearMillbank(delta)

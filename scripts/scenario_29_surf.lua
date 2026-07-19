@@ -48,16 +48,68 @@ require("generate_call_sign_scenario_utility.lua")
 require("comms_scenario_utility.lua")
 
 function init()
-	scenario_version = "1.0.6"
-	ee_version = "2024.08.09"
+	scenario_version = "1.0.8"
+	ee_version = "2024.12.08"
 	print(string.format("    ----    Scenario: Surf's Up!    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
-		print(_VERSION)
+		print("Lua version:",_VERSION)
 	end
-    -- global variables:
+	setGlobals()
+    constructEnvironment()
+    setVariations()
+	onNewPlayerShip(setPlayer)
+end
+function setVariations()
+	enemy_config = {
+		["Easy"] =		{number = .5,	desc = _("msgMainscreen","Easy")},
+		["Normal"] =	{number = 1,	desc = _("msgMainscreen","Normal")},
+		["Hard"] =		{number = 2,	desc = _("msgMainscreen","Hard")},
+		["Extreme"] =	{number = 3,	desc = _("msgMainscreen","Extreme")},
+		["Quixotic"] =	{number = 5,	desc = _("msgMainscreen","Quixotic")},
+	}
+	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
+	local enemy_speed = {
+		["Normal"] = 1,
+		["10"] = 1.1,
+		["20"] = 1.2,
+		["30"] = 1.3,
+		["40"] = 1.4,
+		["50"] = 1.5
+	}
+	speed_factor = enemy_speed[getScenarioSetting("Pace")]
+	local advance_config = {
+		["1"] = 0,
+		["2"] = 1,
+		["3"] = 2,
+		["4"] = 3,
+		["5"] = 4,
+		["6"] = 5,
+		["7"] = 6,
+		["8"] = 7,
+		["9"] = 8,
+	}
+	wave_advance = advance_config[getScenarioSetting("Advance")]
+    --	Alternative player ship
+    local prototype_config = {
+    	["None"] = "None",
+    	["Cruiser"] = "Player Cruiser",
+    	["Missile Cruiser"] = "Player Missile Cr.",
+    	["Fighter"] = "Player Fighter",
+    }
+    if getScenarioSetting("Prototype") ~= "None" then
+    	local ship = PlayerSpaceship():setTemplate(prototype_config[getScenarioSetting("Prototype")])
+    	if prototype_config[getScenarioSetting("Prototype")] == "Player Fighter" then
+--       		          		 Arc, Dir,Range,Cycle, Dmg
+			ship:setBeamWeapon(0, 65,   0,  700,	4, 4)
+			ship:setBeamWeapon(1, 40, -10, 1000,	6, 6)
+			ship:setBeamWeapon(2, 40,  10, 1000,	6, 6)	
+    	end
+    end
+end
+function setGlobals()
     wave_number = 0
     spawn_wave_delay = nil
-    add_station_to_database = true
+	add_station_to_database = true
     include_goods_for_sale_in_status = true
     include_ordnance_in_status = true
     stations_sell_goods = true
@@ -71,30 +123,19 @@ function init()
     transport_list = {}
     nebulas = {}
     check_zones = {}
-    
-    -- Random friendly stations
-    local name_categories = {
+    mission_good = {}
+    mission_goods = {}
+    asteroid_storm = false
+    storm_asteroids = {}
+    player_spawn_count = 0
+    name_categories = {
     	"Science",
     	"History",
     	"Pop Sci Fi",
     	"Spec Sci Fi",
     	"Generic",
     }
-    local station_angle = random(0,360)
-    local station_x, station_y = vectorFromAngle(station_angle,random(2000,5000))
-    local name_category = tableRemoveRandom(name_categories)
-    local station = placeStation(station_x, station_y,name_category,"Human Navy")
-    setReinforcements(station)
-    table.insert(friendly_stations, station)
-    table.insert(station_list, station)
-    local dx, dy = vectorFromAngle(station_angle + random(-60,60),random(2000,5000))
-    name_category = tableRemoveRandom(name_categories)
-    station = placeStation(station_x + dx, station_y + dy,name_category,"Human Navy")
-    setReinforcements(station)
-    table.insert(friendly_stations, station)
-    spreadServiceToStations(friendly_stations)
-    table.insert(station_list, station)
-	local mission_reasons = {
+	mission_reasons = {
 		["energy"] = {
 			[_("situationReport-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships.")] = {
 				"nickel","platinum","gold","dilithium","tritanium","cobalt","optic","filament","sensor","lifter","software","circuit","battery"
@@ -129,100 +170,6 @@ function init()
 			},
 		}
 	}
-    mission_goods = {}
-	for i,station in ipairs(friendly_stations) do
-		if not station:getRestocksScanProbes() then
-			if station.probe_fail_reason == nil then
-				local reason_list = {
-					_("situationReport-comms", "Cannot replenish scan probes due to fabrication unit failure."),
-					_("situationReport-comms", "Parts shortage prevents scan probe replenishment."),
-					_("situationReport-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
-				}
-				station.probe_fail_reason = reason_list[math.random(1,#reason_list)]
-				mission_goods["restock_probes"] = mission_reasons["restock_probes"][station.probe_fail_reason]
-			end
-		end
-		if not station:getRepairDocked() then
-			if station.repair_fail_reason == nil then
-				reason_list = {
-					_("situationReport-comms", "We're out of the necessary materials and supplies for hull repair."),
-					_("situationReport-comms", "Hull repair automation unavailable while it is undergoing maintenance."),
-					_("situationReport-comms", "All hull repair technicians quarantined to quarters due to illness."),
-				}
-				station.repair_fail_reason = reason_list[math.random(1,#reason_list)]
-				mission_goods["hull"] = mission_reasons["hull"][station.repair_fail_reason]
-			end
-		end
-		if not station:getSharesEnergyWithDocked() then
-			if station.energy_fail_reason == nil then
-				reason_list = {
-					_("situationReport-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
-					_("situationReport-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
-					_("situationReport-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
-				}
-				station.energy_fail_reason = reason_list[math.random(1,#reason_list)]
-				mission_goods["energy"] = mission_reasons["energy"][station.energy_fail_reason]
-			end
-		end
-	end
-
-    -- Random nebulae
-    local neb_x, neb_y = vectorFromAngle(random(0, 360), 15000)
-    for n = 1, 5 do
-        local d_neb_x, d_neb_y = vectorFromAngle(random(0, 360), random(2500, 10000))
-        table.insert(nebulas,Nebula():setPosition(neb_x + d_neb_x, neb_y + d_neb_y))
-    end
-
-    -- Random asteroids
-    for cnt = 1, random(2, 7) do
-        local major_angle = random(0, 360)
-        local minor_angle = random(0, 360)
-        local dist = random(3000, 15000 + cnt * 5000)
-        local base_x, base_y = vectorFromAngle(major_angle, dist)
-        for a_cnt = 1, 25 do
-            dx1, dy1 = vectorFromAngle(minor_angle, random(-1000, 1000))
-            dx2, dy2 = vectorFromAngle(minor_angle + 90, random(-10000, 10000))
-            Asteroid():setPosition(base_x + dx1 + dx2, base_y + dy1 + dy2):setSize(random(4,300) + random(4,300) + random(4,300))
-        end
-        for a_cnt = 1, 50 do
-            dx1, dy1 = vectorFromAngle(minor_angle, random(-1500, 1500))
-            dx2, dy2 = vectorFromAngle(minor_angle + 90, random(-10000, 10000))
-            VisualAsteroid():setPosition(base_x + dx1 + dx2, base_y + dy1 + dy2):setSize(random(4,300) + random(4,300) + random(4,300))
-        end
-    end
-    asteroid_storm = false
-    storm_asteroids = {}
-    
-    -- Enemy strength configuration and primary enemy type list
-	enemy_config = {
-		["Easy"] =		{number = .5,	desc = _("msgMainscreen","Easy")},
-		["Normal"] =	{number = 1,	desc = _("msgMainscreen","Normal")},
-		["Hard"] =		{number = 2,	desc = _("msgMainscreen","Hard")},
-		["Extreme"] =	{number = 3,	desc = _("msgMainscreen","Extreme")},
-		["Quixotic"] =	{number = 5,	desc = _("msgMainscreen","Quixotic")},
-	}
-	enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
-	local enemy_speed = {
-		["Normal"] = 1,
-		["10"] = 1.1,
-		["20"] = 1.2,
-		["30"] = 1.3,
-		["40"] = 1.4,
-		["50"] = 1.5
-	}
-	speed_factor = enemy_speed[getScenarioSetting("Pace")]
-	local advance_config = {
-		["1"] = 0,
-		["2"] = 1,
-		["3"] = 2,
-		["4"] = 3,
-		["5"] = 4,
-		["6"] = 5,
-		["7"] = 6,
-		["8"] = 7,
-		["9"] = 8,
-	}
-	wave_advance = advance_config[getScenarioSetting("Advance")]
 	ship_templates = {
 		{name = "Gnat",				warp_jammer = "none",		strength = 2,	create = gnat},
 		{name = "MT52 Hornet",		warp_jammer = "none",		strength = 5,	create = stockTemplate},
@@ -245,9 +192,128 @@ function init()
 		{name = "Starhammer V",		warp_jammer = "plain",		strength = 90,	create = starhammerV},
 		{name = "Tyr",				warp_jammer = "none",		strength = 150,	create = tyr},
 	}
-
+    -- Player ship(s)
+	player_ship_stats = {	
+		["Atlantis"]			= { strength = 52,	cargo = 6,	long_range_radar = 30000, short_range_radar = 5000, 	},
+		["Benedict"]			= { strength = 10,	cargo = 9,	long_range_radar = 30000, short_range_radar = 5000, 	},
+		["Crucible"]			= { strength = 45,	cargo = 5,	long_range_radar = 20000, short_range_radar = 6000, 	},
+		["Ender"]				= { strength = 100,	cargo = 20,	long_range_radar = 45000, short_range_radar = 7000, 	},
+		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	long_range_radar = 40000, short_range_radar = 5000, 	},
+		["Hathcock"]			= { strength = 30,	cargo = 6,	long_range_radar = 35000, short_range_radar = 6000, 	},
+		["Kiriya"]				= { strength = 10,	cargo = 9,	long_range_radar = 35000, short_range_radar = 5000, 	},
+		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	long_range_radar = 18000, short_range_radar = 4000, 	},
+		["Maverick"]			= { strength = 45,	cargo = 5,	long_range_radar = 20000, short_range_radar = 4000, 	},
+		["Nautilus"]			= { strength = 12,	cargo = 7,	long_range_radar = 22000, short_range_radar = 4000, 	},
+		["Phobos M3P"]			= { strength = 19,	cargo = 10,	long_range_radar = 25000, short_range_radar = 5000, 	},
+		["Piranha"]				= { strength = 16,	cargo = 8,	long_range_radar = 25000, short_range_radar = 6000, 	},
+		["Player Cruiser"]		= { strength = 40,	cargo = 6,	long_range_radar = 30000, short_range_radar = 5000, 	},
+		["Player Fighter"]		= { strength = 7,	cargo = 3,	long_range_radar = 15000, short_range_radar = 4500, 	},
+		["Player Missile Cr."]	= { strength = 45,	cargo = 8,	long_range_radar = 35000, short_range_radar = 6000, 	},
+		["Repulse"]				= { strength = 14,	cargo = 12,	long_range_radar = 38000, short_range_radar = 5000, 	},
+		["Striker"]				= { strength = 8,	cargo = 4,	long_range_radar = 35000, short_range_radar = 5000, 	},
+		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	long_range_radar = 18000, short_range_radar = 5500, 	},
+	}	
+    player_ship_names = {
+    	["Atlantis"] =			{"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"},
+    	["Benedict"] =			{"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"},
+    	["Crucible"] =			{"Sling", "Stark", "Torrid", "Kicker", "Flummox", "3rd Charm"},
+    	["Ender"] =				{"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"},
+    	["Flavia P.Falcon"] =	{"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"},
+    	["Hathcock"] = 			{"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"},
+    	["Kiriya"] = 			{"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"},
+    	["MP52 Hornet"] =		{"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"},
+    	["Maverick"] =			{"Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge"},
+    	["Nautilus"] = 			{"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"},
+    	["Phobos M3P"] =		{"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"},
+    	["Piranha"] =			{"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"},
+    	["Player Cruiser"] =	{"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"},
+    	["Player Fighter"] =	{"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"},
+    	["Player Missile Cr."] ={"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"},
+		["Repulse"] = 			{"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"},
+    	["Striker"] =			{"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"},
+    	["ZX-Lindworm"] =		{"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"},
+		["Player Cruiser"] =	{"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"},
+		["Player Missile Cr."] ={"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"},
+		["Player Fighter"] =	{"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"},
+    	["Leftovers"] =			{"Foregone","Righteous","Masher"},
+    }
+end
+function constructEnvironment()
+    -- Random friendly stations
+    local station_angle = random(0,360)
+    local station_x, station_y = vectorFromAngle(station_angle,random(2000,5000))
+    local name_category = tableRemoveRandom(name_categories)
+    local station = placeStation(station_x, station_y,name_category,"Human Navy")
+    setReinforcements(station)
+    table.insert(friendly_stations, station)
+    table.insert(station_list, station)
+    local dx, dy = vectorFromAngle(station_angle + random(-60,60),random(2000,5000))
+    name_category = tableRemoveRandom(name_categories)
+    station = placeStation(station_x + dx, station_y + dy,name_category,"Human Navy")
+    setReinforcements(station)
+    table.insert(friendly_stations, station)
+    spreadServiceToStations(friendly_stations)
+    table.insert(station_list, station)
+	local reason_list = {}
+	for i,station in ipairs(friendly_stations) do
+		if not station:getRestocksScanProbes() then
+			if station.probe_fail_reason == nil then
+				reason_list = {
+					_("situationReport-comms", "Cannot replenish scan probes due to fabrication unit failure."),
+					_("situationReport-comms", "Parts shortage prevents scan probe replenishment."),
+					_("situationReport-comms", "Station management has curtailed scan probe replenishment for cost cutting reasons."),
+				}
+				station.probe_fail_reason = tableSelectRandom(reason_list)
+				mission_goods["restock_probes"] = mission_reasons["restock_probes"][station.probe_fail_reason]
+			end
+		end
+		if not station:getRepairDocked() then
+			if station.repair_fail_reason == nil then
+				reason_list = {
+					_("situationReport-comms", "We're out of the necessary materials and supplies for hull repair."),
+					_("situationReport-comms", "Hull repair automation unavailable while it is undergoing maintenance."),
+					_("situationReport-comms", "All hull repair technicians quarantined to quarters due to illness."),
+				}
+				station.repair_fail_reason = tableSelectRandom(reason_list)
+				mission_goods["hull"] = mission_reasons["hull"][station.repair_fail_reason]
+			end
+		end
+		if not station:getSharesEnergyWithDocked() then
+			if station.energy_fail_reason == nil then
+				reason_list = {
+					_("situationReport-comms", "A recent reactor failure has put us on auxiliary power, so we cannot recharge ships."),
+					_("situationReport-comms", "A damaged power coupling makes it too dangerous to recharge ships."),
+					_("situationReport-comms", "An asteroid strike damaged our solar cells and we are short on power, so we can't recharge ships right now."),
+				}
+				station.energy_fail_reason = tableSelectRandom(reason_list)
+				mission_goods["energy"] = mission_reasons["energy"][station.energy_fail_reason]
+			end
+		end
+	end
+    -- Random nebulae
+    local neb_x, neb_y = vectorFromAngle(random(0, 360), 15000)
+    for n = 1, 5 do
+        local d_neb_x, d_neb_y = vectorFromAngle(random(0, 360), random(2500, 10000))
+        table.insert(nebulas,Nebula():setPosition(neb_x + d_neb_x, neb_y + d_neb_y))
+    end
+    -- Random asteroids
+    for cnt = 1, random(2, 7) do
+        local major_angle = random(0, 360)
+        local minor_angle = random(0, 360)
+        local dist = random(3000, 15000 + cnt * 5000)
+        local base_x, base_y = vectorFromAngle(major_angle, dist)
+        for a_cnt = 1, 25 do
+            dx1, dy1 = vectorFromAngle(minor_angle, random(-1000, 1000))
+            dx2, dy2 = vectorFromAngle(minor_angle + 90, random(-10000, 10000))
+            Asteroid():setPosition(base_x + dx1 + dx2, base_y + dy1 + dy2):setSize(random(4,300) + random(4,300) + random(4,300))
+        end
+        for a_cnt = 1, 50 do
+            dx1, dy1 = vectorFromAngle(minor_angle, random(-1500, 1500))
+            dx2, dy2 = vectorFromAngle(minor_angle + 90, random(-10000, 10000))
+            VisualAsteroid():setPosition(base_x + dx1 + dx2, base_y + dy1 + dy2):setSize(random(4,300) + random(4,300) + random(4,300))
+        end
+    end
     -- Random neutral stations
-    neutral_stations = {}
     for n = 1, 6 do
 		name_category = tableRemoveRandom(name_categories)
 		if name_category == nil then
@@ -259,7 +325,10 @@ function init()
 	    table.insert(station_list, station)
     end
     spreadServiceToStationPairs(neutral_stations)
-
+    setImprovementMissions()
+end
+function setImprovementMissions()
+    --	set up ad hoc improvement missions
     local ordnance_missions = {
 		"Homing","Nuke","EMP","Mine","HVLI",
     }
@@ -289,7 +358,6 @@ function init()
 			end
 		end
     end
-    mission_good = {}
     --	Pick goods for missions
     local already_selected_station = {}
     local already_selected_good = {}
@@ -380,80 +448,6 @@ function init()
 			end
 		end
     end
-    --[[
-    print("Missions and goods final:")
-    for mission,details in pairs(mission_good) do
-    	local out_station = "None"
-    	if details.station ~= nil then
-    		out_station = details.station:getCallSign()
-    	end
-    	print("Mission:",mission,"Good:",details.good,"Station:",out_station)
-    end
-    --]]
-    -- Player ship(s)
-	player_ship_stats = {	
-		["Atlantis"]			= { strength = 52,	cargo = 6,	long_range_radar = 30000, short_range_radar = 5000, 	},
-		["Benedict"]			= { strength = 10,	cargo = 9,	long_range_radar = 30000, short_range_radar = 5000, 	},
-		["Crucible"]			= { strength = 45,	cargo = 5,	long_range_radar = 20000, short_range_radar = 6000, 	},
-		["Ender"]				= { strength = 100,	cargo = 20,	long_range_radar = 45000, short_range_radar = 7000, 	},
-		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	long_range_radar = 40000, short_range_radar = 5000, 	},
-		["Hathcock"]			= { strength = 30,	cargo = 6,	long_range_radar = 35000, short_range_radar = 6000, 	},
-		["Kiriya"]				= { strength = 10,	cargo = 9,	long_range_radar = 35000, short_range_radar = 5000, 	},
-		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	long_range_radar = 18000, short_range_radar = 4000, 	},
-		["Maverick"]			= { strength = 45,	cargo = 5,	long_range_radar = 20000, short_range_radar = 4000, 	},
-		["Nautilus"]			= { strength = 12,	cargo = 7,	long_range_radar = 22000, short_range_radar = 4000, 	},
-		["Phobos M3P"]			= { strength = 19,	cargo = 10,	long_range_radar = 25000, short_range_radar = 5000, 	},
-		["Piranha"]				= { strength = 16,	cargo = 8,	long_range_radar = 25000, short_range_radar = 6000, 	},
-		["Player Cruiser"]		= { strength = 40,	cargo = 6,	long_range_radar = 30000, short_range_radar = 5000, 	},
-		["Player Fighter"]		= { strength = 7,	cargo = 3,	long_range_radar = 15000, short_range_radar = 4500, 	},
-		["Player Missile Cr."]	= { strength = 45,	cargo = 8,	long_range_radar = 35000, short_range_radar = 6000, 	},
-		["Repulse"]				= { strength = 14,	cargo = 12,	long_range_radar = 38000, short_range_radar = 5000, 	},
-		["Striker"]				= { strength = 8,	cargo = 4,	long_range_radar = 35000, short_range_radar = 5000, 	},
-		["ZX-Lindworm"]			= { strength = 8,	cargo = 3,	long_range_radar = 18000, short_range_radar = 5500, 	},
-	}	
-    player_ship_names = {
-    	["Atlantis"] =			{"Excaliber","Thrasher","Punisher","Vorpal","Protang","Drummond","Parchim","Coronado"},
-    	["Benedict"] =			{"Elizabeth","Ford","Vikramaditya","Liaoning","Avenger","Naruebet","Washington","Lincoln","Garibaldi","Eisenhower"},
-    	["Crucible"] =			{"Sling", "Stark", "Torrid", "Kicker", "Flummox", "3rd Charm"},
-    	["Ender"] =				{"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"},
-    	["Flavia P.Falcon"] =	{"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"},
-    	["Hathcock"] = 			{"Hayha", "Waldron", "Plunkett", "Mawhinney", "Furlong", "Zaytsev", "Pavlichenko", "Pegahmagabow", "Fett", "Hawkeye", "Hanzo"},
-    	["Kiriya"] = 			{"Cavour","Reagan","Gaulle","Paulo","Truman","Stennis","Kuznetsov","Roosevelt","Vinson","Old Salt"},
-    	["MP52 Hornet"] =		{"Dragonfly","Scarab","Mantis","Yellow Jacket","Jimminy","Flik","Thorny","Buzz"},
-    	["Maverick"] =			{"Angel", "Thunderbird", "Roaster", "Magnifier", "Hedge"},
-    	["Nautilus"] = 			{"October", "Abdiel", "Manxman", "Newcon", "Nusret", "Pluton", "Amiral", "Amur", "Heinkel", "Dornier"},
-    	["Phobos M3P"] =		{"Blinder","Shadow","Distortion","Diemos","Ganymede","Castillo","Thebe","Retrograde"},
-    	["Piranha"] =			{"Razor","Biter","Ripper","Voracious","Carnivorous","Characid","Vulture","Predator"},
-    	["Player Cruiser"] =	{"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"},
-    	["Player Fighter"] =	{"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"},
-    	["Player Missile Cr."] ={"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"},
-		["Repulse"] = 			{"Fiddler","Brinks","Loomis","Mowag","Patria","Pandur","Terrex","Komatsu","Eitan"},
-    	["Striker"] =			{"Sparrow","Sizzle","Squawk","Crow","Phoenix","Snowbird","Hawk"},
-    	["ZX-Lindworm"] =		{"Seagull","Catapult","Blowhard","Flapper","Nixie","Pixie","Tinkerbell"},
-		["Player Cruiser"] =	{"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"},
-		["Player Missile Cr."] ={"Projectus","Hurlmeister","Flinger","Ovod","Amatola","Nakhimov","Antigone"},
-		["Player Fighter"] =	{"Buzzer","Flitter","Zippiticus","Hopper","Molt","Stinger","Stripe"},
-    	["Leftovers"] =			{"Foregone","Righteous","Masher"},
-    }
-    player_spawn_count = 0
-	onNewPlayerShip(setPlayer)
-
-    --	Alternative player ship
-    local prototype_config = {
-    	["None"] = "None",
-    	["Cruiser"] = "Player Cruiser",
-    	["Missile Cruiser"] = "Player Missile Cr.",
-    	["Fighter"] = "Player Fighter",
-    }
-    if getScenarioSetting("Prototype") ~= "None" then
-    	local ship = PlayerSpaceship():setTemplate(prototype_config[getScenarioSetting("Prototype")])
-    	if prototype_config[getScenarioSetting("Prototype")] == "Player Fighter" then
---       		          		 Arc, Dir,Range,Cycle, Dmg
-			ship:setBeamWeapon(0, 65,   0,  700,	4, 4)
-			ship:setBeamWeapon(1, 40, -10, 1000,	6, 6)
-			ship:setBeamWeapon(2, 40,  10, 1000,	6, 6)	
-    	end
-    end
 end
 function setReinforcements(station)
 	station.comms_data = {}
@@ -522,13 +516,13 @@ function spreadServiceToStationPairs(stations)
 	while(#station_service_pool > 0) do
 		local service = tableRemoveRandom(station_service_pool)
 		if #station_pool < 1 then
-			for _,station in ipairs(stations) do
+			for i,station in ipairs(stations) do
 				table.insert(station_pool,station)
 			end
 		end
 		local station_1 = tableRemoveRandom(station_pool)
 		if #station_pool < 1 then
-			for _,station in ipairs(stations) do
+			for i,station in ipairs(stations) do
 				table.insert(station_pool,station)
 			end
 		end
@@ -666,6 +660,13 @@ function tableRemoveRandom(array)
     array[selected_item] = array[array_item_count]
     array[array_item_count] = temp
     return table.remove(array)
+end
+function tableSelectRandom(array)
+	local array_item_count = #array
+    if array_item_count == 0 then
+        return nil
+    end
+	return array[math.random(1,#array)]	
 end
 function angleFromVectorNorth(p1x,p1y,p2x,p2y)
 	TWOPI = 6.2831853071795865
@@ -1390,7 +1391,7 @@ function asteroidStorm()
 	if #storm_asteroids > 0 then
 		for i,asteroid in ipairs(storm_asteroids) do
 			if asteroid ~= nil and asteroid:isValid() then
-				if asteroid.typeName == "Asteroid" then
+				if isObjectType(asteroid,"Asteroid") then
 					real = real + 1
 				else
 					visual = visual + 1
@@ -1683,9 +1684,7 @@ function checkZones(p,delta)
 		end
 	end
 end
----------------------------
--- Station communication --
----------------------------
+
 function update(delta)
 	if delta == 0 then
 		return
@@ -1716,7 +1715,7 @@ function update(delta)
     for i, enemy in ipairs(enemy_list) do
         if enemy ~= nil and enemy:isValid() then
             enemy_count = enemy_count + 1
-            if enemy.typeName == "SpaceStation" or enemy:getTypeName() == "Defense platform" then
+            if isObjectType(enemy,"SpaceStation") or enemy:getTypeName() == "Defense platform" then
             	enemy_base_count = enemy_base_count + 1
             else
             	if enemy:getOrder() == "Idle" or enemy:getOrder() == "Defend Location" then

@@ -42,7 +42,6 @@ public:
         view_position = _view_position;
         visible_objects = _visible_objects;
 
-
         for(auto& handler : handlers) {
             if ((handler.flags & flags) == handler.flags)
                 handler.func(renderer, handler.rrif);
@@ -53,6 +52,7 @@ public:
     static constexpr int FlagLongRange = 0x01;
     static constexpr int FlagShortRange = 0x02;
     static constexpr int FlagGM = 0x04;
+    static constexpr int FlagCallsigns = 0x08;
     static int current_flags;
 private:
     static float current_scale;

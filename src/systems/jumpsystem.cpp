@@ -1,4 +1,5 @@
 #include "systems/jumpsystem.h"
+#include "multiplayer_server.h"
 #include "components/docking.h"
 #include "components/collision.h"
 #include "components/impulse.h"
@@ -43,11 +44,12 @@ void JumpSystem::update(float delta)
 
                 auto distance = (jump.distance * f) + (jump.distance * (1.0f - f) * random(0.5, 1.5));
                 auto target_position = position.getPosition() + vec2FromAngle(position.getRotation()) * distance;
-                target_position = WarpSystem::getFirstNoneJammedPosition(position.getPosition(), target_position);
+                target_position = WarpSystem::getFirstNonJammedPosition(position.getPosition(), target_position);
                 position.setPosition(target_position);
-                if (entity.hasComponent<Coolant>())
+                if (game_server && entity.hasComponent<Coolant>())
                     jump.addHeat(jump.heat_per_jump);
 
+                jump.charge -= jump.distance;
                 jump.delay = 0.f;
             }
         } else {
@@ -86,7 +88,32 @@ void JumpSystem::initializeJump(sp::ecs::Entity entity, float distance)
     if (jump->delay <= 0.0f)
     {
         jump->distance = distance;
-        jump->delay = 10.f;
-        jump->charge -= distance;
+        jump->delay = jump->activation_delay;
     }
+}
+
+void JumpSystem::abortJump(sp::ecs::Entity entity)
+{
+    auto jump = entity.getComponent<JumpDrive>();
+    if (!jump) return;
+    if (jump->delay <= 0.0f) return;
+    float abort_penalty = 0.1f + (jump->activation_delay - jump->delay) / jump->activation_delay;
+
+    // Discharge the jump charge by a fraction of the completed jump.
+    // Aborting a jump quickly should consume less charge.
+    jump->charge = std::max(0.0f, jump->charge - (jump->distance * abort_penalty));
+
+    // Discourage frequently aborting jumps by flooding the system with heat
+    // that would've been vented into space otherwise.
+    // Aborting a jump quickly generates less system heat.
+    // Aborting a jump late generates significantly more heat than jumping.
+    if (entity.hasComponent<Coolant>())
+        jump->addHeat(abort_penalty);
+    else
+        jump->health -= abort_penalty; // If not using coolant, directly damage the system.
+
+    // Reset the fixed jump delay.
+    jump->delay = 0.0f;
+    // Show jump effect based on abort penalty.
+    jump->just_jumped = abort_penalty;
 }

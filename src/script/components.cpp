@@ -7,6 +7,7 @@
 #include "script/callback.h"
 #include "components/collision.h"
 #include "components/radar.h"
+#include "components/sfx.h"
 #include "components/rendering.h"
 #include "components/spin.h"
 #include "components/orbit.h"
@@ -44,6 +45,7 @@
 #include "components/customshipfunction.h"
 #include "components/zone.h"
 #include "components/shiplog.h"
+#include "components/destroy.h"
 
 
 #define STRINGIFY(n) #n
@@ -67,6 +69,8 @@
             t->MEMBER = sp::script::Convert<std::remove_cv_t<std::remove_reference_t<decltype(t->MEMBER)>>>::fromLua(L, -1); \
         } \
     };
+// Bind a member using getter and setter functions for validation.
+// The getter must be const.
 #define BIND_MEMBER_GS(T, NAME, GET, SET) \
     sp::script::ComponentHandler<T>::members[NAME] = { \
         [](lua_State* L, const void* ptr) { \
@@ -182,7 +186,8 @@
     BIND_MEMBER(T, coolant_change_rate_per_second); \
     BIND_MEMBER(T, heat_add_rate_per_second); \
     BIND_MEMBER(T, power_change_rate_per_second); \
-    BIND_MEMBER(T, auto_repair_per_second);
+    BIND_MEMBER(T, auto_repair_per_second); \
+    BIND_MEMBER(T, damage_per_second_on_overheat);
 
 
 void initComponentScriptBindings()
@@ -261,6 +266,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(MeshRenderComponent, texture.name, "texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, specular_texture.name, "specular_texture");
     BIND_MEMBER_NAMED(MeshRenderComponent, illumination_texture.name, "illumination_texture");
+    BIND_MEMBER_NAMED(MeshRenderComponent, normal_texture.name, "normal_texture");
     BIND_MEMBER(MeshRenderComponent, mesh_offset);
     BIND_MEMBER(MeshRenderComponent, scale);
     sp::script::ComponentHandler<BillboardRenderer>::name("billboard_render");
@@ -291,7 +297,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(Orbit, time);
 
     sp::script::ComponentHandler<AvoidObject>::name("avoid_object");
-    BIND_MEMBER(AvoidObject, range);
+    BIND_MEMBER_GS(AvoidObject, "range", getRange, setRange);
+
+    sp::script::ComponentHandler<DelayedAvoidObject>::name("delayed_avoid_object");
+    BIND_MEMBER(DelayedAvoidObject, delay);
+    BIND_MEMBER_GS(DelayedAvoidObject, "range", getRange, setRange);
 
     sp::script::ComponentHandler<ExplodeOnTouch>::name("explode_on_touch");
     BIND_MEMBER(ExplodeOnTouch, damage_at_center);
@@ -311,6 +321,38 @@ void initComponentScriptBindings()
     BIND_MEMBER(DelayedExplodeOnTouch, damage_type);
     BIND_MEMBER(DelayedExplodeOnTouch, explosion_sfx);
 
+    sp::script::ComponentHandler<MissileFlight>::name("missile_flight");
+    BIND_MEMBER(MissileFlight, speed);
+    BIND_MEMBER(MissileFlight, timeout);
+
+    sp::script::ComponentHandler<MissileHoming>::name("missile_homing");
+    BIND_MEMBER(MissileHoming, turn_rate);
+    BIND_MEMBER(MissileHoming, range);
+    BIND_MEMBER(MissileHoming, target);
+    BIND_MEMBER(MissileHoming, target_angle);
+
+    sp::script::ComponentHandler<ExplodeOnTimeout>::name("explode_on_timeout");
+
+    sp::script::ComponentHandler<ExplosionEffect>::name("explosion_effect");
+    BIND_MEMBER(ExplosionEffect, size);
+    BIND_MEMBER(ExplosionEffect, radar);
+    BIND_MEMBER(ExplosionEffect, electrical);
+
+    sp::script::ComponentHandler<Sfx>::name("sfx");
+    sp::script::ComponentHandler<Sfx>::members["sound"] = {
+        [](lua_State* L, const void* ptr) {
+            auto p = reinterpret_cast<const Sfx*>(ptr);
+            return sp::script::Convert<string>::toLua(L, p->sound);
+        }, [](lua_State* L, void* ptr) {
+            auto p = reinterpret_cast<Sfx*>(ptr);
+            p->sound = sp::script::Convert<string>::fromLua(L, -1);
+            p->played = false;
+        }
+    };
+    BIND_MEMBER(Sfx, sound);
+    BIND_MEMBER(Sfx, volume);
+    BIND_MEMBER(Sfx, pitch);
+
     sp::script::ComponentHandler<CallSign>::name("callsign");
     BIND_MEMBER(CallSign, callsign);
     sp::script::ComponentHandler<TypeName>::name("typename");
@@ -320,13 +362,18 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<LongRangeRadar>::name("long_range_radar");
     BIND_MEMBER(LongRangeRadar, short_range);
     BIND_MEMBER(LongRangeRadar, long_range);
-    BIND_MEMBER(LongRangeRadar, radar_view_linked_entity);
-    BIND_ARRAY_DIRTY_FLAG(LongRangeRadar, waypoints, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, x, waypoints_dirty);
-    BIND_ARRAY_DIRTY_FLAG_MEMBER(LongRangeRadar, waypoints, y, waypoints_dirty);
-    BIND_MEMBER(LongRangeRadar, on_probe_link);
-    BIND_MEMBER(LongRangeRadar, on_probe_unlink);
+
+    sp::script::ComponentHandler<Waypoints>::name("waypoints");
+    BIND_ARRAY_DIRTY_FLAG(Waypoints, waypoints, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "id", id, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "x", position.x, dirty);
+    BIND_ARRAY_DIRTY_FLAG_MEMBER_NAMED(Waypoints, waypoints, "y", position.y, dirty);
     sp::script::ComponentHandler<ShareShortRangeRadar>::name("share_short_range_radar");
+
+    sp::script::ComponentHandler<RadarLink>::name("radar_link");
+    BIND_MEMBER(RadarLink, linked_entity);
+    BIND_MEMBER(RadarLink, on_link);
+    BIND_MEMBER(RadarLink, on_unlink);
     sp::script::ComponentHandler<AllowRadarLink>::name("allow_radar_link");
     BIND_MEMBER(AllowRadarLink, owner);
 
@@ -355,6 +402,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, front_system.heat_add_rate_per_second, "front_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.power_change_rate_per_second, "front_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, front_system.auto_repair_per_second, "front_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, front_system.damage_per_second_on_overheat, "front_damage_per_second_on_overheat");
     BIND_MEMBER_NAMED(Shields, rear_system.health, "rear_health");
     BIND_MEMBER_NAMED(Shields, rear_system.health_max, "rear_health_max");
     BIND_MEMBER_NAMED(Shields, rear_system.power_level, "rear_power_level");
@@ -369,6 +417,7 @@ void initComponentScriptBindings()
     BIND_MEMBER_NAMED(Shields, rear_system.heat_add_rate_per_second, "rear_heat_add_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.power_change_rate_per_second, "rear_power_change_rate_per_second");
     BIND_MEMBER_NAMED(Shields, rear_system.auto_repair_per_second, "rear_auto_repair_per_second");
+    BIND_MEMBER_NAMED(Shields, rear_system.damage_per_second_on_overheat, "rear_damage_per_second_on_overheat");
 
     BIND_MEMBER(Shields, active);
     BIND_MEMBER(Shields, calibration_time);
@@ -385,6 +434,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(DockingPort, state);
     BIND_MEMBER(DockingPort, target);
     BIND_MEMBER(DockingPort, auto_reload_missiles);
+    BIND_MEMBER(DockingPort, auto_reload_missile_time);
 
     sp::script::ComponentHandler<DockingBay>::name("docking_bay");
     BIND_MEMBER_FLAG(DockingBay, flags, "share_energy", DockingBay::ShareEnergy);
@@ -451,9 +501,10 @@ void initComponentScriptBindings()
 
     sp::script::ComponentHandler<BeamWeaponSys>::name("beam_weapons");
     BIND_SHIP_SYSTEM(BeamWeaponSys);
-    BIND_MEMBER(BeamWeaponSys, frequency);
+    BIND_MEMBER_GS(BeamWeaponSys, "frequency", getFrequency, setFrequency);
     BIND_MEMBER(BeamWeaponSys, system_target);
     BIND_ARRAY(BeamWeaponSys, mounts);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, position);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, direction);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, range);
@@ -468,6 +519,7 @@ void initComponentScriptBindings()
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, arc_color_fire);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, damage_type);
     BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, texture);
+    BIND_ARRAY_MEMBER(BeamWeaponSys, mounts, cooldown);
     sp::script::ComponentHandler<Target>::name("weapons_target");
     BIND_MEMBER(Target, entity);
     sp::script::ComponentHandler<BeamEffect>::name("beam_effect");
@@ -481,6 +533,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(BeamEffect, hit_normal);
     BIND_MEMBER(BeamEffect, fire_ring);
     BIND_MEMBER(BeamEffect, beam_texture);
+    BIND_MEMBER(BeamEffect, beam_color);
 
     sp::script::ComponentHandler<Reactor>::name("reactor");
     BIND_SHIP_SYSTEM(Reactor);
@@ -504,14 +557,22 @@ void initComponentScriptBindings()
     BIND_MEMBER(ManeuveringThrusters, rotation_request);
     sp::script::ComponentHandler<CombatManeuveringThrusters>::name("combat_maneuvering_thrusters");
     BIND_MEMBER(CombatManeuveringThrusters, charge);
+    BIND_MEMBER(CombatManeuveringThrusters, charge_time);
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.speed, "boost_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.speed, "strafe_speed");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.request, "boost_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.request, "strafe_request");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.active, "boost_active");
     BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.active, "strafe_active");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.max_time, "boost_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.max_time, "strafe_max_time");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, boost.heat_per_second, "boost_heat_per_second");
+    BIND_MEMBER_NAMED(CombatManeuveringThrusters, strafe.heat_per_second, "strafe_heat_per_second");
     sp::script::ComponentHandler<WarpDrive>::name("warp_drive");
     BIND_SHIP_SYSTEM(WarpDrive);
+    BIND_MEMBER(WarpDrive, charge_time);
+    BIND_MEMBER(WarpDrive, decharge_time);
+    BIND_MEMBER(WarpDrive, heat_per_warp);
     BIND_MEMBER(WarpDrive, max_level);
     BIND_MEMBER(WarpDrive, speed_per_level);
     BIND_MEMBER(WarpDrive, energy_warp_per_second);
@@ -521,12 +582,17 @@ void initComponentScriptBindings()
     BIND_MEMBER(WarpJammer, range);
     sp::script::ComponentHandler<JumpDrive>::name("jump_drive");
     BIND_SHIP_SYSTEM(JumpDrive);
+    BIND_MEMBER(JumpDrive, charge_time);
+    BIND_MEMBER(JumpDrive, energy_per_km_charge);
+    BIND_MEMBER(JumpDrive, heat_per_jump);
     BIND_MEMBER(JumpDrive, min_distance);
     BIND_MEMBER(JumpDrive, max_distance);
+    BIND_MEMBER(JumpDrive, activation_delay);
     BIND_MEMBER(JumpDrive, charge);
     BIND_MEMBER(JumpDrive, distance);
     BIND_MEMBER(JumpDrive, delay);
-    
+    BIND_MEMBER(JumpDrive, just_jumped);
+
     sp::script::ComponentHandler<MissileTubes>::name("missile_tubes");
     BIND_SHIP_SYSTEM(MissileTubes);
     BIND_MEMBER_NAMED(MissileTubes, storage[int(MW_Homing)], "storage_homing");
@@ -576,6 +642,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanState, allow_simple_scan);
     BIND_MEMBER(ScanState, complexity);
     BIND_MEMBER(ScanState, depth);
+    BIND_MEMBER(ScanState, on_scan_initiated);
+    BIND_MEMBER(ScanState, on_scan_completed);
+    BIND_MEMBER(ScanState, on_scan_cancelled);
     BIND_ARRAY_DIRTY_FLAG(ScanState, per_faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, state, per_faction_dirty);
@@ -708,6 +777,11 @@ void initComponentScriptBindings()
     BIND_MEMBER(PickupCallback, callback);
     BIND_MEMBER(PickupCallback, player);
     BIND_MEMBER(PickupCallback, give_energy);
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Homing)], "give_homing");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Nuke)], "give_nuke");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_Mine)], "give_mine");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_EMP)], "give_emp");
+    BIND_MEMBER_NAMED(PickupCallback, give_missile[int(MW_HVLI)], "give_hvli");
 
     sp::script::ComponentHandler<CollisionCallback>::name("collision_callback");
     BIND_MEMBER(CollisionCallback, callback);
@@ -725,14 +799,16 @@ void initComponentScriptBindings()
     sp::script::ComponentHandler<Zone>::name("zone");
     BIND_MEMBER(Zone, color);
     BIND_MEMBER(Zone, label);
+    BIND_MEMBER(Zone, skybox);
+    BIND_MEMBER(Zone, skybox_fade_distance);
     sp::script::ComponentHandler<Zone>::members["points"] = {
         [](lua_State* L, const void* ptr) {
             auto zone = reinterpret_cast<const Zone*>(ptr);
             lua_newtable(L);
             for(size_t n=0; n<zone->outline.size(); n++) {
                 lua_newtable(L);
-                lua_pushnumber(L, zone->outline[n].x); lua_seti(L, -2, 1);
-                lua_pushnumber(L, zone->outline[n].y); lua_seti(L, -2, 2);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].x)); lua_seti(L, -2, 1);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].y)); lua_seti(L, -2, 2);
                 lua_seti(L, -2, n+1);
             }
             return 1;
@@ -755,4 +831,7 @@ void initComponentScriptBindings()
             zone->zone_dirty = true;
         }
     };
+
+    sp::script::ComponentHandler<OnDestroyed>::name("on_destroyed");
+    BIND_MEMBER(OnDestroyed, callback);
 }

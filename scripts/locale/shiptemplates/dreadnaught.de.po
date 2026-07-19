@@ -10,19 +10,23 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
+
 #: scripts/shiptemplates/dreadnaught.lua:9
 msgctxt "ship"
 msgid "Odin"
-msgstr ""
+msgstr "Odin"
+
 #: scripts/shiptemplates/dreadnaught.lua:9
 msgctxt "class"
 msgid "Dreadnought"
 msgstr "Schlachtschiff"
+
 #: scripts/shiptemplates/dreadnaught.lua:9
 msgctxt "subclass"
 msgid "Odin"
 msgstr "Odin"
+
 #: scripts/shiptemplates/dreadnaught.lua:11
 msgid ""
 "The Odin is a \"ship\" so large and unique that it's almost a class of its "
@@ -61,4 +65,3 @@ msgstr ""
 "Die Haupttaktik dieses Schiffes ist es, ueberraschend in feindliche Systeme "
 "zu springen und alles zu zerstoeren, bevor sie begreifen, was geschieht. Es "
 "ist effektiv und zerstoererisch, aber auch extrem kostspielig."
-#, fuzzy

@@ -56,6 +56,7 @@
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
+#include "systems/probe.h"
 #include "systems/comms.h"
 #include "systems/scanning.h"
 
@@ -103,6 +104,7 @@ static const uint16_t CMD_HACKING_FINISHED = 0x0028;
 static const uint16_t CMD_CUSTOM_FUNCTION = 0x0029;
 static const uint16_t CMD_TURN_SPEED = 0x002A;
 static const uint16_t CMD_CREW_SET_TARGET = 0x002B;
+static const uint16_t CMD_ABORT_JUMP = 0x002C;
 
 //Pre-ship commands
 static const uint16_t CMD_UPDATE_CREW_POSITION = 0x0101;
@@ -139,6 +141,29 @@ void PlayerInfo::reset()
     main_screen_control = 0;
     last_ship_password = "";
     crew_positions.clear();
+}
+
+// Return the total number of positions populated by this player.
+int PlayerInfo::countTotalPlayerPositions()
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for (auto monitor : crew_positions)
+        for ([[maybe_unused]] auto position : monitor) count++;
+
+    return count;
+}
+
+// Return the total number of positions populated by this player.
+int PlayerInfo::countPlayerPositionsOnMonitor(int monitor)
+{
+    if (crew_positions.empty()) return 0;
+
+    int count = 0;
+    for ([[maybe_unused]] auto position : crew_positions[monitor]) count++;
+
+    return count;
 }
 
 bool PlayerInfo::hasPosition(CrewPosition cp)
@@ -192,6 +217,13 @@ void PlayerInfo::commandJump(float distance)
 {
     sp::io::DataBuffer packet;
     packet << CMD_JUMP << distance;
+    sendClientCommand(packet);
+}
+
+void PlayerInfo::commandAbortJump()
+{
+    sp::io::DataBuffer packet;
+    packet << CMD_ABORT_JUMP;
     sendClientCommand(packet);
 }
 
@@ -264,10 +296,10 @@ void PlayerInfo::commandMainScreenOverlay(MainScreenOverlay mainScreen)
     sendClientCommand(packet);
 }
 
-void PlayerInfo::commandScan(sp::ecs::Entity object)
+void PlayerInfo::commandScan(sp::ecs::Entity object, sp::ecs::Entity scan_source)
 {
     sp::io::DataBuffer packet;
-    packet << CMD_SCAN_OBJECT << object;
+    packet << CMD_SCAN_OBJECT << object << scan_source;
     sendClientCommand(packet);
 }
 
@@ -619,6 +651,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             JumpSystem::initializeJump(ship, distance);
         }
         break;
+    case CMD_ABORT_JUMP:
+        JumpSystem::abortJump(ship);
+        break;
     case CMD_SET_TARGET:
         {
             sp::ecs::Entity target;
@@ -691,17 +726,27 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         packet >> mso;
         if (auto pc = ship.getComponent<PlayerControl>())
             pc->main_screen_overlay = mso;
-        }break;
+        }
         break;
     case CMD_SCAN_OBJECT:
         {
             sp::ecs::Entity e;
-            packet >> e;
+            sp::ecs::Entity source;
+            packet >> e >> source;
 
             if (auto scanner = ship.getComponent<ScienceScanner>())
             {
                 scanner->delay = scanner->max_scanning_delay;
                 scanner->target = e;
+                if (source) scanner->source = source;
+                else scanner->source = ship;
+
+                // Fire onScanInitiated callback
+                if (auto ss = e.getComponent<ScanState>())
+                {
+                    if (ss->on_scan_initiated)
+                        LuaConsole::checkResult(ss->on_scan_initiated.call<void>(e, ship, scanner->source));
+                }
             }
         }
         break;
@@ -709,8 +754,18 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         ScanningSystem::scanningFinished(ship);
         break;
     case CMD_SCAN_CANCEL:
-        if (auto ss = ship.getComponent<ScienceScanner>()) {
-            ss->target = {};
+        if (auto scanner = ship.getComponent<ScienceScanner>()) {
+            // Fire onScanCancelled callback
+            if (scanner->target)
+            {
+                if (auto ss = scanner->target.getComponent<ScanState>())
+                {
+                    if (ss->on_scan_cancelled)
+                        LuaConsole::checkResult(ss->on_scan_cancelled.call<void>(scanner->target, ship, scanner->source));
+                }
+            }
+            scanner->target = {};
+            scanner->source = {};
         }
         break;
     case CMD_SET_SYSTEM_POWER_REQUEST:
@@ -718,9 +773,9 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             ShipSystem::Type system;
             float request;
             packet >> system >> request;
-            auto sys = ShipSystem::get(ship, system);
-            if (sys && request >= 0.0f && request <= 3.0f)
-                sys->power_request = request;
+
+            if (auto sys = ShipSystem::get(ship, system))
+                sys->power_request = std::clamp(request, 0.0f, 3.0f);
         }
         break;
     case CMD_SET_SYSTEM_COOLANT_REQUEST:
@@ -729,12 +784,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             float request;
             packet >> system >> request;
 
-            auto coolant = ship.getComponent<Coolant>();
-            if (coolant) {
-                request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
-                auto sys = ShipSystem::get(ship, system);
-                if (sys)
-                    sys->coolant_request = request;
+            if (auto coolant = ship.getComponent<Coolant>())
+            {
+                if (auto sys = ShipSystem::get(ship, system))
+                    sys->coolant_request = std::clamp(request, 0.0f, std::min(coolant->max_coolant_per_system, coolant->max));
             }
         }
         break;
@@ -796,9 +849,8 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             int32_t new_frequency;
             packet >> new_frequency;
-            auto beamweapons = ship.getComponent<BeamWeaponSys>();
-            if (beamweapons)
-                beamweapons->frequency = std::clamp(new_frequency, 0, BeamWeaponSys::max_frequency);
+            if (auto beam_weapons = ship.getComponent<BeamWeaponSys>())
+                beam_weapons->setFrequency(new_frequency);
         }
         break;
     case CMD_SET_BEAM_SYSTEM_TARGET:
@@ -807,7 +859,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> system;
             auto beamweapons = ship.getComponent<BeamWeaponSys>();
             if (beamweapons)
-                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, 0, (int)(ShipSystem::COUNT - 1));
+                beamweapons->system_target = (ShipSystem::Type)std::clamp((int)system, -1, (int)(ShipSystem::COUNT - 1));
         }
         break;
     case CMD_SET_SHIELD_FREQUENCY:
@@ -831,33 +883,28 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         {
             glm::vec2 position{};
             packet >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && lrr->waypoints.size() < 9) {
-                lrr->waypoints.push_back(position);
-                lrr->waypoints_dirty = true;
+            auto wp = ship.getComponent<Waypoints>();
+            if (wp) {
+                wp->addNew(position);
             }
         }
         break;
     case CMD_REMOVE_WAYPOINT:
         {
-            int32_t index;
-            packet >> index;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints.erase(lrr->waypoints.begin() + index);
-                lrr->waypoints_dirty = true;
+            int32_t id;
+            packet >> id;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->remove(id);
             }
         }
         break;
     case CMD_MOVE_WAYPOINT:
         {
-            int32_t index;
+            int32_t id;
             glm::vec2 position{};
-            packet >> index >> position;
-            auto lrr = ship.getComponent<LongRangeRadar>();
-            if (lrr && index >= 0 && index < int(lrr->waypoints.size())) {
-                lrr->waypoints[index] = position;
-                lrr->waypoints_dirty = true;
+            packet >> id >> position;
+            if (auto wp = ship.getComponent<Waypoints>()) {
+                wp->move(id, position);
             }
         }
         break;
@@ -901,47 +948,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_LAUNCH_PROBE:
-        if (auto spl = ship.getComponent<ScanProbeLauncher>())
         {
-            auto t = ship.getComponent<sp::Transform>();
-            if (t && spl->stock > 0) {
-                glm::vec2 target{};
-                packet >> target;
-
-                auto p = sp::ecs::Entity::create();
-                p.addComponent<sp::Transform>(*t);
-                p.addComponent<LifeTime>().lifetime = 60*10;
-                if (auto faction = ship.getComponent<Faction>())
-                    p.addComponent<Faction>() = *faction;
-                auto& mt = p.addComponent<MoveTo>();
-                mt.target = target;
-                mt.speed = 1000;
-                p.addComponent<AllowRadarLink>().owner = ship;
-                //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
-                auto& trace = p.addComponent<RadarTrace>();
-                trace.icon = "radar/probe.png";
-                trace.min_size = 10.0;
-                trace.max_size = 10.0;
-                trace.color = {96, 192, 128, 255};
-                trace.flags = RadarTrace::LongRange;
-                auto& hull = p.addComponent<Hull>();
-                hull.current = hull.max = 1;
-                p.addComponent<ShareShortRangeRadar>();
-                auto model = "SensorBuoy/SensorBuoyMKI.model";
-                auto idx = irandom(1, 3);
-                if (idx == 2) model = "SensorBuoy/SensorBuoyMKII.model";
-                if (idx == 3) model = "SensorBuoy/SensorBuoyMKIII.model";
-                auto& mrc = p.addComponent<MeshRenderComponent>();
-                mrc.mesh.name = model;
-                mrc.texture.name = "SensorBuoy/SensorBuoyAlbedoAO.png";
-                mrc.specular_texture.name = "SensorBuoy/SensorBuoyPBRSpecular.png";
-                mrc.scale = 300;
-                auto& phy = p.addComponent<sp::Physics>();
-                phy.setCircle(sp::Physics::Type::Sensor, 15);
-                if (spl->on_launch)
-                    LuaConsole::checkResult(spl->on_launch.call<void>(ship, p));
-                spl->stock--;
-            }
+            glm::vec2 target{};
+            packet >> target;
+            ProbeSystem::launch(ship, target);
         }
         break;
     case CMD_SET_ALERT_LEVEL:{
@@ -957,13 +967,13 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
             packet >> target;
 
             // TODO: Check if this probe is ours
-            if (auto lrr = ship.getComponent<LongRangeRadar>()) {
-                auto old = lrr->radar_view_linked_entity;
-                if (lrr->on_probe_link && target)
-                    LuaConsole::checkResult(lrr->on_probe_link.call<void>(ship, target));
-                lrr->radar_view_linked_entity = target;
-                if (lrr->on_probe_unlink && old)
-                    LuaConsole::checkResult(lrr->on_probe_unlink.call<void>(ship, old));
+            if (auto rl = ship.getComponent<RadarLink>()) {
+                auto old = rl->linked_entity;
+                if (rl->on_link && target)
+                    LuaConsole::checkResult(rl->on_link.call<void>(ship, target));
+                rl->linked_entity = target;
+                if (rl->on_unlink && old)
+                    LuaConsole::checkResult(rl->on_unlink.call<void>(ship, old));
             }
         }
         break;
@@ -998,6 +1008,7 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
                             auto cb = f.callback;
                             cb.call<void>();
                             csf->functions.erase(std::remove_if(csf->functions.begin(), csf->functions.end(), [name](const CustomShipFunctions::Function& f) { return f.name == name; }), csf->functions.end());
+                            csf->functions_dirty = true;
                         }
                         break;
                     }
@@ -1162,16 +1173,16 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::engineering: return "gui/icons/station-engineering";
     case CrewPosition::scienceOfficer: return "gui/icons/station-science";
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
-    case CrewPosition::tacticalOfficer: return "";
-    case CrewPosition::engineeringAdvanced: return "";
-    case CrewPosition::operationsOfficer: return "";
-    case CrewPosition::singlePilot: return "";
-    case CrewPosition::damageControl: return "";
-    case CrewPosition::powerManagement: return "";
-    case CrewPosition::databaseView: return "";
-    case CrewPosition::altRelay: return "";
-    case CrewPosition::commsOnly: return "";
-    case CrewPosition::shipLog: return "";
+    case CrewPosition::tacticalOfficer: return "gui/icons/station-tactical";
+    case CrewPosition::engineeringAdvanced: return "gui/icons/station-engineering-plus";
+    case CrewPosition::operationsOfficer: return "gui/icons/station-operations";
+    case CrewPosition::singlePilot: return "gui/icons/station-single-pilot";
+    case CrewPosition::damageControl: return "gui/icons/status_damaged";
+    case CrewPosition::powerManagement: return "gui/icons/status_low_energy";
+    case CrewPosition::databaseView: return "gui/icons/station-database";
+    case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
+    case CrewPosition::commsOnly: return "gui/icons/station-comms";
+    case CrewPosition::shipLog: return "gui/icons/station-ship-log";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

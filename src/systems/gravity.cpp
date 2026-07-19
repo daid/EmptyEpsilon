@@ -21,6 +21,7 @@ void GravitySystem::update(float delta)
         for(auto target : sp::CollisionSystem::queryArea(source_transform.getPosition() - glm::vec2(grav.range, grav.range), source_transform.getPosition() + glm::vec2(grav.range, grav.range))) {
             if (target == source) continue;
             auto tt = target.getComponent<sp::Transform>();
+            if (!tt) continue;
             auto diff = source_transform.getPosition() - tt->getPosition();
             float dist2 = std::max(1.0f, glm::length2(diff));
             if (dist2 > grav.range*grav.range)
@@ -74,10 +75,11 @@ void GravitySystem::update(float delta)
 
 void GravitySystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity e, glm::vec2 screen_position, float scale, float rotation, Gravity& component)
 {
-    if (component.wormhole_target.x != 0 || component.wormhole_target.y != 0) {
-        auto transform = e.getComponent<sp::Transform>();
-        auto offset = component.wormhole_target - transform->getPosition();
-        renderer.drawLine(screen_position, screen_position + glm::vec2(offset.x, offset.y) * scale, glm::u8vec4(255, 255, 255, 32));
+    // womrhole_target isn't replicated, so show only on the server.
+    if (game_server && (component.wormhole_target.x != 0.0f || component.wormhole_target.y != 0.0f))
+    {
+        if (auto transform = e.getComponent<sp::Transform>())
+            renderer.drawLine(screen_position, screen_position + (component.wormhole_target - transform->getPosition()) * scale, glm::u8vec4(255, 255, 255, 32));
     }
     renderer.drawCircleOutline(screen_position, component.range * scale, 2.0, glm::u8vec4(255, 255, 255, 32));
 }

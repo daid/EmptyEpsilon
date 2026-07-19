@@ -17,7 +17,6 @@
 #include "menus/mainMenus.h"
 #include "menus/autoConnectScreen.h"
 #include "menus/shipSelectionScreen.h"
-#include "menus/optionsMenu.h"
 #include "main.h"
 #include "epsilonServer.h"
 #include "httpScriptAccess.h"
@@ -93,21 +92,50 @@ int main(int argc, char** argv)
 #else
     Logging::setLogLevel(LOGLEVEL_INFO);
 #endif
+
+// Log to STDOUT unless on non-debug Windows builds, which won't have
+// terminals for log output.
 #if defined(_WIN32) && !defined(DEBUG)
     Logging::setLogFile("EmptyEpsilon.log");
 #else
     Logging::setLogStdout();
 #endif
+
     LOG(Info, "Starting...");
     new Engine();
     initSystemsAndComponents();
 
     auto configuration_path = initConfiguration(argc, argv);
 
+    if (PreferencesManager::get("headless") == "")
+    {
+#ifdef _WIN32
+        mkdir(configuration_path.c_str());
+#else
+        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+// On macOS non-debug builds, redirect the log to the configuration directory if
+// invoked as an app bundle.
+#ifdef __APPLE__
+        const char* argv0 = *argv;
+        std::string launch_path(argv0);
+
+        // Check if the path ends with .app/Contents/MacOS/
+        // If so, we're invoked as an app bundle. Write the log to file.
+        size_t pos = launch_path.find(".app/Contents/MacOS/");
+        if (pos != std::string::npos)
+            Logging::setLogFile(configuration_path + "/EmptyEpsilon.log");
+        // If not, we might be invoked as a binary and can log to STDOUT.
+        else Logging::setLogStdout();
+#endif // __APPLE__
+
+#endif // _WIN32
+    }
+
     if (PreferencesManager::get("proxy") != "")
         return runProxyServer();
 
-    if (PreferencesManager::get("headless") != "") {
+    if (PreferencesManager::get("headless") != "")
+    {
         textureManager.setDisabled(true);
         Logging::setLogStdout();
     }
@@ -117,8 +145,6 @@ int main(int argc, char** argv)
     textureManager.setDefaultRepeated(true);
     i18n::load("locale/main." + PreferencesManager::get("language", "en") + ".po");
     keys.init();
-    colorConfig.load();
-
     if (PreferencesManager::get("httpserver").toInt() != 0)
     {
         int port_nr = PreferencesManager::get("httpserver").toInt();
@@ -130,13 +156,13 @@ int main(int argc, char** argv)
     }
 
     string theme_name = PreferencesManager::get("guitheme", "default");
-    if (!GuiTheme::loadTheme(theme_name, "gui/"+theme_name+".theme.txt"))
+    if (!GuiTheme::loadTheme(theme_name, "gui/" + theme_name + ".theme.txt"))
     {
-        LOG(ERROR, "Failed to load "+ theme_name + " theme, trying default. Resources missing or contains errors ? Check gui/" + theme_name + ".theme.txt");
+        LOG(Error, "Failed to load " + theme_name + " theme, trying default. Resources missing or contains errors? Check gui/" + theme_name + ".theme.txt");
         if (!GuiTheme::loadTheme("default", "gui/default.theme.txt"))
         {
-            LOG(ERROR, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
-            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors ? Check gui/default.theme.txt", nullptr);
+            LOG(Error, "Failed to load default theme, exiting. Check gui/default.theme.txt"); //Yes, we may try to load twice default theme but this should be a rare error case which always finish in exit
+            SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "Failed to load gui theme, resources missing or contains errors? Check gui/default.theme.txt", nullptr);
             return 1;
         }
         GuiTheme::setCurrentTheme("default");
@@ -157,8 +183,9 @@ int main(int argc, char** argv)
     soundManager->setMusicVolume(PreferencesManager::get("music_volume", "50").toFloat());
     soundManager->setMasterSoundVolume(PreferencesManager::get("sound_volume", "50").toFloat());
 
-    main_font = GuiTheme::getCurrentTheme()->getStyle("base")->states[0].font;
-    bold_font = GuiTheme::getCurrentTheme()->getStyle("bold")->states[0].font;
+    const auto& active_theme = GuiTheme::getCurrentTheme();
+    main_font = active_theme->getStyle("base")->get(GuiElement::State::Normal).font;
+    bold_font = active_theme->getStyle("bold")->get(GuiElement::State::Normal).font;
     if (!main_font || !bold_font)
     {
         LOG(ERROR, "Missing font or bold font.");
@@ -168,14 +195,22 @@ int main(int argc, char** argv)
 
     sp::RenderTarget::setDefaultFont(main_font);
 
+    // Apply baseline offset adjustments to fonts
+    // Positive values move text down, negative values move text up
+    main_font->setBaselineOffset(active_theme->getStyle("base")->get(GuiElement::State::Normal).font_offset);
+    bold_font->setBaselineOffset(active_theme->getStyle("bold")->get(GuiElement::State::Normal).font_offset);
+
     // On Android, this requires the 'record audio' permissions,
     // which is always a scary thing for users.
     // Since there is no way to access it (yet) via a touchscreen, compile out.
 #if !defined(ANDROID)
     // Set up voice chat and key bindings.
-    NetworkAudioRecorder* nar = new NetworkAudioRecorder();
-    nar->addKeyActivation(&keys.voice_all, 0);
-    nar->addKeyActivation(&keys.voice_ship, 1);
+    if (PreferencesManager::get("voice_chat_enabled", "0") == "1")
+    {
+        NetworkAudioRecorder* nar = new NetworkAudioRecorder();
+        nar->addKeyActivation(&keys.voice_all, 0);
+        nar->addKeyActivation(&keys.voice_ship, 1);
+    }
 #endif
 
     P<HardwareController> hardware_controller = new HardwareController();
@@ -196,7 +231,16 @@ int main(int argc, char** argv)
     new SteamRichPresence();
 #endif //STEAMSDK
 
-    if (PreferencesManager::get("server_scenario") == "")
+    string tutorial = PreferencesManager::get("tutorial");   // use "00_all.lua" for all tutorials
+    string server_scenario = PreferencesManager::get("server_scenario");
+
+    if (!tutorial.empty())
+    {
+        bool repeat_tutorial = PreferencesManager::get("repeat_tutorial", "false") == "true";
+        LOG(DEBUG) << "Starting tutorial: " << tutorial;
+        new TutorialGame(repeat_tutorial, tutorial);
+    }
+    else if (server_scenario.empty())
         returnToMainMenu(defaultRenderLayer);
     else
     {
@@ -204,14 +248,29 @@ int main(int argc, char** argv)
         // using its defined default settings, and launches directly into
         // the ship selection screen instead of the main menu.
 
-        // Create the server.
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0 if empty or not an int).
+        int server_port = PreferencesManager::get("server_port").toInt();
+
+        if (server_port < 10 || server_port > 65535)
+        {
+            LOG(Warning, "Invalid server_port " + string(server_port));
+            server_port = defaultServerPort;
+        }
+
+        LOG(Info, "Launching server_scenario " + server_scenario + " on port " + string(server_port));
+        new EpsilonServer(server_port);
 
         if(!gameGlobalInfo) // => failed to start server
             return 1;
 
+        if (PreferencesManager::get("server_name") != "") game_server->setServerName(PreferencesManager::get("server_name"));
+        if (PreferencesManager::get("server_password") != "") game_server->setPassword(PreferencesManager::get("server_password").upper());
+        if (PreferencesManager::get("server_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
+
         // Load the scenario and open the ship selection screen.
-        gameGlobalInfo->startScenario(PreferencesManager::get("server_scenario"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(server_scenario, loadScenarioSettingsFromPrefs());
         new ShipSelectionScreen();
     }
 
@@ -238,11 +297,6 @@ int main(int argc, char** argv)
 
     if (PreferencesManager::get("headless") == "")
     {
-#ifdef _WIN32
-        mkdir(configuration_path.c_str());
-#else
-        mkdir(configuration_path.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#endif
         PreferencesManager::save(configuration_path + "/options.ini");
         sp::io::Keybinding::saveKeybindings(configuration_path + "/keybindings.json");
     }
@@ -260,28 +314,43 @@ void returnToMainMenu(RenderLayer* render_layer)
         return;
     }
 
-    if (PreferencesManager::get("headless") != "")
+    string headless = PreferencesManager::get("headless", "");
+    if (!headless.empty())
     {
-        new EpsilonServer(defaultServerPort);
+        // Create the server to listen on the assigned port.
+        // Use the default port if server_port isn't set or has an invalid
+        // value (toInt returns 0).
+        int headless_port = PreferencesManager::get("server_port").toInt();
+        // This is the same process as server_port and could be made DRY.
+        if (headless_port < 10 || headless_port > 65535)
+        {
+            LOG(Warning, "Invalid server_port: " + string(headless_port));
+            headless_port = defaultServerPort;
+        }
+
+        LOG(Info, "Launching headless scenario " + headless + " on port " + string(headless_port));
+        new EpsilonServer(headless_port);
+
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
-        gameGlobalInfo->startScenario(PreferencesManager::get("headless"), loadScenarioSettingsFromPrefs());
+        gameGlobalInfo->startScenario(headless, loadScenarioSettingsFromPrefs());
 
         if (PreferencesManager::get("startpaused") != "1")
             engine->setGameSpeed(1.0);
     }
-    else if (PreferencesManager::get("autoconnect").toInt())
+    else if (!PreferencesManager::get("autoconnect").empty())
     {
-        int crew_position = PreferencesManager::get("autoconnect").toInt() - 1;
-        if (crew_position < 0) crew_position = 0;
-        if (crew_position > static_cast<int>(CrewPosition::MAX)) crew_position = static_cast<int>(CrewPosition::MAX);
-        new AutoConnectScreen(CrewPosition(crew_position), PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
+        auto value = PreferencesManager::get("autoconnect");
+
+        std::vector<AutoConnectPosition> window_positions;
+        for (auto part : value.split(";"))
+            window_positions.push_back(AutoConnectPosition(part));
+
+        new AutoConnectScreen(window_positions, PreferencesManager::get("autocontrolmainscreen").toInt(), PreferencesManager::get("autoconnectship", "solo"));
     }
-    else if (PreferencesManager::get("tutorial").toInt())
+    else
     {
-        new TutorialGame(true);
-    }else{
         new MainMenu();
     }
 }
@@ -294,7 +363,7 @@ void returnToShipSelection(RenderLayer* render_layer)
             if (window_render_layers[n] == render_layer)
                 new SecondMonitorScreen(n);
     } else {
-        if (PreferencesManager::get("autoconnect").toInt())
+        if (PreferencesManager::get("autoconnect") != "")
         {
             //If we are auto connect, return to the auto connect screen instead of the ship selection. The returnToMainMenu will handle this.
             returnToMainMenu(render_layer);
@@ -306,9 +375,9 @@ void returnToShipSelection(RenderLayer* render_layer)
     }
 }
 
-void returnToOptionMenu()
+void returnToOptionMenu(OptionsMenu::ReturnTo return_to)
 {
-    new OptionsMenu();
+    new OptionsMenu(return_to);
 }
 
 std::unordered_map<string, string> loadScenarioSettingsFromPrefs()

@@ -24,7 +24,7 @@ void ImpulseSystem::update(float delta)
 
         auto request = std::clamp(impulse.request, -1.0f, 1.0f);
         if (warp_drive && (warp_drive->request > 0 || warp_drive->current > 0))
-            request = 1.0f;
+            request = 0.0f;
         if (impulse.actual < request)
         {
             if (cap_speed > 0)

@@ -10,6 +10,16 @@ void RadarBlockSystem::renderOnRadar(sp::RenderTarget& renderer, sp::ecs::Entity
     renderer.drawCircleOutline(screen_position, component.range * scale, 2.0, glm::u8vec4(255, 255, 255, 64));
 }
 
+bool RadarBlockSystem::inRadarBlock(glm::vec2 position)
+{
+    for(auto [entity, block, transform] : sp::ecs::Query<RadarBlock, sp::Transform>())
+    {
+        if (glm::length2(position - transform.getPosition()) < block.range*block.range)
+            return true;
+    }
+    return false;
+}
+
 bool RadarBlockSystem::isRadarBlockedFrom(glm::vec2 source, sp::ecs::Entity entity, float short_range)
 {
     if (entity.hasComponent<NeverRadarBlocked>()) return false;
