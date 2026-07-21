@@ -6,8 +6,13 @@
 
 
 namespace sp::io {
+    // Upper bound on element counts announced by a replicated vector's size prefix.
+    // Without it, a corrupt or hostile packet can announce a size near UINT32_MAX and
+    // force a multi-gigabyte resize() before a single element is actually read.
+    constexpr size_t max_replicated_vector_size = 1'000'000;
+
     template<typename T> static inline DataBuffer& operator << (DataBuffer& packet, const std::vector<T>& v) { packet << uint32_t(v.size()); for(size_t n=0; n<v.size(); n++) packet << v[n]; return packet;} \
-    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; v.resize(size); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
+    template<typename T> static inline DataBuffer& operator >> (DataBuffer& packet, std::vector<T>& v) { uint32_t size = 0; packet >> size; if (size > max_replicated_vector_size) { LOG(Warning, "Replicated vector size", size, "exceeds maximum", max_replicated_vector_size, "- clamping"); size = uint32_t(max_replicated_vector_size); } v.resize(size); for(size_t n=0; n<v.size(); n++) packet >> v[n]; return packet; }
 }
 
 enum class BasicReplicationRequest {
@@ -83,7 +88,7 @@ enum class BasicReplicationRequest {
     switch(BRR) { \
     case BasicReplicationRequest::SendAll: flags |= flag; tmp << target.FIELD.size(); break; \
     case BasicReplicationRequest::Update: if (target.FIELD.size() != backup->FIELD.size()) { flags |= flag; tmp << target.FIELD.size(); backup->FIELD.resize(target.FIELD.size()); } break; \
-    case BasicReplicationRequest::Receive: if (flags & flag) { size_t size; packet >> size; target.FIELD.resize(size); } break; \
+    case BasicReplicationRequest::Receive: if (flags & flag) { size_t size; packet >> size; if (size > sp::io::max_replicated_vector_size) { LOG(Warning, "Replicated vector size", size, "exceeds maximum", sp::io::max_replicated_vector_size, "- clamping"); size = sp::io::max_replicated_vector_size; } target.FIELD.resize(size); } break; \
     } \
     flag <<= 1; \
     for(size_t idx=0; (BRR==BasicReplicationRequest::Receive) || idx<target.FIELD.size(); idx++) { \
