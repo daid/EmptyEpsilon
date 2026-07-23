@@ -20,6 +20,7 @@ public:
 
     bool getValue() const;
     GuiToggleButton* setValue(bool value);
+    void toggle();
 private:
     void onClick();
 };

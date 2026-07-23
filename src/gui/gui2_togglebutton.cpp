@@ -52,6 +52,10 @@ bool GuiToggleButton::getValue() const
     return value;
 }
 
+void GuiToggleButton::toggle() {
+    onClick();  // trigger the click event used to toggle probe view vie key.
+}
+
 GuiToggleButton* GuiToggleButton::setValue(bool value)
 {
     if (this->value == value)

@@ -248,6 +248,7 @@ Keys::Keys() :
     // Science crew screen
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
     science_scan_abort("SCIENCE_SCAN_ABORT", "D"),
+    science_toggle_probe_view("SCIENCE_TOGGLE_PROBE_VIEW"),
     science_select_next_scannable("SCIENCE_SELECT_NEXT_SCANNABLE", "C"),
     science_scan_param_increase{{
         {"SCIENCE_SCAN_PARAM_INCREASE_1"},
@@ -459,6 +460,7 @@ void Keys::init()
     // Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
+    science_toggle_probe_view.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Toggle probe view"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
     for (auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
