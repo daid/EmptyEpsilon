@@ -21,7 +21,7 @@ void GuiCustomShipFunctions::onUpdate()
 void GuiCustomShipFunctions::checkEntries()
 {
     auto csf = my_spaceship.getComponent<CustomShipFunctions>();
-    int slot_count=0;
+    unsigned int slot_count=0;
     if (!csf) return;
 
     if (csf->functions.size() != entries.size())
@@ -44,7 +44,7 @@ void GuiCustomShipFunctions::checkEntries()
         }
         else if (csf->functions[n].type == CustomShipFunctions::Function::Type::Button)
         {
-            if (keys.trigger_custom_button[slot_count].getDown()) {
+            if (slot_count < keys.trigger_custom_button.size() && keys.trigger_custom_button[slot_count].getDown()) {
                 my_player_info->commandCustomFunction(entries[n].name);
             }
             slot_count++;
