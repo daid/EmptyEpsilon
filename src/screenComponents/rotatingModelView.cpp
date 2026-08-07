@@ -246,8 +246,10 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
 bool GuiRotatingModelView::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    // Positive value = scroll up = zoom in, negative value = scroll down = zoom out
-    zoom_level += value * 0.5f;
+    // Positive value = scroll up = zoom in, negative value = scroll down = zoom out.
+    // Multiplicative so each notch is the same relative step across the range.
+    constexpr float zoom_step = 1.1f;
+    zoom_level *= glm::pow(zoom_step, value);
 
     // Clamp zoom level to reasonable bounds
     zoom_level = glm::clamp(zoom_level, 0.3f, 5.0f);
