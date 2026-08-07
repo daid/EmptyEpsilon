@@ -181,6 +181,7 @@ void DatabaseViewComponent::display()
         if (mrc)
         {
 #ifdef DEBUG
+            visual->setAttribute("height", "1.5");
             (new GuiRotatingModelDebugView(visual, "DB_MODEL_VIEW", selected_entry))
                 ->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 #else
