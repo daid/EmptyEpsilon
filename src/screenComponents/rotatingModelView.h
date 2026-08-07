@@ -26,7 +26,8 @@ private:
 #ifdef DEBUG
     bool debug_show_normal_map = true;
     // Azimuth: degrees around Z axis (0 = forward, 90 = right).
-    // Elevation: degrees above the horizontal plane (0 = flat, 90 = straight down from above).
+    // Elevation: degrees from the horizontal plane, -90..90
+    // (0 = flat, 90 = straight down from above, -90 = straight up from below).
     float debug_light_azimuth = 45.f;
     float debug_light_elevation = 45.f;
 #endif

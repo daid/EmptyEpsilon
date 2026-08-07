@@ -376,7 +376,7 @@ GuiRotatingModelDebugView::GuiRotatingModelDebugView(GuiContainer* owner, string
     (new GuiLabel(panel, id + "_EL_LABEL", "Light elevation", label_h))
         ->setPosition(el_x, 4.f, sp::Alignment::TopLeft)
         ->setSize(ctrl_w, label_h);
-    (new GuiSlider(panel, id + "_EL_SLIDER", 0.f, 90.f, 45.f,
+    (new GuiSlider(panel, id + "_EL_SLIDER", -90.f, 90.f, 45.f,
         [this](float value) { setDebugLightElevation(value); }))
         ->setPosition(el_x, label_h + 4.f, sp::Alignment::TopLeft)
         ->setSize(ctrl_w, ctrl_h);
