@@ -19,7 +19,6 @@
 
 #ifdef DEBUG
 #include "gui/gui2_panel.h"
-#include "gui/gui2_togglebutton.h"
 #include "gui/gui2_slider.h"
 #include "gui/gui2_label.h"
 #endif
@@ -354,15 +353,8 @@ GuiRotatingModelDebugView::GuiRotatingModelDebugView(GuiContainer* owner, string
         ->setPosition(0.f, 0.f, sp::Alignment::BottomLeft)
         ->setSize(GuiElement::GuiSizeMax, panel_h);
 
-    (new GuiLabel(panel, id + "_NM_LABEL", "Normal map", label_h))
-        ->setPosition(8.f, 4.f, sp::Alignment::TopLeft)
-        ->setSize(ctrl_w, label_h);
-    (new GuiToggleButton(panel, id + "_NM_BTN", "ON",
-        [this](bool active) { setDebugShowNormalMap(active); }))
-        ->setValue(true)
-        ->setPosition(8.f, label_h + 4.f, sp::Alignment::TopLeft)
-        ->setSize(ctrl_w, ctrl_h);
-
+    // First column is left empty for the normal map toggle, which stays out of
+    // the UI until the resource packs ship normal maps.
     constexpr float az_x = ctrl_w + 24.f;
     (new GuiLabel(panel, id + "_AZ_LABEL", "Light azimuth", label_h))
         ->setPosition(az_x, 4.f, sp::Alignment::TopLeft)
