@@ -1,0 +1,16 @@
+Empty Epsilon
+How to get started and making your first commit step by step: 
+
+1.	There are a few options for IDE, pick the one you are most comfortable in. VS code is a popular choice. 
+2.	Fork the code. This allows you to freely add/edit the contents without effecting the actual code:  
+3.	After forking, you will then clone your forked repository
+4.	For VS code, make sure to install the GitHub extension. 
+5.	Back on GitHub, on your forked repository page, click the "Code" button and copy the HTTPS or SSH URL.
+6.	On VS code, open a new window and select clone git repo:  
+7.	From there, paste the link you copied from github and clone it. It will take a few moments.
+8.	Add your code or edit the files. 
+9.	Once you are done editing, you can commit and push your files back to your privated forked code on git. 
+10.	Once you are comfortable with your code and want to get your code reviewed to add to the open source project, make a pull request    
+11.	Once you have selected a new pull request, select compare and pull request button next to the branch you pushed your changes to. 
+12.	Now review changes and give a title and description for your pull request, and ensure that the changes look as expected. 
+13.	Lastly Click on the create pull request button to submit your changes for review by the project maintainers.
