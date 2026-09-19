@@ -48,6 +48,7 @@ void MissileSystem::update(float delta)
                     if (game_server)
                     {
                         spawnProjectile(entity, tube, 0, {});
+                        tube.fired += 1;
 
                         tube.fire_count -= 1;
                         if (tube.fire_count > 0)
@@ -194,6 +195,7 @@ void MissileSystem::startLoad(sp::ecs::Entity source, MissileTubes::MountPoint& 
     if (tubes->storage[type] <= 0)
         return;
 
+    tube.fired = 0;
     tube.state = MissileTubes::MountPoint::State::Loading;
     tube.delay = tube.load_time;
     tube.type_loaded = type;
@@ -227,6 +229,7 @@ void MissileSystem::fire(sp::ecs::Entity source, MissileTubes::MountPoint& tube,
         tube.delay = 0.0;
     }else{
         spawnProjectile(source, tube, target_angle, target);
+        tube.fired += 1;
         tube.state = MissileTubes::MountPoint::State::Empty;
         tube.type_loaded = MW_None;
     }
