@@ -1,0 +1,18 @@
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "ship"
+msgid "Odin"
+msgstr "奥丁号"
+
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "class"
+msgid "Dreadnought"
+msgstr "战列舰"
+
+#: scripts/shiptemplates/dreadnaught.lua:9
+msgctxt "subclass"
+msgid "Odin"
+msgstr "奥丁级"
+
+#: scripts/shiptemplates/dreadnaught.lua:11
+msgid """The Odin is a \"ship\" so large and unique that it's almost a class of its \nown.\n\nThe ship is often nicknamed the \"all-father\", a name that aptly describes \nthe many roles this ship can fulfill. It's both a supply station and an \nextremely heavily armored and shielded weapon station capable of \nannihilating small fleets on its own.\n\nOdin's core contains the largest jump drive ever created. About 150 support \ncrew are needed to operate the jump drive alone, and it takes 5 days of \ncontinuous operation to power it.\n\nDue to the enormous cost of this Dreadnought, only the richest star systems \nare able to build and maintain ships like the Odin.\n\nThis machine's primary tactic is to jump into an unsuspecting enemy system \nand destroy everything before they know what hit them. It's effective and \ndestructive, but extremely expensive."""
+msgstr """奥丁号是一艘庞大而独特的\"飞船\"，其规模之大几乎可以自成一派。\n\n这艘飞船常被昵称为\"众神之父\"，这个名称恰如其分地描述了它所能胜任的多种角色。它既是补给站，又是一个装备了极重装甲和强大护盾的武器平台，能够独自摧毁小型舰队。\n\n奥丁号的核心装载着有史以来最大的跳跃驱动器。仅操作该驱动器就需要约150名支援船员，并且需要连续运行5天才可完成充能。\n\n由于这艘战列舰造价极其昂贵，只有最富有的星系才有能力建造和维护像奥丁号这样的飞船。\n\n这台战争机器的主要战术是突然跃迁至毫无防备的敌方星系，在敌人尚未反应过来之前就摧毁一切。它威力强大、破坏力惊人，但代价也极为高昂。"""
