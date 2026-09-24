@@ -198,6 +198,11 @@ void GuiCommsOverlay::onUpdate()
     }
 }
 
+bool GuiCommsOverlay::isChatEntryFocused() const
+{
+    return chat_comms_box->isVisible() && chat_comms_message_entry->hasFocus();
+}
+
 void GuiCommsOverlay::clearElements()
 {
     // Force all panels to hide, in case hiding the overlay doesn't hide its
