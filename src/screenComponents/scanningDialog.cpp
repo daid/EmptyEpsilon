@@ -91,6 +91,10 @@ void GuiScanningDialog::onUpdate()
         for(int n=0; n<max_sliders; n++)
         {
             float adjust = (keys.science_scan_param_increase[n].getValue() - keys.science_scan_param_decrease[n].getValue()) * 0.01f;
+            if (keys.science_scan_param_decrease_step[n].getDown())
+                adjust =-0.02f;
+            if (keys.science_scan_param_increase_step[n].getDown())
+                adjust =0.02f;
             if (adjust != 0.0f)
             {
                 sliders[n]->setValue(sliders[n]->getValue() + adjust);

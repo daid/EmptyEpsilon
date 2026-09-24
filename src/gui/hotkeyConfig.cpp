@@ -244,6 +244,8 @@ Keys::Keys() :
     weapons_disable_aim_lock("WEAPONS_AIM_LOCK_DISABLE"),
     weapons_aim_left("WEAPONS_AIM_LEFT", "G"),
     weapons_aim_right("WEAPONS_AIM_RIGHT", "H"),
+    weapons_aim_left_step("WEAPONS_AIM_LEFT_STEP"),
+    weapons_aim_right_step("WEAPONS_AIM_RIGHT_STEP"),
 
     // Science crew screen
     science_scan_object("SCIENCE_SCAN_OBJECT", "S"),
@@ -266,6 +268,18 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_2"},
         {"SCIENCE_SCAN_PARAM_SET_3"},
         {"SCIENCE_SCAN_PARAM_SET_4"},
+    }},
+    science_scan_param_increase_step{{
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_INCREASE_STEP_4"},
+    }},
+    science_scan_param_decrease_step{{
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_1"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_2"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_3"},
+        {"SCIENCE_SCAN_PARAM_DECREASE_STEP_4"},
     }},
 
     // Engineering crew screen
@@ -292,9 +306,13 @@ Keys::Keys() :
     engineering_set_power_300("ENGINEERING_POWER_300"),
     engineering_increase_power("ENGINEERING_POWER_INCREASE", "]"),
     engineering_decrease_power("ENGINEERING_POWER_DECREASE", "["),
+    engineering_increase_power_stepped("ENGINEERING_POWER_INCREASE_STEPPED"),
+    engineering_decrease_power_stepped("ENGINEERING_POWER_DECREASE_STEPPED"),
     engineering_set_power("ENGINEERING_POWER_SET"),
     engineering_increase_coolant("ENGINEERING_COOLANT_INCREASE", "="),
     engineering_decrease_coolant("ENGINEERING_COOLANT_DECREASE", "-"),
+    engineering_increase_coolant_stepped("ENGINEERING_COOLANT_INCREASE_STEPPED"),
+    engineering_decrease_coolant_stepped("ENGINEERING_COOLANT_DECREASE_STEPPED"),
     engineering_set_coolant("ENGINEERING_COOLANT_SET"),
     engineering_next_repair_crew("ENGINEERING_REPAIR_CREW_NEXT", "C"),
     engineering_repair_crew_up("ENGINEERING_REPAIR_CREW_UP", "Up"),
@@ -455,6 +473,8 @@ void Keys::init()
     weapons_disable_aim_lock.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Disable missile aim lock"));
     weapons_aim_left.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the left"));
     weapons_aim_right.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim to the right"));
+    weapons_aim_left_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim left (15° steps)"));
+    weapons_aim_right_step.setLabel(tr("hotkey_menu", "Weapons"), tr("hotkey_Weapons", "Turn missile aim right (15° steps)"));
 
     // Science
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
@@ -465,6 +485,8 @@ void Keys::init()
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n + 1)}}));
         science_scan_param_decrease[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} decrease").format({{"number", string(n + 1)}}));
         science_scan_param_set[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Set scanning parameter {number} (joystick)").format({{"number", string(n + 1)}}));
+        science_scan_param_increase_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} increase stepwise").format({{"number", string(n+1)}}));
+        science_scan_param_decrease_step[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan parameter {number} decrease stepwise").format({{"number", string(n+1)}}));
     }
 
     // Engineering
@@ -489,9 +511,13 @@ void Keys::init()
     engineering_set_power_300.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power to 300%"));
     engineering_increase_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power"));
     engineering_decrease_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power"));
+    engineering_increase_power_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system power stepwise"));
+    engineering_decrease_power_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system power stepwise"));
     engineering_set_power.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system power (joystick)"));
     engineering_increase_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant"));
     engineering_decrease_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant"));
+    engineering_increase_coolant_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Increase system coolant stepwise"));
+    engineering_decrease_coolant_stepped.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Decrease system coolant stepwise"));
     engineering_set_coolant.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Set system coolant (joystick)"));
     engineering_next_repair_crew.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Next repair crew"));
     engineering_repair_crew_up.setLabel(tr("hotkey_menu", "Engineering"), tr("hotkey_Engineering", "Crew move up"));
