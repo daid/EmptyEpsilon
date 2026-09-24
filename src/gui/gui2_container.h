@@ -1,5 +1,4 @@
-#ifndef GUI2_CONTAINER_H
-#define GUI2_CONTAINER_H
+#pragma once
 
 #include <list>
 #include <memory>
@@ -17,6 +16,7 @@ namespace sp {
 class GuiElement;
 class GuiLayout;
 class GuiTheme;
+
 class GuiContainer : sp::NonCopyable
 {
 public:
@@ -59,10 +59,11 @@ public:
 
     virtual void setAttribute(const string& key, const string& value);
 protected:
-    virtual void drawElements(glm::vec2 mouse_position, sp::Rect parent_rect, sp::RenderTarget& window);
+    virtual void drawElements(glm::vec2 mouse_position, GuiElement* hovered_element, sp::Rect parent_rect, sp::RenderTarget& window);
     virtual void drawDebugElements(sp::Rect parent_rect, sp::RenderTarget& window);
     GuiElement* getClickElement(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id);
     GuiElement* executeScrollOnElement(glm::vec2 position, float value);
+    GuiElement* getHoverElement(glm::vec2 mouse_position);
 
     friend class GuiElement;
 
@@ -70,5 +71,3 @@ protected:
 private:
     std::unique_ptr<GuiLayout> layout_manager = nullptr;
 };
-
-#endif//GUI2_CONTAINER_H

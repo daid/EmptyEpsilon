@@ -4,7 +4,7 @@
 
 
 GuiElement::GuiElement(GuiContainer* owner, const string& id)
-: owner(owner), visible(true), enabled(true), hover(false), focus(false), id(id)
+: owner(owner), id(id)
 {
     owner->children.push_back(this);
     destroyed = false;
