@@ -3,18 +3,22 @@
 --- Upon reaching the center, any entity is instantly destroyed even if it's otherwise incapable of taking damage.
 --- AI behaviors avoid BlackHoles by a 2U margin.
 --- In 3D space, a BlackHole resembles a black sphere with blue horizon.
+--- The optional radius parameter specifies the radius of the BlackHole, default 5000
 --- Example: black_hole = BlackHole():setPosition(1000,2000)
 --- @type creation
-function BlackHole()
+function BlackHole(radius)
+    radius = radius or 5000
+    radius = math.max(0, radius)
     local e = createEntity()
     e.components = {
         transform = {},
         never_radar_blocked = {},
-        gravity = {range=5000, damage=true},
-        avoid_object = {range=7000},
+        gravity = {range=radius, damage=true},
+        avoid_object = {range=radius*1.4},
         radar_signature = {gravity=0.9},
-        radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=5000},
-        billboard_render = {texture="blackHole3d.png", size=5000}
+        radar_trace = {icon="radar/blackHole.png", min_size=0, max_size = 2048, radius=radius},
+        billboard_render = {texture="blackHole3d.png", size=radius},
+        warppostprocessor = { max_radius = radius, max_effect_strength=1 }
     }
     return e
 end
@@ -23,11 +27,13 @@ end
 --- A WormHole is a piece of space terrain that pulls all nearby entities within a 2.5U radius, including otherwise immobile entities like stations, toward its center.
 --- Any entity that reaches its center is teleported to another point in space.
 --- AI behaviors avoid WormHoles by a 0.5U margin.
+--- The optional radius parameter specifies the radius of the WormHole, default 2500
 --- Example: wormhole = WormHole():setPosition(1000,1000):setTargetPosition(10000,10000)
 --- @type creation
-function WormHole()
+function WormHole(radius)
+    radius = radius or 2500
+    radius = math.max(0, radius)
     local e = createEntity()
-    local radius = 2500
     e.components = {
         transform = {},
         never_radar_blocked = {},
@@ -35,7 +41,8 @@ function WormHole()
         avoid_object = {range=radius*1.2},
         radar_signature = {gravity=0.9},
         radar_trace = {icon="radar/wormHole.png", min_size=0, max_size=2048, radius=radius},
-        billboard_render = {texture="wormHole3d.png", size=5000}
+        billboard_render = {texture="wormHole3d.png", size=radius*2},
+        glitchpostprocessor = { max_radius = radius, max_effect_strength=20}
     }
     return e
 end
