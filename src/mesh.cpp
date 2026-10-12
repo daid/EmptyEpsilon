@@ -1,4 +1,5 @@
 #include <graphics/opengl.h>
+#include <cmath>
 #include <unordered_map>
 #include <SDL_endian.h>
 #include <meshoptimizer.h>
@@ -94,7 +95,7 @@ void Mesh::render(int32_t position_attrib, int32_t texcoords_attrib, int32_t nor
         glVertexAttribPointer(texcoords_attrib, 2, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, uv));
 
     if (tangent_attrib != -1)
-        glVertexAttribPointer(tangent_attrib, 3, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, tangent));
+        glVertexAttribPointer(tangent_attrib, 4, GL_FLOAT, GL_FALSE, sizeof(MeshVertex), (void*)offsetof(MeshVertex, tangent));
 
     if (!indices.empty())
     {
@@ -341,17 +342,24 @@ Mesh* Mesh::getMesh(const string& filename)
             glm::vec2 deltaUV1 = uv1 - uv0;
             glm::vec2 deltaUV2 = uv2 - uv0;
 
-            float f = 1.0f / (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y);
+            auto normal = glm::vec3(mesh_vertices[idx].normal[0], mesh_vertices[idx].normal[1], mesh_vertices[idx].normal[2]);
 
-            auto tangent = glm::vec3(
-                    f * (deltaUV2.y * edge1.x - deltaUV1.y * edge2.x),
-                    f * (deltaUV2.y * edge1.y - deltaUV1.y * edge2.y),
-                    f * (deltaUV2.y * edge1.z - deltaUV1.y * edge2.z));
+            // No 1/determinant: the shader normalizes the basis, so only the sign survives.
+            float determinant_sign = (deltaUV1.x * deltaUV2.y - deltaUV2.x * deltaUV1.y) < 0.0f ? -1.0f : 1.0f;
+            auto tangent = determinant_sign * (deltaUV2.y * edge1 - deltaUV1.y * edge2);
+            auto bitangent = determinant_sign * (deltaUV1.x * edge2 - deltaUV2.x * edge1);
+
+            // Mirrored UV islands are left-handed.
+            float handedness = glm::dot(glm::cross(normal, tangent), bitangent) < 0.0f ? -1.0f : 1.0f;
+
+            if (glm::length2(tangent) <= 0.0f)
+                tangent = glm::cross(normal, std::abs(normal.z) < 0.9f ? glm::vec3(0.0f, 0.0f, 1.0f) : glm::vec3(1.0f, 0.0f, 0.0f));
 
             for(int n=0; n<3; n++) {
                 mesh_vertices[idx+n].tangent[0] = tangent.x;
                 mesh_vertices[idx+n].tangent[1] = tangent.y;
                 mesh_vertices[idx+n].tangent[2] = tangent.z;
+                mesh_vertices[idx+n].tangent[3] = handedness;
             }
         }
 

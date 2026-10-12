@@ -113,8 +113,8 @@ void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
 
     mrc.getMesh()->render(positions.get(), texcoords.get(), normals.get(), tangent.get());
 
-    // wut iz?
-    if (mrc.getSpecularTexture() || mrc.getIlluminationTexture())
+    // Restore the active unit so the next mesh binds its base texture to unit 0.
+    if (mrc.getSpecularTexture() || mrc.getIlluminationTexture() || mrc.getNormalTexture())
         glActiveTexture(GL_TEXTURE0);
 }
 

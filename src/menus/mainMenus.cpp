@@ -74,6 +74,7 @@ MainMenu::MainMenu()
     y += 10;
     (new GuiLabel(this, "CREDITS1", tr("Credits", "Graphics:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "T. Hill-Hand (radar traces)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
     (new GuiLabel(this, "CREDITS1", tr("Credits", "Localization:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS3", "Muerte (FR)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
