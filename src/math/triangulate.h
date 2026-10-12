@@ -28,7 +28,7 @@ public:
         int nv = n;
         /*  remove nv-2 Vertices, creating 1 triangle every time */
         int count = 2*nv;   /* error detection */
-        for(int m=0, v=nv-1; nv>2; )
+        for(int v=nv-1; nv>2; )
         {
             /* if we loop, it is probably a non-simple polygon */
             if (count-- < 0)
@@ -54,8 +54,6 @@ public:
                 output.push_back(a);
                 output.push_back(b);
                 output.push_back(c);
-
-                m++;
 
                 /* remove v from remaining polygon */
                 for(s=v,t=v+1;t<nv;s++,t++)

@@ -425,6 +425,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Shields, calibration_delay);
     BIND_MEMBER(Shields, frequency);
     BIND_MEMBER(Shields, energy_use_per_second);
+    BIND_MEMBER(Shields, on_taking_damage);
     BIND_ARRAY(Shields, entries);
     BIND_ARRAY_MEMBER(Shields, entries, level);
     BIND_ARRAY_MEMBER(Shields, entries, max);
@@ -643,6 +644,9 @@ void initComponentScriptBindings()
     BIND_MEMBER(ScanState, allow_simple_scan);
     BIND_MEMBER(ScanState, complexity);
     BIND_MEMBER(ScanState, depth);
+    BIND_MEMBER(ScanState, on_scan_initiated);
+    BIND_MEMBER(ScanState, on_scan_completed);
+    BIND_MEMBER(ScanState, on_scan_cancelled);
     BIND_ARRAY_DIRTY_FLAG(ScanState, per_faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, faction, per_faction_dirty);
     BIND_ARRAY_DIRTY_FLAG_MEMBER(ScanState, per_faction, state, per_faction_dirty);
@@ -806,8 +810,8 @@ void initComponentScriptBindings()
             lua_newtable(L);
             for(size_t n=0; n<zone->outline.size(); n++) {
                 lua_newtable(L);
-                lua_pushnumber(L, zone->outline[n].x); lua_seti(L, -2, 1);
-                lua_pushnumber(L, zone->outline[n].y); lua_seti(L, -2, 2);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].x)); lua_seti(L, -2, 1);
+                lua_pushnumber(L, static_cast<lua_Number>(zone->outline[n].y)); lua_seti(L, -2, 2);
                 lua_seti(L, -2, n+1);
             }
             return 1;

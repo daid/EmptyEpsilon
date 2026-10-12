@@ -931,7 +931,6 @@ float ShipAI::calculateFiringSolution(sp::ecs::Entity target, const MissileTubes
     auto target_position = tt->getPosition();
     const float target_distance = glm::length(ot->getPosition() - target_position);
     const float search_distance = std::min(short_range, target_distance + 500.0f);
-    const float target_angle = vec2ToAngle(target_position - ot->getPosition());
     const float fire_angle = ot->getRotation() + tube.direction;
     const float search_angle = 5.0f;
 

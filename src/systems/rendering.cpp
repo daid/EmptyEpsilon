@@ -113,8 +113,8 @@ void drawMesh(MeshRenderComponent& mrc, ShaderRegistry::ScopedShader& shader)
 
     mrc.getMesh()->render(positions.get(), texcoords.get(), normals.get(), tangent.get());
 
-    // wut iz?
-    if (mrc.getSpecularTexture() || mrc.getIlluminationTexture())
+    // Restore the active unit so the next mesh binds its base texture to unit 0.
+    if (mrc.getSpecularTexture() || mrc.getIlluminationTexture() || mrc.getNormalTexture())
         glActiveTexture(GL_TEXTURE0);
 }
 
@@ -161,10 +161,10 @@ void NebulaRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform, N
         glm::vec2 texcoords;
     };
     std::array<VertexAndTexCoords, 4> quad{
-        glm::vec3{}, {0.f, 1.f},
-        glm::vec3{}, {1.f, 1.f},
-        glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}, {0.f, 0.f}
+        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
+        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
     };
 
     gl::ScopedVertexAttribArray positions(shader.get().attribute(ShaderRegistry::Attributes::Position));
@@ -393,10 +393,10 @@ void BillboardRenderSystem::render3D(sp::ecs::Entity e, sp::Transform& transform
         glm::vec2 texcoords;
     };
     static std::array<VertexAndTexCoords, 4> quad{
-        glm::vec3{}, {0.f, 1.f},
-        glm::vec3{}, {1.f, 1.f},
-        glm::vec3{}, {1.f, 0.f},
-        glm::vec3{}, {0.f, 0.f}
+        VertexAndTexCoords{glm::vec3{}, {0.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 1.f}},
+        VertexAndTexCoords{glm::vec3{}, {1.f, 0.f}},
+        VertexAndTexCoords{glm::vec3{}, {0.f, 0.f}}
     };
 
     textureManager.getTexture(bbr.texture)->bind();

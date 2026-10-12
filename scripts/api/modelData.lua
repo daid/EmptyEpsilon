@@ -81,8 +81,8 @@ end
 --- Optional; if omitted, no normal map is applied.
 --- Valid values include PNG- or JPG-format images relative to the resources/ directory, or paths defined within a resource pack loaded from the packs/ directory.
 --- Example:
---- model:setNormalMap("space_station_1/space_station_1_normal.jpg") -- loads this texture from a resource pack
---- model:setNormalMap("mesh/ship/Ender Battlecruiser_normal.png") -- loads this texture from the resources/ directory
+--- model:setNormalMap("space_station_1/space_station_1_normal.png") -- loads this texture from a resource pack
+--- model:setNormalMap("mesh/ship/my_ship_normal.png") -- loads this texture from the resources/ directory
 function ModelData:setNormalMap(texture)
     if self.mesh_render == nil then self.mesh_render = {} end
     self.mesh_render.normal_texture=texture

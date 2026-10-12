@@ -25,7 +25,7 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
     coolant_display->setIcon("gui/icons/coolant")->setTextSize(20)->setPosition(315, 20, sp::Alignment::TopLeft)->setSize(280, 40);
     GuiElement* layout = new GuiElement(this, "");
     layout->setPosition(20, 60, sp::Alignment::TopLeft)->setSize(GuiElement::GuiSizeMax, 400)->setAttribute("layout", "horizontal");
-    for(int n=0; n<ShipSystem::COUNT; n++)
+    for (int n = 0; n < ShipSystem::COUNT; n++)
     {
         if (n == 4)
         {
@@ -40,8 +40,18 @@ PowerManagementScreen::PowerManagementScreen(GuiContainer* owner)
 
         (new GuiLabel(box, "", getLocaleSystemName(ShipSystem::Type(n)), 30))->addBackground()->setAlignment(sp::Alignment::Center)->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(290, 50);
         (new GuiLabel(box, "", tr("button", "Power"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(30, 340);
-        (new GuiLabel(box, "", tr("button", "Coolant"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(100, 50, sp::Alignment::TopLeft)->setSize(30, 340);
-        (new GuiLabel(box, "", tr("button", "Heat"), 30))->setVertical()->setAlignment(sp::Alignment::CenterLeft)->setPosition(180, 50, sp::Alignment::TopLeft)->setSize(30, 340);
+        systems[n].coolant_label = new GuiLabel(box, "", tr("button", "Coolant"), 30.0f);
+        systems[n].coolant_label
+            ->setVertical()
+            ->setAlignment(sp::Alignment::CenterLeft)
+            ->setPosition(100.0f, 50.0f, sp::Alignment::TopLeft)
+            ->setSize(30.0f, 340.0f);
+        systems[n].heat_label = new GuiLabel(box, "", tr("button", "Heat"), 30.0f);
+        systems[n].heat_label
+            ->setVertical()
+            ->setAlignment(sp::Alignment::CenterLeft)
+            ->setPosition(180.0f, 50.0f, sp::Alignment::TopLeft)
+            ->setSize(30.0f, 340.0f);
 
         systems[n].power_bar = new GuiProgressbar(box, "", 0.0, 3.0, 1.0);
         systems[n].power_bar->setDrawBackground(false)->setPosition(52.5, 60, sp::Alignment::TopLeft)->setSize(50, 320);
@@ -79,6 +89,8 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
     {
         auto reactor = my_spaceship.getComponent<Reactor>();
         auto coolant = my_spaceship.getComponent<Coolant>();
+        float power_max = (reactor || coolant) ? 3.0f : 1.0f;
+
         if (reactor) {
             //Update the energy usage.
             if (previous_energy_measurement == 0.0f)
@@ -107,20 +119,33 @@ void PowerManagementScreen::onDraw(sp::RenderTarget& renderer)
         {
             auto sys = ShipSystem::get(my_spaceship, ShipSystem::Type(n));
             systems[n].box->setVisible(sys);
-            if (sys) {
-                systems[n].power_slider->setValue(sys->power_request);
+            if (sys)
+            {
+                // Power
+                systems[n].power_slider
+                    ->setRange(power_max, 0.0f) // Backward order for rotated slider
+                    ->setValue(sys->power_request);
+                systems[n].power_bar
+                    ->setRange(0.0f, power_max)
+                    ->setValue(sys->power_level)
+                    ->setColor(glm::u8vec4(255, 255, 0, 255));
+
+                // Heat and coolant
                 systems[n].coolant_slider->setVisible(coolant);
-                if (coolant) {
+                systems[n].coolant_bar->setVisible(coolant);
+                systems[n].coolant_label->setVisible(coolant);
+                systems[n].heat_bar->setVisible(coolant);
+                systems[n].heat_label->setVisible(coolant);
+                if (coolant)
+                {
                     systems[n].coolant_slider->setValue(std::min(sys->coolant_request, coolant->max));
                     systems[n].coolant_slider->setEnable(!coolant->auto_levels);
-                }
 
-                float heat = sys->heat_level;
-                float power = sys->power_level;
-                float coolant = sys->coolant_level;
-                systems[n].heat_bar->setValue(heat)->setColor(glm::u8vec4(128, 128 * (1.0f - heat), 0, 255));
-                systems[n].power_bar->setValue(power)->setColor(glm::u8vec4(255, 255, 0, 255));
-                systems[n].coolant_bar->setValue(coolant)->setColor(glm::u8vec4(0, 128, 255, 255));
+                    float heat = sys->heat_level;
+                    float coolant = sys->coolant_level;
+                    systems[n].heat_bar->setValue(heat)->setColor(glm::u8vec4(128, 128 * (1.0f - heat), 0, 255));
+                    systems[n].coolant_bar->setValue(coolant)->setColor(glm::u8vec4(0, 128, 255, 255));
+                }
             }
         }
     }

@@ -101,7 +101,9 @@ function ShipTemplate:setClass(class, subclass)
     return self
 end
 --- Sets the description shown in the science database for entities created from this ShipTemplate.
---- Example: template:setDescription(_("The Phobos T3 is most any navy's workhorse frigate."))
+--- Wrap the string with the _() function to expose it for localization.
+--- For factions and other entity types, see Entity:setDescription().
+--- Example: template:setDescription(_([[The Phobos T3 is most any navy's workhorse frigate.]]))
 function ShipTemplate:setDescription(description)
     self.__description = description
     return self

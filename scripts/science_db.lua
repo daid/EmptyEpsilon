@@ -298,15 +298,17 @@ function __fillDefaultDatabaseData()
     local class_set = {}
 	local template_names = {}
 
-    -- Populate list of ship hull classes
+	-- Populate list of ship hull classes and collect all visible templates
 	for name, ship_template in pairs(__ship_templates) do
-        if not ship_template.__hidden and ship_template.__type ~= "station" then
-			local class_name = _("No class")
-			if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
+		if not ship_template.__hidden then
+			if ship_template.__type ~= "station" then
+				local class_name = _("No class")
+				if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
 
-			if class_set[class_name] == nil then
-				class_list[#class_list + 1] = class_name
-				class_set[class_name] = true
+				if class_set[class_name] == nil then
+					class_list[#class_list + 1] = class_name
+					class_set[class_name] = true
+				end
 			end
 			table.insert(template_names, name)
 		end
@@ -328,11 +330,15 @@ function __fillDefaultDatabaseData()
 			local class_name = _("No class")
 			local subclass_name = _("No sub-class")
 			if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class subclass_name = ship_template.docking_port.dock_subclass end
-        	local entry = nil
+			local entry = nil
+			-- Add space stations to the Stations entry.
+			-- Otherwise, add them to ships by ship class.
 			if ship_template.__type == "station" then
 				entry = stations_database:addEntry(ship_template.typename.localized);
 			else
 				entry = class_database_entries[class_name]:addEntry(ship_template.typename.localized);
+				entry:addKeyValue(_("database", "Class"), class_name)
+				entry:addKeyValue(_("database", "Sub-class"), subclass_name)
 			end
 
 			if ship_template.__model_data_name then
@@ -342,8 +348,6 @@ function __fillDefaultDatabaseData()
 				entry:setImage(ship_template.radar_trace.icon)
 			end
 
-			entry:addKeyValue(_("database", "Class"), class_name)
-			entry:addKeyValue(_("database", "Sub-class"), subclass_name)
 			if ship_template.physics then
 				if type(ship_template.physics.size) == "table" then
 					entry:addKeyValue(_("database", "Size"), math.floor(ship_template.physics.size[1]))

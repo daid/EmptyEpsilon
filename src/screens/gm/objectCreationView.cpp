@@ -5,12 +5,14 @@
 #include "ecs/query.h"
 #include "components/collision.h"
 #include "components/faction.h"
+#include "components/rendering.h"
 #include "gui/gui2_button.h"
 #include "gui/gui2_panel.h"
 #include "gui/gui2_selector.h"
 #include "gui/gui2_listbox.h"
 #include "gui/gui2_scrolltext.h"
 #include "gui/gui2_textentry.h"
+#include "screenComponents/rotatingModelView.h"
 #include "menus/luaConsole.h"
 #include <unordered_set>
 
@@ -148,6 +150,24 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
                 } else {
                     gameGlobalInfo->on_gm_click_cursor = gameGlobalInfo->DEFAULT_ON_GM_CLICK_CURSOR;
                     description->setText(info.description);
+
+                    // Update the 3D preview. Create a full entity to read its
+                    // MeshRenderComponent, copy it to a display-only entity,
+                    // then immediately destroy the full one so it has no effect
+                    // on the simulation.
+                    if (preview_entity)
+                        preview_entity.destroy();
+                    preview_entity = {};
+
+                    auto prev_res = info.create_callback.call<sp::ecs::Entity>();
+                    if (prev_res.isOk()) {
+                        auto full = prev_res.value();
+                        if (auto* mrc = full.getComponent<MeshRenderComponent>()) {
+                            preview_entity = sp::ecs::Entity::create();
+                            preview_entity.addComponent<MeshRenderComponent>() = *mrc;
+                        }
+                        full.destroy();
+                    }
                 }
             }
         }
@@ -161,10 +181,18 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     }
 
+    model_area = new GuiElement(col3, "MODEL_PREVIEW_AREA");
+    model_area->setSize(GuiElement::GuiSizeMax, 250.f);
+    model_view = new GuiRotatingModelView(model_area, "MODEL_PREVIEW", preview_entity);
+    model_view->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+
     description = new GuiScrollText(col3, "DESCRIPTION", "");
     description->setAttribute("stretch", "true");
 
     (new GuiButton(col1, "CLOSE_BUTTON", tr("button", "Cancel"), [this]() {
+        if (preview_entity)
+            preview_entity.destroy();
+        preview_entity = {};
         this->hide();
     }))->setSize(300, 50);
 }

@@ -65,7 +65,7 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
 {
     sp::ecs::Entity target;
     glm::vec2 target_position;
-    for(auto entity : sp::CollisionSystem::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range)))
+    for(auto entity : sp::TransformQuery::queryArea(position - glm::vec2(max_range, max_range), position + glm::vec2(max_range, max_range)))
     {
         auto transform = entity.getComponent<sp::Transform>();
         if (!transform) continue;
@@ -204,6 +204,7 @@ bool TargetsContainer::isValidTarget(sp::ecs::Entity entity, ESelectionType sele
     case Selectable:
         if (entity.hasComponent<Hull>()) return true;
         if (entity.getComponent<ScanState>()) return true;
+        if (entity.getComponent<ScienceDescription>()) return true;
         if (entity.getComponent<ShareShortRangeRadar>()) return true;
         break;
     case Targetable:

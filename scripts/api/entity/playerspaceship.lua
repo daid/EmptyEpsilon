@@ -85,7 +85,7 @@ function Entity:addToShipLog(message, color)
     addEntryToShipsLog(self, message, color)
 end
 --- Moves all players connected to this ship to the same crew positions on another player ship.
---- If the target isn't a player ship, this function has no effect.
+--- If the target lacks the PlayerControl component, or if the PlayerControl component's allowed_positions mask doesn't define any allowed crew positions, this function has no effect.
 --- Use this in scenarios to change the crew's ship.
 --- Example:
 --- ship:transferPlayersToShip(player2) -- transfer all player crew to `player2`

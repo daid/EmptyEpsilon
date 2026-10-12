@@ -88,6 +88,24 @@ Keys::Keys() :
     debug_show_colliders("DEBUG_SHOW_COLLIDERS", "F12"),
 #endif
 
+    trigger_custom_button{{
+        {"TRIGGER_CUSTOM_BUTTON1"},
+        {"TRIGGER_CUSTOM_BUTTON2"},
+        {"TRIGGER_CUSTOM_BUTTON3"},
+        {"TRIGGER_CUSTOM_BUTTON4"},
+        {"TRIGGER_CUSTOM_BUTTON5"},
+        {"TRIGGER_CUSTOM_BUTTON6"},
+        {"TRIGGER_CUSTOM_BUTTON7"},
+        {"TRIGGER_CUSTOM_BUTTON8"},
+        {"TRIGGER_CUSTOM_BUTTON9"},
+        {"TRIGGER_CUSTOM_BUTTON10"},
+        {"TRIGGER_CUSTOM_BUTTON11"},
+        {"TRIGGER_CUSTOM_BUTTON12"},
+        {"TRIGGER_CUSTOM_BUTTON13"},
+        {"TRIGGER_CUSTOM_BUTTON14"},
+        {"TRIGGER_CUSTOM_BUTTON15"}
+    }},
+
     // Crew screen binds
     next_station("STATION_NEXT", "Tab"),
     prev_station("STATION_PREVIOUS"),
@@ -249,6 +267,13 @@ Keys::Keys() :
         {"SCIENCE_SCAN_PARAM_SET_3"},
         {"SCIENCE_SCAN_PARAM_SET_4"},
     }},
+    science_open_radar("SCIENCE_OPEN_RADAR"),
+    science_open_database("SCIENCE_OPEN_DATABASE"),
+    science_open_database_target("SCIENCE_OPEN_DATABASE_TARGET"),
+    science_sidebar_prev("SCIENCE_SIDEBAR_PREV"),
+    science_sidebar_next("SCIENCE_SIDEBAR_NEXT"),
+    science_sidebar_pager_prev("SCIENCE_SIDEBAR_PAGER_PREV"),
+    science_sidebar_pager_next("SCIENCE_SIDEBAR_PAGER_NEXT"),
 
     // Engineering crew screen
     engineering_select_system{
@@ -318,6 +343,7 @@ Keys::Keys() :
     gm_delete("GM_DELETE", "Delete"),
     gm_clipboardcopy("GM_CLIPBOARD_COPY", "F5"),
     gm_show_callsigns("GM_SHOW_CALLSIGNS", "C"),
+    gm_show_health_bars("GM_SHOW_HEALTH_BARS", "H"),
 
     // Spectator screen
     spectator_show_callsigns("SPECTATOR_SHOW_CALLSIGNS", "C")
@@ -340,6 +366,11 @@ void Keys::init()
 #ifdef DEBUG
     debug_show_colliders.setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Show debug colliders"));
 #endif
+
+    for (auto n = 0u; n < trigger_custom_button.size(); n++)
+    {
+        trigger_custom_button[n].setLabel(tr("hotkey_menu", "General"), tr("hotkey_General", "Custom button slot {number}").format({{"number", string(n + 1)}}));
+    }
 
     // Crew screens
     next_station.setLabel(tr("hotkey_menu", "Crew screens"), tr("hotkey_CrewScreen", "Switch to next crew screen"));
@@ -436,6 +467,13 @@ void Keys::init()
     science_scan_object.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scan object"));
     science_scan_abort.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Abort scan"));
     science_select_next_scannable.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Select next scannable object"));
+    science_open_radar.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open radar view"));
+    science_open_database.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open database view"));
+    science_open_database_target.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Open database entry for target"));
+    science_sidebar_prev.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar previous tab"));
+    science_sidebar_next.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar next tab"));
+    science_sidebar_pager_prev.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar page previous"));
+    science_sidebar_pager_next.setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Sidebar page next"));
     for (auto n = 0u; n < science_scan_param_increase.size(); n++)
     {
         science_scan_param_increase[n].setLabel(tr("hotkey_menu", "Science"), tr("hotkey_Science", "Scanning parameter {number} increase").format({{"number", string(n + 1)}}));
@@ -513,6 +551,7 @@ void Keys::init()
     gm_delete.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Delete"));
     gm_clipboardcopy.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Copy to clipboard"));
     gm_show_callsigns.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show callsigns (GM)"));
+    gm_show_health_bars.setLabel(tr("hotkey_menu", "GM screen"), tr("hotkey_GM", "Show health bars (GM)"));
 
     // Spectator screen
     spectator_show_callsigns.setLabel(tr("hotkey_menu", "Spectator view"), tr("hotkey_Spectator", "Show callsigns (spectator)"));

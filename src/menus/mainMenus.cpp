@@ -11,6 +11,7 @@
 #include "menus/tutorialMenu.h"
 #include "menus/serverBrowseMenu.h"
 #include "screens/gm/gameMasterScreen.h"
+#include "screens/extra/databaseScreen.h"
 #include "screenComponents/rotatingModelView.h"
 #include "config.h"
 
@@ -73,6 +74,7 @@ MainMenu::MainMenu()
     y += 10;
     (new GuiLabel(this, "CREDITS1", tr("Credits", "Graphics:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS3", "Interesting John", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
+    (new GuiLabel(this, "CREDITS3", "T. Hill-Hand (radar traces)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
     y += 10;
     (new GuiLabel(this, "CREDITS1", tr("Credits", "Localization:"), 20))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 20); y += 20;
     (new GuiLabel(this, "CREDITS3", "Muerte (FR)", 18))->setAlignment(sp::Alignment::CenterRight)->setPosition(-50, y, sp::Alignment::TopRight)->setSize(0, 18); y += 18;
@@ -110,6 +112,16 @@ MainMenu::MainMenu()
     }
 
 #ifdef DEBUG
+    (new GuiButton(this, "", "Database", [this]() {
+        new EpsilonServer(defaultServerPort);
+        if (game_server)
+        {
+            gameGlobalInfo->startScenario("scenario_10_empty.lua");
+            my_player_info->commandSetShip({});
+            new DatabaseScreen(this);
+        }
+    }))->setPosition({370, -210}, sp::Alignment::BottomLeft)->setSize(300, 50);
+
     (new GuiButton(this, "", "TO DA GM!", [this]() {
         new EpsilonServer(defaultServerPort);
         if (game_server)
