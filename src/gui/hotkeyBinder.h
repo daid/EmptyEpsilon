@@ -8,7 +8,6 @@ class GuiThemeStyle;
 class GuiHotkeyBinder : public GuiElement
 {
 private:
-    bool has_focus;
     sp::io::Keybinding* key;
 
     const GuiThemeStyle* front_style;

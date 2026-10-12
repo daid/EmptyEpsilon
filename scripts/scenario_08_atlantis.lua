@@ -459,8 +459,8 @@ function phase2SpawnWormhole()
 We are reading a huge gravity surge from your direction. Get the hell out of there.]])
     )
     x, y = b20_artifact:getPosition()
-    b20_artifact:explode()
     b20_artifact.nebula:destroy() -- Remove the nebula, else it will get sucked into the wormhole. Now it just looks like the wormhole replaces the nebula.
+    b20_artifact:explode()
     WormHole():setPosition(x, y):setTargetPosition(30036, -270545) -- Wormhole to sector ZR6
 
     -- The explosion damages all systems, but makes sure the impulse, warp, and jump drives are non-functional. This prevents the player from escaping the grasp of the wormhole.

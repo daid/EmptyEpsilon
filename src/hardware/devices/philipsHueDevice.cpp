@@ -1,4 +1,5 @@
-//The Hue bridge returns its info in JSON form, so the json11 library takes this role.
+// Hue V1 API access. V2 is not supported here.
+// The Hue bridge returns its info in JSON form, so the json11 library takes this role.
 
 #include "philipsHueDevice.h"
 #include "hardware/serialDriver.h"
@@ -67,7 +68,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
     {
         sp::io::http::Request http(ip_address,port);
 
-        LOG(INFO) << "No philips hue username. Going to request one. Be sure to press the button on the hue bridge.";
+        LOG(INFO) << "No philips hue V1 username. Going to request one. Be sure to press the button on the hue bridge.";
         auto response = http.post("/api", "{\"devicetype\":\"EmptyEpsilon#EmptyEpsilon\"}");
         if (response.status == 200) // OK
         {
@@ -89,7 +90,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
                         {
                             username = body.substr(idx + 1, end_idx);
                             LOG(INFO) << body;
-                            LOG(INFO) << "Got username from philips hue bridge: " << username;
+                            LOG(INFO) << "Got username from philips hue V1 bridge: " << username;
                             break;
                         }
                     }
@@ -98,7 +99,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         }
         else
         {
-            LOG(WARNING) << "Failed to contact philips hue bridge: " << response.status;
+            LOG(WARNING) << "Failed to contact philips hue V1 bridge: " << response.status;
             LOG(WARNING) << response.body;
             if (response.status < 0)
                 return false;
@@ -110,7 +111,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
             retry_counter--;
         else
         {
-            LOG(WARNING) << "Philips hue retry count exceeded.";
+            LOG(WARNING) << "Philips hue V1 retry count exceeded.";
             return false;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(5000));
@@ -122,7 +123,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
         auto response = http.get(string{ "/api/" } + username + "/lights");
         if (response.status != 200) // !OK
         {
-            LOG(WARNING) << "Failed to validate username on philips hue bridge: " << response.status;
+            LOG(WARNING) << "Failed to validate username on philips hue V1 bridge: " << response.status;
             LOG(WARNING) << response.body;
             username = "";
 
@@ -146,7 +147,7 @@ bool PhilipsHueDevice::configure(std::unordered_map<string, string> settings)
                 for (const auto& entry : hue_json.items())
                 {
                     auto currentInt = string(entry.key()).toInt();
-                    LOG(DEBUG) << "Got key from Hue API " << currentInt;
+                    LOG(DEBUG) << "Got key from Philips Hue V1 API " << currentInt;
                     if (currentInt >= light_count) light_count = currentInt;
                 }
 
@@ -226,7 +227,7 @@ void PhilipsHueDevice::updateLoop()
                     auto response = http.request("put", string{ "/api/" } + username + "/lights/" + string(n + 1) + "/state", post_data);
                     if (response.status != 200) // !OK
                     {
-                        LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue bridge: " << response.status;
+                        LOG(WARNING) << "Failed to set light [" << (n + 1) << "] philips hue V1 bridge: " << response.status;
                         LOG(WARNING) << response.body;
                     }
                 }

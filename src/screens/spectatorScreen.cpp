@@ -345,7 +345,7 @@ void SpectatorScreen::onMouseUp(glm::vec2 position)
 
     glm::vec2 target_position;
 
-    for (auto entity : sp::CollisionSystem::queryArea(position - (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE), position + (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE)))
+    for (auto entity : sp::TransformQuery::queryArea(position - (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE), position + (glm::vec2{300.0f, 300.0f} * main_radar->getDistance() / LONG_RANGE_DISTANCE)))
     {
         if (auto transform = entity.getComponent<sp::Transform>())
         {

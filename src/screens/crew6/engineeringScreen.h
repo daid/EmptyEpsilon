@@ -17,7 +17,6 @@ class GuiThemeStyle;
 class EngineeringScreen : public GuiOverlay
 {
 private:
-    const GuiThemeStyle* background_style;
     const GuiThemeStyle* slider_tick_style;
     const GuiThemeStyle* overlay_damaged_style;
     const GuiThemeStyle* overlay_overheating_style;
@@ -28,6 +27,8 @@ private:
     GuiSlider* power_slider;
     GuiLabel* coolant_label;
     GuiSlider* coolant_slider;
+    GuiImage* system_health_icon;
+    GuiImage* heat_icon;
     GuiProgressbar* coolant_remaining_bar;
 
     class SystemRow

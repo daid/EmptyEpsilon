@@ -23,6 +23,15 @@ private:
     float manual_rotation_x = -30.0f;
     float manual_rotation_z = 0.0f;
 
+#ifdef DEBUG
+    bool debug_show_normal_map = true;
+    // Azimuth: degrees around Z axis (0 = forward, 90 = right).
+    // Elevation: degrees from the horizontal plane, -90..90
+    // (0 = flat, 90 = straight down from above, -90 = straight up from below).
+    float debug_light_azimuth = 45.f;
+    float debug_light_elevation = 45.f;
+#endif
+
 public:
     GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity);
 
@@ -35,4 +44,18 @@ public:
     GuiRotatingModelView* setFillPercentage(float percentage);
     GuiRotatingModelView* setZoom(float zoom);
     GuiRotatingModelView* setManualRotationAllowed(bool allowed);
+
+#ifdef DEBUG
+    GuiRotatingModelView* setDebugShowNormalMap(bool show) { debug_show_normal_map = show; return this; }
+    GuiRotatingModelView* setDebugLightAzimuth(float degrees) { debug_light_azimuth = degrees; return this; }
+    GuiRotatingModelView* setDebugLightElevation(float degrees) { debug_light_elevation = degrees; return this; }
+#endif
 };
+
+#ifdef DEBUG
+class GuiRotatingModelDebugView : public GuiRotatingModelView
+{
+public:
+    GuiRotatingModelDebugView(GuiContainer* owner, string id, sp::ecs::Entity& entity);
+};
+#endif

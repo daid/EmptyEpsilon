@@ -17,6 +17,12 @@
 #include <glm/ext/matrix_clip_space.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#ifdef DEBUG
+#include "gui/gui2_panel.h"
+#include "gui/gui2_slider.h"
+#include "gui/gui2_label.h"
+#endif
+
 GuiRotatingModelView::GuiRotatingModelView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
 
 : GuiElement(owner, id), entity(entity)
@@ -85,20 +91,127 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
     auto model_matrix = calculateModelMatrix(glm::vec2{}, 0.f, mrc->mesh_offset, mrc->scale);
 
-    auto shader = lookUpShader(*mrc);
-    glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+#ifdef DEBUG
+    // Compute light direction once; used for model shading and the marker.
+    // Azimuth rotates around Z; elevation tilts up from horizontal.
+    const float debug_az = glm::radians(debug_light_azimuth);
+    const float debug_el = glm::radians(debug_light_elevation);
+    const glm::vec3 debug_light_dir = glm::normalize(glm::vec3{
+        glm::cos(debug_el) * glm::sin(debug_az),
+        glm::cos(debug_el) * glm::cos(debug_az),
+        glm::sin(debug_el)
+    });
 
-    auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
-    modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc->scale});
+    // Draw model with debug texture overrides and custom light.
+    // We force-load textures via the getters (which write back to ptr), then
+    // check ptr directly for shader selection and binding. This avoids the
+    // fallback-texture problem: clearing normal_texture.name and calling
+    // getNormalTexture() again would load a magenta 8x8 stub, which is
+    // non-null and would still select a Normal shader variant.
+    {
+        mrc->getNormalTexture();
+        mrc->getSpecularTexture();
+        mrc->getIlluminationTexture();
+        mrc->getTexture();
 
-    // Lights setup.
-    ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
+        const bool use_normal       = debug_show_normal_map && (mrc->normal_texture.ptr != nullptr);
+        const bool use_specular     = (mrc->specular_texture.ptr != nullptr);
+        const bool use_illumination = (mrc->illumination_texture.ptr != nullptr);
+        const bool use_texture      = (mrc->texture.ptr != nullptr);
 
-    // Textures
-    activateAndBindMeshTextures(*mrc);
+        auto shader_id = ShaderRegistry::Shaders::Object;
+        if (use_normal) {
+            if (use_texture && use_specular && use_illumination)
+                shader_id = ShaderRegistry::Shaders::ObjectSpecularIlluminationNormal;
+            else if (use_texture && use_specular)
+                shader_id = ShaderRegistry::Shaders::ObjectSpecularNormal;
+            else if (use_texture && use_illumination)
+                shader_id = ShaderRegistry::Shaders::ObjectIlluminationNormal;
+            else
+                shader_id = ShaderRegistry::Shaders::ObjectNormal;
+        } else {
+            if (use_texture && use_specular && use_illumination)
+                shader_id = ShaderRegistry::Shaders::ObjectSpecularIllumination;
+            else if (use_texture && use_specular)
+                shader_id = ShaderRegistry::Shaders::ObjectSpecular;
+            else if (use_texture && use_illumination)
+                shader_id = ShaderRegistry::Shaders::ObjectIllumination;
+        }
 
-    // Draw
-    drawMesh(*mrc, shader);
+        ShaderRegistry::ScopedShader shader(shader_id);
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+        if (auto u = shader.get().uniform(ShaderRegistry::Uniforms::AmbientLightDirection);  u != -1)
+            glUniform3fv(u, 1, glm::value_ptr(debug_light_dir));
+        if (auto u = shader.get().uniform(ShaderRegistry::Uniforms::SpecularLightDirection); u != -1)
+            glUniform3fv(u, 1, glm::value_ptr(debug_light_dir));
+
+        // Bind textures by ptr, skipping normal map when toggled off.
+        if (use_texture)
+            mrc->texture.ptr->bind();
+        if (use_specular) {
+            glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::SpecularMap));
+            mrc->specular_texture.ptr->bind();
+        }
+        if (use_illumination) {
+            glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::IlluminationMap));
+            mrc->illumination_texture.ptr->bind();
+        }
+        if (use_normal) {
+            glActiveTexture(GL_TEXTURE0 + ShaderRegistry::textureIndex(ShaderRegistry::Textures::NormalMap));
+            mrc->normal_texture.ptr->bind();
+        }
+
+        drawMesh(*mrc, shader);
+
+        if (use_specular || use_illumination)
+            glActiveTexture(GL_TEXTURE0);
+    }
+
+    // Billboard circle at the light source position.
+    {
+        glDisable(GL_DEPTH_TEST);
+
+        const glm::vec3 light_pos = debug_light_dir * (mesh_radius * 2.5f);
+        const float marker_r      = mesh_radius * 0.07f;
+
+        ShaderRegistry::ScopedShader col(ShaderRegistry::Shaders::BasicColor);
+        const auto identity = glm::identity<glm::mat4>();
+        glUniformMatrix4fv(col.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(identity));
+        glUniform4f(col.get().uniform(ShaderRegistry::Uniforms::Color), 1.f, 0.9f, 0.2f, 0.8f);
+        gl::ScopedVertexAttribArray positions(col.get().attribute(ShaderRegistry::Attributes::Position));
+
+        // Camera right and up in world space come from the rows of the view
+        // matrix rotation (GLM is column-major: view[col][row]).
+        const glm::vec3 cam_right = glm::normalize(glm::vec3(view_matrix[0][0], view_matrix[1][0], view_matrix[2][0]));
+        const glm::vec3 cam_up    = glm::normalize(glm::vec3(view_matrix[0][1], view_matrix[1][1], view_matrix[2][1]));
+
+        constexpr int N = 24;
+        glm::vec3 verts[N];
+        for (int i = 0; i < N; ++i)
+        {
+            const float a = float(i) / float(N) * 6.28318530f;
+            verts[i] = light_pos + glm::cos(a) * marker_r * cam_right
+                                 + glm::sin(a) * marker_r * cam_up;
+        }
+        glVertexAttribPointer(positions.get(), 3, GL_FLOAT, GL_FALSE, 0, verts);
+        glDrawArrays(GL_LINE_LOOP, 0, N);
+
+        glEnable(GL_DEPTH_TEST);
+    }
+#else
+    {
+        auto shader = lookUpShader(*mrc);
+        glUniformMatrix4fv(shader.get().uniform(ShaderRegistry::Uniforms::Model), 1, GL_FALSE, glm::value_ptr(model_matrix));
+
+        auto modeldata_matrix = glm::rotate(model_matrix, glm::radians(180.f), {0.f, 0.f, 1.f});
+        modeldata_matrix = glm::scale(modeldata_matrix, glm::vec3{mrc->scale});
+
+        ShaderRegistry::setupLights(shader.get(), modeldata_matrix);
+        activateAndBindMeshTextures(*mrc);
+        drawMesh(*mrc, shader);
+    }
+#endif
 
 #if 0
     {
@@ -132,8 +245,10 @@ void GuiRotatingModelView::onDraw(sp::RenderTarget& renderer)
 
 bool GuiRotatingModelView::onMouseWheelScroll(glm::vec2 position, float value)
 {
-    // Positive value = scroll up = zoom in, negative value = scroll down = zoom out
-    zoom_level += value * 0.5f;
+    // Positive value = scroll up = zoom in, negative value = scroll down = zoom out.
+    // Multiplicative so each notch is the same relative step across the range.
+    constexpr float zoom_step = 1.1f;
+    zoom_level *= glm::pow(zoom_step, value);
 
     // Clamp zoom level to reasonable bounds
     zoom_level = glm::clamp(zoom_level, 0.3f, 5.0f);
@@ -224,3 +339,38 @@ void GuiRotatingModelView::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
     mouse_down = false;
     is_dragging = false;
 }
+
+#ifdef DEBUG
+GuiRotatingModelDebugView::GuiRotatingModelDebugView(GuiContainer* owner, string id, sp::ecs::Entity& entity)
+: GuiRotatingModelView(owner, id, entity)
+{
+    constexpr float panel_h = 80.f;
+    constexpr float ctrl_w  = 160.f;
+    constexpr float label_h = 20.f;
+    constexpr float ctrl_h  = panel_h - label_h - 8.f;
+
+    auto* panel = (new GuiPanel(this, id + "_DEBUG_PANEL"))
+        ->setPosition(0.f, 0.f, sp::Alignment::BottomLeft)
+        ->setSize(GuiElement::GuiSizeMax, panel_h);
+
+    // First column is left empty for the normal map toggle, which stays out of
+    // the UI until the resource packs ship normal maps.
+    constexpr float az_x = ctrl_w + 24.f;
+    (new GuiLabel(panel, id + "_AZ_LABEL", "Light azimuth", label_h))
+        ->setPosition(az_x, 4.f, sp::Alignment::TopLeft)
+        ->setSize(ctrl_w, label_h);
+    (new GuiSlider(panel, id + "_AZ_SLIDER", -180.f, 180.f, 45.f,
+        [this](float value) { setDebugLightAzimuth(value); }))
+        ->setPosition(az_x, label_h + 4.f, sp::Alignment::TopLeft)
+        ->setSize(ctrl_w, ctrl_h);
+
+    constexpr float el_x = az_x + ctrl_w + 16.f;
+    (new GuiLabel(panel, id + "_EL_LABEL", "Light elevation", label_h))
+        ->setPosition(el_x, 4.f, sp::Alignment::TopLeft)
+        ->setSize(ctrl_w, label_h);
+    (new GuiSlider(panel, id + "_EL_SLIDER", -90.f, 90.f, 45.f,
+        [this](float value) { setDebugLightElevation(value); }))
+        ->setPosition(el_x, label_h + 4.f, sp::Alignment::TopLeft)
+        ->setSize(ctrl_w, ctrl_h);
+}
+#endif

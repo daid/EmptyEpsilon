@@ -2,7 +2,7 @@
 
 #include "ecs/entity.h"
 #include "shipsystem.h"
-
+#include "script/callback.h"
 
 class Shields {
 public:
@@ -28,4 +28,6 @@ public:
 
     ShipSystem& getSystemForIndex(int index);
     float getDamageFactor(int index);
+
+     sp::script::Callback on_taking_damage;
 };

@@ -14,6 +14,7 @@
 
 #include "gui/theme.h"
 #include "screenComponents/radarView.h"
+#include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/openCommsButton.h"
 #include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
@@ -72,13 +73,7 @@ OperationScreen::OperationScreen(GuiContainer* owner)
             }
         },
         [this](float value, glm::vec2 position) { // Wheel
-            float view_distance = std::clamp(
-                science->science_radar->getDistance() * (1.0f - value * 0.1f),
-                science->DEFAULT_MIN_ZOOM_DISTANCE,
-                science->DEFAULT_MAX_ZOOM_DISTANCE
-            );
-            science->science_radar->setDistance(view_distance);
-            // zoom_slider->setValue(view_distance);
+            science->doRadarZoom(value);
         }
     );
     science->science_radar->setAutoRotating(PreferencesManager::get("operations_radar_lock","0")=="1");
