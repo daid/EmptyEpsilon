@@ -5,7 +5,7 @@
 class LifeTime
 {
 public:
-    float lifetime = 1.0;
-    float initial_lifetime = 1.0;
+    float maximum = 1.0;
+    float alive_for = 0.0;
     sp::script::Callback on_expire;
 };

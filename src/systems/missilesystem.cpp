@@ -115,21 +115,6 @@ void MissileSystem::update(float delta)
             explode(entity, {}, deot);
         }
     }
-
-    if (game_server) {
-        // TODO: Not really part of missile
-        for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
-            lifetime.lifetime -= delta;
-            if (lifetime.lifetime <= 0.0f) {
-                if (entity.hasComponent<ExplodeOnTimeout>()) {
-                    if (auto eot = entity.getComponent<ExplodeOnTouch>()) {
-                        explode(entity, {}, *eot);
-                    }
-                }
-                entity.destroy();
-            }
-        }
-    }
 }
 
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
@@ -168,11 +153,10 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
     } else {
         if (eot.full_damage_after > 0.0f){
             auto lifetime = source.getComponent<LifeTime>();
-            float alive_for = lifetime->initial_lifetime - lifetime->lifetime;
-            if (alive_for > eot.full_damage_after){
+            if (lifetime->alive_for > eot.full_damage_after){
                 DamageSystem::applyDamage(target, eot.damage_at_center, info);
             } else {
-                DamageSystem::applyDamage(target, eot.damage_at_center * (alive_for / eot.full_damage_after), info);
+                DamageSystem::applyDamage(target, eot.damage_at_center * (lifetime->alive_for / eot.full_damage_after), info);
             }
         } else {
             DamageSystem::applyDamage(target, eot.damage_at_center, info);
@@ -363,8 +347,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
 
         if (tube.type_loaded != MW_Mine){
             auto& lifetime = missile.addComponent<LifeTime>();
-            lifetime.lifetime = mwd.lifetime * category_modifier;
-            lifetime.initial_lifetime = mwd.lifetime * category_modifier;
+            lifetime.maximum = mwd.lifetime * category_modifier;
         }
 
         if (tube.type_loaded != MW_Mine) {

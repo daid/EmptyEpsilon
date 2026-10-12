@@ -26,7 +26,7 @@ sp::ecs::Entity ProbeSystem::launch(sp::ecs::Entity ship, glm::vec2 target)
     auto probe = sp::ecs::Entity::create();
     probe.addComponent<sp::Transform>(*ship_transform);
     probe.addComponent<CallSign>().callsign = probe.toString().split(":", 1)[0] + "P";
-    probe.addComponent<LifeTime>().lifetime = 600.0f; // 600 sec., 10 min.
+    probe.addComponent<LifeTime>().maximum = 600.0f; // 600 sec., 10 min.
     auto& hull = probe.addComponent<Hull>();
     hull.current = hull.max = 1;
 
