@@ -8,8 +8,8 @@
 --- Module API description: 
 --- * customElements:modifyOperatorPositions(operator_key, position_list) = Modify ECrewPositions for specified station
 --- * customElements:closeAllMessagesUponClose(boolean_value) = change closing behavior
---- * customElements:addCustomButton(player_ship, operator, name, caption, callback) = wrapper around PlayerSpaceship:addCustomButton
---- * customElements:addCustomInfo(player_ship, operator, name, caption) = wrapper around PlayerSpaceship:addCustomInfo
+--- * customElements:addCustomButton(player_ship, operator, name, caption, callback, order) = wrapper around PlayerSpaceship:addCustomButton
+--- * customElements:addCustomInfo(player_ship, operator, name, caption, order) = wrapper around PlayerSpaceship:addCustomInfo
 --- * customElements:addCustomMessage(player_ship, operator, name, caption) = wrapper around PlayerSpaceship:addCustomMessage
 --- * customElements:addCustomMessageWithCallback(player_ship, operator, name, caption, callback) = wrapper around PlayerSpaceship:addCustomMessageWithCallback
 --- * customElements:removeCustom(player_ship, name) = wrapper around PlayerSpaceship:removeCustom
@@ -75,9 +75,10 @@ end
 -- @param name: String identifier of the button (parameter of PlayerShip:addCustomButton)
 -- @param caption: Label of the button (parameter of PlayerShip:addCustomButton)
 -- @param callback: Callback function to be run when button is pressed (parameter of PlayerShip:addCustomButton)
-function customElements:addCustomButton(player_ship, operator, name, caption, callback)
+-- @param order: Use the order value to specify a priority (parameter of PlayerShip:addCustomButton)
+function customElements:addCustomButton(player_ship, operator, name, caption, callback, order)
     for idx, station in ipairs(self:operatorPositions(operator)) do
-        player_ship:addCustomButton(station, name..station, caption, callback)
+        player_ship:addCustomButton(station, name..station, caption, callback, order)
     end
 end
 
@@ -86,9 +87,10 @@ end
 -- @param operator: String identification of operator. 
 -- @param name: String identifier of the message (parameter of PlayerShip:addCustomInfo)
 -- @param caption: Text content of the info field (parameter of PlayerShip:addCustomInfo)
-function customElements:addCustomInfo(player_ship, operator, name, caption)
+-- @param order: Use the order value to specify a priority (parameter of PlayerShip:addCustomInfo)
+function customElements:addCustomInfo(player_ship, operator, name, caption, order)
     for idx, station in ipairs(self:operatorPositions(operator)) do
-        player_ship:addCustomInfo(station, name..station, caption)
+        player_ship:addCustomInfo(station, name..station, caption, order)
     end
 end
 
