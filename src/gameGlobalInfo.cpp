@@ -281,6 +281,7 @@ void GameGlobalInfo::reset()
     script_environment_base = nullptr;
 
     elapsed_time = 0.0f;
+    wall_time.restart();
     callsign_counter = 0;
     global_message = "";
     global_message_timeout = 0.0f;

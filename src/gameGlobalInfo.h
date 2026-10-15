@@ -6,6 +6,7 @@
 #include "components/radar.h"
 #include "Updatable.h"
 #include "multiplayer.h"
+#include "timer.h"
 #include <list>
 #include <functional>
 #include <optional>
@@ -58,6 +59,7 @@ public:
     string default_skybox = "default";
     string gm_control_code;
     float elapsed_time;
+    sp::SystemStopwatch wall_time;
     string scenario;
     std::unordered_map<string, string> scenario_settings;
 
