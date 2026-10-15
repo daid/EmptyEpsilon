@@ -66,11 +66,7 @@ function init()
     -- Start off the mission by sending a transmission to the player
     research_station:sendCommsMessage(
         player,
-        _("goal-incCall", [[Epsilon, please come in.
-
-We lost contact with one of our transports, callsign RT-4, transporting the diplomat named J.J. Johnson. They were heading from our research station to Orion-5.
-
-Our last contact with RT-4 was before it entered the nebula at sector G5. The nebula is blocking our long-range scans, so we're asking you to investigate and recover RT-4 if possible.]])
+        string.format(_("goal-incCall", "Epsilon, please come in.\n\nWe lost contact with one of our transports, callsign RT-4, transporting the diplomat named J.J. Johnson. They were heading from our research station to Orion-5.\n\nOur last contact with RT-4 was before it entered the nebula at sector %s. The nebula is blocking our long-range scans, so we're asking you to investigate and recover RT-4 if possible."),transport_RT4:getSectorName())
     )
     -- Set the initial mission state
     mission_state = missionStartState
@@ -130,9 +126,7 @@ Please deliver his body back to Research-1. We will arrange for you to take over
             mission_state = missionRT4PickedUp
             research_station:sendCommsMessage(
                 player,
-                _("incCall", [[Just received message that Sir Johnson is safely aboard your ship! Great job!
-
-Please deliver the diplomat to Orion-5 in sector G3. Do this by docking with the station.]])
+                string.format(_("incCall", "Just received message that Sir Johnson is safely aboard your ship! Great job!\n\nPlease deliver the diplomat to Orion-5 in sector %s. Do this by docking with the station."),main_station:getSectorName())
             )
         end
     end
@@ -143,28 +137,12 @@ function missionRT4PickedUp(delta)
         if jjj_alive then
             main_station:sendCommsMessage(
                 player,
-                _("incCall", [[J.J. Johnson thanks you for rescuing him and tells you about his mission.
-
-]]) .. _("incCall", [[He just returned from a mission from the Refugee-X station, a neutral station in the area known to house anyone regardless of their history.
-
-Refugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
-
-The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector D5.
-
-To ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals.]])
+                string.format(_("incCall", "J.J. Johnson thanks you for rescuing him and tells you about his mission.\n\nHe just returned from a mission from the Refugee-X station, a neutral station in the area known to house anyone regardless of their history.\n\nRefugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.\n\nThe officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector %s.\n\nTo ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals."),neutral_station:getSectorName())
             )
         else
             main_station:sendCommsMessage(
                 player,
-                _("incCall", [[J.J. Johnson's message toward Orion-5 is clear:
-
-]]) .. _("incCall", [[He just returned from a mission from the Refugee-X station, a neutral station in the area known to house anyone regardless of their history.
-
-Refugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.
-
-The officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector D5.
-
-To ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals.]])
+                string.format(_("incCall", "J.J. Johnson's message toward Orion-5 is clear:\n\nHe just returned from a mission from the Refugee-X station, a neutral station in the area known to house anyone regardless of their history.\n\nRefugee-X has recently been attacked by Exuari ships, and some criminals living there have offered to give themselves up in exchange for better protection of the station.\n\nThe officers at Orion-5 will gladly make this trade, and they ask that you retrieve the criminals for them at Refugee-X in sector %s.\n\nTo ensure Refugee-X is aware of your peaceful intentions, we have stripped you of nukes and EMPs. You will get them back once you deliver the criminals."),neutral_station:getSectorName())
             )
         end
         player.old_nuke_max = player:getWeaponStorageMax("Nuke")
@@ -182,7 +160,7 @@ function missionRT4Died(delta)
         -- Docked and delivered the diplomat's body.
         research_station:sendCommsMessage(
             player,
-            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 in sector G3 for details.]])
+            _("incCall", [[J.J. Johnson transmitted his mission details to Orion-5 before he passed away. Head to Orion-5 for details.]])
         )
         mission_state = missionRT4PickedUp
     end
@@ -236,11 +214,15 @@ function missionAmbushed(delta)
         end
 
         if not ambush_main:isValid() and not ambush_side1:isValid() and not ambush_side2:isValid() then
-            message = _("incCall", [[Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.
+            transports = {}
 
-We extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector D7. Seek them out and scan the ships to find the Exuari transport.]])
+            for n = 1, 5 do
+                table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
+            end
+
+            message = string.format(_("incCall", "Good job dealing with those Exuari scum. The criminals are safely in our custody, and we'll send a protection detail to Refugee-X.\n\nWe extracted some vital info from the Exuari. In the next transport convoy toward Research-1, an Exuari death squad is hiding in one of the ships. The transport detail is heading in from sector %s. Seek them out and scan the ships to find the Exuari transport."),transports[1]:getSectorName())
             if refilled then
-                message = message .. _("incCall", [[We have refitted your nukes and EMPs.]]) .. _("incCall", [[Awesome job taking out the Exuari without those.]])
+                message = message .. _("incCall", "\n\nWe have refitted your nukes and EMPs.\n\nAwesome job taking out the Exuari without those.")
                 refilled = false
             end
 
@@ -253,11 +235,6 @@ We extracted some vital info from the Exuari. In the next transport convoy towar
             CpuShip():setTemplate("Phobos T3"):setFaction("Human Navy"):setPosition(x - 1000, y - 1000):orderDefendTarget(neutral_station):setCommsScript("")
             CpuShip():setTemplate("Nirvana R5"):setFaction("Human Navy"):setPosition(x + 1000, y + 1000):orderDefendTarget(neutral_station):setCommsScript("")
 
-            transports = {}
-
-            for n = 1, 5 do
-                table.insert(transports, CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Independent"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000)))
-            end
 
             transport_target = CpuShip():setTemplate("Personnel Freighter 2"):setFaction("Exuari"):setPosition(50000 + random(-10000, 10000), -30000 + random(-10000, 10000))
 
@@ -380,9 +357,7 @@ function missionTransportDone(delta)
     if player:isDocked(main_station) then
         main_station:sendCommsMessage(
             player,
-            _("incCall", [[Thanks to the captured Exuari death squad, we now know the location of the Exuari base in the area.
-
-Lead the assault on the Exuari base in sector E2. Expect heavy resistance.]])
+            string.format(_("incCall", "Thanks to the captured Exuari death squad, we now know the location of the Exuari base in the area.\n\nLead the assault on the Exuari base in sector %s. Expect heavy resistance."),enemy_station:getSectorName())
         )
         CpuShip():setTemplate("Phobos T3"):setFaction("Exuari"):setPosition(-44000, -14000):orderDefendTarget(enemy_station)
         CpuShip():setTemplate("Nirvana R5"):setFaction("Exuari"):setPosition(-47000, -14000):orderDefendTarget(enemy_station)
