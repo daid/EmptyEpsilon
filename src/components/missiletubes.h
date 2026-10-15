@@ -1,5 +1,6 @@
 #pragma once
 
+#include "script/callback.h"
 #include "ecs/entity.h"
 #include "shipsystem.h"
 #include "missileWeaponData.h"
@@ -44,4 +45,6 @@ public:
     int storage_max[MW_Count] = {0};
 
     std::vector<MountPoint> mounts;
+
+    sp::script::Callback on_launch;
 };
