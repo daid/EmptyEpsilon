@@ -53,6 +53,7 @@ private:
     GuiButton* player_comms_hail;
     GuiButton* global_message_button;
     GuiToggleButton* pause_button;
+    GuiToggleButton* slow_button;
     GuiToggleButton* intercept_comms_button;
     GuiButton* tweak_button;
     GuiRadarZoomSlider* zoom_slider;
