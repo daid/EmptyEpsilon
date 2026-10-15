@@ -6,6 +6,7 @@
 GuiTextEntry::GuiTextEntry(GuiContainer* owner, string id, string text)
 : GuiElement(owner, id), text(text), text_size(30), func(nullptr)
 {
+    intercepts_pointer = true;
     blink_timer.repeat(blink_rate);
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");

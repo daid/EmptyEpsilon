@@ -5,6 +5,7 @@
 GuiPanel::GuiPanel(GuiContainer* owner, string id)
 : GuiElement(owner, id)
 {
+    intercepts_pointer = true;
     style = theme->getStyle("panel");
 }
 

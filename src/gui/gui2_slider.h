@@ -1,10 +1,10 @@
-#ifndef GUI2_SLIDER_H
-#define GUI2_SLIDER_H
+#pragma once
 
 #include "gui2_element.h"
 #include "gui2_label.h"
 
 class GuiThemeStyle;
+
 class GuiBasicSlider : public GuiElement
 {
 public:
@@ -92,5 +92,3 @@ public:
     GuiSlider2D* setValue(glm::vec2 value);
     glm::vec2 getValue();
 };
-
-#endif//GUI2_SLIDER_H

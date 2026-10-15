@@ -8,6 +8,7 @@
 GuiHotkeyBinder::GuiHotkeyBinder(GuiContainer* owner, string id, sp::io::Keybinding* key)
 : GuiElement(owner, id), key(key)
 {
+    intercepts_pointer = true;
     front_style = theme->getStyle("textentry.front");
     back_style = theme->getStyle("textentry.back");
 }
