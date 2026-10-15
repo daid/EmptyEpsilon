@@ -555,8 +555,8 @@ end
 function __exportScanProbe(entity)
     local extras = __exportBasics(entity)
     local lt = entity.components.lifetime
-    if lt and lt.lifetime then
-        extras = extras .. string.format(":setLifetime(%.0f)", lt.lifetime)
+    if lt and lt.maximum then
+        extras = extras .. string.format(":setLifetime(%.0f)", lt.maximum)
     end
     local mt = entity.components.move_to
     if mt and mt.speed then

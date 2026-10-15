@@ -115,21 +115,6 @@ void MissileSystem::update(float delta)
             explode(entity, {}, deot);
         }
     }
-
-    if (game_server) {
-        // TODO: Not really part of missile
-        for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
-            lifetime.lifetime -= delta;
-            if (lifetime.lifetime <= 0.0f) {
-                if (entity.hasComponent<ExplodeOnTimeout>()) {
-                    if (auto eot = entity.getComponent<ExplodeOnTouch>()) {
-                        explode(entity, {}, *eot);
-                    }
-                }
-                entity.destroy();
-            }
-        }
-    }
 }
 
 void MissileSystem::collision(sp::ecs::Entity a, sp::ecs::Entity b, float force)
@@ -166,7 +151,16 @@ void MissileSystem::explode(sp::ecs::Entity source, sp::ecs::Entity target, Expl
     if (eot.blast_range > 100.0f || !target) {
         DamageSystem::damageArea(transform->getPosition(), eot.blast_range, eot.damage_at_edge, eot.damage_at_center, info, eot.blast_range / 2);
     } else {
-        DamageSystem::applyDamage(target, eot.damage_at_center, info);
+        if (eot.full_damage_after > 0.0f){
+            auto lifetime = source.getComponent<LifeTime>();
+            if (lifetime->alive_for > eot.full_damage_after){
+                DamageSystem::applyDamage(target, eot.damage_at_center, info);
+            } else {
+                DamageSystem::applyDamage(target, eot.damage_at_center * (lifetime->alive_for / eot.full_damage_after), info);
+            }
+        } else {
+            DamageSystem::applyDamage(target, eot.damage_at_center, info);
+        }
     }
 
     auto e = sp::ecs::Entity::create();
@@ -293,6 +287,7 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             mc.damage_at_edge = 10.0f * category_modifier;
             mc.blast_range = 20.0f * category_modifier;
             mc.explosion_sfx = "sfx/explosion.wav";
+            mc.full_damage_after = 1000.0f / (mwd.speed / category_modifier); // Full damage after 1U
             missile.addComponent<RawRadarSignatureInfo>(0.1f, 0.0f, 0.0f);
         }
         break;
@@ -350,8 +345,10 @@ void MissileSystem::spawnProjectile(sp::ecs::Entity source, MissileTubes::MountP
             cpe.life_time = 10.0f;
         }
 
-        if (tube.type_loaded != MW_Mine)
-            missile.addComponent<LifeTime>().lifetime = mwd.lifetime * category_modifier;
+        if (tube.type_loaded != MW_Mine){
+            auto& lifetime = missile.addComponent<LifeTime>();
+            lifetime.maximum = mwd.lifetime * category_modifier;
+        }
 
         if (tube.type_loaded != MW_Mine) {
             auto& dbad = missile.addComponent<DestroyedByAreaDamage>();

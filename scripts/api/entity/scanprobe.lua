@@ -9,7 +9,7 @@ function ScanProbe()
     local e = createEntity()
     e.components = {
         transform = {},
-        lifetime = {lifetime=60*10},
+        lifetime = {maximum=60*10},
         radar_trace = {
             icon="radar/probe.png",
             min_size=10.0,
@@ -54,13 +54,13 @@ end
 --- Defaults to 600 seconds (10 minutes).
 --- Example: probe:setLifetime(60 * 5) -- sets the lifetime to 5 minutes
 function Entity:setLifetime(lifetime)
-    if self.components.lifetime then self.components.lifetime.lifetime = lifetime end
+    if self.components.lifetime then self.components.lifetime.maximum = lifetime end
     return self
 end
 --- Returns this ScanProbe's remaining lifetime.
 --- Example: probe:getLifetime()
 function Entity:getLifetime()
-    if self.components.lifetime then return self.components.lifetime.lifetime end
+    if self.components.lifetime then return self.components.lifetime.maximum - self.components.alive_for end
     return 0.0
 end
 --- Sets this ScanProbe's owner entity.
