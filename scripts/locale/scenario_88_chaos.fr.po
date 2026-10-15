@@ -32,7 +32,7 @@ msgid ""
 "\n"
 "Version 2.2"
 msgstr ""
-"EN COURS DE TRADUCTION 50%\n"
+"EN COURS DE TRADUCTION 58%     381/648\n"
 "\n"
 "Two, three or four species battle for ultimate dominion. Designed as a "
 "replayable player versus player (PVP) scenario for individuals or teams. "
@@ -344,81 +344,99 @@ msgstr ""
 # Scenario setting
 msgctxt "setting"
 msgid "Respawn"
-msgstr ""
+msgstr "Réapparition"
 
 msgctxt "setting"
 msgid ""
 "How a player ship returns to the game after being destroyed. Default: "
 "Lindworm"
 msgstr ""
+"Définit comment un vaisseau joueur réapparait en jeu après avoir été "
+"détruit.\n"
+"Par défaut : Le Dragon (Lindworm)"
 
 msgctxt "Respawn"
 msgid "Lindworm"
-msgstr ""
+msgstr "Dragon"
 
 msgctxt "Respawn"
 msgid "Destroyed player returns in a weak, but fast Lindworm"
 msgstr ""
+"Le vaisseau joueur détruit réapparait sous la forme d'un Dragon (Lindworm) "
+"faible mais rapide."
 
 msgctxt "Respawn"
 msgid "Self"
-msgstr ""
+msgstr "Identique"
 
 msgctxt "Respawn"
 msgid ""
 "Destroyed player returns as the same type of ship they originally started in"
 msgstr ""
+"Le vaisseau joueur détruit réapparait à l'identique du vaisseau originel."
 
 # Scenario setting
 msgctxt "setting"
 msgid "Station Sensors"
-msgstr ""
+msgstr "Portée des capteurs"
 
 msgctxt "setting"
 msgid ""
 "Determines range at which station sensors will warn friendly ships about "
 "enemy ships via messages. Default: 20U"
 msgstr ""
+"Définit la portée des capteurs de la station qui signaleront aux vaisseaux "
+"alliés, la présence de vaisseaux ennemis par messages.\n"
+"Valeur par défaut : 20u."
 
 msgctxt "Station Sensors"
 msgid "Zero"
-msgstr ""
+msgstr "Désactivée"
 
 msgctxt "Station Sensors"
 msgid "Stations don't warn friendly players of enemies"
 msgstr ""
+"Les stations n'avertissent pas les joueurs alliés de la présence d'ennemis."
 
 msgctxt "Station Sensors"
 msgid "5U"
-msgstr ""
+msgstr "5 unités"
 
 msgctxt "Station Sensors"
 msgid "Stations warn friendly players of enemies within 5 units"
 msgstr ""
+"Les stations avertissent les joueurs alliés de la présence d'ennemis dans un "
+"rayon de 5 unités."
 
 msgctxt "Station Sensors"
 msgid "10U"
-msgstr ""
+msgstr "10 unités"
 
 msgctxt "Station Sensors"
 msgid "Stations warn friendly players of enemies within 10 units"
 msgstr ""
+"Les stations avertissent les joueurs alliés de la présence d'ennemis dans un "
+"rayon de 10 unités."
 
 msgctxt "Station Sensors"
 msgid "20U"
-msgstr ""
+msgstr "20 unités"
 
 msgctxt "Station Sensors"
 msgid "Stations warn friendly players of enemies within 20 units"
 msgstr ""
+"Les stations avertissent les joueurs alliés de la présence d'ennemis dans un "
+"rayon de 20 unités."
 
 msgctxt "Station Sensors"
 msgid "30U"
-msgstr ""
+msgstr "30 unités"
 
 msgctxt "Station Sensors"
 msgid "Stations warn friendly players of enemies within 30 units"
 msgstr ""
+"Les stations avertissent les joueurs alliés de la présence d'ennemis dans un "
+"rayon de 30 unités."
 
 # Scenario setting
 msgctxt "setting"
@@ -508,47 +526,47 @@ msgstr "La partie prend fin après 100 minutes."
 #: scripts/scenario_88_chaos.lua:673
 msgctxt "station-comms"
 msgid "hull strength upgrade"
-msgstr ""
+msgstr "Mise à niveau de la résistance de la coque"
 
 #: scripts/scenario_88_chaos.lua:674
 msgctxt "station-comms"
 msgid "shield strength upgrade"
-msgstr ""
+msgstr "Mise à niveau de la puissance des boucliers"
 
 #: scripts/scenario_88_chaos.lua:675
 msgctxt "station-comms"
 msgid "missile load speed upgrade"
-msgstr ""
+msgstr "Mise à niveau de la vitesse de chargement des missiles"
 
 #: scripts/scenario_88_chaos.lua:676
 msgctxt "station-comms"
 msgid "beam damage upgrade"
-msgstr ""
+msgstr "Mise à niveau des dégâts des faisceaux laser"
 
 #: scripts/scenario_88_chaos.lua:677
 msgctxt "station-comms"
 msgid "beam range upgrade"
-msgstr ""
+msgstr "Mise à niveau de la portée des faisceaux laser"
 
 #: scripts/scenario_88_chaos.lua:678
 msgctxt "station-comms"
 msgid "battery efficiency upgrade"
-msgstr ""
+msgstr "Mise à niveau de l'efficacité de la batterie"
 
 #: scripts/scenario_88_chaos.lua:679
 msgctxt "station-comms"
 msgid "faster impulse upgrade"
-msgstr ""
+msgstr "Mise à niveau de la vitesse des moteurs"
 
 #: scripts/scenario_88_chaos.lua:680
 msgctxt "station-comms"
 msgid "longer sensor range upgrade"
-msgstr ""
+msgstr "Mise à niveau de la portée des capteurs"
 
 #: scripts/scenario_88_chaos.lua:681
 msgctxt "station-comms"
 msgid "faster maneuvering speed upgrade"
-msgstr ""
+msgstr "Mise à niveau de la vitesse de manœuvre"
 
 #: scripts/scenario_88_chaos.lua:849
 msgctxt "trade-comms"
@@ -736,17 +754,17 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:1525 scripts/scenario_88_chaos.lua:1577
 msgctxt "buttonGM"
 msgid "Show control codes"
-msgstr ""
+msgstr "Codes de contrôle"
 
 #: scripts/scenario_88_chaos.lua:1526 scripts/scenario_88_chaos.lua:1578
 msgctxt "buttonGM"
 msgid "Show Human codes"
-msgstr ""
+msgstr "Codes Humains"
 
 #: scripts/scenario_88_chaos.lua:1527 scripts/scenario_88_chaos.lua:1579
 msgctxt "buttonGM"
 msgid "Show Kraylor codes"
-msgstr ""
+msgstr "Codes Kraylors"
 
 #: scripts/scenario_88_chaos.lua:1529 scripts/scenario_88_chaos.lua:1581
 msgctxt "buttonGM"
@@ -756,7 +774,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:1532 scripts/scenario_88_chaos.lua:1584
 msgctxt "buttonGM"
 msgid "Show Ktlitan codes"
-msgstr ""
+msgstr "Codes Ktlitiens"
 
 #: scripts/scenario_88_chaos.lua:1536
 #, lua-format
@@ -849,7 +867,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:1559
 msgctxt "buttonGM"
 msgid "Random PShip Names"
-msgstr ""
+msgstr "Noms vaisseaux aléat."
 
 #: scripts/scenario_88_chaos.lua:1560
 msgctxt "msgGM"
@@ -1142,7 +1160,7 @@ msgstr "- Précédent"
 #: scripts/scenario_88_chaos.lua:1793
 msgctxt "buttonGM"
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #: scripts/scenario_88_chaos.lua:1795 scripts/scenario_88_chaos.lua:1803
 #: scripts/scenario_88_chaos.lua:1818 scripts/scenario_88_chaos.lua:1866
@@ -1161,7 +1179,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:1801
 msgctxt "buttonGM"
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #: scripts/scenario_88_chaos.lua:1810 scripts/scenario_88_chaos.lua:1825
 #: scripts/scenario_88_chaos.lua:1840 scripts/scenario_88_chaos.lua:1850
@@ -1172,7 +1190,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:1816
 msgctxt "buttonGM"
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #: scripts/scenario_88_chaos.lua:1834
 msgctxt "buttonGM"
@@ -1419,29 +1437,30 @@ msgid ""
 msgstr ""
 
 #: scripts/scenario_88_chaos.lua:2067
+#, fuzzy
 msgctxt "buttonGM"
 msgid "Zero"
-msgstr ""
+msgstr "Désactivée"
 
 #: scripts/scenario_88_chaos.lua:2075
 msgctxt "buttonGM"
 msgid "5U"
-msgstr ""
+msgstr "5u"
 
 #: scripts/scenario_88_chaos.lua:2083
 msgctxt "buttonGM"
 msgid "10U"
-msgstr ""
+msgstr "10u"
 
 #: scripts/scenario_88_chaos.lua:2091
 msgctxt "buttonGM"
 msgid "20U"
-msgstr ""
+msgstr "20u"
 
 #: scripts/scenario_88_chaos.lua:2099
 msgctxt "buttonGM"
 msgid "30U"
-msgstr ""
+msgstr "30u"
 
 #: scripts/scenario_88_chaos.lua:2108
 msgctxt "msgGM"
@@ -2463,7 +2482,7 @@ msgstr ""
 #, lua-format
 msgctxt "stationStats-comms"
 msgid "%s %s"
-msgstr ""
+msgstr "%s %s"
 
 #: scripts/scenario_88_chaos.lua:5126
 #, lua-format
@@ -3265,7 +3284,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:6228
 msgctxt "upgrade-comms"
 msgid "You already have the shield upgrade"
-msgstr ""
+msgstr "Vous avez déjà effectué la mise à niveau des boucliers."
 
 #: scripts/scenario_88_chaos.lua:6247
 msgctxt "upgrade-comms"
@@ -3291,6 +3310,7 @@ msgstr ""
 msgctxt "upgrade-comms"
 msgid "You already have the beam range upgrade"
 msgstr ""
+"Vous avez déjà effectué la mise à niveau de la portée des faisceaux laser."
 
 #: scripts/scenario_88_chaos.lua:6284
 msgctxt "upgrade-comms"
@@ -3552,31 +3572,31 @@ msgstr "Coque : %d%%\n"
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield: %d%%\n"
-msgstr ""
+msgstr "%sBoucliers : %d%%\n"
 
 #: scripts/scenario_88_chaos.lua:6553
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sFront Shield: %d%%\n"
-msgstr ""
+msgstr "%sBoucliers avant : %d%%\n"
 
 #: scripts/scenario_88_chaos.lua:6554
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sRear Shield: %d%%\n"
-msgstr ""
+msgstr "%sBoucliers arrière : %d%%\n"
 
 #: scripts/scenario_88_chaos.lua:6557
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%sShield %s: %d%%\n"
-msgstr ""
+msgstr "%sBouclier %s : %d%%\n"
 
 #: scripts/scenario_88_chaos.lua:6563
 #, lua-format
 msgctxt "shipAssist-comms"
 msgid "%s%s Missiles: %d/%d\n"
-msgstr ""
+msgstr "%sMissiles %s : %d/%d\n"
 
 #: scripts/scenario_88_chaos.lua:6567
 #, lua-format
@@ -3900,7 +3920,7 @@ msgstr ""
 #: scripts/scenario_88_chaos.lua:6811
 msgctxt "shipAssist-comms"
 msgid "Go offensive, attack all enemy targets"
-msgstr ""
+msgstr "Passez à l'offensive, attaquez toutes les cibles ennemies."
 
 #: scripts/scenario_88_chaos.lua:6819
 #, lua-format
@@ -4026,13 +4046,13 @@ msgstr ""
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i:%.2i"
-msgstr ""
+msgstr "%s %i :%.2i"
 
 #: scripts/scenario_88_chaos.lua:7375
 #, lua-format
 msgctxt "-tabRelay&Operations"
 msgid "%s %i"
-msgstr ""
+msgstr "%s %i"
 
 #: scripts/scenario_88_chaos.lua:7418
 #, lua-format
@@ -4045,7 +4065,7 @@ msgstr ""
 #, lua-format
 msgctxt "-tabRelay&Ops&Helms&Tactical"
 msgid "%s in %s"
-msgstr ""
+msgstr "%s est en secteur %s"
 
 #: scripts/scenario_88_chaos.lua:7578
 msgctxt "inventory-buttonRelay"
