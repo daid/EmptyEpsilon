@@ -1,0 +1,27 @@
+# Scenario name
+msgid "Ghost from the Past"
+msgstr "来自过去的幽灵"
+
+# Scenario description
+msgid """Far from any frontline or civilization, patrolling the Stakhanov Mining \nComplex can be a dull and lonely task of seizing contraband and stopping \ndrunken brawls, and brightened only by R&R at Marco Polo station.\n\nHowever, when an inbound FTL-capable Ktlitan swarm is announced, you must \nscramble to save the sector!\n\n[Requires beam/shield frequencies] [Hard]\n\nThis scenario is limited to one player ship: the Atlantis Epsilon."""
+msgstr """远离任何前线或文明区域，巡逻斯塔汉诺夫采矿区是一项枯燥而孤独的任务，\n主要负责查扣违禁品和制止醉酒斗殴事件，唯一能带来乐趣的是在马可波罗站的休整时光。\n\n然而，当探测到一支具备超光速能力的克特利坦虫群即将进入该区域时，你必须紧急出动以拯救这个星域！\n\n[需要设置光束/护盾频率] [困难]\n\n此场景限定为一艘玩家控制的飞船：亚特兰蒂斯·伊普西隆号。"""
+
+#: scripts/scenario_07_gftp.lua:17
+msgctxt "scienceDescription-station"
+msgid "A merchant and entertainment hub."
+msgstr "一个商业与娱乐中心。"
+
+#: scripts/scenario_07_gftp.lua:30
+msgctxt "scienceDescription-station"
+msgid "The Stakhanov Mining Complex centralises efforts to mine the sector's material-rich asteroids."
+msgstr "斯塔汉诺夫采矿区集中了对富含资源的小行星进行开采的努力。"
+
+#: scripts/scenario_07_gftp.lua:51
+msgctxt "scienceDescription-station"
+msgid "A Human Navy secret base. Its purpose is highly classified."
+msgstr "一个人类海军的秘密基地。其用途高度机密。"
+
+#: scripts/scenario_07_gftp.lua:61
+msgctxt "scienceDescription-station"
+msgid "Nosy Sensing Array, an old SIGINT platform."
+msgstr "诺兹传感阵列，一个老旧的信号情报平台。"

@@ -1,0 +1,28 @@
+# Scenario name
+msgid "Beacon of Light series"
+msgstr "光明灯塔系列"
+
+# Scenario description
+msgid """The Beacon of Light scenario, based on the tutorial from https://daid.github.
+io/EmptyEpsilon/#tabs=4.\n\nNear the far outpost of Orion-5, Exuari attacks are increasing. A diplomat \nwent missing, and your first mission is to recover him.\n\nThis scenario is limited to one player ship: the Atlantis Epsilon. Estimated \nduration: 1 hour"""
+msgstr """光明灯塔场景基于教程 https://daid.github.io/EmptyEpsilon/#tabs=4。\n\n在遥远的奥瑞恩-5前哨站附近，艾苏瑞人的攻击正在加剧。一位外交官失踪了，你的第一个任务是将他营救回来。\n\n此场景仅限一艘玩家飞船：亚特兰蒂斯·伊普西隆号。预计时长：1小时"""
+
+#: scripts/scenario_05_beacon.lua:69
+msgctxt "goal-incCall"
+msgid """Epsilon, please come in.\n\nWe lost contact with one of our transports, callsign RT-4, transporting the \ndiplomat named J.J. Johnson. They were heading from our research station to \nOrion-5.\n\nOur last contact with RT-4 was before it entered the nebula at sector G5. \nThe nebula is blocking our long-range scans, so we're asking you to \ninvestigate and recover RT-4 if possible."""
+msgstr """伊普西隆号，请回话。\n\n我们与其中一艘运输舰——呼号RT-4——失去了联系，它正运送名为J.J.约翰逊的外交官前往奥瑞恩-5。\n\n我们最后一次与RT-4取得联系是在其进入G5扇区星云之前。星云阻挡了我们的远程扫描，因此我们请求你前去调查并尽可能找回RT-4。"""
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "Life Pod"
+msgstr "逃生舱"
+
+#: scripts/scenario_05_beacon.lua:90 scripts/scenario_05_beacon.lua:103
+msgctxt "scienceDescription-lifepod"
+msgid "J. J. Johnson in Life Pod"
+msgstr "逃生舱中的J.J.约翰逊"
+
+#: scripts/scenario_05_beacon.lua:94 scripts/scenario_05_beacon.lua:107
+msgctxt "incCall"
+msgid """RT-4 has been destroyed, but not before it launched an escape pod.\n\nLife signs are detected in the pod. Please retrieve the pod to see if J.J. \nJohnson survived. His death would be a great blow to the region's peace \nnegotiations."""
+msgstr """RT-4已被摧毁，但在此之前它发射了一个逃生舱。\n\n探测显示逃生舱内有生命迹象。请回收该逃生舱以确认J.J.约翰逊是否幸存。他的死亡将对本地区的和平谈判造成重大打击。"""

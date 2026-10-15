@@ -1,0 +1,52 @@
+#: scripts/comms_ship.lua:38
+msgctxt "shipAssist-comms"
+msgid "What do you want?"
+msgstr "你需要什么？"
+
+#: scripts/comms_ship.lua:40
+msgctxt "shipAssist-comms"
+msgid "Sir, how can we assist?"
+msgstr "长官，我们如何协助您？"
+
+#: scripts/comms_ship.lua:43
+msgctxt "shipAssist-comms"
+msgid "Defend a waypoint"
+msgstr "保卫一个航点"
+
+#: scripts/comms_ship.lua:46
+msgctxt "shipAssist-comms"
+msgid "No waypoints set. Please set a waypoint first."
+msgstr "未设置航点，请先设置一个航点。"
+
+#: scripts/comms_ship.lua:47 scripts/comms_ship.lua:57
+#: scripts/comms_ship.lua:70 scripts/comms_ship.lua:78
+#: scripts/comms_ship.lua:88
+msgid "Back"
+msgstr "返回"
+
+#: scripts/comms_ship.lua:49
+msgctxt "shipAssist-comms"
+msgid "Which waypoint should we defend?"
+msgstr "我们应该保卫哪个航点？"
+
+#: scripts/comms_ship.lua:52
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "Defend %s"
+msgstr "保卫 %s"
+
+#: scripts/comms_ship.lua:56
+#, lua-format
+msgctxt "shipAssist-comms"
+msgid "We are heading to assist at %s."
+msgstr "我们正前往 %s 提供援助。"
+
+#: scripts/comms_ship.lua:66
+msgctxt "shipAssist-comms"
+msgid "Assist me"
+msgstr "协助我"
+
+#: scripts/comms_ship.lua:68
+msgctxt "shipAssist-comms"
+msgid "Heading toward you to assist."
+msgstr "正朝您的方向前进以提供协助。"

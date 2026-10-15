@@ -1,0 +1,38 @@
+#: scripts/shiptemplates/starFighters.lua:13
+msgctxt "ship"
+msgid "MT52 Hornet"
+msgstr "MT52 黄蜂号"
+
+#: scripts/shiptemplates/starFighters.lua:13
+#: scripts/shiptemplates/starFighters.lua:65
+#: scripts/shiptemplates/starFighters.lua:121
+msgctxt "class"
+msgid "Starfighter"
+msgstr "星际战斗机"
+
+#: scripts/shiptemplates/starFighters.lua:13
+msgctxt "subclass"
+msgid "Interceptor"
+msgstr "截击机"
+
+#: scripts/shiptemplates/starFighters.lua:15
+msgid """The MT52 Hornet is a basic interceptor found in many corners of the galaxy. \nIt's easy to find spare parts for MT52s, not only because they are produced \nin large numbers, but also because they suffer high losses in combat."""
+msgstr """MT52 黄蜂号是一种在银河系多个角落都能见到的基础截击机。它的备件很容易获取，这不仅是因为其产量巨大，更是因为它们在战斗中损失率很高。"""
+
+#: scripts/shiptemplates/starFighters.lua:23
+msgctxt "ship"
+msgid "MU52 Hornet"
+msgstr "MU52 黄蜂号"
+
+#: scripts/shiptemplates/starFighters.lua:25
+msgid """The MU52 Hornet is a new, upgraded version of the MT52. All of its systems \nare slightly improved over the MT52 model."""
+msgstr """MU52 黄蜂号是MT52的新型升级版。它的所有系统都比MT52型号略有提升。"""
+
+#: scripts/shiptemplates/starFighters.lua:31
+msgctxt "playerShip"
+msgid "MP52 Hornet"
+msgstr "MP52 黄蜂号"
+
+#: scripts/shiptemplates/starFighters.lua:32
+msgid """The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with \nnearly twice the hull strength, nearly three times the shielding, better \nacceleration, impulse boosters, and a second laser cannon."""
+msgstr """MP52 黄蜂号是MU52黄蜂号的重大升级版，其船体强度接近两倍、护盾接近三倍，并拥有更好的加速度、脉冲推进器以及第二门激光炮。"""
