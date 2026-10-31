@@ -7591,7 +7591,7 @@ function checkSurviveEvents(delta)
 					enemy:orderAttack(p)
 				end
 				if random(1,100) < 50 then
-					WarpJammer():setRange(8000):setLocation(plx+3000,ply-3000):setFaction("Exuari")
+					WarpJammer():setRange(8000):setPosition(plx+3000,ply-3000):setFaction("Exuari")
 				end
 			end
 			survive_timer = getScenarioTime() + survive_interval

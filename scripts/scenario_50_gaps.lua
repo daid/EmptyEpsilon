@@ -1465,6 +1465,7 @@ function goodsOnShip(comms_target,comms_data)
 	if shipType:find("Freighter") ~= nil then
 		if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 			local count_repeat_loop = 0
+			local max_repeat_loop = max_repeat_loop or 100
 			repeat
 				comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
 				local goodCount = 0
