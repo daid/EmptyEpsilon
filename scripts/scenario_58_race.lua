@@ -3152,7 +3152,7 @@ function gatherStats(final_score)
 	local score_list = {}
 	for pidx=1,32 do
 		local p = getPlayerShip(pidx)
-		if p ~= nil then
+		if p ~= nil and p:isValid() then
 			score_list[p:getCallSign()] = {laps = p.laps, goal = p.goal, drone_points = 0, rank = 0, score = 0, time = 0}
 			local participant = false
 			if p.participant == "participant" then

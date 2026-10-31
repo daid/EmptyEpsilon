@@ -566,6 +566,7 @@ function setConstants()
 end
 function setPlayer()
 	player = getPlayerShip(-1)
+	if not player:isValid() then return end	-- ship destroyed: a destroyed entity has no methods
 	if not player.name_assigned then
 		if player:getTypeName() == "Striker" then
 			if #playerShipNamesForStriker > 0 then
