@@ -233,33 +233,7 @@ function commsStation()
 		handleUndockedState()
 	end
 end
-function isObjectType(obj,typ)
-	if obj ~= nil and obj:isValid() then
-		if typ ~= nil then
-			if ECS then
-				if typ == "SpaceStation" then
-					return obj.components.docking_bay and obj.components.physics and obj.components.physics.type == "static"
-				elseif typ == "PlayerSpaceship" then
-					return obj.components.player_control
-				elseif typ == "ScanProbe" then
-					return obj.components.allow_radar_link
-				elseif typ == "CpuShip" then
-					return obj.components.ai_controller
-				elseif typ == "Asteroid" then
-					return obj.components.mesh_render and string.sub(obj.components.mesh_render.mesh, 7) == "Astroid"
-				else
-					return false
-				end
-			else
-				return obj.typeName == typ
-			end
-		else
-			return false
-		end
-	else
-		return false
-	end
-end
+--	isObjectType comes from utils.lua (required above). A local copy here read ECS before any comms function had set it, and tested Asteroid by a mesh name that never matches
 
 -----------------
 --	Utilities  --
