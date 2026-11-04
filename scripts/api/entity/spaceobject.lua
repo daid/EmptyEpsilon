@@ -112,7 +112,7 @@ end
 --- Returns true if the given entity's faction is hostile to this entity's.
 --- Example: entity:isEnemy(target)
 function Entity:isEnemy(target)
-    if target == nil then return false end
+    if target == nil or not target:isValid() then return false end
     local my_faction = self:getFactionId()
     if my_faction == nil then return false end
     local my_faction_info = my_faction.components.faction_info
@@ -132,7 +132,7 @@ end
 --- If an entity is neither friendly nor enemy, it is neutral.
 --- Example: entity:isFriendly(target)
 function Entity:isFriendly(target)
-    if target == nil then return false end
+    if target == nil or not target:isValid() then return false end
     local my_faction = self:getFactionId()
     if my_faction == nil then return false end
     local my_faction_info = my_faction.components.faction_info
