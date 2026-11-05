@@ -424,11 +424,11 @@ end
 --	Transport ship generation and handling 
 function nearStations(station, compareStationList)
 	remainingStations = {}
-	if compareStationList[1]:isValid() then
+	if compareStationList[1] ~= nil and compareStationList[1]:isValid() then
 		if station:getCallSign() ~= compareStationList[1]:getCallSign() then
 			closest = compareStationList[1]
 		else
-			if compareStationList[2]:isValid() then
+			if compareStationList[2] ~= nil and compareStationList[2]:isValid() then
 				closest = compareStationList[2]
 			end
 		end
@@ -1586,7 +1586,11 @@ function neutralComms()
 			setCommsMessage(_("trade-comms", "Yes?"))
 			-- Offer destination information
 			addCommsReply(_("trade-comms", "Where are you headed?"), function()
-				setCommsMessage(comms_target.target:getCallSign())
+				if comms_target.target ~= nil and comms_target.target:isValid() then
+					setCommsMessage(comms_target.target:getCallSign())
+				else
+					setCommsMessage(_("shipAssist-comms", "I no longer have a destination."))
+				end
 				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
@@ -1686,7 +1690,11 @@ function neutralComms()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
-					setCommsMessage(comms_target.target:getCallSign())
+					if comms_target.target ~= nil and comms_target.target:isValid() then
+						setCommsMessage(comms_target.target:getCallSign())
+					else
+						setCommsMessage(_("shipAssist-comms", "I no longer have a destination."))
+					end
 				end
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -3157,7 +3165,7 @@ function waves(delta)
 				end
 			end
 		end
-		if homeStation:areEnemiesInRange(2000) then
+		if homeStation:isValid() and homeStation:areEnemiesInRange(2000) then
 			wakeEnemyFleet = homeStation:getObjectsInRange(2000)
 			for _, enemy in ipairs(wakeEnemyFleet) do
 				if enemy:isEnemy(homeStation) then
