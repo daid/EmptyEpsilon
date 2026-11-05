@@ -352,8 +352,8 @@ end
 
 function phase1WaitForSupplyPickup(delta)
     -- Keep the shields of the dummies charged.
-    target_dummy_1:setShields(300)
-    target_dummy_2:setShields(300)
+    if target_dummy_1:isValid() then target_dummy_1:setShields(300) end
+    if target_dummy_2:isValid() then target_dummy_2:setShields(300) end
 
     if not supply_drop:isValid() then
         shipyard_gamma:sendCommsMessage(
@@ -371,10 +371,11 @@ end
 
 function phase1ScanDummyShips(delta)
     -- Keep the shields of the dummies charged. (Note, at this point, you could destroy them with nukes, which is why we keep the shields at 300)
-    target_dummy_1:setShields(300)
-    target_dummy_2:setShields(300)
+    if target_dummy_1:isValid() then target_dummy_1:setShields(300) end
+    if target_dummy_2:isValid() then target_dummy_2:setShields(300) end
 
-    if target_dummy_1:isScannedBy(player) and target_dummy_2:isScannedBy(player) then
+    if (not target_dummy_1:isValid() or target_dummy_1:isScannedBy(player))
+        and (not target_dummy_2:isValid() or target_dummy_2:isScannedBy(player)) then
         shipyard_gamma:sendCommsMessage(
             player,
             _("station-incCall", [[Perfect, Atlantis-1. They identify as Kraylor ships because we put fake IDs in them.
@@ -384,8 +385,8 @@ Destroy Dummy-1 with your beam weapons, and use a homing missile to take out Dum
 The shields of Dummy-2 are configured so that your beam weapons will not penetrate them.]])
         )
         mission_state = phase1DestroyDummyShips
-        target_dummy_1:setShieldsMax(30)
-        target_dummy_2:setShieldsMax(30)
+        if target_dummy_1:isValid() then target_dummy_1:setShieldsMax(30) end
+        if target_dummy_2:isValid() then target_dummy_2:setShieldsMax(30) end
         player:addReputationPoints(5)
     end
 end

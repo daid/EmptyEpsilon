@@ -6186,6 +6186,7 @@ function enemyComms(comms_data)
 						comms_target.original_target = original_target
 					end
 					comms_target.taunt_may_expire = true	--change to conditional in future refactoring
+					if enemy_reverts == nil then enemy_reverts = {} end
 					table.insert(enemy_reverts,comms_target)
 				end
 				comms_target:orderAttack(comms_source)	--consider alternative options besides attack in future refactoring
@@ -6230,6 +6231,7 @@ function enemyComms(comms_data)
 						--print(original_target:getCallSign())
 						comms_target.original_target = original_target
 					end
+					if enemy_reverts == nil then enemy_reverts = {} end
 					table.insert(enemy_reverts,comms_target)
 				end
 				comms_target.amenability_may_expire = true		--set up conditional in future refactoring
