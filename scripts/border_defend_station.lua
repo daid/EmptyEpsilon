@@ -27,7 +27,7 @@ function init()
 		end
 	end
 	if my_station == nil then
-		destroyScript()
+		update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 		return
 	end
 	--name, faction _id and template set by calling script
@@ -69,7 +69,7 @@ function shipFull()
 end
 function update(delta)
 	if not my_ship:isValid() then
-		destroyScript()
+		update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 		return
 	end
 	if my_station ~= nil and my_station:isValid() then
@@ -108,12 +108,12 @@ function update(delta)
 			if inactivity_count > inactivity_max then
 				my_station.comms_data.idle_defense_fleet[name] = my_ship:getTypeName()
 				my_ship:destroy()
-				destroyScript()
+				update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 			end
 			check_timer = check_interval
 		end
 	else
 		my_ship:setCommsScript(""):setCommsFunction(commsShip)
-		destroyScript()
+		update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 	end
 end
