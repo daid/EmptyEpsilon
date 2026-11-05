@@ -106,7 +106,7 @@ If you feel ready for combat, play scenario 'Basic Battle'.
 If you want to try another ship, play the next training mission.
 
 If you need more practice, play this training again
-with different stations assigned to your crew members.]]), formatTime(timer), bonusString))
+with different stations assigned to your crew members.]]), math.floor(timer), bonusString))
     end
 end
 
