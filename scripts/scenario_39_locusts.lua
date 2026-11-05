@@ -1307,7 +1307,7 @@ function gatherSwarm()
 			local spawn_distance = 1000
 			local j = 0
 			for i,ship in ipairs(swarm_ships) do
-				if ship ~= lead_ship then
+				if ship ~= lead_ship and ship:isValid() then
 					j = j + 1
 					local form = hex_ring_positions[j]
 					local form_prime_x, form_prime_y = vectorFromAngle(form.angle, form.dist * spawn_distance)
@@ -1349,7 +1349,7 @@ function gatherSwarm()
 				local spawn_distance = 1000
 				local j = 0
 				for i,ship in ipairs(swarm_ships) do
-					if ship ~= lead_ship then
+					if ship ~= lead_ship and ship:isValid() then
 						j = j + 1
 						local form = hex_ring_positions[j]
 						local form_prime_x, form_prime_y = vectorFromAngle(form.angle, form.dist * spawn_distance)

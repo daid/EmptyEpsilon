@@ -312,8 +312,8 @@ function update(delta)
     end
 
     -- Increment reputation for both sides.
-    gallipoli:addReputationPoints(delta * 0.3)
-    crusader:addReputationPoints(delta * 0.3)
+    if gallipoli:isValid() then gallipoli:addReputationPoints(delta * 0.3) end
+    if crusader:isValid() then crusader:addReputationPoints(delta * 0.3) end
 
     -- If a faction has no station or flagship, it loses.
     -- If a faction scores 50 points, it wins.
@@ -334,7 +334,7 @@ function update(delta)
 
 The pathetic Human flagship has been disabled. Go for the victory!]])
         )
-        crusader:addReputationPoints(50)
+        if crusader:isValid() then crusader:addReputationPoints(50) end
         points_kraylor = points_kraylor + 5
         respawn_human = 0
     end
@@ -346,7 +346,7 @@ The pathetic Human flagship has been disabled. Go for the victory!]])
 
 With the Kraylor flagship out of the way, we can land the final blow!]])
         )
-        gallipoli:addReputationPoints(50)
+        if gallipoli:isValid() then gallipoli:addReputationPoints(50) end
         points_human = points_human + 5
         respawn_kraylor = 0
     end
