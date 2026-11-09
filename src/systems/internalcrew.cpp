@@ -5,6 +5,7 @@
 #include "random.h"
 
 #include <glm/gtx/hash.hpp>
+#include <unordered_set>
 #include "astar.h"
 
 static InternalRooms* pathfind_rooms;
@@ -34,6 +35,47 @@ static std::vector<std::pair<glm::ivec2, float>> astarGetNeighbors(glm::ivec2 po
 
 static float astarGetDistance(glm::ivec2 a, glm::ivec2 b) { return glm::length(glm::vec2(b - a)); }
 
+static std::unordered_set<glm::ivec2> collectOccupiedCells(sp::ecs::Entity ship, sp::ecs::Entity ignore)
+{
+    std::unordered_set<glm::ivec2> result;
+    for(auto [entity, ic] : sp::ecs::Query<InternalCrew>()) {
+        if (entity == ignore || ic.ship != ship || ic.position.x < -0.5f)
+            continue;
+        // Only the destination counts. A crew that is idle has target_position == its own cell, and a
+        // crew that is merely walking through a cell does not block it.
+        result.insert(ic.target_position);
+    }
+    return result;
+}
+
+bool InternalCrewSystem::isCellOccupied(sp::ecs::Entity ship, glm::ivec2 cell, sp::ecs::Entity ignore)
+{
+    return collectOccupiedCells(ship, ignore).count(cell) > 0;
+}
+
+std::optional<glm::ivec2> InternalCrewSystem::findNearestFreeCell(sp::ecs::Entity ship, glm::ivec2 from, sp::ecs::Entity ignore)
+{
+    auto ir = ship.getComponent<InternalRooms>();
+    if (!ir) return {};
+    auto occupied = collectOccupiedCells(ship, ignore);
+    std::optional<glm::ivec2> best;
+    float best_distance = 0.0f;
+    for(auto& room : ir->rooms) {
+        for(int y = room.position.y; y < room.position.y + room.size.y; y++) {
+            for(int x = room.position.x; x < room.position.x + room.size.x; x++) {
+                glm::ivec2 cell{x, y};
+                if (occupied.count(cell)) continue;
+                float distance = astarGetDistance(from, cell);
+                if (!best || distance < best_distance) {
+                    best = cell;
+                    best_distance = distance;
+                }
+            }
+        }
+    }
+    return best;
+}
+
 void InternalCrewSystem::update(float delta)
 {
     for(auto [entity, ic] : sp::ecs::Query<InternalCrew>()) {
@@ -57,6 +99,9 @@ void InternalCrewSystem::update(float delta)
             int n=irandom(0, ir->rooms.size() - 1);
             ic.position.x = ir->rooms[n].position.x + irandom(0, ir->rooms[n].size.x - 1);
             ic.position.y = ir->rooms[n].position.y + irandom(0, ir->rooms[n].size.y - 1);
+            // Avoid spawning on top of another crew member; if every cell is taken, stack anyway.
+            if (auto free_cell = findNearestFreeCell(ic.ship, glm::ivec2(ic.position), entity))
+                ic.position = glm::vec2(*free_cell);
             ic.target_position = glm::ivec2(ic.position);
         }
 
@@ -103,7 +148,11 @@ void InternalCrewSystem::update(float delta)
                             {
                                 if (ir->rooms[idx].system == ShipSystem::Type(n))
                                 {
-                                    ic.target_position = ir->rooms[idx].position + glm::ivec2(irandom(0, ir->rooms[idx].size.x - 1), irandom(0, ir->rooms[idx].size.y - 1));
+                                    auto target = ir->rooms[idx].position + glm::ivec2(irandom(0, ir->rooms[idx].size.x - 1), irandom(0, ir->rooms[idx].size.y - 1));
+                                    // Do not send two crew members to the same cell; stack only if no cell is free.
+                                    if (auto free_cell = findNearestFreeCell(ic.ship, target, entity))
+                                        target = *free_cell;
+                                    ic.target_position = target;
                                 }
                             }
                         }

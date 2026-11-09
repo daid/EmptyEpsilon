@@ -795,11 +795,41 @@ function Entity:getCoordinatesForInternalRoom(room)
 
     return coords
 end
+--- Returns the {x,y} cell nearest to pos that no other repair crew of this entity has as its destination (an idle crew's destination is the cell it stands on), or nil if every cell is taken.
+--- Mirrors InternalCrewSystem::findNearestFreeCell in the engine. Optional `room` restricts the search to that room's cells.
+--- crew_entity (optional) is excluded from the occupancy check.
+local function nearestFreeCrewCell(ship, pos, crew_entity, room)
+    local ir = ship.components.internal_rooms
+    if not ir then return nil end
+    local occupied = {}
+    for _, e in ipairs(getEntitiesWithComponent("internal_crew")) do
+        local ic = e.components.internal_crew
+        if e ~= crew_entity and ic.ship == ship and ic.position[1] >= -0.5 then
+            occupied[ic.target_position[1] .. "," .. ic.target_position[2]] = true
+        end
+    end
+    local best, best_d
+    for i = 1, #ir do
+        local r = ir[i]
+        if room == nil or (r.position[1] == room.position[1] and r.position[2] == room.position[2]) then
+            for x = r.position[1], r.position[1] + r.size[1] - 1 do
+                for y = r.position[2], r.position[2] + r.size[2] - 1 do
+                    if not occupied[x .. "," .. y] then
+                        local d = (x - pos[1]) ^ 2 + (y - pos[2]) ^ 2
+                        if not best_d or d < best_d then best, best_d = {x, y}, d end
+                    end
+                end
+            end
+        end
+    end
+    return best
+end
 --- Sets the target coordinates of a repair crew within this entity's internal rooms.
 --- Returns a Boolean value indicating success.
 --- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
 --- If the x,y coordinates are outside of any room, this returns false. Otherwise, this returns true.
---- Using this function to assign multiple crews to the same coordinates will stack them on the same square, which players should not be able to do!
+--- If another crew already stands on or is heading for those coordinates (its destination), the crew is sent to the nearest free square instead (this still returns true).
+--- Crews stack only when every square is already taken.
 --- Example:
 --- target_position = {3, 2} -- must be a table
 --- entity:moveRepairCrewToPosition(1, target_position)
@@ -812,14 +842,15 @@ function Entity:moveRepairCrewToPosition(crew_index, pos)
     local crew = self:getRepairCrew()
     if not crew[crew_index] then return false end
 
-    crew[crew_index].components.internal_crew.target_position = pos
+    local ic = crew[crew_index].components.internal_crew
+    ic.target_position = nearestFreeCrewCell(self, pos, crew[crew_index]) or pos
     return true
 end
 --- Sets the target room of a repair crew within this entity's internal rooms, selected by passing a room.
 --- Returns a Boolean value indicating success.
 --- The crew_index is 1-indexed. If the crew_index is invalid, this returns false.
 --- The crew is assigned a random set of coordinates within the room.
---- Using this function to assign multiple crews to the same room can stack them on the same square, which players should not be able to do!
+--- Crews are sent to free squares in the room; if the room is full, to the nearest free square elsewhere. Crews stack only when every square is taken.
 --- Example:
 --- target_room = entity:getInternalRoomForSystem("beamweapons")
 --- entity:moveRepairCrewToRoom(1, target_room)
@@ -833,6 +864,7 @@ function Entity:moveRepairCrewToRoom(crew_index, room)
     local coordinates_list = self:getCoordinatesForInternalRoom(room)
     if not coordinates_list or #coordinates_list == 0 then return false end
     local coords = coordinates_list[math.random(#coordinates_list)]
+    coords = nearestFreeCrewCell(self, coords, crew[crew_index], room) or nearestFreeCrewCell(self, coords, crew[crew_index]) or coords
     crew[crew_index].components.internal_crew.target_position = coords
     return true
 end
