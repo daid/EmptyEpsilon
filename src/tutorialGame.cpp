@@ -33,6 +33,11 @@ TutorialGame::TutorialGame(bool repeated_tutorial, string filename)
 {
     instance = this;
     new LocalOnlyGame();
+    if (!game_server) // => failed to start the local server (for example: port already in use)
+    {
+        LOG(Error, "Failed to start tutorial server on port " + string(defaultServerPort));
+        exit(1);
+    }
 
     new GuiOverlay(this, "", GuiTheme::getColor("background"));
     (new GuiOverlay(this, "", glm::u8vec4{255,255,255,255}))->setTextureTiledThemed("background.crosses");
