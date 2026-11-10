@@ -23,6 +23,7 @@ private:
     GuiTextEntry* gm_password;
     GuiSelector* server_visibility;
     GuiTextEntry* server_port;
+    GuiLabel* start_error;
 };
 
 class ServerSetupMasterServerRegistrationScreen : public GuiCanvas, Updatable

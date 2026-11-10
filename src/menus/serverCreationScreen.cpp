@@ -118,12 +118,22 @@ ServerSetupScreen::ServerSetupScreen()
     }))->setSize(300.0f, GuiElement::GuiSizeMax)
        ->setPosition(-250.0f, 0.0f, sp::Alignment::BottomCenter);
 
+    // Shown when the server could not be started, for example when the port is already in use. Sits above the buttons so it cannot overlap them.
+    start_error = new GuiLabel(row, "START_ERROR", "", 25);
+    start_error->setAlignment(sp::Alignment::Center)->setPosition(0.0f, -50.0f, sp::Alignment::BottomCenter)->setSize(GuiElement::GuiSizeMax, 50.0f)->hide();
+
     // Start server button.
     (new GuiButton(row, "START_SERVER", tr("Start server"), [this]() {
         int port = server_port->getText().toInt();
         if (port < 1)
             port = defaultServerPort;
         new EpsilonServer(port);
+        if (!game_server)
+        {
+            LOG(Error, "Failed to start server on port " + string(port));
+            start_error->setText(tr("Failed to start server on port {port}. Is it already in use?").format({{"port", string(port)}}))->show();
+            return;
+        }
         game_server->setServerName(server_name->getText());
         game_server->setPassword(server_password->getText().upper());
         gameGlobalInfo->gm_control_code = gm_password->getText().upper();

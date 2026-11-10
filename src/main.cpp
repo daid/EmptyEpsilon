@@ -331,6 +331,12 @@ void returnToMainMenu(RenderLayer* render_layer)
         LOG(Info, "Launching headless scenario " + headless + " on port " + string(headless_port));
         new EpsilonServer(headless_port);
 
+        if (!game_server) // => failed to start server (for example: port already in use)
+        {
+            LOG(Error, "Failed to start headless server on port " + string(headless_port));
+            exit(1);
+        }
+
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());
         if (PreferencesManager::get("headless_internet") == "1") game_server->registerOnMasterServer(PreferencesManager::get("registry_registration_url", "http://daid.eu/ee/register.php"));
