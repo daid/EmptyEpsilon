@@ -53,6 +53,7 @@
 #include "components/lifetime.h"
 #include "components/rendering.h"
 #include "systems/jumpsystem.h"
+#include "systems/internalcrew.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
@@ -1058,7 +1059,11 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_CREW_SET_TARGET:{
             auto [crew, position] = packet.read<sp::ecs::Entity, glm::ivec2>();
             if (auto ic = crew.getComponent<InternalCrew>())
-                ic->target_position = position;
+            {
+                // Refuse orders onto a cell another crew member stands on or is heading for.
+                if (!InternalCrewSystem::isCellOccupied(ic->ship, position, crew))
+                    ic->target_position = position;
+            }
         }break;
     }
 }
