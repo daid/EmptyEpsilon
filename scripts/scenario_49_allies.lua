@@ -3534,6 +3534,7 @@ function handleDockedState()
 						end)
 					end	--end station has HVLI for player if branch
 				end	--end player can accept HVLI if branch
+				addCommsReply(_("Back"), commsStation)
 			end)	--end player requests secondary ordnance comms reply branch
 		end	--end secondary ordnance available from station if branch
 	end	--end missles used on player ship if branch
@@ -3873,6 +3874,7 @@ function handleDockedState()
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("trade-comms", "Repair crew member hired"))
+					addCommsReply(_("Back"), commsStation)
 				end
 			end)
 		end
@@ -3889,6 +3891,7 @@ function handleDockedState()
 				else
 					player:setRepairCrewCount(player:getRepairCrewCount() + 1)
 					setCommsMessage(_("trade-comms", "Repair crew member hired"))
+					addCommsReply(_("Back"), commsStation)
 				end
 			end)
 		end
@@ -6631,12 +6634,12 @@ function stationStatus()
 		if item.count_base > 0 then
 			item.count = counts[faction]/item.count_base*100
 		else
-			item.count = -1
+			item.count = nil	--no stations of this faction: leave it out of the end statistics instead of printing -1.0%
 		end
 		if item.strength_base > 0 then
 			item.value = values[faction]/item.strength_base*100
 		else
-			item.value = -1
+			item.value = nil
 		end
 	end
 	return	percentages["Human Navy"].count,
