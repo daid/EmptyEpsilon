@@ -246,13 +246,13 @@ function ClearHazardsNear(centerX, centerY, radius, maxRoids, maxMines)
 
   -- Destroy any hazards beyond the limits
   for _, potentialHazard in ipairs(objects) do
-    if potentialHazard.typeName == "Asteroid" then
+    if isObjectType(potentialHazard, "Asteroid") then
       roidCount = roidCount + 1
       if roidCount > maxRoids then
         potentialHazard:destroy()
       end
     end
-    if potentialHazard.typeName == "Mine" then
+    if isObjectType(potentialHazard, "Mine") then
       mineCount = mineCount + 1
       if mineCount > maxMines then
         potentialHazard:destroy()
@@ -304,7 +304,7 @@ function SpawnWeaponPickups()
       artifact:onCollision(function(self, collider)
         -- "Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table..."
         local __ = math.abs(0)
-        if collider.typeName == "PlayerSpaceship" then
+        if isObjectType(collider, "PlayerSpaceship") then
           collider:setWeaponStorage(weaponType, collider:getWeaponStorage(weaponType) + 1)
           self:destroy()
           collider:addToShipLog(_("artifacts", "Picked up a ") .. weaponType, "green")
@@ -337,7 +337,7 @@ function CheckPayloadControl(target, faction1, faction2)
   local allShips = getObjectsInRadius(payloadX, payloadY, PayloadDistanceThreshold)
 
   for _, ship in ipairs(allShips) do
-    if ship.typeName ~= "CpuShip" and ship.typeName ~= "PlayerSpaceship" then
+    if not isObjectType(ship, "CpuShip") and not isObjectType(ship, "PlayerSpaceship") then
       goto continue
     end
     if ship:isValid() and ship:getFaction() == faction1 then

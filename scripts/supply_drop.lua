@@ -12,7 +12,7 @@ end
 
 function update(delta)
 	if not my_ship:isValid() then
-		destroyScript()
+		update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 		return
 	end
 	local x, y = my_ship:getPosition()
@@ -25,7 +25,7 @@ function update(delta)
 	elseif state == 1 then
 		if math.abs(x - position_x) < 1500 and math.abs(y - position_y) < 1500 then
 			my_ship:destroy()
-			destroyScript()
+			update = nil	--destroyScript() is gone since the ECS port; an additional script with no update is skipped
 			return
 		end
 	end
