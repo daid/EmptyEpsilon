@@ -1056,7 +1056,7 @@ function setGlobals()
 		["Cruiser"] =			{"Excelsior","Velociraptor","Thunder","Kona","Encounter","Perth","Aspern","Panther"},
 		["Deimos"] =			{"Dante","Protector","Staunch"},
 		["Destroyer III"] =		{"Strand","Isometric"},
-		["Destroyer IV"] =		{"Bent","Inpenetrable","Impervious"},
+		["Destroyer IV"] =		{"Bent","Impenetrable","Impervious"},
 		["Ender"] =				{"Mongo","Godzilla","Leviathan","Kraken","Jupiter","Saturn"},
 		["Era"] =				{"Mindful","Peer","Star Flow"},
 		["Flavia"] =			{"Ladyhawke","Hunter","Seeker","Gyrefalcon","Kestrel","Magpie","Bandit","Buccaneer"},
@@ -1201,8 +1201,8 @@ function setGlobals()
 				},
 				{
 					name = "Iota Carinae",
-					unscanned = _("scienceDescription-star","Classification A7 lb"),
-					scanned = _("scienceDescription-star","Classification A7 lb, supergiant, temprature 7,500 K, 7xSol mass"),
+					unscanned = _("scienceDescription-star","Classification A7 Ib"),
+					scanned = _("scienceDescription-star","Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"),
 				},
 				{
 					name = "Theta Arietis",
@@ -1322,7 +1322,7 @@ function setGlobals()
 				{	
 					name = "Wouri",	
 					unscanned = _("scienceDescription-star","Classification K"),
-					scanned = _("scienceDescription-star","Classification 5V, K-type main sequence, temperature 4,782 K"),
+					scanned = _("scienceDescription-star","Classification K5V, K-type main sequence, temperature 4,782 K"),
 				},
 				{	
 					name = "Xihe",	
@@ -1332,12 +1332,12 @@ function setGlobals()
 				{	
 					name = "Yildun",	
 					unscanned = _("scienceDescription-star","Classification A"),
-					scanned = _("scienceDescription-star","Classification A1 Van, white hued, A-type main sequence, temperature 9,911 K"),
+					scanned = _("scienceDescription-star","Classification A1 Vn, white-hued, A-type main sequence, temperature 9,911 K"),
 				},
 				{	
 					name = "Zosma",	
 					unscanned = _("scienceDescription-star","Classification A"),
-					scanned = _("scienceDescription-star","Classification A4 V, white hued, A-type main sequence, temperature 8,296 K"),
+					scanned = _("scienceDescription-star","Classification A4 V, white-hued, A-type main sequence, temperature 8,296 K"),
 				},
 			},
 			color = {
@@ -1352,7 +1352,7 @@ function setGlobals()
 		{
 			name = {"Bespin","Aldea","Bersallis"},
 			unscanned = _("scienceDescription-planet","Class J"),
-			scanned = _("scienceDescription-planet","Class J, Jovian, source for hydrogen and helium and a large variety of exotic gasses"),
+			scanned = _("scienceDescription-planet","Class J, Jovian, source of hydrogen, helium, and a large variety of exotic gases"),
 			texture = {
 				surface = "planets/gas-1.png"
 			},
@@ -1361,7 +1361,7 @@ function setGlobals()
 		{
 			name = {"Farius Prime","Deneb","Mordan"},
 			unscanned = _("scienceDescription-planet","Class J"),
-			scanned = _("scienceDescription-planet","Class J, Neptunian, source for hydrogen helium, ammonia, methane, water"),
+			scanned = _("scienceDescription-planet","Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"),
 			texture = {
 				surface = "planets/gas-2.png"
 			},
@@ -3200,9 +3200,9 @@ function getCurrentOrders()
 		if comms_source.met_pirate == nil then
 			if comms_source:getDockedWith() == comms_target then
 				addCommsReply(_("orders-comms","Visit lounge"),function()
-					setCommsMessage(_("orders-comms","When you enter the lounge, you see a guy sitting at the bar with an eye patch, a peg leg, a cutlass at his belt, a three cornered hat and a green bird on his shoulder."))
+					setCommsMessage(_("orders-comms","When you enter the lounge, you see a guy sitting at the bar with an eye patch, a peg leg, a cutlass at his belt, a three-cornered hat and a green bird on his shoulder."))
 					addCommsReply(_("orders-comms","Ask about the eye patch, hat, peg leg and bird"),function()
-						setCommsMessage(string.format(_("pirate-comms","Why, I'm a pirate, matey! Marcus the pirate! Actually, I'm just playing the part of a pirate in the live production of 'Caribbean Pirates' here on %s. I'm on a ten minute rehearsal break. This stuff I'm wearing is my costume. The peg leg is a hologram and the bird is a robot. I think the bird has better lines than I do.\n\nIf you want to talk to real modern pirates, that couple over there at that table are the real deal. They recently retired from a successful career as pirates, or so I hear. This will probably be the only time you can talk to them."),comms_target:getCallSign()))
+						setCommsMessage(string.format(_("pirate-comms","Why, I'm a pirate, matey! Marcus the pirate! Actually, I'm just playing the part of a pirate in the live production of 'Caribbean Pirates' here on %s. I'm on a ten-minute rehearsal break. This stuff I'm wearing is my costume. The peg leg is a hologram and the bird is a robot. I think the bird has better lines than I do.\n\nIf you want to talk to real modern pirates, that couple over there at that table are the real deal. They recently retired from a successful career as pirates, or so I hear. This will probably be the only time you can talk to them."),comms_target:getCallSign()))
 						comms_source.met_pirate = "met"
 						addCommsReply(_("pirate-comms","Talk to pirate couple"),function()
 							setCommsMessage(_("pirate-comms","Hi there, take a seat with us. Marcus signaled us that you've got some kind of interest in pirates. Is that right?"))
@@ -3212,7 +3212,7 @@ function getCurrentOrders()
 									setCommsMessage(_("pirate-comms","Loot?! We'd prefer to call that excess cargo. [they laugh at their own joke]\n\nSeveral things have to come together in order to relieve them of their excess cargo."))
 									addCommsReply(_("pirate-comms","What things have to come together?"),function()
 										setCommsMessage(_("pirate-comms","Things your ship has to do and things that have to happen on the ship you're liberating excess cargo from. Your ship has to be within 3 units of the other ship, it has to be at a complete stop, it has to have the shields down, it has to have room in the cargo bay, and it has to have at least 50 units of energy per cargo item to operate the transporters that grab the cargo."))
-										addCommsReply(_("pirate-comms","What about the other ship"),function()
+										addCommsReply(_("pirate-comms","What about the other ship?"),function()
 											setCommsMessage(_("pirate-comms","Assuming you haven't destroyed it (a common mistake with inexperienced pirates), the other ship has to be completely immobile and their shields have to be down. It also helps if they actually have excess cargo to liberate."))
 											addCommsReply(_("pirate-comms","How do we know if they have any cargo?"),function()
 												setCommsMessage(_("pirate-comms","Sometimes you can just ask them. Otherwise you can double scan them. You should see the cargo manifest in the ship description. You may have to click the tactical widget or the systems widget on the science console to see the description."))
@@ -3221,7 +3221,7 @@ function getCurrentOrders()
 													addCommsReply(_("pirate-comms","How do we get their shields down?"),function()
 														setCommsMessage(_("pirate-comms","First, shoot them down, then target the applicable shield generator to keep them down."))
 														addCommsReply(_("pirate-comms","Is that it?"),function()
-															setCommsMessage(string.format(_("pirate-comms","Once you meet all those requirements, your Relay or Operations officer should see buttons to get cargo from the ship.\n\nOnce you go down this path, there's no going back. If you stick to liberating cargo from enemies of the %s, you'll only be called Licensed Privateers. Loot neutrals or friendlies and you'll be labled Pirates."),player_faction))
+															setCommsMessage(string.format(_("pirate-comms","Once you meet all those requirements, your Relay or Operations officer should see buttons to get cargo from the ship.\n\nOnce you go down this path, there's no going back. If you stick to liberating cargo from enemies of the %s, you'll only be called Licensed Privateers. Loot neutrals or friendlies and you'll be labeled Pirates."),player_faction))
 															addCommsReply(_("pirate-comms","What do we do with the excess cargo?"),function()
 																setCommsMessage(_("pirate-comms","Sell it to stations that want to buy it. In fact, you should identify what stations want what goods before you start liberating excess cargo from innocent freighters."))
 																addCommsReply(_("pirate-comms","How do we find out what stations want goods?"),function()
@@ -3536,7 +3536,7 @@ function scenarioShipEnhancements()
 	end
 	if comms_target.jump_upgrade_station and comms_source.jump_upgrade == nil and not comms_source:hasJumpDrive() then
 		addCommsReply(_("upgrade-comms","Check on jump drive availability"),function()
-			setCommsMessage(_("upgrade-comms","Jonathan Rogers, our resident engine systems specialist has three jump drives not being used. He could install one of them on your ship. One is a Repulse Rabbit XR5, one is a Vesta UK41, and the third is a Ketrik Presence D8"))
+			setCommsMessage(_("upgrade-comms","Jonathan Rogers, our resident engine systems specialist, has three jump drives not being used. He could install one of them on your ship. One is a Repulse Rabbit XR5, one is a Vesta UK41, and the third is a Ketrik Presence D8."))
 			if comms_target.jump_upgrades == nil then
 				comms_target.jump_upgrades = {
 					{long = 50000,	short = 5000,	adjacent = true,	charged = true},
@@ -3602,7 +3602,7 @@ function scenarioShipEnhancements()
 				end)
 				addCommsReply(_("Back"), commsStation)
 			end)
-			addCommsReply(_("upgrade-comms","What do you know of the Ketrik Presence D8"),function()
+			addCommsReply(_("upgrade-comms","What do you know of the Ketrik Presence D8?"),function()
 				if comms_target.ketrik == nil then
 					comms_target.ketrik = tableRemoveRandom(comms_target.jump_upgrades)
 				end
@@ -4409,14 +4409,14 @@ function smee(p)
 		local fail_conditions = {}
 		if smee_color == nil or #smee_color == 0 then
 			smee_color = {
-				_("smee-msgRelay","Avast, mehearties."),
+				_("smee-msgRelay","Avast, me hearties."),
 				_("smee-msgRelay","The pirate code's more like guidelines than actual rules."),
 				_("smee-msgRelay","Where aarrrr they going?"),
 				_("smee-msgRelay","It's bad form to shoot a man in the middle of his cadenza."),
 				_("smee-msgRelay","There's a bit of bravery in everyone, even if they don't know it."),
 				_("smee-msgRelay","A good pirate never shows his true colors."),
 				_("smee-msgRelay","It's not the size of the ship, but the captain's heart that matters."),
-				_("smee-msgRelay","Always remember, laughter is the best medicine, especially when you’re sailing through tough times."),
+				_("smee-msgRelay","Always remember, laughter is the best medicine, especially when you're sailing through tough times."),
 				_("smee-msgRelay","Not all treasure is silver and gold."),
 				_("smee-msgRelay","Why join the navy if you can be a pirate?"),
 				_("smee-msgRelay","Work like a captain, play like a pirate."),
@@ -4435,8 +4435,8 @@ function smee(p)
 				_("smee-msgRelay","In politics and trade, bruisers and pirates are of better promise than talkers and clerks."),
 				_("smee-msgRelay","I am a man of fortune and must seek my fortune."),
 				_("smee-msgRelay","In an honest service, there is thin commons, low wages, and hard labor."),
-				_("smee-msgRelay","Revenge may sate your being, but don’t misunderstand me, it's an end, not a beginning."),
-				_("smee-msgRelay","Betrayin’s all part of piratin’. If you don’t know that you’re not even close to being a pirate."),
+				_("smee-msgRelay","Revenge may sate your being, but don't misunderstand me. It's an end, not a beginning."),
+				_("smee-msgRelay","Betrayin's all part of piratin'. If you don't know that, you're not even close to being a pirate."),
 				_("smee-msgRelay","Aye, the sea whispers secrets only the brave dare to listen."),
 				_("smee-msgRelay","Ye have the heart of a sea serpent—cold and deep as the abyss itself."),
 				_("smee-msgRelay","Weigh anchor! The dawn's light brings promise of plunder and glory."),
@@ -4568,7 +4568,7 @@ function smee(p)
 					if svx == 0 and svy == 0 then
 						table.insert(out,{msg=string.format(_("smee-msgRelay","%s and %s have both stopped."),p:getCallSign(),victim:getCallSign()),continue=true})
 					else
-						table.insert(out,{msg=string.format(_("smee-msgRelay","We're stopped and another ship has stopped, but %s, the closest cherry to be picked has not stopped."),victim:getCallSign()),continue=false})
+						table.insert(out,{msg=string.format(_("smee-msgRelay","We're stopped and another ship has stopped, but %s, the closest cherry to be picked, has not stopped."),victim:getCallSign()),continue=false})
 						loot_fail_reason_count = loot_fail_reason_count + 1
 					end
 				else
@@ -4604,7 +4604,7 @@ function smee(p)
 		else
 			if victim:getShieldCount() > 0 then
 				if victim:getShieldCount() > 1 then
-					table.insert(out,{msg=string.format(_("smee-msgRelay","At least one of %s's shield arcs are down."),victim:getCallSign()),continue=true})
+					table.insert(out,{msg=string.format(_("smee-msgRelay","At least one of %s's shield arcs is down."),victim:getCallSign()),continue=true})
 				else
 					table.insert(out,{msg=string.format(_("smee-msgRelay","%s's shield is down."),victim:getCallSign()),continue=true})
 				end
@@ -4673,7 +4673,7 @@ function smee(p)
 		return advisePlayer(out,smee_threshold)
 	else
 		--No victims in 3U. Analyze sensor readings
-		table.insert(out,{msg=_("smee-msgRelay","There are not ships we can loot within three units."),continue=false})
+		table.insert(out,{msg=_("smee-msgRelay","There are no ships we can loot within three units."),continue=false})
 		return advisePlayer(out,1)
 	end
 end
@@ -4884,8 +4884,8 @@ function getLoot(p,ship,good,ord)
 							else
 								p.cargo_bay_full_rel = "cargo_bay_full_rel"
 								p.cargo_bay_full_ops = "cargo_bay_full_ops"
-								p:addCustomMessage("Relay",p.cargo_bay_full_rel,_("msgRelay","Cannot get cargo because cargo bay is full."))
-								p:addCustomMessage("Operations",p.cargo_bay_full_ops,_("msgOperations","Cannot get cargo because cargo bay is full."))
+								p:addCustomMessage("Relay",p.cargo_bay_full_rel,_("msgRelay","Cannot get cargo because the cargo bay is full."))
+								p:addCustomMessage("Operations",p.cargo_bay_full_ops,_("msgOperations","Cannot get cargo because the cargo bay is full."))
 							end
 						end
 					end

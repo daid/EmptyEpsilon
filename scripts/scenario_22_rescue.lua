@@ -52,7 +52,7 @@ function init()
 	setConstants()
 	setGlobals()
 	setVariations()
-	primary_orders = _("orders-comms","Rescue exotic weapons research scientist, Hans Gestalt")
+	primary_orders = _("orders-comms","Rescue the exotic weapons research scientist, Hans Gestalt.")
 	constructEnvironment()
 	onNewPlayerShip(setPlayers)
 	missionMaintenance = startInitialMission
@@ -458,8 +458,8 @@ function setGlobals()
 				},
 				{
 					name = "Iota Carinae",
-					unscanned = _("scienceDescription-star","Classification A7 lb"),
-					scanned = _("scienceDescription-star","Classification A7 lb,\nsupergiant,\ntemperature 7,500 K,\n7xSol mass"),
+					unscanned = _("scienceDescription-star","Classification A7 Ib"),
+					scanned = _("scienceDescription-star","Classification A7 Ib,\nsupergiant,\ntemperature 7,500 K,\n7xSol mass"),
 				},
 				{
 					name = "Theta Arietis",
@@ -519,7 +519,7 @@ function setGlobals()
 				{	
 					name = "Inquill",	
 					unscanned = _("scienceDescription-star","Classification G1V(w)"),
-					scanned = _("scienceDescription-star","Classification G1V(w),\n1.24xSol mass,n7th magnitude G-type main sequence"),
+					scanned = _("scienceDescription-star","Classification G1V(w),\n1.24xSol mass,\n7th magnitude G-type main sequence"),
 				},
 				{	
 					name = "Jishui",	
@@ -579,7 +579,7 @@ function setGlobals()
 				{	
 					name = "Wouri",	
 					unscanned = _("scienceDescription-star","Classification K"),
-					scanned = _("scienceDescription-star","Classification 5V,\nK-type main sequence,\ntemperature 4,782 K"),
+					scanned = _("scienceDescription-star","Classification K5V,\nK-type main sequence,\ntemperature 4,782 K"),
 				},
 				{	
 					name = "Xihe",	
@@ -589,12 +589,12 @@ function setGlobals()
 				{	
 					name = "Yildun",	
 					unscanned = _("scienceDescription-star","Classification A"),
-					scanned = _("scienceDescription-star","Classification A1 Van,\nwhite hued,\nA-type main sequence,\ntemperature 9,911 K"),
+					scanned = _("scienceDescription-star","Classification A1 Vn,\nwhite-hued,\nA-type main sequence,\ntemperature 9,911 K"),
 				},
 				{	
 					name = "Zosma",	
 					unscanned = _("scienceDescription-star","Classification A"),
-					scanned = _("scienceDescription-star","Classification A4 V,\nwhite hued,\nA-type main sequence,\ntemperature 8,296 K"),
+					scanned = _("scienceDescription-star","Classification A4 V,\nwhite-hued,\nA-type main sequence,\ntemperature 8,296 K"),
 				},
 			},
 			color = {
@@ -609,7 +609,7 @@ function setGlobals()
 		{
 			name = {"Bespin","Aldea","Bersallis"},
 			unscanned = _("scienceDescription-planet","Class J"),
-			scanned = _("scienceDescription-planet","Class J, Jovian, source for hydrogen and helium and a large variety of exotic gasses"),
+			scanned = _("scienceDescription-planet","Class J, Jovian, source of hydrogen, helium, and a large variety of exotic gases"),
 			texture = {
 				surface = "planets/gas-1.png"
 			},
@@ -618,7 +618,7 @@ function setGlobals()
 		{
 			name = {"Farius Prime","Deneb","Mordan"},
 			unscanned = _("scienceDescription-planet","Class J"),
-			scanned = _("scienceDescription-planet","Class J, Neptunian, source for hydrogen helium, ammonia, methane, water"),
+			scanned = _("scienceDescription-planet","Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"),
 			texture = {
 				surface = "planets/gas-2.png"
 			},
@@ -2634,7 +2634,7 @@ function dockWithTargetStation()
 								if variance > 1 then
 									for i,p in ipairs(getActivePlayerShips()) do
 										if p.component_programmed then
-											p:addToShipLog(_("goal-shipLog","Hack activation was not simulataneous. Variance exceeded one second. The component needs to be reprogrammed for another attempt to activate the hack simulataneously."),"Yellow")
+											p:addToShipLog(_("goal-shipLog","Hack activation was not simultaneous. Variance exceeded one second. The component needs to be reprogrammed for another attempt to activate the hack simultaneously."),"Yellow")
 											p.component_programmed = false
 											p:addCustomButton("Relay",p.program_component_rel,_("buttonRelay","Program Component"),function()
 												string.format("")
@@ -2710,8 +2710,8 @@ function informRelay(p)
 	string.format("")
 	p:removeCustom(p.inform_relay_button_sci)
 	p:removeCustom(p.inform_relay_button_ops)
-	p:addCustomMessage("Relay","program_component_message_rel",string.format(_("msgRelay","Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces to the station through the docking clamp."),target_station:getCallSign()))
-	p:addCustomMessage("Operations","program_component_message_ops",string.format(_("msgRelay","Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces to the station through the docking clamp."),target_station:getCallSign()))
+	p:addCustomMessage("Relay","program_component_message_rel",string.format(_("msgRelay","Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces with the station through the docking clamp."),target_station:getCallSign()))
+	p:addCustomMessage("Operations","program_component_message_ops",string.format(_("msgRelay","Science just sent you the details on what is required to interface with station %s to switch the systems back to Independent control. You will need to program the component to hack the systems when it interfaces with the station through the docking clamp."),target_station:getCallSign()))
 	p.program_component_rel = "program_component_rel"
 	p:addCustomButton("Relay",p.program_component_rel,_("buttonRelay","Program Component"),function()
 		string.format("")
@@ -2934,7 +2934,7 @@ function scenarioShipEnhancements()
 	end
 	if not comms_source.sensor_upgrade then
 		addCommsReply(_("upgrade-comms","Check on long range sensor upgrade availability"),function()
-			setCommsMessage(string.format(_("upgrade-comms","Our quartermaster, Sylvia Trondheim, has several spare long range sensor upgrade packages. They were scheduled to be installed on exploration vessels coming into the region, but those exploration missions were cancelled or repurposed. She's willing to install one on %s"),comms_source:getCallSign()))
+			setCommsMessage(string.format(_("upgrade-comms","Our quartermaster, Sylvia Trondheim, has several spare long range sensor upgrade packages. They were scheduled to be installed on exploration vessels coming into the region, but those exploration missions were cancelled or repurposed. She's willing to install one on %s."),comms_source:getCallSign()))
 			if comms_target.sensor_upgrades == nil then
 				comms_target.sensor_upgrades = {
 					{long = 40000, short = 5000},
@@ -2954,7 +2954,7 @@ function scenarioShipEnhancements()
 						comms_source.normal_short_range_radar = comms_target.richter.short
 						comms_source:setLongRangeRadarRange(comms_source.normal_long_range_radar)
 						comms_source:setShortRangeRadarRange(comms_source.normal_short_range_radar)
-						setCommsMessage(_("upgrade-comms","Sylvia has installed the Richter version 7 sensor upgrade"))
+						setCommsMessage(_("upgrade-comms","Sylvia has installed the Richter version 7 sensor upgrade."))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				else
@@ -2974,7 +2974,7 @@ function scenarioShipEnhancements()
 						comms_source.normal_short_range_radar = comms_target.omniscient.short
 						comms_source:setLongRangeRadarRange(comms_source.normal_long_range_radar)
 						comms_source:setShortRangeRadarRange(comms_source.normal_short_range_radar)
-						setCommsMessage(_("upgrade-comms","Sylvia has installed the Omniscient Mark 4 sensor upgrade"))
+						setCommsMessage(_("upgrade-comms","Sylvia has installed the Omniscient Mark 4 sensor upgrade."))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				else
@@ -2994,7 +2994,7 @@ function scenarioShipEnhancements()
 						comms_source.normal_short_range_radar = comms_target.voriax.short
 						comms_source:setLongRangeRadarRange(comms_source.normal_long_range_radar)
 						comms_source:setShortRangeRadarRange(comms_source.normal_short_range_radar)
-						setCommsMessage(_("upgrade-comms","Sylvia has installed the Voriax II sensor upgrade"))
+						setCommsMessage(_("upgrade-comms","Sylvia has installed the Voriax II sensor upgrade."))
 						addCommsReply(_("Back"), commsStation)
 					end)
 				else
