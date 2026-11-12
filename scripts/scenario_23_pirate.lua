@@ -5,7 +5,7 @@
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[Playership]: Configure what player ship to start with. Default is random
@@ -287,13 +287,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -308,7 +308,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -325,7 +325,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -346,7 +346,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -371,7 +371,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -400,7 +400,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -416,7 +416,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -502,7 +502,7 @@ function setGlobals()
 				{idx = 4,	dir =	-90,	siz =	"medium",	tim =	10,	exc =	"Mine",	},
 				{idx = 5,	dir =	180,	siz =	"medium",	tim =	15,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"EMP",	qty =	6},	--original: 3
 			},
 		},
@@ -547,7 +547,7 @@ function setGlobals()
 				{idx = 6,	dir =	-90,	siz =	"large",	tim =	20,	exc =	"Mine",	},
 				{idx = 7,	dir =	180,	siz =	"medium",	tim =	10,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"HVLI",	qty =	18},	--original: 0
 			},
 		},
@@ -607,7 +607,7 @@ function setGlobals()
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	16,	only =	"Mine",	},
 				{idx = 3,	dir =	180,	siz =	"medium",	tim =	16,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	16},	--original: 12
 				{typ =	"Mine",		qty =	10},	--original: 8
 				{typ =	"HVLI",		qty =	0},		--original: 0
@@ -659,7 +659,7 @@ function setGlobals()
 				{idx = 2,	dir =	0,	siz =	"large",	tim =	6,	only =	"HVLI",		},
 				{idx = 3,	dir =	180,siz =	"large",	tim =	6,	only =	"Homing",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	5},	--original: 8
 				{typ =	"EMP",		qty =	5},	--original: 6
 				{typ =	"Mine",		qty =	0},	--original: 6
@@ -667,7 +667,7 @@ function setGlobals()
 		},
 		["Cruiser"] =			{base = "Player Cruiser",		del = false,	},
 		["Raven"] =				{base = "Player Cruiser",		del = false,
-			warp =	{speed = 400},	
+			warp =	{speed = 400},
 			jump =	{s =	0,	l =	0},					--original: s:5 l:50
 			shields =	{f =	120,	b =	120,	},	--original: f:80 b:80
 			hull =		160,							--original: 200
@@ -683,7 +683,7 @@ function setGlobals()
 				{idx = 4,	dir =	0,		siz =	"large",	tim =	12,	only =	"Homing",	},
 				{idx = 5,	dir =	180,	siz =	"medium",	tim =	10,	only =	"Mine",		},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	8},	--original: 12
 				{typ =	"EMP",		qty =	4},	--original: 6
 				{typ =	"Mine",		qty =	6},	--original: 8
@@ -708,7 +708,7 @@ function setGlobals()
 				{idx = 3,	dir =	90,		siz =	"medium",	tim =	8,	only =	"Nuke",		},
 				{idx = 4,	dir =	180,	siz =	"medium",	tim =	12,	only =	"Mine",		},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	16},--original: 12
 				{typ =	"EMP",		qty =	5},	--original: 6
 				{typ =	"Nuke",		qty =	3},	--original: 4
@@ -716,7 +716,7 @@ function setGlobals()
 		},
 		["Missile Cruiser"] =	{base = "Player Missile Cr.",	del = false,	},
 		["Mantis"] =			{base = "Player Missile Cr.",	del = false,
-			beam = {	
+			beam = {
 				{idx = 0,	arc =	60,	dir = 	-15,rng =	1000,	cyc =	6,		dmg = 	4,	},
 				{idx = 1,	arc =	60,	dir = 	15,	rng =	1000,	cyc =	6,		dmg = 	4,	},
 			},
@@ -727,7 +727,7 @@ function setGlobals()
 				{idx = 3,	dir =	90,		siz =	"medium",	tim =	8,	inc =	"EMP",	inc2 =	"Nuke",	},
 				{idx = 4,	dir =	180,	siz =	"medium",	tim =	8,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	8},		--original: 30
 				{typ =	"HVLI",		qty =	12},	--original: 0
 				{typ =	"EMP",		qty =	6},		--original: 10
@@ -737,7 +737,7 @@ function setGlobals()
 		},
 		["Midian"] =			{base = "Player Missile Cr.",	del = false,
 			warp =		{speed = 350},					--original:800
-			beam = {	
+			beam = {
 				{idx = 0,	arc =	50,	dir = 	-20,rng =	1000,	cyc =	6,		dmg = 	4,	},
 				{idx = 1,	arc =	50,	dir = 	20,	rng =	1000,	cyc =	6,		dmg = 	4,	},
 				{idx = 2,	arc =	10,	dir = 	180,rng =	1000,	cyc =	6,		dmg = 	3,	tarc =	220,	tur =	.3,	},
@@ -749,7 +749,7 @@ function setGlobals()
 				{idx = 3,	dir =	90,		siz =	"medium",	tim =	12,	only =	"HVLI",	inc =	"EMP",	inc2 =	"Nuke",	},
 				{idx = 4,	dir =	180,	siz =	"medium",	tim =	15,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	16},	--original: 30
 				{typ =	"HVLI",		qty =	16},	--original: 0
 				{typ =	"EMP",		qty =	5},		--original: 10
@@ -764,7 +764,7 @@ function setGlobals()
 			spin =		15,							--original: 8
 			accel =		{f =	40,		b =	40,	},	--original: f:15 b:15
 			cmbmov =	{b =	400,	s = 250	},	--original: b:450 s:200
-			beam = {	
+			beam = {
 				{idx = 0,	arc =	60,	dir = 	-15,rng =	1500,	cyc =	6,		dmg = 	6,	bdt = "emp",		},
 				{idx = 1,	arc =	60,	dir = 	15,	rng =	1500,	cyc =	6,		dmg = 	6,	bdt = "emp",		},
 				{idx = 2,	arc =	60,	dir = 	-15,rng =	1000,	cyc =	6,		dmg = 	6,	bdt = "kinetic",	},
@@ -777,7 +777,7 @@ function setGlobals()
 				{idx = 1,	dir =	90,		siz =	"medium",	tim =	8,	exc =	"Mine",	},
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	8,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	6},		--original: 30
 				{typ =	"HVLI",		qty =	10},	--original: 0
 				{typ =	"EMP",		qty =	4},		--original: 10
@@ -803,7 +803,7 @@ function setGlobals()
 				{idx = 1,	dir =	90,		siz =	"medium",	tim =	15,	exc =	"Mine",	},
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	30,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Mine",		qty =	3},		--original: 0
 			},
 		},
@@ -816,7 +816,7 @@ function setGlobals()
 				{idx = 1,	dir =	60,		siz =	"medium",	tim =	10,	only =	"Homing",	},
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	10,	only =	"Mine",		},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	8},		--original: 0
 				{typ =	"Mine",		qty =	8},		--original: 12
 			},
@@ -843,7 +843,7 @@ function setGlobals()
 				{idx = 1,	dir =	90,		siz =	"large",	tim =	20,	only =	"Homing",	},
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	20,	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Mine",		qty =	2},		--original: 1
 				{typ =	"EMP",		qty =	2},		--original: 0
 				{typ =	"Nuke",		qty =	2},		--original: 1
@@ -856,7 +856,7 @@ function setGlobals()
 			shields =	{f =	100,	b =	100,},	--original: f:70 b:70
 			hull =		130,						--original: 120
 			jump =		{s =	2,	l =	20,	},		--original: s:5 l:50
-			beam = {	
+			beam = {
 				{idx = 0,	arc =	10,	dir = 	0,	rng =	1000,	cyc =	4,		dmg = 	4,	tarc = 80,	tur =	1,	},
 			},
 			tube =	{	--original: dir:-90,-90,-90,90,90,90,170,190 siz:lmllmlmm tim:8
@@ -869,7 +869,7 @@ function setGlobals()
 				{idx = 6,	dir =	170,siz =	"medium",	tim =	15,	only =	"Mine",		},
 				{idx = 7,	dir =	190,siz =	"medium",	tim =	15,	only =	"Mine",		},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"HVLI",		qty =	10},	--original: 20
 				{typ =	"Homing",	qty =	10},	--original: 12
 				{typ =	"Mine",		qty =	6},		--original: 8
@@ -895,7 +895,7 @@ function setGlobals()
 				{idx = 1,	dir =	90,		siz =	"large",	tim =	20,	exc =	"Mine",	},
 				{idx = 2,	dir =	180,	siz =	"medium",	tim =	20,	only =	"Mine",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Mine",		qty =	4},		--original: 0
 			},
 		},
@@ -912,7 +912,7 @@ function setGlobals()
 				{idx = 2,	arc =	10,dir = 	0,	rng =	1250,	cyc =	6,		dmg = 	4,	tarc =	50,	tur =	.5,	bdt =	"emp"},
 				{idx = 3,	arc =	10,dir = 	180,rng =	800,	cyc =	6,		dmg = 	4,	tarc =	60,	tur =	.5,	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Nuke",		qty =	2},		--original: 4
 				{typ =	"EMP",		qty =	4},		--original: 6
 				{typ =	"Homing",	qty =	12},	--original: 8
@@ -952,13 +952,13 @@ function setGlobals()
 				{idx = 10,	dir =	300,siz =	"medium",	tim =	8,	only =	"Homing",	},
 				{idx = 11,	dir =	330,siz =	"medium",	tim =	8,	only =	"Homing",	},
 			},
-			missile =	{	
+			missile =	{
 				{typ =	"Homing",	qty =	24},	--original: 8
 				{typ =	"Mine",		qty =	0},		--original: 6
 			},
 		},
 	}
-	player_ship_stats = {	
+	player_ship_stats = {
 		["Amalgam"]				= { strength = 42,	cargo = 7,	distance = 400,	long_range_radar = 36000, short_range_radar = 5000, probes = 11,tractor = false,	mining = false	},
 		["Atlantis"]			= { strength = 52,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 8,	tractor = true,		mining = true	},
 		["Atlantis II"]			= { strength = 60,	cargo = 6,	distance = 400,	long_range_radar = 30000, short_range_radar = 5000, probes = 8,	tractor = true,		mining = true	},
@@ -1182,7 +1182,7 @@ function setGlobals()
 		["Mehklar"] =		{id = "M", count = 0},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			info = {
 				{
 					name = "Gamma Piscium",
@@ -1254,88 +1254,88 @@ function setGlobals()
 					unscanned = _("scienceDescription-star","Pulsar or Neutron star"),
 					scanned = _("scienceDescription-star","Pulsar or Neutron star, gamma ray source"),
 				},
-				{	
-					name = "Helvetios",	
+				{
+					name = "Helvetios",
 					unscanned = _("scienceDescription-star","Classification G2V"),
 					scanned = _("scienceDescription-star","Classification G2V, yellow, temperature 5,571 K"),
 				},
-				{	
-					name = "Inquill",	
+				{
+					name = "Inquill",
 					unscanned = _("scienceDescription-star","Classification G1V(w)"),
 					scanned = _("scienceDescription-star","Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"),
 				},
-				{	
-					name = "Jishui",	
+				{
+					name = "Jishui",
 					unscanned = _("scienceDescription-star","Classification F3 III"),
 					scanned = _("scienceDescription-star","Classification F3 III, F-type giant, temperature 6,309 K"),
 				},
-				{	
-					name = "Kaus Borealis",	
+				{
+					name = "Kaus Borealis",
 					unscanned = _("scienceDescription-star","Classification K1 IIIb"),
 					scanned = _("scienceDescription-star","Classification K1 IIIb, giant, temperature 4,768 K"),
 				},
-				{	
-					name = "Liesma",	
+				{
+					name = "Liesma",
 					unscanned = _("scienceDescription-star","Classification G0V"),
 					scanned = _("scienceDescription-star","Classification G0V, G-type giant, temperature 5,741 K"),
 				},
-				{	
-					name = "Macondo",	
+				{
+					name = "Macondo",
 					unscanned = _("scienceDescription-star","Classification K2IV-V or K3V"),
 					scanned = _("scienceDescription-star","Classification K2IV-V or K3V, orange, K-type main sequence, temperature 5,030 K"),
 				},
-				{	
-					name = "Nikawiy",	
+				{
+					name = "Nikawiy",
 					unscanned = _("scienceDescription-star","Classification G5"),
 					scanned = _("scienceDescription-star","Classification G5, yellow, luminosity 7.7"),
 				},
-				{	
-					name = "Orkaria",	
+				{
+					name = "Orkaria",
 					unscanned = _("scienceDescription-star","Classification M4.5"),
 					scanned = _("scienceDescription-star","Classification M4.5, Red Dwarf, luminosity .0035, temperature 3,111 K"),
 				},
-				{	
-					name = "Poerava",	
+				{
+					name = "Poerava",
 					unscanned = _("scienceDescription-star","Classification F7V"),
 					scanned = _("scienceDescription-star","Classification F7V, yellow-white, luminosity 1.9, temperature 6,440 K"),
 				},
-				{	
-					name = "Stribor",	
+				{
+					name = "Stribor",
 					unscanned = _("scienceDescription-star","Classification F8V"),
 					scanned = _("scienceDescription-star","Classification F8V, luminosity 2.9, temperature 6,122 K"),
 				},
-				{	
-					name = "Taygeta",	
+				{
+					name = "Taygeta",
 					unscanned = _("scienceDescription-star","Classification B"),
 					scanned = _("scienceDescription-star","Classification B-type subgiant, blue-white, luminosity 600, temperature 13,696 K"),
 				},
-				{	
-					name = "Tuiren",	
+				{
+					name = "Tuiren",
 					unscanned = _("scienceDescription-star","Classification G"),
 					scanned = _("scienceDescription-star","Classification G, magnitude 12.26, temperature 5,580 K"),
 				},
-				{	
-					name = "Ukdah",	
+				{
+					name = "Ukdah",
 					unscanned = _("scienceDescription-star","Classification K"),
 					scanned = _("scienceDescription-star","Classification K2.5 III, K-type giant, temperature 4,244 K"),
 				},
-				{	
-					name = "Wouri",	
+				{
+					name = "Wouri",
 					unscanned = _("scienceDescription-star","Classification K"),
 					scanned = _("scienceDescription-star","Classification K5V, K-type main sequence, temperature 4,782 K"),
 				},
-				{	
-					name = "Xihe",	
+				{
+					name = "Xihe",
 					unscanned = _("scienceDescription-star","Classification G"),
 					scanned = _("scienceDescription-star","Classification G8 III, evolved G-type giant, temperature 4,790 K"),
 				},
-				{	
-					name = "Yildun",	
+				{
+					name = "Yildun",
 					unscanned = _("scienceDescription-star","Classification A"),
 					scanned = _("scienceDescription-star","Classification A1 Vn, white-hued, A-type main sequence, temperature 9,911 K"),
 				},
-				{	
-					name = "Zosma",	
+				{
+					name = "Zosma",
 					unscanned = _("scienceDescription-star","Classification A"),
 					scanned = _("scienceDescription-star","Classification A4 V, white-hued, A-type main sequence, temperature 8,296 K"),
 				},
@@ -1379,13 +1379,13 @@ function setGlobals()
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1393,13 +1393,13 @@ function setGlobals()
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1407,13 +1407,13 @@ function setGlobals()
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -1972,8 +1972,8 @@ function constructEnvironment()
 		end
 		if station.comms_data.trade == nil then
 			station.comms_data.trade = {
-				food =		random(1,100) <= 18, 
-				medicine =	random(1,100) <= 23, 
+				food =		random(1,100) <= 18,
+				medicine =	random(1,100) <= 23,
 				luxury =	random(1,100) <= 35,
 			}
 		end
@@ -2109,49 +2109,49 @@ function constructEnvironment()
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
-		{lo = 1000,	hi = 2250},	
+		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 	}
 	placement_areas = {
 		["Inner Torus"] = {
 			stations = inner_stations,
-			transports = transports, 
+			transports = transports,
 			space = inner_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = radius + 4000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 2 Torus"] = {
 			stations = region_two_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_two_space,
 			shape = "torus",
-			center_x = center_region_two_x, 
-			center_y = center_region_two_y, 
-			inner_radius = region_two_planet_radius + 4000, 
+			center_x = center_region_two_x,
+			center_y = center_region_two_y,
+			inner_radius = region_two_planet_radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 3 Torus"] = {
 			stations = region_three_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_three_space,
 			shape = "torus",
-			center_x = center_region_three_x, 
-			center_y = center_region_three_y, 
-			inner_radius = region_three_moon_radius + 4000, 
+			center_x = center_region_three_x,
+			center_y = center_region_three_y,
+			inner_radius = region_three_moon_radius + 4000,
 			outer_radius = 50000,
 		},
 		["Region 4 Torus"] = {
 			stations = region_four_stations,
-			transports = transports, 
+			transports = transports,
 			space = region_four_space,
 			shape = "torus",
-			center_x = center_region_four_x, 
-			center_y = center_region_four_y, 
-			inner_radius = region_four_planet_radius + 4000, 
+			center_x = center_region_four_x,
+			center_y = center_region_four_y,
+			inner_radius = region_four_planet_radius + 4000,
 			outer_radius = 50000,
 		},
 	}
@@ -2634,7 +2634,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Inner Torus" or placement_area == "Region 2 Torus" or placement_area == "Region 3 Torus" or placement_area == "Region 4 Torus" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.inner_radius,area.outer_radius,nil,radius)
@@ -2685,7 +2685,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -4296,7 +4296,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -4316,7 +4316,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -4335,7 +4335,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -4907,7 +4907,7 @@ function updateShipManifest(ship)
 	ship:setDescriptionForScanState("notscanned","")
 	ship:setDescriptionForScanState("friendorfoeidentified",_("scienceDescription","Commercial Freighter"))
 	ship:setDescriptionForScanState("simplescan",_("scienceDescription","Commercial Freighter"))
-	ship:setDescriptionForScanState("fullscan",manifest)	
+	ship:setDescriptionForScanState("fullscan",manifest)
 end
 
 function supplyPickupProcess(self, player)
@@ -4985,7 +4985,7 @@ function update(delta)
 		return
 	end
 	--	game is no longer paused
-	allowNewPlayerShips(false)	
+	allowNewPlayerShips(false)
 	if reputation_goal == nil then
 		reputation_goal = playerPower() * goal_strength_multiplier + 50	--normal difficulty gives you 50 rep to start
 		primary_orders = string.format(_("orders-comms","Goal: Reach your reputation goal of %s reputation points. You're only loosely affiliated with the %s, so you don't have orders per se."),reputation_goal,player_faction)

@@ -5,9 +5,9 @@
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Mission
--- Author: Xansta 
+-- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
 -- Enemies[Easy]: Fewer or weaker enemies
 -- Enemies[Normal|Default]: Normal number or strength of enemies
@@ -200,13 +200,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -221,7 +221,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -238,7 +238,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -259,7 +259,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -284,7 +284,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -313,7 +313,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -329,7 +329,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -357,7 +357,7 @@ function setGlobals()
 	player_respawn_max = 0
 	deployed_player_count = 0
 	deployed_players = {}
-	player_ship_stats = {	
+	player_ship_stats = {
 		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 8,	tractor = false,	mining = false	},
 		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 8,	tractor = false,	mining = false	},
 		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 8,	tractor = true,		mining = true	},
@@ -439,7 +439,7 @@ function setGlobals()
 	}
 	template_pool_size = 10
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			info = {
 				{
 					name = "Gamma Piscium",
@@ -511,88 +511,88 @@ function setGlobals()
 					unscanned = _("scienceDescription-star","Pulsar or Neutron star"),
 					scanned = _("scienceDescription-star","Pulsar or Neutron star,\ngamma ray source"),
 				},
-				{	
-					name = "Helvetios",	
+				{
+					name = "Helvetios",
 					unscanned = _("scienceDescription-star","Classification G2V"),
 					scanned = _("scienceDescription-star","Classification G2V,\nyellow,\ntemperature 5,571 K"),
 				},
-				{	
-					name = "Inquill",	
+				{
+					name = "Inquill",
 					unscanned = _("scienceDescription-star","Classification G1V(w)"),
 					scanned = _("scienceDescription-star","Classification G1V(w),\n1.24xSol mass,\n7th magnitude G-type main sequence"),
 				},
-				{	
-					name = "Jishui",	
+				{
+					name = "Jishui",
 					unscanned = _("scienceDescription-star","Classification F3 III"),
 					scanned = _("scienceDescription-star","Classification F3 III,\nF-type giant,\ntemperature 6,309 K"),
 				},
-				{	
-					name = "Kaus Borealis",	
+				{
+					name = "Kaus Borealis",
 					unscanned = _("scienceDescription-star","Classification K1 IIIb"),
 					scanned = _("scienceDescription-star","Classification K1 IIIb,\ngiant,\ntemperature 4,768 K"),
 				},
-				{	
-					name = "Liesma",	
+				{
+					name = "Liesma",
 					unscanned = _("scienceDescription-star","Classification G0V"),
 					scanned = _("scienceDescription-star","Classification G0V,\nG-type giant, \ntemperature 5,741 K"),
 				},
-				{	
-					name = "Macondo",	
+				{
+					name = "Macondo",
 					unscanned = _("scienceDescription-star","Classification K2IV-V or K3V"),
 					scanned = _("scienceDescription-star","Classification K2IV-V or K3V,\norange,\nK-type main sequence,\ntemperature 5,030 K"),
 				},
-				{	
-					name = "Nikawiy",	
+				{
+					name = "Nikawiy",
 					unscanned = _("scienceDescription-star","Classification G5"),
 					scanned = _("scienceDescription-star","Classification G5,\nyellow,\nluminosity 7.7"),
 				},
-				{	
-					name = "Orkaria",	
+				{
+					name = "Orkaria",
 					unscanned = _("scienceDescription-star","Classification M4.5"),
 					scanned = _("scienceDescription-star","Classification M4.5,\nRed Dwarf,\nluminosity .0035,\ntemperature 3,111 K"),
 				},
-				{	
-					name = "Poerava",	
+				{
+					name = "Poerava",
 					unscanned = _("scienceDescription-star","Classification F7V"),
 					scanned = _("scienceDescription-star","Classification F7V,\nyellow-white,\nluminosity 1.9,\ntemperature 6,440 K"),
 				},
-				{	
-					name = "Stribor",	
+				{
+					name = "Stribor",
 					unscanned = _("scienceDescription-star","Classification F8V"),
 					scanned = _("scienceDescription-star","Classification F8V,\nluminosity 2.9,\ntemperature 6,122 K"),
 				},
-				{	
-					name = "Taygeta",	
+				{
+					name = "Taygeta",
 					unscanned = _("scienceDescription-star","Classification B"),
 					scanned = _("scienceDescription-star","Classification B-type subgiant, blue-white, luminosity 600, temperature 13,696 K"),
 				},
-				{	
-					name = "Tuiren",	
+				{
+					name = "Tuiren",
 					unscanned = _("scienceDescription-star","Classification G"),
 					scanned = _("scienceDescription-star","Classification G,\nmagnitude 12.26,\ntemperature 5,580 K"),
 				},
-				{	
-					name = "Ukdah",	
+				{
+					name = "Ukdah",
 					unscanned = _("scienceDescription-star","Classification K"),
 					scanned = _("scienceDescription-star","Classification K2.5 III,\nK-type giant,\ntemperature 4,244 K"),
 				},
-				{	
-					name = "Wouri",	
+				{
+					name = "Wouri",
 					unscanned = _("scienceDescription-star","Classification K"),
 					scanned = _("scienceDescription-star","Classification K5V,\nK-type main sequence,\ntemperature 4,782 K"),
 				},
-				{	
-					name = "Xihe",	
+				{
+					name = "Xihe",
 					unscanned = _("scienceDescription-star","Classification G"),
 					scanned = _("scienceDescription-star","Classification G8 III,\nevolved G-type giant,\ntemperature 4,790 K"),
 				},
-				{	
-					name = "Yildun",	
+				{
+					name = "Yildun",
 					unscanned = _("scienceDescription-star","Classification A"),
 					scanned = _("scienceDescription-star","Classification A1 Vn,\nwhite-hued,\nA-type main sequence,\ntemperature 9,911 K"),
 				},
-				{	
-					name = "Zosma",	
+				{
+					name = "Zosma",
 					unscanned = _("scienceDescription-star","Classification A"),
 					scanned = _("scienceDescription-star","Classification A4 V,\nwhite-hued,\nA-type main sequence,\ntemperature 8,296 K"),
 				},
@@ -636,13 +636,13 @@ function setGlobals()
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -650,13 +650,13 @@ function setGlobals()
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -664,13 +664,13 @@ function setGlobals()
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -927,19 +927,19 @@ function constructEnvironment()
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
-		{lo = 1000,	hi = 2250},	
+		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 	}
 	placement_areas = {
 		["Inner Torus"] = {
 			stations = inner_stations,
-			transports = transports, 
+			transports = transports,
 			space = inner_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = radius + 4000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = radius + 4000,
 			outer_radius = 50000,
 		},
 	}
@@ -1325,7 +1325,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Inner Torus" or placement_area == "Region 2 Torus" or placement_area == "Region 3 Torus" or placement_area == "Region 4 Torus" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.inner_radius,area.outer_radius,nil,radius)
@@ -1376,7 +1376,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -1987,9 +1987,9 @@ function setPlayers()
 			updatePlayerSoftTemplate(p)
 			deployed_player_count = deployed_player_count + 1
 			if difficulty < 1 then
-				p:addToShipLog(string.format(_("goal-shipLog","Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s in sector %s. Your mission is to dock with %s, retrieve him and bring him to %s."),target_station:getCallSign(),target_station:getSectorName(),target_station:getCallSign(),home_station:getCallSign()),"Magenta") 
+				p:addToShipLog(string.format(_("goal-shipLog","Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s in sector %s. Your mission is to dock with %s, retrieve him and bring him to %s."),target_station:getCallSign(),target_station:getSectorName(),target_station:getCallSign(),home_station:getCallSign()),"Magenta")
 			else
-				p:addToShipLog(string.format(_("goal-shipLog","Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s. Your mission is to dock with %s, retrieve him and bring him to %s."),target_station:getCallSign(),target_station:getCallSign(),home_station:getCallSign()),"Magenta") 
+				p:addToShipLog(string.format(_("goal-shipLog","Hans Gestalt, a noted exotic weapons research scientist, sent us an encrypted message. He's being held by the Kraylor against his will in his research facility on station %s. Your mission is to dock with %s, retrieve him and bring him to %s."),target_station:getCallSign(),target_station:getCallSign(),home_station:getCallSign()),"Magenta")
 			end
 		end
 		local already_recorded = false
@@ -2762,7 +2762,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2782,7 +2782,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -2801,7 +2801,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3167,6 +3167,6 @@ function update(delta)
 	if #getActivePlayerShips() == 0 then
 		local msg = finalStats()
 		globalMessage(string.format(_("msgMainscreen","All available player ships destroyed.\n%s"),msg))
-		victory("Kraylor")		
+		victory("Kraylor")
 	end
 end
