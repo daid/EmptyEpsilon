@@ -5,7 +5,7 @@
 ---
 --- Version 1
 ---
---- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome. 
+--- USN Discord: https://discord.gg/PntGG3a where you can join a game online. There's usually one every weekend. All experience levels are welcome.
 -- Type: Replayable Mission
 -- Author: Xansta
 -- Setting[Enemies]: Configures strength and/or number of enemies in this scenario
@@ -48,7 +48,7 @@ require("spawn_ships_scenario_utility.lua")
 function init()
 	scenario_version = "1.0.0"
 	ee_version = "2024.12.08"
-	print(string.format("    ----    Scenario: Iris Seige    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	print(string.format("    ----    Scenario: Iris Siege    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
 	end
@@ -271,13 +271,13 @@ function setConstants()
 			[3] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
-				{angle =  1, distance = 1},				
+				{angle =  1, distance = 1},
 			},
 			[4] = {
 				{angle =  0, distance = 0},
 				{angle = -1, distance = 1},
 				{angle =  1, distance = 1},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[5] = {
 				{angle =  0, distance = 0},
@@ -292,7 +292,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 			},
 			[7] = {
 				{angle =  0, distance = 0},
@@ -309,7 +309,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 			},
@@ -330,7 +330,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -355,7 +355,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle = -2, distance = 3},
@@ -384,7 +384,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 4},
@@ -400,7 +400,7 @@ function setConstants()
 				{angle =  1, distance = 1},
 				{angle = -2, distance = 2},
 				{angle =  2, distance = 2},
-				{angle =  0, distance = 2},	
+				{angle =  0, distance = 2},
 				{angle = -3, distance = 3},
 				{angle =  3, distance = 3},
 				{angle =  0, distance = 3},
@@ -446,14 +446,14 @@ function setGlobals()
 		["Spectacle"] =	{cat = "sensorboost",	speed = 1000,	cost = math.random(0,4) + 7,	quantity = 5,	range = 30,		boost = 10,	desc = "Travel at warp 1 to destination. Effectiveness range: 20 units. Boost sensor range by 10 units.",	},
 		["Binoc"] =		{cat = "sensorboost",	speed = 1000,	cost = math.random(0,4) + 12,	quantity = 5,	range = 40,		boost = 20,	desc = "Travel at warp 1 to destination. Effectiveness range: 20 units. Boost sensor range by 20 units.",	},
 		["Scope"] =		{cat = "sensorboost",	speed = 1000,	cost = math.random(0,4) + 17,	quantity = 5,	range = 50,		boost = 30,	desc = "Travel at warp 1 to destination. Effectiveness range: 20 units. Boost sensor range by 30 units.",	},
-		["Maunakea"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 24,	quantity = 3,	range = 20,		hull = 150,	shield = 100,	desc = "Travel at warp 1 to destination then deploy observatory with a sensor range of 20 units, hull strength of 150, shield strength of 100.",	},
-		["Arcetri"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 19,	quantity = 3,	range = 5,		hull = 50,	shield = 50,	desc = "Travel at warp 1 to destination then deploy observatory with a sensor range of 5 units, hull strength of 50, shield strength of 50.",	},
-		["Kitt"] =		{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 25,	quantity = 3,	range = 10,		hull = 100,	shield = 150,	desc = "Travel at warp 1 to destination then deploy observatory with a sensor range of 10 units, hull strength of 100, shield strength of 150.",	},
-		["Palomar"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 30,	quantity = 3,	range = 20,		hull = 150,	shield = 300,	desc = "Travel at warp 1 to destination then deploy observatory with a sensor range of 20 units, hull strength of 150, shield strength of 300.",	},
-		["Tector"] =	{cat = "scan",			speed = 1000,	cost = math.random(0,4) + 4,	quantity = 3,	range = 5,		full = false,	desc = "Travel at warp 1 to destination. Automatically simple scan ships within 5 units.",	},
-		["Grat"] =		{cat = "scan",			speed = 2500,	cost = math.random(0,4) + 9,	quantity = 3,	range = 5,		full = false,	desc = "Travel at warp 2.5 to destination. Automatically simple scan ships within 5 units.",	},
-		["Watcher"] =	{cat = "scan",			speed = 1000,	cost = math.random(0,4) + 14,	quantity = 3,	range = 5,		full = true,	desc = "Travel at warp 1 to destination. Automatically fully scan ships within 5 units.",	},
-		["007"] =		{cat = "scan",			speed = 2500,	cost = math.random(0,4) + 19,	quantity = 3,	range = 5,		full = true,	desc = "Travel at warp 2.5 to destination. Automatically fully scan ships within 5 units.",	},
+		["Maunakea"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 24,	quantity = 3,	range = 20,		hull = 150,	shield = 100,	desc = "Travel at warp 1 to destination then deploy an observatory with a sensor range of 20 units, hull strength of 150, shield strength of 100.",	},
+		["Arcetri"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 19,	quantity = 3,	range = 5,		hull = 50,	shield = 50,	desc = "Travel at warp 1 to destination then deploy an observatory with a sensor range of 5 units, hull strength of 50, shield strength of 50.",	},
+		["Kitt"] =		{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 25,	quantity = 3,	range = 10,		hull = 100,	shield = 150,	desc = "Travel at warp 1 to destination then deploy an observatory with a sensor range of 10 units, hull strength of 100, shield strength of 150.",	},
+		["Palomar"] =	{cat = "observatory",	speed = 1000,	cost = math.random(0,4) + 30,	quantity = 3,	range = 20,		hull = 150,	shield = 300,	desc = "Travel at warp 1 to destination then deploy an observatory with a sensor range of 20 units, hull strength of 150, shield strength of 300.",	},
+		["Tector"] =	{cat = "scan",			speed = 1000,	cost = math.random(0,4) + 4,	quantity = 3,	range = 5,		full = false,	desc = "Travel at warp 1 to destination. Automatically performs a simple scan of ships within 5 units.",	},
+		["Grat"] =		{cat = "scan",			speed = 2500,	cost = math.random(0,4) + 9,	quantity = 3,	range = 5,		full = false,	desc = "Travel at warp 2.5 to destination. Automatically performs a simple scan of ships within 5 units.",	},
+		["Watcher"] =	{cat = "scan",			speed = 1000,	cost = math.random(0,4) + 14,	quantity = 3,	range = 5,		full = true,	desc = "Travel at warp 1 to destination. Automatically performs a full scan of ships within 5 units.",	},
+		["007"] =		{cat = "scan",			speed = 2500,	cost = math.random(0,4) + 19,	quantity = 3,	range = 5,		full = true,	desc = "Travel at warp 2.5 to destination. Automatically performs a full scan of ships within 5 units.",	},
 		["LDSM 1.1"] =	{cat = "mine",			speed = 1000,	cost = math.random(0,4) + 33,	quantity = 3,	fetus = 1,		mines = 1,		desc = "Travel at warp 1 to destination. Deploy 1 mine.", },
 		["LDSM 2.1"] =	{cat = "mine",			speed = 2000,	cost = math.random(0,4) + 38,	quantity = 3,	fetus = 1,		mines = 1,		desc = "Travel at warp 2 to destination. Deploy 1 mine.", },
 		["LDSM 3.1"] =	{cat = "mine",			speed = 3000,	cost = math.random(0,4) + 43,	quantity = 3,	fetus = 1,		mines = 1,		desc = "Travel at warp 3 to destination. Deploy 1 mine.", },
@@ -468,7 +468,7 @@ function setGlobals()
 	deployed_players = {}
 	deployed_player_count = 0
 	sensor_impact = 1	--normal
-	player_ship_stats = {	
+	player_ship_stats = {
 		["MP52 Hornet"] 		= { strength = 7, 	cargo = 3,	distance = 100,	long_range_radar = 18000, short_range_radar = 4000, probes = 8,	tractor = false,	mining = false	},
 		["Piranha"]				= { strength = 16,	cargo = 8,	distance = 200,	long_range_radar = 25000, short_range_radar = 6000, probes = 8,	tractor = false,	mining = false	},
 		["Flavia P.Falcon"]		= { strength = 13,	cargo = 15,	distance = 200,	long_range_radar = 40000, short_range_radar = 5000, probes = 8,	tractor = true,		mining = true	},
@@ -585,7 +585,7 @@ function setGlobals()
 		["Mehklar"] =		{id = "M", count = 0},
 	}
 	star_list = {
-		{radius = random(600,1400), distance = random(-2500,-1400), 
+		{radius = random(600,1400), distance = random(-2500,-1400),
 			info = {
 				{
 					name = "Gamma Piscium",
@@ -604,8 +604,8 @@ function setGlobals()
 				},
 				{
 					name = "Iota Carinae",
-					unscanned = _("scienceDescription-star","Classification A7 lb"),
-					scanned = _("scienceDescription-star","Classification A7 lb, supergiant, temprature 7,500 K, 7xSol mass"),
+					unscanned = _("scienceDescription-star","Classification A7 Ib"),
+					scanned = _("scienceDescription-star","Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"),
 				},
 				{
 					name = "Theta Arietis",
@@ -657,33 +657,33 @@ function setGlobals()
 					unscanned = _("scienceDescription-star","Pulsar or Neutron star"),
 					scanned = _("scienceDescription-star","Pulsar or Neutron star, gamma ray source"),
 				},
-				{	
-					name = "Helvetios",	
+				{
+					name = "Helvetios",
 					unscanned = _("scienceDescription-star","Classification G2V"),
 					scanned = _("scienceDescription-star","Classification G2V, yellow, temperature 5,571 K"),
 				},
-				{	
-					name = "Inquill",	
+				{
+					name = "Inquill",
 					unscanned = _("scienceDescription-star","Classification G1V(w)"),
 					scanned = _("scienceDescription-star","Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"),
 				},
-				{	
-					name = "Jishui",	
+				{
+					name = "Jishui",
 					unscanned = _("scienceDescription-star","Classification F3 III"),
 					scanned = _("scienceDescription-star","Classification F3 III, F-type giant, temperature 6,309 K"),
 				},
-				{	
-					name = "Kaus Borealis",	
+				{
+					name = "Kaus Borealis",
 					unscanned = _("scienceDescription-star","Classification K1 IIIb"),
 					scanned = _("scienceDescription-star","Classification K1 IIIb, giant, temperature 4,768 K"),
 				},
-				{	
-					name = "Liesma",	
+				{
+					name = "Liesma",
 					unscanned = _("scienceDescription-star","Classification G0V"),
 					scanned = _("scienceDescription-star","Classification G0V, G-type giant, temperature 5,741 K"),
 				},
-				{	
-					name = "Macondo",	
+				{
+					name = "Macondo",
 					unscanned = _("scienceDescription-star","Classification K2IV-V or K3V"),
 					scanned = _("scienceDescription-star","Classification K2IV-V or K3V, orange, K-type main sequence, temperature 5,030 K"),
 				},
@@ -732,13 +732,13 @@ function setGlobals()
 		{
 			name = {"Alderaan","Dagobah","Dantooine","Rigel"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-1.png", 
-				cloud = "planets/clouds-1.png", 
+				surface = "planets/planet-1.png",
+				cloud = "planets/clouds-1.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -746,13 +746,13 @@ function setGlobals()
 		{
 			name = {"Pahvo","Penthara","Scalos"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-4.png", 
-				cloud = "planets/clouds-3.png", 
+				surface = "planets/planet-4.png",
+				cloud = "planets/clouds-3.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -760,13 +760,13 @@ function setGlobals()
 		{
 			name = {"Tanuga","Vacca","Terlina","Timor"},
 			color = {
-				red = random(0,0.2), 
-				green = random(0,0.2), 
+				red = random(0,0.2),
+				green = random(0,0.2),
 				blue = random(0.8,1)
 			},
 			texture = {
-				surface = "planets/planet-5.png", 
-				cloud = "planets/clouds-2.png", 
+				surface = "planets/planet-5.png",
+				cloud = "planets/clouds-2.png",
 				atmosphere = "planets/atmosphere.png"
 			},
 			radius = random(3000,5000),
@@ -805,7 +805,7 @@ function setVariations()
 	player_respawns = respawn_config[getScenarioSetting("Respawn")].respawn
 	player_respawn_max = respawn_config[getScenarioSetting("Respawn")].max
 	reputation_goal = getScenarioSetting("ReputationGoal")
-	primary_orders = string.format("Reach %s reputation before friendly station nebula defense nodes destroyed.",reputation_goal)
+	primary_orders = string.format("Reach %s reputation before the friendly station nebula defense nodes are destroyed.",reputation_goal)
 end
 function mainGMButtons()
 	clearGMFunctions()
@@ -1025,7 +1025,7 @@ function constructEnvironment()
 	table.insert(inner_space,{obj=VisualAsteroid():setPosition(player_spawn_x,player_spawn_y),dist=500,shape="circle"})
 	local inner_station_count = math.random(4,6)
 	local gap_distance = 0
-	local gap_angle = 0	
+	local gap_angle = 0
 	local prev_angle = nil
 	for i=1,inner_station_count do
 		local angle = (player_spawn_angle + (360/inner_station_count) * i + (360/inner_station_count/2)) % 360
@@ -1099,7 +1099,7 @@ function constructEnvironment()
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
-		{lo = 1000,	hi = 2250},	
+		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 		{lo = 1000,	hi = 2250},
 	}
@@ -1144,7 +1144,7 @@ function constructEnvironment()
 	outer_space = {}
 	outer_stations = {}
 	gap_distance = 0
-	gap_angle = 0	
+	gap_angle = 0
 	prev_angle = nil
 	for i=1,outer_station_count do
 		local angle = (player_spawn_angle + (360/outer_station_count) * i) % 360
@@ -1227,7 +1227,7 @@ function constructEnvironment()
 		{lo = 3000,	hi = 7000},
 		{lo = 3000,	hi = 7000},
 		{lo = 3000,	hi = 7000},
-		{lo = 3000,	hi = 7000},	
+		{lo = 3000,	hi = 7000},
 		{lo = 3000,	hi = 7000},
 		{lo = 3000,	hi = 7000},
 		{lo = 3000,	hi = 7000},
@@ -1269,20 +1269,20 @@ function constructEnvironment()
 				print("could not find a place for a friendly station in the outer region")
 			end
 		end
-	end	
+	end
 	seige_nebula = {}
 	nebula_impact_systems = {"reactor","beamweapons","missilesystem","maneuver","impulse","warp","jumpdrive","frontshield","rearshield","coolant","hull"}
 	pretty_nebula_impact_systems = {
-		["reactor"] =		_("scienceDescription-nebula","reactor"), 
-		["beamweapons"] =	_("scienceDescription-nebula","beamweapons"), 
-		["missilesystem"] =	_("scienceDescription-nebula","missilesystem"), 
-		["maneuver"] =		_("scienceDescription-nebula","maneuver"), 
-		["impulse"] =		_("scienceDescription-nebula","impulse"), 
-		["warp"] =			_("scienceDescription-nebula","warp"), 
-		["jumpdrive"] =		_("scienceDescription-nebula","jumpdrive"), 
-		["frontshield"] =	_("scienceDescription-nebula","frontshield"), 
-		["rearshield"] =	_("scienceDescription-nebula","rearshield"), 
-		["coolant"] =		_("scienceDescription-nebula","coolant"), 
+		["reactor"] =		_("scienceDescription-nebula","reactor"),
+		["beamweapons"] =	_("scienceDescription-nebula","beamweapons"),
+		["missilesystem"] =	_("scienceDescription-nebula","missilesystem"),
+		["maneuver"] =		_("scienceDescription-nebula","maneuver"),
+		["impulse"] =		_("scienceDescription-nebula","impulse"),
+		["warp"] =			_("scienceDescription-nebula","warp"),
+		["jumpdrive"] =		_("scienceDescription-nebula","jumpdrive"),
+		["frontshield"] =	_("scienceDescription-nebula","frontshield"),
+		["rearshield"] =	_("scienceDescription-nebula","rearshield"),
+		["coolant"] =		_("scienceDescription-nebula","coolant"),
 		["hull"] =			_("scienceDescription-nebula","hull"),
 	}
 	for i=1,40 do
@@ -1471,32 +1471,32 @@ function constructEnvironment()
 	placement_areas = {
 		["Inner Torus"] = {
 			stations = inner_stations,
-			transports = transport_list, 
+			transports = transport_list,
 			space = inner_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = 8000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = 8000,
 			outer_radius = 20000,
 		},
 		["Outer Torus"] = {
 			stations = outer_stations,
-			transports = transport_list, 
+			transports = transport_list,
 			space = outer_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = 30000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = 30000,
 			outer_radius = 70000,
 		},
 		["Peripheral Torus"] = {
 			stations = peripheral_stations,
-			transports = transport_list, 
+			transports = transport_list,
 			space = outer_space,
 			shape = "torus",
-			center_x = center_x, 
-			center_y = center_y, 
-			inner_radius = 90000, 
+			center_x = center_x,
+			center_y = center_y,
+			inner_radius = 90000,
 			outer_radius = 120000,
 		},
 	}
@@ -1929,7 +1929,7 @@ function placeTerrain(placement_area,terrain)
 		radius = radius + (field_size * 1500)
 	elseif terrain.desc == "Field" then
 		field_size = radius
-		radius = radius + 500 
+		radius = radius + 500
 	end
 	if placement_area == "Inner Torus" or placement_area == "Outer Torus" or placement_area == "Peripheral Torus" then
 		eo_x, eo_y = findClearSpot(area.space,area.shape,area.center_x,area.center_y,area.inner_radius,area.outer_radius,nil,radius)
@@ -1980,7 +1980,7 @@ function placeTerrain(placement_area,terrain)
 			local impact_increment = (hi_impact - lo_impact)/4
 		--	local mix = math.random(2,10 - (4 - (2*math.floor(difficulty))))	--	2-6, 2-8, 2-10
 			local mix = math.random(2,10 - (4 - (2)))	--	2-8
-			sensor_jammer_scan_complexity = 1 
+			sensor_jammer_scan_complexity = 1
 			sensor_jammer_scan_depth = 1
 			if mix > 5 then
 				sensor_jammer_scan_depth = math.min(math.random(mix-4,mix),8)
@@ -2825,7 +2825,7 @@ function scenarioShipEnhancements()
 				_("probeShop-comms","Welcome to the Proboscis Probe Shop. I'm Calon Proboscis, owner and proprietor. How can I help you?"),
 				_("probeShop-comms","Hi there, I'm Calon Proboscis, owner and proprietor of the Proboscis Probe Shop. How can I help you?"),
 				_("probeShop-comms","A man comes over with a big smile and says, 'Welcome to my store, the Proboscis Probe Shop. I'm Calon Proboscis. How may I help you?'"),
-				_("probeShop-comms","A guy with a name tag that says 'Calon Proboscis' greets you and says, 'We have got all kinds of scan probe enhancements here in my Proboscis Probe Shop. What are you looking for?'"),
+				_("probeShop-comms","A guy with a name tag that reads 'Calon Proboscis' greets you and says, 'We have all kinds of scan probe enhancements here in my Proboscis Probe Shop. What are you looking for?'"),
 			}
 			setCommsMessage(tableSelectRandom(probe_shop_greetings))
 			addCommsReply(_("probeShop-comms","Patrol probes"),function()
@@ -2874,7 +2874,7 @@ function scenarioShipEnhancements()
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("probeShop-comms","Faster probes"),function()
-				local out = _("probeShop-comms","Attach these kits to your probe to make them travel faster to their destination. They typical probe travels at warp 1. They come in batches of 5.")
+				local out = _("probeShop-comms","Attach these kits to your probe to make them travel faster to their destination. The typical probe travels at warp 1. They come in batches of 5.")
 				for name,probe in pairs(probe_types) do
 					if probe.cat == "fast" then
 						out = string.format(_("probeShop-comms","%s\n%s: warp %.1f, cost %i"),out,name,probe.speed/1000,probe.cost)
@@ -2919,7 +2919,7 @@ function scenarioShipEnhancements()
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("probeShop-comms","Warp Jammer probes"),function()
-				local out = _("probeShop-comms","Attach these kits to your probe and when they reach their destination, they will drop a warp jammer. They come in batches of 5.")
+				local out = _("probeShop-comms","Attach these kits to your probe and when the probe reaches its destination, it will drop a warp jammer. They come in batches of 5.")
 				for name,probe in pairs(probe_types) do
 					if probe.cat == "warpjam" then
 						out = string.format(_("probeShop-comms","%s\n%s: warp %.1f, warp jam range: %iu, cost: %i"),out,name,probe.speed/1000,probe.range,probe.cost)
@@ -3009,7 +3009,7 @@ function scenarioShipEnhancements()
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("probeShop-comms","Observatory deployment probes"),function()
-				local out = _("probeShop-comms","This kit causes the probe to deploy a friendly self powered observatory at its destination. The kit comes in batches of 3.")
+				local out = _("probeShop-comms","This kit causes the probe to deploy a friendly self-powered observatory at its destination. The kit comes in batches of 3.")
 				for name,probe in pairs(probe_types) do
 					if probe.cat == "observatory" then
 						out = string.format(_("probeShop-comms","%s\n%s: warp %.1f, range %iu, hull/shield: %i/%i, cost: %i"),out,name,probe.speed/1000,probe.range,probe.hull,probe.shield,probe.cost)
@@ -3103,7 +3103,7 @@ function scenarioShipEnhancements()
 				addCommsReply(_("Back"), commsStation)
 			end)
 			addCommsReply(_("probeShop-comms","Mine deployment probes"),function()
-				local out = _("probeShop-comms","Attach these probe kits to your probe and when the probe reaches its destination it goes into stealth mode after 5 seconds. Once the birth period has passed, it will deploy one or more mines. These probe kits come in batches of 3.")
+				local out = _("probeShop-comms","Attach these probe kits to your probe and when the probe reaches its destination, it goes into stealth mode after 5 seconds. Once the birth period has passed, it will deploy one or more mines. These probe kits come in batches of 3.")
 				for name,probe in pairs(probe_types) do
 					if probe.cat == "mine" then
 						out = string.format(_("probeShop-comms","%s\n%s: warp %.1f, birth: %i seconds, mines: %i, cost: %i"),out,name,probe.speed/1000,probe.fetus*5+5,probe.mines,probe.cost)
@@ -3143,7 +3143,7 @@ function scenarioShipEnhancements()
 									setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 								end
 							else
-								setCommsMessage(string.format(_("probeShop-comms","Your mine storage capacity of %i is insufficient for this LDSM probe kit which requires %i mines."),comms_source:getWeaponStorageMax("Mine"),probe.quantity))
+								setCommsMessage(string.format(_("probeShop-comms","Your mine storage capacity of %i is insufficient for this LDSM probe kit, which requires %i mines."),comms_source:getWeaponStorageMax("Mine"),probe.quantity))
 							end
 							addCommsReply(_("Back"), commsStation)
 						end)
@@ -3291,7 +3291,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3311,7 +3311,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template].fleet_group[fleetComposition] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3330,7 +3330,7 @@ function getTemplatePool(max_strength)
 					table.insert(template_pool,current_ship_template)
 				else
 					if ship_template[current_ship_template][fleet_group[fleetComposition]] then
-						table.insert(template_pool,current_ship_template)							
+						table.insert(template_pool,current_ship_template)
 					end
 				end
 			end
@@ -3645,7 +3645,7 @@ function cycleProbeType(p,probe_type)
 		end
 		refreshSpecialProbeButton(p)
 	end
-end	
+end
 function refreshSpecialProbeButton(p)
 	if probe_diagnostic then
 		print("Top of refresh special probe button")
@@ -3688,7 +3688,7 @@ function refreshSpecialProbeButton(p)
 			addProbeCycleButton(comms_source,"AltRelay",p.probe_type_button_alt)
 		end
 	end
-end	
+end
 function patrolProbe(self)
 	string.format("")
 	local p = self:getOwner()
@@ -4263,7 +4263,7 @@ function update(delta)
 	--	initial message describing mission and setting goals
 	if mission_message == nil then
 		mission_message = "queued"
-		local player_message = string.format(_("goal-incCall","Enemies of the %s have deployed destructive nebulae against the region around the planet %s. The deployment mechanism resembles a closing iris door as the nebulae converge on %s. We have created a nebula defense network. We installed the defense nodes on some friendly stations, some neutral stations and some warp jammers. Your mission is to accumulate %s reputation points before the friendly stations with the nebula defense nodes get destroyed."),player_faction,region_planet:getCallSign(),region_planet:getCallSign(),reputation_goal)
+		local player_message = string.format(_("goal-incCall","Enemies of the %s have deployed destructive nebulae against the region around the planet %s. The deployment mechanism resembles a closing iris door as the nebulae converge on %s. We have created a nebula defense network. We installed the defense nodes on some friendly stations, some neutral stations and some warp jammers. Your mission is to accumulate %s reputation points before the friendly stations with the nebula defense nodes are destroyed."),player_faction,region_planet:getCallSign(),region_planet:getCallSign(),reputation_goal)
 		table.insert(messages,{msg=player_message,list={}})
 		local messages_index = #messages
 		for i,p in ipairs(getActivePlayerShips()) do
