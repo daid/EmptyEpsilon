@@ -48,7 +48,7 @@ require("spawn_ships_scenario_utility.lua")
 function init()
 	scenario_version = "1.0.0"
 	ee_version = "2024.12.08"
-	print(string.format("    ----    Scenario: Iris Seige    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
+	print(string.format("    ----    Scenario: Iris Siege    ----    Version %s    ----    Tested with EE version %s    ----",scenario_version,ee_version))
 	if _VERSION ~= nil then
 		print("Lua version:",_VERSION)
 	end
