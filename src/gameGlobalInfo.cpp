@@ -13,6 +13,9 @@
 #include "menus/luaConsole.h"
 #include "playerInfo.h"
 #include <SDL_assert.h>
+#include <algorithm>
+#include <climits>
+#include <cstdint>
 
 P<GameGlobalInfo> gameGlobalInfo;
 
@@ -343,6 +346,8 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
     i18n::load("locale/science_db." + PreferencesManager::get("language", "en") + ".po");
     i18n::load("locale/" + filename.replace(".lua", "." + PreferencesManager::get("language", "en") + ".po"));
 
+    // No instruction limit while the base environment (templates, science db) loads; the real limit is set below.
+    sp::script::setMaxRunCycles(0);
     script_environment_base = std::make_unique<sp::script::Environment>();
     main_script_error_count = 0;
     if (setupScriptEnvironment(*script_environment_base.get())) {
@@ -364,9 +369,8 @@ void GameGlobalInfo::startScenario(string filename, std::unordered_map<string, s
 
     main_scenario_script = std::make_unique<sp::script::Environment>(script_environment_base.get());
     setupSubEnvironment(*main_scenario_script.get());
-    //TODO: int max_cycles = PreferencesManager::get("script_cycle_limit", "0").toInt();
-    //TODO: if (max_cycles > 0)
-    //TODO:     script->setMaxRunCycles(max_cycles);
+    // Per-call Lua instruction limit (0 = off). Aborts runaway loops instead of hanging the game (#1678).
+    sp::script::setMaxRunCycles(int(std::clamp<int64_t>(PreferencesManager::get("script_cycle_limit", "0").toInt64(), 0, INT_MAX)));
 
     // Initialize scenario settings.
     setScenarioSettings(filename, new_settings);
