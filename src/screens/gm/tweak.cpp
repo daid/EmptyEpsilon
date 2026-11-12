@@ -452,6 +452,53 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow EMP:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_EMP);
     ADD_VECTOR_TOGGLE_MASK_TWEAK(tr("tweak-text", "Allow HVLI:"), MissileTubes, mounts, type_allowed_mask, 1 << MW_HVLI);
 
+    ADD_PAGE(tr("tweak-tab", "Missile flight"), MissileFlight);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Speed:"), MissileFlight, speed);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Timeout:"), MissileFlight, timeout);
+
+    ADD_PAGE(tr("tweak-tab", "Missile homing"), MissileHoming);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Turn rate:"), MissileHoming, turn_rate);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Homing range:"), MissileHoming, range);
+    ADD_NUM_SLIDER_TWEAK(tr("tweak-text", "Target angle:"), MissileHoming, 0.0f, 360.0f, target_angle);
+
+    ADD_PAGE(tr("tweak-tab", "Explode on touch"), ExplodeOnTouch);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at center:"), ExplodeOnTouch, damage_at_center);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Damage at edge:"), ExplodeOnTouch, damage_at_edge);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Blast range:"), ExplodeOnTouch, blast_range);
+    do {
+        auto row = new GuiElement(new_page->tweaks, "");
+        row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal");
+        auto label = new GuiLabel(row, "", tr("tweak-text", "Damage type:"), 20);
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30);
+        auto ui = new GuiSelectorTweak(row, "EXPLODE_DAMAGE_TYPE", [this](int index, string) {
+            auto v = entity.getComponent<ExplodeOnTouch>();
+            if (v) {
+                switch(index) {
+                case 0: v->damage_type = DamageType::Kinetic; break;
+                case 1: v->damage_type = DamageType::Energy; break;
+                case 2: v->damage_type = DamageType::EMP; break;
+                }
+            }
+        });
+        ui->addEntry(tr("tweak-damage", "Kinetic"), "0");
+        ui->addEntry(tr("tweak-damage", "Energy"), "1");
+        ui->addEntry(tr("tweak-damage", "EMP"), "2");
+        ui->update_func = [this]() -> int {
+            auto v = entity.getComponent<ExplodeOnTouch>();
+            if (v) {
+                switch(v->damage_type) {
+                case DamageType::Kinetic: return 0;
+                case DamageType::Energy: return 1;
+                case DamageType::EMP: return 2;
+                }
+            }
+            return 0;
+        };
+    } while(0);
+
+    ADD_PAGE(tr("tweak-tab", "Lifetime"), LifeTime);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Remaining:"), LifeTime, lifetime);
+
     ADD_PAGE(tr("tweak-tab", "Shields"), Shields);
     // Unsure how to access the shield component's front/rear systems
     // ADD_LABEL(tr("tweak-text", "Shields systems"));
