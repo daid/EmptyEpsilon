@@ -1,6 +1,7 @@
 #include <i18n.h>
 #include "menus/luaConsole.h"
 #include "gameGlobalInfo.h"
+#include "systems/destroy.h"
 #include "preferenceManager.h"
 #include "scenarioInfo.h"
 #include "multiplayer_client.h"
@@ -275,7 +276,7 @@ void GameGlobalInfo::reset()
     on_gm_click = nullptr;
     on_gm_click_cursor = DEFAULT_ON_GM_CLICK_CURSOR;
 
-    sp::ecs::Entity::destroyAllEntities();
+    OnDestroySystem::destroyAllEntities();
     main_scenario_script = nullptr;
     additional_scripts.clear();
     script_environment_base = nullptr;
