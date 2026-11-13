@@ -1,3 +1,4 @@
+#include "systems/destroy.h"
 #include "tutorialGame.h"
 #include <i18n.h>
 #include "playerInfo.h"
@@ -224,7 +225,7 @@ void TutorialGame::finish()
 {
     if (instance->repeated_tutorial)
     {
-        sp::ecs::Entity::destroyAllEntities();
+        OnDestroySystem::destroyAllEntities();
         instance->hideAllScreens();
 
         gameGlobalInfo->startScenario(instance->filename);
