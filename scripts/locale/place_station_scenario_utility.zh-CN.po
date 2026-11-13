@@ -1,0 +1,39 @@
+#: scripts/place_station_scenario_utility.lua:387
+msgctxt "scienceDescription-station"
+msgid "Training and Coordination"
+msgstr "训练与协调站"
+
+#: scripts/place_station_scenario_utility.lua:388
+msgctxt "stationGeneralInfo-comms"
+msgid "We train naval cadets in routine and specialized functions aboard space vessels and coordinate naval activity throughout the sector"
+msgstr "我们在这艘空间站上训练海军学员执行常规及专业任务，并协调整个星域内的海军活动。"
+
+#: scripts/place_station_scenario_utility.lua:389
+msgctxt "stationStory-comms"
+msgid """The original station builders were fans of the late 20th century scientist \nand author Isaac Asimov. The station was initially named Foundation, but was \nlater changed simply to Asimov. It started off as a stellar observatory, \nthen became a supply stop and as it has grown has become an educational and \ncoordination hub for the region"""
+msgstr """该空间站的原始建造者是20世纪末科学家兼作家艾萨克·阿西莫夫的粉丝。\n最初命名为“基地”号，后来更名为“阿西莫夫”号。\n它起初是一座恒星观测站，随后演变为补给中转站，并随着发展逐渐成为本区域的教育与协调中心。"""
+
+#: scripts/place_station_scenario_utility.lua:427
+msgctxt "scienceDescription-station"
+msgid "Warp and Impulse engine manufacturing"
+msgstr "曲速与脉冲引擎制造站"
+
+#: scripts/place_station_scenario_utility.lua:428
+msgctxt "stationGeneralInfo-comms"
+msgid "We manufacture warp, impulse and jump engines for the human navy fleet as well as other independent clients on a contract basis"
+msgstr "我们为人类海军舰队以及其他独立客户提供合同制的曲速、脉冲和跃迁引擎制造服务。"
+
+#: scripts/place_station_scenario_utility.lua:429
+msgctxt "stationStory-comms"
+msgid """The station is named after the late 19th century astronaut as well as the \nfictionlized stations that followed. The station initially constructed \nentire space worthy vessels. In time, it transitioned into specializeing in \npropulsion systems."""
+msgstr """该空间站以19世纪末期的宇航员命名，并延续了后续虚构空间站的传统。\n起初负责建造完整的太空适航飞船，随着时间推移，逐渐转型专注于推进系统研发。"""
+
+#: scripts/place_station_scenario_utility.lua:463
+msgctxt "scienceDescription-station"
+msgid "Warp drive components"
+msgstr "曲速驱动组件制造站"
+
+#: scripts/place_station_scenario_utility.lua:464
+msgctxt "stationGeneralInfo-comms"
+msgid "We provide warp drive engines and components"
+msgstr "我们提供曲速驱动引擎及其组件。"

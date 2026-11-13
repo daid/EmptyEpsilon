@@ -1,0 +1,31 @@
+#: scripts/shiptemplates/stations.lua:5
+msgid "Small Station"
+msgstr "小型空间站"
+
+#: scripts/shiptemplates/stations.lua:6
+msgid """Stations of this size are often used as research outposts, listening \nstations, and security checkpoints. Crews turn over frequently in a small \nstation's cramped accommodatations, but they are small enough to look like \nships on many long-range sensors, and organized raiders sometimes take \nadvantage of this by placing small stations in nebulae to serve as raiding \nbases. They are lightly shielded and vulnerable to swarming assaults."""
+msgstr """这种规模的空间站通常被用作研究前哨、监听站和安全检查点。由于小型空间站的居住环境十分拥挤，船员更换频繁。但它们体积小，在许多远程传感器上看起来像飞船一样，有组织的掠夺者有时会利用这一点，将小型空间站设在星云中作为袭击基地。这些空间站护盾较弱，容易受到蜂群式攻击。"""
+
+#: scripts/shiptemplates/stations.lua:11
+msgid "Medium Station"
+msgstr "中型空间站"
+
+#: scripts/shiptemplates/stations.lua:12
+msgid """Large enough to accommodate small crews for extended periods of times, \nstations of this size are often trading posts, refuelling bases, mining \noperations, and forward military bases. While their shields are strong, \nconcerted attacks by many ships can bring them down quickly."""
+msgstr """这种尺寸的空间站足够容纳少量船员长期驻留。它们常被用作贸易站、补给基地、采矿设施以及前线军事基地。虽然它们的护盾较强，但多艘飞船协同攻击可以迅速将其摧毁。"""
+
+#: scripts/shiptemplates/stations.lua:17
+msgid "Large Station"
+msgstr "大型空间站"
+
+#: scripts/shiptemplates/stations.lua:18
+msgid """These spaceborne communities often represent permanent bases in a sector. \nStations of this size can be military installations, commercial hubs, deep-\nspace settlements, and small shipyards. Only a concentrated attack can \npenetrate a large station's shields, and its hull can withstand all but the \nmost powerful weaponry."""
+msgstr """这种规模的空间站通常是某个派系在一个区域内的永久性基地。它们可作为军事设施、商业中心、深空定居点或小型造船厂。只有集中火力才可能穿透大型空间站的护盾，而其船体几乎能抵御除最强大武器外的所有攻击。"""
+
+#: scripts/shiptemplates/stations.lua:23
+msgid "Huge Station"
+msgstr "巨型空间站"
+
+#: scripts/shiptemplates/stations.lua:24
+msgid """The size of a sprawling town, stations at this scale represent a faction's \ncenter of spaceborne power in a region. They serve many functions at once \nand represent an extensive investment of time, money, and labor. A huge \nstation's shields and thick hull can keep it intact long enough for \nreinforcements to arrive, even when faced with an ongoing siege or massive, \nperfectly coordinated assault."""
+msgstr """这种空间站的大小堪比一座扩展中的城镇，代表了一个派系在一个地区的太空力量核心。它们兼具多种功能，并代表着大量的时间、金钱和人力投入。巨型空间站拥有强大的护盾和厚重的船体，即使面对持续围攻或大规模协调攻击，也能维持足够长时间不被摧毁，直至增援抵达。"""

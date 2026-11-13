@@ -1,0 +1,7 @@
+# Scenario name
+msgid "Surrounded"
+msgstr "被包围"
+
+# Scenario description
+msgid """You are surrounded by asteroids, enemies, and mines.\n\nSpawn the player ships you want. The strength of enemy ships is independent \nof the number and type of player ships.\n\n(The scenario can be won with a single Atlantis.)"""
+msgstr """你被小行星、敌人和水雷包围。\n\n生成你想要的玩家飞船。敌方飞船的强度与玩家飞船的数量和类型无关。\n\n（该场景可以通过一艘亚特兰蒂斯号获胜。）"""
