@@ -11,10 +11,10 @@
 #include "components/radar.h"
 #include "components/name.h"
 
+#include "screenComponents/commsOverlay.h"
 #include "screenComponents/radarView.h"
 #include "screenComponents/radarZoomSlider.h"
 #include "screenComponents/openCommsButton.h"
-#include "screenComponents/commsOverlay.h"
 #include "screenComponents/shipsLogControl.h"
 #include "screenComponents/hackingDialog.h"
 #include "screenComponents/customShipFunctions.h"
@@ -39,7 +39,8 @@ static bool canHack(sp::ecs::Entity entity)
 }
 
 RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
-: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection)
+: GuiOverlay(owner, "RELAY_SCREEN", GuiTheme::getColor("background")), mode(TargetSelection),
+  allow_comms(allow_comms)
 {
     targets.setAllowWaypointSelection();
     radar = new GuiRadarView(this, "RELAY_RADAR", MAX_ZOOM_DISTANCE, &targets);
@@ -134,7 +135,7 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
     option_buttons = new GuiElement(this, "BUTTONS");
     option_buttons->setPosition(20, 50, sp::Alignment::TopLeft)->setSize(250, GuiElement::GuiSizeMax)->setAttribute("layout", "vertical");
 
-    // Cancel
+    // Mode cancellation button.
     cancel_button = new GuiButton(this, "CANCEL_MODE", tr("Cancel"),
         [this]()
         {
@@ -143,62 +144,84 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
             cancel_button->hide();
         }
     );
-    cancel_button->setPosition(20, 50)->setSize(250, 50)->hide();
+    cancel_button
+        ->setPosition(20.0f, 50.0f)
+        ->setSize(250.0f, 50.0f)
+        ->hide();
 
     // Open comms button.
-    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets))->setSize(GuiElement::GuiSizeMax, 50.0f);
+    (new GuiOpenCommsButton(option_buttons, "OPEN_COMMS_BUTTON", allow_comms == true ? tr("Open comms") : tr("Link to comms"), &targets))
+        ->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Hack target
-    hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"), [this](){
-        auto target = targets.get();
-        if (canHack(target)) {
-            hacking_dialog->open(target);
+    hack_target_button = new GuiButton(option_buttons, "HACK_TARGET", tr("Start hacking"),
+        [this]()
+        {
+            auto target = targets.get();
+            if (target && canHack(target)) hacking_dialog->open(target);
         }
-    });
-    hack_target_button->setSize(GuiElement::GuiSizeMax, 50);
+    );
+    hack_target_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Link probe to science button.
-    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to science"), [this](bool value){
-        if (value)
+    link_to_science_button = new GuiToggleButton(option_buttons, "LINK_TO_SCIENCE", tr("Link to science"),
+        [this](bool value)
         {
-            my_player_info->commandSetScienceLink(targets.get());
+            if (value)
+                my_player_info->commandSetScienceLink(targets.get());
+            else
+                my_player_info->commandClearScienceLink();
         }
-        else
-        {
-            my_player_info->commandClearScienceLink();
-        }
-    });
-    link_to_science_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
+    );
+    link_to_science_button
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && my_spaceship.hasComponent<ScanProbeLauncher>() && my_spaceship.hasComponent<RadarLink>());
 
     // Manage waypoints.
-    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"), [this]() {
-        mode = WaypointPlacement;
-        option_buttons->hide();
-        cancel_button->setText(tr("Cancel waypoint"))->show();
-    }))->setSize(GuiElement::GuiSizeMax, 50);
-
-    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"), [this]() {
-        if (my_spaceship && targets.getWaypointIndex() >= 0)
+    (new GuiButton(option_buttons, "WAYPOINT_PLACE_BUTTON", tr("Place waypoint"),
+        [this]()
         {
-            my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
+            mode = WaypointPlacement;
+            option_buttons->hide();
+            cancel_button
+                ->setText(tr("Cancel waypoint"))
+                ->show();
         }
-    });
-    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50);
+    ))->setSize(GuiElement::GuiSizeMax, 50.0f);
+
+    delete_waypoint_button = new GuiButton(option_buttons, "WAYPOINT_DELETE_BUTTON", tr("Delete waypoint"),
+        [this]()
+        {
+            if (my_spaceship && targets.getWaypointIndex() >= 0)
+                my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
+        }
+    );
+    delete_waypoint_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Launch probe button.
-    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"), [this]() {
-        mode = LaunchProbe;
-        option_buttons->hide();
-        cancel_button->setText(tr("Cancel probe"))->show();
-    });
-    launch_probe_button->setSize(GuiElement::GuiSizeMax, 50)->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
+    launch_probe_button = new GuiButton(option_buttons, "LAUNCH_PROBE_BUTTON", tr("Launch probe"),
+        [this]()
+        {
+            mode = LaunchProbe;
+            option_buttons->hide();
+            cancel_button
+                ->setText(tr("Cancel probe"))
+                ->show();
+        }
+    );
+    launch_probe_button
+        ->setSize(GuiElement::GuiSizeMax, 50.0f)
+        ->setVisible(my_spaceship.hasComponent<ScanProbeLauncher>());
 
     // Center on ship
-    center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center on ship"), [this](bool value) {
-        if(!my_spaceship) return;
-        radar->setAutoCentering(value);
-    });
-    center_button->setSize(GuiElement::GuiSizeMax, 50);
+    center_button = new GuiToggleButton(option_buttons, "CENTER_ON_SHIP", tr("Center on ship"),
+        [this](bool value)
+        {
+            if (!my_spaceship) return;
+            radar->setAutoCentering(value);
+        }
+    );
+    center_button->setSize(GuiElement::GuiSizeMax, 50.0f);
 
     // Reputation display.
     info_reputation = new GuiKeyValueDisplay(option_buttons, "INFO_REPUTATION", 0.4f, tr("Reputation") + ":", "");
@@ -217,8 +240,9 @@ RelayScreen::RelayScreen(GuiContainer* owner, bool allow_comms)
 
     if (allow_comms)
     {
-        new ShipsLog(this);
-        (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+        ships_log = new ShipsLog(this);
+        comms_overlay = new GuiCommsOverlay(this);
+        comms_overlay->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
     }
 }
 
@@ -261,7 +285,6 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
 
                 // If the target is within the short-range radar range/5U of the
                 // object, consider it near a friendly object.
-                
                 if (glm::length2(transform.getPosition() - target_transform->getPosition()) < r * r)
                 {
                     near_friendly = true;
@@ -330,7 +353,9 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
         launch_probe_button->setEnable(spl ? spl->stock > 0 : false);
         link_to_science_button->setVisible(my_spaceship.hasComponent<LongRangeRadar>() && spl && my_spaceship.hasComponent<RadarLink>());
         hack_target_button->setVisible(my_spaceship.hasComponent<HackingDevice>());
+        center_button->setValue(radar->getAutoCentering());
 
+        // Update reputation counter.
         info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0));
 
         // Update mission clock
@@ -341,4 +366,103 @@ void RelayScreen::onDraw(sp::RenderTarget& renderer)
     }
 
     delete_waypoint_button->setEnable(targets.getWaypointIndex() >= 0);
+}
+
+void RelayScreen::onUpdate()
+{
+    if (!my_spaceship || !isVisible()) return;
+
+    // Don't process hotkeys while the chat text entry has keyboard focus.
+    if (comms_overlay && comms_overlay->isChatEntryFocused()) return;
+
+    // Open comms with the selected target.
+    if (allow_comms && keys.relay_open_comms.getDown())
+    {
+        auto target = targets.get();
+        if (target) my_player_info->commandOpenTextComm(target);
+    }
+
+    // Start hacking the selected target.
+    if (keys.relay_start_hacking.getDown())
+    {
+        auto target = targets.get();
+        if (target && canHack(target)) hacking_dialog->open(target);
+    }
+
+    // Toggle science link on the selected probe.
+    if (keys.relay_link_to_science.getDown())
+    {
+        auto target = targets.get();
+        if (target)
+        {
+            if (auto radar_link = my_spaceship.getComponent<RadarLink>())
+            {
+                auto linked_entity = radar_link->linked_entity;
+                if (linked_entity == target)
+                    my_player_info->commandClearScienceLink();
+                else if (auto target_arl = target.getComponent<AllowRadarLink>())
+                {
+                    if (target_arl->owner == my_spaceship)
+                        my_player_info->commandSetScienceLink(target);
+                }
+            }
+        }
+    }
+
+    // Toggle waypoint placement mode.
+    if (keys.relay_toggle_waypoint.getDown())
+    {
+        if (mode == TargetSelection)
+        {
+            mode = WaypointPlacement;
+            option_buttons->hide();
+            cancel_button
+                ->setText(tr("Cancel waypoint"))
+                ->show();
+        }
+        else if (mode == WaypointPlacement)
+        {
+            mode = TargetSelection;
+            option_buttons->show();
+            cancel_button->hide();
+        }
+    }
+
+    // Delete the selected waypoint.
+    if (keys.relay_delete_waypoint.getDown())
+    {
+        if (targets.getWaypointIndex() >= 0)
+            my_player_info->commandRemoveWaypoint(targets.getWaypointIndex());
+    }
+
+    // Toggle probe launch mode.
+    if (keys.relay_launch_probe.getDown())
+    {
+        if (mode == LaunchProbe)
+        {
+            mode = TargetSelection;
+            option_buttons->show();
+            cancel_button->hide();
+        }
+        else if (mode == TargetSelection)
+        {
+            auto spl = my_spaceship.getComponent<ScanProbeLauncher>();
+            if (spl && spl->stock > 0)
+            {
+                mode = LaunchProbe;
+                option_buttons->hide();
+                cancel_button
+                    ->setText(tr("Cancel probe"))
+                    ->show();
+            }
+        }
+    }
+
+    // Toggle view centered on ship.
+    if (keys.relay_center_on_ship.getDown())
+        radar->setAutoCentering(!radar->getAutoCentering());
+
+    // Toggle ship's log min/maximized state.
+    if (ships_log && keys.relay_toggle_ships_log.getDown())
+        ships_log->toggle();
 }

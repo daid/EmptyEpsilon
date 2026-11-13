@@ -112,14 +112,14 @@ OperationScreen::OperationScreen(GuiContainer* owner)
     info_reputation->setTextSize(20)->setSize(200, 40);
 
     // Scenario clock display.
-
     info_clock = new GuiKeyValueDisplay(stats, "INFO_CLOCK", 0.55f, tr("Clock") + ":", "");
     info_clock->setTextSize(20)->setSize(200, 40);
 
     mode = TargetSelection;
 
-    new ShipsLog(this);
-    (new GuiCommsOverlay(this))->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
+    ships_log = new ShipsLog(this);
+    comms_overlay = new GuiCommsOverlay(this);
+    comms_overlay->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax);
 }
 
 void OperationScreen::onDraw(sp::RenderTarget& target)
@@ -127,16 +127,54 @@ void OperationScreen::onDraw(sp::RenderTarget& target)
     GuiOverlay::onDraw(target);
 
     if (!my_spaceship) return;
+
     if (science->radar_view->isVisible())
     {
-        info_reputation->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0))->show();
+        // Update reputation counter.
+        info_reputation
+            ->setValue(string(Faction::getInfo(my_spaceship).reputation_points, 0))
+            ->show();
 
-        // Update mission clock
-        info_clock->setValue(gameGlobalInfo->getMissionTime())->show();
+        // Update mission clock.
+        info_clock
+            ->setValue(gameGlobalInfo->getMissionTime())
+            ->show();
     }
     else
     {
         info_reputation->hide();
         info_clock->hide();
     }
+}
+
+void OperationScreen::onUpdate()
+{
+    // Relay keybinds, copied from Relay screen.
+    // Don't process hotkeys while the chat text entry has keyboard focus.
+    if (comms_overlay && comms_overlay->isChatEntryFocused()) return;
+
+    // Open comms with the selected target.
+    if (keys.relay_open_comms.getDown())
+    {
+        auto target = science->targets.get();
+        if (target) my_player_info->commandOpenTextComm(target);
+    }
+
+    // Toggle waypoint placement mode.
+    if (keys.relay_toggle_waypoint.getDown())
+    {
+        if (mode == TargetSelection) mode = WaypointPlacement;
+        else if (mode == WaypointPlacement) mode = TargetSelection;
+    }
+
+    // Delete the selected waypoint.
+    if (keys.relay_delete_waypoint.getDown())
+    {
+        if (science->targets.getWaypointIndex() >= 0)
+            my_player_info->commandRemoveWaypoint(science->targets.getWaypointIndex());
+    }
+
+    // Toggle ship's log min/maximized state.
+    if (ships_log && keys.relay_toggle_ships_log.getDown())
+        ships_log->toggle();
 }
