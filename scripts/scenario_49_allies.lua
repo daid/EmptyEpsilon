@@ -6388,12 +6388,12 @@ function setPlayers()
 			p.maxCargo = player_ship_stats[temp_player_type].cargo
 			if temp_player_type == "MP52 Hornet" then
 				p.autoCoolant = false
-				p.setWarpDrive(true)
+				p:setWarpDrive(true)
 			elseif temp_player_type == "Phobos M3P" then
-				p.setWarpDrive(true)
+				p:setWarpDrive(true)
 			elseif temp_player_type == "Player Fighter" then
 				p.autoCoolant = false
-				p.setJumpDrive(true)
+				p:setJumpDrive(true)
 				p:setJumpDriveRange(3000,40000)
 			elseif temp_player_type == "Striker" then
 				if p:getImpulseMaxSpeed() == 45 then
@@ -6415,7 +6415,7 @@ function setPlayers()
 				p:setJumpDriveRange(3000,40000)
 			elseif temp_player_type == "ZX-Lindworm" then
 				p.autoCoolant = false
-				p.setWarpDrive(true)
+				p:setWarpDrive(true)
 			end
 			if p.cargo == nil then
 				p.cargo = p.maxCargo
