@@ -174,18 +174,35 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
     box_selection_overlay->layout.fill_width = false;
     box_selection_overlay->hide();
 
-    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [](bool value) {
-        if (!value)
+    pause_button = new GuiToggleButton(this, "PAUSE_BUTTON", tr("button", "Pause"), [this](bool value) {
+        if (!value) {
             engine->setGameSpeed(1.0f);
+            slow_button->setValue(false);
+        }
         else
+        {
             engine->setGameSpeed(0.0f);
+            slow_button->setValue(false);
+        }
     });
     pause_button->setValue(engine->getGameSpeed() == 0.0f)->setPosition(20, 20, sp::Alignment::TopLeft)->setSize(250, 50);
+    slow_button = new GuiToggleButton(this, "SLOW_BUTTON", tr("button", "Slow"), [this](bool value) {
+        if (!value) {
+            engine->setGameSpeed(1.0f);
+            pause_button->setValue(false);
+        }
+        else
+        {
+            engine->setGameSpeed(0.1f);
+            pause_button->setValue(false);
+        }
+    });
+    slow_button->setValue(false)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(250, 50);
 
     intercept_comms_button = new GuiToggleButton(this, "INTERCEPT_COMMS_BUTTON", tr("button", "Intercept all comms"), [](bool value) {
         gameGlobalInfo->intercept_all_comms_to_gm = value;
     });
-    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(300, 20, sp::Alignment::TopLeft)->setSize(200, 25);
+    intercept_comms_button->setValue(gameGlobalInfo->intercept_all_comms_to_gm)->setTextSize(20)->setPosition(580, 20, sp::Alignment::TopLeft)->setSize(200, 25);
 
     faction_selector = new GuiSelector(this, "FACTION_SELECTOR", [this](int index, string value) {
         for (auto obj : targets.getTargets())
@@ -477,6 +494,10 @@ void GameMasterScreen::update(float delta)
     std::vector<std::pair<string, string>> selection_info;
     // Track selection indices to determine "*mixed*" state.
     std::unordered_map<string, size_t> selection_info_index;
+
+    // Update pause button
+    slow_button->setValue(engine->getGameSpeed() == 0.1f);
+    pause_button->setValue(engine->getGameSpeed() == 0.0f);
 
     // List position if only one entity is selected.
     if (targets.getTargets().size() == 1)

@@ -702,6 +702,21 @@ static bool luaIsGamePaused()
     return engine->getGameSpeed() == 0.0f;
 }
 
+static void luaSlowGame()
+{
+    engine->setGameSpeed(0.1f);
+}
+
+static void luaUnslowGame()
+{
+    engine->setGameSpeed(1.0f);
+}
+
+static bool luaIsGameSlowed()
+{
+    return engine->getGameSpeed() == 0.1f;
+}
+
 static void luaPlaySoundFile(string filename)
 {
     int n = filename.rfind(".");
@@ -1405,6 +1420,18 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// Returns true if the game is paused.
     /// Example: local is_paused = isGamePaused()
     env.setGlobal("isGamePaused", &luaIsGamePaused);
+    /// void slowGame()
+    /// Slows down the game to 10% game speed.
+    /// Example: slowGame()
+    env.setGlobal("slowGame", &luaSlowGame);
+    /// void unslowGame()
+    /// Restores the normal game speed.
+    /// Example: unslowGame()
+    env.setGlobal("unslowGame", &luaUnslowGame);
+    /// bool isGameSlowed()
+    /// Returns true if the game was slowed down by slowGame.
+    /// Example: local is_slowed = isGameSlowed()
+    env.setGlobal("isGameSlowed", &luaIsGameSlowed);
     /// void playSoundFile(string filename)
     /// Plays the given audio file on the server.
     /// Paths are relative to the resources/ directory.
