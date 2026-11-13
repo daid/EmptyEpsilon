@@ -1,10 +1,9 @@
-#ifndef GUI2_PROGRESSBAR_H
-#define GUI2_PROGRESSBAR_H
+#pragma once
 
 #include "gui2_element.h"
 
-
 class GuiThemeStyle;
+
 class GuiProgressbar : public GuiElement
 {
 protected:
@@ -28,5 +27,3 @@ public:
     GuiProgressbar* setColor(glm::u8vec4 color);
     GuiProgressbar* setDrawBackground(bool drawBackground);
 };
-
-#endif//GUI2_PROGRESSBAR_H

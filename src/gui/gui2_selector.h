@@ -2,7 +2,6 @@
 
 #include "gui2_entrylist.h"
 
-
 class GuiArrowButton;
 class GuiThemeStyle;
 class GuiToggleButton;

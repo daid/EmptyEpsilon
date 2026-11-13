@@ -8,6 +8,7 @@
 GuiBasicSlider::GuiBasicSlider(GuiContainer* owner, string id, float min_value, float max_value, float start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
+    intercepts_pointer = true;
     front_style = theme->getStyle("slider.front");
     back_style = theme->getStyle("slider.back");
 }
@@ -229,6 +230,7 @@ GuiSlider* GuiSlider::addOverlay(unsigned int precision, float font_size)
 GuiSlider2D::GuiSlider2D(GuiContainer* owner, string id, glm::vec2 min_value, glm::vec2 max_value, glm::vec2 start_value, func_t func)
 : GuiElement(owner, id), min_value(min_value), max_value(max_value), value(start_value), func(func)
 {
+    intercepts_pointer = true;
     front_style = theme->getStyle("slider.front");
     back_style = theme->getStyle("slider.back");
 }

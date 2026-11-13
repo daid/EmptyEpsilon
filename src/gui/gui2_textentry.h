@@ -1,11 +1,10 @@
-#ifndef GUI2_TEXTENTRY_H
-#define GUI2_TEXTENTRY_H
+#pragma once
 
 #include "gui2_element.h"
 #include "timer.h"
 
-
 class GuiThemeStyle;
+
 class GuiTextEntry : public GuiElement
 {
 public:
@@ -64,5 +63,3 @@ protected:
     int getTextOffsetForPosition(glm::vec2 position);
     void runChangeCallback();
 };
-
-#endif//GUI2_TEXTENTRY_H

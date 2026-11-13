@@ -1,10 +1,9 @@
-#ifndef HOTKEYBINDER_H
-#define HOTKEYBINDER_H
+#pragma once
 
 #include "gui2_element.h"
 
-
 class GuiThemeStyle;
+
 class GuiHotkeyBinder : public GuiElement
 {
 private:
@@ -18,5 +17,3 @@ public:
     virtual bool onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id) override;
     virtual void onDraw(sp::RenderTarget& renderer) override;
 };
-
-#endif //HOTKEYBINDER_H
