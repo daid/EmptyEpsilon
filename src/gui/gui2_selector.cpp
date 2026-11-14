@@ -49,13 +49,23 @@ void GuiSelector::onDraw(sp::RenderTarget& renderer)
 
     if (!focus)
         popup->hide();
+    // Shrink item height so the whole list fits the virtual screen height.
+    float virtual_h = renderer.getVirtualSize().y;
+    float item_h = 50.0f;
+    if (!entries.empty())
+        item_h = std::min(item_h, virtual_h / entries.size());
     float top = rect.position.y;
-    float height = entries.size() * 50;
+    float height = entries.size() * item_h;
     if (selection_index >= 0)
-        top -= selection_index * 50;
+        top -= selection_index * item_h;
+    top = std::min(virtual_h - height, top);
     top = std::max(0.0f, top);
-    top = std::min(900.0f - height, top);
     popup->setPosition(rect.position.x, top, sp::Alignment::TopLeft)->setSize(rect.size.x, height);
+    for(unsigned int n=0; n<popup_buttons.size(); n++)
+    {
+        popup_buttons[n]->setSize(GuiElement::GuiSizeMax, item_h);
+        popup_buttons[n]->setPosition(0, n * item_h, sp::Alignment::TopLeft);
+    }
 }
 
 GuiSelector* GuiSelector::setTextSize(float size)
@@ -83,14 +93,12 @@ void GuiSelector::onMouseUp(glm::vec2 position, sp::io::Pointer::ID id)
                     setSelectionIndex(n);
                     callback();
                 }));
-                popup_buttons[n]->setSize(GuiElement::GuiSizeMax, 50);
                 popup_buttons[n]->setTextSize(text_size);
             }else{
                 popup_buttons[n]->setText(entries[n].name);
                 popup_buttons[n]->show();
             }
             popup_buttons[n]->setValue(int(n) == selection_index);
-            popup_buttons[n]->setPosition(0, n * 50, sp::Alignment::TopLeft);
         }
         for(unsigned int n=entries.size(); n<popup_buttons.size(); n++)
         {
