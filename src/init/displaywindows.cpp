@@ -52,6 +52,13 @@ bool createDisplayWindows()
         auto n = PreferencesManager::get("multimonitor", "0").toInt();
         if (n < 2)
             n = SDL_GetNumVideoDisplays();
+        else if (fullscreen != Window::Mode::Window && n > SDL_GetNumVideoDisplays())
+        {
+            // A fullscreen window needs a display of its own. Windows beyond the display count would
+            // be placed on a display that does not exist and fight over an existing one.
+            LOG(WARNING, "multimonitor=", n, " but only ", SDL_GetNumVideoDisplays(), " display(s) found; limiting to ", SDL_GetNumVideoDisplays(), " fullscreen windows.");
+            n = SDL_GetNumVideoDisplays();
+        }
         while(int(windows.size()) < n)
         {
             auto wrl = new RenderLayer();
