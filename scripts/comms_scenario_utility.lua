@@ -58,6 +58,9 @@
 --					return true
 --				end
 --			end
+--		commsEnemyStation - if your scenario needs the players to actually communicate 
+--			with an enemy station. This function defines how that communication occurs.
+--			Normally, there's no response when attempting to contact an enemy faction station.
 --	Booleans to set outside of this utility to control this utility. Default is false
 --		fixed_ordnance_cost - sets the price for ordnance to fixed values. Default (false) 
 --			is to set ordnance to range appropriate random values.
@@ -77,10 +80,6 @@ require("generate_call_sign_scenario_utility.lua")
 require("cpu_ship_diversification_scenario_utility.lua")
 
 function commsStation()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {}
 	end
@@ -205,7 +204,12 @@ function commsStation()
     	setPlayers()
     end
     if comms_source:isEnemy(comms_target) then
-        return false
+    	if commsEnemyStation ~= nil then
+    		commsEnemyStation()
+    		return true
+    	else
+	        return false
+	    end
     end
 	local no_relay_panic_responses = {
 		_("station-comms","No communication officers available due to station emergency."),
@@ -233,8 +237,6 @@ function commsStation()
 		handleUndockedState()
 	end
 end
---	isObjectType comes from utils.lua (required above). A local copy here read ECS before any comms function had set it, and tested Asteroid by a mesh name that never matches
-
 -----------------
 --	Utilities  --
 -----------------
@@ -1773,11 +1775,19 @@ function requestJonque()
 			else
 				for n=1,comms_source:getWaypointCount() do
 					local rendezvous_prompts = {
-						string.format(_("stationAssist-comms","Rendezvous at waypoint %i"),comms_source:getWaypointID(n)),
-						string.format(_("stationAssist-comms","Tell jonque to meet at waypoint %i"),comms_source:getWaypointID(n)),
-						string.format(_("stationAssist-comms","Jonque to rendezvous at waypoint %i"),comms_source:getWaypointID(n)),
-						string.format(_("stationAssist-comms","Have the service jonque meet us at waypoint %i"),comms_source:getWaypointID(n))
+						string.format(_("stationAssist-comms","Rendezvous at waypoint %i"),n),
+						string.format(_("stationAssist-comms","Tell jonque to meet at waypoint %i"),n),
+						string.format(_("stationAssist-comms","Jonque to rendezvous at waypoint %i"),n),
+						string.format(_("stationAssist-comms","Have the service jonque meet us at waypoint %i"),n)
 					}
+					if createEntity then	--ECS? then use get waypoint ID
+						rendezvous_prompts = {
+							string.format(_("stationAssist-comms","Rendezvous at waypoint %s"),comms_source:getWaypointID(n)),
+							string.format(_("stationAssist-comms","Tell jonque to meet at waypoint %s"),comms_source:getWaypointID(n)),
+							string.format(_("stationAssist-comms","Jonque to rendezvous at waypoint %s"),comms_source:getWaypointID(n)),
+							string.format(_("stationAssist-comms","Have the service jonque meet us at waypoint %s"),comms_source:getWaypointID(n)),
+						}
+					end
 					addCommsReply(tableSelectRandom(rendezvous_prompts),function()
 						if comms_source:takeReputationPoints(getServiceCost("servicejonque")) then
 							ship = serviceJonque(comms_target:getFaction()):setPosition(comms_target:getPosition()):setCallSign(generateCallSign(nil,comms_target:getFaction())):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
@@ -1939,17 +1949,28 @@ function commsStationReinforcements()
 					}
 					setCommsMessage(tableSelectRandom(direct_to_what_waypoint))
 					for n = 1, comms_source:getWaypointCount() do
-						addCommsReply(string.format(_("stationAssist-comms", "Waypoint %d"), comms_source:getWaypointID(n)),function()
+						local button_label = string.format(_("stationAssist-comms", "Waypoint %d"), n)
+						if createEntity then	--ECS? then use get waypoint ID
+							button_label = string.format(_("stationAssist-comms", "Waypoint %s"), comms_source:getWaypointID(n))
+						end
+						addCommsReply(button_label,function()
 							if comms_source:takeReputationPoints(info.cost) then
 								local ship = CpuShip():setFactionId(comms_target:getFactionId()):setPosition(comms_target:getPosition()):setTemplate(info.template):setScanned(true):orderDefendLocation(comms_source:getWaypoint(n))
 								suffix_index = math.random(11,77)
 								ship:setCallSign(generateCallSign(nil,comms_target:getFaction()))
 								local sent_reinforcements = {
-									string.format(_("stationAssist-comms","We have dispatched %s to assist at waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
-									string.format(_("stationAssist-comms","%s is heading for waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
-									string.format(_("stationAssist-comms","%s has been sent to waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
-									string.format(_("stationAssist-comms","We ordered %s to help at waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
+									string.format(_("stationAssist-comms","We have dispatched %s to assist at waypoint %s"),ship:getCallSign(),n),
+									string.format(_("stationAssist-comms","%s is heading for waypoint %s"),ship:getCallSign(),n),
+									string.format(_("stationAssist-comms","%s has been sent to waypoint %s"),ship:getCallSign(),n),
+									string.format(_("stationAssist-comms","We ordered %s to help at waypoint %s"),ship:getCallSign(),n),
 								}
+								if createEntity then	--ECS? then use get waypoint ID
+									sent_reinforcements = {
+										string.format(_("stationAssist-comms","We have dispatched %s to assist at waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
+										string.format(_("stationAssist-comms","%s is heading for waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
+										string.format(_("stationAssist-comms","%s has been sent to waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
+										string.format(_("stationAssist-comms","We ordered %s to help at waypoint %s"),ship:getCallSign(),comms_source:getWaypointID(n)),
+									}								end
 								setCommsMessage(tableSelectRandom(sent_reinforcements))
 							else
 								local insufficient_rep_responses = {
@@ -2033,7 +2054,11 @@ function requestSupplyDrop()
 				}
 				setCommsMessage(tableSelectRandom(point_supplies))
 				for n=1,comms_source:getWaypointCount() do
-					addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+					local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+					if createEntity then	--ECS? then use get waypoint ID
+						button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+					end
+					addCommsReply(button_label, function()
 						if comms_source:takeReputationPoints(getServiceCost("supplydrop")) then
 							local position_x, position_y = comms_target:getPosition()
 							local target_x, target_y = comms_source:getWaypoint(n)
@@ -2042,11 +2067,19 @@ function requestSupplyDrop()
 							script:setVariable("target_x", target_x):setVariable("target_y", target_y)
 							script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
 							local supply_ship_en_route = {
-								string.format(_("stationAssist-comms","We have dispatched a supply ship toward waypoint %d"),comms_source:getWaypointID(n)),
-								string.format(_("stationAssist-comms","We sent a supply ship to waypoint %i"),comms_source:getWaypointID(n)),
-								string.format(_("stationAssist-comms","There's a ship headed for %i with your supplies"),comms_source:getWaypointID(n)),
-								string.format(_("stationAssist-comms","A ship should be arriving soon at waypoint %i with your supplies"),comms_source:getWaypointID(n))
+								string.format(_("stationAssist-comms","We have dispatched a supply ship toward waypoint %d"),n),
+								string.format(_("stationAssist-comms","We sent a supply ship to waypoint %i"),n),
+								string.format(_("stationAssist-comms","There's a ship headed for waypoint %i with your supplies"),n),
+								string.format(_("stationAssist-comms","A ship should be arriving soon at waypoint %i with your supplies"),n)
 							}
+							if createEntity then
+								supply_ship_en_route = {
+									string.format(_("stationAssist-comms","We have dispatched a supply ship toward waypoint %s"),comms_source:getWaypointID(n)),
+									string.format(_("stationAssist-comms","We sent a supply ship to waypoint %s"),comms_source:getWaypointID(n)),
+									string.format(_("stationAssist-comms","There's a ship headed for waypoint %s with your supplies"),comms_source:getWaypointID(n)),
+									string.format(_("stationAssist-comms","A ship should be arriving soon at waypoint %s with your supplies"),comms_source:getWaypointID(n))
+								}							
+							end
 							setCommsMessage(tableSelectRandom(supply_ship_en_route))
 						else
 							local insufficient_rep_responses = {
@@ -2091,7 +2124,11 @@ function requestSupplyDrop()
 						}
 						setCommsMessage(tableSelectRandom(point_supplies))
 						for n=1,comms_source:getWaypointCount() do
-							addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+							local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+							if createEntity then
+								button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+							end
+							addCommsReply(button_label, function()
 								if comms_source:takeReputationPoints(getServiceCost("jumpsupplydrop")) then
 									local position_x, position_y = comms_target:getPosition()
 									local target_x, target_y = comms_source:getWaypoint(n)
@@ -2101,11 +2138,19 @@ function requestSupplyDrop()
 									script:setVariable("jump_freighter","yes")
 									script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
 									local supply_ship_en_route = {
-										string.format(_("stationAssist-comms","We have dispatched a supply ship with a jump drivetoward waypoint %d"),comms_source:getWaypointID(n)),
-										string.format(_("stationAssist-comms","We sent a supply ship with a jump drive to waypoint %i"),comms_source:getWaypointID(n)),
-										string.format(_("stationAssist-comms","There's a ship with a jump drive headed for %i with your supplies"),comms_source:getWaypointID(n)),
-										string.format(_("stationAssist-comms","A jump ship should be arriving soon at waypoint %i with your supplies"),comms_source:getWaypointID(n))
+										string.format(_("stationAssist-comms","We have dispatched a supply ship with a jump drivetoward waypoint %d"),n),
+										string.format(_("stationAssist-comms","We sent a supply ship with a jump drive to waypoint %i"),n),
+										string.format(_("stationAssist-comms","There's a ship with a jump drive headed for %i with your supplies"),n),
+										string.format(_("stationAssist-comms","A jump ship should be arriving soon at waypoint %i with your supplies"),n),
 									}
+									if createEntity then
+										supply_ship_en_route = {
+											string.format(_("stationAssist-comms","We have dispatched a supply ship with a jump drivetoward waypoint %s"),comms_source:getWaypointID(n)),
+											string.format(_("stationAssist-comms","We sent a supply ship with a jump drive to waypoint %s"),comms_source:getWaypointID(n)),
+											string.format(_("stationAssist-comms","There's a ship with a jump drive headed for %s with your supplies"),comms_source:getWaypointID(n)),
+											string.format(_("stationAssist-comms","A jump ship should be arriving soon at waypoint %s with your supplies"),comms_source:getWaypointID(n)),
+										}
+									end
 									setCommsMessage(tableSelectRandom(supply_ship_en_route))
 								else
 									local insufficient_rep_responses = {
@@ -2166,7 +2211,11 @@ function requestSupplyDrop()
 							}
 							setCommsMessage(tableSelectRandom(point_supplies))
 							for n=1,comms_source:getWaypointCount() do
-								addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+								local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+								if createEntity then
+									button_label = string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n))
+								end
+								addCommsReply(button_label, function()
 									if comms_source:takeReputationPoints(getServiceCost("flingsupplydrop")) then
 										local target_x, target_y = comms_source:getWaypoint(n)
 										local target_angle = random(0,360)
@@ -2179,6 +2228,14 @@ function requestSupplyDrop()
 											string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 											string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 										}
+										if createEntity then
+											supply_location = {
+												string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+												string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+											}
+										end
 										setCommsMessage(tableSelectRandom(supply_location))
 									else
 										local insufficient_rep_responses = {
@@ -2213,7 +2270,11 @@ function requestSupplyDrop()
 							}
 							setCommsMessage(tableSelectRandom(point_supplies))
 							for n=1,comms_source:getWaypointCount() do
-								addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+								local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+								if createEntity then
+									button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+								end
+								addCommsReply(button_label, function()
 									if comms_source:takeReputationPoints(getServiceCost("flingsupplydrop") + (getWeaponCost("HVLI")*5)) then
 										local target_x, target_y = comms_source:getWaypoint(n)
 										local target_angle = random(0,360)
@@ -2226,6 +2287,14 @@ function requestSupplyDrop()
 											string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 											string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 										}
+										if createEntity then
+											supply_location = {
+												string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+												string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+											}
+										end
 										setCommsMessage(tableSelectRandom(supply_location))
 									else
 										local insufficient_rep_responses = {
@@ -2260,7 +2329,11 @@ function requestSupplyDrop()
 							}
 							setCommsMessage(tableSelectRandom(point_supplies))
 							for n=1,comms_source:getWaypointCount() do
-								addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+								local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+								if createEntity then
+									button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+								end
+								addCommsReply(button_label, function()
 									if comms_source:takeReputationPoints(getServiceCost("flingsupplydrop") + 100) then
 										local target_x, target_y = comms_source:getWaypoint(n)
 										local target_angle = random(0,360)
@@ -2277,6 +2350,14 @@ function requestSupplyDrop()
 											string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 											string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 										}
+										if createEntity then
+											supply_location = {
+												string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+												string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+											}
+										end
 										setCommsMessage(tableSelectRandom(supply_location))
 									else
 										local insufficient_rep_responses = {
@@ -2311,7 +2392,11 @@ function requestSupplyDrop()
 							}
 							setCommsMessage(tableSelectRandom(point_supplies))
 							for n=1,comms_source:getWaypointCount() do
-								addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+								local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+								if createEntity then
+									button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+								end
+								addCommsReply(button_label, function()
 									if comms_source:takeReputationPoints(getServiceCost("flingsupplydrop") + 20) then
 										local target_x, target_y = comms_source:getWaypoint(n)
 										local target_angle = random(0,360)
@@ -2328,6 +2413,14 @@ function requestSupplyDrop()
 											string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 											string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 										}
+										if createEntity then
+											supply_location = {
+												string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+												string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+												string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+											}
+										end
 										setCommsMessage(tableSelectRandom(supply_location))
 									else
 										local insufficient_rep_responses = {
@@ -2389,7 +2482,11 @@ function requestSupplyDrop()
 									}
 									setCommsMessage(tableSelectRandom(point_supplies))
 									for n=1,comms_source:getWaypointCount() do
-										addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+										local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+										if createEntity then
+											button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+										end
+										addCommsReply(button_label, function()
 											local hire_cost = 0
 											if comms_source:isFriendly(comms_target) then
 												hire_cost = comms_target.comms_data.available_repair_crew_cost_friendly
@@ -2422,6 +2519,14 @@ function requestSupplyDrop()
 													string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 													string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 												}
+												if createEntity then
+													supply_location = {
+														string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+														string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+														string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+														string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+													}
+												end
 												setCommsMessage(tableSelectRandom(supply_location))
 											else
 												local insufficient_rep_responses = {
@@ -2485,7 +2590,11 @@ function requestSupplyDrop()
 									}
 									setCommsMessage(tableSelectRandom(point_supplies))
 									for n=1,comms_source:getWaypointCount() do
-										addCommsReply(string.format(_("stationAssist-comms","Waypoint %i"),comms_source:getWaypointID(n)), function()
+										local button_label = string.format(_("stationAssist-comms","Waypoint %i"),n)
+										if createEntity then
+											button_label = string.format(_("stationAssist-comms","Waypoint %s"),comms_source:getWaypointID(n))
+										end
+										addCommsReply(button_label, function()
 											local coolant_cost = 0
 											if comms_source:isFriendly(comms_target) then
 												coolant_cost = comms_target.comms_data.coolant_inventory_cost_friendly
@@ -2518,6 +2627,14 @@ function requestSupplyDrop()
 													string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %i. Look for them at %.1f units from waypoint, bearing %.1f"),n,flinger_miss/1000,target_angle),
 													string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %i on bearing %.1f"),flinger_miss/1000,n,target_angle),
 												}
+												if createEntity then
+													supply_location = {
+														string.format(_("stationAssist-comms","Supplies delivered %.1f units from waypoint, bearing %.1f."),flinger_miss/1000,target_angle),
+														string.format(_("stationAssist-comms","Supplies have been launched. You can find them %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+														string.format(_("stationAssist-comms","Our flinger has launched your supplies at waypoint %s. Look for them at %.1f units from waypoint, bearing %.1f"),comms_source:getWaypointID(n),flinger_miss/1000,target_angle),
+														string.format(_("stationAssist-comms","Flung. Find supplies %.1f units from waypoint %s on bearing %.1f"),flinger_miss/1000,comms_source:getWaypointID(n),target_angle),
+													}
+												end
 												setCommsMessage(tableSelectRandom(supply_location))
 											else
 												local insufficient_rep_responses = {
@@ -4551,6 +4668,9 @@ function stationTalk()
 				stationHistory()
 			end
 		end
+		if scenarioStationTalk ~= nil and type(scenarioStationTalk) == "function" then
+			knowledge_count = knowledge_count + scenarioStationTalk()
+		end
 		if knowledge_count == 0 then
 			local lack_of_knowledge_response = {
 				_("station-comms","I have no additional knowledge."),
@@ -4721,104 +4841,121 @@ function transportAndCargoMissions()
 			comms_source.transport_mission = nil
 		end
 	else	--player ship transport mission is nil
-		if comms_target.transport_mission == nil then
-			mission_character = tableRemoveRandom(characters)	--character_names
-			local mission_target = nil
-			local reward = 0
-			if mission_character ~= nil then
-				mission_type = random(1,100)
-				local destination_pool = {}
-				local clean_list = true
-				repeat
-					clean_list = true
-					for i,station in ipairs(inner_stations) do
-						if station ~= nil then
-							if not station:isValid() then
+		if not comms_target.transport_mission_restricted then
+			if comms_target.transport_mission == nil then
+				mission_character = tableRemoveRandom(characters)	--character_names
+				local mission_target = nil
+				local reward = 0
+				if mission_character ~= nil then
+					mission_type = random(1,100)
+					local destination_pool = {}
+					local clean_list = true
+					repeat
+						clean_list = true
+						for i,station in ipairs(inner_stations) do
+							if station ~= nil then
+								if not station:isValid() then
+									inner_stations[i] = inner_stations[#inner_stations]
+									inner_stations[#inner_stations] = nil
+									clean_list = false
+									break
+								end
+							else
 								inner_stations[i] = inner_stations[#inner_stations]
 								inner_stations[#inner_stations] = nil
 								clean_list = false
 								break
 							end
-						else
-							inner_stations[i] = inner_stations[#inner_stations]
-							inner_stations[#inner_stations] = nil
-							clean_list = false
-							break
 						end
-					end
-				until(clean_list)
-				repeat
-					clean_list = true
-					for i,station in ipairs(outer_stations) do
-						if station ~= nil then
-							if not station:isValid() then
+					until(clean_list)
+					repeat
+						clean_list = true
+						for i,station in ipairs(outer_stations) do
+							if station ~= nil then
+								if not station:isValid() then
+									outer_stations[i] = outer_stations[#outer_stations]
+									outer_stations[#outer_stations] = nil
+									clean_list = false
+									break
+								end
+							else
 								outer_stations[i] = outer_stations[#outer_stations]
 								outer_stations[#outer_stations] = nil
 								clean_list = false
 								break
 							end
-						else
-							outer_stations[i] = outer_stations[#outer_stations]
-							outer_stations[#outer_stations] = nil
-							clean_list = false
-							break
 						end
-					end
-				until(clean_list)
-				repeat
-					clean_list = true
-					for i,station in ipairs(friendly_spike_stations) do
-						if station ~= nil then
-							if not station:isValid() then
+					until(clean_list)
+					repeat
+						clean_list = true
+						for i,station in ipairs(friendly_spike_stations) do
+							if station ~= nil then
+								if not station:isValid() then
+									friendly_spike_stations[i] = friendly_spike_stations[#friendly_spike_stations]
+									friendly_spike_stations[#friendly_spike_stations] = nil
+									clean_list = false
+									break
+								end
+							else
 								friendly_spike_stations[i] = friendly_spike_stations[#friendly_spike_stations]
 								friendly_spike_stations[#friendly_spike_stations] = nil
 								clean_list = false
 								break
 							end
-						else
-							friendly_spike_stations[i] = friendly_spike_stations[#friendly_spike_stations]
-							friendly_spike_stations[#friendly_spike_stations] = nil
-							clean_list = false
-							break
 						end
-					end
-				until(clean_list)				
-				if mission_type < 20 then
-					for _, station in ipairs(inner_stations) do
-						if station ~= nil and station:isValid() and station ~= comms_target then
-							table.insert(destination_pool,station)
+					until(clean_list)				
+					if mission_type < 20 then
+						for _, station in ipairs(inner_stations) do
+							if station ~= nil and station:isValid() and station ~= comms_target then
+								table.insert(destination_pool,station)
+							end
 						end
-					end
-					mission_target = tableRemoveRandom(destination_pool)
-					if mission_target ~= nil then
-						reward = 40
-						if mission_target:isFriendly(comms_source) then
-							reward = 30
+						mission_target = tableRemoveRandom(destination_pool)
+						if mission_target ~= nil then
+							reward = 40
+							if mission_target:isFriendly(comms_source) then
+								reward = 30
+							end
+							comms_target.transport_mission = {
+								["destination"] = mission_target,
+								["destination_name"] = mission_target:getCallSign(),
+								["reward"] = reward,
+								["character"] = mission_character,
+							}
 						end
-						comms_target.transport_mission = {
-							["destination"] = mission_target,
-							["destination_name"] = mission_target:getCallSign(),
-							["reward"] = reward,
-							["character"] = mission_character,
-						}
-					end
-				elseif mission_type < 50 then
-					for _, station in ipairs(outer_stations) do
-						if station ~= nil and station:isValid() and station ~= comms_target and comms_source:isFriendly(station) then
-							table.insert(destination_pool,station)
-						end
-					end
-					mission_target = tableRemoveRandom(destination_pool)
-					if mission_target ~= nil then
-						comms_target.transport_mission = {
-							["destination"] = mission_target,
-							["destination_name"] = mission_target:getCallSign(),
-							["reward"] = 40,
-							["character"] = mission_character,
-						}
-					else
+					elseif mission_type < 50 then
 						for _, station in ipairs(outer_stations) do
-							if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isEnemy(station) then
+							if station ~= nil and station:isValid() and station ~= comms_target and comms_source:isFriendly(station) then
+								table.insert(destination_pool,station)
+							end
+						end
+						mission_target = tableRemoveRandom(destination_pool)
+						if mission_target ~= nil then
+							comms_target.transport_mission = {
+								["destination"] = mission_target,
+								["destination_name"] = mission_target:getCallSign(),
+								["reward"] = 40,
+								["character"] = mission_character,
+							}
+						else
+							for _, station in ipairs(outer_stations) do
+								if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isEnemy(station) then
+									table.insert(destination_pool,station)
+								end
+							end
+							mission_target = tableRemoveRandom(destination_pool)
+							if mission_target ~= nil then
+								comms_target.transport_mission = {
+									["destination"] = mission_target,
+									["destination_name"] = mission_target:getCallSign(),
+									["reward"] = 50,
+									["character"] = mission_character,
+								}
+							end
+						end
+					elseif mission_type < 75 then
+						for _, station in ipairs(outer_stations) do
+							if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isFriendly(station) and not comms_source:isEnemy(station) then
 								table.insert(destination_pool,station)
 							end
 						end
@@ -4831,65 +4968,50 @@ function transportAndCargoMissions()
 								["character"] = mission_character,
 							}
 						end
-					end
-				elseif mission_type < 75 then
-					for _, station in ipairs(outer_stations) do
-						if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isFriendly(station) and not comms_source:isEnemy(station) then
-							table.insert(destination_pool,station)
-						end
-					end
-					mission_target = tableRemoveRandom(destination_pool)
-					if mission_target ~= nil then
-						comms_target.transport_mission = {
-							["destination"] = mission_target,
-							["destination_name"] = mission_target:getCallSign(),
-							["reward"] = 50,
-							["character"] = mission_character,
-						}
-					end
-				else
-					for _, station in ipairs(friendly_spike_stations) do
-						if station ~= nil and station:isValid() and station ~= comms_target then
-							table.insert(destination_pool,station)
-						end
-					end
-					mission_target = tableRemoveRandom(destination_pool)
-					if mission_target ~= nil then
-						comms_target.transport_mission = {
-							["destination"] = mission_target,
-							["destination_name"] = mission_target:getCallSign(),
-							["reward"] = 60,
-							["character"] = mission_character,
-						}
 					else
-						for _, station in ipairs(outer_stations) do
-							if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isEnemy(station) then
+						for _, station in ipairs(friendly_spike_stations) do
+							if station ~= nil and station:isValid() and station ~= comms_target then
 								table.insert(destination_pool,station)
 							end
 						end
 						mission_target = tableRemoveRandom(destination_pool)
 						if mission_target ~= nil then
-							reward = 50
-							if mission_target:isFriendly(comms_source) then
-								reward = 40
-							end
 							comms_target.transport_mission = {
 								["destination"] = mission_target,
 								["destination_name"] = mission_target:getCallSign(),
-								["reward"] = reward,
+								["reward"] = 60,
 								["character"] = mission_character,
 							}
+						else
+							for _, station in ipairs(outer_stations) do
+								if station ~= nil and station:isValid() and station ~= comms_target and not comms_source:isEnemy(station) then
+									table.insert(destination_pool,station)
+								end
+							end
+							mission_target = tableRemoveRandom(destination_pool)
+							if mission_target ~= nil then
+								reward = 50
+								if mission_target:isFriendly(comms_source) then
+									reward = 40
+								end
+								comms_target.transport_mission = {
+									["destination"] = mission_target,
+									["destination_name"] = mission_target:getCallSign(),
+									["reward"] = reward,
+									["character"] = mission_character,
+								}
+							end
 						end
 					end
 				end
-			end
-		else	--station transport mission not nil
-			if not comms_target.transport_mission.destination:isValid() then
-				if comms_target.residents == nil then
-					comms_target.residents = {}
+			else	--station transport mission not nil
+				if not comms_target.transport_mission.destination:isValid() then
+					if comms_target.residents == nil then
+						comms_target.residents = {}
+					end
+					table.insert(comms_target.residents,comms_target.transport_mission.character)
+					comms_target.transport_mission = nil
 				end
-				table.insert(comms_target.residents,comms_target.transport_mission.character)
-				comms_target.transport_mission = nil
 			end
 		end
 		if comms_target.transport_mission ~= nil then
@@ -4914,6 +5036,9 @@ function transportAndCargoMissions()
 					string.format(_("station-comms","This transportation mission is worth %s reputation."),comms_target.transport_mission.reward),
 				}
 				local out = string.format("%s %s",tableSelectRandom(transport_info),tableSelectRandom(transport_reputation_info))
+				if comms_source:isEnemy(comms_target.transport_mission.destination) then
+					out = string.format(_("station-comms","%s This mission may be hard to complete since the %s are enemies."),out,comms_target.transport_mission.destination:getFaction())
+				end
 				setCommsMessage(out)
 				local transport_agree_prompts = {
 					string.format(_("station-comms","Agree to transport %s to %s station %s"),comms_target.transport_mission.character.name,comms_target.transport_mission.destination:getFaction(),comms_target.transport_mission.destination_name),
@@ -7847,7 +7972,11 @@ function minorUpgrades()
 											comms_source:setBeamWeaponTurret(beam.index,beam.tarc,beam.dir,beam.tspd)
 										end
 										comms_source:setBeamWeaponDamageType(beam.index,"emp")
-										comms_source:setBeamWeaponArcColor(beam.index,0,0,0.5,0,0,1.0)
+										if createEntity then
+											comms_source:setBeamWeaponArcColor(beam.index,0,0,0.5,0,0,1)
+										else
+											comms_source:setBeamWeaponArcColor(beam.index,0,0,128,0,0,255)
+										end
 									end
 									comms_source.beams_for_shields = true
 									local beams_for_shields_installed = {
@@ -8252,6 +8381,69 @@ function sellGoodsToStation()
 		setCommsMessage(tableRemoveRandom(no_matching_sellable_goods))
 	end
 	addCommsReply(_("Back"), commsStation)
+end
+function tradeGoodsWithStation()
+	local trade_goods_prompt = {
+		_("trade-comms","Which one of these goods would you like to trade?"),
+		_("trade-comms","Which one would you like to trade?"),
+		_("trade-comms","Make an offer."),
+		_("trade-comms","What do you want to trade?"),
+	}
+	setCommsMessage(tableSelectRandom(trade_goods_prompt))
+	if comms_target.comms_data.trade ~= nil then
+		for trade_good, trade_bool in pairs(comms_target.comms_data.trade) do
+			if comms_source.goods ~= nil then
+				if comms_source.goods[trade_good] ~= nil then
+					if comms_source.goods[trade_good] > 0 then
+						for good, good_data in pairs(comms_target.comms_data.goods) do
+							if good_data.quantity > 0 then
+								addCommsReply(string.format(_("trade-comms","Trade %s for %s"),good_desc[trade_good],good_desc[good]),function()
+									if not comms_source:isDocked(comms_target) then
+										local stay_docked_to_trade = {
+											"You need to stay docked for that action.",
+											"You need to stay docked to trade.",
+											string.format("You must stay docked long enough for a trade between %s and %s to be completed.",comms_source:getCallSign(),comms_target:getCallSign()),
+											string.format("You undocked before %s could complete the trade you wanted.",comms_target:getCallSign()),
+										}
+										setCommsMessage(tableSelectRandom(stay_docked_to_trade))
+										return
+									end
+									if good_data.quantity < 1 then
+										local insufficient_station_inventory = {
+											"Insufficient station inventory",
+											"Not enough inventory on the station",
+											string.format("%s does not have enough inventory",comms_target:getCallSign()),
+											string.format("Not enough inventory on %s",comms_target:getCallSign()),
+										}
+										setCommsMessage(tableSelectRandom(insufficient_station_inventory))
+									else
+										good_data.quantity = good_data.quantity - 1
+										if comms_source.goods[good] == nil then
+											comms_source.goods[good] = 0
+										end
+										comms_source.goods[good] = comms_source.goods[good] + 1
+										comms_source.goods[trade_good] = comms_source.goods[trade_good] - 1
+										local trade_confirmation = {
+											string.format("Traded a %s for a %s",good_desc[trade_good],good_desc[good]),
+											string.format("You traded one %s for one %s",good_desc[trade_good],good_desc[good]),
+											string.format("%s agreed to trade a %s for a %s",comms_target:getCallSign(),good_desc[trade_good],good_desc[good]),
+											string.format("You successfully traded a %s for a %s",good_desc[trade_good],good_desc[good]),
+										}
+										setCommsMessage(tableSelectRandom(trade_confirmation))
+										comms_target.comms_data.friendlyness = math.min(100,comms_target.comms_data.friendlyness + random(2,5))
+									end
+									addCommsReply(_("trade-comms","Back to trade options"), tradeGoodsWithStation)
+									addCommsReply(_("trade-comms","Back to commercial options"),goodsCommerce)
+									addCommsReply("Back to interactive relay officer",interactiveDockedStationCommsMeat)
+									addCommsReply(_("Back to station communication"), commsStation)
+								end)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
 end
 function jettisonGoodsFromShip()
 	local jettison_prompt = {
@@ -8662,10 +8854,6 @@ end
 --	Ship Communications  --
 ---------------------------
 function commsShip()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
@@ -8765,14 +8953,26 @@ function friendlyShipComms()
 			}
 			setCommsMessage(tableSelectRandom(defend_what_waypoint))
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("shipAssist-comms", "Defend waypoint %d"), comms_source:getWaypointID(n)), function()
+				local button_label = string.format(_("shipAssist-comms", "Defend waypoint %d"), n)
+				if createEntity then
+					button_label = string.format(_("shipAssist-comms", "Defend waypoint %s"), comms_source:getWaypointID(n))
+				end
+				addCommsReply(button_label, function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					local defend_wp_confirmation = {
-						string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+						string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), n),
 					}
+					if createEntity then
+						defend_wp_confirmation = {
+							string.format(_("shipAssist-comms", "We are heading to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "Changing course to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "Moving to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %s."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+						}
+					end
 					setCommsMessage(tableSelectRandom(defend_wp_confirmation));
 					addCommsReply(_("Back"), commsShip)
 				end)
@@ -10015,10 +10215,6 @@ end	--end neutral communications function
 --	Service Jonque Ship Communications  --
 ------------------------------------------
 function commsServiceJonque()
-	ECS = false
-	if createEntity then
-		ECS = true
-	end
 	if comms_target.comms_data == nil then
 		comms_target.comms_data = {friendlyness = random(0.0, 100.0)}
 	end
@@ -10086,14 +10282,26 @@ function friendlyServiceJonqueComms(comms_data)
 			}
 			setCommsMessage(tableSelectRandom(defend_what_waypoint))
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("ship-comms","Defend WP %i"),comms_source:getWaypointID(n)), function()
+				local button_label = string.format(_("ship-comms","Defend WP %i"),n)
+				if createEntity then
+					button_label = string.format(_("ship-comms","Defend WP %s"),comms_source:getWaypointID(n))
+				end
+				addCommsReply(button_label, function()
 					comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 					local defend_wp_confirmation = {
-						string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), comms_source:getWaypointID(n)),
-						string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+						string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), n),
+						string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), n),
 					}
+					if createEntity then
+						defend_wp_confirmation = {
+							string.format(_("shipAssist-comms", "We are heading to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "Changing course to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "Moving to assist at waypoint %s."), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %s."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+						}
+					end
 					setCommsMessage(tableSelectRandom(defend_wp_confirmation));
 					addCommsReply(_("Back"), commsServiceJonque)
 				end)
@@ -10209,15 +10417,27 @@ function neutralServiceJonqueComms(comms_data)
 			}
 			setCommsMessage(tableSelectRandom(defend_what_waypoint))
 			for n=1,comms_source:getWaypointCount() do
-				addCommsReply(string.format(_("ship-comms","Defend WP %i"),comms_source:getWaypointID(n)), function()
+				local button_label = string.format(_("ship-comms","Defend WP %i"),n)
+				if createEntity then
+					button_label = string.format(_("ship-comms","Defend WP %s"),comms_source:getWaypointID(n))
+				end
+				addCommsReply(button_label, function()
 					if random(0,100) < comms_data.friendlyness then
 						comms_target:orderDefendLocation(comms_source:getWaypoint(n))
 						local defend_wp_confirmation = {
-							string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), comms_source:getWaypointID(n)),
-							string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), comms_source:getWaypointID(n)),
-							string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), comms_source:getWaypointID(n)),
-							string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+							string.format(_("shipAssist-comms", "We are heading to assist at waypoint %d."), n),
+							string.format(_("shipAssist-comms", "Changing course to assist at waypoint %d."), n),
+							string.format(_("shipAssist-comms", "Moving to assist at waypoint %d."), n),
+							string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %d."),comms_target:getCallSign(), n),
 						}
+						if createEntity then
+							defend_wp_confirmation = {
+								string.format(_("shipAssist-comms", "We are heading to assist at waypoint %s."), comms_source:getWaypointID(n)),
+								string.format(_("shipAssist-comms", "Changing course to assist at waypoint %s."), comms_source:getWaypointID(n)),
+								string.format(_("shipAssist-comms", "Moving to assist at waypoint %s."), comms_source:getWaypointID(n)),
+								string.format(_("shipAssist-comms", "%s is changing course to assist at waypoint %s."),comms_target:getCallSign(), comms_source:getWaypointID(n)),
+							}
+						end
 						setCommsMessage(tableSelectRandom(defend_wp_confirmation));
 					else
 						local defend_wp_denial = {
@@ -11396,11 +11616,23 @@ function waypointDistanceUtility(p,console)
 			local wx, wy = p:getWaypoint(i)
 			local px, py = p:getPosition()
 			if prev_x == nil then
-				seq = string.format(_("msgHelms","%s\n    From current to waypoint %i: %.1f Units"),seq,p:getWaypointID(n),distance(px,py,wx,wy)/1000)
+				if createEntity then
+					seq = string.format(_("msgHelms","%s\n    From current to waypoint %s: %.1f Units"),seq,p:getWaypointID(i),distance(px,py,wx,wy)/1000)
+				else
+					seq = string.format(_("msgHelms","%s\n    From current to waypoint %i: %.1f Units"),seq,i,distance(px,py,wx,wy)/1000)
+				end
 			else
-				seq = string.format(_("msgHelms","%s\n    From waypoint %i to waypoint %i: %.1f Units"),seq,p:getWaypointID(n)-1,p:getWaypointID(n),distance(prev_x,prev_y,wx,wy)/1000)
+				if createEntity then
+					seq = string.format(_("msgHelms","%s\n    From waypoint %s to waypoint %s: %.1f Units"),seq,p:getWaypointID(i-1),p:getWaypointID(i),distance(prev_x,prev_y,wx,wy)/1000)
+				else
+					seq = string.format(_("msgHelms","%s\n    From waypoint %i to waypoint %i: %.1f Units"),seq,i-1,i,distance(prev_x,prev_y,wx,wy)/1000)
+				end
 			end
-			node = string.format(_("msgHelms","%s\n    To waypoint %i: %.1f Units (Bearing: %.1f)"),node,i,distance(px,py,wx,wy)/1000,angleFromVectorNorth(wx,wy,px,py))
+			if createEntity then
+				node = string.format(_("msgHelms","%s\n    To waypoint %s: %.1f Units (Bearing: %.1f)"),node,p:getWaypointID(i),distance(px,py,wx,wy)/1000,angleFromVectorNorth(wx,wy,px,py))
+			else
+				node = string.format(_("msgHelms","%s\n    To waypoint %i: %.1f Units (Bearing: %.1f)"),node,i,distance(px,py,wx,wy)/1000,angleFromVectorNorth(wx,wy,px,py))
+			end
 			prev_x = wx
 			prev_y = wy
 		end
