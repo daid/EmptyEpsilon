@@ -4107,7 +4107,11 @@ function updateNebulaEncroachment()
 end
 function finalStats()
 	local a_player = getPlayerShip(-1)
-	local final_message = string.format(_("msgMainscreen","%s ended with %s reputation points (goal: %s)."),player_faction,a_player:getReputationPoints(),reputation_goal)
+	local reputation_points = 0
+	if a_player ~= nil and a_player:isValid() then
+		reputation_points = a_player:getReputationPoints()
+	end
+	local final_message = string.format(_("msgMainscreen","%s ended with %s reputation points (goal: %s)."),player_faction,reputation_points,reputation_goal)
 	local cleared_message = string.format(_("msgMainscreen","%i waves cleared."),wave_number - 1)
 	if wave_number - 1 == 0 then
 		cleared_message = _("msgMainscreen","No waves cleared.")
