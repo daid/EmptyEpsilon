@@ -6306,7 +6306,7 @@ function commonServiceOptions()
 										if comms_source:takeReputationPoints(getWeaponCost(missile_type)*comms_target.comms_data.weapon_inventory[missile_type]) then
 											comms_source:setWeaponStorage(missile_type,comms_source:getWeaponStorage(missile_type) + comms_target.comms_data.weapon_inventory[missile_type])
 											if comms_target.comms_data.weapon_inventory[missile_type] > 1 then
-												setCommsMessage(string.format(_("ammo-comms","%i %ss provided"),missile_count,missile_type))
+												setCommsMessage(string.format(_("ammo-comms","%i %ss provided"),comms_target.comms_data.weapon_inventory[missile_type],missile_type))
 											else
 												setCommsMessage(string.format(_("ammo-comms","One %s provided"),missile_type))
 											end
