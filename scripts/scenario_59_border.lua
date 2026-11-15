@@ -5265,7 +5265,7 @@ function playerShip()
 			playerShip()
 		end)
 	end
-	if playerSpinstar == nil then
+	if playerSpinStar == nil then
 		addGMFunction(_("buttonGM", "Spinstar"),function()
 			createPlayerShipSpinstar()
 			playerShip()
