@@ -1354,7 +1354,7 @@ function constructEnvironment()
 			end
 		end
 		if straw_neb ~= nil then
-			local block_warp_jammer = WarpJammer()
+			local block_warp_jammer = WarpJammer():setFaction("Independent")
 			local bwj_x, bwj_y = vectorFromAngle(straw_neb.iris_angle,block_dist,true)
 			block_warp_jammer:setPosition(bwj_x + center_x, bwj_y + center_y):setRange(random(7000,15000))
 			block_warp_jammer.range = block_warp_jammer:getRange()
