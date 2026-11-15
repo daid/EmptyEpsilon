@@ -4298,7 +4298,10 @@ function delayedRespawn(name)
 				p:setTemplate("ZX-Lindworm")
 			elseif respawn_type == "self" then
 				p:setTemplate(old_template)
-				death_penalty[faction] = death_penalty[faction] + self.shipScore
+				local old_ship = player_restart[name].self	--old ship; there is no `self` in this function
+				if old_ship ~= nil and old_ship.shipScore ~= nil then
+					death_penalty[faction] = death_penalty[faction] + old_ship.shipScore
+				end
 			end
 			p:setFaction(faction)
 			p.control_code = player_restart[name].control_code
@@ -6374,6 +6377,169 @@ function friendlyComms()
 	fleetCommunication(commsShip)
 	friendlyFreighterCommunication(commsShip)
 	return true
+end
+-- copied from scenario_32_devour.lua: this scenario does not require comms_scenario_utility.lua
+function getEnemyHealth(enemy)
+	local enemy_health = 0
+	local enemy_shield = 0
+	local enemy_shield_count = enemy:getShieldCount()
+	local faction = enemy:getFaction()
+	if change_enemy_order_diagnostic then print(string.format("%s statistics:",enemy:getCallSign())) end
+	if change_enemy_order_diagnostic then print(string.format("   shield count:    %i",enemy_shield_count)) end
+	if enemy_shield_count > 0 then
+		local total_shield_level = 0
+		local max_shield_level = 0
+		for i=1,enemy_shield_count do
+			total_shield_level = total_shield_level + enemy:getShieldLevel(i-1)
+			max_shield_level = max_shield_level + enemy:getShieldMax(i-1)
+		end
+		enemy_shield = total_shield_level/max_shield_level
+	else
+		enemy_shield = 1
+	end
+	if change_enemy_order_diagnostic then print(string.format("   shield health:   %.1f",enemy_shield)) end
+	local enemy_hull = enemy:getHull()/enemy:getHullMax()
+	if change_enemy_order_diagnostic then print(string.format("   hull health:     %.1f",enemy_hull)) end
+	local enemy_reactor = enemy:getSystemHealth("reactor")
+	if change_enemy_order_diagnostic then print(string.format("   reactor health:  %.1f",enemy_reactor)) end
+	local enemy_maneuver = enemy:getSystemHealth("maneuver")
+	if change_enemy_order_diagnostic then print(string.format("   maneuver health: %.1f",enemy_maneuver)) end
+	local enemy_impulse = enemy:getSystemHealth("impulse")
+	if change_enemy_order_diagnostic then print(string.format("   impulse health:  %.1f",enemy_impulse)) end
+	local enemy_beam = 0
+	if enemy:getBeamWeaponRange(0) > 0 then
+		enemy_beam = enemy:getSystemHealth("beamweapons")
+		if change_enemy_order_diagnostic then print(string.format("   beam health:     %.1f",enemy_beam)) end
+	else
+		enemy_beam = 1
+		if change_enemy_order_diagnostic then print(string.format("   beam health:     %.1f (no beams)",enemy_beam)) end
+	end
+	local enemy_missile = 0
+	if enemy:getWeaponTubeCount() > 0 then
+		enemy_missile = enemy:getSystemHealth("missilesystem")
+		if change_enemy_order_diagnostic then print(string.format("   missile health:  %.1f",enemy_missile)) end
+	else
+		enemy_missile = 1
+		if change_enemy_order_diagnostic then print(string.format("   missile health:  %.1f (no missile system)",enemy_missile)) end
+	end
+	local enemy_warp = 0
+	if enemy:hasWarpDrive() then
+		enemy_warp = enemy:getSystemHealth("warp")
+		if change_enemy_order_diagnostic then print(string.format("   warp health:     %.1f",enemy_warp)) end
+	else
+		enemy_warp = 1
+		if change_enemy_order_diagnostic then print(string.format("   warp health:     %.1f (no warp drive)",enemy_warp)) end
+	end
+	local enemy_jump = 0
+	if enemy:hasJumpDrive() then
+		enemy_jump = enemy:getSystemHealth("jumpdrive")
+		if change_enemy_order_diagnostic then print(string.format("   jump health:     %.1f",enemy_jump)) end
+	else
+		enemy_jump = 1
+		if change_enemy_order_diagnostic then print(string.format("   jump health:     %.1f (no jump drive)",enemy_jump)) end
+	end
+	if change_enemy_order_diagnostic then print(string.format("   faction:         %s",faction)) end
+	if faction == "Kraylor" then
+		enemy_health = 
+			enemy_shield 	* .3	+
+			enemy_hull		* .4	+
+			enemy_reactor	* .1 	+
+			enemy_maneuver	* .03	+
+			enemy_impulse	* .03	+
+			enemy_beam		* .04	+
+			enemy_missile	* .04	+
+			enemy_warp		* .03	+
+			enemy_jump		* .03
+	elseif faction == "Arlenians" then
+		enemy_health = 
+			enemy_shield 	* .35	+
+			enemy_hull		* .45	+
+			enemy_reactor	* .05 	+
+			enemy_maneuver	* .03	+
+			enemy_impulse	* .04	+
+			enemy_beam		* .02	+
+			enemy_missile	* .02	+
+			enemy_warp		* .02	+
+			enemy_jump		* .02	
+	elseif faction == "Exuari" then
+		enemy_health = 
+			enemy_shield 	* .2	+
+			enemy_hull		* .3	+
+			enemy_reactor	* .2 	+
+			enemy_maneuver	* .05	+
+			enemy_impulse	* .05	+
+			enemy_beam		* .05	+
+			enemy_missile	* .05	+
+			enemy_warp		* .05	+
+			enemy_jump		* .05	
+	elseif faction == "Ghosts" then
+		enemy_health = 
+			enemy_shield 	* .25	+
+			enemy_hull		* .25	+
+			enemy_reactor	* .25 	+
+			enemy_maneuver	* .04	+
+			enemy_impulse	* .05	+
+			enemy_beam		* .04	+
+			enemy_missile	* .04	+
+			enemy_warp		* .04	+
+			enemy_jump		* .04	
+	elseif faction == "Ktlitans" then
+		enemy_health = 
+			enemy_shield 	* .2	+
+			enemy_hull		* .3	+
+			enemy_reactor	* .1 	+
+			enemy_maneuver	* .05	+
+			enemy_impulse	* .05	+
+			enemy_beam		* .05	+
+			enemy_missile	* .05	+
+			enemy_warp		* .1	+
+			enemy_jump		* .1	
+	elseif faction == "TSN" then
+		enemy_health = 
+			enemy_shield 	* .35	+
+			enemy_hull		* .35	+
+			enemy_reactor	* .08 	+
+			enemy_maneuver	* .01	+
+			enemy_impulse	* .02	+
+			enemy_beam		* .02	+
+			enemy_missile	* .01	+
+			enemy_warp		* .08	+
+			enemy_jump		* .08	
+	elseif faction == "USN" then
+		enemy_health = 
+			enemy_shield 	* .38	+
+			enemy_hull		* .38	+
+			enemy_reactor	* .05 	+
+			enemy_maneuver	* .02	+
+			enemy_impulse	* .03	+
+			enemy_beam		* .02	+
+			enemy_missile	* .02	+
+			enemy_warp		* .05	+
+			enemy_jump		* .05	
+	elseif faction == "CUF" then
+		enemy_health = 
+			enemy_shield 	* .35	+
+			enemy_hull		* .38	+
+			enemy_reactor	* .05 	+
+			enemy_maneuver	* .03	+
+			enemy_impulse	* .03	+
+			enemy_beam		* .03	+
+			enemy_missile	* .03	+
+			enemy_warp		* .06	+
+			enemy_jump		* .04	
+	else
+		enemy_health = 
+			enemy_shield 	* .3	+
+			enemy_hull		* .4	+
+			enemy_reactor	* .06 	+
+			enemy_maneuver	* .03	+
+			enemy_impulse	* .05	+
+			enemy_beam		* .03	+
+			enemy_missile	* .03	+
+			enemy_warp		* .05	+
+			enemy_jump		* .05	
+	end
+	return enemy_health
 end
 function enemyComms()
 	local faction = comms_target:getFaction()

@@ -848,12 +848,12 @@ If you need supplies, please dock with us first.]]))
                                     else
                                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
                                     end
-                                    addCommsReply(_("Back"), commsStationMainMenu)
+                                    addCommsReply(_("Back"), commsCentralCommandStation)
                                 end
                             )
                         end
                     end
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             )
             addCommsReply(
@@ -871,12 +871,12 @@ If you need supplies, please dock with us first.]]))
                                     else
                                         setCommsMessage(_("needRep-comms", "Not enough rep!"))
                                     end
-                                    addCommsReply(_("Back"), commsStationMainMenu)
+                                    addCommsReply(_("Back"), commsCentralCommandStation)
                                 end
                             )
                         end
                     end
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             )
             return true
@@ -899,11 +899,11 @@ What can we do for you today?]]))
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") then
                     setCommsMessage(_("ammo-comms", "Sorry, sir, but you are fully stocked with homing missiles."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     comms_source:setWeaponStorage("Homing", comms_source:getWeaponStorageMax("Homing"))
                     setCommsMessage(_("ammo-comms", "We have refilled your missile supply."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -920,11 +920,11 @@ What can we do for you today?]]))
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
                     setCommsMessage(_("ammo-comms", "Captain, your ship is already fully stocked with mines."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                     setCommsMessage(_("ammo-comms", "These mines are yours."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -941,11 +941,11 @@ What can we do for you today?]]))
                 end
                 if comms_source:getWeaponStorage("Nuke") >= comms_source:getWeaponStorageMax("Nuke") then
                     setCommsMessage(_("ammo-comms", "All nukes are charged and primed for destruction."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     comms_source:setWeaponStorage("Nuke", comms_source:getWeaponStorageMax("Nuke"))
                     setCommsMessage(_("ammo-comms", "You are fully loaded and ready to explode things."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -962,11 +962,11 @@ What can we do for you today?]]))
                 end
                 if comms_source:getWeaponStorage("EMP") >= comms_source:getWeaponStorageMax("EMP") then
                     setCommsMessage(_("ammo-comms", "All storage for EMP missiles is filled, sir."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     comms_source:setWeaponStorage("EMP", comms_source:getWeaponStorageMax("EMP"))
                     setCommsMessage(_("ammo-comms", "Recalibrated the electronics and fitted you with all the EMP missiles you can carry."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -991,7 +991,7 @@ If you want to do business, please dock with us first.]]))
                 end
                 if comms_source:getWeaponStorage("Homing") >= comms_source:getWeaponStorageMax("Homing") / 2 then
                     setCommsMessage(_("ammo-comms", "You seem to have more than enough missiles."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     if not comms_source:takeReputationPoints(5 * ((comms_source:getWeaponStorageMax("Homing") / 2) - comms_source:getWeaponStorage("Homing"))) then
                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
@@ -1001,7 +1001,7 @@ If you want to do business, please dock with us first.]]))
                     setCommsMessage(_("ammo-comms", [[We generously resupplied you with some free homing missiles.
 
 Put them to good use.]]))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -1014,7 +1014,7 @@ Put them to good use.]]))
                 end
                 if comms_source:getWeaponStorage("Mine") >= comms_source:getWeaponStorageMax("Mine") then
                     setCommsMessage(_("ammo-comms", "You are fully stocked with mines."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 else
                     if not comms_source:takeReputationPoints(5 * (comms_source:getWeaponStorageMax("Mine") - comms_source:getWeaponStorage("Mine"))) then
                         setCommsMessage(_("needRep-comms", "Not enough reputation."))
@@ -1022,7 +1022,7 @@ Put them to good use.]]))
                     end
                     comms_source:setWeaponStorage("Mine", comms_source:getWeaponStorageMax("Mine"))
                     setCommsMessage(_("ammo-comms", "Here, have some mines. Mines are good defensive weapons."))
-                    addCommsReply(_("Back"), commsStationMainMenu)
+                    addCommsReply(_("Back"), commsCentralCommandStation)
                 end
             end
         )
@@ -1030,14 +1030,14 @@ Put them to good use.]]))
             _("ammo-comms", "Can you supply us with some nukes?"),
             function()
                 setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass destruction."))
-                addCommsReply(_("Back"), commsStationMainMenu)
+                addCommsReply(_("Back"), commsCentralCommandStation)
             end
         )
         addCommsReply(
             _("ammo-comms", "Please re-stock our EMP missiles."),
             function()
                 setCommsMessage(_("ammo-comms", "We do not deal in weapons of mass disruption."))
-                addCommsReply(_("Back"), commsStationMainMenu)
+                addCommsReply(_("Back"), commsCentralCommandStation)
             end
         )
     end

@@ -8348,6 +8348,7 @@ function neutralFriendlyFreighterComms()
 	end
 end
 function friendlyFreighterComms()
+	local shipType = comms_target:getTypeName()
 	if comms_source.interaction == nil then
 		comms_source.interaction = {}
 	end
