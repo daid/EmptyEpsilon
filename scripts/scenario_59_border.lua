@@ -2396,7 +2396,7 @@ function wreckModHealthShield(x,y)
 			end
 			if random(1,100) < base_wreck_mod_positive - (difficulty * wreck_mod_interval) + scan_bonus then
 				if max_health_front < 1 then
-					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
+					p:setSystemHealthMax("frontshield",math.min(1, max_health_front + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_front_shield_health_message = "artifact_improved_max_front_shield_health_message"
 						p:addCustomMessage("Engineering",p.artifact_improved_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system maximum health"),full_desc))
@@ -2410,7 +2410,7 @@ function wreckModHealthShield(x,y)
 						p:addCustomMessage("DamageControl",p.artifact_improved_max_front_shield_health_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved has improved the front shield system maximum health"),full_desc))
 					end
 				elseif max_health_rear < 1 then
-					p:setSystemHealthMax("rearshield",math.min(1, max_health + .05))
+					p:setSystemHealthMax("rearshield",math.min(1, max_health_rear + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_max_rear_shield_health_message = "artifact_improved_max_rear_shield_health_message"
 						p:addCustomMessage("Engineering",p.artifact_improved_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
@@ -2424,7 +2424,7 @@ function wreckModHealthShield(x,y)
 						p:addCustomMessage("DamageControl",p.artifact_improved_max_rear_shield_health_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved has improved the rear shield system maximum health"),full_desc))
 					end
 				elseif health_front < 1 then
-					p:setSystemHealth("frontshield",math.min(1, health + .05))
+					p:setSystemHealth("frontshield",math.min(1, health_front + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_front_shield_health_message = "artifact_improved_front_shield_health_message"
 						p:addCustomMessage("Engineering",p.artifact_improved_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the front shield system health"),full_desc))
@@ -2438,7 +2438,7 @@ function wreckModHealthShield(x,y)
 						p:addCustomMessage("DamageControl",p.artifact_improved_front_shield_health_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved has improved the front shield system health"),full_desc))
 					end
 				elseif health_rear < 1 then
-					p:setSystemHealth("rearshield",math.min(1, health + .05))
+					p:setSystemHealth("rearshield",math.min(1, health_rear + .05))
 					if p:hasPlayerAtPosition("Engineering") then
 						p.artifact_improved_rear_shield_health_message = "artifact_improved_rear_shield_health_message"
 						p:addCustomMessage("Engineering",p.artifact_improved_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has improved the rear shield system health"),full_desc))
@@ -2468,7 +2468,7 @@ function wreckModHealthShield(x,y)
 			else
 				if random(1,100) < base_wreck_mod_positive - (difficulty * wreck_mod_interval) + scan_bonus then
 					if random(1,100) <= 50 then
-						p:setSystemHealth("frontshield",math.max(-1, health - .05))
+						p:setSystemHealth("frontshield",math.max(-1, health_front - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_front_shield_health_message = "artifact_damaged_front_shield_health_message"
 							p:addCustomMessage("Engineering",p.artifact_damaged_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system health"),full_desc))
@@ -2482,7 +2482,7 @@ function wreckModHealthShield(x,y)
 							p:addCustomMessage("DamageControl",p.artifact_damaged_front_shield_health_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved has damaged the front shield system health"),full_desc))
 						end
 					else
-						p:setSystemHealth("rearshield",math.max(-1, health - .05))
+						p:setSystemHealth("rearshield",math.max(-1, health_rear - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_rear_shield_health_message = "artifact_damaged_rear_shield_health_message"
 							p:addCustomMessage("Engineering",p.artifact_damaged_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system health"),full_desc))
@@ -2498,7 +2498,7 @@ function wreckModHealthShield(x,y)
 					end
 				else
 					if random(1,100) <= 50 then
-						p:setSystemHealthMax("frontshield",math.max(-1, max_health - .05))
+						p:setSystemHealthMax("frontshield",math.max(-1, max_health_front - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_front_shield_health_message = "artifact_damaged_max_front_shield_health_message"
 							p:addCustomMessage("Engineering",p.artifact_damaged_max_front_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
@@ -2512,7 +2512,7 @@ function wreckModHealthShield(x,y)
 							p:addCustomMessage("DamageControl",p.artifact_damaged_max_front_shield_health_message_dmg,string.format(_("artifactEffect-msgDamageControl", "The %s retrieved has damaged the front shield system maximum health"),full_desc))
 						end
 					else
-						p:setSystemHealthMax("rearshield",math.max(-1, max_health - .05))
+						p:setSystemHealthMax("rearshield",math.max(-1, max_health_rear - .05))
 						if p:hasPlayerAtPosition("Engineering") then
 							p.artifact_damaged_max_rear_shield_health_message = "artifact_damaged_max_rear_shield_health_message"
 							p:addCustomMessage("Engineering",p.artifact_damaged_max_rear_shield_health_message,string.format(_("artifactEffect-msgEngineer", "The %s retrieved has damaged the rear shield system maximum health"),full_desc))
@@ -15273,7 +15273,7 @@ function updateInner(delta)
 	if updateDiagnostic then print("end of update loop") end	
 end
 function onError(error)
-	err = "script error : - \n" .. error .. "\n\ntraceback :-\n" .. traceback()
+	err = "script error : - \n" .. error .. "\n\ntraceback :-\n" .. debug.traceback()
 	print(err)
 	if popupGMDebug == "once" or popupGMDebug == "always" then
 		if popupGMDebug == "once" then

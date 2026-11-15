@@ -5115,7 +5115,7 @@ function visitShieldExpertStation(delta)
 				if p ~= nil and p:isValid() then
 					p:addToShipLog(string.format(_("Maria-shipLog", "We received word that station %s has been destroyed. However, in some of their final records we see that Maria Shrivner left the station to take a job on freighter %s which was last reported in %s"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName()),"Magenta")
 					plot4 = meetShieldExportTransport
-					plot4reminder = stringFormat(_("MariaOrders-comms", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
+					plot4reminder = string.format(_("MariaOrders-comms", "Meet transport %s last reported in %s to find Maria Shrivner"),shieldExpertTransport:getCallSign(),shieldExpertTransport:getSectorName())
 				end
 			end
 		else
@@ -5356,7 +5356,7 @@ function setWormArt()
 end
 function moveWormArt(delta)
 	plotWname = "moveWormArt"
-	if wormart ~= nil and wormart:isValid() then
+	if wormArt ~= nil and wormArt:isValid() then
 		if wormArt:isScannedByFaction("Human Navy") then
 			wormDelayTimer = 5
 			plotW = wormBirth

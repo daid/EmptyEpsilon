@@ -4646,7 +4646,7 @@ function exuariHarassment(delta)
 		if exuari_harassing_station ~= nil and exuari_harassing_station:isValid() then
 			for i, enemy in pairs(plot1_last_defense_fleet) do
 				if enemy ~= nil and enemy:isValid() then
-					currrent_order = enemy:getOrder()
+					current_order = enemy:getOrder()
 					if current_order == "Defend Target" then
 						if enemy:getWeaponTubeCount() > 0 then
 							low_on_missiles = false

@@ -3607,7 +3607,7 @@ function cycleProbeType(p,probe_type)
 					if probe_diagnostic then
 						print("New probe type has zero count. Removing")
 					end
-					p.probe_type_list[mathing_index] = p.probe_type_list[#p.probe_type_list]
+					p.probe_type_list[matching_index] = p.probe_type_list[#p.probe_type_list]
 					p.probe_type_list[#p.probe_type_list] = nil
 					if p.probe_type ~= "standard" then
 						if probe_diagnostic then
