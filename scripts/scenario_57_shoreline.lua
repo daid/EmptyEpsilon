@@ -5820,6 +5820,12 @@ function addPatrol(delta)
 		print("-----     Patrol fleet larger than available formations")
 	end
 	local form_index = math.random(1,4)
+	while #patrol_fleet > 7 do	--formation_groups defines 2 to 7 followers; surplus ships are removed
+		local surplus = table.remove(patrol_fleet)
+		if surplus ~= nil and surplus:isValid() then
+			surplus:destroy()
+		end
+	end
 	for pfi, ship in ipairs(patrol_fleet) do
 		local form_x, form_y = vectorFromAngleNorth((patrol_angle + formation_groups[#patrol_fleet][form_index][pfi].angle) % 360, formation_groups[#patrol_fleet][form_index][pfi].dist)
 		local form_prime_x, form_prime_y = vectorFromAngle(formation_groups[#patrol_fleet][form_index][pfi].angle, formation_groups[#patrol_fleet][form_index][pfi].dist)
@@ -9795,7 +9801,9 @@ function waveNear(enemyWaveList)
 							end
 						end
 						local lMsg = string.format(_("helpfullWarning-shipLog", "[%s, Sector %s] There are enemies nearby"), closestStation:getCallSign(), closestStation:getSectorName())
-						closestPlayer:addToShipLog(lMsg, "Red")
+						if closestPlayer ~= nil then
+							closestPlayer:addToShipLog(lMsg, "Red")
+						end
 						closestStation.warn_count = closestStation.warn_count + 1
 						return
 					end
