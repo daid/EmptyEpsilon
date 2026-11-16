@@ -29,18 +29,23 @@ msgstr "Divers"
 
 #: scripts/api/gm.lua:4
 msgctxt "create"
-msgid "Warp Jammer"
+msgid "Warp jammer"
 msgstr "Brouilleur de vitesse lumière"
 
-#: scripts/api/gm.lua:5 scripts/api/gm.lua:7
+#: scripts/api/gm.lua:5
 msgctxt "create"
 msgid "Mine"
 msgstr "Mine"
 
 #: scripts/api/gm.lua:6
 msgctxt "create"
-msgid "Supply Drop"
+msgid "Supply drop"
 msgstr "Caisse d'approvisionnement"
+
+#: scripts/api/gm.lua:7
+msgctxt "create"
+msgid "Scan probe"
+msgstr "Sonde"
 
 #: scripts/api/gm.lua:8
 msgctxt "create"
@@ -49,7 +54,7 @@ msgstr "Astéroïde"
 
 #: scripts/api/gm.lua:9
 msgctxt "create"
-msgid "Visual Asteroid"
+msgid "Visual asteroid"
 msgstr "Astéroïde décoratif"
 
 #: scripts/api/gm.lua:10
@@ -59,7 +64,7 @@ msgstr "Planète"
 
 #: scripts/api/gm.lua:11
 msgctxt "create"
-msgid "BlackHole"
+msgid "Black hole"
 msgstr "Trou noir"
 
 #: scripts/api/gm.lua:12
@@ -69,20 +74,20 @@ msgstr "Nébuleuse"
 
 #: scripts/api/gm.lua:13
 msgctxt "create"
-msgid "Worm Hole"
+msgid "Worm hole"
 msgstr "Trou de ver"
 
 #: scripts/api/gm.lua:18
 msgctxt "create"
-msgid "player ship"
+msgid "Player ship"
 msgstr "Vaisseau joueur"
 
 #: scripts/api/gm.lua:20
 msgctxt "create"
-msgid "station"
+msgid "Station"
 msgstr "Station"
 
 #: scripts/api/gm.lua:22
 msgctxt "create"
-msgid "cpu ship"
+msgid "CPU ship"
 msgstr "Vaisseau IA"
