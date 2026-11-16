@@ -2475,6 +2475,7 @@ function probeDestroyed(self,instigator)
 end
 --	Transport utilities
 function goodsOnShip(comms_target,comms_data)
+	if comms_data == nil then comms_data = comms_target.comms_data end
 	comms_data.goods = {}
 	comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
 	local shipType = comms_target:getTypeName()
