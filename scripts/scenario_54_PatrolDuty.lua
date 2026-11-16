@@ -202,7 +202,7 @@ function setVariations()
 		playWithTimeLimit = true			--set time limit boolean
 		plot7 = beforeAmbush				--use time limit plot
 	end
-	if mission_length == 1 or gameTimeLimit > 0 then
+	if missionLength == 1 or gameTimeLimit > 0 then
 		patrolGoal = 6
 	end
 end
@@ -3195,6 +3195,12 @@ function setConstants()
 	highestConcurrentPlayerCount = 0
 	setConcurrentPlayerCount = 0
 
+	--enemy lists counted by afterPatrol; a plot that never runs (Short length, 6-leg patrol) leaves them empty
+	nuisanceList = {}
+	incursionList = {}
+	attack1list = {}
+	attack2list = {}
+	attack3list = {}
 	plot1 = initialOrderMessage
 	plotT = transportPlot
 	plotTname = "transportPlot"
@@ -5671,9 +5677,9 @@ function commsShip()
 					for good, goodData in pairs(comms_data.goods) do
 						goodCount = goodCount + 1
 					end
-					if good_count == 1 then
+					if goodCount == 1 then
 						comms_data.goods[mineralGoods[math.random(1,#mineralGoods)]] = {quantity = 1, cost = random(20,80)}
-					elseif good_count == 2 then
+					elseif goodCount == 2 then
 						comms_data.goods[componentGoods[math.random(1,#componentGoods)]] = {quantity = 1, cost = random(20,80)}
 					else
 						comms_data.goods[commonGoods[math.random(1,#commonGoods)]] = {quantity = 1, cost = random(20,80)}
@@ -6762,8 +6768,8 @@ function afterPatrol(delta)
 					defendUtopiaMsgButtonOps = "defendUtopiaMsgButtonOps"
 					closestUtopiaPlayer:addCustomButton("Operations",defendUtopiaMsgButtonOps,_("UPlanitia1Audio-buttonOperations", "|> UTPLNT441"),playDefendUtopiaMsg)
 				end
+				stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("UPlanitia1Audio-incCall", "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"))
 			end
-			stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("UPlanitia1Audio-incCall", "Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"))
 			primaryOrders = _("UPlanitia1AudioOrders-comms", "Defend Utopia Planitia")
 			waveDelayTimer = 120
 			longWave = 0
@@ -6956,7 +6962,7 @@ function destroyEnemyStronghold(delta)
 			end
 			targetPlayer:addToShipLog(string.format(_("strongHold-shipLog", "Enemy base nearby located in sector %s. Fleet assembled near Utopia Planitia to assist if needed. Destroy base."),stationScarletCitadel:getSectorName()),"Magenta")
 		end
-		posse = spawnEnemies(utopiaPlanitiaX,utopiaPlanitiaY+8000,2,"Human Navy")
+		posse = spawnEnemies(utopiaPlanitiax,utopiaPlanitiay+8000,2,"Human Navy")
 		primaryOrders = string.format(_("strongHoldOrders-comms", "Destroy enemy base in sector %s"),stationScarletCitadel:getSectorName())
 		for i, friend in ipairs(posse) do
 			friend:orderStandGround()
@@ -7066,7 +7072,7 @@ function sickMiner(delta)
 			sickMinerStationChoice = math.random(1,5)
 			if sickMinerStationChoice == 1 then
 				sickMinerStation = stationKrik
-			elseif sickMinerStationChoicbaye == 2 then
+			elseif sickMinerStationChoice == 2 then
 				sickMinerStation = stationKrak
 			elseif sickMinerStationChoice == 3 then
 				sickMinerStation = stationKruk
