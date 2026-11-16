@@ -34,8 +34,8 @@
 -- Reputation[Unknown]: Nobody knows you. Zero reputation
 -- Reputation[Nice]: 200 reputation - you've helped a few people
 -- Reputation[Hero|Default]: 400 reputation - you've helped important people or lots of people
--- Reputation[Major Hero"]: 700 reputation - you're well known by nearly everyone as a force for good
--- Reputation[Super Hero"]: 1000 reputation - everyone knows you and relies on you for help
+-- Reputation[Major Hero]: 700 reputation - you're well known by nearly everyone as a force for good
+-- Reputation[Super Hero]: 1000 reputation - everyone knows you and relies on you for help
 -- Setting[Unique Ship]: Choose player ship outside of standard player ship list
 -- Unique Ship[None|Default]: None: just use standard player ship list on spawn screen
 -- Unique Ship[Spinstar]: Based on Atlantis, has spinal beam: narrow, long range, rapid firing, 5 second duration, 30 second recharge, fewer tubes, weaker shields and hull, warp, faster maneuver
@@ -197,6 +197,7 @@ function setVariations()
 			["Easy"] =		{number = .5},
 			["Normal"] =	{number = 1},
 			["Hard"] =		{number = 2},
+			["Extreme"] =	{number = 3},
 			["Quixotic"] =	{number = 5},
 		}
 		enemy_power =	enemy_config[getScenarioSetting("Enemies")].number
