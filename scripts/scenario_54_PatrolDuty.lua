@@ -7597,6 +7597,9 @@ function jumpStart(delta)
 	jumpStartTimer = jumpStartTimer - delta
 	if jumpStartTimer < 0 then
 		cp = closestPlayerTo(stationAsimov)
+		if cp == nil then
+			return
+		end
 		x, y = cp:getPosition()
 		objList = getObjectsInRadius(x, y, 30000)
 		nebulaList = {}
