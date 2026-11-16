@@ -15273,7 +15273,7 @@ function updateInner(delta)
 	if updateDiagnostic then print("end of update loop") end	
 end
 function onError(error)
-	err = "script error : - \n" .. error .. "\n\ntraceback :-\n" .. debug.traceback()
+	err = "script error : - \n" .. error
 	print(err)
 	if popupGMDebug == "once" or popupGMDebug == "always" then
 		if popupGMDebug == "once" then
