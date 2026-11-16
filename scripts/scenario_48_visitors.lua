@@ -7201,7 +7201,7 @@ function checkVirusEvents(delta)
 			for j,station in ipairs(belt1Stations) do
 				if p:isDocked(station) and not station.virus_cure then
 					station.virus_cure = true
-					p:addToShipLog(string.format(_("virus-shipLog","[%s Medical Team] Received Anti-virus. Administering to station personnel. Thanks %s"),current_belt1_station:getCallSign(),p:getCallSign()),"Magenta")
+					p:addToShipLog(string.format(_("virus-shipLog","[%s Medical Team] Received Anti-virus. Administering to station personnel. Thanks %s"),station:getCallSign(),p:getCallSign()),"Magenta")
 				end
 			end
 		end
