@@ -1646,7 +1646,7 @@ function mainGMButtonsAfterPause()
 		print("    NPC Asset Total:",stat_list.human.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
 		if respawn_type == "self" then
 			local weighted_death_penalty = stat_list.human.death_penalty * stat_list.weight.ship
-			out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"),out,stat_list.human.death_penalty,stat_list.weight.ship,weighted_death_penalty)
+			out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%.2f"),out,stat_list.human.death_penalty,stat_list.weight.ship,weighted_death_penalty)
 			print("    Player ship death penalty:",stat_list.human.death_penalty,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_death_penalty)
 		end
 		out = string.format(_("msgGM", "%s\n----Human weighted total:%.1f Original:%.1f Change:%.2f%%"),out,stat_list.human.weighted_score,original_score["Human Navy"],stat_list.human.weighted_score/original_score["Human Navy"]*100)
@@ -1688,7 +1688,7 @@ function mainGMButtonsAfterPause()
 		print("    NPC Asset Total:",stat_list.kraylor.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
 		if respawn_type == "self" then
 			local weighted_death_penalty = stat_list.kraylor.death_penalty * stat_list.weight.ship
-			out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"),out,stat_list.kraylor.death_penalty,stat_list.weight.ship,weighted_death_penalty)
+			out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%.2f"),out,stat_list.kraylor.death_penalty,stat_list.weight.ship,weighted_death_penalty)
 			print("    Player ship death penalty:",stat_list.kraylor.death_penalty,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_death_penalty)
 		end
 		out = string.format(_("msgGM", "%s\n----Kraylor weighted total:%.1f Original:%.1f Change:%.2f%%"),out,stat_list.kraylor.weighted_score,original_score["Kraylor"],stat_list.kraylor.weighted_score/original_score["Kraylor"]*100)
@@ -1731,7 +1731,7 @@ function mainGMButtonsAfterPause()
 			print("    NPC Asset Total:",stat_list.exuari.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
 			if respawn_type == "self" then
 				local weighted_death_penalty = stat_list.exuari.death_penalty * stat_list.weight.ship
-				out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"),out,stat_list.exuari.death_penalty,stat_list.weight.ship,weighted_death_penalty)
+				out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%.2f"),out,stat_list.exuari.death_penalty,stat_list.weight.ship,weighted_death_penalty)
 				print("    Player ship death penalty:",stat_list.exuari.death_penalty,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_death_penalty)
 			end
 			out = string.format(_("msgGM", "%s\n----Exuari weighted total:%.1f Original:%.1f Change:%.2f%%"),out,stat_list.exuari.weighted_score,original_score["Exuari"],stat_list.exuari.weighted_score/original_score["Exuari"]*100)
@@ -1775,7 +1775,7 @@ function mainGMButtonsAfterPause()
 			print("    NPC Asset Total:",stat_list.ktlitan.npc_score_total,"Weight:",stat_list.weight.npc,"Weighted Total:",weighted_npcs)
 			if respawn_type == "self" then
 				local weighted_death_penalty = stat_list.ktlitan.death_penalty * stat_list.weight.ship
-				out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%,2f"),out,stat_list.ktlitan.death_penalty,stat_list.weight.ship,weighted_death_penalty)
+				out = string.format(_("msgGM","%s\n            Player ship death penalty:%i Weight:%.1f Weighted Total:%.2f"),out,stat_list.ktlitan.death_penalty,stat_list.weight.ship,weighted_death_penalty)
 				print("    Player ship death penalty:",stat_list.ktlitan.death_penalty,"Weight:",stat_list.weight.ship,"Weighted Total:",weighted_death_penalty)
 			end
 			out = string.format(_("msgGM", "%s\n----Ktlitan weighted total:%.1f Original:%.1f Change:%.2f%%"),out,stat_list.ktlitan.weighted_score,original_score["Ktlitans"],stat_list.ktlitan.weighted_score/original_score["Ktlitans"]*100)
