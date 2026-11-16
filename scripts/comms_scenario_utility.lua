@@ -8672,7 +8672,7 @@ function commsShip()
 --	comms_data = comms_target.comms_data
 	if comms_target.comms_data.goods == nil then
 		if stations_sell_goods then
-			goodsOnShip(comms_target)
+			goodsOnShip(comms_target, comms_target.comms_data)
 		end
 	end
 	if stations_sell_goods then
