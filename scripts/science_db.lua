@@ -240,7 +240,7 @@ local function angleDifference(angle_a, angle_b)
 end
 
 local function directionLabel(direction)
-	name = "?"
+	local name = "?"
     if math.abs(angleDifference(0.0, direction)) <= 45 then name = _("database direction", "Front") end
     if math.abs(angleDifference(90.0, direction)) < 45 then name = _("database direction", "Right") end
     if math.abs(angleDifference(-90.0, direction)) < 45 then name = _("database direction", "Left") end
@@ -316,7 +316,7 @@ function __fillDefaultDatabaseData()
 
     table.sort(class_list)
 	table.sort(template_names)
-    class_database_entries = {}
+    local class_database_entries = {}
 
     -- Populate each ship hull class with members
 	for idx, class_name in pairs(class_list) do
@@ -325,7 +325,7 @@ function __fillDefaultDatabaseData()
 
     -- Populate each ship's entry
 	for idx, name in ipairs(template_names) do
-		ship_template = __ship_templates[name]
+		local ship_template = __ship_templates[name]
         if not ship_template.__hidden then
 			local class_name = _("No class")
 			local subclass_name = _("No sub-class")
