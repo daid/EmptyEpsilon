@@ -32,7 +32,16 @@
 static bool canHack(sp::ecs::Entity entity)
 {
     auto scanstate = entity.getComponent<ScanState>();
-    //TODO: Check if there are actually hackable systems.
+    auto hackable_system = false;
+    for(int n=0; n<int(ShipSystem::Type::COUNT); n++) {
+        auto sys = ShipSystem::get(entity, ShipSystem::Type(n));
+        if (sys && sys->can_be_hacked) {
+            hackable_system = true;
+            break;
+        }
+    }
+    if (!hackable_system)
+        return false;
     if (scanstate && scanstate->getStateFor(my_spaceship) == ScanState::State::NotScanned)
         return true;
     return Faction::getRelation(entity, my_spaceship) != FactionRelation::Friendly;
