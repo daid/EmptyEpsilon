@@ -78,6 +78,16 @@ void DamageSystem::applyDamage(sp::ecs::Entity entity, float amount, const Damag
         {
             amount = 0.0;
         }
+
+        if (shields->on_taking_damage)
+        {
+            if (info.instigator)
+            {
+                LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity, info.instigator));
+            } else {
+                LuaConsole::checkResult(shields->on_taking_damage.call<void>(entity));
+            }
+        }
     }
 
     if (amount > 0.0f)

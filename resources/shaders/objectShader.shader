@@ -10,19 +10,20 @@ uniform mat4 u_projection;
 attribute vec3 a_position;
 attribute vec3 a_normal;
 attribute vec2 a_texcoords;
-attribute vec3 a_tangent;
+// xyz: tangent. w: bitangent handedness.
+attribute vec4 a_tangent;
 
 // Per-vertex outputs
 varying vec3 v_normal;
 varying vec2 v_texcoords;
-varying vec3 v_tangent;
+varying vec4 v_tangent;
 
 void main()
 {
 	v_normal = normalize((u_model * vec4(a_normal, 0.)).xyz);
-	v_tangent = normalize((u_model * vec4(a_tangent, 0.)).xyz);
+	v_tangent = vec4(normalize((u_model * vec4(a_tangent.xyz, 0.)).xyz), a_tangent.w);
 	vec4 modelview_position = u_view * u_model * vec4(a_position, 1.);
-	
+
 	v_texcoords = a_texcoords;
 	gl_Position = u_projection * modelview_position;
 }
@@ -48,18 +49,18 @@ uniform sampler2D u_normalMap;
 // Per-fragment inputs
 varying vec3 v_normal;
 varying vec2 v_texcoords;
-varying vec3 v_tangent;
+varying vec4 v_tangent;
 
 void main()
 {
 	vec3 n = v_normal;
 #ifdef NORMAL
-	vec3 bitangent = cross(v_tangent, n);
-	mat3 TBN = mat3(normalize(v_tangent), normalize(bitangent), normalize(n));
-	n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0)); 
+	vec3 bitangent = cross(n, v_tangent.xyz) * v_tangent.w;
+	mat3 TBN = mat3(normalize(v_tangent.xyz), normalize(bitangent), normalize(n));
+	n = normalize(TBN * (texture2D(u_normalMap, v_texcoords.st).rgb * 2.0 - 1.0));
 #endif
 	float intensity = max(0.1, dot(u_ambientLightDirection, n));
-	
+
 	vec4 base = texture2D(u_baseMap, v_texcoords.st);
 #ifdef ILLUMINATION
 	vec4 illumination = texture2D(u_illuminationMap, v_texcoords.st);

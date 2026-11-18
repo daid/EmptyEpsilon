@@ -13,7 +13,6 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     back_style = theme->getStyle("selector.back");
     front_style = theme->getStyle("selector.front");
     left = new GuiArrowButton(this, id + "_ARROW_LEFT", 0, [this]() {
-        soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() <= 0)
             setSelectionIndex(entries.size() - 1);
         else
@@ -22,7 +21,6 @@ GuiSelector::GuiSelector(GuiContainer* owner, string id, func_t func)
     });
     left->setPosition(0, 0, sp::Alignment::TopLeft)->setSize(GuiSizeMatchHeight, GuiSizeMax);
     right = new GuiArrowButton(this, id + "_ARROW_RIGHT", 180, [this]() {
-        soundManager->playSound("sfx/button.wav");
         if (getSelectionIndex() >= (int)entries.size() - 1)
             setSelectionIndex(0);
         else

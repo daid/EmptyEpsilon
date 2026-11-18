@@ -37,6 +37,7 @@ public:
     static std::vector<string> getCategories();
     static const std::vector<ScenarioInfo>& getScenarios();
     static std::vector<ScenarioInfo> getScenarios(const string& category);
+    static void clearScenarioCache();
 private:
     void addKeyValue(string key, string value);
     bool addSettingOption(string key, string option, string description);

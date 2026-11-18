@@ -13,6 +13,7 @@ BASIC_REPLICATION_IMPL(MeshRenderComponentReplication, MeshRenderComponent)
     BASIC_REPLICATION_FIELD(texture.name);
     BASIC_REPLICATION_FIELD(specular_texture.name);
     BASIC_REPLICATION_FIELD(illumination_texture.name);
+    BASIC_REPLICATION_FIELD(normal_texture.name);
     BASIC_REPLICATION_FIELD(mesh_offset);
     BASIC_REPLICATION_FIELD(scale);
 }

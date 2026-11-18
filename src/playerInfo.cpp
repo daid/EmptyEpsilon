@@ -53,9 +53,11 @@
 #include "components/lifetime.h"
 #include "components/rendering.h"
 #include "systems/jumpsystem.h"
+#include "systems/internalcrew.h"
 #include "systems/docking.h"
 #include "systems/missilesystem.h"
 #include "systems/selfdestruct.h"
+#include "systems/probe.h"
 #include "systems/comms.h"
 #include "systems/scanning.h"
 
@@ -947,48 +949,10 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
         }
         break;
     case CMD_LAUNCH_PROBE:
-        if (auto spl = ship.getComponent<ScanProbeLauncher>())
         {
-            auto t = ship.getComponent<sp::Transform>();
-            if (t && spl->stock > 0) {
-                glm::vec2 target{};
-                packet >> target;
-
-                auto p = sp::ecs::Entity::create();
-                p.addComponent<sp::Transform>(*t);
-                p.addComponent<CallSign>().callsign = p.toString().split(":", 1)[0] + "P";
-                p.addComponent<LifeTime>().lifetime = 60*10;
-                if (auto faction = ship.getComponent<Faction>())
-                    p.addComponent<Faction>() = *faction;
-                auto& mt = p.addComponent<MoveTo>();
-                mt.target = target;
-                mt.speed = 1000;
-                p.addComponent<AllowRadarLink>().owner = ship;
-                //TODO: setRadarSignatureInfo(0.0, 0.2, 0.0);
-                auto& trace = p.addComponent<RadarTrace>();
-                trace.icon = "radar/probe.png";
-                trace.min_size = 10.0;
-                trace.max_size = 10.0;
-                trace.color = {96, 192, 128, 255};
-                trace.flags = RadarTrace::LongRange;
-                auto& hull = p.addComponent<Hull>();
-                hull.current = hull.max = 1;
-                p.addComponent<ShareShortRangeRadar>();
-                auto model = "SensorBuoy/SensorBuoyMKI.model";
-                auto idx = irandom(1, 3);
-                if (idx == 2) model = "SensorBuoy/SensorBuoyMKII.model";
-                if (idx == 3) model = "SensorBuoy/SensorBuoyMKIII.model";
-                auto& mrc = p.addComponent<MeshRenderComponent>();
-                mrc.mesh.name = model;
-                mrc.texture.name = "SensorBuoy/SensorBuoyAlbedoAO.png";
-                mrc.specular_texture.name = "SensorBuoy/SensorBuoyPBRSpecular.png";
-                mrc.scale = 300;
-                auto& phy = p.addComponent<sp::Physics>();
-                phy.setCircle(sp::Physics::Type::Sensor, 15);
-                if (spl->on_launch)
-                    LuaConsole::checkResult(spl->on_launch.call<void>(ship, p));
-                spl->stock--;
-            }
+            glm::vec2 target{};
+            packet >> target;
+            ProbeSystem::launch(ship, target);
         }
         break;
     case CMD_SET_ALERT_LEVEL:{
@@ -1095,7 +1059,11 @@ void PlayerInfo::onReceiveClientCommand(int32_t client_id, sp::io::DataBuffer& p
     case CMD_CREW_SET_TARGET:{
             auto [crew, position] = packet.read<sp::ecs::Entity, glm::ivec2>();
             if (auto ic = crew.getComponent<InternalCrew>())
-                ic->target_position = position;
+            {
+                // Refuse orders onto a cell another crew member stands on or is heading for.
+                if (!InternalCrewSystem::isCellOccupied(ic->ship, position, crew))
+                    ic->target_position = position;
+            }
         }break;
     }
 }
@@ -1210,16 +1178,16 @@ string getCrewPositionIcon(CrewPosition position)
     case CrewPosition::engineering: return "gui/icons/station-engineering";
     case CrewPosition::scienceOfficer: return "gui/icons/station-science";
     case CrewPosition::relayOfficer: return "gui/icons/station-relay";
-    case CrewPosition::tacticalOfficer: return "";
-    case CrewPosition::engineeringAdvanced: return "";
-    case CrewPosition::operationsOfficer: return "";
-    case CrewPosition::singlePilot: return "";
-    case CrewPosition::damageControl: return "";
-    case CrewPosition::powerManagement: return "";
-    case CrewPosition::databaseView: return "";
-    case CrewPosition::altRelay: return "";
-    case CrewPosition::commsOnly: return "";
-    case CrewPosition::shipLog: return "";
+    case CrewPosition::tacticalOfficer: return "gui/icons/station-tactical";
+    case CrewPosition::engineeringAdvanced: return "gui/icons/station-engineering-plus";
+    case CrewPosition::operationsOfficer: return "gui/icons/station-operations";
+    case CrewPosition::singlePilot: return "gui/icons/station-single-pilot";
+    case CrewPosition::damageControl: return "gui/icons/status_damaged";
+    case CrewPosition::powerManagement: return "gui/icons/status_low_energy";
+    case CrewPosition::databaseView: return "gui/icons/station-database";
+    case CrewPosition::altRelay: return "gui/icons/station-strategic-map";
+    case CrewPosition::commsOnly: return "gui/icons/station-comms";
+    case CrewPosition::shipLog: return "gui/icons/station-ship-log";
     default: return "ErrUnk: " + string(static_cast<int>(position));
     }
 }

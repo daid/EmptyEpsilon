@@ -6,6 +6,7 @@
 #include "preferenceManager.h"
 #include "soundManager.h"
 #include "windowManager.h"
+#include "scenarioInfo.h"
 
 #include "gui/theme.h"
 #include "gui/gui2_overlay.h"
@@ -155,6 +156,7 @@ void OptionsMenu::setupInterfaceOptions(OptionsMenu::ReturnTo return_to)
             i18n::reset();
             i18n::load("locale/main." + value + ".po");
             PreferencesManager::set("language", value);
+            ScenarioInfo::clearScenarioCache();
             keys.init(); // Reinit keyboard shortcut labels
         }))
             ->setOptions(languages)

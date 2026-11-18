@@ -77,10 +77,19 @@ int runProxyServer()
     if (parts.size() > 2) password = parts[2].upper();
     if (parts.size() > 3) listenPort = parts[3].toInt();
     if (parts.size() > 4) proxyName = parts[4];
+    P<GameServerProxy> proxy;
     if (host == "listen")
-        new GameServerProxy(password, listenPort, proxyName);
+        proxy = new GameServerProxy(password, listenPort, proxyName);
     else
-        new GameServerProxy(host, port, password, listenPort, proxyName);
+        proxy = new GameServerProxy(host, port, password, listenPort, proxyName);
+    if (!proxy->isListening())
+    {
+        // Without a listener nobody can ever connect through this proxy, so exit
+        // with an error rather than keep running uselessly (e.g. port in use).
+        LOG(Error, "Proxy server failed to listen on port ", listenPort, ", exiting.");
+        proxy->destroy();
+        return 1;
+    }
     engine->runMainLoop();
     return 0;
 }
@@ -330,6 +339,12 @@ void returnToMainMenu(RenderLayer* render_layer)
 
         LOG(Info, "Launching headless scenario " + headless + " on port " + string(headless_port));
         new EpsilonServer(headless_port);
+
+        if (!game_server) // => failed to start server (for example: port already in use)
+        {
+            LOG(Error, "Failed to start headless server on port " + string(headless_port));
+            exit(1);
+        }
 
         if (PreferencesManager::get("headless_name") != "") game_server->setServerName(PreferencesManager::get("headless_name"));
         if (PreferencesManager::get("headless_password") != "") game_server->setPassword(PreferencesManager::get("headless_password").upper());

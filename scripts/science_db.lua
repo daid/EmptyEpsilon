@@ -230,7 +230,7 @@ item:addKeyValue(_('Sizes'), _('Small (S) / Medium (M) / Large (L)'))
 populateMissileStats(item, missile_stat_keys, hvli_stats)
 item:setLongDescription(_([[A high-velocity lead impactor (HVLI) fires a simple slug of lead at a high velocity. This weapon is usually found in simpler ships since it does not require guidance computers. This also means its projectiles fly in a straight line from its tube and can't pursue a target.
 
-Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 2u.]]))
+Each shot from an HVLI fires a burst of 5 projectiles, which increases the chance to hit but requires precision aiming to be effective. It reaches its full damage potential at a range of 1u.]]))
 
 local function angleDifference(angle_a, angle_b)
     local ret = (angle_b or 0) - (angle_a or 0)
@@ -240,7 +240,7 @@ local function angleDifference(angle_a, angle_b)
 end
 
 local function directionLabel(direction)
-	name = "?"
+	local name = "?"
     if math.abs(angleDifference(0.0, direction)) <= 45 then name = _("database direction", "Front") end
     if math.abs(angleDifference(90.0, direction)) < 45 then name = _("database direction", "Right") end
     if math.abs(angleDifference(-90.0, direction)) < 45 then name = _("database direction", "Left") end
@@ -298,15 +298,17 @@ function __fillDefaultDatabaseData()
     local class_set = {}
 	local template_names = {}
 
-    -- Populate list of ship hull classes
+	-- Populate list of ship hull classes and collect all visible templates
 	for name, ship_template in pairs(__ship_templates) do
-        if not ship_template.__hidden and ship_template.__type ~= "station" then
-			local class_name = _("No class")
-			if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
+		if not ship_template.__hidden then
+			if ship_template.__type ~= "station" then
+				local class_name = _("No class")
+				if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class end
 
-			if class_set[class_name] == nil then
-				class_list[#class_list + 1] = class_name
-				class_set[class_name] = true
+				if class_set[class_name] == nil then
+					class_list[#class_list + 1] = class_name
+					class_set[class_name] = true
+				end
 			end
 			table.insert(template_names, name)
 		end
@@ -314,7 +316,7 @@ function __fillDefaultDatabaseData()
 
     table.sort(class_list)
 	table.sort(template_names)
-    class_database_entries = {}
+    local class_database_entries = {}
 
     -- Populate each ship hull class with members
 	for idx, class_name in pairs(class_list) do
@@ -323,16 +325,20 @@ function __fillDefaultDatabaseData()
 
     -- Populate each ship's entry
 	for idx, name in ipairs(template_names) do
-		ship_template = __ship_templates[name]
+		local ship_template = __ship_templates[name]
         if not ship_template.__hidden then
 			local class_name = _("No class")
 			local subclass_name = _("No sub-class")
 			if ship_template.docking_port ~= nil then class_name = ship_template.docking_port.dock_class subclass_name = ship_template.docking_port.dock_subclass end
-        	local entry = nil
+			local entry = nil
+			-- Add space stations to the Stations entry.
+			-- Otherwise, add them to ships by ship class.
 			if ship_template.__type == "station" then
 				entry = stations_database:addEntry(ship_template.typename.localized);
 			else
 				entry = class_database_entries[class_name]:addEntry(ship_template.typename.localized);
+				entry:addKeyValue(_("database", "Class"), class_name)
+				entry:addKeyValue(_("database", "Sub-class"), subclass_name)
 			end
 
 			if ship_template.__model_data_name then
@@ -342,8 +348,6 @@ function __fillDefaultDatabaseData()
 				entry:setImage(ship_template.radar_trace.icon)
 			end
 
-			entry:addKeyValue(_("database", "Class"), class_name)
-			entry:addKeyValue(_("database", "Sub-class"), subclass_name)
 			if ship_template.physics then
 				if type(ship_template.physics.size) == "table" then
 					entry:addKeyValue(_("database", "Size"), math.floor(ship_template.physics.size[1]))

@@ -27,6 +27,7 @@ public:
 #ifdef DEBUG
     sp::io::Keybinding debug_show_colliders;
 #endif
+    std::array<sp::io::Keybinding, 15> trigger_custom_button;
 
     // Crew screen binds
     sp::io::Keybinding next_station;
@@ -127,6 +128,13 @@ public:
     sp::io::Keybinding science_prev_target;
     sp::io::Keybinding science_enemy_next_target;
     sp::io::Keybinding science_enemy_prev_target;
+    sp::io::Keybinding science_open_radar;
+    sp::io::Keybinding science_open_database;
+    sp::io::Keybinding science_open_database_target;
+    sp::io::Keybinding science_sidebar_prev;
+    sp::io::Keybinding science_sidebar_next;
+    sp::io::Keybinding science_sidebar_pager_prev;
+    sp::io::Keybinding science_sidebar_pager_next;
     std::array<sp::io::Keybinding, 4> science_scan_param_increase;
     std::array<sp::io::Keybinding, 4> science_scan_param_decrease;
     std::array<sp::io::Keybinding, 4> science_scan_param_set;
@@ -215,6 +223,7 @@ public:
     sp::io::Keybinding gm_delete;
     sp::io::Keybinding gm_clipboardcopy;
     sp::io::Keybinding gm_show_callsigns;
+    sp::io::Keybinding gm_show_health_bars;
 
     // Spectator screen binds
     sp::io::Keybinding spectator_show_callsigns;

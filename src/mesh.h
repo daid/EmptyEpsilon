@@ -12,7 +12,8 @@ struct MeshVertex
     float position[3];
     float normal[3];
     float uv[2];
-    float tangent[3];
+    // xyz: tangent. w: bitangent handedness, +1 or -1.
+    float tangent[4];
 };
 
 class Mesh : sp::NonCopyable

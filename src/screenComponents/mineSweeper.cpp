@@ -245,7 +245,7 @@ void MineSweeper::FieldItem::onMouseUp(glm::vec2 position, sp::io::Pointer::ID i
 {
     if (!rect.contains(position)) return;
 
-    if (last_button == sp::io::Pointer::Button::Left && left_click_func)
+    if ((last_button == sp::io::Pointer::Button::Left || last_button == sp::io::Pointer::Button::Touch ) && left_click_func)
     {
         func_t f = left_click_func;
         f(getValue());

@@ -53,8 +53,8 @@ void ScanningSystem::scanningFinished(sp::ecs::Entity command_source)
         case ScanState::State::FullScan:
             break;
         }
-
-        LuaConsole::checkResult(ss->on_scan_completed.call<void>(scanner->target, command_source, scanner->source));
+        if (ss->on_scan_completed)
+            LuaConsole::checkResult(ss->on_scan_completed.call<void>(scanner->target, command_source, scanner->source));
     }
 
     scanner->target = {};

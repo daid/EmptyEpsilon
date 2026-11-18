@@ -49,6 +49,7 @@
 #include "systems/shieldsystem.h"
 #include "systems/shipsystemssystem.h"
 #include "systems/coolantsystem.h"
+#include "systems/lifetimesystem.h"
 #include "systems/missilesystem.h"
 #include "systems/maneuvering.h"
 #include "systems/energysystem.h"
@@ -145,6 +146,7 @@ void initSystemsAndComponents()
     engine->registerSystem<ManeuveringSystem>();
     engine->registerSystem<WarpSystem>();
     engine->registerSystem<BeamWeaponSystem>();
+    engine->registerSystem<LifeTimeSystem>();
     engine->registerSystem<MissileSystem>();
     engine->registerSystem<ShieldSystem>();
     engine->registerSystem<CoolantSystem>();

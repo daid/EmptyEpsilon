@@ -1,6 +1,9 @@
 #include "beamweapon.h"
 #include "tween.h"
-
+#ifdef _WIN32
+// Avoid missing M_PI errors by using our own
+#include "vectorUtils.h"
+#endif
 
 float frequencyVsFrequencyDamageFactor(int beam_frequency, int shield_frequency)
 {

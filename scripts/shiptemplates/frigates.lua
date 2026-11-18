@@ -290,7 +290,7 @@ variation:setDescription(_([[The Stalker is a strike ship designed to swoop into
 variation:setWarpSpeed(0)
 variation:setJumpDrive(true)
 
-var2 = variation:copy("Stalker R5"):setLocaleName(_("ship", "Stalker R5"))
+local var2 = variation:copy("Stalker R5"):setLocaleName(_("ship", "Stalker R5"))
 var2:setDescription(_([[The stalker R5 predates the Stalker R7. Like the R7, the R5 is designed to swoop into battle, deal damage quickly and retreat. Compared to the R7, the R5 has weaker shields and hull, but a faster turn speed]]))
 variation:setHull(45)
 variation:setShields(50,50)

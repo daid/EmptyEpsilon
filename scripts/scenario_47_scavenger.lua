@@ -4996,7 +4996,7 @@ function kraylorDiversionarySabotage(delta)
 			diversionary_sabotage_fleet_adjust_time = nil
 			if supply_depot_station ~= nil and supply_depot_station:isValid() then
 				local enemy_close_to_supply = 0
-				local obj_list = supply_depot_station:getObjectsInRadius(target_x, target_y, 7500)
+				local obj_list = getObjectsInRadius(target_x, target_y, 7500)
 				for i,obj in ipairs(obj_list) do
 					if isObjectType(obj,"CpuShip") then
 						if obj:getFaction() == "Kraylor" then
@@ -5161,7 +5161,7 @@ function kraylorPlanetBuster(delta)
 		if getScenarioTime() > planetary_attack_fleet_adjust_time then
 			planetary_attack_fleet_adjust_time = nil
 			local enemy_close_to_planet_count = 0
-			local obj_list = target_planet:getObjectsInRadius(target_x, target_y, 1500 + target_planet_radius)
+			local obj_list = getObjectsInRadius(target_x, target_y, 1500 + target_planet_radius)
 			for i,obj in ipairs(obj_list) do
 				if isObjectType(obj,"CpuShip") then
 					if obj:getFaction() == "Kraylor" then

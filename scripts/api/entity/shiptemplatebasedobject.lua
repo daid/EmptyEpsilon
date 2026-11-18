@@ -346,6 +346,13 @@ function Entity:onTakingDamage(callback)
     if self.components.hull then self.components.hull.on_taking_damage = callback end
     return self
 end
+--- Defines a function to call when this entity takes damage to its shields.
+--- Passes the object taking damage to its shields and the instigator entity (or nil) to the function.
+--- Example: stbo:onTakingShieldDamage(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " had shields damaged by " .. instigator:getCallSign()) end)
+function Entity:onTakingShieldDamage(callback)
+    if self.components.shields then self.components.shields.on_taking_damage = callback end
+    return self
+end
 --- Defines a function to call when this entity is destroyed by taking damage.
 --- Passes the object taking damage and the instigator entity that delivered the destroying damage (or nil) to the function.
 --- Example: stbo:onDestruction(function(this_stbo,instigator) print(this_stbo:getCallSign() .. " was destroyed by " .. instigator:getCallSign()) end)

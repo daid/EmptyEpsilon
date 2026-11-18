@@ -310,6 +310,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(ExplodeOnTouch, owner);
     BIND_MEMBER(ExplodeOnTouch, damage_type);
     BIND_MEMBER(ExplodeOnTouch, explosion_sfx);
+    BIND_MEMBER(ExplodeOnTouch, full_damage_after);
 
     sp::script::ComponentHandler<DelayedExplodeOnTouch>::name("delayed_explode_on_touch");
     BIND_MEMBER(DelayedExplodeOnTouch, delay);
@@ -424,6 +425,7 @@ void initComponentScriptBindings()
     BIND_MEMBER(Shields, calibration_delay);
     BIND_MEMBER(Shields, frequency);
     BIND_MEMBER(Shields, energy_use_per_second);
+    BIND_MEMBER(Shields, on_taking_damage);
     BIND_ARRAY(Shields, entries);
     BIND_ARRAY_MEMBER(Shields, entries, level);
     BIND_ARRAY_MEMBER(Shields, entries, max);
@@ -668,7 +670,8 @@ void initComponentScriptBindings()
     BIND_MEMBER(MoveTo, target);
     BIND_MEMBER(MoveTo, on_arrival);
     sp::script::ComponentHandler<LifeTime>::name("lifetime");
-    BIND_MEMBER(LifeTime, lifetime);
+    BIND_MEMBER(LifeTime, maximum);
+    BIND_MEMBER(LifeTime, alive_for);
     BIND_MEMBER(LifeTime, on_expire);
 
     sp::script::ComponentHandler<Faction>::name("faction");
