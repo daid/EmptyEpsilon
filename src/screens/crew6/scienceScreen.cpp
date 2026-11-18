@@ -642,7 +642,7 @@ void ScienceScreen::onUpdate()
             }
         }
 
-        // Allow change of target along when the scanner isn't active.
+        // Allow change of target only when the scanner isn't active.
         if (scanner && scanner->delay == 0.0f)
         {
             // Select next/previous scannable entity.
