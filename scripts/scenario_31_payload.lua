@@ -42,6 +42,9 @@ Debug = false
 
 ---@diagnostic disable-next-line: lowercase-global
 function init()
+  -- Check if EE is running the ECS branch (true) or the legacy branch (false).
+  ECS = createEntity ~= nil
+
   TimeLimit = tonumber(getScenarioSetting("TimeLimit")) * 60
 
   SetResistance()
@@ -304,7 +307,7 @@ function SpawnWeaponPickups()
       artifact:onCollision(function(self, collider)
         -- "Note that the callback function must reference something global, otherwise you get an error like "??[convert<ScriptSimpleCallback>::param] Upvalue 1 of function is not a table..."
         local __ = math.abs(0)
-        if collider.typeName == "PlayerSpaceship" then
+        if ((not ECS and collider.typeName == "PlayerSpaceship") or (ECS and collider.components and collider.components.player_control)) then
           collider:setWeaponStorage(weaponType, collider:getWeaponStorage(weaponType) + 1)
           self:destroy()
           collider:addToShipLog(_("artifacts", "Picked up a ") .. weaponType, "green")
@@ -333,19 +336,28 @@ end
 function CheckPayloadControl(target, faction1, faction2)
   local count1 = 0
   local count2 = 0
-  local payloadX, payloadY = target:getPosition()
-  local allShips = getObjectsInRadius(payloadX, payloadY, PayloadDistanceThreshold)
+  local px, py = target:getPosition()
 
-  for _, ship in ipairs(allShips) do
-    if ship.typeName ~= "CpuShip" and ship.typeName ~= "PlayerSpaceship" then
-      goto continue
-    end
-    if ship:isValid() and ship:getFaction() == faction1 then
+  -- Check player ship separately
+  if Player:isValid() and distance(Player, px, py) <= PayloadDistanceThreshold then
+    if Player:getFaction() == faction1 then
       count1 = count1 + 1
-    elseif ship:isValid() and ship:getFaction() == faction2 then
+    elseif Player:getFaction() == faction2 then
       count2 = count2 + 1
     end
-    ::continue::
+  end
+
+  -- Check tracked ship lists
+  for _, list in ipairs({KraylorShips, HumanShips}) do
+    for _, ship in ipairs(list) do
+      if ship:isValid() and distance(ship, px, py) <= PayloadDistanceThreshold then
+        if ship:getFaction() == faction1 then
+          count1 = count1 + 1
+        elseif ship:getFaction() == faction2 then
+          count2 = count2 + 1
+        end
+      end
+    end
   end
 
   if count1 > 0 and count2 == 0 then
@@ -692,27 +704,56 @@ end
 --
 
 function CheckWinCondition()
-  if PayloadShip:isDocked(FactionStation) then
-    victory("Kraylor")
-  elseif PayloadShip:isDocked(KraylorStation) then
-    victory("Human Navy")
-  end
-  if not (Player:isValid()
-    and PayloadShip:isValid()
-    and FactionStation:isValid()
-    and KraylorStation:isValid())
-  then
-    victory("Kraylor")
-  end
   if TimeLimit > 0 and getScenarioTime() >= TimeLimit then
-    globalMessage(_("payload-comms","You are out of time!"))
+    globalMessage(_("payload-comms", "You are out of time!"))
     Player:addToShipLog(_("payload-comms", "You are out of time!"), "red")
     victory("Kraylor")
+    return
+  end
+
+  if not Player:isValid() then
+    globalMessage(_("payload-comms", "Screamin' Firehawk has been destroyed!"))
+    victory("Kraylor")
+    return
+  end
+
+  if not PayloadShip:isValid() then
+    globalMessage(_("payload-comms", "The Payload has been destroyed!"))
+    Player:addToShipLog(_("payload-comms", "The Payload has been destroyed!"), "red")
+    victory ("Kraylor")
+    return
+  end
+
+  if not FactionStation:isValid() then
+    globalMessage(_("payload-comms", "Human Navy station has been destroyed!"))
+    Player:addToShipLog(_("payload-comms", "Human Navy station has been destroyed!"), "red")
+    victory ("Kraylor")
+    return
+  end
+
+  if not KraylorStation:isValid() then
+    globalMessage(_("payload-comms", "Kraylor station has been destroyed!"))
+    Player:addToShipLog(_("payload-comms", "Kraylor station has been destroyed!"), "red")
+    victory ("Kraylor")
+    return
+  end
+
+  if PayloadShip:isDocked(FactionStation) then
+    globalMessage(_("payload-comms", "The Payload has been delivered to the Human Navy station!"))
+    Player:addToShipLog(_("payload-comms", "The Payload has been delivered to the Human Navy station!"), "red")
+    victory("Kraylor")
+  elseif PayloadShip:isDocked(KraylorStation) then
+    globalMessage(_("payload-comms", "The Payload has been delivered to the Kraylor station!"))
+    Player:addToShipLog(_("payload-comms", "The Payload has been delivered to the Kraylor station!"), "red")
+    victory("Human Navy")
   end
 end
 
 -- Update the Payload's target based on proximities and scan status
 function DeterminePayloadTarget()
+  if not (Player:isValid() and PayloadShip:isValid()) then
+    return
+  end
   local oldTarget = PayloadShip.target
   local inControl, ourCount, oppositionCount = CheckPayloadControl(PayloadShip, "Human Navy", "Kraylor")
 
@@ -755,9 +796,9 @@ function DeterminePayloadTarget()
   if PayloadShip.target ~= nil and PayloadShip.target ~= oldTarget then
     PayloadShip.Waypoints = GeneratePayloadPath(PayloadShip.target)
     if PayloadShip.target == FactionStation then
-      Player:addToShipLog(_("payload-comms", "DANGER, The payload is moving towards the Human Navy station!"), "red")
+      Player:addToShipLog(_("payload-comms", "DANGER! The Payload is moving toward the Human Navy station!"), "red")
     elseif PayloadShip.target == KraylorStation then
-      Player:addToShipLog(_("payload-comms", "Payload is being delivered to the Kraylor station."), "green")
+      Player:addToShipLog(_("payload-comms", "The Payload is being delivered to the Kraylor station."), "green")
     end
   end
 end
@@ -831,6 +872,9 @@ end
 
 -- Function to handle Payload movement
 function HandlePayloadMovement()
+  if not (Player:isValid() and PayloadShip:isValid()) then
+    return
+  end
   local currentOrder = PayloadShip:getOrder()
   if PayloadShip.target == nil then
     if currentOrder ~= "Idle" then
@@ -952,6 +996,8 @@ function UpdateTraffic()
   local x, y = RandPositionInRadius(MidX, MidY, FieldSize + 5000, FieldSize, 0, 360)
   local station = Traffic.stations[irandom(1,#Traffic.stations)]
   local new_ship = CpuShip():setFaction(faction):setTemplate(type):setPosition(x, y):orderDock(station)
+  -- If running on an ECS build, remove heat generation on PlayerShip templates used as CpuShips to prevent systems like warp from overheating
+  if ECS then new_ship.components.coolant = nil end
   table.insert(Traffic.new_ships, new_ship)
 end
 
