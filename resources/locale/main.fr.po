@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-11-17 02:28+0100\n"
+"PO-Revision-Date: 2026-11-18 22:17+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -41,7 +41,7 @@ msgstr "Communications"
 #: src/playerInfo.cpp:1158
 msgctxt "station"
 msgid "Tactical"
-msgstr "Radar tactique"
+msgstr "Pilotage-armement"
 
 #: src/playerInfo.cpp:1159
 msgctxt "station"
@@ -56,12 +56,12 @@ msgstr "Opérations"
 #: src/playerInfo.cpp:1161
 msgctxt "station"
 msgid "Single Pilot"
-msgstr "Pilotage - armement"
+msgstr "Vaisseau autonome"
 
 #: src/playerInfo.cpp:1162
 msgctxt "station"
 msgid "Damage Control"
-msgstr "Réparation systèmes"
+msgstr "Réparations"
 
 #: src/playerInfo.cpp:1163
 msgctxt "station"
@@ -81,7 +81,7 @@ msgstr "Carte tactique"
 #: src/playerInfo.cpp:1166
 msgctxt "station"
 msgid "Comms"
-msgstr "Communications"
+msgstr "Centre d'appel"
 
 #: src/playerInfo.cpp:1167
 msgctxt "station"
@@ -144,7 +144,7 @@ msgstr "Annuler"
 
 #: src/menus/joinServerMenu.cpp:64
 msgid "Please enter the server password:"
-msgstr "Veuillez saisir le mot de passe du serveur :"
+msgstr "Veuillez saisir le mot de passe d'accès au serveur :"
 
 #: src/menus/serverBrowseMenu.cpp:24
 msgctxt "game_client_disconnect_reason"
@@ -172,9 +172,10 @@ msgid "timed out"
 msgstr "Délai écoulé"
 
 #: src/menus/serverBrowseMenu.cpp:34
+#, fuzzy
 msgctxt "game_client_disconnect_reason"
 msgid "unknown"
-msgstr "Inconnu"
+msgstr "Inconnue"
 
 #: src/menus/serverBrowseMenu.cpp:36
 msgctxt "game_client_disconnect_reason"
@@ -337,6 +338,7 @@ msgstr "Démarrer le serveur"
 #: src/menus/serverCreationScreen.cpp:134
 msgid "Failed to start server on port {port}. Is it already in use?"
 msgstr ""
+"Impossible de démarrer le serveur sur le port {port}. Est-il déjà utilisé ?"
 
 #: src/menus/serverCreationScreen.cpp:169
 msgid "Continue"
@@ -498,8 +500,9 @@ msgid "Enabled"
 msgstr "Activé"
 
 #: src/menus/optionsMenu.cpp:412 src/menus/optionsMenu.cpp:437
+#, fuzzy
 msgid "Main Screen only"
-msgstr "Écran principal"
+msgstr "Écran principal seul"
 
 #: src/menus/optionsMenu.cpp:418 src/menus/optionsMenu.cpp:423
 msgid "Music Volume: {volume}%"
@@ -527,7 +530,7 @@ msgstr "Ok"
 
 #: src/menus/shipSelectionScreen.cpp:81
 msgid "OK"
-msgstr "OK"
+msgstr "Ok"
 
 #: src/menus/shipSelectionScreen.cpp:113
 msgid ""
@@ -547,16 +550,16 @@ msgstr "Options et vues supplémentaires"
 
 #: src/menus/shipSelectionScreen.cpp:178
 msgid "Game master"
-msgstr "Maître de jeu"
+msgstr "Maître de jeu (MJ)"
 
 #: src/menus/shipSelectionScreen.cpp:185 src/menus/shipSelectionScreen.cpp:224
 #: src/menus/shipSelectionScreen.cpp:262 src/menus/shipSelectionScreen.cpp:300
 msgid "Enter the GM control code:"
-msgstr "Entrer le code de contrôle MJ :"
+msgstr "Veuillez saisir le code de contrôle MJ :"
 
 #: src/menus/shipSelectionScreen.cpp:217
 msgid "Spectator map (view all)"
-msgstr "Vue spectateur (carte)"
+msgstr "Vue spectateurs (carte)"
 
 #: src/menus/shipSelectionScreen.cpp:255
 msgid "Cinematic view"
@@ -564,7 +567,7 @@ msgstr "Vue cinématique"
 
 #: src/menus/shipSelectionScreen.cpp:293
 msgid "Top-down 3D view"
-msgstr "Vue plongeante"
+msgstr "Vue plongeante en 3D"
 
 #: src/menus/shipSelectionScreen.cpp:347
 msgid "Scan complexity: "
@@ -656,7 +659,7 @@ msgstr "Aucun joueur connecté"
 
 #: src/menus/shipSelectionScreen.cpp:422
 msgid "No information for the selected ship type"
-msgstr ""
+msgstr "Aucune information disponible pour le type de vaisseau sélectionné"
 
 #: src/menus/shipSelectionScreen.cpp:428 src/menus/shipSelectionScreen.cpp:435
 msgid "Create player ship"
@@ -672,8 +675,9 @@ msgid "No description provided"
 msgstr "Aucune description fournie"
 
 #: src/menus/shipSelectionScreen.cpp:480 src/menus/shipSelectionScreen.cpp:555
+#, fuzzy
 msgid "Player ship description"
-msgstr ""
+msgstr "Description vaisseaux joueur ???? Saffiche nulle part"
 
 #: src/menus/shipSelectionScreen.cpp:481 src/menus/shipSelectionScreen.cpp:554
 #, fuzzy
@@ -714,7 +718,7 @@ msgstr "Équipage 5/6 joueurs"
 
 #: src/menus/shipSelectionScreen.cpp:782
 msgid "3D screens"
-msgstr "Vues de l'espace en 3D"
+msgstr "Écrans 3D"
 
 #: src/menus/shipSelectionScreen.cpp:786 src/menus/shipSelectionScreen.cpp:899
 #: src/menus/autoConnectScreen.cpp:293
@@ -722,9 +726,8 @@ msgid "Main screen"
 msgstr "Écran principal"
 
 #: src/menus/shipSelectionScreen.cpp:797 src/menus/autoConnectScreen.cpp:290
-#, fuzzy
 msgid "Ship window"
-msgstr "Angle de vue"
+msgstr "Vue interne. Angle :"
 
 #: src/menus/shipSelectionScreen.cpp:820
 msgid "Alternative options"
@@ -740,13 +743,12 @@ msgid ""
 "If mainscreen is selected alongside stations, it will be shown next to the "
 "current station (if the total screen size is wide enough)."
 msgstr ""
-"Vous pouvez sélectionner plusieurs postes et switcher entre eux (touche Tab) "
-"durant la partie.\n"
-"Si vous sélectionnez l'écran principal en plus, il s'affichera à droite de "
-"votre poste (si votre écran est suffisamment large)."
+"Vous pouvez sélectionner plusieurs consoles et switcher entre elles durant "
+"la partie.\n"
+"Si vous sélectionnez la vue principale en plus, elle s'affichera à droite de "
+"votre console si votre écran est suffisamment large."
 
 #: src/menus/shipSelectionScreen.cpp:841
-#, fuzzy
 msgid "Crew assignments"
 msgstr "Membres d'équipage :"
 
@@ -756,53 +758,49 @@ msgid "Ready"
 msgstr "Prêt"
 
 #: src/menus/shipSelectionScreen.cpp:898
-#, fuzzy
 msgid "No crew members assigned"
-msgstr "Aucun membre d'équipage affecté à ce vaisseau"
+msgstr "Aucun membre d'équipage affecté à ce vaisseau."
 
 #: src/menus/shipSelectionScreen.cpp:899
-#, fuzzy
 msgid "Main screen (split)"
-msgstr "Écran principal"
+msgstr "+ Vue principale"
 
 #: src/menus/autoConnectScreen.cpp:31 src/menus/autoConnectScreen.cpp:108
-#, fuzzy
 msgid "Searching for server..."
-msgstr "Recherche du serveur..."
+msgstr "Recherche d'un serveur..."
 
 #: src/menus/autoConnectScreen.cpp:87
 #, fuzzy
 msgid "Using autoconnect server "
-msgstr "échec de connexion au serveur"
+msgstr "Utilisation de la connexion automatique au serveur ????"
 
 #: src/menus/autoConnectScreen.cpp:99
 #, fuzzy
 msgid "Found server "
-msgstr "Fermé par le serveur"
+msgstr "Serveur trouvé ????"
 
 #: src/menus/autoConnectScreen.cpp:116
 #, fuzzy
 msgid "Connecting: "
-msgstr "Connexion: "
+msgstr "Connexion : ????"
 
 #: src/menus/autoConnectScreen.cpp:118
 #, fuzzy
 msgid "Connecting..."
-msgstr "Connexion en cours..."
+msgstr "Connexion en cours… ????"
 
 #: src/menus/autoConnectScreen.cpp:146
-#, fuzzy
 msgid "Waiting for ship on "
-msgstr "En attente d'un vaisseau pour embarquement"
+msgstr "En attente d'un vaisseau pour embarquement sur "
 
 #: src/menus/autoConnectScreen.cpp:148
-#, fuzzy
 msgid "Waiting for ship..."
-msgstr "En attente d'un vaisseau pour embarquement"
+msgstr "En attente d'un vaisseau pour embarquement..."
 
 #: src/menus/autoConnectScreen.cpp:179
+#, fuzzy
 msgid "Connected, waiting for game data..."
-msgstr ""
+msgstr "Connecté, en attente des données de jeu… ????"
 
 #: src/menus/hotkeyMenu.cpp:41
 msgid "Configure Keyboard/Joystick"
@@ -884,25 +882,24 @@ msgid "Close"
 msgstr "Fermer"
 
 #: src/screens/crewStationScreen.cpp:73
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Crew screen"
-msgstr "Vues de l'espace en 3D"
+msgstr ""
 
 #: src/screens/crewStationScreen.cpp:217 src/screens/mainScreen.cpp:74
 #: src/screens/spectatorScreen.cpp:122
+#, fuzzy
 msgid "More shortcuts available in settings"
-msgstr ""
+msgstr "Raccourcis supplémentaires disponibles dans les paramètres ????"
 
 #: src/screens/mainScreen.cpp:62 src/gui/hotkeyConfig.cpp:385
 #: src/gui/hotkeyConfig.cpp:386 src/gui/hotkeyConfig.cpp:387
 #: src/gui/hotkeyConfig.cpp:388 src/gui/hotkeyConfig.cpp:389
 #: src/gui/hotkeyConfig.cpp:390 src/gui/hotkeyConfig.cpp:391
 #: src/gui/hotkeyConfig.cpp:392 src/gui/hotkeyConfig.cpp:393
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Main screen"
-msgstr "Écran principal"
+msgstr "Vue principale"
 
 #: src/screens/spectatorScreen.cpp:51
 msgctxt "spectator"
@@ -918,7 +915,6 @@ msgstr "Secteur"
 #: src/screens/crew4/operationsScreen.cpp:116
 #: src/screens/crew6/relayScreen.cpp:208
 #: src/screens/gm/gameMasterScreen.cpp:275
-#, fuzzy
 msgid "Clock"
 msgstr "Horloge "
 
@@ -934,16 +930,14 @@ msgid "Follow"
 msgstr "Suivre"
 
 #: src/screens/spectatorScreen.cpp:110 src/gui/hotkeyConfig.cpp:557
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Spectator view"
-msgstr "Vue spectateur (carte)"
+msgstr "Vue spectateurs (carte)"
 
 #: src/screens/spectatorScreen.cpp:110 src/gui/hotkeyConfig.cpp:64
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Top-down view"
-msgstr "Vue de haut en 3D"
+msgstr "Vue plongeante en 3D"
 
 #: src/screens/spectatorScreen.cpp:242
 msgctxt "spectator"
@@ -984,26 +978,23 @@ msgstr "gm_info"
 #: src/screens/crew4/operationsScreen.cpp:89
 #: src/screens/crew6/relayScreen.cpp:149
 #: src/screenComponents/openCommsButton.cpp:31
-#, fuzzy
 msgid "Open comms"
 msgstr "Ouvrir Comm."
 
 #: src/screens/crew4/operationsScreen.cpp:93
 #: src/screens/crew6/relayScreen.cpp:174
-#, fuzzy
 msgid "Place waypoint"
 msgstr "Placer marqueur"
 
 #: src/screens/crew4/operationsScreen.cpp:98
 #: src/screens/crew6/relayScreen.cpp:180
-#, fuzzy
 msgid "Delete waypoint"
 msgstr "Suppr. marqueur"
 
 #: src/screens/crew4/operationsScreen.cpp:111
 #: src/screens/crew6/relayScreen.cpp:204
 msgid "Reputation"
-msgstr "Rép. actuelle "
+msgstr "Réputation "
 
 #: src/screens/crew4/tacticalScreen.cpp:109
 #: src/screens/crew1/singlePilotScreen.cpp:121
@@ -1076,15 +1067,15 @@ msgid "Warp drive speed"
 msgstr "Vitesse lumière max"
 
 #: src/screens/crew6/engineeringScreen.cpp:477
+#, fuzzy
 msgid "Time to jump activation"
-msgstr ""
+msgstr "Délai d'activation du saut ????"
 
 #: src/screens/crew6/engineeringScreen.cpp:477
 #: src/screenComponents/jumpControls.cpp:76
-#, fuzzy
 msgctxt "jumpcontrol"
 msgid "{delay} sec."
-msgstr "Vit. de charge {loadtime}s"
+msgstr "{delay}s"
 
 #: src/screens/crew6/engineeringScreen.cpp:481
 msgid "Jump drive recharge rate"
@@ -1203,48 +1194,41 @@ msgstr "Faction"
 
 #: src/screens/crew6/relayScreen.cpp:138
 #: src/screenComponents/dockingButton.cpp:137
-#, fuzzy
 msgid "Cancel"
 msgstr "Annuler"
 
 #: src/screens/crew6/relayScreen.cpp:149
 #: src/screenComponents/openCommsButton.cpp:31
-#, fuzzy
 msgid "Link to comms"
-msgstr "Lier a Communications"
+msgstr "Lier a Communications ????"
 
 #: src/screens/crew6/relayScreen.cpp:152
 msgid "Start hacking"
 msgstr "Démarrer piratage"
 
 #: src/screens/crew6/relayScreen.cpp:161
-#, fuzzy
 msgid "Link to science"
 msgstr "Lier a Science"
 
 #: src/screens/crew6/relayScreen.cpp:177
-#, fuzzy
 msgid "Cancel waypoint"
-msgstr "Placer marqueur"
+msgstr "Annuler marqueur"
 
 #: src/screens/crew6/relayScreen.cpp:189
-#, fuzzy
 msgid "Launch probe"
 msgstr "Largage sonde"
 
 #: src/screens/crew6/relayScreen.cpp:192
-#, fuzzy
 msgid "Cancel probe"
-msgstr "Peut larguer des sondes"
+msgstr "Annuler largage"
 
 #: src/screens/crew6/relayScreen.cpp:197
 msgid "Center on ship"
-msgstr "Vue vérouillée"
+msgstr "Verrouillage vaisseau"
 
 #: src/screens/crew6/relayScreen.cpp:340
-#, fuzzy
 msgid "Launch probe ({stock})"
-msgstr "Largage sonde"
+msgstr "Largage sonde ({stock})"
 
 #: src/screens/crew6/weaponsScreen.cpp:78
 msgid "Beam info"
@@ -1267,8 +1251,9 @@ msgid "Rear"
 msgstr "B. arrière"
 
 #: src/screens/crew1/singlePilotScreen.cpp:136
+#, fuzzy
 msgid "Open Comms"
-msgstr "Ouvrir Comm."
+msgstr "Ouvrir comm. ???? Saffiche nulle part"
 
 #: src/screens/extra/damcon.cpp:22
 msgctxt "damagecontrol"
@@ -1368,10 +1353,9 @@ msgstr "Ordres"
 #: src/screens/gm/gameMasterScreen.cpp:359 src/gui/hotkeyConfig.cpp:551
 #: src/gui/hotkeyConfig.cpp:552 src/gui/hotkeyConfig.cpp:553
 #: src/gui/hotkeyConfig.cpp:554
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "GM screen"
-msgstr "Écran principal"
+msgstr "Écran Maître de jeu (MJ)"
 
 #: src/screens/gm/gameMasterScreen.cpp:486
 msgctxt "gm_info"
@@ -1504,13 +1488,13 @@ msgstr ""
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Position X:"
-msgstr "Position"
+msgstr "Position X :"
 
 #: src/screens/gm/tweak.cpp:334
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Position Y:"
-msgstr "Position"
+msgstr "Position Y :"
 
 #: src/screens/gm/tweak.cpp:356
 #, fuzzy
@@ -1996,7 +1980,7 @@ msgstr "Rayon du radar courte portée :"
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Long-range radar range:"
-msgstr "Rayon du radar longue portée :"
+msgstr "Radar longue portée :"
 
 #: src/screens/gm/tweak.cpp:499
 #, fuzzy
@@ -2218,17 +2202,15 @@ msgstr "Entrer [{letter}]"
 
 #: src/screenComponents/dockingButton.cpp:24
 #: src/screenComponents/dockingButton.cpp:159
-#, fuzzy
 msgid "Request dock"
-msgstr "Amarrage"
+msgstr "S'amarrer"
 
 #: src/screenComponents/dockingButton.cpp:132
 #, fuzzy
 msgid "Unknown"
-msgstr "Inconnu"
+msgstr "[non identifié]"
 
 #: src/screenComponents/dockingButton.cpp:164
-#, fuzzy
 msgid "Cancel docking"
 msgstr "Annuler amarrage"
 
@@ -2289,10 +2271,9 @@ msgid "Jump"
 msgstr "Saut"
 
 #: src/screenComponents/jumpControls.cpp:69
-#, fuzzy
 msgctxt "jumpcontrol"
 msgid "delayed"
-msgstr "Communications"
+msgstr "Retardé"
 
 #: src/screenComponents/jumpControls.cpp:75
 msgctxt "jumpcontrol"
@@ -2302,7 +2283,7 @@ msgstr "Saut dans"
 #: src/screenComponents/jumpControls.cpp:83
 msgctxt "jumpcontrol"
 msgid "Abort"
-msgstr ""
+msgstr "Annuler"
 
 #: src/screenComponents/jumpControls.cpp:93
 msgctxt "jumpcontrol"
@@ -2373,13 +2354,12 @@ msgstr "ENDOMMAGÉ"
 #: src/screenComponents/powerDamageIndicator.cpp:61
 msgctxt "systems"
 msgid "DOCKING"
-msgstr ""
+msgstr "Amarrage en cours"
 
 #: src/screenComponents/powerDamageIndicator.cpp:61
-#, fuzzy
 msgctxt "systems"
 msgid "DOCKED"
-msgstr "VERROUILLÉ"
+msgstr "Amarré"
 
 #: src/screenComponents/powerDamageIndicator.cpp:66
 msgctxt "systems"
@@ -2423,7 +2403,6 @@ msgid "Zoom: {zoom}x"
 msgstr "Zoom : {zoom}x"
 
 #: src/screenComponents/scanTargetButton.cpp:15
-#, fuzzy
 msgctxt "scienceButton"
 msgid "Scan"
 msgstr "Analyse"
@@ -2450,11 +2429,11 @@ msgstr "{faction} gagne"
 
 #: src/screenComponents/openCommsButton.cpp:33
 msgid "No comms target"
-msgstr ""
+msgstr "Communications"
 
 #: src/screenComponents/openCommsButton.cpp:35
 msgid "Transmitting..."
-msgstr ""
+msgstr "Appel en cours..."
 
 #: src/screenComponents/combatManeuver.cpp:19
 msgid "Combat maneuver"
@@ -2503,19 +2482,19 @@ msgid "Hailed by {name}"
 msgstr "Message provenant de {name}"
 
 #: src/screenComponents/jumpIndicator.cpp:28
-#, fuzzy
 msgctxt "jumpcontrol"
 msgid "Jump delayed"
-msgstr "Saut dans : {delay}"
+msgstr "Saut retardé"
 
 #: src/screenComponents/jumpIndicator.cpp:30
 msgid "Jump in: {delay}"
 msgstr "Saut dans : {delay}"
 
 #: src/screenComponents/jumpIndicator.cpp:30
+#, fuzzy
 msgctxt "jumpcontrol"
 msgid " sec."
-msgstr ""
+msgstr " s ???? Saffiche nulle part"
 
 #: src/screenComponents/scanningDialog.cpp:27
 #: src/screenComponents/scanningDialog.cpp:144
@@ -2529,57 +2508,54 @@ msgid "LOCKED"
 msgstr "VERROUILLÉ"
 
 #: src/screenComponents/scanningDialog.cpp:145
-#, fuzzy
 msgctxt "scanning"
 msgid "Biomass frequency"
-msgstr "Fréq. faisceaux/boucliers"
+msgstr "Fréquence biomasse xénographique"
 
 #: src/screenComponents/scanningDialog.cpp:146
-#, fuzzy
 msgctxt "scanning"
 msgid "Gravity well signature"
-msgstr "Signature électrique"
+msgstr "Signature gravimétrique"
 
 #: src/screenComponents/scanningDialog.cpp:147
 msgctxt "scanning"
 msgid "Radiation halftime"
-msgstr ""
+msgstr "Analyse spectrale séquentielle"
 
 #: src/screenComponents/scanningDialog.cpp:148
 msgctxt "scanning"
 msgid "Radio profile"
-msgstr ""
+msgstr "Modulation radio stationnaire"
 
 #: src/screenComponents/scanningDialog.cpp:149
 msgctxt "scanning"
 msgid "Ionic phase shift"
-msgstr ""
+msgstr "Déphasage ionique"
 
 #: src/screenComponents/scanningDialog.cpp:150
 msgctxt "scanning"
 msgid "Infra-red color shift"
-msgstr ""
+msgstr "Détection tachyonique quantique"
 
 #: src/screenComponents/scanningDialog.cpp:151
 msgctxt "scanning"
 msgid "Doppler stability"
-msgstr ""
+msgstr "Stabilisation Doppler"
 
 #: src/screenComponents/scanningDialog.cpp:152
 msgctxt "scanning"
 msgid "Raspberry jam prevention"
-msgstr ""
+msgstr "Distorsion d'intermodulation"
 
 #: src/screenComponents/scanningDialog.cpp:153
 msgctxt "scanning"
 msgid "Infinity impropability"
-msgstr ""
+msgstr "Puissance isotrope rayonnée"
 
 #: src/screenComponents/scanningDialog.cpp:154
-#, fuzzy
 msgctxt "scanning"
 msgid "Zerospace audio frequency"
-msgstr "Réduire la fréquence des faisceaux"
+msgstr "Superposition signaux I/Q"
 
 #: src/screenComponents/mainScreenControls.cpp:22
 msgctxt "controlbutton"
@@ -2612,19 +2588,16 @@ msgid "Target lock"
 msgstr "Cible verrouillée"
 
 #: src/screenComponents/mainScreenControls.cpp:136
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Tactical radar"
-msgstr "Vue radar tactique"
+msgstr "Radar courte portée"
 
 #: src/screenComponents/mainScreenControls.cpp:147
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Long-range radar"
-msgstr "Rayon du radar longue portée :"
+msgstr "Radar longue portée"
 
 #: src/screenComponents/mainScreenControls.cpp:158
-#, fuzzy
 msgctxt "mainscreen"
 msgid "Strategic map"
 msgstr "Carte tactique"
@@ -2632,7 +2605,7 @@ msgstr "Carte tactique"
 #: src/screenComponents/mainScreenControls.cpp:175
 msgctxt "mainscreen"
 msgid "Comms overlay"
-msgstr ""
+msgstr "+communications"
 
 #: src/screenComponents/databaseView.cpp:29
 #, fuzzy
@@ -2652,7 +2625,6 @@ msgid "Target system"
 msgstr "Système ciblé :"
 
 #: src/screenComponents/hackingDialog.cpp:81
-#, fuzzy
 msgid ""
 "Select a system in the targeted ship to begin a remote intrusion attempt, or "
 "hack. If successful, you reduce that system's effectiveness for a short "
@@ -2661,7 +2633,7 @@ msgid ""
 msgstr ""
 "Sélectionnez un système du vaisseau ciblé pour lancer une tentative "
 "d'intrusion à distance ou piratage.\n"
-"En cas de succès, l'efficacité de ce système sera temporairement diminuée. "
+"En cas de succès, l'efficacité de ce système sera temporairement diminuée.\n"
 "Continuez à pirater les systèmes ennemis afin de donner à votre équipage et "
 "à vos alliés un avantage tactique certain.\n"
 "Attention toutefois à ne pas oublier vos autres tâches."
@@ -2669,7 +2641,7 @@ msgstr ""
 #: src/screenComponents/hackingDialog.cpp:91
 msgctxt "hacking"
 msgid "Instructions"
-msgstr ""
+msgstr "Instructions"
 
 #: src/screenComponents/hackingDialog.cpp:138
 msgctxt "hacking"
@@ -2878,7 +2850,6 @@ msgid "[New input]"
 msgstr "Nouv. entrée"
 
 #: src/gui/hotkeyConfig.cpp:30
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Cinematic view"
 msgstr "Vue cinématique"
@@ -2889,10 +2860,9 @@ msgid "Toggle UI"
 msgstr "Activer/désactiver boutons"
 
 #: src/gui/hotkeyConfig.cpp:32
-#, fuzzy
 msgctxt "hotkey_Cinematic"
 msgid "Toggle callsigns"
-msgstr "Activer/désactiver les boucliers"
+msgstr "Afficher/cacher les noms"
 
 #: src/gui/hotkeyConfig.cpp:33
 msgctxt "hotkey_Cinematic"
@@ -2967,99 +2937,89 @@ msgstr "Incliner vers le haut"
 #: src/gui/hotkeyConfig.cpp:65
 msgctxt "hotkey_Topdown"
 msgid "Toggle UI"
-msgstr "Activer/désactiver boutons"
+msgstr "Activer/désactiver interface gestion"
 
 #: src/gui/hotkeyConfig.cpp:66
-#, fuzzy
 msgctxt "hotkey_Topdown"
 msgid "Toggle callsigns"
-msgstr "Activer/désactiver les boucliers"
+msgstr "Afficher/cacher les noms"
 
 #: src/gui/hotkeyConfig.cpp:67
 msgctxt "hotkey_Topdown"
 msgid "Camera lock"
-msgstr "Verrouillage caméra"
+msgstr "Verrouillage caméra vaisseaux joueur"
 
 #: src/gui/hotkeyConfig.cpp:68
 msgctxt "hotkey_Topdown"
 msgid "Cycle previous player ship"
-msgstr "Basculer vaisseau joueur précédent"
+msgstr "Basculer vaisseau verrouillé préc."
 
 #: src/gui/hotkeyConfig.cpp:69
 msgctxt "hotkey_Topdown"
 msgid "Cycle next player ship"
-msgstr "Basculer vaisseau joueur suivant"
+msgstr "Basculer vaisseau verrouillé suivant"
 
 #: src/gui/hotkeyConfig.cpp:70
 msgctxt "hotkey_Topdown"
 msgid "Pan up"
-msgstr "Défiler vers le haut"
+msgstr "Déplacer carte vers le haut"
 
 #: src/gui/hotkeyConfig.cpp:71
 msgctxt "hotkey_Topdown"
 msgid "Pan down"
-msgstr "Défiler vers le bas"
+msgstr "Déplacer carte vers le bas"
 
 #: src/gui/hotkeyConfig.cpp:72
 msgctxt "hotkey_Topdown"
 msgid "Pan left"
-msgstr "Défiler vers la gauche"
+msgstr "Déplacer carte vers la gauche"
 
 #: src/gui/hotkeyConfig.cpp:73
 msgctxt "hotkey_Topdown"
 msgid "Pan right"
-msgstr "Défiler vers la droite"
+msgstr "Déplacer carte vers la droite"
 
 #: src/gui/hotkeyConfig.cpp:356
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Pause game"
 msgstr "Mettre le jeu en pause"
 
 #: src/gui/hotkeyConfig.cpp:357
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Show in-game help"
 msgstr "Afficher l'aide en jeu"
 
 #: src/gui/hotkeyConfig.cpp:358
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Return to ship options menu"
 msgstr "Retourner au menu vaisseau/postes"
 
 #: src/gui/hotkeyConfig.cpp:359
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Zoom in on zoomable screens"
-msgstr "Zoomer sur stations zoomables"
+msgstr "Zoomer sur écrans zoomables"
 
 #: src/gui/hotkeyConfig.cpp:360
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Zoom out on zoomable screens"
-msgstr "Dézoomer sur stations zoomables"
+msgstr "Dézoomer sur écrans zoomables"
 
 #: src/gui/hotkeyConfig.cpp:361
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Broadcast voice chat to server"
 msgstr "Diffuser chat vocal sur le serveur"
 
 #: src/gui/hotkeyConfig.cpp:362
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Broadcast voice chat to ship"
 msgstr "Diffuser chat vocal sur le vaisseau"
 
 #: src/gui/hotkeyConfig.cpp:363
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Fullscreen toggle"
-msgstr "Activer plein écran"
+msgstr "Activer/Désactiver le plein écran"
 
 #: src/gui/hotkeyConfig.cpp:364
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Show FPS"
 msgstr "Afficher les FPS"
@@ -3068,27 +3028,26 @@ msgstr "Afficher les FPS"
 #, fuzzy
 msgctxt "hotkey_General"
 msgid "Show debug timing"
-msgstr "Afficher le graphique de débogage"
+msgstr "Afficher graphique débogage temps"
 
 #: src/gui/hotkeyConfig.cpp:367
 #, fuzzy
 msgctxt "hotkey_General"
 msgid "Show debug colliders"
-msgstr "Afficher le graphique de débogage"
+msgstr "Afficher les collisions de débogage"
 
 #: src/gui/hotkeyConfig.cpp:372
 msgctxt "hotkey_General"
 msgid "Custom button slot {number}"
-msgstr ""
+msgstr "Emplacement bouton personnalisé {number}"
 
 #: src/gui/hotkeyConfig.cpp:376 src/gui/hotkeyConfig.cpp:377
 #: src/gui/hotkeyConfig.cpp:378 src/gui/hotkeyConfig.cpp:379
 #: src/gui/hotkeyConfig.cpp:380 src/gui/hotkeyConfig.cpp:381
 #: src/gui/hotkeyConfig.cpp:382
-#, fuzzy
 msgctxt "hotkey_menu"
 msgid "Crew screens"
-msgstr "Vues de l'espace en 3D"
+msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:376
 #, fuzzy
@@ -3245,12 +3204,12 @@ msgstr "Eteindre les moteurs"
 #: src/gui/hotkeyConfig.cpp:404
 msgctxt "hotkey_Helms"
 msgid "Max impulse"
-msgstr "Vitesse max des moteurs avant :"
+msgstr "Vitesse max des moteurs avant"
 
 #: src/gui/hotkeyConfig.cpp:405
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr "Vitesse max des moteurs arrière :"
+msgstr "Vitesse max des moteurs arrière"
 
 #: src/gui/hotkeyConfig.cpp:406
 msgctxt "hotkey_Helms"
@@ -3268,28 +3227,24 @@ msgid "Zero warp"
 msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:409
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Request warp 1"
-msgstr "Amarrage"
+msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:410
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Request warp 2"
-msgstr "Amarrage"
+msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:411
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Request warp 3"
-msgstr "Amarrage"
+msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:412
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Request warp 4"
-msgstr "Amarrage"
+msgstr ""
 
 #: src/gui/hotkeyConfig.cpp:413
 msgctxt "hotkey_Helms"
@@ -3300,13 +3255,13 @@ msgstr ""
 #, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase warp request"
-msgstr "Augmenter fréquence des faisceaux"
+msgstr "Augmenter ..."
 
 #: src/gui/hotkeyConfig.cpp:415
 #, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease warp request"
-msgstr "Réduire la fréquence des faisceaux"
+msgstr "Réduire ..."
 
 #: src/gui/hotkeyConfig.cpp:416
 #, fuzzy
@@ -3315,9 +3270,10 @@ msgid "Set warp request (joystick)"
 msgstr "Régler puiss. vit. lumière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:417
+#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Amarrer/désamarrer"
+msgstr "Amarrer/annuler/désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:418
 msgctxt "hotkey_Helms"
@@ -3394,7 +3350,7 @@ msgstr "Activer le saut (téléportation)"
 #: src/gui/hotkeyConfig.cpp:431
 msgctxt "hotkey_Helms"
 msgid "Abort jump"
-msgstr ""
+msgstr "Annuler Saut"
 
 #: src/gui/hotkeyConfig.cpp:432
 msgctxt "hotkey_Helms"
@@ -3709,13 +3665,13 @@ msgstr "Sélectionner les boucliers arrière"
 #, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Select next system"
-msgstr "Sélectionner le réacteur"
+msgstr "Sélectionnez le système suivant"
 
 #: src/gui/hotkeyConfig.cpp:495
 #, fuzzy
 msgctxt "hotkey_Engineering"
 msgid "Select previous system"
-msgstr "Sélectionner le réacteur"
+msgstr "Sélectionner le système précédent"
 
 #: src/gui/hotkeyConfig.cpp:496
 msgctxt "hotkey_Engineering"
@@ -3949,21 +3905,19 @@ msgid "Copy to clipboard"
 msgstr "Copier dans le presse-papier"
 
 #: src/gui/hotkeyConfig.cpp:553
-#, fuzzy
 msgctxt "hotkey_GM"
 msgid "Show callsigns (GM)"
-msgstr "Afficher noms vaisseaux (spect.)"
+msgstr "Afficher les noms"
 
 #: src/gui/hotkeyConfig.cpp:554
 msgctxt "hotkey_GM"
 msgid "Show health bars (GM)"
-msgstr ""
+msgstr "Afficher les barres de santé"
 
 #: src/gui/hotkeyConfig.cpp:557
-#, fuzzy
 msgctxt "hotkey_Spectator"
 msgid "Show callsigns (spectator)"
-msgstr "Afficher noms vaisseaux (spect.)"
+msgstr "Afficher/cacher les noms"
 
 #~ msgctxt "database direction"
 #~ msgid "Front"
