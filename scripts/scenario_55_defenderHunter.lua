@@ -3375,7 +3375,11 @@ function neutralComms()
 			setCommsMessage(_("trade-comms", "Yes?"))
 			-- Offer destination information
 			addCommsReply(_("trade-comms", "Where are you headed?"), function()
-				setCommsMessage(comms_target.target:getCallSign())
+				if comms_target.target ~= nil and comms_target.target:isValid() then
+					setCommsMessage(comms_target.target:getCallSign())
+				else
+					setCommsMessage(_("shipAssist-comms", "I no longer have a destination."))
+				end
 				addCommsReply(_("Back"), commsShip)
 			end)
 			-- Offer to trade goods if goods or equipment freighter
@@ -3452,7 +3456,11 @@ function neutralComms()
 				if not comms_source:takeReputationPoints(destRep) then
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				else
-					setCommsMessage(comms_target.target:getCallSign())
+					if comms_target.target ~= nil and comms_target.target:isValid() then
+						setCommsMessage(comms_target.target:getCallSign())
+					else
+						setCommsMessage(_("shipAssist-comms", "I no longer have a destination."))
+					end
 				end
 				addCommsReply(_("Back"), commsShip)
 			end)
@@ -6226,7 +6234,7 @@ function endStatistics()
 	survivedNeutralStations = 0
 	for idx, station in pairs(originalStationList) do
 		tp = getPlayerShip(-1)
-		if tp ~= nil and tp:isValid() then
+		if tp ~= nil and tp:isValid() and station:isValid() then
 			if station:isFriendly(tp) then
 				if station:isValid() then
 					survivedStations = survivedStations + 1
