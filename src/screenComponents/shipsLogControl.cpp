@@ -75,12 +75,14 @@ void ShipsLog::onDraw(sp::RenderTarget& renderer)
     }
 }
 
-bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+void ShipsLog::toggle()
 {
     open = !open;
-    if (open)
-        setSize(getSize().x, 800);
-    else
-        setSize(getSize().x, 50);
+    setSize(getSize().x, open ? 800.0f : 50.0f);
+}
+
+bool ShipsLog::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
+{
+    toggle();
     return true;
 }
