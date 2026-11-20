@@ -1,0 +1,2454 @@
+# Scenario name
+msgid "Defenders or Pirates"
+msgstr ""
+
+# Scenario description
+msgid ""
+"Amass reputation by destroying enemies or grabbing and selling cargo\n"
+"\n"
+"Designed for 1-32 player ships. Duration: 45 minutes. Features many "
+"nonstandard player ships\n"
+"\n"
+"Version 1\n"
+"\n"
+"USN Discord: https://discord.gg/PntGG3a where you can join a game online. "
+"There's usually one every weekend. All experience levels are welcome."
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Playership"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configure what player ship to start with. Default is random"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Random"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Select a player ship at random from the list of available starting player "
+"ships"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Amalgam"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 4 front beams, broadside missiles, no HVLIs"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Atlantis"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 2 front beams, broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Atlantis II"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 2 front beams, angled missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Butler"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, 2 wide front beams, front and rear missiles, no mines"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Caretaker"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, front missiles, 2 front beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Crucible"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, front and broadside missiles, 2 front beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Cruiser"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 2 front beams, front slightly angled missiles, no HVLIs"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Deimos"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, warp, 3 front beams, front and broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Era"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, warp, 2 front beams, rear missile tube, no EMPs"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Flavia"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate (converted freighter), warp, 2 rear beams, rear missile tube, no EMPs"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Flavia 2C"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate (converted freighter), warp, 2 front beams, broadside and rear "
+"missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Hathcock"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, 4 front beams, broadside missiles, no mines"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Interlock"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, 6 beams (5 front, 1 rear), broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Mantis"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, front and broadside missiles, 2 front beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Maverick"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, 6 beams (5 front, 1 rear), broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Maverick XP"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 1 strong wide angle beam, broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Midian"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, 3 beams (2 front, 1 rear), front and broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Missile Cruiser"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, broadside and front missiles, no beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Moose"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Corvette, jump, front and broadside missiles, 4 beams (3 front, 1 rear), "
+"ships can dock to Moose"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Mortar"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 6 front beams, broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Nautilus"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, 3 rear mine tubes, 2 front beams, only mines"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Nusret"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, angled missiles, 2 front beams, only homing and mines"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Ogre"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Dreadnaught, jump, 12 beams, 12 missile tubes, only homing"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Peacock"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, 4 front beams, front and broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Phobos M3P"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, warp, 2 front beams, front missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Piranha"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, broadside missiles, no beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Proto-Atlantis"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, jump, broadside and front missiles, 2 front beams"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Raven"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Corvette, warp, 2 front beams, angled missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Repulse"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate, jump, 2 wide broadside beams, 1 front and 1 rear tube, only HVLI "
+"and homing"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Roc"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate, warp, front and broadside missiles, 3 beams (2 front, 1 wide rear)"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Rodent"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate, jump, 4 beams (2 front, 2 short wide angled front/rear), front and "
+"broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Saipan"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Corvette, jump, front and broadside missiles, 3 beams (2 front, 1 rear), "
+"ships can dock to Saipan"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Scatter"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Frigate, jump, 4 beams (3 front, 1 rear), broadside missiles"
+msgstr ""
+
+msgctxt "Playership"
+msgid "Squid"
+msgstr ""
+
+msgctxt "Playership"
+msgid ""
+"Frigate, jump, broadside and front missiles including two rear mine tubes, 1 "
+"front beam"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Enemies"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures strength and/or number of enemies in this scenario"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Fewer or weaker enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Normal number or strength of enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "More or stronger enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Extreme"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Much stronger, many more enemies"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Enemies"
+msgid "Insanely strong and/or inordinately large numbers of enemies"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Murphy"
+msgstr ""
+
+msgctxt "setting"
+msgid "Configures the perversity of the universe according to Murphy's law"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Easy"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more in your favor"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are normal"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Hard"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are more against you"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Extreme"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Random factors are severely against you"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "Quixotic"
+msgstr ""
+
+msgctxt "Murphy"
+msgid "No need for paranoia, the universe *is* out to get you"
+msgstr ""
+
+# Scenario setting
+msgctxt "setting"
+msgid "Respawn"
+msgstr ""
+
+msgctxt "setting"
+msgid ""
+"Configures whether the player ship or ships automatically respawn in game or "
+"not and how often if they do automatically respawn"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "None"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Player ships do not automatically respawn"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "One"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Player ships will automatically respawn once"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Two"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Player ships will automatically respawn twice"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Three"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Player ships will automatically respawn thrice"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Infinite"
+msgstr ""
+
+msgctxt "Respawn"
+msgid "Player ships will automatically respawn forever"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:92 scripts/scenario_23_pirate.lua:103
+msgctxt "stationServices-comms"
+msgid "reactor"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:93
+msgctxt "stationServices-comms"
+msgid "beam weapons"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:94
+msgctxt "stationServices-comms"
+msgid "missile system"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:95 scripts/scenario_23_pirate.lua:106
+msgctxt "stationServices-comms"
+msgid "maneuver"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:96
+msgctxt "stationServices-comms"
+msgid "impulse engines"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:97
+msgctxt "stationServices-comms"
+msgid "warp drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:98
+msgctxt "stationServices-comms"
+msgid "jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:99 scripts/scenario_23_pirate.lua:110
+msgctxt "stationServices-comms"
+msgid "front shield"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:100 scripts/scenario_23_pirate.lua:111
+msgctxt "stationServices-comms"
+msgid "rear shield"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:104
+msgctxt "stationServices-comms"
+msgid "beams"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:105
+msgctxt "stationServices-comms"
+msgid "missiles"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:107
+msgctxt "stationServices-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:108
+msgctxt "stationServices-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:109
+msgctxt "stationServices-comms"
+msgid "jump"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:121
+msgctxt "trade-comms"
+msgid "food"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:122
+msgctxt "trade-comms"
+msgid "medicine"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:123
+msgctxt "trade-comms"
+msgid "luxury"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:124
+msgctxt "trade-comms"
+msgid "cobalt"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:125
+msgctxt "trade-comms"
+msgid "dilithium"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:126
+msgctxt "trade-comms"
+msgid "gold"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:127
+msgctxt "trade-comms"
+msgid "nickel"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:128
+msgctxt "trade-comms"
+msgid "platinum"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:129
+msgctxt "trade-comms"
+msgid "tritanium"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:130
+msgctxt "trade-comms"
+msgid "autodoc"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:131
+msgctxt "trade-comms"
+msgid "android"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:132
+msgctxt "trade-comms"
+msgid "battery"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:133
+msgctxt "trade-comms"
+msgid "beam"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:134
+msgctxt "trade-comms"
+msgid "circuit"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:135
+msgctxt "trade-comms"
+msgid "communication"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:136
+msgctxt "trade-comms"
+msgid "filament"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:137
+msgctxt "trade-comms"
+msgid "impulse"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:138
+msgctxt "trade-comms"
+msgid "lifter"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:139
+msgctxt "trade-comms"
+msgid "nanites"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:140
+msgctxt "trade-comms"
+msgid "optic"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:141
+msgctxt "trade-comms"
+msgid "repulsor"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:142
+msgctxt "trade-comms"
+msgid "robotic"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:143
+msgctxt "trade-comms"
+msgid "sensor"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:144
+msgctxt "trade-comms"
+msgid "shield"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:145
+msgctxt "trade-comms"
+msgid "software"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:146
+msgctxt "trade-comms"
+msgid "tractor"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:147
+msgctxt "trade-comms"
+msgid "transporter"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:148
+msgctxt "trade-comms"
+msgid "warp"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:441
+msgctxt "msgMainscreen"
+msgid "Noble Defenders"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1137
+msgctxt "buttonGM"
+msgid "Random"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1138
+msgctxt "buttonGM"
+msgid "Fighters"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1139
+msgctxt "buttonGM"
+msgid "Chasers"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1140
+msgctxt "buttonGM"
+msgid "Frigates"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1141
+msgctxt "buttonGM"
+msgid "Beamers"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1142
+msgctxt "buttonGM"
+msgid "Missilers"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1143
+msgctxt "buttonGM"
+msgid "Adders"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1144
+msgctxt "buttonGM"
+msgid "Non-DB"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1145
+msgctxt "buttonGM"
+msgid "Drones"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1149
+msgctxt "scienceDescription-buoy"
+msgid "Come to Billy Bob's for the best food in the sector"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1150
+msgctxt "scienceDescription-buoy"
+msgid "It's never too late to buy life insurance"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1151
+msgctxt "scienceDescription-buoy"
+msgid "You'll feel better in an Adder Mark 9"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1152
+msgctxt "scienceDescription-buoy"
+msgid ""
+"Melinda's Mynock Management service: excellent rates, satisfaction guaranteed"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1153
+msgctxt "scienceDescription-buoy"
+msgid "Visit Repulse shipyards for the best deals"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1154
+msgctxt "scienceDescription-buoy"
+msgid "Fresh fish! We catch, you buy!"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1155
+msgctxt "scienceDescription-buoy"
+msgid "Get your fuel cells at Mariana's Market"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1156
+msgctxt "scienceDescription-buoy"
+msgid "Find a special companion. All species available"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1157
+msgctxt "scienceDescription-buoy"
+msgid "Feeling down? Robotherapist is there for you"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1158
+msgctxt "scienceDescription-buoy"
+msgid "30 days, 30 kilograms, guaranteed"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1159
+msgctxt "scienceDescription-buoy"
+msgid "Be sure to drink your Ovaltine"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1160
+msgctxt "scienceDescription-buoy"
+msgid "Need a personal upgrade? Contact Celine's Cybernetic Implants"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1161
+msgctxt "scienceDescription-buoy"
+msgid "Try our asteroid dust diet weight loss program"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1162
+msgctxt "scienceDescription-buoy"
+msgid "Best tasting water in the quadrant at Willy's Waterway"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1163
+msgctxt "scienceDescription-buoy"
+msgid "Amazing shows every night at Lenny's Lounge"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1164
+msgctxt "scienceDescription-buoy"
+msgid "Get all your vaccinations at Fred's Pharmacy. Pick up some snacks, too"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1165
+msgctxt "scienceDescription-buoy"
+msgid "Tip: make lemons an integral part of your diet"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1166
+msgctxt "scienceDescription-buoy"
+msgid "Visit the Proboscis shop for all your specialty probe needs"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1189
+msgctxt "scienceDescription-star"
+msgid "Yellow, spectral type G8 III"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1190
+msgctxt "scienceDescription-star"
+msgid ""
+"Yellow, spectral type G8 III, giant, surface temperature 4,833 K, 11 solar "
+"radii"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1194
+msgctxt "scienceDescription-star"
+msgid "Classification G5 II"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1195
+msgctxt "scienceDescription-star"
+msgid "Classification G5 II, bright giant, possible binary"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1199
+msgctxt "scienceDescription-star"
+msgid "Classification K0 V or G9 V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1200
+msgctxt "scienceDescription-star"
+msgid "Classification K0 V or G9 V, main sequence dwarf, 84% of Sol mass"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1204
+msgctxt "scienceDescription-star"
+msgid "Classification A7 Ib"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1205
+msgctxt "scienceDescription-star"
+msgid "Classification A7 Ib, supergiant, temperature 7,500 K, 7xSol mass"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1209
+msgctxt "scienceDescription-star"
+msgid "Classification A1 Vn"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1210
+msgctxt "scienceDescription-star"
+msgid "Classification A1 Vn, type A main sequence, binary, nebulous"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1214
+msgctxt "scienceDescription-star"
+msgid "Classification K5V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1215
+msgctxt "scienceDescription-star"
+msgid "Classification K5V, orange, temperature 4,649 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1219
+msgctxt "scienceDescription-star"
+msgid "Classification G2 IV"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1220
+msgctxt "scienceDescription-star"
+msgid "Classification G2 IV, 113% of Sol mass, 185% Sol radius"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1224
+msgctxt "scienceDescription-star"
+msgid "Classification A3 IV-V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1225
+msgctxt "scienceDescription-star"
+msgid "Classification A3 IV-V, binary, 2.6xSol mass"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1229
+msgctxt "scienceDescription-star"
+msgid "Classification B2 III or B2 V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1230
+msgctxt "scienceDescription-star"
+msgid "Classification B2 III or B2 V, 8.6xSol mass, temperature 22,000 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1234
+msgctxt "scienceDescription-star"
+msgid "Classification G8 IIIb Fe-0.5"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1235
+msgctxt "scienceDescription-star"
+msgid "Classification G8 IIIb Fe-0.5, yellow, red clump giant"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1239
+msgctxt "scienceDescription-star"
+msgid "Classification F5 IV-V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1240
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification F5 IV-V, binary, F-type subgiant and F-type main sequence"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1244
+msgctxt "scienceDescription-star"
+msgid "Classification B7 III"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1245
+msgctxt "scienceDescription-star"
+msgid "Classification B7 III, B-class giant, double star, 5xSol mass"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1249
+msgctxt "scienceDescription-star"
+msgid "Classification K0"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1250
+msgctxt "scienceDescription-star"
+msgid "Classification K0, orange-red, temperature ~4,000 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1254
+msgctxt "scienceDescription-star"
+msgid "Pulsar or Neutron star"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1255
+msgctxt "scienceDescription-star"
+msgid "Pulsar or Neutron star, gamma ray source"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1259
+msgctxt "scienceDescription-star"
+msgid "Classification G2V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1260
+msgctxt "scienceDescription-star"
+msgid "Classification G2V, yellow, temperature 5,571 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1264
+msgctxt "scienceDescription-star"
+msgid "Classification G1V(w)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1265
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification G1V(w), 1.24xSol mass, 7th magnitude G-type main sequence"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1269
+msgctxt "scienceDescription-star"
+msgid "Classification F3 III"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1270
+msgctxt "scienceDescription-star"
+msgid "Classification F3 III, F-type giant, temperature 6,309 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1274
+msgctxt "scienceDescription-star"
+msgid "Classification K1 IIIb"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1275
+msgctxt "scienceDescription-star"
+msgid "Classification K1 IIIb, giant, temperature 4,768 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1279
+msgctxt "scienceDescription-star"
+msgid "Classification G0V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1280
+msgctxt "scienceDescription-star"
+msgid "Classification G0V, G-type giant, temperature 5,741 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1284
+msgctxt "scienceDescription-star"
+msgid "Classification K2IV-V or K3V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1285
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification K2IV-V or K3V, orange, K-type main sequence, temperature "
+"5,030 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1289
+msgctxt "scienceDescription-star"
+msgid "Classification G5"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1290
+msgctxt "scienceDescription-star"
+msgid "Classification G5, yellow, luminosity 7.7"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1294
+msgctxt "scienceDescription-star"
+msgid "Classification M4.5"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1295
+msgctxt "scienceDescription-star"
+msgid "Classification M4.5, Red Dwarf, luminosity .0035, temperature 3,111 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1299
+msgctxt "scienceDescription-star"
+msgid "Classification F7V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1300
+msgctxt "scienceDescription-star"
+msgid "Classification F7V, yellow-white, luminosity 1.9, temperature 6,440 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1304
+msgctxt "scienceDescription-star"
+msgid "Classification F8V"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1305
+msgctxt "scienceDescription-star"
+msgid "Classification F8V, luminosity 2.9, temperature 6,122 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1309
+msgctxt "scienceDescription-star"
+msgid "Classification B"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1310
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification B-type subgiant, blue-white, luminosity 600, temperature "
+"13,696 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1314 scripts/scenario_23_pirate.lua:1329
+msgctxt "scienceDescription-star"
+msgid "Classification G"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1315
+msgctxt "scienceDescription-star"
+msgid "Classification G, magnitude 12.26, temperature 5,580 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1319 scripts/scenario_23_pirate.lua:1324
+msgctxt "scienceDescription-star"
+msgid "Classification K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1320
+msgctxt "scienceDescription-star"
+msgid "Classification K2.5 III, K-type giant, temperature 4,244 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1325
+msgctxt "scienceDescription-star"
+msgid "Classification K5V, K-type main sequence, temperature 4,782 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1330
+msgctxt "scienceDescription-star"
+msgid "Classification G8 III, evolved G-type giant, temperature 4,790 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1334 scripts/scenario_23_pirate.lua:1339
+msgctxt "scienceDescription-star"
+msgid "Classification A"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1335
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification A1 Vn, white-hued, A-type main sequence, temperature 9,911 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1340
+msgctxt "scienceDescription-star"
+msgid ""
+"Classification A4 V, white-hued, A-type main sequence, temperature 8,296 K"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1354 scripts/scenario_23_pirate.lua:1363
+#: scripts/scenario_23_pirate.lua:1372
+msgctxt "scienceDescription-planet"
+msgid "Class J"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1355
+msgctxt "scienceDescription-planet"
+msgid ""
+"Class J, Jovian, source of hydrogen, helium, and a large variety of exotic "
+"gases"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1364
+msgctxt "scienceDescription-planet"
+msgid ""
+"Class J, Neptunian, source of hydrogen, helium, ammonia, methane, and water"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1373
+msgctxt "scienceDescription-planet"
+msgid "Class J, Neptunian, composed of hydrogen, helium, methane, water"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1497
+msgctxt "orders-comms"
+msgid "Reach your reputation goal."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1501
+msgctxt "buttonGM"
+msgid "+Spawn Ship(s)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1757
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "%s has been destroyed."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:1766
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "The %s has respawned %s to replace %s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2726 scripts/scenario_23_pirate.lua:3110
+#: scripts/scenario_23_pirate.lua:3118 scripts/scenario_23_pirate.lua:3124
+msgctxt "scienceDescription-nebula"
+msgid "Nebula"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2958 scripts/scenario_23_pirate.lua:2970
+#: scripts/scenario_23_pirate.lua:2975 scripts/scenario_23_pirate.lua:2978
+#: scripts/scenario_23_pirate.lua:2981 scripts/scenario_23_pirate.lua:2984
+#: scripts/scenario_23_pirate.lua:2987
+msgctxt "scienceDescription-supplyDrop"
+msgid "Supply Drop"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2958
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%i energy boost supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2970
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%i %s supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2975
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%.1f%% coolant supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2978
+msgctxt "scienceDescription-supplyDrop"
+msgid "Robotic repair crew supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2981
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%i probes supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2984
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%.1f hull repair points supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:2987
+#, lua-format
+msgctxt "scienceDescription-supplyDrop"
+msgid "%.1fK jump drive charge supply drop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3022
+msgctxt "scienceDescription-warpJammer"
+msgid "Warp jammer"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3022
+#, lua-format
+msgctxt "scienceDescription-warpJammer"
+msgid "Warp jammer. Operated by %s. Placed by station %s. Identifier: %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3048
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3050
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s, %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3080
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "Sensor Record: %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3082
+#, lua-format
+msgctxt "scienceDescription-buoy"
+msgid "%s; %s %s %s in %s carrying %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3090
+msgctxt "scienceDescription-buoy"
+msgid "No data recorded"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3092 scripts/scenario_23_pirate.lua:3103
+msgctxt "scienceDescription-buoy"
+msgid "Automated data gathering device"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3169
+msgctxt "msgScience"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3171
+msgctxt "msgOperations"
+msgid "The unscanned artifact we just picked up has fried our scanners"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3179
+#, lua-format
+msgctxt "scienceDescription-artifact"
+msgid ""
+"Source of emanations interfering with long range sensors. Range:%.1fu Impact:"
+"%.1fu"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3180
+msgctxt "scienceDescription-artifact"
+msgid "Source of unusual emanations"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3191
+msgctxt "orders-comms"
+msgid "Current orders?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3192
+msgctxt "orders-comms"
+msgid "What are my current orders?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3193
+#, lua-format
+msgctxt "orders-comms"
+msgid "Current orders for %s?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3194
+msgctxt "orders-comms"
+msgid "Remind me of our current orders, please"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3202
+msgctxt "orders-comms"
+msgid "Visit lounge"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3203
+msgctxt "orders-comms"
+msgid ""
+"When you enter the lounge, you see a guy sitting at the bar with an eye "
+"patch, a peg leg, a cutlass at his belt, a three-cornered hat and a green "
+"bird on his shoulder."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3204
+msgctxt "orders-comms"
+msgid "Ask about the eye patch, hat, peg leg and bird"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3205
+#, lua-format
+msgctxt "pirate-comms"
+msgid ""
+"Why, I'm a pirate, matey! Marcus the pirate! Actually, I'm just playing the "
+"part of a pirate in the live production of 'Caribbean Pirates' here on %s. "
+"I'm on a ten-minute rehearsal break. This stuff I'm wearing is my costume. "
+"The peg leg is a hologram and the bird is a robot. I think the bird has "
+"better lines than I do.\n"
+"\n"
+"If you want to talk to real modern pirates, that couple over there at that "
+"table are the real deal. They recently retired from a successful career as "
+"pirates, or so I hear. This will probably be the only time you can talk to "
+"them."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3207
+msgctxt "pirate-comms"
+msgid "Talk to pirate couple"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3208
+msgctxt "pirate-comms"
+msgid ""
+"Hi there, take a seat with us. Marcus signaled us that you've got some kind "
+"of interest in pirates. Is that right?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3209
+msgctxt "pirate-comms"
+msgid "Yes, I want to know about pirates"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3210
+msgctxt "pirate-comms"
+msgid ""
+"Well, we can tell you about it. Not that we would ever engage in such "
+"practices ourselves."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3211
+msgctxt "pirate-comms"
+msgid "Of course. How would one get loot from another ship?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3212
+msgctxt "pirate-comms"
+msgid ""
+"Loot?! We'd prefer to call that excess cargo. [they laugh at their own "
+"joke]\n"
+"\n"
+"Several things have to come together in order to relieve them of their "
+"excess cargo."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3213
+msgctxt "pirate-comms"
+msgid "What things have to come together?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3214
+msgctxt "pirate-comms"
+msgid ""
+"Things your ship has to do and things that have to happen on the ship you're "
+"liberating excess cargo from. Your ship has to be within 3 units of the "
+"other ship, it has to be at a complete stop, it has to have the shields "
+"down, it has to have room in the cargo bay, and it has to have at least 50 "
+"units of energy per cargo item to operate the transporters that grab the "
+"cargo."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3215
+msgctxt "pirate-comms"
+msgid "What about the other ship?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3216
+msgctxt "pirate-comms"
+msgid ""
+"Assuming you haven't destroyed it (a common mistake with inexperienced "
+"pirates), the other ship has to be completely immobile and their shields "
+"have to be down. It also helps if they actually have excess cargo to "
+"liberate."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3217
+msgctxt "pirate-comms"
+msgid "How do we know if they have any cargo?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3218
+msgctxt "pirate-comms"
+msgid ""
+"Sometimes you can just ask them. Otherwise you can double scan them. You "
+"should see the cargo manifest in the ship description. You may have to click "
+"the tactical widget or the systems widget on the science console to see the "
+"description."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3219
+msgctxt "pirate-comms"
+msgid "How do we get them to stop?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3220
+msgctxt "pirate-comms"
+msgid ""
+"Your weapons officer can focus beams on their impulse engines. Once they're "
+"in the negatives for their impulse engines, they won't be able to move. If "
+"you've double scanned them, your science officer can check the status of "
+"their impulse engines by clicking the tactical or description widget and "
+"selecting systems.\n"
+"\n"
+"Now, some freighters have jump drives. You may need to disable those, too. "
+"If you don't have beams, you have to use your missiles very carefully to "
+"keep from destroying them altogether. You can't get cargo once they're "
+"destroyed."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3221
+msgctxt "pirate-comms"
+msgid "How do we get their shields down?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3222
+msgctxt "pirate-comms"
+msgid ""
+"First, shoot them down, then target the applicable shield generator to keep "
+"them down."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3223
+msgctxt "pirate-comms"
+msgid "Is that it?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3224
+#, lua-format
+msgctxt "pirate-comms"
+msgid ""
+"Once you meet all those requirements, your Relay or Operations officer "
+"should see buttons to get cargo from the ship.\n"
+"\n"
+"Once you go down this path, there's no going back. If you stick to "
+"liberating cargo from enemies of the %s, you'll only be called Licensed "
+"Privateers. Loot neutrals or friendlies and you'll be labeled Pirates."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3225
+msgctxt "pirate-comms"
+msgid "What do we do with the excess cargo?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3226
+msgctxt "pirate-comms"
+msgid ""
+"Sell it to stations that want to buy it. In fact, you should identify what "
+"stations want what goods before you start liberating excess cargo from "
+"innocent freighters."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3227
+msgctxt "pirate-comms"
+msgid "How do we find out what stations want goods?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3228
+msgctxt "pirate-comms"
+msgid ""
+"Talk to them. Near the end of their status report, they'll say what goods "
+"they sell and what goods they'll buy."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3229
+msgctxt "pirate-comms"
+msgid "Thanks for your help"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3230
+msgctxt "pirate-comms"
+msgid ""
+"Don't mention it\n"
+"\n"
+"...to anyone...\n"
+"\n"
+"\n"
+"   ---EVER---"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3242
+msgctxt "pirate-comms"
+msgid "No, I'm not interested in pirates"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3243
+msgctxt "pirate-comms"
+msgid "Suit yourself. Good luck."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3250 scripts/scenario_23_pirate.lua:3416
+#: scripts/scenario_23_pirate.lua:3422 scripts/scenario_23_pirate.lua:3428
+#: scripts/scenario_23_pirate.lua:3450 scripts/scenario_23_pirate.lua:3452
+#: scripts/scenario_23_pirate.lua:3455 scripts/scenario_23_pirate.lua:3486
+#: scripts/scenario_23_pirate.lua:3516 scripts/scenario_23_pirate.lua:3520
+#: scripts/scenario_23_pirate.lua:3526 scripts/scenario_23_pirate.lua:3572
+#: scripts/scenario_23_pirate.lua:3574 scripts/scenario_23_pirate.lua:3601
+#: scripts/scenario_23_pirate.lua:3603 scripts/scenario_23_pirate.lua:3630
+#: scripts/scenario_23_pirate.lua:3632 scripts/scenario_23_pirate.lua:3634
+msgid "Back"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3257
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3258
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Optional orders:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3259
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"These orders are optional:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3260
+msgctxt "orders-comms"
+msgid ""
+"\n"
+"Not required:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3266
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to %s station %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3268
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Transport %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3274
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3276
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Deliver cargo for %s to station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3280
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3282
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"Pick up cargo for %s at station %s (defunct)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3291 scripts/scenario_23_pirate.lua:3297
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"%s\n"
+"%s (defunct)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3361
+msgctxt "station-comms"
+msgid "Connect to warp jammer"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3362
+msgctxt "station-comms"
+msgid "Which one would you like to connect to?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3407
+#, lua-format
+msgctxt "station-comms"
+msgid "(%i reputation)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3411
+#, lua-format
+msgctxt "station-comms"
+msgid "%s Automated warp jammer access menu"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3412
+msgctxt "station-comms"
+msgid "Reduce range to 1 unit for 1 minute"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3415 scripts/scenario_23_pirate.lua:3421
+#: scripts/scenario_23_pirate.lua:3427
+msgctxt "station-comms"
+msgid "Acknowledged. Range adjusted. Reset timer engaged."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3418
+msgctxt "station-comms"
+msgid "Reduce range by 50% for 2 minutes"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3424
+msgctxt "station-comms"
+msgid "Reduce range by 25% for 3 minutes"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3431 scripts/scenario_23_pirate.lua:3484
+#: scripts/scenario_23_pirate.lua:3518
+msgctxt "needRep-comms"
+msgid "Insufficient reputation"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3436
+msgctxt "station-comms"
+msgid ""
+"Why do I have to pay reputation to log in to some of these warp jammers?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3437
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"It's complicated. It depends on the relationships between the warp jammer "
+"owner, us, station %s and you, %s. The farther apart the relationship, the "
+"more reputation it costs to gain access. Do you want more details?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3438
+msgctxt "station-comms"
+msgid "Yes, please provide more details"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3439
+msgctxt "station-comms"
+msgid "These are the cases and their reputation costs:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3440
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is friendly to %s = no reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3441
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is neutral to %s = 5 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3442
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ friendly to %s and WJ is enemy to %s = 10 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3443
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is friendly to %s = 10 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3444
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is friendly to %s = 15 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3445
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3446
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is neutral to %s = 20 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3447
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ neutral to %s and WJ is enemy to %s = 25 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3448
+#, lua-format
+msgctxt "station-comms"
+msgid ""
+"%s\n"
+"    WJ enemy to %s and WJ is enemy to %s = 100 reputation."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3477
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Increase long range sensors by 5 units (%i rep)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3482
+msgctxt "upgrade-comms"
+msgid "Sensor range improved by five units"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3499
+msgctxt "upgrade-comms"
+msgid "Investigate pirate assistant AI"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3500
+msgctxt "upgrade-comms"
+msgid ""
+"There's an AI assistant available called Mr. Smee that is supposed to advise "
+"a ship's communication officer about the basic requirements of pirating "
+"things from other ships. It looks a bit shady. It probably won't be offered "
+"for long. Is this something you are interested in?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3501
+#, lua-format
+msgctxt "upgrade-comms"
+msgid "Yes, I'd like Mr. Smee (%i reputation)"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3523
+msgctxt "upgrade-comms"
+msgid "No. I've heard bad things about Mr. Smee"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3538
+msgctxt "upgrade-comms"
+msgid "Check on jump drive availability"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3539
+msgctxt "upgrade-comms"
+msgid ""
+"Jonathan Rogers, our resident engine systems specialist, has three jump "
+"drives not being used. He could install one of them on your ship. One is a "
+"Repulse Rabbit XR5, one is a Vesta UK41, and the third is a Ketrik Presence "
+"D8."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3547
+msgctxt "upgrade-comms"
+msgid "Tell me about the Repulse Rabbit XR5"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3551 scripts/scenario_23_pirate.lua:3580
+#: scripts/scenario_23_pirate.lua:3609
+msgctxt "upgrade-comms"
+msgid "comes fully"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3553 scripts/scenario_23_pirate.lua:3582
+#: scripts/scenario_23_pirate.lua:3611
+msgctxt "upgrade-comms"
+msgid "is not"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3555 scripts/scenario_23_pirate.lua:3584
+#: scripts/scenario_23_pirate.lua:3613
+msgctxt "upgrade-comms"
+msgid "but cannot be"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3557 scripts/scenario_23_pirate.lua:3586
+#: scripts/scenario_23_pirate.lua:3615
+msgctxt "upgrade-comms"
+msgid "and can be"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3559
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"The Repulse Rabbit XR5 has a long jump range of up to %i units, minimum jump "
+"range of %i units, %s charged, %s installed alongside your warp drive."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3560
+msgctxt "upgrade-comms"
+msgid "Install the Repulse Rabbit XR5 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3571
+msgctxt "upgrade-comms"
+msgid "Jonathan Rogers has installed a Repulse Rabbit XR5 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3576
+msgctxt "upgrade-comms"
+msgid "The Vesta UK41 sounds interesting"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3588
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"The Vesta UK41 has a long jump range of up to %i units, minimum jump range "
+"of %i units, %s charged, %s installed alongside your warp drive."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3589
+msgctxt "upgrade-comms"
+msgid "Install the Vesta UK41 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3600
+msgctxt "upgrade-comms"
+msgid "Jonathan Rogers has installed a Vesta UK41 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3605
+msgctxt "upgrade-comms"
+msgid "What do you know of the Ketrik Presence D8?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3617
+#, lua-format
+msgctxt "upgrade-comms"
+msgid ""
+"The Ketrik Presence D8 has a long jump range of up to %i units, minimum jump "
+"range of %i units, %s charged, %s installed alongside your warp drive."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3618
+msgctxt "upgrade-comms"
+msgid "Install the Ketrik Presence D8 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3629
+msgctxt "upgrade-comms"
+msgid "Jonathan Rogers has installed a Ketrik Presence D8 jump drive"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:3907
+#, lua-format
+msgctxt "tabHelms-id"
+msgid "%s %s in %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4412
+msgctxt "smee-msgRelay"
+msgid "Avast, me hearties."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4413
+msgctxt "smee-msgRelay"
+msgid "The pirate code's more like guidelines than actual rules."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4414
+msgctxt "smee-msgRelay"
+msgid "Where aarrrr they going?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4415
+msgctxt "smee-msgRelay"
+msgid "It's bad form to shoot a man in the middle of his cadenza."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4416
+msgctxt "smee-msgRelay"
+msgid "There's a bit of bravery in everyone, even if they don't know it."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4417
+msgctxt "smee-msgRelay"
+msgid "A good pirate never shows his true colors."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4418
+msgctxt "smee-msgRelay"
+msgid "It's not the size of the ship, but the captain's heart that matters."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4419
+msgctxt "smee-msgRelay"
+msgid ""
+"Always remember, laughter is the best medicine, especially when you're "
+"sailing through tough times."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4420
+msgctxt "smee-msgRelay"
+msgid "Not all treasure is silver and gold."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4421
+msgctxt "smee-msgRelay"
+msgid "Why join the navy if you can be a pirate?"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4422
+msgctxt "smee-msgRelay"
+msgid "Work like a captain, play like a pirate."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4423
+msgctxt "smee-msgRelay"
+msgid "May your blade always be wet and your powder dry."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4424
+msgctxt "smee-msgRelay"
+msgid "Ahoy matey! Let's trouble the water!"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4425
+msgctxt "smee-msgRelay"
+msgid "Shiver me timbers."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4426
+msgctxt "smee-msgRelay"
+msgid "Avast, ye scurvy dog."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4427
+msgctxt "smee-msgRelay"
+msgid "Batten down the hatches."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4428
+msgctxt "smee-msgRelay"
+msgid "Here be treasure, matey."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4429
+msgctxt "smee-msgRelay"
+msgid "Yo ho ho and a bottle of coolant."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4430
+msgctxt "smee-msgRelay"
+msgid "A merry life and a short one shall be my motto."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4431
+msgctxt "smee-msgRelay"
+msgid "Every generation welcomes the pirates from the last."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4432
+msgctxt "smee-msgRelay"
+msgid "When a pirate grows rich enough, they make him a prince."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4433
+msgctxt "smee-msgRelay"
+msgid "It is when pirates count their booty that they become mere thieves."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4434
+msgctxt "smee-msgRelay"
+msgid "Take what you can, give nothing back."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4435
+msgctxt "smee-msgRelay"
+msgid ""
+"In politics and trade, bruisers and pirates are of better promise than "
+"talkers and clerks."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4436
+msgctxt "smee-msgRelay"
+msgid "I am a man of fortune and must seek my fortune."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4437
+msgctxt "smee-msgRelay"
+msgid "In an honest service, there is thin commons, low wages, and hard labor."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4438
+msgctxt "smee-msgRelay"
+msgid ""
+"Revenge may sate your being, but don't misunderstand me. It's an end, not a "
+"beginning."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4439
+msgctxt "smee-msgRelay"
+msgid ""
+"Betrayin's all part of piratin'. If you don't know that, you're not even "
+"close to being a pirate."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4440
+msgctxt "smee-msgRelay"
+msgid "Aye, the sea whispers secrets only the brave dare to listen."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4441
+msgctxt "smee-msgRelay"
+msgid "Ye have the heart of a sea serpentcold and deep as the abyss itself."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4442
+msgctxt "smee-msgRelay"
+msgid "Weigh anchor! The dawn's light brings promise of plunder and glory."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4443
+msgctxt "smee-msgRelay"
+msgid ""
+"Let the sea's song guide us to untold riches, hidden where X marks the spot."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4444
+msgctxt "smee-msgRelay"
+msgid "Marooned by fate, saved by wit and willsuch is the pirate's plight."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4445
+msgctxt "smee-msgRelay"
+msgid ""
+"A chest of gold, a bottle of rum, and a sky alight with starspirate's "
+"paradise."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4446
+msgctxt "smee-msgRelay"
+msgid ""
+"Coolant's the fuel that stirs the soul and emboldens the spirit of adventure."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4447
+msgctxt "smee-msgRelay"
+msgid "A sword's edge and a cunning mind carve the path to treasures untold."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4448
+msgctxt "smee-msgRelay"
+msgid ""
+"Let no man be called a landlubber when the call of the ocean beckons his "
+"heart."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4449
+msgctxt "smee-msgRelay"
+msgid ""
+"The code of the sea is written in the blood of those who dare to defy it."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4450
+msgctxt "smee-msgRelay"
+msgid ""
+"Only in the dead of night, under the moon's watchful eye, do true pirates "
+"ply their trade."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4451
+msgctxt "smee-msgRelay"
+msgid ""
+"The call of the deep is a siren's song, luring the unwary to their doom or "
+"glory."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4452
+msgctxt "smee-msgRelay"
+msgid ""
+"In the shadow of the mast, we find solace in the brotherhood of outcasts."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4453
+msgctxt "smee-msgRelay"
+msgid ""
+"The gleam of treasure is not in its worth, but in the adventure it promises."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4454
+msgctxt "smee-msgRelay"
+msgid "Gold and glory, the twin sirens that lead us through peril to paradise."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4455
+msgctxt "smee-msgRelay"
+msgid ""
+"Let our laughter echo across the waves, a testament to the joy found in "
+"lawlessness."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4456
+msgctxt "smee-msgRelay"
+msgid ""
+"We are the shadows that slip through the night, the whisper of danger on the "
+"wind."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4548
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "We've stopped and %s has stopped."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4550
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid ""
+"We've stopped but %s hasn't. We can't get loot while they're moving. Shoot "
+"out their engines to make them stop."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4555
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s has stopped. We have to stop, too, if we're going to get some loot."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4558
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s and %s both have to be stopped if we're going to get loot from %s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4569
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s and %s have both stopped."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4571
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid ""
+"We're stopped and another ship has stopped, but %s, the closest cherry to be "
+"picked, has not stopped."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4575
+msgctxt "smee-msgRelay"
+msgid "We need to stop too if we want to get any loot."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4583
+msgctxt "smee-msgRelay"
+msgid "We can't loot any cargo because we have no room in our cargo hold."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4586
+msgctxt "smee-msgRelay"
+msgid "We've got room in our cargo hold for some loot."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4602
+msgctxt "smee-msgRelay"
+msgid "We have to take down at least one of their shields to get loot."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4607
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "At least one of %s's shield arcs is down."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4609
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s's shield is down."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4612
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s does not have any shields."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4619
+msgctxt "smee-msgRelay"
+msgid "We can't get loot if our shields are up."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4622
+msgctxt "smee-msgRelay"
+msgid "Our shields are down."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4653
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s has cargo and ordnance we could get:%s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4655
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s has cargo we could get:%s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4657
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s has ordnance we could get:%s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4661
+#, lua-format
+msgctxt "smee-msgRelay"
+msgid "%s has nothing we need or want."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4669
+msgctxt "smee-msgRelay"
+msgid "We need 50 energy per item of loot we want. Looting may fail."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4671
+msgctxt "smee-msgRelay"
+msgid ""
+"We've got 50 or more energy. We need 50 per item. Looting will probably "
+"succeed."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4676
+msgctxt "smee-msgRelay"
+msgid "There are no ships we can loot within three units."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4785
+msgctxt "msgRelay"
+msgid ""
+"Cannot get munitions because there is not enough energy to power the "
+"transporters. You need at least 50 energy."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4786
+msgctxt "msgOperations"
+msgid ""
+"Cannot get munitions because there is not enough energy to power the "
+"transporters. You need at least 50 energy."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4808
+msgctxt "msgRelay"
+msgid ""
+"Cannot get cargo because there is not enough energy to power the "
+"transporters. You need at least 50 energy."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4809
+msgctxt "msgOperations"
+msgid ""
+"Cannot get cargo because there is not enough energy to power the "
+"transporters. You need at least 50 energy."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4849 scripts/scenario_23_pirate.lua:4853
+msgctxt "msgMainscreen"
+msgid "Pirates"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4851
+msgctxt "msgMainscreen"
+msgid "Licensed Privateers"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4887
+msgctxt "msgRelay"
+msgid "Cannot get cargo because the cargo bay is full."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4888
+msgctxt "msgOperations"
+msgid "Cannot get cargo because the cargo bay is full."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4898 scripts/scenario_23_pirate.lua:4904
+msgctxt "scienceDescription"
+msgid "Manifest:"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4905
+msgctxt "scienceDescription"
+msgid "Manifest: empty"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4908 scripts/scenario_23_pirate.lua:4909
+msgctxt "scienceDescription"
+msgid "Commercial Freighter"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4966
+#, lua-format
+msgctxt "msgMainscreen"
+msgid "Reputation point goal: %s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4968
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"The %s ended with %s reputation points."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4970
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"The %s did not quite make it."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4972
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"You have been labeled %s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4974
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Deployed %s player ships."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4976
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Deployed one player ship."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4978
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Time spent: %s."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4979
+#, lua-format
+msgctxt "msgMainscreen"
+msgid ""
+"%s\n"
+"Enemies:%s Murphy:%s Respawn:%s"
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:4991
+#, lua-format
+msgctxt "orders-comms"
+msgid ""
+"Goal: Reach your reputation goal of %s reputation points. You're only "
+"loosely affiliated with the %s, so you don't have orders per se."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:5002
+#, lua-format
+msgctxt "goal-incCall"
+msgid ""
+"Your goal is to accumulate %s reputation points in %s minutes or less. You "
+"get reputation by killing enemies, completing missions or selling goods to "
+"stations. You can accumulate goods by trading or by taking (like pirates). "
+"Your call. Your reputation goal is set based on the number and capability of "
+"the player ships spawned along with the configuration options selected at "
+"the start by the game host."
+msgstr ""
+
+#: scripts/scenario_23_pirate.lua:5004
+#, lua-format
+msgctxt "goal-incCall"
+msgid "%s Visit us anytime in sector %s."
+msgstr ""
