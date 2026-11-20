@@ -2079,7 +2079,7 @@ function handleDockedState()
 				if comms_source:takeReputationPoints(replacement_cost) then
 					respawnCarrier()
 					setPlayers()
-					setComsMessage(_("station-comms","A replacement carrier has been provided"))
+					setCommsMessage(_("station-comms","A replacement carrier has been provided"))
 				else
 					setCommsMessage(_("needRep-comms", "Insufficient reputation"))
 				end
@@ -2732,7 +2732,7 @@ function commsMissionChanges()
 										comms_source.tube_size = comms_source.tube_size .. "M"
 									end
 									if tube_size == "large" then
-										comms_source.tube_size = p.tube_size .. "L"
+										comms_source.tube_size = comms_source.tube_size .. "L"
 									end
 								end
 							end
@@ -2762,7 +2762,7 @@ function commsMissionChanges()
 										comms_source.tube_size = comms_source.tube_size .. "M"
 									end
 									if tube_size == "large" then
-										comms_source.tube_size = p.tube_size .. "L"
+										comms_source.tube_size = comms_source.tube_size .. "L"
 									end
 								end
 							end

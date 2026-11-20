@@ -3784,7 +3784,7 @@ function jasmineExuariConversationTopics()
 			if nemesis_station:isValid() then
 				setCommsMessage(string.format(_("ship-comms","It's located in sector %s"),nemesis_station_sector))
 			else
-				setCommsmessage(string.format(_("ship-comms","It used to be located in sector %s, but it has since been destroyed. However, they may have launched the nova device before the station was destroyed."),nemesis_station_sector))
+				setCommsMessage(string.format(_("ship-comms","It used to be located in sector %s, but it has since been destroyed. However, they may have launched the nova device before the station was destroyed."),nemesis_station_sector))
 			end
 			addCommsReply(_("ship-comms","Back to Jasmine topics of conversation"),function()
 				jasmineTalksAboutExuari(_("ship-comms","Do you need to know anything else about the Exuari?"))

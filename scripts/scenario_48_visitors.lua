@@ -6105,7 +6105,7 @@ function healthCheck(delta)
 						crewFate(p,fatalityChance)
 					end
 				else	--no repair crew left
-					if random(1,100) <= (4 - dificulty) then
+					if random(1,100) <= (4 - difficulty) then
 						p:setRepairCrewCount(1)
 						if p:hasPlayerAtPosition("Engineering") then
 							local repairCrewRecovery = "repairCrewRecovery"
@@ -6709,9 +6709,9 @@ function checkTransportPrimusResearcherEvents(delta)
 					plot1 = nil
 					mission_complete_count = mission_complete_count + 1
 					plotChoiceStation = primusStation
-					p:addToShipLog(_("planetologist-shipLog","Enrique Flogistan profusely thanked you as he dashed to his observation laboratory. He discussed his research on some unique properties of dilithium with your engineer before he left. Consequently, engineering has improved battery efficiency by ten percent"),"Magenta")
-					p:setMaxEnergy(p:getMaxEnergy()*1.1)
-					p:addReputationPoints(50)
+					player_ship_with_planetologist:addToShipLog(_("planetologist-shipLog","Enrique Flogistan profusely thanked you as he dashed to his observation laboratory. He discussed his research on some unique properties of dilithium with your engineer before he left. Consequently, engineering has improved battery efficiency by ten percent"),"Magenta")
+					player_ship_with_planetologist:setMaxEnergy(player_ship_with_planetologist:getMaxEnergy()*1.1)
+					player_ship_with_planetologist:addReputationPoints(50)
 				end
 			else
 				--player ship with planetologist aboard was destroyed
