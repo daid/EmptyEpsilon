@@ -2367,7 +2367,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
 				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
@@ -2387,7 +2387,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 					end
 				end
 				if item.shape == "zone" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ta = Artifact():setPosition(cx,cy)
 					if item.obj:isInside(ta) then
 						far_enough = false
@@ -2419,7 +2419,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
 				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
@@ -2457,7 +2457,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
 				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
@@ -2499,7 +2499,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
 				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
@@ -2541,7 +2541,7 @@ function findClearSpot(objects,area_shape,area_point_x,area_point_y,area_distanc
 				assert(item.shape ~= nil,string.format("function findClearSpot expects an object list table where each item in the table is identified by shape, but item index %s's shape was nil",i))
 				assert(valid_table_item_shapes[item.shape] == nil,string.format("function findClearSpot expects a valid shape in the object list table item index %i, but got %s instead",i,item.shape))
 				if item.shape == "circle" then
-					assert(type(item.obj)=="table",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
+					assert(type(item.obj)=="table" or type(item.obj)=="userdata",string.format("function findClearSpot expects a space object or table as the object in the object list table item index %i, but got a %s instead",i,type(item.obj)))
 					local ix, iy = item.obj:getPosition()
 					assert(type(item.dist)=="number",string.format("function findClearSpot expects a distance number as the dist value in the object list table item index %i, but got a %s instead",i,type(item.dist)))
 					local comparison_dist = item.dist
