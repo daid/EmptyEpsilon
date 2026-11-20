@@ -408,6 +408,11 @@ static float luaGetScenarioTime()
     return gameGlobalInfo->elapsed_time;
 }
 
+static float luaGetWallTime()
+{
+    return gameGlobalInfo->wall_time.get();
+}
+
 static int luaGetAllObjects(lua_State* L)
 {
     lua_newtable(L);
@@ -1350,6 +1355,11 @@ bool setupScriptEnvironment(sp::script::Environment& env)
     /// This timer stops when the game is paused.
     /// Example: getScenarioTime() -- after two minutes, returns 120.0
     env.setGlobal("getScenarioTime", &luaGetScenarioTime);
+    /// float getWallTime()
+    /// Returns the elapsed wall time since scenario start, in seconds.
+    /// This timer does *not* stop when the game is paused.
+    /// Example: getWallTime() -- after one minute of the game being paused and two minutes of the game running, returns 180.0
+    env.setGlobal("getWallTime", &luaGetWallTime);
 
     /// std::vector<sp::ecs::Entity> getAllObjects()
     /// Returns a list of all objects that have a position in the world.
