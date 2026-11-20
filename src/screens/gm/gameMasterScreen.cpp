@@ -191,8 +191,8 @@ GameMasterScreen::GameMasterScreen(RenderLayer* render_layer)
         for (auto obj : targets.getTargets())
             obj.getOrAddComponent<Faction>().entity = Faction::find(value);
     });
-    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
-        faction_selector->addEntry(info.locale_name, info.name);
+    for (auto info : FactionInfo::getOrderedList())
+        faction_selector->addEntry(info->locale_name, info->name);
     faction_selector
         ->setSelectionIndex(0)
         ->setPosition(20.0f, 70.0f, sp::Alignment::TopLeft)
