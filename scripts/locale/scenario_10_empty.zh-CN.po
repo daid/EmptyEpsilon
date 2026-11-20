@@ -1,0 +1,22 @@
+# Scenario name
+msgid "Empty space"
+msgstr "空旷空间"
+
+# Scenario description
+msgid """Empty scenario, no enemies, no friendlies. Can be used by a GM player to \nsetup a scenario in the GM screen. The F5 key can be used to copy the \ncurrent layout to the clipboard for use in scenario scripts."""
+msgstr """一个空白场景，没有敌人，也没有友军。可用于由GM玩家在GM界面中 \n设置自定义场景。按下F5键可以将当前布局复制到剪贴板，用于编写场景脚本。"""
+
+#: scripts/scenario_10_empty.lua:30
+msgctxt "buttonGM"
+msgid "Random asteroid field"
+msgstr "随机小行星带"
+
+#: scripts/scenario_10_empty.lua:40
+msgctxt "buttonGM"
+msgid "Random nebula field"
+msgstr "随机星云区域"
+
+#: scripts/scenario_10_empty.lua:49
+msgctxt "buttonGM"
+msgid "Delete unselected"
+msgstr "删除未选中对象"

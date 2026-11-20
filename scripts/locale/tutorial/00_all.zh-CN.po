@@ -1,0 +1,30 @@
+# Scenario name
+msgid "Run All"
+msgstr "运行全部"
+
+# Scenario description
+msgid "All Station Tutorials. This cycles through all the stations."
+msgstr "所有工作站教程。此模式会循环展示所有工作站。"
+
+#: scripts/tutorial/00_all.lua:28
+msgid """This is the main screen, which displays your ship and the surrounding 
+space.\nWhile you cannot move the ship from this screen, you can use it to visually \nidentify objects."""
+msgstr "这是主屏幕，显示您的飞船和周围的太空。\n虽然您不能从这个屏幕上移动飞船，但您可以使用它来视觉识别物体。"
+
+#: scripts/tutorial/00_all.lua:34
+msgid """Welcome to the long-range radar. This radar can detect objects up to 30u 
+from your ship, depicted at the radar's center. This radar allows you to 
+quickly identify distant objects."""
+msgstr "欢迎使用远程雷达。此雷达可以检测到距离您的飞船最远达30u的物体，以雷达中心为参照点。此雷达允许您快速识别远处的物体。"
+
+#: scripts/tutorial/00_all.lua:36
+msgid """This is an asteroid. Flying into an asteroid will damage your ship, so avoid \nhitting them."""
+msgstr "这是一个小行星。飞入小行星将损坏您的飞船，因此请避免撞击它们。"
+
+#: scripts/tutorial/00_all.lua:39
+msgid """The white dot is a mine. When you move near a mine, it explodes with a \npowerful 1u-radius blast. Striking a mine while your shields are down will \nsurely destroy your ship."""
+msgstr "白点是一个水雷。当您靠近水雷时，它会爆炸并产生强大的1u半径冲击波。在护盾关闭时撞击水雷肯定会摧毁您的飞船。"
+
+#: scripts/tutorial/00_all.lua:44
+msgid """These are stations. Stations can be several different sizes and belong to \ndifferent factions. Their color indicates whether the station is friendly \n(green), neutral (light blue), or hostile (red)."""
+msgstr "这些都是空间站。空间站可以有不同的大小，并属于不同的派系。它们的颜色表明该空间站是友好的（绿色）、中立的（浅蓝色）还是敌对的（红色）。"

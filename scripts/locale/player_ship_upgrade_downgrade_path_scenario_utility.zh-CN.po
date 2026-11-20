@@ -1,0 +1,29 @@
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:2
+msgctxt "scienceDB"
+msgid "Ship Yard"
+msgstr "造船厂"
+
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:7
+msgctxt "scienceDB"
+msgid """A ship yard is where starships are built, maintained and enhanced. They \ntypically get built in to stations to facilitate services such as energy \nrecharging, hull repair, probe and ordnance replenishment, etc. This section \nof the science database shows ship types that might get upgraded by ship \nyards in the area and the details around potentially available upgrades."""
+msgstr """造船厂是建造、维护和升级星际飞船的地方。\n它们通常建在空间站内，以方便提供能源补给、船体修复、探测器与弹药补给等服务。\n该科学数据库部分展示了区域内造船厂可能升级的舰船类型以及相关可用升级的详细信息。"""
+
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:12
+msgctxt "scienceDB"
+msgid """The MP52 Hornet is a significantly upgraded version of MU52 Hornet, with \nnearly twice the hull strength, nearly three times the shielding, better \nacceleration, impulse boosters, and a second laser cannon."""
+msgstr """MP52黄蜂号是MU52黄蜂号的一个显著升级版，其船体强度接近两倍，护盾接近三倍，\n加速性能更优，并配备了脉冲推进器和第二门激光炮。"""
+
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:13
+msgctxt "scienceDB"
+msgid """The ZX model is an improvement on the WX-Lindworm with stronger hull and \nshields, faster impulse and tubes, more missiles and a single weak, turreted \nbeam. The 'Worm' as it's often called, is a bomber-class starfighter. While \none of the least-shielded starfighters in active duty, the Worm's launchers \ncan pack quite a punch. Its goal is to fly in, destroy its target, and fly \nout or be destroyed."""
+msgstr """ZX型号是在WX-Lindworm基础上改进而来，拥有更强的船体和护盾、更快的脉冲速度和发射管、更多的导弹，以及一门较弱的旋转式光束武器。\n这艘常被称为“蠕虫”的飞船是一款轰炸机型星际战斗机。虽然它是现役中最少护盾的星际战斗机之一，但它的发射器威力十足。\n它的任务目标是飞入战场，摧毁目标，然后飞离或被摧毁。"""
+
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:14
+msgctxt "scienceDB"
+msgid """Player variant of the Phobos M3. Not as strong as the Atlantis, but has \nfront firing tubes, making it an easier to use ship in some scenarios."""
+msgstr """Phobos M3的玩家变种。虽然不如亚特兰蒂斯强大，但它配备了前向发射管，使得在某些场景中更容易使用。"""
+
+#: scripts/player_ship_upgrade_downgrade_path_scenario_utility.lua:15
+msgctxt "scienceDB"
+msgid """Long range narrow beam and some point defense beams, broadside missiles. \nAgile for a frigate"""
+msgstr """远程窄束光束武器及一些点防御光束，侧舷导弹。作为护卫舰而言非常灵活敏捷。"""

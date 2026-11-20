@@ -1,0 +1,39 @@
+#: scripts/shiptemplates/corvette.lua:14
+msgctxt "ship"
+msgid "Atlantis X23"
+msgstr "亚特兰蒂斯X23"
+
+#: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
+#: scripts/shiptemplates/corvette.lua:101
+#: scripts/shiptemplates/corvette.lua:157
+#: scripts/shiptemplates/corvette.lua:217
+#: scripts/shiptemplates/corvette.lua:235
+#: scripts/shiptemplates/corvette.lua:248
+#: scripts/shiptemplates/corvette.lua:261
+#: scripts/shiptemplates/corvette.lua:274
+#: scripts/shiptemplates/corvette.lua:287
+#: scripts/shiptemplates/corvette.lua:301
+#: scripts/shiptemplates/corvette.lua:310
+#: scripts/shiptemplates/corvette.lua:315
+#: scripts/shiptemplates/corvette.lua:360
+msgctxt "class"
+msgid "Corvette"
+msgstr "护卫舰"
+
+#: scripts/shiptemplates/corvette.lua:14 scripts/shiptemplates/corvette.lua:83
+msgctxt "subclass"
+msgid "Destroyer"
+msgstr "驱逐舰"
+
+#: scripts/shiptemplates/corvette.lua:15
+msgid """The Atlantis X23 is the smallest model of destroyer, and its combination of \nfrigate-like size and corvette-like power makes it an excellent escort ship \nwhen defending larger ships against multiple smaller enemies. Because the \nAtlantis X23 is fitted with a jump drive, it can also serve as an \nintersystem patrol craft."""
+msgstr """亚特兰蒂斯X23是最小型的驱逐舰型号，它结合了类似护卫舰的尺寸和类似巡洋舰的动力系统，使其在保护大型飞船对抗多个小型敌人时表现出色。由于亚特兰蒂斯X23配备了跳跃驱动器，它也可以作为跨星系巡逻飞船使用。"""
+
+#: scripts/shiptemplates/corvette.lua:33
+msgctxt "playerShip"
+msgid "Atlantis"
+msgstr "亚特兰蒂斯号"
+
+#: scripts/shiptemplates/corvette.lua:34
+msgid """A refitted Atlantis X23 for more general tasks. The large shield system has \nbeen replaced with an advanced combat maneuvering systems and improved \nimpulse engines. Its missile loadout is also more diverse. Mistaking the \nmodified Atlantis for an Atlantis X23 would be a deadly mistake."""
+msgstr """这是一艘经过改装以执行多种任务的亚特兰蒂斯X23。其大型护盾系统已被先进的战斗机动系统和改进型脉冲引擎取代。它的导弹配置也更加多样化。将这艘改装后的亚特兰蒂斯号误认为是普通的亚特兰蒂斯X23将会是一个致命的错误。"""

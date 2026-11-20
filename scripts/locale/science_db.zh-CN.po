@@ -1,0 +1,36 @@
+#: scripts/science_db.lua:8
+msgid "Natural"
+msgstr "自然现象"
+
+#: scripts/science_db.lua:9
+msgid """This database covers naturally occurring phenomena that spaceborne crews 
+might encounter.
+\nWhile ship captains are encouraged to avoid unnecessary interactions with 
+these phenomena, knowing their properties can offer an advantage in 
+conflicts near them."""
+msgstr "本数据库涵盖了太空航行中可能遇到的自然现象。\n虽然建议舰长们避免与这些现象进行不必要的接触，但了解它们的特性可以在靠近它们的战斗中提供优势。"
+
+#: scripts/science_db.lua:13
+msgid "Asteroid"
+msgstr "小行星"
+
+#: scripts/science_db.lua:14
+msgid """An asteroid is a minor planet, usually smaller than a few kilometers. Larger 
+variants are sometimes referred to as planetoids."""
+msgstr "小行星是一颗较小的行星，通常小于几公里。较大的变种有时被称为类行星。"
+
+#: scripts/science_db.lua:16
+msgid "Black hole"
+msgstr "黑洞"
+
+#: scripts/science_db.lua:17
+msgid """A black hole is a point of supercondensed mass with a gravitational pull so 
+powerful that not even light can escape it. It has no locally detectable 
+features, and can only be seen indirectly by blocking the view and 
+distorting its surroundings, creating a strange circular mirror image of the 
+galaxy. The black disc in the middle marks the event horizon, the boundary 
+where even light can't escape it anymore. \n\t\nOn the sensors, a black hole appears as a disc indicating the zone where the 
+gravitational pull is getting dangerous, and soon will be stronger then the 
+ship's impulse engines. An object that crosses a black hole is drawn toward 
+its center and quickly ripped apart by the gravitational forces."""
+msgstr "黑洞是一个质量极度集中的点，其引力强大到连光都无法逃脱。它没有局部可探测的特征，只能通过间接的方式看到，比如阻挡视线并扭曲周围环境，从而形成一个奇怪的圆形镜像图像。中间的黑色圆盘标志着事件视界，即光也无法逃脱的边界。\n\t\n在传感器上，黑洞显示为一个圆盘，表示该区域的引力正在变得危险，并且很快会超过飞船的推进引擎力量。任何穿过黑洞的物体都会被拉向中心，并迅速被强大的引力撕裂。"
