@@ -221,7 +221,7 @@ function commsStationSupplyDrop(comms_source, comms_target)
                         script:setVariable("position_x", position_x):setVariable("position_y", position_y)
                         script:setVariable("target_x", target_x):setVariable("target_y", target_y)
                         script:setVariable("faction_id", comms_target:getFactionId()):run("supply_drop.lua")
-                        message = string.format(_("stationAssist-comms", "We have dispatched a supply ship toward %s."), formatWaypoint(n))
+                        message = string.format(_("stationAssist-comms", "We have dispatched a supply ship toward %s."), formatWaypoint(comms_source:getWaypointID(n)))
                     else
                         message = _("needRep-comms", "Not enough reputation!")
                     end
