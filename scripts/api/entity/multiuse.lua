@@ -37,11 +37,16 @@ end
 --- Sets this entity's radius.
 --- Default sizes vary by entity type. Asteroids default to random values between 110 and 130. Explosions default to 1.0.
 --- If the entity has an AvoidObject component, this also sets that radius to 2x the given value.
+--- If the entity has a RadarTrace component whose radius equals the old size (such as asteroids), this sets that radius to the new size. Other RadarTrace radii are left unchanged.
 --- Examples: obj:setSize(150) -- sets the entity's size to 150
 ---           explosion:setSize(1000) -- sets the explosion radius to 1U
 function Entity:setSize(radius)
     local comp = self.components
+    local old_size = comp.physics and comp.physics.size or 0
     if comp.physics then comp.physics.size=radius end
+    -- Entities whose radar blip radius tracks their size (asteroids) keep doing so; other types keep their own trace radius.
+    local trace = comp.radar_trace
+    if trace and old_size > 0 and math.abs(trace.radius - old_size) < 0.01 then trace.radius = radius end
     if comp.mesh_render then comp.mesh_render.scale=radius end
     if comp.avoid_object then comp.avoid_object.range=radius*2 end
     if comp.explosion_effect then comp.explosion_effect.size=radius end
