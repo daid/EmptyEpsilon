@@ -47,7 +47,7 @@ static std::vector<std::pair<string, string>> getGMInfo(sp::ecs::Entity entity)
         result.emplace_back(trMark("gm_info", "Type"), tn->localized);
     if (auto shields = entity.getComponent<Shields>())
         for (size_t n = 0; n < shields->entries.size(); n++)
-            result.emplace_back(trMark("gm_info", "Shield {n}").format({{"n", string(static_cast<int>(n) + 1)}}), string(shields->entries[n].level) + "/" + string(shields->entries[n].max));
+            result.emplace_back(tr("gm_info", "Shield {n}").format({{"n", string(static_cast<int>(n) + 1)}}), string(shields->entries[n].level) + "/" + string(shields->entries[n].max));
     if (auto hull = entity.getComponent<Hull>())
         result.emplace_back(trMark("gm_info", "Hull"), string(hull->current) + "/" + string(hull->max));
     /* from missile weapons
