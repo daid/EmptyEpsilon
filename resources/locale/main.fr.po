@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-11-20 00:52+0100\n"
+"PO-Revision-Date: 2026-11-20 18:50+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -471,7 +471,7 @@ msgstr ""
 
 #: src/menus/optionsMenu.cpp:333
 msgid "Fullscreen toggle"
-msgstr "Activer/Désactiver le plein écran"
+msgstr "Activer/désactiver le plein écran"
 
 #: src/menus/optionsMenu.cpp:363
 msgid "Restart EmptyEpsilon to apply FSAA change"
@@ -838,7 +838,6 @@ msgid "General"
 msgstr "Général"
 
 #: src/menus/luaConsole.cpp:22
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Open Lua console"
 msgstr "Ouvrir la console LUA"
@@ -898,7 +897,7 @@ msgstr ""
 #: src/gui/hotkeyConfig.cpp:392 src/gui/hotkeyConfig.cpp:393
 msgctxt "hotkey_menu"
 msgid "Main screen"
-msgstr "Vue principale"
+msgstr "Écran principal"
 
 #: src/screens/spectatorScreen.cpp:51
 msgctxt "spectator"
@@ -1350,7 +1349,7 @@ msgstr "Ordres"
 #: src/gui/hotkeyConfig.cpp:554
 msgctxt "hotkey_menu"
 msgid "GM screen"
-msgstr "Écran Maître de jeu (MJ)"
+msgstr "Console Maître de jeu (MJ)"
 
 #: src/screens/gm/gameMasterScreen.cpp:486
 msgctxt "gm_info"
@@ -2089,7 +2088,6 @@ msgid "Black hole damage:"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:574
-#, fuzzy
 msgctxt "tweak-button"
 msgid "Remove component"
 msgstr "Supprimer ce composant"
@@ -2097,7 +2095,7 @@ msgstr "Supprimer ce composant"
 #: src/screens/gm/tweak.cpp:577
 msgctxt "tweak-button"
 msgid "Create component"
-msgstr ""
+msgstr "Ajouter ce composant"
 
 #: src/screenComponents/aimLock.cpp:12
 msgctxt "missile"
@@ -2602,10 +2600,9 @@ msgid "Comms overlay"
 msgstr "+communications"
 
 #: src/screenComponents/databaseView.cpp:29
-#, fuzzy
 msgctxt "databaseView"
 msgid "Back"
-msgstr "Retour RRRRR"
+msgstr "Retour"
 
 #: src/screenComponents/hackingDialog.cpp:41
 msgctxt "hacking"
@@ -2984,10 +2981,9 @@ msgid "Show in-game help"
 msgstr "Afficher l'aide en jeu"
 
 #: src/gui/hotkeyConfig.cpp:358
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Return to ship options menu"
-msgstr "Retourner au menu selection vaisseaux"
+msgstr "Retour au menu selection vaisseaux"
 
 #: src/gui/hotkeyConfig.cpp:359
 msgctxt "hotkey_General"
@@ -3012,7 +3008,7 @@ msgstr "Diffuser chat vocal sur le vaisseau"
 #: src/gui/hotkeyConfig.cpp:363
 msgctxt "hotkey_General"
 msgid "Fullscreen toggle"
-msgstr "Activer/Désactiver le plein écran"
+msgstr "Activer/désactiver le plein écran"
 
 #: src/gui/hotkeyConfig.cpp:364
 msgctxt "hotkey_General"
@@ -3020,7 +3016,6 @@ msgid "Show FPS"
 msgstr "Afficher les FPS"
 
 #: src/gui/hotkeyConfig.cpp:365
-#, fuzzy
 msgctxt "hotkey_General"
 msgid "Show debug timing"
 msgstr "Afficher graphique débogage temps"
@@ -3029,7 +3024,7 @@ msgstr "Afficher graphique débogage temps"
 #, fuzzy
 msgctxt "hotkey_General"
 msgid "Show debug colliders"
-msgstr "Afficher les collisions de débogage"
+msgstr "Afficher les collisions de débogage ??????"
 
 #: src/gui/hotkeyConfig.cpp:372
 msgctxt "hotkey_General"
@@ -3042,7 +3037,7 @@ msgstr "Emplacement bouton personnalisé {number}"
 #: src/gui/hotkeyConfig.cpp:382
 msgctxt "hotkey_menu"
 msgid "Crew screens"
-msgstr "Écrans équipage"
+msgstr "Consoles équipage"
 
 #: src/gui/hotkeyConfig.cpp:376
 msgctxt "hotkey_CrewScreen"
@@ -3102,27 +3097,27 @@ msgstr "Vue arrière"
 #: src/gui/hotkeyConfig.cpp:389
 msgctxt "hotkey_MainScreen"
 msgid "Lock view on weapons target"
-msgstr "Vue verrouillée sur cible Armement"
+msgstr "Vue sur cible verrouillée Armement"
 
 #: src/gui/hotkeyConfig.cpp:390
 msgctxt "hotkey_MainScreen"
 msgid "View tactical radar"
-msgstr "Vue radar tactique"
+msgstr "Afficher radar courte portée"
 
 #: src/gui/hotkeyConfig.cpp:391
 msgctxt "hotkey_MainScreen"
 msgid "View long-range radar"
-msgstr "Vue radar longue portée"
+msgstr "Afficher radar longue portée"
 
 #: src/gui/hotkeyConfig.cpp:392
 msgctxt "hotkey_MainScreen"
 msgid "View strategic map"
-msgstr ""
+msgstr "Afficher carte tactique"
 
 #: src/gui/hotkeyConfig.cpp:393
 msgctxt "hotkey_MainScreen"
 msgid "Toggle first-person view"
-msgstr "Vue à la 1ère personne"
+msgstr "Activer/désactiver vue 1ère personne"
 
 #: src/gui/hotkeyConfig.cpp:396 src/gui/hotkeyConfig.cpp:397
 #: src/gui/hotkeyConfig.cpp:398 src/gui/hotkeyConfig.cpp:399
@@ -3151,52 +3146,52 @@ msgstr "Navigation"
 #: src/gui/hotkeyConfig.cpp:396
 msgctxt "hotkey_Helms"
 msgid "Increase impulse"
-msgstr "Accélérer (moteurs principaux)"
+msgstr "Accélérer"
 
 #: src/gui/hotkeyConfig.cpp:397
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 1%"
-msgstr "Accélérer (moteurs principaux) 1%"
+msgstr "Accélérer de 1%"
 
 #: src/gui/hotkeyConfig.cpp:398
 msgctxt "hotkey_Helms"
 msgid "Increase impulse 10%"
-msgstr "Accélérer (moteurs principaux) 10%"
+msgstr "Accélérer de 10%"
 
 #: src/gui/hotkeyConfig.cpp:399
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse"
-msgstr "Décélérer (moteurs principaux)"
+msgstr "Décélérer"
 
 #: src/gui/hotkeyConfig.cpp:400
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 1%"
-msgstr "Décélérer (moteurs principaux) 1%"
+msgstr "Décélérer de 1%"
 
 #: src/gui/hotkeyConfig.cpp:401
 msgctxt "hotkey_Helms"
 msgid "Decrease impulse 10%"
-msgstr "Décélérer (moteurs principaux) 10%"
+msgstr "Décélérer de 10%"
 
 #: src/gui/hotkeyConfig.cpp:402
 msgctxt "hotkey_Helms"
 msgid "Set impulse (joystick)"
-msgstr "Activer les moteurs (joystick)"
+msgstr "Régler vitesse moteurs (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:403
 msgctxt "hotkey_Helms"
 msgid "Zero impulse"
-msgstr "Eteindre les moteurs"
+msgstr "Moteurs à l'arrêt"
 
 #: src/gui/hotkeyConfig.cpp:404
 msgctxt "hotkey_Helms"
 msgid "Max impulse"
-msgstr "Vitesse max des moteurs avant"
+msgstr "Vitesse max moteurs avant"
 
 #: src/gui/hotkeyConfig.cpp:405
 msgctxt "hotkey_Helms"
 msgid "Max reverse impulse"
-msgstr "Vitesse max des moteurs arrière"
+msgstr "Vitesse max moteurs arrière"
 
 #: src/gui/hotkeyConfig.cpp:406
 msgctxt "hotkey_Helms"
@@ -3211,61 +3206,57 @@ msgstr "Tourner à droite"
 #: src/gui/hotkeyConfig.cpp:408
 msgctxt "hotkey_Helms"
 msgid "Zero warp"
-msgstr ""
+msgstr "Vitesse lumière à l'arrêt (niveau 0)"
 
 #: src/gui/hotkeyConfig.cpp:409
 msgctxt "hotkey_Helms"
 msgid "Request warp 1"
-msgstr ""
+msgstr "Vitesse lumière niveau 1"
 
 #: src/gui/hotkeyConfig.cpp:410
 msgctxt "hotkey_Helms"
 msgid "Request warp 2"
-msgstr ""
+msgstr "Vitesse lumière niveau 2"
 
 #: src/gui/hotkeyConfig.cpp:411
 msgctxt "hotkey_Helms"
 msgid "Request warp 3"
-msgstr ""
+msgstr "Vitesse lumière niveau 3"
 
 #: src/gui/hotkeyConfig.cpp:412
 msgctxt "hotkey_Helms"
 msgid "Request warp 4"
-msgstr ""
+msgstr "Vitesse lumière niveau 4"
 
 #: src/gui/hotkeyConfig.cpp:413
 msgctxt "hotkey_Helms"
 msgid "Request max warp"
-msgstr ""
+msgstr "Vitesse lumière niveau max"
 
 #: src/gui/hotkeyConfig.cpp:414
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase warp request"
-msgstr "Augmenter ..."
+msgstr "Augmenter vitesse lumière"
 
 #: src/gui/hotkeyConfig.cpp:415
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease warp request"
-msgstr "Réduire ..."
+msgstr "Réduire vitesse lumière"
 
 #: src/gui/hotkeyConfig.cpp:416
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Set warp request (joystick)"
-msgstr "Régler puiss. vit. lumière (joystick)"
+msgstr "Régler vitesse lumière (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:417
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Dock request/abort/undock"
-msgstr "Amarrer/annuler/désamarrer"
+msgstr "S'amarrer/annuler/se désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:418
 msgctxt "hotkey_Helms"
 msgid "Initiate docking"
-msgstr "Amarrer"
+msgstr "S'amarrer"
 
 #: src/gui/hotkeyConfig.cpp:419
 msgctxt "hotkey_Helms"
@@ -3275,69 +3266,62 @@ msgstr "Annuler amarrage"
 #: src/gui/hotkeyConfig.cpp:420
 msgctxt "hotkey_Helms"
 msgid "Undock"
-msgstr "Désamarrer"
+msgstr "Se désamarrer"
 
 #: src/gui/hotkeyConfig.cpp:421
 msgctxt "hotkey_Helms"
 msgid "Increase jump distance"
-msgstr "Augmenter la distance de saut"
+msgstr "Augmenter distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:422
 msgctxt "hotkey_Helms"
 msgid "Decrease jump distance"
-msgstr "Diminuer la distance de saut"
+msgstr "Réduire distance de saut"
 
 #: src/gui/hotkeyConfig.cpp:423
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase jump distance 0.1U"
-msgstr "Augmenter la distance de saut"
+msgstr "Augmenter distance de saut de 0.1u"
 
 #: src/gui/hotkeyConfig.cpp:424
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Increase jump distance 1U"
-msgstr "Augmenter la distance de saut"
+msgstr "Augmenter distance de saut de 1u"
 
 #: src/gui/hotkeyConfig.cpp:425
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease jump distance 0.1U"
-msgstr "Diminuer la distance de saut"
+msgstr "Réduire distance de saut de 0.1u"
 
 #: src/gui/hotkeyConfig.cpp:426
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Decrease jump distance 1U"
-msgstr "Diminuer la distance de saut"
+msgstr "Réduire distance de saut de 1u"
 
 #: src/gui/hotkeyConfig.cpp:427
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Set jump distance (joystick)"
-msgstr "Régler liq. ref. téléportation (joystick)"
+msgstr "Régler distance de saut (joystick)"
 
 #: src/gui/hotkeyConfig.cpp:428
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Maximize jump distance"
-msgstr "Augmenter la distance de saut"
+msgstr "Augmenter distance de saut au max"
 
 #: src/gui/hotkeyConfig.cpp:429
-#, fuzzy
 msgctxt "hotkey_Helms"
 msgid "Minimize jump distance"
-msgstr "Augmenter la distance de saut"
+msgstr "Réduire distance de saut au max"
 
 #: src/gui/hotkeyConfig.cpp:430
 msgctxt "hotkey_Helms"
 msgid "Initiate jump"
-msgstr "Activer le saut (téléportation)"
+msgstr "Activer saut"
 
 #: src/gui/hotkeyConfig.cpp:431
 msgctxt "hotkey_Helms"
 msgid "Abort jump"
-msgstr "Annuler Saut"
+msgstr "Annuler saut"
 
 #: src/gui/hotkeyConfig.cpp:432
 msgctxt "hotkey_Helms"
