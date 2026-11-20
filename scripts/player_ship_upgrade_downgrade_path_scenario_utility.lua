@@ -53,6 +53,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 				end
 				level_db:setLongDescription(out)
 				for j,emplacement in ipairs(beam) do
+					if emplacement.idx >= 0 then	--{idx = -1} marks "no beam at this level"
 					local dir_key = string.format(_("scienceDB","Beam %i Direction"),j)
 					local arc_rng_key = string.format(_("scienceDB","%i Arc, Range"),j)
 					local cyc_dmg_key = string.format(_("scienceDB","%i Cycle, Damage"),j)
@@ -62,6 +63,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 					if emplacement.tar ~= nil then
 						local tur_key = string.format(_("scienceDB","%i Turret Arc, Turn"),j)
 						level_db:setKeyValue(tur_key,string.format(_("scienceDB","%s degrees, %.1f"),emplacement.tar,emplacement.trt))
+					end
 					end
 				end
 			end
@@ -84,6 +86,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 				end
 				level_db:setLongDescription(out)
 				for j,tub in ipairs(upgrade_path[template]["tube"][missile.tube]) do
+					if tub.idx >= 0 then	--{idx = -1} marks "no tube at this level"
 					local dir_siz_key = string.format(_("scienceDB","Tube %i %i degrees %s"),j,tub.dir,tub.siz)
 					level_db:setKeyValue(dir_siz_key,string.format(_("scienceDB","%.1f seconds load time"),tub.spd))
 					local type_count = 0
@@ -129,6 +132,7 @@ function addShipUpgradeInfoToScienceDatabase(template)
 						type_key = string.format(_("scienceDB","Tube %i missile types"),j)						
 					end
 					level_db:setKeyValue(type_key,type_list)
+					end
 				end
 				if upgrade_path[template]["ordnance"][missile.ord].hom > 0 then
 					local homing_key = _("scienceDB","Homing capacity")
@@ -3192,22 +3196,22 @@ function playerShipUpgradeDowngradeData()
 					downgrade = _("downgrade-comms","reduced long range sensors by 1/7"),
 				},
 				{	--10
-					short = 5000, long = 35000,
+					short = 5000, long = 35000, prox_scan = 3,
 					desc = _("upgrade-comms","increase long range sensors by ~17%"),
 					downgrade = _("downgrade-comms","reduced short range sensors by 1/11"),
 				},
 				{	--11
-					short = 5500, long = 35000,
+					short = 5500, long = 35000, prox_scan = 3,
 					desc = _("upgrade-comms","increase short range sensors by 10%"),
 					downgrade = _("downgrade-comms","reduced long range sensors by 1/8"),
 				},
 				{	--12
-					short = 5500, long = 40000,
+					short = 5500, long = 40000, prox_scan = 3,
 					desc = _("upgrade-comms","increase long range sensors by ~14%"),
 					downgrade = _("downgrade-comms","reduced short range sensors by 1/12"),
 				},
 				{	--13
-					short = 6000, long = 40000,
+					short = 6000, long = 40000, prox_scan = 3,
 					desc = _("upgrade-comms","increase short range sensors by ~9%"),
 				},
 				["stock"] = {
@@ -7199,8 +7203,8 @@ function playerShipUpgradeDowngradeData()
 				{tube = 5,	ord = 5, desc = _("upgrade-comms","increase capacity by 1/3"), downgrade = _("downgrade-comms","switched two lower tubes from large to medium")},				--8
 				{tube = 6,	ord = 5, desc = _("upgrade-comms","make two lower tubes large"), downgrade = _("downgrade-comms","reduced capacity by 20%")},			--9
 				{tube = 6,	ord = 6, desc = _("upgrade-comms","increase capacity by 25%"), downgrade = _("downgrade-comms","slowed tube load times")},				--10
-				{tube = 7,	ord = 7, desc = _("upgrade-comms","reduce tube load times by 20%"), downgrade = _("downgrade-comms","slowed medium tube load times")},		--11
-				{tube = 8,	ord = 7, desc = _("upgrade-comms","reduce medium tube load times by 25%")},	--12
+				{tube = 7,	ord = 6, desc = _("upgrade-comms","reduce tube load times by 20%"), downgrade = _("downgrade-comms","slowed medium tube load times")},		--11
+				{tube = 8,	ord = 6, desc = _("upgrade-comms","reduce medium tube load times by 25%")},	--12
 				["start"] = 2,
 			},
 			["tube"] = {
