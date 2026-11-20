@@ -12,6 +12,17 @@ class ReferenceBuilder:
         self.db.read("api/all.lua")
         self.output_file = open(output_filename, "wt")
 
+    def _write_func(self, data, func):
+        if not func.doc and not func.example:
+            print(f"WARNING: {func.name} has no description or example")
+        out = data
+        out = out.replace("{{name}}", html.escape(func.name))
+        out = out.replace("{{doc}}", html.escape("\n".join(func.doc)))
+        out = out.replace("{{docs}}", html.escape("\n".join(func.doc)))
+        out = out.replace("{{example}}", html.escape("\n".join(func.example)))
+        out = out.replace("{{params}}", html.escape(", ".join(func.params)))
+        self.output_file.write(out)
+
     def process_block(self, data, tag, params):
         if tag == "foreach":
             funcs = list(self.db.filter(params))
@@ -34,24 +45,12 @@ class ReferenceBuilder:
                 for cat in sorted(groups.keys(), key=lambda s: s.lower()):
                     self.output_file.write(f"<h2 id='category_{html.escape(cat)}'><a href='#entity'>{html.escape(cat)} functions</a></h2><ul>\n")
                     for func in groups[cat]:
-                        out = data
-                        out = out.replace("{{name}}", html.escape(func.name))
-                        out = out.replace("{{doc}}", html.escape("\n".join(func.doc)))
-                        out = out.replace("{{docs}}", html.escape("\n".join(func.doc)))
-                        out = out.replace("{{example}}", html.escape("\n".join(func.example)))
-                        out = out.replace("{{params}}", html.escape(", ".join(func.params)))
-                        self.output_file.write(out)
+                        self._write_func(data, func)
                     self.output_file.write("</ul>\n")
                 return
             # Fallback to all functions ungrouped without ToC
             for func in funcs:
-                out = data
-                out = out.replace("{{name}}", html.escape(func.name))
-                out = out.replace("{{doc}}", html.escape("\n".join(func.doc)))
-                out = out.replace("{{docs}}", html.escape("\n".join(func.doc)))
-                out = out.replace("{{example}}", html.escape("\n".join(func.example)))
-                out = out.replace("{{params}}", html.escape(", ".join(func.params)))
-                self.output_file.write(out)
+                self._write_func(data, func)
         else:
             print(tag, params)
 
