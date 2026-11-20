@@ -2531,6 +2531,10 @@ function wreckModHealthShield(x,y)
 		else	--only one shield
 			local max_health = p:getSystemHealthMax("frontshield")
 			local health = p:getSystemHealth("frontshield")
+			local scan_bonus = 0
+			if self:isScannedByFaction(p:getFaction()) then
+				scan_bonus = difficulty * 5
+			end
 			if random(1,100) < base_wreck_mod_positive - (difficulty * wreck_mod_interval) + scan_bonus then
 				if max_health < 1 then
 					p:setSystemHealthMax("frontshield",math.min(1, max_health + .05))
@@ -5261,7 +5265,7 @@ function playerShip()
 			playerShip()
 		end)
 	end
-	if playerSpinstar == nil then
+	if playerSpinStar == nil then
 		addGMFunction(_("buttonGM", "Spinstar"),function()
 			createPlayerShipSpinstar()
 			playerShip()
@@ -8326,7 +8330,7 @@ function handleDockedState()
 							for good, goodData in pairs(ctd.goods) do
 								addCommsReply(string.format(_("trade-comms", "Trade luxury for %s"),good), function()
 									local goodTransactionMessage = string.format(_("trade-comms", "Type: %s,  Quantity: %i"),good,goodData["quantity"])
-									if goodData[quantity] < 1 then
+									if goodData["quantity"] < 1 then
 										goodTransactionMessage = goodTransactionMessage .. _("trade-comms", "\nInsufficient station inventory")
 									else
 										goodData["quantity"] = goodData["quantity"] - 1

@@ -4994,8 +4994,8 @@ function kraylorDiversionarySabotage(delta)
 		end
 		if getScenarioTime() > diversionary_sabotage_fleet_adjust_time then
 			diversionary_sabotage_fleet_adjust_time = nil
+			local enemy_close_to_supply = 0
 			if supply_depot_station ~= nil and supply_depot_station:isValid() then
-				local enemy_close_to_supply = 0
 				local obj_list = getObjectsInRadius(target_x, target_y, 7500)
 				for i,obj in ipairs(obj_list) do
 					if isObjectType(obj,"CpuShip") then

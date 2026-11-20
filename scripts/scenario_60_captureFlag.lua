@@ -7602,7 +7602,7 @@ function manageHuntPhaseMechanics()
 										p1Flag = Artifact():setPosition(px,py):setModel("artifact5"):allowPickup(false)
 										table.insert(human_flags,p1Flag)
 										p1Flag:setDescriptions(_("scienceDescription-flag", "Flag"),_("scienceDescription-flag", "Human Navy Flag")):setRadarSignatureInfo(15,10,5):setScanningParameters(flagScanComplexity,flagScanDepth)
-										if flag_revel then
+										if flag_reveal then
 											if flag_drop < 2 then
 												for i,cp in ipairs(getActivePlayerShips()) do
 													if cp ~= p then

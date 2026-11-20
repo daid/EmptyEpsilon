@@ -2456,7 +2456,7 @@ function formalWar()
 							for j,missile in ipairs(missile_types) do
 								if ship:getWeaponStorageMax(missile) > 0 then
 									if ship:getWeaponStorage(missile) < 1 then
-										ship:setWeaponStorage(missile,getWeaponStorageMax(missile))
+										ship:setWeaponStorage(missile,ship:getWeaponStorageMax(missile))
 									end
 								end
 							end
