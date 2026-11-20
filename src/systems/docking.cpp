@@ -28,7 +28,8 @@ void DockingSystem::update(float delta)
             break;
         case DockingPort::State::Docking:
             if (!docking_port.target || !(target_transform = docking_port.target.getComponent<sp::Transform>())) {
-                docking_port.state = DockingPort::State::NotDocking;
+                // Target was removed while we were docking: stop the maneuver as well, not just the state.
+                abortDock(entity);
             } else {
                 auto engine = entity.getComponent<ImpulseEngine>();
                 auto warp = entity.getComponent<WarpDrive>();
@@ -191,7 +192,7 @@ void DockingSystem::requestDock(sp::ecs::Entity entity, sp::ecs::Entity target)
 
     auto docking_port = entity.getComponent<DockingPort>();
     if (!docking_port || docking_port->state != DockingPort::State::NotDocking) return;
-    if (!target) return;
+    if (!target || target == entity) return;
     auto bay = target.getComponent<DockingBay>();
     if (!bay || docking_port->canDockOn(*bay) == DockingStyle::None) return;
     auto position = entity.getComponent<sp::Transform>();

@@ -438,10 +438,10 @@ Thank you for defending our station. Please dock with us, and we'll analyze the 
                 string.format(_("centralcommand-incCall", "Apollo, come in!\n\nLeave the E.O.S. data with Galileo for now, we've confirmed reports that Kraylor are brazen enough to attack our E.O.S. scope directly! All available ships should converge on E.O.S. territory in sector %s!\n\nThat means you, Apollo!"),EOS_Station:getSectorName())
             )
 
-            kraylor_e1:orderRoaming()
-            kraylor_e2:orderRoaming()
-            kraylor_e3:orderRoaming()
-            kraylor_e4:orderRoaming()
+            if kraylor_e1:isValid() then kraylor_e1:orderRoaming() end
+            if kraylor_e2:isValid() then kraylor_e2:orderRoaming() end
+            if kraylor_e3:isValid() then kraylor_e3:orderRoaming() end
+            if kraylor_e4:isValid() then kraylor_e4:orderRoaming() end
 
             Human_m1:orderDefendLocation(60500, 42100)
             Human_m2:orderDefendLocation(60500, 42100)

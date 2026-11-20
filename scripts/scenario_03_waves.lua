@@ -125,7 +125,13 @@ end
 function spawnWave()
     waveNumber = waveNumber + 1
     getPlayerShip(-1):addToShipLog(string.format(_("shipLog", "Wave %d"), waveNumber), "red")
-    friendlyList[1]:addReputationPoints(150 + waveNumber * 15)
+    -- friendlyList[1] may have been destroyed by an earlier wave; reward the first station still alive
+    for _, friendly in ipairs(friendlyList) do
+        if friendly:isValid() then
+            friendly:addReputationPoints(150 + waveNumber * 15)
+            break
+        end
+    end
 
     enemyList = {}
 

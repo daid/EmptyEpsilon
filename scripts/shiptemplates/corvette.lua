@@ -346,7 +346,7 @@ variation:addDoor(2, 3, false)
 variation:addDoor(8, 2, false)
 variation:addDoor(9, 3, false)
 
-var2 = variation:copy("Kiriya"):setLocaleName(_("playerShip", "Kiriya"))
+local var2 = variation:copy("Kiriya"):setLocaleName(_("playerShip", "Kiriya"))
 var2:setDescription(_("Kiriya is an improved warp drive version of the Jump Carrier"))
 --          Arc, Dir, Range, CycleTime, Dmg
 var2:setBeam(0, 10,   0, 1500.0, 6.0, 4)

@@ -1620,6 +1620,7 @@ function commsStation()
             neutral = 0.5
         }
     })
+    comms_data = comms_target.comms_data	--getWeaponCost() and handleWeaponRestock() read this global
     if comms_source:isEnemy(comms_target) then
         return false
     end
@@ -1659,13 +1660,14 @@ function handleDockedState()
 					end)
 				end
 			end
+			addCommsReply(_("Back"), commsStation)
 		end)
 	end
 	if comms_source:isFriendly(comms_target) then
 		addCommsReply(_("orders-comms", "What are my current orders?"), function()
 			ordMsg = primaryOrders
 			if raceStartDelay > 0 then
-				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),raceStartDelay)
+				ordMsg = ordMsg .. string.format(_("orders-comms", "\n%i Seconds remain until start of race"),math.ceil(raceStartDelay))
 			else
 				if comms_source.goal ~= nil then
 					ordMsg = ordMsg .. string.format(_("orders-comms", "\nImmediate goal: race waypoint %i"),comms_source.goal)
@@ -2419,9 +2421,9 @@ function handleUndockedState()
 		end	
 		addCommsReply(_("station-comms","Station docking service status"),function()
 			local out = _("station-comms","Station docking services report:")
-			out = string.format(_("station-comms","%s\nRestock scan probes: %s"),out,comms_target:getRestocksScanProbes())
-			out = string.format(_("station-comms","%s\nRecharge energy: %s"),out,comms_target:getSharesEnergyWithDocked())
-			out = string.format(_("station-comms","%s\nRepair hull: %s"),out,comms_target:getRepairDocked())
+			out = string.format(_("station-comms","%s\nRestock scan probes: %s"),out,(comms_target:getRestocksScanProbes() and _("station-comms","yes") or _("station-comms","no")))
+			out = string.format(_("station-comms","%s\nRecharge energy: %s"),out,(comms_target:getSharesEnergyWithDocked() and _("station-comms","yes") or _("station-comms","no")))
+			out = string.format(_("station-comms","%s\nRepair hull: %s"),out,(comms_target:getRepairDocked() and _("station-comms","yes") or _("station-comms","no")))
 			setCommsMessage(out)
 			addCommsReply(_("Back"), commsStation)
 		end)	
@@ -3414,7 +3416,7 @@ function update(delta)
 	if raceInstructionMessage ~= "sent" then
 		game_state = "introducing"
 		raceInstructionMessage = "sent"
-		primaryOrders = string.format(_("raceOrders-comms", "Start race on time at waypoint 1\nRace Length: %f units"),raceLength)
+		primaryOrders = string.format(_("raceOrders-comms", "Start race on time at waypoint 1\nRace Length: %.1f units"),raceLength)
 		for p1idx=1,32 do
 			local p1 = getPlayerShip(p1idx)
 			if p1 ~= nil and p1:isValid() then

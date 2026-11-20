@@ -1318,6 +1318,11 @@ msgctxt "button"
 msgid "Intercept all comms"
 msgstr "Intercetta tutte le comunicazioni"
 
+#: src/screens/gm/gameMasterScreen.cpp:50
+msgctxt "gm_info"
+msgid "Shield {n}"
+msgstr "Scudo {n}"
+
 #: src/screens/gm/gameMasterScreen.cpp:64
 msgctxt "button"
 msgid "Global message"

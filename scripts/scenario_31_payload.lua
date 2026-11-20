@@ -572,6 +572,11 @@ end
 
 function SafeAttackRandom(ship, shipList, changeTarget)
   local changeTarget = changeTarget or false
+  -- An empty list made shipList[irandom(1, 0)] nil and SafeOrder raised.
+  -- Callers read false as "keep formation".
+  if #shipList == 0 then
+    return false
+  end
   local randomEnemy = shipList[irandom(1, #shipList)]
   return SafeOrder(ship, randomEnemy, "Attack", changeTarget)
 end
@@ -692,10 +697,14 @@ end
 --
 
 function CheckWinCondition()
-  if PayloadShip:isDocked(FactionStation) then
-    victory("Kraylor")
-  elseif PayloadShip:isDocked(KraylorStation) then
-    victory("Human Navy")
+  -- A destroyed PayloadShip has no methods: isDocked below raised "attempt to
+  -- call a nil value" and stopped update(). Test validity first.
+  if PayloadShip:isValid() then
+    if PayloadShip:isDocked(FactionStation) then
+      victory("Kraylor")
+    elseif PayloadShip:isDocked(KraylorStation) then
+      victory("Human Navy")
+    end
   end
   if not (Player:isValid()
     and PayloadShip:isValid()
@@ -713,6 +722,10 @@ end
 
 -- Update the Payload's target based on proximities and scan status
 function DeterminePayloadTarget()
+  -- A destroyed PayloadShip has no getPosition: CheckPayloadControl raised.
+  if PayloadShip == nil or not PayloadShip:isValid() then
+    return
+  end
   local oldTarget = PayloadShip.target
   local inControl, ourCount, oppositionCount = CheckPayloadControl(PayloadShip, "Human Navy", "Kraylor")
 
@@ -831,6 +844,10 @@ end
 
 -- Function to handle Payload movement
 function HandlePayloadMovement()
+  -- A destroyed PayloadShip has no getOrder.
+  if PayloadShip == nil or not PayloadShip:isValid() then
+    return
+  end
   local currentOrder = PayloadShip:getOrder()
   if PayloadShip.target == nil then
     if currentOrder ~= "Idle" then

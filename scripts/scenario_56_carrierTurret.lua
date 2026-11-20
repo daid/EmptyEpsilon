@@ -3380,7 +3380,7 @@ function freighterComms()
 			if shipType:find("Goods") ~= nil or shipType:find("Equipment") ~= nil then
 				goodsQuantity = 0
 				if comms_target.comms_data.goods ~= nil then
-					for good,good_data in pairs(comms_target.goods) do
+					for good,good_data in pairs(comms_target.comms_data.goods) do
 						if good_data.quantity > 0 then
 							goodsQuantity = goodsQuantity + good_data.quantity
 						end
@@ -3697,7 +3697,7 @@ function cargoTransfer()
 		if carrier2bladeTransferButtonList ~= nil then
 			carrier2bladeTransfer()
 		end
-	else
+	elseif playerCarrier:isValid() then	-- a destroyed carrier has no methods
 		if carrier2bladeTransferButton ~= nil then
 			playerCarrier:removeCustom(carrier2bladeTransferButton)
 			playerCarrier:removeCustom(carrier2bladeTransferButtonOps)
@@ -3722,7 +3722,7 @@ function cargoTransfer()
 		if carrier2pointTransferButtonList ~= nil then
 			carrier2pointTransfer()
 		end
-	else
+	elseif playerCarrier:isValid() then	-- a destroyed carrier has no methods
 		if carrier2pointTransferButton ~= nil then
 			playerCarrier:removeCustom(carrier2pointTransferButton)
 			playerCarrier:removeCustom(carrier2pointTransferButtonOps)
@@ -4159,7 +4159,7 @@ function destroyef2(delta)
 	end
 	if #ef2 < 1 then
 		mission_milestones = mission_milestones + 1
-		getPlayerShip(-1):addReputationPoints(rep_bump)
+		if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 		plot2 = chooseNextPlot2line
 	end
 	if mission_diagnostic then
@@ -4267,7 +4267,7 @@ function upgradeShipSpin(delta)
 		plot2reminder = string.format(_("orders-comms","Visit Paulina Lindquist on %s in %s regarding ship spin upgrade."),spinScientistStation:getCallSign(),spinScientistStation:getSectorName())
 		plot2name = "spinScientist"
 		plot2 = spinScientist
-		getPlayerShip(-1):addReputationPoints(rep_bump)
+		if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 		spinUpgradeAvailable = false
 		if mission_diagnostic then
 			print("upgrade ship spin (plot 2), switch to spin scientist - plot 2 delay timer expired")
@@ -4308,7 +4308,7 @@ function spinScientist(delta)
 		end
 		if spinPlayers == #getActivePlayerShips() or not spinScientistStation:isValid() then
 			betweenPlot2fleet()
-			getPlayerShip(-1):addReputationPoints(rep_bump)
+			if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 		end
 	else
 		if not spinScientistStation:isValid() then
@@ -4374,7 +4374,7 @@ function locateTargetEnemyBase(delta)
 		plot2reminder = string.format(_("orders-comms","Talk to Herbert Long on %s in %s regarding enemy base"),friendlyClueStation:getCallSign(),friendlyClueStation:getSectorName())
 		plot2name = "friendlyClue"
 		plot2 = friendlyClue
-		getPlayerShip(-1):addReputationPoints(rep_bump)
+		if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 		if mission_diagnostic then
 			print("locate target enemy base - plot 2 delay timer expired")
 		end
@@ -4539,7 +4539,7 @@ function getSickScientist(delta)
 					})
 					plot2name = "deliverSickScientist"
 					plot2 = deliverSickScientist
-					getPlayerShip(-1):addReputationPoints(rep_bump)
+					if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 					mission_milestones = mission_milestones + 1
 					if mission_diagnostic then
 						print("player ship close enough to get doctor")
@@ -4579,7 +4579,7 @@ function deliverSickScientist(delta)
 					plot2reminder = nil
 					scientistRecoveryTimer = getScenarioTime() + 90
 					plot2 = keyToArtifact
-					getPlayerShip(-1):addReputationPoints(rep_bump)
+					if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 					mission_milestones = mission_milestones + 1
 					table.insert(command_log,{
 						name = "delivered scientist",
@@ -4703,7 +4703,7 @@ function destroyef3(delta)
 	end
 	if #ef3 < 1 then
 		mission_milestones = mission_milestones + 1
-		getPlayerShip(-1):addReputationPoints(rep_bump)
+		if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 		plot3 = chooseNextPlot3line
 	end
 end
@@ -4914,7 +4914,7 @@ function beamPhysicist(delta)
 			end
 		end
 		if beamPlayers == beam_upgrade_players then
-			getPlayerShip(-1):addReputationPoints(rep_bump)
+			if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 			betweenPlot3fleet()
 		end
 	else
@@ -5085,7 +5085,7 @@ function awaitingTractor(delta)
 									plot3name = "awaitRepairs"
 									plot3reminder = nil
 									plot3 = awaitRepairs
-									getPlayerShip(-1):addReputationPoints(rep_bump)
+									if getPlayerShip(-1):isValid() then getPlayerShip(-1):addReputationPoints(rep_bump) end
 									table.insert(command_log,{
 										name = "awaiting repairs",
 										long = string.format(_("goal-incCall","Station %s says: Thanks for bringing %s in for repairs, %s. We'll take it from here"),repairStation:getCallSign(),tractorShip:getCallSign(),playerCarrier:getCallSign()),
@@ -5227,6 +5227,7 @@ function destroyef4(delta)
 	end
 end
 function doNotPush(delta)
+	if not playerCarrier:isValid() then return end	-- a destroyed carrier has no methods
 	alienHack = false
 	doNotPushButton = "doNotPushButton"
 	playerCarrier:addCustomButton("Weapons",doNotPushButton,_("-buttonWeapons", "Do Not Push"),pushed)
@@ -5361,7 +5362,9 @@ function closestPlayerTo(obj)
 	if obj ~= nil and obj:isValid() then
 		local closest_player = nil
 		for i,p in ipairs(getActivePlayerShips()) do
-			if closest_player == nil then
+			if p:getPosition() == nil then
+				-- stored in a carrier hangar: the engine drops its Transform (docking.cpp), so it has no position to measure
+			elseif closest_player == nil then
 				closest_player = p
 			else
 				if distance(p,obj) < distance(obj,closest_player) then
@@ -5379,7 +5382,9 @@ function farthestPlayerFrom(obj)
 	if obj ~= nil and obj:isValid() then
 		local farthest_player = nil
 		for i,p in ipairs(getActivePlayerShips()) do
-			if farthest_player == nil then
+			if p:getPosition() == nil then
+				-- stored in a carrier hangar: no Transform, no position
+			elseif farthest_player == nil then
 				farthest_player = p
 			else
 				if distance(p,obj) > distance(obj,farthest_player) then

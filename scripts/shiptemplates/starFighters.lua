@@ -85,7 +85,7 @@ variation:setTubes(1, 20.0)
 variation:setTubeSize(0, "small")
 variation:setWeaponStorage("HVLI", 2)
 
-var2 = variation:copy("Adder MK3"):setLocaleName(_("ship", "Adder MK3"))
+local var2 = variation:copy("Adder MK3"):setLocaleName(_("ship", "Adder MK3"))
 var2:setDescription(_([[The Adder MK3 is one of the first of the Adder line to meet with some success. A large number of them were made before the manufacturer went through its first bankruptcy. There has been a recent surge of purchases of the Adder MK3 in the secondary market due to its low price and its similarity to subsequent models. Compared to the Adder MK4, the Adder MK3 has weaker shields and hull, but a faster turn speed]]))
 var2:setHull(35)
 var2:setShields(15)
