@@ -103,25 +103,7 @@ SpectatorScreen::SpectatorScreen(RenderLayer* render_layer)
 
     new GuiIndicatorOverlays(this);
 
-    keyboard_help = new GuiHelpOverlay(this, tr("hotkey_F1", "Keyboard Shortcuts"));
-    bool show_additional_shortcuts_string = false;
-    string keyboard_help_text = "";
-
-    for (const auto& category : {tr("hotkey_menu", "Spectator view"), tr("hotkey_menu", "Top-down view")})
-    {
-        for (auto binding : sp::io::Keybinding::listAllByCategory(tr(category)))
-        {
-            if (binding->isBound())
-                keyboard_help_text += binding->getLabel() + ": " + binding->getHumanReadableKeyName(0) + "\n";
-            else
-                show_additional_shortcuts_string = true;
-        }
-    }
-
-    if (show_additional_shortcuts_string)
-        keyboard_help_text += "\n" + tr("More shortcuts available in settings") + "\n";
-
-    keyboard_help->setText(keyboard_help_text);
+    keyboard_help = new GuiHotkeyHelpOverlay(this, {tr("hotkey_menu", "General"), tr("hotkey_menu", "Spectator view"), tr("hotkey_menu", "Top-down view")});
     keyboard_help->moveToFront();
 
     new GuiIndicatorOverlays(this);
