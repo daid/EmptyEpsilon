@@ -29,6 +29,8 @@
 
 #include "hardwareMappingEffects.h"
 
+#include <numeric>
+
 HardwareController::~HardwareController()
 {
     for(HardwareOutputDevice* device : devices)
@@ -355,6 +357,14 @@ HardwareMappingEffect* HardwareController::createEffect(std::unordered_map<strin
     return nullptr;
 }
 
+namespace
+{
+    template <typename Container, typename Function> float SUM(Container items, Function func)
+    {
+        return static_cast<float>(std::transform_reduce(items.cbegin(), items.cend(), 0, std::plus{}, func));
+    }
+}
+
 #define SHIP_VARIABLE(name, COMP, formula) if (variable_name == name) { if (auto c = ship.getComponent<COMP>()) { value = (formula); return true; } return false; }
 #define SHIP_VARIABLE2(name, formula) if (variable_name == name) { if (c) { value = (formula); return true; } return false; }
 bool HardwareController::getVariableValue(string variable_name, float& value)
@@ -410,7 +420,9 @@ bool HardwareController::getVariableValue(string variable_name, float& value)
         SHIP_VARIABLE("TubeLoading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Loading ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeUnloading" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Unloading ? 1.0f : 0.0f);
         SHIP_VARIABLE("TubeFiring" + string(n), MissileTubes, c->mounts.size() > n && c->mounts[n].state == MissileTubes::MountPoint::State::Firing ? 1.0f : 0.0f);
+        SHIP_VARIABLE("TubeFired" + string(n), MissileTubes, c->mounts.size() > n ? static_cast<float>(c->mounts[n].fired) : 0.0f);
     }
+    SHIP_VARIABLE("TubeFired", MissileTubes, SUM(c->mounts, [](const MissileTubes::MountPoint & tube){return tube.fired;}));
     for(int n=0; n<ShipSystem::COUNT; n++)
     {
         auto c = ShipSystem::get(ship, static_cast<ShipSystem::Type>(n));
