@@ -1269,6 +1269,11 @@ msgctxt "button"
 msgid "Intercept all comms"
 msgstr "Intercepter toute comm."
 
+#: src/screens/gm/gameMasterScreen.cpp:50
+msgctxt "gm_info"
+msgid "Shield {n}"
+msgstr "Bouclier {n}"
+
 #: src/screens/gm/gameMasterScreen.cpp:64
 msgctxt "button"
 msgid "Global message"

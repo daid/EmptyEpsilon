@@ -947,6 +947,11 @@ msgctxt "gm_info"
 msgid "Hull"
 msgstr "Hülle"
 
+#: src/screens/gm/gameMasterScreen.cpp:50
+msgctxt "gm_info"
+msgid "Shield {n}"
+msgstr "Schild {n}"
+
 #: src/screens/spectatorScreen.cpp:280 src/screens/gm/gameMasterScreen.cpp:410
 msgid "gm_info"
 msgstr "gm_info"
