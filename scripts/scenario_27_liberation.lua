@@ -3222,7 +3222,9 @@ function finalNovaExplosion()
 			if final_nova_objects_index < #nova_objects then
 				for i=final_nova_objects_index,#nova_objects do
 					local obj=nova_objects[i]
-					if obj.nova_dist <= rescue_star_radius then
+					if not obj:isValid() then
+						-- destroyed since it was measured: its fields are gone (nova_dist nil), skip it
+					elseif obj.nova_dist <= rescue_star_radius then
 						if obj.check_boom == nil then
 							obj.check_boom = true
 							local chance = original_star_radius/rescue_star_radius
@@ -3354,7 +3356,9 @@ function novaDemoArtifact()
 					if nova_objects_index < #nova_objects then
 						for i=nova_objects_index,#nova_objects do
 							local obj=nova_objects[i]
-							if obj.nova_dist <= star_radius then
+							if not obj:isValid() then
+								-- destroyed since it was measured: its fields are gone (nova_dist nil), skip it
+							elseif obj.nova_dist <= star_radius then
 								if obj.check_boom == nil then
 									obj.check_boom = true
 									local chance = original_star_radius/star_radius

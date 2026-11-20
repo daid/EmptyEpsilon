@@ -77,7 +77,7 @@ function no_reply()
 end
 
 function mission_start_state(delta)
-    if player1:getReputationPoints() >= reputation_threshold and debris_interactions>=interaction_threshold then
+    if player1:isValid() and player1:getReputationPoints() >= reputation_threshold and debris_interactions>=interaction_threshold then
         mission_state=unusual_readings
     end
     if not areBeamShieldFrequenciesUsed() then
