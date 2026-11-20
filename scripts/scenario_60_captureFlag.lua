@@ -5673,6 +5673,30 @@ function handleDockedState()
 		end
 	end
 end
+------------------------
+--	Cargo management  --
+------------------------
+function incrementPlayerGoods(goodsType)
+	for gi=1,#goods[comms_source] do
+		if goods[comms_source][gi][1] == goodsType then
+			goods[comms_source][gi][2] = goods[comms_source][gi][2] + 1
+		end
+	end
+end
+function decrementPlayerGoods(goodsType)
+	for gi=1,#goods[comms_source] do
+		if goods[comms_source][gi][1] == goodsType then
+			goods[comms_source][gi][2] = goods[comms_source][gi][2] - 1
+		end
+	end
+end
+function decrementStationGoods(goodsType)
+	for gi=1,#goods[comms_target] do
+		if goods[comms_target][gi][1] == goodsType then
+			goods[comms_target][gi][2] = goods[comms_target][gi][2] - 1
+		end
+	end
+end
 function isAllowedTo(state)
     if state == "friend" and comms_source:isFriendly(comms_target) then
         return true
