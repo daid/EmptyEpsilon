@@ -6,6 +6,7 @@
 GuiButton::GuiButton(GuiContainer* owner, string id, string text, func_t func)
 : GuiElement(owner, id), text(text), func(func)
 {
+    intercepts_pointer = true;
     text_size = -1;
     back_style = theme->getStyle("button.back");
     front_style = theme->getStyle("button.front");
