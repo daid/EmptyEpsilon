@@ -3,6 +3,10 @@ function getSpawnableGMObjects()
     result[#result+1] = {function() return Artifact() end, _("create", "Artifact"), _("create", "Various"), "", "radar/blip.png"}
     result[#result+1] = {function() return WarpJammer() end, _("create", "Warp jammer"), _("create", "Various"), "", "radar/blip.png"}
     result[#result+1] = {function() return Mine() end, _("create", "Mine"), _("create", "Various"), "", "radar/blip.png"}
+    result[#result+1] = {function() return HomingMissile() end, _("create", "Homing missile"), _("create", "Missiles"), "", "radar/missile.png"}
+    result[#result+1] = {function() return Nuke() end, _("create", "Nuke"), _("create", "Missiles"), "", "radar/missile.png"}
+    result[#result+1] = {function() return EMPMissile() end, _("create", "EMP missile"), _("create", "Missiles"), "", "radar/missile.png"}
+    result[#result+1] = {function() return HVLI() end, _("create", "HVLI"), _("create", "Missiles"), "", "radar/missile.png"}
     result[#result+1] = {function() return SupplyDrop():setEnergy(500):setWeaponStorage('Nuke', 1):setWeaponStorage('Homing', 4):setWeaponStorage('Mine', 2):setWeaponStorage('EMP', 1) end, _("create", "Supply drop"), _("create", "Various"), "", "radar/blip.png"}
     result[#result+1] = {function() return ScanProbe() end, _("create", "Scan probe"), _("create", "Various"), "", "radar/probe.png"}
     result[#result+1] = {function() return Asteroid() end, _("create", "Asteroid"), _("create", "Various"), "", "radar/blip.png"}
