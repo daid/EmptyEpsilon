@@ -300,6 +300,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
 
+    //Science Description component
+    ADD_PAGE(tr("tweak-tab", "Science Description"), ScienceDescription);
+    ADD_LABEL(tr("tweak-text", "Entity will be fully scanned from the start, unless a Scan State component is added"));
+    ADD_TEXT_TWEAK(tr("tweak-text", "Not scanned:"), ScienceDescription, not_scanned);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Friend or Foe identified:"), ScienceDescription, friend_or_foe_identified);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Simple scan:"), ScienceDescription, simple_scan);
+    ADD_TEXT_TWEAK(tr("tweak-text", "Fully scanned:"), ScienceDescription, full_scan);
+
+    //Scan State component
+    ADD_PAGE(tr("tweak-tab", "Scan State"), ScanState);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow simple scan:"), ScanState, allow_simple_scan);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scan Complexity:"), ScanState, complexity);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scan Depth:"), ScanState, depth);
+
     // Transform component, custom implementation since it uses functions
     // instead of direct access to members
     ADD_PAGE(tr("tweak-tab", "Transform"), sp::Transform);
