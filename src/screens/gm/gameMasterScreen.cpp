@@ -836,11 +836,11 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
         {
             std::vector<sp::ecs::Entity> entities;
 
-            auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            auto findTargets = [&](float add_radius, std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
-                    auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                    auto size = (physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f) + add_radius;
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
@@ -867,14 +867,14 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
             // Select entities in the bounding box.
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
-                findTargets([&](auto entity, auto) { entities.push_back(entity); });
-            // If no box, select the nearest entity by screen distance.
+                findTargets(0.0f, [&](auto entity, auto) { entities.push_back(entity); });
+            // If no box, select the nearest entity with a slightly wider search area.
             else
             {
                 sp::ecs::Entity closest_entity;
                 float closest_dist2 = std::numeric_limits<float>::max();
 
-                findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
+                findTargets(10.0f / main_radar->getScale(), [&](sp::ecs::Entity entity, sp::Transform& transform)
                     {
                         const float dist2 = glm::length2(transform.getPosition() - position);
 
