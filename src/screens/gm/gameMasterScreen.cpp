@@ -872,27 +872,21 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
             else
             {
                 sp::ecs::Entity closest_entity;
-                float closest_score = std::numeric_limits<float>::max();
-                glm::vec2 click_screen = main_radar->worldToScreen(position);
+                float closest_dist2 = std::numeric_limits<float>::max();
 
                 findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
                     {
-                        const float screen_dist = glm::length(main_radar->worldToScreen(transform.getPosition()) - click_screen);
-                        float screen_radius = 0.0f;
+                        const float dist2 = glm::length2(transform.getPosition() - position);
 
-                        if (auto physics = entity.getComponent<sp::Physics>())
-                            screen_radius = physics->getSize().x * main_radar->getScale();
-
-                        const float score = std::max(0.0f, screen_dist - screen_radius);
-                        if (score < closest_score)
+                        if (dist2 < closest_dist2)
                         {
-                            closest_score = score;
+                            closest_dist2 = dist2;
                             closest_entity = entity;
                         }
                     }
                 );
 
-                if (closest_score != std::numeric_limits<float>::max())
+                if (closest_dist2 != std::numeric_limits<float>::max())
                     entities.push_back(closest_entity);
             }
 
