@@ -189,15 +189,23 @@ void TargetsContainer::setToClosestTo(glm::vec2 position, float max_range, ESele
     {
         if (auto waypoints = my_spaceship.getComponent<Waypoints>())
         {
+            int best_waypoint_idx = -1;
+
             for (size_t n = 0; n < waypoints->waypoints.size(); n++)
             {
                 if (glm::length2(waypoints->waypoints[n].position - position) < max_range * max_range
-                    && (!target || glm::length2(position - waypoints->waypoints[n].position) < glm::length2(position - target_position)))
+                    && ((!target && best_waypoint_idx == -1) || glm::length2(position - waypoints->waypoints[n].position) < glm::length2(position - target_position)))
                 {
-                    clear();
-                    waypoint_selection_index = waypoints->waypoints[n].id;
-                    return;
+                    best_waypoint_idx = n;
+                    target_position = waypoints->waypoints[n].position;
                 }
+            }
+
+            if (best_waypoint_idx != -1)
+            {
+                clear();
+                waypoint_selection_index = waypoints->waypoints[best_waypoint_idx].id;
+                return;
             }
         }
     }
