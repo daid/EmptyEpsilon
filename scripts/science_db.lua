@@ -158,7 +158,8 @@ local homing_stats = { _('Kinetic'),  35,  5,   30 / 1000, 200 / 1000, 10, 27.0,
 local nuke_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
 local emp_stats    = { _('EMP'),     160, 30, 1000 / 1000, 200 / 1000, 10, 27.0,  500 / 1000 }
 local hvli_stats   = { _('Kinetic'),  10, 10,   20 / 1000, 500 / 1000,  0, 13.5,    0 }
-local mine_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 100 / 1000,  0, 10.0, 1000 / 1000 }
+-- For medium size: damage type, damage at center, damage at edge, blast radius, launch speed, turn rate, arming delay, trigger distance
+local mine_stats   = { _('Kinetic'), 160, 30, 1000 / 1000, 100 / 1000,  0, 10.0, 600 / 1000 }
 -- Mine speed is upon ejection, lifetime is duration from launch to activation, homing range is detection radius
 
 local function populateMissileStats(__item, __keys, __stats)
