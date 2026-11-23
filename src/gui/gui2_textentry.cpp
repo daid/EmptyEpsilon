@@ -38,7 +38,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
     }
     if (shown_text.empty()) shown_text = " ";
     sp::Rect text_rect(rect.position.x + 16, rect.position.y, rect.size.x - 32, rect.size.y);
-    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip);
+    auto prepared = front.font->prepare(shown_text, 32, text_size, {255,255,255,255}, text_rect.size, multiline ? sp::Alignment::TopLeft : sp::Alignment::CenterLeft, sp::Font::FlagClip | sp::Font::FlagLineWrap);
     auto linespacing = front.font->getLineSpacing(32) * text_size / float(32);
 
     if (multiline) {
@@ -127,7 +127,7 @@ void GuiTextEntry::onDraw(sp::RenderTarget& renderer)
             }
         }
     }
-    renderer.drawText(text_rect, prepared, sp::Font::FlagClip);
+    renderer.drawText(text_rect, prepared, sp::Font::FlagClip | sp::Font::FlagLineWrap);
 }
 
 bool GuiTextEntry::onMouseDown(sp::io::Pointer::Button button, glm::vec2 position, sp::io::Pointer::ID id)
