@@ -836,11 +836,11 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
         {
             std::vector<sp::ecs::Entity> entities;
 
-            auto findTargets = [&](std::function<void(sp::ecs::Entity, sp::Transform&)> found)
+            auto findTargets = [&](float add_radius, std::function<void(sp::ecs::Entity, sp::Transform&)> found)
             {
                 for (auto [entity, transform, physics] : sp::ecs::Query<sp::Transform, sp::ecs::optional<sp::Physics>>())
                 {
-                    auto size = physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f;
+                    auto size = (physics ? std::max(physics->getSize().x, physics->getSize().y) : 0.0f) + add_radius;
                     if (transform.getPosition().x + size < std::min(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().x - size > std::max(drag_start_position.x, position.x)) continue;
                     if (transform.getPosition().y + size < std::min(drag_start_position.y, position.y)) continue;
@@ -867,32 +867,26 @@ void GameMasterScreen::onMouseUp(glm::vec2 position)
 
             // Select entities in the bounding box.
             if (click_and_drag_state == ClickAndDragState::BoxSelect)
-                findTargets([&](auto entity, auto) { entities.push_back(entity); });
-            // If no box, select the nearest entity by screen distance.
+                findTargets(0.0f, [&](auto entity, auto) { entities.push_back(entity); });
+            // If no box, select the nearest entity with a slightly wider search area.
             else
             {
                 sp::ecs::Entity closest_entity;
-                float closest_score = std::numeric_limits<float>::max();
-                glm::vec2 click_screen = main_radar->worldToScreen(position);
+                float closest_dist2 = std::numeric_limits<float>::max();
 
-                findTargets([&](sp::ecs::Entity entity, sp::Transform& transform)
+                findTargets(10.0f / main_radar->getScale(), [&](sp::ecs::Entity entity, sp::Transform& transform)
                     {
-                        const float screen_dist = glm::length(main_radar->worldToScreen(transform.getPosition()) - click_screen);
-                        float screen_radius = 0.0f;
+                        const float dist2 = glm::length2(transform.getPosition() - position);
 
-                        if (auto physics = entity.getComponent<sp::Physics>())
-                            screen_radius = physics->getSize().x * main_radar->getScale();
-
-                        const float score = std::max(0.0f, screen_dist - screen_radius);
-                        if (score < closest_score)
+                        if (dist2 < closest_dist2)
                         {
-                            closest_score = score;
+                            closest_dist2 = dist2;
                             closest_entity = entity;
                         }
                     }
                 );
 
-                if (closest_score != std::numeric_limits<float>::max())
+                if (closest_dist2 != std::numeric_limits<float>::max())
                     entities.push_back(closest_entity);
             }
 
