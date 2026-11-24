@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-11-20 18:50+0100\n"
+"PO-Revision-Date: 2026-11-24 02:13+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -1423,78 +1423,67 @@ msgstr "{callsign} - Communiquer comme {target}"
 #: src/screens/gm/tweak.cpp:270
 msgctxt "tweak-text"
 msgid "Health:"
-msgstr ""
+msgstr "État de santé actuel [-1 à Santé max] : "
 
 #: src/screens/gm/tweak.cpp:271
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Health max:"
-msgstr "Niveau max de la coque :"
+msgstr "Santé max [-1 à 1] : "
 
 #: src/screens/gm/tweak.cpp:272
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Heat:"
-msgstr "Surchauffe"
+msgstr "Surchauffe en cours (c%) : "
 
 #: src/screens/gm/tweak.cpp:273
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Can be hacked:"
-msgstr "Peut pirater"
+msgstr "Peut être piraté : "
 
 #: src/screens/gm/tweak.cpp:274
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Power factor:"
-msgstr "Taux de puissance"
+msgstr "Quantité d'énergie tirée (facteur) : "
 
 #: src/screens/gm/tweak.cpp:275
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Heat rate:"
-msgstr "Taux de chaleur"
+msgstr "Vitesse de production de chaleur (taux) : "
 
 #: src/screens/gm/tweak.cpp:276
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Coolant change rate:"
-msgstr "Recharge man. de combat"
+msgstr "Vitesse de réglage du liq. de refroid. (taux) : "
 
 #: src/screens/gm/tweak.cpp:277
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Power change rate:"
-msgstr "Gestion puissance"
+msgstr "Vitesse de réglage de la puissance (taux) : "
 
 #: src/screens/gm/tweak.cpp:278
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Auto repair rate:"
-msgstr "Réparation auto"
+msgstr "Vitesse de réparation auto (taux/0.005) : "
 
 #: src/screens/gm/tweak.cpp:305
 msgctxt "tweak-tab"
 msgid "Transform"
-msgstr ""
+msgstr "Position/Rotation"
 
 #: src/screens/gm/tweak.cpp:312
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Position X:"
-msgstr "Position X :"
+msgstr "Position X : "
 
 #: src/screens/gm/tweak.cpp:334
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Position Y:"
-msgstr "Position Y :"
+msgstr "Position Y : "
 
 #: src/screens/gm/tweak.cpp:356
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Rotation:"
-msgstr "Réputation actuelle :"
+msgstr "Rotation (°) : "
 
 #: src/screens/gm/tweak.cpp:377
 msgctxt "tweak-tab"
@@ -1502,34 +1491,29 @@ msgid "Physics"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:380
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Callsign"
-msgstr "Nom"
+msgstr ">Nom"
 
 #: src/screens/gm/tweak.cpp:381
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Callsign:"
-msgstr "Nom :"
+msgstr "Nom : "
 
 #: src/screens/gm/tweak.cpp:383
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Type name"
-msgstr "Type :"
+msgstr ">Modèle"
 
 #: src/screens/gm/tweak.cpp:384
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Type name:"
-msgstr "Type :"
+msgstr "Nom du modèle : "
 
 #: src/screens/gm/tweak.cpp:385
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Localized:"
-msgstr "Traduction :"
+msgstr "Alias : "
 
 #: src/screens/gm/tweak.cpp:387
 #, fuzzy
@@ -1541,7 +1525,7 @@ msgstr "Liq. de refr."
 #: src/screens/gm/tweak.cpp:466
 msgctxt "tweak-text"
 msgid "Max:"
-msgstr ""
+msgstr "Max : "
 
 #: src/screens/gm/tweak.cpp:389
 #, fuzzy
@@ -1556,22 +1540,19 @@ msgid "Auto levels:"
 msgstr "Niveau d'alerte"
 
 #: src/screens/gm/tweak.cpp:392
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Hull"
-msgstr "Coque"
+msgstr ">Coque"
 
 #: src/screens/gm/tweak.cpp:393
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Current:"
-msgstr "Énergie actuelle :"
+msgstr "État actuel : "
 
 #: src/screens/gm/tweak.cpp:395
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow destruction:"
-msgstr "Autodestruction"
+msgstr "Peut être détruit : "
 
 #: src/screens/gm/tweak.cpp:397
 #, fuzzy
@@ -1642,32 +1623,29 @@ msgid "Seconds to full recharge from 0:"
 msgstr ""
 
 #: src/screens/gm/tweak.cpp:414
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Beam system"
-msgstr "Système ciblé :"
+msgstr "Faisceaux laser"
 
 #: src/screens/gm/tweak.cpp:415 src/screens/gm/tweak.cpp:462
 msgctxt "tweak-text"
 msgid "Frequency:"
-msgstr ""
+msgstr "Fréquence sélectionnée (THz) : "
 
 #: src/screens/gm/tweak.cpp:416
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Beam weapons system"
-msgstr "Sélectionner les faisceaux laser"
+msgstr "Système de faisceaux laser              "
 
 #: src/screens/gm/tweak.cpp:419
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Beam mounts"
-msgstr "Faisceaux laser"
+msgstr "Faisceaux laser (suite)"
 
 #: src/screens/gm/tweak.cpp:420 src/screens/gm/tweak.cpp:445
 msgctxt "tweak-vector"
 msgid "Mounts"
-msgstr ""
+msgstr "Tube/faisceau monté n° "
 
 #: src/screens/gm/tweak.cpp:421
 #, fuzzy
@@ -1676,10 +1654,9 @@ msgid "Arc:"
 msgstr "Amplitude de l'arc :"
 
 #: src/screens/gm/tweak.cpp:422 src/screens/gm/tweak.cpp:446
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Direction:"
-msgstr "Orientation :"
+msgstr "Orientation (°) : "
 
 #: src/screens/gm/tweak.cpp:423
 #, fuzzy
@@ -1718,150 +1695,134 @@ msgid "Turret rotation rate:"
 msgstr "Tourelle : vitesse de rotation"
 
 #: src/screens/gm/tweak.cpp:430
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Missile system"
-msgstr "Système de missiles"
+msgstr ">Missiles"
 
 #: src/screens/gm/tweak.cpp:431
 msgctxt "tweak-text"
 msgid "Homing missiles:"
-msgstr ""
+msgstr "Stock actuel Homing : "
 
 #: src/screens/gm/tweak.cpp:432
 msgctxt "tweak-text"
 msgid "Homing capacity:"
-msgstr ""
+msgstr "Capacité de stockage max Homing : "
 
 #: src/screens/gm/tweak.cpp:433
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Nuke missiles:"
-msgstr "Missiles"
+msgstr "Stock actuel Nuke : "
 
 #: src/screens/gm/tweak.cpp:434
 msgctxt "tweak-text"
 msgid "Nuke capacity:"
-msgstr ""
+msgstr "Capacité de stockage max Nuke : "
 
 #: src/screens/gm/tweak.cpp:435
-#, fuzzy
 msgctxt "tweak-text"
 msgid "EMP missiles:"
-msgstr "Missiles"
+msgstr "Stock actuel EMP : "
 
 #: src/screens/gm/tweak.cpp:436
 msgctxt "tweak-text"
 msgid "EMP capacity:"
-msgstr ""
+msgstr "Capacité de stockage max EMP : "
 
 #: src/screens/gm/tweak.cpp:437
-#, fuzzy
 msgctxt "tweak-text"
 msgid "HVLI missiles:"
-msgstr "Missiles"
+msgstr "Stock actuel HVLI : "
 
 #: src/screens/gm/tweak.cpp:438
 msgctxt "tweak-text"
 msgid "HVLI capacity:"
-msgstr ""
+msgstr "Capacité de stockage max HVLI : "
 
 #: src/screens/gm/tweak.cpp:439
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Mines:"
-msgstr "Mines"
+msgstr "Stock actuel Mine : "
 
 #: src/screens/gm/tweak.cpp:440
 msgctxt "tweak-text"
 msgid "Mines capacity:"
-msgstr ""
+msgstr "Capacité de stockage max Mine : "
 
 #: src/screens/gm/tweak.cpp:441
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Missile weapons system"
-msgstr "Sélectionner le système de missiles"
+msgstr "Système de missiles                    "
 
 #: src/screens/gm/tweak.cpp:444
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Missile mounts"
-msgstr "Missiles"
+msgstr ">Tubes"
 
 #: src/screens/gm/tweak.cpp:447
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Load time:"
-msgstr "Temps de chargement :"
+msgstr "Temps de (dé)chargement (s) : "
 
 #: src/screens/gm/tweak.cpp:448
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Size:"
-msgstr "Taille :"
+msgstr "Taille : "
 
 #: src/screens/gm/tweak.cpp:449
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow homing:"
-msgstr "Sélectionner homing"
+msgstr "Homing autorisés : "
 
 #: src/screens/gm/tweak.cpp:450
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow nuke:"
-msgstr "Missiles autorisés :"
+msgstr "Nuke autorisés : "
 
 #: src/screens/gm/tweak.cpp:451
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow mine:"
-msgstr "Missiles autorisés :"
+msgstr "Mine autorisés : "
 
 #: src/screens/gm/tweak.cpp:452
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow EMP:"
-msgstr "Missiles autorisés :"
+msgstr "EMP autorisés : "
 
 #: src/screens/gm/tweak.cpp:453
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Allow HVLI:"
-msgstr "Missiles autorisés :"
+msgstr "HVLI autorisés : "
 
 #: src/screens/gm/tweak.cpp:455
 msgctxt "tweak-tab"
 msgid "Shields"
-msgstr "Boucliers"
+msgstr ">Boucliers"
 
 #: src/screens/gm/tweak.cpp:460 src/screens/gm/tweak.cpp:515
 msgctxt "tweak-text"
 msgid "Active:"
-msgstr ""
+msgstr "Activation : "
 
 #: src/screens/gm/tweak.cpp:461
 msgctxt "tweak-text"
 msgid "Seconds to recalibrate:"
-msgstr ""
+msgstr "Délai de recalibration : "
 
 #: src/screens/gm/tweak.cpp:463
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Energy use per second:"
-msgstr "Énergie utilisée par tir :"
+msgstr "Énergie tirée si activés (E/s) : "
 
 #: src/screens/gm/tweak.cpp:464
-#, fuzzy
 msgctxt "tweak-vector"
 msgid "Shields"
-msgstr "Boucliers"
+msgstr "Bouclier n° "
 
 #: src/screens/gm/tweak.cpp:465
 msgctxt "tweak-text"
 msgid "Level:"
-msgstr ""
+msgstr "État actuel : "
 
 #: src/screens/gm/tweak.cpp:468
 #, fuzzy
@@ -1899,22 +1860,19 @@ msgid "Jump drive"
 msgstr "Téléportation"
 
 #: src/screens/gm/tweak.cpp:476
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Min distance:"
-msgstr "Portée de saut min :"
+msgstr "Portée de saut min (u) : "
 
 #: src/screens/gm/tweak.cpp:477
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Max distance:"
-msgstr "Portée de saut max :"
+msgstr "Portée de saut max (u) : "
 
 #: src/screens/gm/tweak.cpp:478
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Jump drive system"
-msgstr "Sélectionner la téléportation"
+msgstr "Système de téléportation                "
 
 #: src/screens/gm/tweak.cpp:485
 #, fuzzy
@@ -1929,51 +1887,44 @@ msgid "Control code:"
 msgstr "Code de contrôle :"
 
 #: src/screens/gm/tweak.cpp:488
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Reactor"
 msgstr "Réacteur"
 
 #: src/screens/gm/tweak.cpp:489
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Energy:"
-msgstr "Énergie"
+msgstr "Niveau d'énergie actuel : "
 
 #: src/screens/gm/tweak.cpp:490
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Max energy:"
-msgstr "Énergie max :"
+msgstr "Niveau d'énergie max : "
 
 #: src/screens/gm/tweak.cpp:491
 msgctxt "tweak-text"
 msgid "Explode on overload:"
-msgstr ""
+msgstr "Explose en cas de surcharge : "
 
 #: src/screens/gm/tweak.cpp:492
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Reactor system"
-msgstr "Sélectionner le réacteur"
+msgstr "Système du réacteur :                 "
 
 #: src/screens/gm/tweak.cpp:495
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Radar"
-msgstr "Radar"
+msgstr ">Écrans radar"
 
 #: src/screens/gm/tweak.cpp:496
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Short-range radar range:"
-msgstr "Rayon du radar courte portée :"
+msgstr "Rayon du radar courte portée (mU) : "
 
 #: src/screens/gm/tweak.cpp:497
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Long-range radar range:"
-msgstr "Radar longue portée :"
+msgstr "Rayon du radar longue portée (mU) : "
 
 #: src/screens/gm/tweak.cpp:499
 #, fuzzy
@@ -1982,15 +1933,16 @@ msgid "Scanner"
 msgstr "Analyse"
 
 #: src/screens/gm/tweak.cpp:500
+#, fuzzy
 msgctxt "tweak-text"
 msgid "Countdown delay:"
-msgstr ""
+msgstr "Délai avant compte à rebours : "
 
 #: src/screens/gm/tweak.cpp:501
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Max delay:"
-msgstr "Énergie max :"
+msgstr "Délai maximum : "
 
 #: src/screens/gm/tweak.cpp:503
 msgctxt "tweak-tab"
@@ -2005,62 +1957,57 @@ msgstr ""
 #: src/screens/gm/tweak.cpp:506
 msgctxt "tweak-tab"
 msgid "Scan probe launcher"
-msgstr ""
+msgstr ">Sondes"
 
 #: src/screens/gm/tweak.cpp:507
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Stored probes:"
-msgstr "Stock actuel"
+msgstr "Stock actuel : "
 
 #: src/screens/gm/tweak.cpp:508
 msgctxt "tweak-text"
 msgid "Max probe storage:"
-msgstr ""
+msgstr "Capacité max de stockage : "
 
 #: src/screens/gm/tweak.cpp:509
 msgctxt "tweak-text"
 msgid "Probe restocking delay:"
-msgstr ""
+msgstr "Délai de réapprovisionnement toutes les (s) "
 
 #: src/screens/gm/tweak.cpp:511
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Hacking"
-msgstr "Type de piratage : "
+msgstr "Piratage"
 
 #: src/screens/gm/tweak.cpp:512
 msgctxt "tweak-text"
 msgid "Effectiveness:"
-msgstr ""
+msgstr "Efficacité : "
 
 #: src/screens/gm/tweak.cpp:514
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Self-destruct"
-msgstr "Autodestruction"
+msgstr ">Autodestruction"
 
 #: src/screens/gm/tweak.cpp:516
 msgctxt "tweak-text"
 msgid "Countdown:"
-msgstr ""
+msgstr "Compte à rebours (10s si non modifié) : "
 
 #: src/screens/gm/tweak.cpp:517
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Blast damage:"
-msgstr "Dommages supplémentaires"
+msgstr "Dommages causés : "
 
 #: src/screens/gm/tweak.cpp:518
 msgctxt "tweak-text"
 msgid "Blast radius:"
-msgstr ""
+msgstr "Rayon d'action (mU) : "
 
 #: src/screens/gm/tweak.cpp:520
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Radar obstruction"
-msgstr "Rotation des écrans radars"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:521 src/screens/gm/tweak.cpp:525
 msgctxt "tweak-text"
