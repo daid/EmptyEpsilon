@@ -1,16 +1,16 @@
 #include "systems/lifetimesystem.h"
 
-
 #include "components/missile.h"
 #include "components/lifetime.h"
 #include "ecs/query.h"
 #include "multiplayer_server.h"
 #include "systems/missilesystem.h"
+#include "menus/luaConsole.h"
+
 
 void LifeTimeSystem::update(float delta)
 {
     if (game_server) {
-        // TODO: Not really part of missile
         for(auto [entity, lifetime] : sp::ecs::Query<LifeTime>()) {
             lifetime.alive_for += delta;
             if (lifetime.alive_for >= lifetime.maximum) {
@@ -20,6 +20,9 @@ void LifeTimeSystem::update(float delta)
                             missilesystem->explode(entity, {}, *eot);
                         }
                     }
+                }
+                if (lifetime.on_expire){
+                     LuaConsole::checkResult(lifetime.on_expire.call<void>(entity));
                 }
                 entity.destroy();
             }
