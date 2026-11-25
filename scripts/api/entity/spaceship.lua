@@ -99,7 +99,7 @@ function Entity:getDockedWith()
     if self.components.docking_port and self.components.docking_port.state == "docked" then
         return self.components.docking_port.target
     end
-    return false
+    return nil
 end
 --- Returns the EDockingState value of this ship.
 --- 0 = Not docked
