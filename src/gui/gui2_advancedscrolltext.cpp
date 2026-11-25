@@ -104,12 +104,13 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
         if (is_resized){ prepEntry(e); }
 
         const float height = e.prepared_text.getUsedAreaSize().y;
+        // Prepared glyph positions are baselines; the first one sits one line spacing
+        // below the top of the line, so draw_offset - y_start is the entry's top edge.
+        const float y_start = e.prepared_prefix.data[0].position.y;
 
         if (draw_offset + height > 0
-            && draw_offset < rect.size.y)
+            && draw_offset - y_start < rect.size.y)
         {
-            const float y_start = e.prepared_prefix.data[0].position.y;
-
             auto prepared_prefix = e.prepared_prefix;
             auto prepared_text = e.prepared_text;
             for(auto& g : prepared_prefix.data)
@@ -128,7 +129,17 @@ void GuiAdvancedScrollText::onDraw(sp::RenderTarget& renderer)
     }
 
     //Calculate how many lines we have to display in total.
-    const int line_count = (draw_offset - text_size - 12.0f) + scrollbar->getValue();
+    int line_count = (draw_offset - text_size - 12.0f) + scrollbar->getValue();
+    if (!entries.empty())
+    {
+        // Entry heights span from the top of the first line to the last baseline. Pad the
+        // range by the gap the draw offset leaves above the first line, the same gap below
+        // the last, and room for descenders. The font API exposes no descent; 0.25 of the
+        // line spacing covers BigShouldersDisplay (descent 0.213 em, line spacing 1.197 em).
+        const float line_spacing = entries.front().prepared_prefix.data[0].position.y;
+        const float top_gap = text_size + 12.0f - line_spacing;
+        line_count += 2.0f * top_gap + 0.25f * line_spacing;
+    }
 
     //Check if we need to update the scroll bar.
     if (scrollbar->getMax() != line_count)
