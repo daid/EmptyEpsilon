@@ -7,6 +7,7 @@
 GuiListbox::GuiListbox(GuiContainer* owner, string id, func_t func)
 : GuiEntryList(owner, id, func), text_size(30), button_height(50), text_alignment(sp::Alignment::Center)
 {
+    intercepts_pointer = true;
     scroll = new GuiScrollbar(this, id + "_SCROLL", 0, 0, 0, [](int value) {});
     scroll
         ->setClickChange(button_height)

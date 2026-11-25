@@ -1,5 +1,4 @@
-#ifndef GUI2_BUTTON_H
-#define GUI2_BUTTON_H
+#pragma once
 
 #include "gui2_element.h"
 
@@ -33,5 +32,3 @@ public:
     string getText() const;
     string getIcon() const;
 };
-
-#endif//GUI2_BUTTON_H
