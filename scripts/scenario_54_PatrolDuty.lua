@@ -6755,7 +6755,7 @@ function afterPatrol(delta)
 			if closestUtopiaPlayer ~= nil then
 				closestUtopiaPlayer_timer = play_button_expire_time
 				stationUtopiaPlanitia:sendCommsMessage(closestUtopiaPlayer, _("UPlanitia1Audio-incCall", "Audio message received, auto-transcribed to log, stored for playback: UTPLNT441"))
-				closestUtopiaPlayer:addToShipLog(_("UPlanitia1Audio-shipLog", "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia","Yellow"))
+				closestUtopiaPlayer:addToShipLog(_("UPlanitia1Audio-shipLog", "[UTPLNT441](Utopia Planitia) Our long range sensors show a number of enemy ships approaching. Cease patrolling other stations and defend station Utopia Planitia"),"Yellow")
 				if defendUtopiaMsgButton == nil then
 					defendUtopiaMsgButton = "defendUtopiaMsgButton"
 					closestUtopiaPlayer:addCustomButton("Relay",defendUtopiaMsgButton,_("UPlanitia1Audio-buttonRelay", "|> UTPLNT441"),playDefendUtopiaMsg)
@@ -6841,7 +6841,7 @@ function defendUtopia(delta)
 				for pidx=1,8 do
 					p = getPlayerShip(pidx)
 					if p ~= nil and p:isValid() then
-						p:addToShipLog(_("UPlanitia2Audio-shipLog", "Nearest ships cleared. More to come shortly","Magenta"))
+						p:addToShipLog(_("UPlanitia2Audio-shipLog", "Nearest ships cleared. More to come shortly"),"Magenta")
 					end
 				end
 				longWave = 3
@@ -7284,7 +7284,7 @@ function minerWeaponsDecide(delta)
 	if sickMinerState == "base processed" then
 		if closestBethesdaPlayer:isValid() and closestBethesdaPlayer.receivedMinerResearch then
 			stationUtopiaPlanitia:sendCommsMessage(closestBethesdaPlayer,_("Koja8kUP-incCall", "Thanks for the information. We can upgrade you next time you dock."))
-			closestBethesdaPlayer:addToShipLog(_("Kojak8UP-shipLog", "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock","Magenta"))
+			closestBethesdaPlayer:addToShipLog(_("Kojak8UP-shipLog", "[Utopia Planitia] Thanks for the information. We can upgrade you next time you dock"),"Magenta")
 		end
 		plot2 = nil
 		minerUpgrade = true
@@ -7412,7 +7412,7 @@ function dropNabbit(delta)
 	if nabbitShip:isValid() and nabbitShip.nabbitAboard and stationArmstrong:isValid() then
 		if nabbitShip:isDocked(stationArmstrong) then
 			stationArmstrong:sendCommsMessage(nabbitShip,_("Nabbit3Audio-incCall", "Audio message received, auto-transcribed into log, stored for playback: ASTGDN038"))
-			nabbitShip:addToShipLog(_("Nabbit3Audio-shipLog", "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds","Yellow"))
+			nabbitShip:addToShipLog(_("Nabbit3Audio-shipLog", "[ASTGDN038](Dan McNabbit) Thanks for the ride. I've tuned your impulse engines en route. I transmitted my engine tuning parameters to Utopia Planitia. Expect faster impulse speeds"),"Yellow")
 			nabbitShip:setImpulseMaxSpeed(nabbitShip:getImpulseMaxSpeed()*1.2)
 			nabbitShip.nabbitUpgrade = true
 			nabbitUpgrade = true
