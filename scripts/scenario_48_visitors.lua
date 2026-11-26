@@ -6427,7 +6427,7 @@ function checkOrbitingArtifactEvents(delta)
 					p:addCustomButton("Relay",sensor_data_timer_button,_("Polly-buttonRelay","Polly Scan Time"),function()
 						string.format("")
 						if getScenarioTime() > artifactSensorReadingTimer then
-							p:addToShipLog(_("Polly-shipLog","Scan complete","Yellow"))
+							p:addToShipLog(_("Polly-shipLog","Scan complete"),"Yellow")
 						else
 							p:addToShipLog(string.format(_("Polly-shipLog","%.1f seconds remain to be scanned"),remaining_scan_time),"Yellow")
 						end
