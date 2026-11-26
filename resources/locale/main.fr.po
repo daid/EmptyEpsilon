@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Empty Epsilon\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2026-11-24 02:13+0100\n"
+"PO-Revision-Date: 2026-11-26 19:26+0100\n"
 "Last-Translator: muerteFR\n"
 "Language-Team: muerteFR\n"
 "Language: fr_FR\n"
@@ -1062,9 +1062,8 @@ msgid "Warp drive speed"
 msgstr "Vitesse lumière max"
 
 #: src/screens/crew6/engineeringScreen.cpp:477
-#, fuzzy
 msgid "Time to jump activation"
-msgstr "Délai d'activation du saut ????"
+msgstr "Délai avant le saut"
 
 #: src/screens/crew6/engineeringScreen.cpp:477
 #: src/screenComponents/jumpControls.cpp:76
@@ -1448,7 +1447,7 @@ msgstr "Quantité d'énergie tirée (facteur) : "
 #: src/screens/gm/tweak.cpp:275
 msgctxt "tweak-text"
 msgid "Heat rate:"
-msgstr "Vitesse de production de chaleur (taux) : "
+msgstr "Vitesse de prod./réduc. de chaleur (taux) : "
 
 #: src/screens/gm/tweak.cpp:276
 msgctxt "tweak-text"
@@ -1516,10 +1515,9 @@ msgid "Localized:"
 msgstr "Alias : "
 
 #: src/screens/gm/tweak.cpp:387
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Coolant"
-msgstr "Liq. de refr."
+msgstr ">Liq. de refroidissement"
 
 #: src/screens/gm/tweak.cpp:388 src/screens/gm/tweak.cpp:394
 #: src/screens/gm/tweak.cpp:466
@@ -1528,16 +1526,15 @@ msgid "Max:"
 msgstr "Max : "
 
 #: src/screens/gm/tweak.cpp:389
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Max per system:"
-msgstr "Système ciblé :"
+msgstr "Max par système : "
 
 #: src/screens/gm/tweak.cpp:390
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Auto levels:"
-msgstr "Niveau d'alerte"
+msgstr "Niveaux automatiques : "
 
 #: src/screens/gm/tweak.cpp:392
 msgctxt "tweak-tab"
@@ -1555,72 +1552,64 @@ msgid "Allow destruction:"
 msgstr "Peut être détruit : "
 
 #: src/screens/gm/tweak.cpp:397
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Impulse engine"
-msgstr "Moteurs à impulsion"
+msgstr "> Moteurs à impulsion"
 
 #: src/screens/gm/tweak.cpp:398
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Speed forward:"
-msgstr "Avancer"
+msgstr "Vitesse max avant (1=0,06u/min;20=1,2u/min) : "
 
 #: src/screens/gm/tweak.cpp:399
 msgctxt "tweak-text"
 msgid "Speed reverse:"
-msgstr ""
+msgstr "Vitesse max arrière (1=0,06u/min;20=1,2u/min) : "
 
 #: src/screens/gm/tweak.cpp:400
 msgctxt "tweak-text"
 msgid "Acceleration forward:"
-msgstr ""
+msgstr "Vit. d'accélération/décel. avant : "
 
 #: src/screens/gm/tweak.cpp:401
 msgctxt "tweak-text"
 msgid "Acceleration reverse:"
-msgstr ""
+msgstr "Vit. d'accélération/décel. arrière : "
 
 #: src/screens/gm/tweak.cpp:402
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Impulse engine system"
-msgstr "Moteurs à impulsion"
+msgstr "Système des moteurs à impulsion         "
 
 #: src/screens/gm/tweak.cpp:405
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Maneuvering thrusters"
-msgstr "Manoeuvre"
+msgstr ">Manœuvre"
 
 #: src/screens/gm/tweak.cpp:406
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Rotational speed:"
-msgstr "Vitesse de calibration"
+msgstr "Vitesse de rotation (°/s) : "
 
 #: src/screens/gm/tweak.cpp:407
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Maneuvering thrusters system"
-msgstr "Sélectionner la manoeuvre"
+msgstr "Système de manœuvre                 "
 
 #: src/screens/gm/tweak.cpp:410
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Combat thrusters"
-msgstr "Manoeuvre de combat"
+msgstr ">Manœuvre de combat"
 
 #: src/screens/gm/tweak.cpp:411
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Charge available:"
-msgstr "Régénération"
+msgstr "Charge actuelle : "
 
 #: src/screens/gm/tweak.cpp:412
 msgctxt "tweak-text"
 msgid "Seconds to full recharge from 0:"
-msgstr ""
+msgstr "Délai de recharge complète (s) : "
 
 #: src/screens/gm/tweak.cpp:414
 msgctxt "tweak-tab"
@@ -1752,7 +1741,7 @@ msgstr "Capacité de stockage max Mine : "
 #: src/screens/gm/tweak.cpp:441
 msgctxt "tweak-text"
 msgid "Missile weapons system"
-msgstr "Système de missiles                    "
+msgstr "Système de missiles                  "
 
 #: src/screens/gm/tweak.cpp:444
 msgctxt "tweak-tab"
@@ -1825,39 +1814,36 @@ msgid "Level:"
 msgstr "État actuel : "
 
 #: src/screens/gm/tweak.cpp:468
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Warp drive"
-msgstr "Vitesse lumière"
+msgstr "> Vitesse lumière"
 
 #: src/screens/gm/tweak.cpp:469
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Max level:"
-msgstr "Énergie max :"
+msgstr "Nombre de niveau disponibles : "
 
 #: src/screens/gm/tweak.cpp:470
+#, fuzzy
 msgctxt "tweak-text"
 msgid "Speed per level:"
-msgstr ""
+msgstr "Vitesse par niveau (taux???) : "
 
 #: src/screens/gm/tweak.cpp:471
 #, fuzzy
 msgctxt "tweak-text"
 msgid "Energy per second:"
-msgstr "Production d'énergie"
+msgstr "Énergie tirée si activés (E/s???) : "
 
 #: src/screens/gm/tweak.cpp:472
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Warp drive system"
-msgstr "Vitesse lumière max"
+msgstr "Système de vitesse lumière              "
 
 #: src/screens/gm/tweak.cpp:475
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Jump drive"
-msgstr "Téléportation"
+msgstr ">Téléportation"
 
 #: src/screens/gm/tweak.cpp:476
 msgctxt "tweak-text"
@@ -1872,24 +1858,22 @@ msgstr "Portée de saut max (u) : "
 #: src/screens/gm/tweak.cpp:478
 msgctxt "tweak-text"
 msgid "Jump drive system"
-msgstr "Système de téléportation                "
+msgstr "Système de téléportation               "
 
 #: src/screens/gm/tweak.cpp:485
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Player ship"
-msgstr "Vaisseau joueur"
+msgstr ">Vaisseau joueur"
 
 #: src/screens/gm/tweak.cpp:486
-#, fuzzy
 msgctxt "tweak-text"
 msgid "Control code:"
-msgstr "Code de contrôle :"
+msgstr "Code de contrôle MJ du vaisseau : "
 
 #: src/screens/gm/tweak.cpp:488
 msgctxt "tweak-tab"
 msgid "Reactor"
-msgstr "Réacteur"
+msgstr ">Réacteur"
 
 #: src/screens/gm/tweak.cpp:489
 msgctxt "tweak-text"
@@ -1909,7 +1893,7 @@ msgstr "Explose en cas de surcharge : "
 #: src/screens/gm/tweak.cpp:492
 msgctxt "tweak-text"
 msgid "Reactor system"
-msgstr "Système du réacteur :                 "
+msgstr "Système du réacteur                   "
 
 #: src/screens/gm/tweak.cpp:495
 msgctxt "tweak-tab"
@@ -1927,10 +1911,9 @@ msgid "Long-range radar range:"
 msgstr "Rayon du radar longue portée (mU) : "
 
 #: src/screens/gm/tweak.cpp:499
-#, fuzzy
 msgctxt "tweak-tab"
 msgid "Scanner"
-msgstr "Analyse"
+msgstr ""
 
 #: src/screens/gm/tweak.cpp:500
 #, fuzzy
@@ -3551,7 +3534,7 @@ msgstr "Sélectionner le système de missiles"
 #: src/gui/hotkeyConfig.cpp:488
 msgctxt "hotkey_Engineering"
 msgid "Select maneuvering system"
-msgstr "Sélectionner la manoeuvre"
+msgstr "Sélectionner la manœuvre"
 
 #: src/gui/hotkeyConfig.cpp:489
 msgctxt "hotkey_Engineering"
