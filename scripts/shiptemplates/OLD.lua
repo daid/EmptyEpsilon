@@ -3,7 +3,12 @@ These are older ship templates, going to be replaced soon.
 ----------------------------------------------------------]]
 
 --[[ Player ships --]]
-local template = ShipTemplate():setName("Player Cruiser"):setLocaleName(_("playerShip", "Player Cruiser")):setModel("battleship_destroyer_5_upgraded"):setType("playership")
+local template = ShipTemplate()
+    :setName("Player Cruiser")
+    :setLocaleName(_("playerShip", "Player Cruiser"))
+    :setClass(_("class", "Corvette"), _("subclass", "Destroyer"))
+    :setModel("battleship_destroyer_5_upgraded")
+    :setType("playership")
 template:hidden() -- The player cruiser is pretty much replaced by the Atlantis.
 template:setRadarTrace("cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -60,7 +65,12 @@ template:addDoor(8, 4, false);
 --template:addDoor(2, 2, false);
 --template:addDoor(2, 5, false);
 
-template = ShipTemplate():setName("Player Missile Cr."):setLocaleName(_("playerShip", "Player Missile Cr.")):setModel("space_cruiser_4"):setType("playership")
+template = ShipTemplate()
+    :setName("Player Missile Cr.")
+    :setLocaleName(_("playerShip", "Player Missile Cr."))
+    :setClass(_("class", "Corvette"), _("subclass", "Popper"))
+    :setModel("space_cruiser_4")
+    :setType("playership")
 template:hidden() -- The Player Missile Cr. is pretty much replaced by the Crucible
 template:setRadarTrace("missile_cruiser.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
@@ -115,7 +125,12 @@ template:addDoor(6, 4, false);
 template:addDoor(8, 3, false);
 template:addDoor(8, 4, false);
 
-template = ShipTemplate():setName("Player Fighter"):setLocaleName(_("playerShip", "Player Fighter")):setModel("small_fighter_1"):setType("playership")
+template = ShipTemplate()
+    :setName("Player Fighter")
+    :setLocaleName(_("playerShip", "Player Fighter"))
+    :setClass(_("class", "Starfighter"), _("subclass", "Interceptor"))
+    :setModel("small_fighter_1")
+    :setType("playership")
 template:hidden() -- The Player Figher is replaced by the MP52 Hornet
 template:setRadarTrace("fighter.png")
 --                  Arc, Dir, Range, CycleTime, Dmg
