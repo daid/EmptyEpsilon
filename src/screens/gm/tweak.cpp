@@ -140,6 +140,16 @@ public:
         ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return ""; }; \
         ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text; }); \
     } while(0)
+#define ADD_MULTILINE_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
+        auto row = new GuiElement(new_page->tweaks, ""); \
+        row->setSize(GuiElement::GuiSizeMax, 120)->setAttribute("layout", "horizontal"); \
+        auto label = new GuiLabel(row, "", LABEL, 20); \
+        label->setAlignment(sp::Alignment::CenterRight)->setSize(GuiElement::GuiSizeMax, 30); \
+        auto ui = new GuiTextTweak(row); \
+        ui->setMultiline()->setSize(GuiElement::GuiSizeMax, GuiElement::GuiSizeMax); \
+        ui->update_func = [this]() -> string { auto v = entity.getComponent<COMPONENT>(); if (v) return v->VALUE; return ""; }; \
+        ui->callback([this](string text) { auto v = entity.getComponent<COMPONENT>(); if (v) v->VALUE = text; }); \
+    } while(0)
 #define ADD_NUM_TEXT_TWEAK(LABEL, COMPONENT, VALUE) do { \
         auto row = new GuiElement(new_page->tweaks, ""); \
         row->setSize(GuiElement::GuiSizeMax, 30)->setAttribute("layout", "horizontal"); \
@@ -299,6 +309,20 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
 
     GuiTweakPage* new_page;
     GuiVectorTweak* vector_selector;
+
+    //Science Description component
+    ADD_PAGE(tr("tweak-tab", "Science Description"), ScienceDescription);
+    ADD_LABEL(tr("tweak-text", "Entity will be fully scanned from the start, unless a Scan State component is added"));
+    ADD_MULTILINE_TEXT_TWEAK(tr("tweak-text", "Not scanned:"), ScienceDescription, not_scanned);
+    ADD_MULTILINE_TEXT_TWEAK(tr("tweak-text", "Friend or Foe identified:"), ScienceDescription, friend_or_foe_identified);
+    ADD_MULTILINE_TEXT_TWEAK(tr("tweak-text", "Simple scan:"), ScienceDescription, simple_scan);
+    ADD_MULTILINE_TEXT_TWEAK(tr("tweak-text", "Fully scanned:"), ScienceDescription, full_scan);
+
+    //Scan State component
+    ADD_PAGE(tr("tweak-tab", "Scan State"), ScanState);
+    ADD_BOOL_TWEAK(tr("tweak-text", "Allow simple scan:"), ScanState, allow_simple_scan);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scan Complexity:"), ScanState, complexity);
+    ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Scan Depth:"), ScanState, depth);
 
     // Transform component, custom implementation since it uses functions
     // instead of direct access to members
@@ -464,6 +488,7 @@ GuiEntityTweak::GuiEntityTweak(GuiContainer* owner)
     ADD_VECTOR(tr("tweak-vector", "Shields"), Shields, entries);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Level:"), Shields, entries, level);
     ADD_VECTOR_NUM_TEXT_TWEAK(tr("tweak-text", "Max:"), Shields, entries, max);
+
 
     ADD_PAGE(tr("tweak-tab", "Warp drive"), WarpDrive);
     ADD_NUM_TEXT_TWEAK(tr("tweak-text", "Max level:"), WarpDrive, max_level);
