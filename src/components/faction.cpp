@@ -1,5 +1,6 @@
 #include "components/faction.h"
 #include "ecs/query.h"
+#include <algorithm>
 
 
 static FactionInfo default_faction_info;
@@ -83,4 +84,15 @@ void FactionInfo::setRelation(sp::ecs::Entity faction_entity, FactionRelation re
 FactionInfo* FactionInfo::find(const string& name)
 {
     return Faction::find(name).getComponent<FactionInfo>();
+}
+
+std::vector<FactionInfo*> FactionInfo::getOrderedList()
+{
+    std::vector<FactionInfo*> result;
+    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
+        result.push_back(&info);
+    std::sort(result.begin(), result.end(), [](const FactionInfo* a, const FactionInfo* b) {
+        return a->creation_order < b->creation_order;
+    });
+    return result;
 }

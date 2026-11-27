@@ -52,8 +52,8 @@ GuiObjectCreationView::GuiObjectCreationView(GuiContainer* owner)
         }
     );
 
-    for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
-        faction_selector->addEntry(info.locale_name, info.name);
+    for (auto info : FactionInfo::getOrderedList())
+        faction_selector->addEntry(info->locale_name, info->name);
 
     // Seed the initial faction color.
     for (auto [entity, info] : sp::ecs::Query<FactionInfo>())
