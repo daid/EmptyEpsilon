@@ -3729,7 +3729,7 @@ function independentTransportPlot(delta)
 			tempTransportList = {}
 			for idx, obj in ipairs(independentTransportList) do
 				if obj ~= nil and obj:isValid() then
-					table.insert(independentTransportList,obj)
+					table.insert(tempTransportList,obj)
 					independentTransportCount = independentTransportCount + 1
 				end
 			end
